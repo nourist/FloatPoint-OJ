@@ -7,6 +7,8 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import path from 'path';
 
+import route from './routes/index.js';
+
 const app = express();
 
 const connectDB = async () => {
@@ -23,7 +25,7 @@ const connectDB = async () => {
 
 connectDB();
 
-// app.use(express.static(path.join(path.resolve(), 'uploads')));
+app.use(express.static(path.join(path.resolve(), 'uploads')));
 
 app.use(
 	express.urlencoded({
@@ -42,6 +44,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(morgan('combined'));
+
+route(app);
 
 app.listen(process.env.PORT || 8080, () =>
 	console.log(`Server listening on port ${process.env.PORT || 8080} ${process.env.PORT ? '' : '(default)'}`),
