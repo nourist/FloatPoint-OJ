@@ -13,11 +13,8 @@ const app = express();
 
 const connectDB = async () => {
 	try {
-		if (!process.env.DATABASE_URL) {
-			throw new Error("ERROR: couldn't find DATABASE_URL from env!!");
-		}
-		await mongoose.connect(process.env.DATABASE_URL);
-		console.log('Success connect to db');
+		await mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/FloatPoint');
+		console.log(`Success connect to db ${process.env.DATABASE_URL ? '' : '(default)'}`);
 	} catch (err) {
 		console.error('Failed to connect to db', err);
 	}
