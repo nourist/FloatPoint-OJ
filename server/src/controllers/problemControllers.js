@@ -66,7 +66,11 @@ const problemControllers = {
 
 			await problem.save();
 
-			res.status(201).json({ success: true, data: { ...problem._doc, _id: undefined, __v: undefined } });
+			res.status(201).json({
+				success: true,
+				msg: 'Problem created successfull',
+				data: { ...problem._doc, _id: undefined, __v: undefined },
+			});
 
 			console.log('Create problem successfull');
 		} catch (err) {
@@ -87,7 +91,11 @@ const problemControllers = {
 				throw new Error('Problem not found');
 			}
 
-			res.status(200).json({ success: true, data: problem });
+			res.status(200).json({
+				success: true,
+				msg: 'Problem edited successfull',
+				data: { ...problem._doc, _id: undefined, __v: undefined },
+			});
 
 			console.log(`Edit problem "${id}" successfull`);
 		} catch (err) {
