@@ -29,6 +29,11 @@ const problemSchema = new mongoose.Schema(
 			type: Number,
 			default: 256,
 		},
+		difficulty: {
+			type: String,
+			enum: ['easy', 'medium', 'hard'],
+			required: true,
+		},
 		noOfSubm: {
 			type: Number,
 			default: 0,
