@@ -81,10 +81,6 @@ const problemControllers = {
 		try {
 			const { id } = req.params;
 
-			if (!id) {
-				throw new Error('id fields are required');
-			}
-
 			const problem = await Problem.findOneAndUpdate({ id }, req.body, { new: true });
 
 			if (!problem) {

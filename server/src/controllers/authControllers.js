@@ -2,7 +2,6 @@ import bcryptjs from 'bcryptjs';
 import crypto from 'crypto';
 
 import User from '../models/user.js';
-import { transformUserData } from '../utils/db.js';
 import { generateTokenAndSetCookie, generateVerificationCode } from '../utils/auth.js';
 import {
 	sendResetPasswordRequestEmail,
@@ -44,7 +43,13 @@ const authControllers = {
 			res.status(201).json({
 				success: true,
 				msg: 'User created successfully',
-				user: transformUserData(user._doc),
+				user: {
+					...user._doc,
+					_id: undefined,
+					password: undefined,
+					resetPasswordToken: undefined,
+					verificationToken: undefined,
+				},
 			});
 
 			console.log(`User ${user._id} created successfully`);
@@ -154,7 +159,13 @@ const authControllers = {
 			res.status(200).json({
 				success: true,
 				msg: 'Logged in successfully',
-				user: transformUserData(user._doc),
+				user: {
+					...user._doc,
+					_id: undefined,
+					password: undefined,
+					resetPasswordToken: undefined,
+					verificationToken: undefined,
+				},
 			});
 
 			console.log(`User ${user._id} logged in successfully`);
@@ -251,7 +262,16 @@ const authControllers = {
 				throw new Error('User does not exist');
 			}
 
-			res.status(200).json({ success: true, user: transformUserData(user._doc) });
+			res.status(200).json({
+				success: true,
+				user: {
+					...user._doc,
+					_id: undefined,
+					password: undefined,
+					resetPasswordToken: undefined,
+					verificationToken: undefined,
+				},
+			});
 
 			console.log(`Success get user ${user._id} info `);
 		} catch (err) {
