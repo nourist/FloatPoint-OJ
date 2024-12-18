@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
 		},
 		permission: {
 			type: String,
+			enum: ['Member', 'Admin'],
 			default: 'Member',
 		},
 		avatar: String,

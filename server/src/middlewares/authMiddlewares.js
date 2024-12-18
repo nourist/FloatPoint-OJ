@@ -41,6 +41,28 @@ const authMiddlewares = {
 			console.error(`Error in checking user verification: ${err.message}`);
 		}
 	},
+
+	async requireAd(req, res, next) {
+		//require isAuth middleware
+
+		try {
+			const user = await User.findById(req.userId);
+
+			if (!user.isVerified) {
+				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
+			}
+
+			if (user.permission != 'Admin') {
+				return res.status(401).json({ success: false, message: 'Unauthorized - admin permission required' });
+			}
+
+			next();
+		} catch (err) {
+			res.status(500).json({ success: false, msg: 'Server error' });
+
+			console.error(`Error in checking user permission: ${err.message}`);
+		}
+	},
 };
 
 export default authMiddlewares;

@@ -32,7 +32,7 @@ const problemSchema = new mongoose.Schema(
 		difficulty: {
 			type: String,
 			enum: ['easy', 'medium', 'hard'],
-			required: true,
+			default: 'medium',
 		},
 		noOfSubm: {
 			type: Number,
@@ -76,7 +76,33 @@ const problemSchema = new mongoose.Schema(
 			},
 		],
 	},
-	{ timestamps: true },
+	{
+		timestamps: true,
+		statics: {
+			filterAndSort: async function ({ tags = [], q = '', sortBy, order }) {
+				const regex = new RegExp(q, 'i');
+
+				const data = await this.find({
+					$or: [
+						{
+							id: {
+								$regex: regex,
+							},
+						},
+						{
+							name: {
+								$regex: regex,
+							},
+						},
+					],
+				})
+					.sort({ [sortBy]: order || 1 })
+					.select('-testcase -_id -__v');
+
+				return data.filter((problem) => tags.every((tag) => problem.tags.includes(tag)));
+			},
+		},
+	},
 );
 
 const Problem = mongoose.model('Problem', problemSchema);

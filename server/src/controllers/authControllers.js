@@ -12,6 +12,7 @@ import {
 } from '../mail/emails.js';
 
 const authControllers = {
+	//[POST] /auth/signup
 	async signup(req, res, next) {
 		const { email, password, name } = req.body;
 
@@ -54,6 +55,7 @@ const authControllers = {
 		}
 	},
 
+	//[POST] /auth/res-send-verify
 	async reSendVerificationCode(req, res, next) {
 		const { email } = req.body;
 
@@ -86,6 +88,7 @@ const authControllers = {
 		}
 	},
 
+	//[POST] /auth/verify-email
 	async verifyEmail(req, res, next) {
 		const { code } = req.body;
 
@@ -122,6 +125,7 @@ const authControllers = {
 		}
 	},
 
+	//[GET] /auth/login
 	async login(req, res, next) {
 		const { email, password } = req.body;
 
@@ -161,6 +165,7 @@ const authControllers = {
 		}
 	},
 
+	//[POST] /auth/logout
 	logout(req, res, next) {
 		res.clearCookie('token');
 		res.status(200).json({ success: true, msg: 'Logged out successfully' });
@@ -168,6 +173,7 @@ const authControllers = {
 		console.log('User logged out successfully');
 	},
 
+	//[POST] /auth/forgot-password
 	async forgotPassword(req, res, next) {
 		const { email } = req.body;
 
@@ -202,6 +208,7 @@ const authControllers = {
 		}
 	},
 
+	//[POST] /auth/reset-password/:token
 	async resetPassword(req, res, next) {
 		const { token } = req.params;
 		const { password } = req.body;
@@ -235,7 +242,8 @@ const authControllers = {
 		}
 	},
 
-	async getUserInfo(req, res, next) {
+	//[GET] /auth/info
+	async getSelfInfo(req, res, next) {
 		try {
 			const user = await User.findById(req.userId);
 
