@@ -1,7 +1,7 @@
 import Problem from '../models/problem.js';
 
 const problemControllers = {
-	//[GET] /problem/list
+	//[GET] /problem
 	async getList(req, res, next) {
 		try {
 			const { size = 20, page = 1, tags, q, sortBy, order } = req.query;
