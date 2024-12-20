@@ -7,6 +7,7 @@ import Problem from '../models/problem.js';
 import checker from './checker.js';
 import writeTestcase from './writeTestcase.js';
 import languages from './languages.js';
+import getFinalResult from './getFinalResult.js';
 
 import connectDb from '../config/db.js';
 
@@ -116,6 +117,10 @@ const judger = async ({ src, language, problem: problemId }) => {
 		}
 
 		console.log(res);
+		return {
+			...getFinalResult(res, { maxPoint: problem.point }),
+			testcase: res,
+		};
 	} catch (err) {
 		console.error(`Error in judging code: ${err.message}`);
 
