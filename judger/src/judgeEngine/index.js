@@ -3,18 +3,13 @@ import path from 'path';
 import { spawnSync } from 'child_process';
 import shelljs from 'shelljs';
 
-import Problem from '../models/problem.js';
 import checker from './checker.js';
 import writeTestcase from './writeTestcase.js';
 import languages from './languages.js';
 import getFinalResult from './getFinalResult.js';
 
-import connectDb from '../config/db.js';
-
-connectDb();
-
-const judger = async ({ src, language, problem: problemId }) => {
-	if (!problemId || !language || !src) {
+const judger = async ({ src, language, problem }) => {
+	if (!problem || !language || !src) {
 		return {
 			status: 'AB',
 			msg: 'All fields are required',
@@ -25,15 +20,6 @@ const judger = async ({ src, language, problem: problemId }) => {
 		return {
 			status: 'AB',
 			msg: `Language "${language}" not supported`,
-		};
-	}
-
-	const problem = await Problem.findOne({ id: problemId });
-
-	if (!problem) {
-		return {
-			status: 'AB',
-			msg: `Problem "${problemId}" not found`,
 		};
 	}
 
@@ -67,6 +53,7 @@ const judger = async ({ src, language, problem: problemId }) => {
 		for (let i = 1; i <= problem.testcase.length; i++) {
 			const cmd = `/bin/time -q -f "%M %U" -o testcase/${i}usage.txt prlimit -m=${problem.memoryLimit}m -t=${problem.timeLimit} ${languages[language].runCmd} < testcase/${i}.inp 2> testcase/${i}.err > testcase/${i}_.out`;
 
+			console.log(`Running on test ${i}...`);
 			const { code: status, stderr, stdout } = shelljs.exec(cmd, { cwd, silent: false });
 
 			let [memory, time] = fs
@@ -77,8 +64,6 @@ const judger = async ({ src, language, problem: problemId }) => {
 				.map((item) => Number(item));
 
 			memory = Number((memory / 1028).toFixed(1));
-
-			console.log(cmd, status, stderr, stdout, memory, time);
 
 			if (status == 0) {
 				res.push({
@@ -116,7 +101,8 @@ const judger = async ({ src, language, problem: problemId }) => {
 			}
 		}
 
-		console.log(res);
+		console.log(`Judging code successfull`);
+
 		return {
 			...getFinalResult(res, { maxPoint: problem.point }),
 			testcase: res,
@@ -130,19 +116,5 @@ const judger = async ({ src, language, problem: problemId }) => {
 		};
 	}
 };
-
-(async function () {
-	const res = await judger({
-		src: `
-		#include <bits/stdc++.h>
-		using namespace std;
-		
-		int main(){
-		while(1)int a[100000000000];}`,
-		language: 'c++17',
-		problem: 'bai100',
-	});
-	console.log(res);
-})();
 
 export default judger;
