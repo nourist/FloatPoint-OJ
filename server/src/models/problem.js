@@ -13,9 +13,7 @@ const problemSchema = new mongoose.Schema(
 			unique: true,
 		},
 		tags: [
-			{
-				type: String,
-			},
+			String,
 		],
 		point: {
 			type: Number,
@@ -47,22 +45,6 @@ const problemSchema = new mongoose.Schema(
 			default: '',
 		},
 		images: [String],
-		examples: [
-			{
-				type: Object,
-				input: {
-					type: String,
-					required: true,
-				},
-				output: {
-					type: String,
-					required: true,
-				},
-				explaination: {
-					type: String,
-				},
-			},
-		],
 		testcase: [
 			{
 				type: Object,
