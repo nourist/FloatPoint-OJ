@@ -44,7 +44,6 @@ const problemSchema = new mongoose.Schema(
 			type: String,
 			default: '',
 		},
-		images: [String],
 		testcase: [
 			{
 				type: Object,
