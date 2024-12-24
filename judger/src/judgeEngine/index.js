@@ -10,17 +10,11 @@ import getFinalResult from './getFinalResult.js';
 
 const judger = async ({ src, language, problem }) => {
 	if (!problem || !language || !src) {
-		return {
-			status: 'AB',
-			msg: 'All fields are required',
-		};
+		throw new Error('All fields are required');
 	}
 
 	if (!Object.keys(languages).includes(language)) {
-		return {
-			status: 'AB',
-			msg: `Language "${language}" not supported`,
-		};
+		throw new Error(`Language "${language}" not supported`);
 	}
 
 	console.log('Starting judge...');

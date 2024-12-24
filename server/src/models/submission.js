@@ -30,7 +30,7 @@ const submissionSchema = new mongoose.Schema(
 		status: {
 			type: String,
 			default: 'IE',
-			enum: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE', 'AB'],
+			enum: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
 		},
 		msg: String,
 		point: {
