@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import User from '../models/user.js';
 import Submission from '../models/submission.js';
 import Problem from '../models/problem.js';
@@ -66,7 +68,20 @@ const submissionControllers = {
 
 			const user = await User.findById(req.userId);
 
-			//judge....
+			axios
+				.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL })
+				.catch((err) => res.status(400).json(err.response.data))
+				.then(async (response) => {
+					const submission = new Submission({
+						author: user.name,
+						src,
+						forProblem: id,
+						language,
+						...response.data.data,
+					});
+					await submission.save();
+					res.status(200).json({ success: true, data: submission });
+				});
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });
 

@@ -12,7 +12,7 @@ const getFinalResult = (testResult = [], { maxPoint }) => {
 		? -1
 		: testResult.reduce((acc, test) => Math.max(acc, test.memory), 0);
 	const noOfAC = testResult.reduce((acc, test) => acc + (test.status == 'AC'), 0);
-	const point = (maxPoint / testResult.length) * noOfAC;
+	const point = (maxPoint / testResult.length) * noOfAC || 0;
 
 	return { status, time, memory, point: Number(point.toFixed(2)) };
 };

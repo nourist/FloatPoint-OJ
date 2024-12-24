@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import './console.js';
 
 import express from 'express';
 import morgan from 'morgan';

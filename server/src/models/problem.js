@@ -12,9 +12,7 @@ const problemSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
-		tags: [
-			String,
-		],
+		tags: [String],
 		point: {
 			type: Number,
 			default: 100,
