@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
 			enum: ['Member', 'Admin'],
 			default: 'Member',
 		},
+		joiningContest: {
+			type: String,
+			default: null,
+		},
+		joinedContest: [String],
 		avatar: String,
 		resetPasswordToken: String,
 		resetPasswordExpiresAt: Date,
