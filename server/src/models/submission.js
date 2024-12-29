@@ -14,6 +14,10 @@ const submissionSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		forContest: {
+			type: String,
+			default: null,
+		},
 		language: {
 			type: String,
 			required: true,

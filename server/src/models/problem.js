@@ -13,6 +13,11 @@ const problemSchema = new mongoose.Schema(
 			unique: true,
 		},
 		tags: [String],
+		public: {
+			type: Boolean,
+			default: true,
+		},
+		contest: [String],
 		point: {
 			type: Number,
 			default: 100,

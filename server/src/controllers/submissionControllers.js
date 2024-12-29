@@ -79,7 +79,12 @@ const submissionControllers = {
 						language,
 						...response.data.data,
 					});
+					problem.noOfSubm++;
+					problem.noOfSuccess += response.data.data.status === 'AC';
+
 					await submission.save();
+					await problem.save();
+
 					res.status(200).json({ success: true, data: submission });
 				});
 		} catch (err) {
