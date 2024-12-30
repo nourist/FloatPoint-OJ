@@ -1,4 +1,5 @@
 import Contest from '../models/contest.js';
+import User from '../models/user.js';
 
 const contestControllers = {
 	//[GET] /contest
@@ -46,6 +47,60 @@ const contestControllers = {
 		}
 	},
 
+	//[POST] /contest/join/:id
+	async join(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const contest = await Contest.findOne({ id });
+			const user = await User.findById(req.userId);
+
+			if (!contest) {
+				throw new Error('Contest not found');
+			}
+
+			if (!contest.participant.includes(user.name)) {
+				contest.standing.push({ user: user.name });
+			}
+
+			if (!user.joinedContest.includes(contest.id)) {
+				user.joinedContest.push(contest.id);
+			}
+
+			user.joiningContest = contest.id;
+
+			await contest.save();
+			await user.save();
+
+			res.status(200).json({ success: true, msg: 'Join contest successfull' });
+
+			console.log('Join contest successfull');
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in join contest: ${err.message}`);
+		}
+	},
+
+	//[POST] /contest/leave
+	async leave(req, res, next) {
+		try {
+			const user = await User.findById(req.userId);
+
+			user.joiningContest = null;
+
+			user.save();
+
+			res.status(200).json({ success: false, msg: 'Leave contest successfull' });
+
+			console.log('Leave contest successfull');
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in leave contest: ${err.message}`);
+		}
+	},
+
 	//[POST] /contest/create
 	async create(req, res, next) {
 		try {
@@ -55,7 +110,7 @@ const contestControllers = {
 				throw new Error('Required fields are empty');
 			}
 
-			const isExisted = Contest.findOne({ $or: [{ id }, { title }] });
+			const isExisted = await Contest.findOne({ $or: [{ id }, { title }] });
 
 			if (isExisted) {
 				throw new Error('Contest already exists');

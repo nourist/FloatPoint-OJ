@@ -8,6 +8,9 @@ const router = express.Router();
 router.get('/', contestControllers.getList);
 router.get('/info/:id', contestControllers.get);
 
+router.post('/join', authMiddlewares.isVerify, contestControllers.join);
+router.post('/leave', authMiddlewares.isVerify, contestControllers.leave);
+
 router.post('/create', authMiddlewares.requireAd, contestControllers.create);
 router.post('/edit/:id', authMiddlewares.requireAd, contestControllers.edit);
 router.delete('/delete/:id', authMiddlewares.requireAd, contestControllers.delete);
