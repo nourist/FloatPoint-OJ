@@ -12,6 +12,10 @@ const submissionControllers = {
 			const { size = 20, page = 1, status, author, language, problem } = req.query;
 			const data = await Submission.filter({ status, author, language, problem });
 
+			if (req.userPermission != 'Admin') {
+				data = data.filter((submission) => !submission.forContest);
+			}
+
 			res.status(200).json({
 				success: true,
 				data: data.slice(size * (page - 1), size * page),

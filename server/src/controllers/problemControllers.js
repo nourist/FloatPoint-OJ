@@ -7,6 +7,10 @@ const problemControllers = {
 			const { size = 20, page = 1, tags, q, sortBy, order } = req.query;
 			const data = await Problem.filterAndSort({ tags, q, sortBy, order });
 
+			if (req.userPermission != 'Admin') {
+				data = data.filter((problem) => problem.public);
+			}
+
 			res.status(200).json({
 				success: true,
 				data: data.slice(size * (page - 1), size * page),
@@ -30,6 +34,10 @@ const problemControllers = {
 
 			if (!problem) {
 				throw new Error('Problem not found');
+			}
+
+			if (!problem.public && req.userPermission != 'Admin') {
+				return res.status(401).json({ success: false, msg: 'You cant see this content' });
 			}
 
 			res.status(200).json({

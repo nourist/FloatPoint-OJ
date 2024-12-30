@@ -5,8 +5,8 @@ import authMiddlewares from '../middlewares/authMiddlewares.js';
 
 const router = express.Router();
 
-router.get('/', problemControllers.getList);
-router.get('/info/:id', problemControllers.get);
+router.get('/', authMiddlewares.isSoftAuth, problemControllers.getList);
+router.get('/info/:id', authMiddlewares.isSoftAuth, problemControllers.get);
 
 router.post('/create', authMiddlewares.requireAd, problemControllers.create);
 router.post('/edit/:id', authMiddlewares.requireAd, problemControllers.edit);

@@ -26,6 +26,35 @@ const authMiddlewares = {
 		}
 	},
 
+	async isSoftAuth(req, res, next) {
+		try {
+			const token = req.cookies.token;
+			if (!token) {
+				next();
+			}
+
+			const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+			if (!decoded) {
+				next();
+			}
+
+			const user = await User.findById(decoded.userId);
+
+			if (!user.isVerified) {
+				next();
+			}
+
+			req.userId = decode.userId;
+			req.userPermission = user.permission;
+
+			next();
+		} catch (err) {
+			res.status(500).json({ success: false, msg: 'Server error' });
+
+			console.error(`Error in checking auth: ${err.message}`);
+		}
+	},
+
 	async isVerify(req, res, next) {
 		try {
 			const user = await User.findById(req.userId);
