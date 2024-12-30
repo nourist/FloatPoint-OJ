@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		fullname: {
+			type: String,
+			default: null,
+		},
 		lastLogin: {
 			type: Date,
 			default: Date.now,
@@ -33,13 +37,41 @@ const userSchema = new mongoose.Schema(
 			default: null,
 		},
 		joinedContest: [String],
+		totalScore: {
+			type: Number,
+			default: 0,
+		},
+		totalAC: {
+			type: Number,
+			default: 0,
+		},
 		avatar: String,
 		resetPasswordToken: String,
 		resetPasswordExpiresAt: Date,
 		verificationToken: String,
 		verificationTokenExpiresAt: Date,
 	},
-	{ timestamps: true },
+	{
+		timestamps: true,
+		statics: {
+			filterAndSort: function ({ q = '', permission, sortBy, order }) {
+				const regex = new RegExp(q, 'i');
+
+				return this.find({
+					$and: [
+						{
+							$or: [{ name: { $regex: regex } }, { fullname: { $regex: regex } }],
+						},
+						{
+							permission,
+						},
+					],
+				})
+					.select('-resetPasswordToken -verificationToken -isVerified -password -email')
+					.sort({ [sortBy]: order || 1 });
+			},
+		},
+	},
 );
 
 const User = mongoose.model('User', userSchema);
