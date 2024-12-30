@@ -85,7 +85,9 @@ const submissionControllers = {
 					await submission.save();
 					await problem.save();
 
-					res.status(200).json({ success: true, data: submission });
+					res.status(201).json({ success: true, data: submission });
+
+					console.log('Submit code successfull');
 				});
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });

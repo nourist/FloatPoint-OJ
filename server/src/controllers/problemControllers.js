@@ -51,7 +51,7 @@ const problemControllers = {
 			const { id, name } = req.body;
 
 			if (!id || !name) {
-				throw new Error('All fields are required');
+				throw new Error(`Required fields are empty`);
 			}
 
 			const isExisted = await Problem.findOne({ $or: [{ id }, { name }] });
@@ -60,9 +60,7 @@ const problemControllers = {
 				throw new Error('Problem already exists');
 			}
 
-			const problem = await Problem.create({
-				...req.body,
-			});
+			const problem = await Problem.create(req.body);
 
 			await problem.save();
 
@@ -102,6 +100,28 @@ const problemControllers = {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in edit problem: ${err.message}`);
+		}
+	},
+
+	//[DELETE] /problem/delete/:id
+	async delete(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const problem = await Problem.findOneAndDelete({ id });
+
+			if (!problem) {
+				throw new Error('Problem not found');
+			}
+
+			res.status(200).json({
+				success: true,
+				msg: 'Problem deleted successfull',
+			});
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in delete problem: ${err.message}`);
 		}
 	},
 };

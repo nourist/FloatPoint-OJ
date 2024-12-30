@@ -47,7 +47,37 @@ const contestSchema = new mongoose.Schema(
 			},
 		],
 	},
-	{ timestamps: true },
+	{
+		timestamps: true,
+		statics: {
+			filter: async function ({ q = '', status }) {
+				const regex = new RegExp(q, 'i');
+
+				const data = await this.find({
+					$or: [
+						{
+							id: {
+								$regex: regex,
+							},
+						},
+						{
+							title: {
+								$regex: regex,
+							},
+						},
+					],
+				}).select('-_id');
+
+				return data.filter((contest) =>
+					!status || contest.startTime > Date.now()
+						? 'upcoming'
+						: contest.endTime < Date.now()
+							? 'ended'
+							: 'ongoing' == status,
+				);
+			},
+		},
+	},
 );
 
 contestSchema.virtual('status').get(function () {

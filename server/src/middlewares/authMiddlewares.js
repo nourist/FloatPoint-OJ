@@ -27,13 +27,14 @@ const authMiddlewares = {
 	},
 
 	async isVerify(req, res, next) {
-		//require isAuth middleware
 		try {
 			const user = await User.findById(req.userId);
 
 			if (!user.isVerified) {
 				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
 			}
+
+			req.userPermission = user.permission;
 
 			next();
 		} catch (err) {
@@ -43,17 +44,9 @@ const authMiddlewares = {
 		}
 	},
 
-	async requireAd(req, res, next) {
-		//require isAuth middleware
-
+	requireAd(req, res, next) {
 		try {
-			const user = await User.findById(req.userId);
-
-			if (!user.isVerified) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
-			}
-
-			if (user.permission != 'Admin') {
+			if (req.userPermission != 'Admin') {
 				return res.status(401).json({ success: false, message: 'Unauthorized - admin permission required' });
 			}
 
@@ -65,5 +58,8 @@ const authMiddlewares = {
 		}
 	},
 };
+
+authMiddlewares.isVerify = [authMiddlewares.isAuth, authMiddlewares.isVerify];
+authMiddlewares.requireAd = [authMiddlewares.isAuth, authMiddlewares.isVerify, authMiddlewares.requireAd];
 
 export default authMiddlewares;

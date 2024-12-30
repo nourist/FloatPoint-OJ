@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.get('/', problemControllers.getList);
 router.get('/info/:id', problemControllers.get);
-router.post('/create', authMiddlewares.isAuth, authMiddlewares.requireAd, problemControllers.create);
-router.post('/edit/:id', authMiddlewares.isAuth, authMiddlewares.requireAd, problemControllers.edit);
+
+router.post('/create', authMiddlewares.requireAd, problemControllers.create);
+router.post('/edit/:id', authMiddlewares.requireAd, problemControllers.edit);
+router.delete('/delete/:id', authMiddlewares.requireAd, problemControllers.delete);
 
 export default router;
