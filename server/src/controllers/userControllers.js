@@ -7,7 +7,7 @@ const userControllers = {
 		try {
 			const { size = 20, page = 1, q, permission, sortBy, order } = req.query;
 
-			const data = await User.filterAndSort({ p, permission, sortBy, order });
+			const data = await User.filterAndSort({ q, permission, sortBy, order });
 
 			res.status(200).json({
 				success: true,

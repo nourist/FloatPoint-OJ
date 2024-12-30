@@ -64,8 +64,10 @@ const submissionSchema = new mongoose.Schema(
 	{
 		timestamps: true,
 		statics: {
-			filter: async function ({ status, author, language, problem }) {
-				return this.find({ status, author, language, forProblem: problem }).select('-src -testcase');
+			filter: async function ({ status, author, language, problem, contest }) {
+				return this.find({ status, author, language, forProblem: problem, forContest: contest }).select(
+					'-src -testcase',
+				);
 			},
 		},
 	},
