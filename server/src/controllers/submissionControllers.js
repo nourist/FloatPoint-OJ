@@ -3,6 +3,7 @@ import axios from 'axios';
 import User from '../models/user.js';
 import Submission from '../models/submission.js';
 import Problem from '../models/problem.js';
+import Contest from '../models/contest.js';
 
 const submissionControllers = {
 	//[GET] /submission
@@ -58,7 +59,7 @@ const submissionControllers = {
 	//[POST] /submission/submit
 	async submit(req, res, next) {
 		try {
-			const { src, problem: id, language } = req.body;
+			const { src, problem: id, language, contest: contestId } = req.body;
 
 			const problem = await Problem.findOne({ id });
 
@@ -68,6 +69,21 @@ const submissionControllers = {
 
 			const user = await User.findById(req.userId);
 
+			let contest = null;
+
+			if (contestId) {
+				contest = await Contest.findOne({ id: contestId });
+				if (!contest) {
+					throw new Error('Contest not found');
+				}
+				if (!contest.problems.includes(problem.id)) {
+					throw new Error('This contest does not have this problem');
+				}
+				if (user.joiningContest != contest.id) {
+					throw new Error('You are not participating in this contest');
+				}
+			}
+
 			axios
 				.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL })
 				.catch((err) => res.status(400).json(err.response.data))
@@ -76,20 +92,40 @@ const submissionControllers = {
 						author: user.name,
 						src,
 						forProblem: id,
+						forContest: contestId,
 						language,
 						...response.data.data,
 					});
 					problem.noOfSubm++;
-					
-					const alreadyAC = Submission.filter({ status: "AC", author: user.name, problem: id });
+
+					const alreadyAC = await Submission.filter({ status: 'AC', author: user.name, problem: id });
 					if (!alreadyAC && response.data.data.status === 'AC') {
-						problem.noOfSuccess ++ ;
+						problem.noOfSuccess++;
 						user.totalAC++;
 					}
+
+					const lastSubmissions = await Submission.filter({ author: user.name, problem: id });
+					const bestLastSubmit = lastSubmissions.reduce((acc, val) => max(acc, val.point));
+					user.totalScore -= bestLastSubmit;
+					user.totalScore += max(bestLastSubmit, submission.point);
 
 					await submission.save();
 					await problem.save();
 					await user.save();
+
+					if (contest) {
+						contest.standing = contest.standing.map((usr) => {
+							if (usr.user == user.name) {
+								if (submission.point > usr.score[contest.problems.indexOf(id)]) {
+									usr.score[contest.problems.indexOf(id)] = submission.point;
+									usr.time[contest.problems.indexOf(id)] = Date.now();
+								}
+							}
+							return usr;
+						});
+
+						await contest.save();
+					}
 
 					res.status(201).json({ success: true, data: submission });
 
