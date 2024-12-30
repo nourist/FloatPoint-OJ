@@ -80,10 +80,16 @@ const submissionControllers = {
 						...response.data.data,
 					});
 					problem.noOfSubm++;
-					problem.noOfSuccess += response.data.data.status === 'AC';
+					
+					const alreadyAC = Submission.filter({ status: "AC", author: user.name, problem: id });
+					if (!alreadyAC && response.data.data.status === 'AC') {
+						problem.noOfSuccess ++ ;
+						user.totalAC++;
+					}
 
 					await submission.save();
 					await problem.save();
+					await user.save();
 
 					res.status(201).json({ success: true, data: submission });
 
