@@ -9,10 +9,16 @@ const submissionControllers = {
 	//[GET] /submission
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, status, author, language, problem } = req.query;
-			const data = await Submission.filter({ status, author, language, problem });
+			const { size = 20, page = 1, status, author, language, problem, contest: contestId } = req.query;
+			const data = await Submission.filter({ status, author, language, problem, contest: contestId });
 
-			if (req.userPermission != 'Admin') {
+			if (contestId) {
+				const user = await User.findById(req.userId);
+				if (req.userPermission != 'Admin' && user.joiningContest != contestId) {
+					throw new Error('You cant see this content');
+				}
+				data = data.filter((submission) => submission.forContest == contestId);
+			} else if (req.userPermission != 'Admin') {
 				data = data.filter((submission) => !submission.forContest);
 			}
 

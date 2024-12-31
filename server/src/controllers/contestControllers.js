@@ -49,40 +49,6 @@ const contestControllers = {
 		}
 	},
 
-	//[GET] /contest/submissions/:id
-	async submissions(req, res, next) {
-		try {
-			const { id } = req.params;
-			const { size = 20, page = 1, problem, author, contest: contestId } = req.query;
-
-			const contest = await Contest.findOne({ id }, '-_id');
-
-			if (!contest) {
-				throw new Error('Contest not found');
-			}
-
-			const user = await User.findById(req.userId);
-
-			if (user.permission != 'Admin' && user.joiningContest != id) {
-				return res.status(401).json({ success: false, msg: 'You cant view this content' });
-			}
-
-			const data = await Submission.filter({ problem, author, contest: contestId });
-
-			res.status(200).json({
-				success: true,
-				data: data.slice(size * (page - 1), size * page),
-				maxPage: Math.ceil(data.length / size),
-			});
-
-			console.log('Get contest submissions successfull');
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in get contest submissions: ${err.message}`);
-		}
-	},
-
 	//[POST] /contest/join/:id
 	async join(req, res, next) {
 		try {
