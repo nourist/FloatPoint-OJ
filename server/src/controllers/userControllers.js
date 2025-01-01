@@ -1,5 +1,6 @@
 import User from '../models/user.js';
 import { getTop } from '../utils/user.js';
+import cloudinary from '../config/cloudinary.js';
 
 const userControllers = {
 	//[GET] /user
@@ -46,6 +47,30 @@ const userControllers = {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in get user: ${err.message}`);
+		}
+	},
+
+	//[POST] /user/change-avatar
+	async changeAvatar(req, res, next) {
+		try {
+			const url = cloudinary.url(req.file?.filename) || req.body.url;
+			if (!url) {
+				throw new Error('No file uploaded');
+			}
+
+			const user = await User.findByIdAndUpdate(req.userId, { avatar: url }, { new: true });
+
+			res.status(200).json({
+				success: true,
+				msg: 'Change avatar successfull',
+				data: user.avatar,
+			});
+
+			console.log(`Change user avatar successfull`);
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in change user avatar: ${err.message}`);
 		}
 	},
 };
