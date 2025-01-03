@@ -1,3 +1,23 @@
 @tailwind base;
+
+@layer base {
+	html {
+		@apply font-inter;
+	}
+}
+
 @tailwind components;
 @tailwind utilities;
+
+html {
+	height: 100vh;
+	width: 100vw;
+}
+
+body {
+	@apply h-full w-full;
+}
+
+#root {
+	@apply h-full w-full;
+}
