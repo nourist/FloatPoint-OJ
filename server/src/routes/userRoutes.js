@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get('/', userControllers.getList);
 router.get('/info/:name', userControllers.get);
-router.post('/change-avatar', authMiddlewares.isVerify, uploadAvatar.single('avatar'), userControllers.changeAvatar);
+router.post('/change-avatar', authMiddlewares.isAuth, uploadAvatar.single('avatar'), userControllers.changeAvatar);
 
 export default router;

@@ -6,8 +6,8 @@ import authMiddlewares from '../middlewares/authMiddlewares.js';
 const router = express.Router();
 
 router.get('/', authMiddlewares.isSoftAuth, submissionControllers.getList);
-router.get('/info/:id', authMiddlewares.isVerify, submissionControllers.get);
+router.get('/info/:id', authMiddlewares.isAuth, submissionControllers.get);
 
-router.post('/submit', authMiddlewares.isVerify, submissionControllers.submit);
+router.post('/submit', authMiddlewares.isAuth, submissionControllers.submit);
 
 export default router;
