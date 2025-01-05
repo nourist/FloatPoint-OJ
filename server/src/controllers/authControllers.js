@@ -38,8 +38,6 @@ const authControllers = {
 
 			await sendVerificationEmail(user.email, user.verificationToken);
 
-			generateTokenAndSetCookie(res, user._id);
-
 			res.status(201).json({
 				success: true,
 				msg: 'User created successfully',
@@ -149,6 +147,10 @@ const authControllers = {
 
 			if (!isPasswordValid) {
 				throw new Error('Password not valid');
+			}
+
+			if (!user.isVerified) {
+				throw new Error("User doesn't verified");
 			}
 
 			generateTokenAndSetCookie(res, user._id);

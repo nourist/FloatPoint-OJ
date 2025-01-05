@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 const authMiddlewares = {
-	isAuth(req, res, next) {
+	async isAuth(req, res, next) {
 		try {
 			const token = req.cookies.token;
 
@@ -17,7 +17,15 @@ const authMiddlewares = {
 				return res.status(401).json({ success: false, message: 'Unauthorized - invalid token' });
 			}
 
+			const user = await User.findById(req.userId);
+
+			if (!user.isVerified) {
+				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
+			}
+
 			req.userId = decoded.userId;
+			req.userPermission = user.permission;
+
 			next();
 		} catch (err) {
 			res.status(500).json({ success: false, msg: 'Server error' });
@@ -29,11 +37,13 @@ const authMiddlewares = {
 	async isSoftAuth(req, res, next) {
 		try {
 			const token = req.cookies.token;
+
 			if (!token) {
 				next();
 			}
 
 			const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+
 			if (!decoded) {
 				next();
 			}
@@ -44,7 +54,7 @@ const authMiddlewares = {
 				next();
 			}
 
-			req.userId = decode.userId;
+			req.userId = decoded.userId;
 			req.userPermission = user.permission;
 
 			next();
@@ -52,24 +62,6 @@ const authMiddlewares = {
 			res.status(500).json({ success: false, msg: 'Server error' });
 
 			console.error(`Error in checking auth: ${err.message}`);
-		}
-	},
-
-	async isVerify(req, res, next) {
-		try {
-			const user = await User.findById(req.userId);
-
-			if (!user.isVerified) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
-			}
-
-			req.userPermission = user.permission;
-
-			next();
-		} catch (err) {
-			res.status(500).json({ success: false, msg: 'Server error' });
-
-			console.error(`Error in checking user verification: ${err.message}`);
 		}
 	},
 
@@ -88,7 +80,6 @@ const authMiddlewares = {
 	},
 };
 
-authMiddlewares.isVerify = [authMiddlewares.isAuth, authMiddlewares.isVerify];
-authMiddlewares.requireAd = [authMiddlewares.isAuth, authMiddlewares.isVerify, authMiddlewares.requireAd];
+authMiddlewares.requireAd = [authMiddlewares.isAuth, authMiddlewares.requireAd];
 
 export default authMiddlewares;
