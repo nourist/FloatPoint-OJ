@@ -1,3 +1,4 @@
+// import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -35,5 +36,7 @@ const AppRouter = () => {
 		</Router>
 	);
 };
+
+AppRouter.propTypes = {};
 
 export default AppRouter;
