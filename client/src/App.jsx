@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { TooltipProvider } from '~/components/ui/tooltip';
 
 import AppRouter from './components/AppRouter';
 import useThemeStore from './stores/themeStore';
-import { useEffect } from 'react';
 
 const App = () => {
 	const { i18n } = useTranslation();
@@ -20,10 +21,15 @@ const App = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		document.documentElement.classList.remove('light', 'dark');
+		document.documentElement.classList.add(theme);
+	}, [theme]);
+
 	return (
-		<div className={`${theme == 'dark' && 'dark'} h-full w-full`}>
+		<TooltipProvider>
 			<AppRouter />
-		</div>
+		</TooltipProvider>
 	);
 };
 

@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 const HexagonIcon = ({
 	children,
-	circleBg = 'white',
-	darkCircleBg = 'gray-900',
 	bg = 'linear-gradient(to bottom right, #4fc3f7 0%, #2196f3 100%)',
 	className = '',
 }) => {
@@ -19,7 +17,7 @@ const HexagonIcon = ({
 					style={{ background: bg }}
 				></div>
 				<div
-					className={`rounded-full w-9 h-9 bg-${circleBg} dark:bg-${darkCircleBg} absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center`}
+					className={`rounded-full w-9 h-9 bg-white dark:bg-gray-900 absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center`}
 				>
 					{children}
 				</div>
@@ -31,8 +29,6 @@ const HexagonIcon = ({
 HexagonIcon.propTypes = {
 	children: PropTypes.node,
 	bg: PropTypes.string,
-	darkCircleBg: PropTypes.string,
-	circleBg: PropTypes.string,
 	className: PropTypes.string,
 };
 

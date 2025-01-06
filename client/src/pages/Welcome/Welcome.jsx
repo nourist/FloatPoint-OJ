@@ -1,34 +1,55 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRef } from 'react';
+import styled from 'styled-components';
+import { Tooltip, TooltipTrigger, TooltipContent } from '~/components/ui/tooltip';
 
 import routesConfig from '~/config/routes';
 import HexagonIcon from '~/components/HexagonIcon';
+import useThemeStore from '~/stores/themeStore';
+
+const Container = styled.div.attrs({ className: 'dark:bg-gray-900 h-full relative overflow-y-auto overflow-x-hidden' })`
+	&::-webkit-scrollbar {
+		display: none;
+	}
+`;
 
 const Welcome = () => {
 	const { t } = useTranslation('welcome');
+	const { theme, setMode } = useThemeStore();
+
+	const pageRef = useRef();
 
 	return (
-		<div className="dark:bg-gray-900 h-full overflow-auto relative">
-			<div
-				className="absolute top-0 inset-0 m-auto max-w-xs h-[357px] blur-[118px] sm:max-w-md md:max-w-lg"
+		<Container ref={pageRef}>
+			<header
+				className="w-full h-20 flex justify-between items-center py-6 px-12 fixed top-0 z-50 backdrop-blur-md"
 				style={{
-					background:
-						'linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)',
+					maskImage:
+						'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)',
 				}}
-			></div>
-			<header className="w-full h-20 flex justify-between items-center py-6 px-12">
+			>
 				<Link to={routesConfig.welcome}>
 					<img src="./logo.png" alt="" className="size-9" />
 				</Link>
 				<div>
-					<button className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300">
+					<button
+						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						onClick={() => pageRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
+					>
 						{t('home')}
 					</button>
-					<button className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300">
+					<button
+						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						onClick={() => pageRef.current.scrollTo({ top: 500, behavior: 'smooth' })}
+					>
 						{t('product')}
 					</button>
-					<button className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300">
+					<button
+						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						onClick={() => pageRef.current.scrollTo({ top: 1000, behavior: 'smooth' })}
+					>
 						{t('developer')}
 					</button>
 					<a
@@ -38,12 +59,21 @@ const Welcome = () => {
 						{t('about-me')}
 					</a>
 				</div>
-				<Link className="font-semibold text-gray-900 text-sm transition-all dark:text-gray-50 hover:text-sky-500">
+				<Link className="font-semibold text-gray-900 text-sm transition-all hover:text-sky-500 dark:text-gray-50 dark:hover:text-sky-500">
 					{t('login')}
 					<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-1 mb-[-1px]" />
 				</Link>
 			</header>
-			<div className="w-full h-[80%] space-y-10 text-center py-36 relative">
+
+			<div
+				className="absolute top-0 inset-0 m-auto max-w-xs h-[357px] blur-[118px] sm:max-w-md md:max-w-lg"
+				style={{
+					background:
+						'linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)',
+				}}
+			></div>
+
+			<div className="w-full h-[90%] space-y-10 text-center py-36 relative mt-20">
 				<h1 className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl dark:text-white">
 					{(() => {
 						const arr = t('slogan')
@@ -74,20 +104,65 @@ const Welcome = () => {
 					</a>
 				</div>
 			</div>
-			<div className="w-full h-[70%]">
-				<div className="flex flex-row space-x-[-12px]">
-					<HexagonIcon className="z-20">
-						<p className="text-sky-500 font-bold text-xs">7749</p>
+
+			<div className="flex flex-row flex-wrap justify-evenly mb-[100px] gap-y-[100px]">
+				<div className="h-[300px] flex flex-col gap-6 max-w-[540px] mx-5">
+					<div className="flex flex-row space-x-[-12px]">
+						<HexagonIcon className="z-20">
+							<p className="text-sky-500 font-bold text-xs">7749</p>
+						</HexagonIcon>
+						<HexagonIcon bg="linear-gradient(to bottom right, #cddc39 0%, #8bc34a 100%)" className="z-10">
+							<FontAwesomeIcon className="text-lime-400" icon="fa-solid fa-users" />
+						</HexagonIcon>
+						<HexagonIcon bg="linear-gradient(to bottom right, #ffeb3b 0%, #fbc02d 100%)" className="z-0">
+							<FontAwesomeIcon className="text-yellow-400" icon="fa-solid fa-trophy" />
+						</HexagonIcon>
+					</div>
+					<h2 className="text-sky-500 text-xl font-semibold">{t('product-title')}</h2>
+					<p className="text-gray-400 text-[15px]">{t('product-description')}</p>
+					<Link className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
+						{t('view-questions')} <FontAwesomeIcon icon="fa-solid fa-angle-right" className="ml-1.5" />
+					</Link>
+				</div>
+
+				<div className="h-[300px] max-w-[540px] flex flex-col gap-6 mx-5">
+					<HexagonIcon
+						bg="linear-gradient(to bottom right, rgb(155,155,155) 0%, rgb(44,44,44) 100%)"
+						className="z-10"
+					>
+						<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-700 dark:text-zinc-500 size-5" />
 					</HexagonIcon>
-					<HexagonIcon bg="linear-gradient(to bottom right, #cddc39 0%, #8bc34a 100%)" className="z-10">
-						<FontAwesomeIcon className="text-lime-400" icon="fa-solid fa-users" />
-					</HexagonIcon>
-					<HexagonIcon bg="linear-gradient(to bottom right, #ffeb3b 0%, #fbc02d 100%)" className="z-0">
-						<FontAwesomeIcon className="text-yellow-400" icon="fa-solid fa-trophy" />
-					</HexagonIcon>
+					<h2 className="text-slate-700 dark:text-zinc-400 text-xl font-semibold">{t('appearance')}</h2>
+					<p className="text-gray-400 text-[15px]">{t('appearance-description')}</p>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<button
+								className={`size-8 bg-slate-200 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md`}
+								onClick={() => setMode(theme == 'dark' ? 'light' : 'dark')}
+							>
+								{theme == 'dark' ? (
+									<FontAwesomeIcon
+										icon="fa-solid fa-moon"
+										className="text-slate-400 rotate-[-15deg]"
+									/>
+								) : (
+									<FontAwesomeIcon icon="fa-solid fa-sun" className="text-gray-600" />
+								)}
+							</button>
+						</TooltipTrigger>
+						<TooltipContent className="bg-slate-500 dark:bg-gray-400">{t('try-now')}</TooltipContent>
+					</Tooltip>
 				</div>
 			</div>
-		</div>
+
+			<div className="max-w-[584px] h-[80%] mx-auto items-center flex flex-col gap-6">
+				<HexagonIcon bg="linear-gradient(to bottom right, #4db6ac 0%, #00796b 100%)">
+					<FontAwesomeIcon icon="fa-solid fa-code" className="text-teal-500" />
+				</HexagonIcon>
+				<h2 className="text-teal-500 text-xl font-semibold">{t('developer')}</h2>
+				<p className="text-gray-400 text-[15px] text-center">{t('developer-description')}</p>
+			</div>
+		</Container>
 	);
 };
 
