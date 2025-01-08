@@ -68,13 +68,7 @@ const contestSchema = new mongoose.Schema(
 					],
 				}).select('-_id');
 
-				return data.filter((contest) =>
-					!status || contest.startTime > Date.now()
-						? 'upcoming'
-						: contest.endTime < Date.now()
-							? 'ended'
-							: 'ongoing' == status,
-				);
+				return data.filter((contest) => (!status || contest.startTime > Date.now() ? 'upcoming' : contest.endTime < Date.now() ? 'ended' : 'ongoing' == status));
 			},
 		},
 	},
@@ -92,10 +86,7 @@ contestSchema.pre('save', function (next) {
 	this.participant = this.standing.map((x) => x.user);
 
 	this.standing.sort((x, y) => {
-		return (
-			y.score.reduce((a, b) => a + b, 0) - x.score.reduce((a, b) => a + b, 0) ||
-			y.time.reduce((a, b) => a + b, 0) - x.time.reduce((a, b) => a + b, 0)
-		);
+		return y.score.reduce((a, b) => a + b, 0) - x.score.reduce((a, b) => a + b, 0) || y.time.reduce((a, b) => a + b, 0) - x.time.reduce((a, b) => a + b, 0);
 	});
 
 	next();

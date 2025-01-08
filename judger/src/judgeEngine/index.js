@@ -61,12 +61,7 @@ const judger = async ({ src, language, problem }) => {
 
 			if (status == 0) {
 				res.push({
-					status: checker(
-						path.join(path.resolve(), 'tmp', 'testcase', `${i}_.out`),
-						path.join(path.resolve(), 'tmp', 'testcase', `${i}.out`),
-					)
-						? 'AC'
-						: 'WA',
+					status: checker(path.join(path.resolve(), 'tmp', 'testcase', `${i}_.out`), path.join(path.resolve(), 'tmp', 'testcase', `${i}.out`)) ? 'AC' : 'WA',
 					time,
 					memory,
 				});
@@ -85,9 +80,7 @@ const judger = async ({ src, language, problem }) => {
 			} else {
 				res.push({
 					status: 'RTE',
-					msg:
-						fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() ||
-						`Exit code ${status}`,
+					msg: fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}`,
 					time,
 					memory,
 				});

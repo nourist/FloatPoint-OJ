@@ -19,6 +19,4 @@ app.use(morgan('combined'));
 
 route(app);
 
-app.listen(process.env.PORT || 8090, () =>
-	console.log(`Judger Server listening on port ${process.env.PORT || 8090} ${process.env.PORT ? '' : '(default)'}`),
-);
+app.listen(process.env.PORT || 8090, () => console.log(`Judger Server listening on port ${process.env.PORT || 8090} ${process.env.PORT ? '' : '(default)'}`));

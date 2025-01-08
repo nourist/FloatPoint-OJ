@@ -3,12 +3,7 @@ import crypto from 'crypto';
 
 import User from '../models/user.js';
 import { generateTokenAndSetCookie, generateVerificationCode } from '../utils/auth.js';
-import {
-	sendResetPasswordRequestEmail,
-	sendResetPasswordSuccessEmail,
-	sendVerificationEmail,
-	sendWellcomeEmail,
-} from '../mail/emails.js';
+import { sendResetPasswordRequestEmail, sendResetPasswordSuccessEmail, sendVerificationEmail, sendWellcomeEmail } from '../mail/emails.js';
 
 const authControllers = {
 	//[POST] /auth/signup

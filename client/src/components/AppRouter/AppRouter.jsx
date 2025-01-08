@@ -32,6 +32,7 @@ const AppRouter = () => {
 						/>
 					);
 				})}
+				<Route path="*" element={<Navigate to={routesConfig.notFound} />} />
 			</Routes>
 		</Router>
 	);

@@ -20,14 +20,15 @@ const Welcome = () => {
 	const { theme, setMode } = useThemeStore();
 
 	const pageRef = useRef();
+	const ref1 = useRef();
+	const ref2 = useRef();
 
 	return (
 		<Container ref={pageRef}>
 			<header
 				className="w-full h-20 flex justify-between items-center py-6 px-12 fixed top-0 z-50 backdrop-blur-md"
 				style={{
-					maskImage:
-						'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)',
+					maskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)',
 				}}
 			>
 				<Link to={routesConfig.welcome}>
@@ -42,13 +43,23 @@ const Welcome = () => {
 					</button>
 					<button
 						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-						onClick={() => pageRef.current.scrollTo({ top: 500, behavior: 'smooth' })}
+						onClick={() =>
+							pageRef.current.scrollTo({
+								top: ref1.current.offsetTop - 180,
+								behavior: 'smooth',
+							})
+						}
 					>
 						{t('product')}
 					</button>
 					<button
 						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
-						onClick={() => pageRef.current.scrollTo({ top: 1000, behavior: 'smooth' })}
+						onClick={() =>
+							pageRef.current.scrollTo({
+								top: ref2.current.offsetTop - 80,
+								behavior: 'smooth',
+							})
+						}
 					>
 						{t('developer')}
 					</button>
@@ -80,10 +91,7 @@ const Welcome = () => {
 							.split(' ')
 							.map((item) => ` ${item}`);
 						arr[arr.length - 1] = (
-							<span
-								key={arr.length - 1}
-								className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]"
-							>
+							<span key={arr.length - 1} className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
 								{arr[arr.length - 1]}
 							</span>
 						);
@@ -92,7 +100,7 @@ const Welcome = () => {
 				</h1>
 				<p className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">{t('description')}</p>
 				<div className="space-x-2">
-					<Link className="px-3.5 py-2.5 bg-sky-500 rounded-md font-semibold text-white text-sm transition-all hover:bg-sky-400">
+					<Link to={routesConfig.home} className="px-3.5 py-2.5 bg-sky-500 rounded-md font-semibold text-white text-sm transition-all hover:bg-sky-400">
 						{t('get-started')}
 					</Link>
 					<a
@@ -106,7 +114,7 @@ const Welcome = () => {
 			</div>
 
 			<div className="flex flex-row flex-wrap justify-evenly mb-[100px] gap-y-[100px]">
-				<div className="h-[300px] flex flex-col gap-6 max-w-[540px] mx-5">
+				<div className="h-[300px] flex flex-col gap-6 max-w-[540px] mx-5" ref={ref1}>
 					<div className="flex flex-row space-x-[-12px]">
 						<HexagonIcon className="z-20">
 							<p className="text-sky-500 font-bold text-xs">7749</p>
@@ -120,16 +128,13 @@ const Welcome = () => {
 					</div>
 					<h2 className="text-sky-500 text-xl font-semibold">{t('product-title')}</h2>
 					<p className="text-gray-400 text-[15px]">{t('product-description')}</p>
-					<Link className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
+					<Link to={routesConfig.problem} className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
 						{t('view-questions')} <FontAwesomeIcon icon="fa-solid fa-angle-right" className="ml-1.5" />
 					</Link>
 				</div>
 
 				<div className="h-[300px] max-w-[540px] flex flex-col gap-6 mx-5">
-					<HexagonIcon
-						bg="linear-gradient(to bottom right, rgb(155,155,155) 0%, rgb(44,44,44) 100%)"
-						className="z-10"
-					>
+					<HexagonIcon bg="linear-gradient(to bottom right, rgb(155,155,155) 0%, rgb(44,44,44) 100%)" className="z-10">
 						<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-700 dark:text-zinc-500 size-5" />
 					</HexagonIcon>
 					<h2 className="text-slate-700 dark:text-zinc-400 text-xl font-semibold">{t('appearance')}</h2>
@@ -141,10 +146,7 @@ const Welcome = () => {
 								onClick={() => setMode(theme == 'dark' ? 'light' : 'dark')}
 							>
 								{theme == 'dark' ? (
-									<FontAwesomeIcon
-										icon="fa-solid fa-moon"
-										className="text-slate-400 rotate-[-15deg]"
-									/>
+									<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-400 rotate-[-15deg]" />
 								) : (
 									<FontAwesomeIcon icon="fa-solid fa-sun" className="text-gray-600" />
 								)}
@@ -155,7 +157,7 @@ const Welcome = () => {
 				</div>
 			</div>
 
-			<div className="max-w-[584px] h-[80%] mx-auto items-center flex flex-col gap-6">
+			<div className="max-w-[584px] h-[80%] mx-auto items-center flex flex-col gap-6" ref={ref2}>
 				<HexagonIcon bg="linear-gradient(to bottom right, #4db6ac 0%, #00796b 100%)">
 					<FontAwesomeIcon icon="fa-solid fa-code" className="text-teal-500" />
 				</HexagonIcon>

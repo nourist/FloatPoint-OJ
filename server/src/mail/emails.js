@@ -1,9 +1,4 @@
-import {
-	WELLCOME_TEMPLATE,
-	VERIFICATION_TEMPLATE,
-	PASSWORD_RESET_REQUEST_TEMPLATE,
-	PASSWORD_RESET_SUCCESS_TEMPLATE,
-} from './emailTemplate.js';
+import { WELLCOME_TEMPLATE, VERIFICATION_TEMPLATE, PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE } from './emailTemplate.js';
 import { sender, mailtrapClient } from './mailtrap.js';
 
 export const sendWellcomeEmail = async (email, username) => {

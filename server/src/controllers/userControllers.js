@@ -29,10 +29,7 @@ const userControllers = {
 		try {
 			const { name } = req.params;
 
-			const user = await User.findOne(
-				{ name },
-				'-resetPasswordToken -verificationToken -isVerified -password -email',
-			);
+			const user = await User.findOne({ name }, '-resetPasswordToken -verificationToken -isVerified -password -email');
 
 			if (!user) {
 				throw new Error('User not found');
