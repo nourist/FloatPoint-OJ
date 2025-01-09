@@ -8,19 +8,19 @@ const authMiddlewares = {
 			const token = req.cookies.token;
 
 			if (!token) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - no token provided' });
+				return res.status(401).json({ success: false, msg: 'Unauthorized - no token provided' });
 			}
 
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 			if (!decoded) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - invalid token' });
+				return res.status(401).json({ success: false, msg: 'Unauthorized - invalid token' });
 			}
 
-			const user = await User.findById(req.userId);
+			const user = await User.findById(decoded.userId);
 
 			if (!user.isVerified) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - unverified' });
+				return res.status(401).json({ success: false, msg: 'Unauthorized - unverified' });
 			}
 
 			req.userId = decoded.userId;
@@ -68,7 +68,7 @@ const authMiddlewares = {
 	requireAd(req, res, next) {
 		try {
 			if (req.userPermission != 'Admin') {
-				return res.status(401).json({ success: false, message: 'Unauthorized - admin permission required' });
+				return res.status(401).json({ success: false, msg: 'Unauthorized - admin permission required' });
 			}
 
 			next();

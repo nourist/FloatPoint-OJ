@@ -4,10 +4,12 @@ import { TooltipProvider } from '~/components/ui/tooltip';
 
 import AppRouter from './components/AppRouter';
 import useThemeStore from './stores/themeStore';
+import useAuthStore from './stores/authStore';
 
 const App = () => {
 	const { i18n } = useTranslation();
 	const { theme } = useThemeStore();
+	const { getInfo } = useAuthStore();
 
 	useEffect(() => {
 		i18n.changeLanguage(localStorage.getItem('lang') || 'en');
@@ -25,6 +27,11 @@ const App = () => {
 		document.documentElement.classList.remove('light', 'dark');
 		document.documentElement.classList.add(theme);
 	}, [theme]);
+
+	useEffect(() => {
+		getInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<TooltipProvider>

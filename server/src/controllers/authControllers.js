@@ -250,7 +250,7 @@ const authControllers = {
 		}
 	},
 
-	//[GET] /auth/info
+	//[GET] /auth
 	async getSelfInfo(req, res, next) {
 		try {
 			const user = await User.findById(req.userId);

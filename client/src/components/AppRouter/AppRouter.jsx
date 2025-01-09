@@ -9,20 +9,26 @@ import useAuthStore from '~/stores/authStore';
 import DefaultLayout from '~/layouts/DefaultLayout';
 
 const AppRouter = () => {
-	const { auth } = useAuthStore();
+	const { isAuth } = useAuthStore();
 
 	return (
 		<Router>
 			<Routes>
 				{routes.map((route, index) => {
-					const Layout = route.layout == null ? Fragment : route.layout || DefaultLayout;
+					const Layout = route.layout === null ? Fragment : route.layout || DefaultLayout;
 					return (
 						<Route
 							key={index}
 							path={route.path}
 							element={
-								route.auth && !auth ? (
+								isAuth && route.path == '/' ? (
+									<Navigate to={routesConfig.home} />
+								) : !isAuth && route.page == '/home' ? (
 									<Navigate to={routesConfig.welcome} />
+								) : route.type == 'auth' && !isAuth ? (
+									<Navigate to={routesConfig.welcome} />
+								) : route.type == 'redirect' && isAuth ? (
+									<Navigate to={routesConfig.home} />
 								) : (
 									<Layout>
 										<route.page />

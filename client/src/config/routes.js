@@ -9,6 +9,7 @@ const routesConfig = {
 	problem: '/problem',
 	submission: '/submission',
 	contest: '/contest',
+	user: '/user',
 };
 
 export default routesConfig;

@@ -70,7 +70,7 @@ const Welcome = () => {
 						{t('about-me')}
 					</a>
 				</div>
-				<Link className="font-semibold text-gray-900 text-sm transition-all hover:text-sky-500 dark:text-gray-50 dark:hover:text-sky-500">
+				<Link to={routesConfig.login} className="font-semibold text-gray-900 text-sm transition-all hover:text-sky-500 dark:text-gray-50 dark:hover:text-sky-500">
 					{t('login')}
 					<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-1 mb-[-1px]" />
 				</Link>
@@ -100,7 +100,7 @@ const Welcome = () => {
 				</h1>
 				<p className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">{t('description')}</p>
 				<div className="space-x-2">
-					<Link to={routesConfig.home} className="px-3.5 py-2.5 bg-sky-500 rounded-md font-semibold text-white text-sm transition-all hover:bg-sky-400">
+					<Link to={routesConfig.signup} className="px-3.5 py-2.5 bg-sky-500 rounded-md font-semibold text-white text-sm transition-all hover:bg-sky-400">
 						{t('get-started')}
 					</Link>
 					<a

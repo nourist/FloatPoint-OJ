@@ -6,7 +6,7 @@ import useAuthStore from '~/stores/authStore';
 
 const NotFound = () => {
 	const { t } = useTranslation('notFound');
-	const { auth } = useAuthStore();
+	const { isAuth } = useAuthStore();
 
 	return (
 		<div className="dark:bg-gray-900 w-full h-full flex py-[10%] justify-center">
@@ -15,7 +15,7 @@ const NotFound = () => {
 				<h1 className="mt-4 text-balance text-5xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-7xl">{t('title')}</h1>
 				<p className="mt-6 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">{t('text')}</p>
 				<Link
-					to={auth ? routesConfig.home : routesConfig.welcome}
+					to={isAuth ? routesConfig.home : routesConfig.welcome}
 					className="mt-6 transition-all inline-block rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
 				>
 					{t('back-home')}
