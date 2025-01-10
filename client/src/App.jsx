@@ -2,14 +2,17 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { TooltipProvider } from '~/components/ui/tooltip';
 
-import AppRouter from './components/AppRouter';
 import useThemeStore from './stores/themeStore';
 import useAuthStore from './stores/authStore';
+import useLoadingStore from './stores/loadingStore';
+import AppRouter from './components/AppRouter';
+import Loading from './components/Loading';
 
 const App = () => {
 	const { i18n } = useTranslation();
 	const { theme } = useThemeStore();
 	const { getInfo } = useAuthStore();
+	const { isLoading } = useLoadingStore();
 
 	useEffect(() => {
 		i18n.changeLanguage(localStorage.getItem('lang') || 'en');
@@ -32,6 +35,10 @@ const App = () => {
 		getInfo();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<TooltipProvider>

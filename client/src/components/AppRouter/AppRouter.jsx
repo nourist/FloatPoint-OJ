@@ -23,7 +23,7 @@ const AppRouter = () => {
 							element={
 								isAuth && route.path == '/' ? (
 									<Navigate to={routesConfig.home} />
-								) : !isAuth && route.page == '/home' ? (
+								) : !isAuth && route.path == '/home' ? (
 									<Navigate to={routesConfig.welcome} />
 								) : route.type == 'auth' && !isAuth ? (
 									<Navigate to={routesConfig.welcome} />

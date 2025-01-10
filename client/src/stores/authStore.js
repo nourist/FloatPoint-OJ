@@ -48,6 +48,18 @@ const useAuthStore = create((set) => ({
 			set({ error: err.message, isLoading: false });
 		}
 	},
+
+	async logout() {
+		set({ error: null, msg: null, isLoading: true });
+
+		try {
+			const res = await httpRequest.post('/auth/logout');
+			set({ isAuth: false, user: null, isLoading: false, msg: res.data.msg });
+		} catch (err) {
+			console.error(err);
+			set({ error: err.message, isLoading: false });
+		}
+	},
 }));
 
 export default useAuthStore;

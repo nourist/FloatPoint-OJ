@@ -3,5 +3,14 @@
 	"problem": "Problem",
 	"submission": "Submission",
 	"contest": "Contest",
-	"user": "User"
+	"user": "User",
+	"login": "Login",
+	"editor": "Editor",
+	"setting": "Setting",
+	"appearance": "Appearance",
+	"language": "Language",
+	"log-out": "Logout",
+	"light": "Light",
+	"dark": "Dark",
+	"system": "System"
 }
