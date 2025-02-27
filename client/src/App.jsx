@@ -5,6 +5,7 @@ import { TooltipProvider } from '~/components/ui/tooltip';
 import useThemeStore from './stores/themeStore';
 import useAuthStore from './stores/authStore';
 import useLoadingStore from './stores/loadingStore';
+import useThemeListener from './hooks/useThemeListener';
 import AppRouter from './components/AppRouter';
 import Loading from './components/Loading';
 
@@ -35,6 +36,8 @@ const App = () => {
 		getInfo();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useThemeListener();
 
 	if (isLoading) {
 		return <Loading />;

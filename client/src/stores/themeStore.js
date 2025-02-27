@@ -11,6 +11,11 @@ const useThemeStore = create((set) => {
 		mode,
 		theme,
 		getSystemTheme,
+		updateSystemTheme: () => {
+			if (mode === 'system') {
+				set({ theme: getSystemTheme() });
+			}
+		},
 		setMode: (newMode) => {
 			localStorage.setItem('mode', newMode);
 			set({ mode: newMode, theme: newMode === 'system' ? getSystemTheme() : newMode });
