@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Sun, MoonStar } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 
 import routesConfig from '~/config/routes';
@@ -67,19 +68,21 @@ const DefaultLayout = ({ children }) => {
 					</>
 				) : (
 					<>
-						<Button className="!bg-sky-500 !ml-auto h-8 dark:!bg-sky-500/30">
+						<Button className="!bg-sky-500 !ml-auto h-8 dark:!bg-sky-500/20">
 							<Link to={routesConfig.login} className="text-white dark:text-sky-400 font-medium text-xs">
 								{t('login')}
 							</Link>
 						</Button>
 						<button
-							className={`size-8 bg-slate-200 hover:bg-slate-300 dark:bg-neutral-900 dark:hover:bg-gray-700 rounded-md`}
+							className={`size-8 bg-slate-200 hover:bg-slate-300 dark:bg-neutral-900 dark:hover:bg-gray-700 rounded-md flex items-center justify-center`}
 							onClick={() => setMode(theme == 'dark' ? 'light' : 'dark')}
 						>
 							{theme == 'dark' ? (
-								<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-400 rotate-[-15deg]" />
+								// <FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-400 rotate-[-15deg]" />
+								<MoonStar className="text-slate-300" size="18px"></MoonStar>
 							) : (
-								<FontAwesomeIcon icon="fa-solid fa-sun" className="text-gray-600" />
+								// <FontAwesomeIcon icon="fa-solid fa-sun" className="text-gray-600" />
+								<Sun className="text-gray-700" size="18px"></Sun>
 							)}
 						</button>
 					</>

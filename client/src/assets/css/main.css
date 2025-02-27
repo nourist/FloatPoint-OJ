@@ -71,6 +71,9 @@
 		content: '';
 		@apply bg-red-500 rounded-full w-2 h-2 right-[10%] top-[10%] absolute block;
 	}
+	.input-error {
+		@apply !text-red-500 !ring-red-500 !border-red-500 !caret-red-500 focus-within:!border-red-500 focus-within:!ring-red-500;
+	}
 }
 
 html {

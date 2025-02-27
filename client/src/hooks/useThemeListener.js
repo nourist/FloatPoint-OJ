@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import useThemeStore from "~/stores/themeStore";
+import useThemeStore from '~/stores/themeStore';
 
 const useThemeListener = () => {
 	const { updateSystemTheme } = useThemeStore();
@@ -10,8 +10,8 @@ const useThemeListener = () => {
 
 		mediaQuery.addEventListener('change', updateSystemTheme);
 		return () => mediaQuery.removeEventListener('change', updateSystemTheme);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-}
+};
 
 export default useThemeListener;
