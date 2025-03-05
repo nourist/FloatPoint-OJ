@@ -76,6 +76,10 @@
 	}
 }
 
+:root {
+	--toastify-color-dark: rgb(38, 38, 38);
+}
+
 html {
 	height: 100vh;
 	width: 100vw;

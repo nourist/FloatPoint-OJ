@@ -20,7 +20,7 @@ const useAuthStore = create((set) => ({
 			useLoadingStore.setState({ isLoading: false });
 		} catch (err) {
 			console.error(err);
-			set({ error: err.response.data.msg, isAuth: false, isLoading: false });
+			set({ /*error: err.response.data.msg,*/ isAuth: false, isLoading: false });
 			useLoadingStore.setState({ isLoading: false });
 		}
 	},
@@ -45,7 +45,7 @@ const useAuthStore = create((set) => ({
 			set({ msg: res.data.msg, isLoading: false });
 		} catch (err) {
 			console.error(err);
-			set({ error: err.message, isLoading: false });
+			set({ error: err.response.data.msg, isLoading: false });
 		}
 	},
 
@@ -59,6 +59,10 @@ const useAuthStore = create((set) => ({
 			console.error(err);
 			set({ error: err.message, isLoading: false });
 		}
+	},
+
+	clearLog() {
+		set({ error: null, msg: null });
 	},
 }));
 

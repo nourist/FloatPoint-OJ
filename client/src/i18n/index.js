@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 import LAYOUT_EN from '../locales/en/layout.json';
 import WELCOME_EN from '../locales/en/welcome.json';
 import NOTFOUND_EN from '../locales/en/notFound.json';
+import SIGNUP_EN from '../locales/en/signup.json';
 
 export const locales = {
 	en: 'English',
@@ -11,7 +12,7 @@ export const locales = {
 };
 
 const resources = {
-	en: { layout: LAYOUT_EN, welcome: WELCOME_EN, notFound: NOTFOUND_EN },
+	en: { layout: LAYOUT_EN, welcome: WELCOME_EN, notFound: NOTFOUND_EN, signup: SIGNUP_EN },
 	vi: {},
 };
 

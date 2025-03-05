@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { TooltipProvider } from '~/components/ui/tooltip';
 
 import useThemeStore from './stores/themeStore';
@@ -46,6 +47,7 @@ const App = () => {
 	return (
 		<TooltipProvider>
 			<AppRouter />
+			<ToastContainer position="bottom-right" theme={theme} newestOnTop draggable></ToastContainer>
 		</TooltipProvider>
 	);
 };
