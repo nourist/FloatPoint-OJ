@@ -1,27 +1,20 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-import LAYOUT_EN from '../locales/en/layout.json';
-import WELCOME_EN from '../locales/en/welcome.json';
-import NOTFOUND_EN from '../locales/en/notFound.json';
-import SIGNUP_EN from '../locales/en/signup.json';
+import HttpApi from 'i18next-http-backend';
 
 export const locales = {
 	en: 'English',
 	vi: 'Tiếng Việt',
 };
 
-const resources = {
-	en: { layout: LAYOUT_EN, welcome: WELCOME_EN, notFound: NOTFOUND_EN, signup: SIGNUP_EN },
-	vi: {},
-};
-
-i18next.use(initReactI18next).init({
-	resources,
-	lng: 'en',
-	debug: false,
-	defaultNS: 'layout',
-	interpolation: {
-		excapeValue: false,
-	},
-});
+i18next
+	.use(initReactI18next)
+	.use(HttpApi)
+	.init({
+		lng: 'en',
+		debug: false,
+		defaultNS: 'layout',
+		interpolation: {
+			excapeValue: false,
+		},
+	});
