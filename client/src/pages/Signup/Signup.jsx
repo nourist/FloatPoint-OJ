@@ -62,7 +62,7 @@ const Signup = () => {
 	}, [msg, clearLog]);
 
 	return (
-		<div className="w-full py-10 flex items-center justify-center">
+		<div className="w-full h-[calc(100%-80px)] flex items-center justify-center">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}

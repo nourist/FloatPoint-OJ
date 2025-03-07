@@ -1,0 +1,13 @@
+{
+	"title": "Welcome Back",
+	"password": "Password",
+	"email": "Email",
+	"forgot-password": "Forgot password?",
+	"dont-have-account": "Don't have an account?",
+	"signup": "Sign up",
+	"login": "Login",
+	"email-required": "Please enter an email",
+	"email-error": "Please enter a valid email",
+	"password-required": "Please enter a password",
+	"verify-email": "Verify Email"
+}

@@ -8,6 +8,7 @@ import Contest from '~/pages/Contest';
 import Signup from '~/pages/Signup';
 import Login from '~/pages/Login';
 import VerifyEmail from '~/pages/VerifyEmail';
+import ForgotPassword from '~/pages/ForgotPassword';
 import ResetPassword from '~/pages/ResetPassword';
 
 const routes = [
@@ -34,12 +35,14 @@ const routes = [
 	{
 		path: routesConfig.verifyEmail,
 		page: VerifyEmail,
-		type: 'redirect',
+	},
+	{
+		path: routesConfig.forgotPassword,
+		page: ForgotPassword,
 	},
 	{
 		path: routesConfig.resetPassword,
 		page: ResetPassword,
-		type: 'auth',
 	},
 	{
 		path: routesConfig.home,

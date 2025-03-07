@@ -86,9 +86,9 @@ const authControllers = {
 		}
 	},
 
-	//[POST] /auth/verify-email
+	//[POST] /auth/verify-email/:code
 	async verifyEmail(req, res, next) {
-		const { code } = req.body;
+		const { code } = req.params;
 
 		try {
 			const user = await User.findOne({

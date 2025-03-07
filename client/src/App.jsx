@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { TooltipProvider } from '~/components/ui/tooltip';
 
@@ -45,10 +45,12 @@ const App = () => {
 	}
 
 	return (
-		<TooltipProvider>
-			<AppRouter />
-			<ToastContainer position="bottom-right" theme={theme} newestOnTop draggable></ToastContainer>
-		</TooltipProvider>
+		<React.Suspense fallback={<Loading />}>
+			<TooltipProvider>
+				<AppRouter />
+				<ToastContainer position="bottom-right" theme={theme} newestOnTop draggable></ToastContainer>
+			</TooltipProvider>
+		</React.Suspense>
 	);
 };
 

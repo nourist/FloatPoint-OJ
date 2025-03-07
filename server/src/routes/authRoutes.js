@@ -12,7 +12,7 @@ router.post('/login', authControllers.login);
 router.post('/logout', authControllers.logout);
 
 router.post('/re-send-verify', authControllers.reSendVerificationCode);
-router.post('/verify-email', authControllers.verifyEmail);
+router.post('/verify-email/:code', authControllers.verifyEmail);
 
 router.post('/forgot-password', authControllers.forgotPassword);
 router.post('/reset-password/:token', authControllers.resetPassword);

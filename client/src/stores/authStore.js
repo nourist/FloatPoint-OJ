@@ -53,11 +53,12 @@ const useAuthStore = create((set) => ({
 		set({ error: null, msg: null, isLoading: true });
 
 		try {
+			// eslint-disable-next-line no-unused-vars
 			const res = await httpRequest.post('/auth/logout');
-			set({ isAuth: false, user: null, isLoading: false, msg: res.data.msg });
+			set({ isAuth: false, user: null, isLoading: false, /*msg: res.data.msg*/ });
 		} catch (err) {
 			console.error(err);
-			set({ error: err.message, isLoading: false });
+			set({ /*error: err.message,*/ isLoading: false });
 		}
 	},
 
