@@ -53,7 +53,7 @@ const authControllers = {
 		}
 	},
 
-	//[POST] /auth/res-send-verify
+	//[POST] /auth/re-send-verify
 	async reSendVerificationCode(req, res, next) {
 		const { email } = req.body;
 

@@ -72,7 +72,7 @@ const VerifyEmail = () => {
 				</div>
 				<div className="h-12 dark:bg-neutral-900 bg-neutral-200 bg-opacity-50 dark:bg-opacity-60 dark:text-gray-400 text-gray-500 text-sm flex items-center justify-center gap-1">
 					{t('re-verify-msg')}{' '}
-					<Link to={routesConfig.reVerifyEmail} className="text-sky-400">
+					<Link to={routesConfig.sendVerifyCode} className="text-sky-400">
 						{t('re-send')}
 					</Link>
 				</div>

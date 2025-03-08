@@ -1,6 +1,7 @@
 {
 	"title": "Send verify code",
 	"email": "Email",
+	"enter-email": "Please enter your email",
 	"send": "Send",
 	"already-have-code": "Already have verification code?",
 	"verify-now": "Verify Now",

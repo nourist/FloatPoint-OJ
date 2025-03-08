@@ -10,7 +10,7 @@ import Login from '~/pages/Login';
 import VerifyEmail from '~/pages/VerifyEmail';
 import ForgotPassword from '~/pages/ForgotPassword';
 import ResetPassword from '~/pages/ResetPassword';
-import ReVerifyEmail from '~/pages/ReVerifyEmail';
+import SendVerifyCode from '~/pages/SendVerifyCode';
 
 const routes = [
 	{
@@ -39,8 +39,8 @@ const routes = [
 		type: 'redirect',
 	},
 	{
-		path: routesConfig.reVerifyEmail,
-		page: ReVerifyEmail,
+		path: routesConfig.sendVerifyCode,
+		page: SendVerifyCode,
 		type: 'redirect',
 	},
 	{

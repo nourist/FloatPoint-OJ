@@ -11,8 +11,8 @@ import Input from '~/components/Input';
 import routesConfig from '~/config/routes';
 import useAuthStore from '~/stores/authStore';
 
-const Login = () => {
-	const { t } = useTranslation('reVerifyEmail');
+const SendVerifyCode = () => {
+	const { t } = useTranslation('sendVerifyCode');
 
 	const { sendVerifyCode, isLoading, msg, error, clearLog } = useAuthStore();
 
@@ -47,8 +47,9 @@ const Login = () => {
 				className="max-w-[25rem] w-full bg-white dark:bg-neutral-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
 			overflow-hidden"
 			>
-				<div className="p-8 space-y-6">
-					<h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-sky-400 to-blue-400 text-transparent bg-clip-text">{t('title')}</h2>
+				<div className="p-8 space-y-5">
+					<h2 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-sky-400 to-blue-400 text-transparent bg-clip-text">{t('title')}</h2>
+					<p className="text-[13px] dark:text-gray-400 text-center">{t('enter-email')}</p>
 					<Input
 						icon={<Mail size={'16px'} className="translate-y-[-1px]" />}
 						placeholder={t('email')}
@@ -76,4 +77,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SendVerifyCode;

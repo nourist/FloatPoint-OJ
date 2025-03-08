@@ -9,6 +9,7 @@ import routesConfig from '~/config/routes';
 import useAuthStore from '~/stores/authStore';
 import useThemeStore from '~/stores/themeStore';
 import AvatarWithMenu from '~/components/AvatarWithMenu';
+import Logo from '~/assets/images/logo.png';
 
 const DefaultLayout = ({ children }) => {
 	const { t } = useTranslation();
@@ -25,7 +26,7 @@ const DefaultLayout = ({ children }) => {
 		<div className="h-full w-full overflow-auto bg-gray-100 dark:bg-neutral-900">
 			<header className="h-16 px-16 flex items-center space-x-4 dark:bg-neutral-800 bg-white shadow">
 				<Link to={routesConfig.home}>
-					<img src="./logo.png" className="size-8" alt="" />
+					<img src={Logo} className="size-8" alt="" />
 				</Link>
 
 				{[

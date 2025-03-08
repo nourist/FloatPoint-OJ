@@ -86,7 +86,7 @@ const useAuthStore = create((set) => ({
 		}
 	},
 
-	async fotgotPassword(email) {
+	async forgotPassword(email) {
 		set({ error: null, msg: null, isLoading: true });
 
 		try {
