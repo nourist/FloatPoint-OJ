@@ -1,0 +1,8 @@
+{
+	"title": "Verify your email",
+	"enter-otp": "Enter the 6-digits code sent to your email.",
+	"verify": "Verify",
+	"re-verify-msg": "Don't have code or code was Expired?",
+	"re-send": "Send Code",
+	"success-msg": "Now you can login to your account!"
+}

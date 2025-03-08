@@ -55,10 +55,58 @@ const useAuthStore = create((set) => ({
 		try {
 			// eslint-disable-next-line no-unused-vars
 			const res = await httpRequest.post('/auth/logout');
-			set({ isAuth: false, user: null, isLoading: false, /*msg: res.data.msg*/ });
+			set({ isAuth: false, user: null, isLoading: false /*msg: res.data.msg*/ });
 		} catch (err) {
 			console.error(err);
 			set({ /*error: err.message,*/ isLoading: false });
+		}
+	},
+
+	async verifyEmail(code) {
+		set({ error: null, msg: null, isLoading: true });
+
+		try {
+			const res = await httpRequest.post(`/auth/verify-email/${code}`);
+			set({ isLoading: false, msg: res.data.msg });
+		} catch (err) {
+			console.error(err);
+			set({ error: err.response.data.msg, isLoading: false });
+		}
+	},
+
+	async sendVerifyCode(email) {
+		set({ error: null, msg: null, isLoading: true });
+
+		try {
+			const res = await httpRequest.post(`/auth/re-send-verify`, { email });
+			set({ isLoading: false, msg: res.data.msg });
+		} catch (err) {
+			console.error(err);
+			set({ error: err.response.data.msg, isLoading: false });
+		}
+	},
+
+	async fotgotPassword(email) {
+		set({ error: null, msg: null, isLoading: true });
+
+		try {
+			const res = await httpRequest.post('/auth/forgot-password', { email });
+			set({ isLoading: false, msg: res.data.msg });
+		} catch (err) {
+			console.error(err);
+			set({ error: err.response.data.msg, isLoading: false });
+		}
+	},
+
+	async resetPassword(token, password) {
+		set({ error: null, msg: null, isLoading: true });
+
+		try {
+			const res = await httpRequest.post(`/auth/reset-password/${token}`, { password });
+			set({ isLoading: false, msg: res.data.msg });
+		} catch (err) {
+			console.error(err);
+			set({ error: err.response.data.msg, isLoading: false });
 		}
 	},
 

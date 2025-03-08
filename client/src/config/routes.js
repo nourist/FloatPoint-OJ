@@ -4,6 +4,7 @@ const routesConfig = {
 	login: '/login',
 	signup: '/signup',
 	verifyEmail: '/verify',
+	reVerifyEmail: '/re-verify',
 	forgotPassword: '/forgot-password',
 	resetPassword: '/reset-password',
 	home: '/home',

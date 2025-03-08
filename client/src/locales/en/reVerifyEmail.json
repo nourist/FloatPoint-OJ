@@ -1,0 +1,8 @@
+{
+	"title": "Send verify code",
+	"email": "Email",
+	"send": "Send",
+	"already-have-code": "Already have verification code?",
+	"verify-now": "Verify Now",
+	"msg-success": "Please check your mailBox!"
+}

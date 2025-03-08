@@ -96,7 +96,11 @@ const Signup = () => {
 						isError={password.length != 0 && !passwordOK}
 					></Input>
 					<PasswordIndicator password={password} setOk={setPasswordOK}></PasswordIndicator>
-					<Button disabled={isLoading} className="h-9 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold" onClick={handleSignup}>
+					<Button
+						disabled={isLoading}
+						className="h-9 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold hover:ring-2 transition-all duration-200 hover:ring-opacity-50 hover:ring-sky-400"
+						onClick={handleSignup}
+					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('signup')}
 					</Button>
 				</div>

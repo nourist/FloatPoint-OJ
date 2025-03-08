@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Lock, Mail, Loader2 } from 'lucide-react';
+import { Mail, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import isEmail from 'validator/lib/isEmail';
@@ -12,41 +12,31 @@ import routesConfig from '~/config/routes';
 import useAuthStore from '~/stores/authStore';
 
 const Login = () => {
-	const { t } = useTranslation('login');
+	const { t } = useTranslation('reVerifyEmail');
 
-	const { login, isLoading, msg, error, clearLog } = useAuthStore();
+	const { sendVerifyCode, isLoading, msg, error, clearLog } = useAuthStore();
 
 	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
 	const [emailOK, setEmailOK] = useState(false);
 
 	useEffect(() => {
 		setEmailOK(isEmail(email));
 	}, [email]);
 
-	const handleLogin = () => {
-		if (!emailOK) {
-			if (!email) toast.error(t('email-required'));
-			else toast.warn(t('email-error'));
-			return;
-		}
-		if (!password) {
-			toast.error(t('password-required'));
-			return;
-		}
-		login(email, password);
+	const handleSend = () => {
+		sendVerifyCode(email);
 	};
 
 	useEffect(() => {
-		toast.error(error);
-		clearLog();
-	}, [error, clearLog, t]);
-
-	useEffect(() => {
-		toast.success(msg);
-		clearLog();
-	}, [msg, clearLog]);
+		if (msg) {
+			toast.success(msg);
+			toast.info(t('msg-success'));
+			clearLog();
+		} else {
+			toast.error(error);
+			clearLog();
+		}
+	}, [msg, error, clearLog, t]);
 
 	return (
 		<div className="w-full h-[calc(80%-80px)] flex items-center justify-center">
@@ -57,7 +47,7 @@ const Login = () => {
 				className="max-w-[25rem] w-full bg-white dark:bg-neutral-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
 			overflow-hidden"
 			>
-				<div className="p-8 space-y-5">
+				<div className="p-8 space-y-6">
 					<h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-sky-400 to-blue-400 text-transparent bg-clip-text">{t('title')}</h2>
 					<Input
 						icon={<Mail size={'16px'} className="translate-y-[-1px]" />}
@@ -67,27 +57,18 @@ const Login = () => {
 						setValue={setEmail}
 						isError={email.length != 0 && !emailOK}
 					></Input>
-					<Input icon={<Lock size={'16px'} className="translate-y-[-1px]" />} placeholder={t('password')} type="password" value={password} setValue={setPassword}></Input>
-					<div className="flex justify-between">
-						<Link to={routesConfig.forgotPassword} className="text-sky-400 text-xs font-medium block hover:text-sky-500 transition-all duration-100">
-							{t('forgot-password')}
-						</Link>
-						<Link to={routesConfig.verifyEmail} className="dark:text-gray-300 text-xs font-medium block hover:dark:text-gray-400 transition-all duration-100">
-							{t('verify-email')}
-						</Link>
-					</div>
 					<Button
-						disabled={isLoading}
+						disabled={isLoading || !emailOK}
 						className="h-9 transition-all duration-200 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold hover:ring-2 hover:ring-opacity-50 hover:ring-sky-400"
-						onClick={handleLogin}
+						onClick={handleSend}
 					>
-						{isLoading ? <Loader2 className="animate-spin" /> : t('login')}
+						{isLoading ? <Loader2 className="animate-spin" /> : t('send')}
 					</Button>
 				</div>
 				<div className="h-12 dark:bg-neutral-900 bg-neutral-200 bg-opacity-50 dark:bg-opacity-60 dark:text-gray-400 text-gray-500 text-sm flex items-center justify-center gap-1">
-					{t('dont-have-account')}{' '}
-					<Link to={routesConfig.signup} className="text-sky-400">
-						{t('signup')}
+					{t('already-have-code')}{' '}
+					<Link to={routesConfig.verifyEmail} className="text-sky-400">
+						{t('verify-now')}
 					</Link>
 				</div>
 			</motion.div>

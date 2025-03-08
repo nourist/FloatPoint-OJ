@@ -10,6 +10,7 @@ import Login from '~/pages/Login';
 import VerifyEmail from '~/pages/VerifyEmail';
 import ForgotPassword from '~/pages/ForgotPassword';
 import ResetPassword from '~/pages/ResetPassword';
+import ReVerifyEmail from '~/pages/ReVerifyEmail';
 
 const routes = [
 	{
@@ -35,14 +36,22 @@ const routes = [
 	{
 		path: routesConfig.verifyEmail,
 		page: VerifyEmail,
+		type: 'redirect',
+	},
+	{
+		path: routesConfig.reVerifyEmail,
+		page: ReVerifyEmail,
+		type: 'redirect',
 	},
 	{
 		path: routesConfig.forgotPassword,
 		page: ForgotPassword,
+		type: 'redirect',
 	},
 	{
 		path: routesConfig.resetPassword,
 		page: ResetPassword,
+		type: 'redirect',
 	},
 	{
 		path: routesConfig.home,

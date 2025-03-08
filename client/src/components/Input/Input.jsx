@@ -9,11 +9,13 @@ const Input = ({ type = 'text', placeholder = '', icon, classname = '', value, s
 		<div
 			className={`w-full h-9 dark:bg-neutral-700 dark:bg-opacity-40 rounded-md flex border border-neutral-300 dark:border-transparent dark:hover:border-zinc-800 relative focus-within:ring-sky-400 focus-within:ring-opacity-90 focus-within:ring-1 focus-within:border-sky-400 group transition-all duration-200 ${classname} ${isError ? 'input-error' : ''}`}
 		>
-			<div
-				className={`absolute w-9 h-9 dark:text-gray-500 text-gray-600 flex items-center justify-center group-focus-within:text-sky-400 transition-all duration-200 ${isError ? 'input-error' : ''}`}
-			>
-				{icon}
-			</div>
+			{icon && (
+				<div
+					className={`absolute w-9 h-9 dark:text-gray-500 text-gray-600 flex items-center justify-center group-focus-within:text-sky-400 transition-all duration-200 ${isError ? 'input-error' : ''}`}
+				>
+					{icon}
+				</div>
+			)}
 			<input
 				value={value}
 				onChange={(e) => {
