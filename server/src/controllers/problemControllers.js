@@ -1,14 +1,29 @@
 import Problem from '../models/problem.js';
+import User from '../models/user.js';
+import Submission from '../models/submission.js';
 
 const problemControllers = {
 	//[GET] /problem
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, tags, q, sortBy, order } = req.query;
-			const data = await Problem.filterAndSort({ tags, q, sortBy, order });
+			const { size = 20, page = 1, tags, q, sortBy, order, dificulty } = req.query;
+			let data = await Problem.filterAndSort({ tags, q, sortBy, order, dificulty });
+			data = data.map((d) => d.toObject());
 
 			if (req.userPermission != 'Admin') {
 				data = data.filter((problem) => problem.public);
+			}
+
+			if (req.userId) {
+				const user = await User.findById(req.userId);
+				const submissions = await Submission.filter({ author: user.name, status: 'AC' });
+
+				for (let i = 0; i < data.length; i++) {
+					const okAC = submissions.find((submission) => submission.forProblem == data[i].id);
+					if (okAC) {
+						data[i].solve = true;
+					}
+				}
 			}
 
 			res.status(200).json({

@@ -8,9 +8,12 @@ const routesConfig = {
 	forgotPassword: '/forgot-password',
 	resetPassword: '/reset-password/:token',
 	home: '/home',
-	problem: '/problem',
-	submission: '/submission',
-	contest: '/contest',
+	problem: '/problem/:id',
+	problems: '/problems',
+	submission: '/submission/:id',
+	submissions: '/submissions',
+	contest: '/contest/:id',
+	contests: '/contests',
 	user: '/user',
 };
 

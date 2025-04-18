@@ -3,6 +3,7 @@ import Welcome from '~/pages/Welcome';
 import NotFound from '~/pages/NotFound';
 import Home from '~/pages/Home';
 import Problem from '~/pages/Problem';
+import Problems from '~/pages/Problems';
 import Submission from '~/pages/Submission';
 import Contest from '~/pages/Contest';
 import Signup from '~/pages/Signup';
@@ -60,6 +61,10 @@ const routes = [
 	{
 		path: routesConfig.problem,
 		page: Problem,
+	},
+	{
+		path: routesConfig.problems,
+		page: Problems,
 	},
 	{
 		path: routesConfig.submission,

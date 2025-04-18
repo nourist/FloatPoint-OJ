@@ -64,7 +64,7 @@ const problemSchema = new mongoose.Schema(
 	{
 		timestamps: true,
 		statics: {
-			filterAndSort: async function ({ tags = [], q = '', sortBy, order }) {
+			filterAndSort: async function ({ tags = [], q = '', sortBy, order, difficulty }) {
 				const regex = new RegExp(q, 'i');
 
 				const data = await this.find({
@@ -84,7 +84,7 @@ const problemSchema = new mongoose.Schema(
 					.sort({ [sortBy]: order || 1 })
 					.select('-testcase -_id -__v');
 
-				return data.filter((problem) => tags.every((tag) => problem.tags.includes(tag)));
+				return data.filter((problem) => tags.every((tag) => problem.tags.includes(tag)) && (!difficulty || (difficulty && problem.difficulty == difficulty)));
 			},
 		},
 	},

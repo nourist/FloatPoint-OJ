@@ -68,7 +68,7 @@ const ForgotPassword = () => {
 				</div>
 				<div className="h-12 dark:bg-neutral-900 bg-neutral-200 bg-opacity-50 dark:bg-opacity-60 dark:text-gray-400 text-gray-500 text-sm flex items-center justify-center gap-1">
 					{t('already-have-password')}{' '}
-					<Link to={routesConfig.verifyEmail} className="text-sky-400">
+					<Link to={routesConfig.login} className="text-sky-400">
 						{t('login-now')}
 					</Link>
 				</div>
