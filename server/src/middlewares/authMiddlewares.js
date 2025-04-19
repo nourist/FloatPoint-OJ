@@ -39,19 +39,19 @@ const authMiddlewares = {
 			const token = req.cookies.token;
 
 			if (!token) {
-				next();
+				return next();
 			}
 
 			const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
 
 			if (!decoded) {
-				next();
+				return next();
 			}
 
 			const user = await User.findById(decoded.userId);
 
 			if (!user.isVerified) {
-				next();
+				return next();
 			}
 
 			req.userId = decoded.userId;

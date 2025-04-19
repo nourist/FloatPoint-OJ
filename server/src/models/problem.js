@@ -84,7 +84,9 @@ const problemSchema = new mongoose.Schema(
 					.sort({ [sortBy]: order || 1 })
 					.select('-testcase -_id -__v');
 
-				return data.filter((problem) => tags.every((tag) => problem.tags.includes(tag)) && (!difficulty || (difficulty && problem.difficulty == difficulty)));
+				return data.filter(
+					(problem) => (tags.length == 0 || tags.every((tag) => problem.tags.includes(tag))) && (!difficulty || (difficulty && problem.difficulty == difficulty)),
+				);
 			},
 		},
 	},

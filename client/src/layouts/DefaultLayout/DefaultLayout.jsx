@@ -11,7 +11,7 @@ import useThemeStore from '~/stores/themeStore';
 import AvatarWithMenu from '~/components/AvatarWithMenu';
 import Logo from '~/assets/images/logo.png';
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = ({ children, footer }) => {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const { isAuth, user } = useAuthStore();
@@ -36,15 +36,15 @@ const DefaultLayout = ({ children }) => {
 					},
 					{
 						title: t('problem'),
-						path: routesConfig.problem,
+						path: routesConfig.problems,
 					},
 					{
 						title: t('submission'),
-						path: routesConfig.submission,
+						path: routesConfig.submissions,
 					},
 					{
 						title: t('contest'),
-						path: routesConfig.contest,
+						path: routesConfig.contests,
 					},
 				].map((item, index) => (
 					<Button key={index} variant="ghost" asChild>
@@ -89,13 +89,31 @@ const DefaultLayout = ({ children }) => {
 					</>
 				)}
 			</header>
-			{children}
+			<div className="min-h-[calc(100%-64px)] flex">{children}</div>
+			{footer}
+			{/* <footer className=" bg-gray-800 text-gray-300 py-6">
+				<div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
+					<div className="text-center sm:text-left">
+						<h2 className="text-lg font-semibold text-white">My Online Judge</h2>
+						<p className="text-sm">© 2025 Hồ Đình Vỹ. All rights reserved.</p>
+					</div>
+					<div className="flex gap-4 mt-4 sm:mt-0">
+						<a href="mailto:your@email.com" className="hover:text-white">
+							<Mail size={24} />
+						</a>
+						<a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+							<Github size={24} />
+						</a>
+					</div>
+				</div>
+			</footer> */}
 		</div>
 	);
 };
 
 DefaultLayout.propTypes = {
 	children: PropTypes.node,
+	footer: PropTypes.node,
 };
 
 export default DefaultLayout;

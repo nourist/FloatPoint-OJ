@@ -4,11 +4,15 @@ import { getProblems } from '~/services/problem';
 import { CircleCheck } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
+
 import routesConfig from '~/config/routes';
 import Pagination from '~/components/Pagination';
+import useAuthStore from '~/stores/authStore';
+import padlock from '~/assets/images/padlock.png';
 
 const Problem = () => {
 	const { t } = useTranslation('problems');
+	const { user } = useAuthStore();
 
 	const [list, setList] = useState([]);
 	const [numOfPage, setNumOfPage] = useState(0);
@@ -44,6 +48,11 @@ const Problem = () => {
 							<th scope="col" className="px-6 py-3">
 								{t('tags')}
 							</th>
+							{user.permission == 'Admin' && (
+								<th scope="col" className="px-6 py-3">
+									{t('private')}
+								</th>
+							)}
 							<th scope="col" className="px-6 py-3">
 								{t('point')}
 							</th>
@@ -67,6 +76,7 @@ const Problem = () => {
 								</th>
 								<td className="px-6 py-4 capitalize">{t(problem.difficulty)}</td>
 								<td className="px-6 py-4 capitalize">{problem.tags.join(' | ')}</td>
+								{user.permission == 'Admin' && <td className="px-6 py-4">{!problem.public && <img className="size-6 mx-auto" src={padlock} />}</td>}
 								<td className="px-6 py-4">{problem.point}p</td>
 								<td className="px-6 py-4">{problem.noOfSubm ? Math.round((problem.noOfSuccess / problem.noOfSubm) * 100) : 0}%</td>
 								<td className="px-6 py-4">{problem.noOfSuccess}</td>

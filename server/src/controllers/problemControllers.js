@@ -6,16 +6,16 @@ const problemControllers = {
 	//[GET] /problem
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, tags, q, sortBy, order, dificulty } = req.query;
-			let data = await Problem.filterAndSort({ tags, q, sortBy, order, dificulty });
+			const { size = 20, page = 1, tags, q, sortBy, order, difficulty } = req.query;
+			let data = await Problem.filterAndSort({ tags, q, sortBy, order, difficulty });
 			data = data.map((d) => d.toObject());
 
 			if (req.userPermission != 'Admin') {
 				data = data.filter((problem) => problem.public);
 			}
 
-			if (req.userId) {
-				const user = await User.findById(req.userId);
+			const user = await User.findById(req.userId);
+			if (user) {
 				const submissions = await Submission.filter({ author: user.name, status: 'AC' });
 
 				for (let i = 0; i < data.length; i++) {

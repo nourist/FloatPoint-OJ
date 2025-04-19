@@ -4,4 +4,3 @@ A web application for online judge(algorithm questions), build with MERN stack(M
 todo list: 
 - sortable table problem
 - problem filter with search
-- footer layout

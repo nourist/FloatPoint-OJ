@@ -12,5 +12,7 @@
 	"log-out": "Logout",
 	"light": "Light",
 	"dark": "Dark",
-	"system": "System"
+	"system": "System",
+	"oops": "Oops!",
+	"no-mail": "Unfortunately, I will not reveal my information."
 }

@@ -1,11 +1,14 @@
 import routesConfig from '~/config/routes';
+import DefaultLayoutWithFooter from '~/layouts/DefaultLayoutWithFooter';
 import Welcome from '~/pages/Welcome';
 import NotFound from '~/pages/NotFound';
 import Home from '~/pages/Home';
 import Problem from '~/pages/Problem';
 import Problems from '~/pages/Problems';
 import Submission from '~/pages/Submission';
+import Submissions from '~/pages/Submissions';
 import Contest from '~/pages/Contest';
+import Contests from '~/pages/Contests';
 import Signup from '~/pages/Signup';
 import Login from '~/pages/Login';
 import VerifyEmail from '~/pages/VerifyEmail';
@@ -27,36 +30,43 @@ const routes = [
 	{
 		path: routesConfig.signup,
 		page: Signup,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.login,
 		page: Login,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.verifyEmail,
 		page: VerifyEmail,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.sendVerifyCode,
 		page: SendVerifyCode,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.forgotPassword,
 		page: ForgotPassword,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.resetPassword,
 		page: ResetPassword,
+		layout: DefaultLayoutWithFooter,
 		type: 'redirect',
 	},
 	{
 		path: routesConfig.home,
 		page: Home,
+		layout: DefaultLayoutWithFooter,
 	},
 	{
 		path: routesConfig.problem,
@@ -65,14 +75,25 @@ const routes = [
 	{
 		path: routesConfig.problems,
 		page: Problems,
+		layout: DefaultLayoutWithFooter,
 	},
 	{
 		path: routesConfig.submission,
 		page: Submission,
 	},
 	{
+		path: routesConfig.submissions,
+		page: Submissions,
+		layout: DefaultLayoutWithFooter,
+	},
+	{
 		path: routesConfig.contest,
 		page: Contest,
+	},
+	{
+		path: routesConfig.contests,
+		page: Contests,
+		layout: DefaultLayoutWithFooter,
 	},
 ];
 

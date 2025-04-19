@@ -39,7 +39,7 @@ const ForgotPassword = () => {
 	}, [msg, error, clearLog, t]);
 
 	return (
-		<div className="w-full h-[calc(80%-80px)] flex items-center justify-center">
+		<div className="w-full mt-2 flex items-center justify-center pb-28">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
