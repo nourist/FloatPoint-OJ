@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { CircleCheck } from 'lucide-react';
 import { Link } from 'react-router';
@@ -11,11 +11,14 @@ import routesConfig from '~/config/routes';
 import Pagination from '~/components/Pagination';
 import useAuthStore from '~/stores/authStore';
 import padlock from '~/assets/images/padlock.png';
+import ChipList from '~/components/ChipList';
 
 const Problem = () => {
 	const { t } = useTranslation('problems');
 	const { user } = useAuthStore();
 
+	const tagsRef = useRef();
+	const [tagsW, setTagsW] = useState(80);
 	const [list, setList] = useState([]);
 	const [numOfPage, setNumOfPage] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +29,12 @@ const Problem = () => {
 		setSortBy(sortType);
 		setSortOrder((prev) => (prev == -1 ? 1 : -1));
 	};
+
+	useEffect(() => {
+		if (tagsRef.current) {
+			setTagsW(tagsRef.current.getBoundingClientRect().width);
+		}
+	}, [tagsRef]);
 
 	useEffect(() => {
 		getProblems({ page: currentPage, sortBy, order: sortOrder })
@@ -40,10 +49,10 @@ const Problem = () => {
 	}, [currentPage, sortBy, sortOrder]);
 
 	return (
-		<div className="w-[90%] h-[calc(100%-64px)] max-w-[1184px] mx-auto mt-12">
-			<div className="relative overflow-x-auto shadow-md sm:rounded-lg block">
-				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-					<thead className="text-xs text-gray-700 uppercase bg-white dark:bg-neutral-800 dark:text-gray-400">
+		<div className="mx-auto mt-12 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
+			<div className="block relative shadow-md sm:rounded-lg overflow-x-auto">
+				<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
+					<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
 						<tr>
 							<th scope="col" className="px-6 py-3 text-center">
 								{t('status')}
@@ -60,11 +69,11 @@ const Problem = () => {
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
-							<th scope="col" className="px-6 py-3 hidden md:table-cell md:max-w-24 lg:max-w-48">
+							<th scope="col" ref={tagsRef} className="hidden md:table-cell px-6 py-3 md:max-w-24 lg:max-w-48">
 								{t('tags')}
 							</th>
 							{user?.permission == 'Admin' && (
-								<th scope="col" className="px-6 py-3 hidden lg:table-cell text-center">
+								<th scope="col" className="hidden lg:table-cell px-6 py-3 text-center">
 									{t('private')}
 									<button className="ml-1" onClick={() => sortHandler('public')}>
 										<FontAwesomeIcon icon="fa-solid fa-sort" />
@@ -95,28 +104,30 @@ const Problem = () => {
 						{list.map((problem, index) => (
 							<tr
 								key={index}
-								className="odd:bg-gray-100 odd:dark:bg-neutral-900 even:bg-white even:dark:bg-neutral-800 border-b dark:border-gray-700 border-gray-200 h-14"
+								className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
 							>
-								<td className="px-6 py-4">{problem.solve && <CircleCheck className="size-5 text-green-500 mx-auto"></CircleCheck>}</td>
-								<th
+								<td className="px-6 py-4">{problem.solve && <CircleCheck className="mx-auto size-5 text-green-500"></CircleCheck>}</td>
+								<td
 									scope="row"
-									className="px-6 py-4 md:max-w-24 lg:max-w-48 font-medium truncate text-gray-900 whitespace-nowrap hover:text-blue-400 dark:hover:text-blue-400 dark:text-white"
+									className="px-6 py-4 md:max-w-24 lg:max-w-48 font-medium text-gray-900 hover:text-blue-400 dark:hover:text-blue-400 dark:text-white truncate whitespace-nowrap"
 								>
 									<Link to={routesConfig.problem.replace(':id', problem.id)}>{problem.name}</Link>
-								</th>
+								</td>
 								<td className="px-6 py-4 capitalize">{t(problem.difficulty)}</td>
 								{problem.tags.length != 0 ? (
-									<td className="px-6 py-4 capitalize truncate hidden md:table-cell md:max-w-24 lg:max-w-48">
+									<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 overflow-hidden">
 										<Tooltip>
-											<TooltipTrigger>{problem.tags.join(' | ')}</TooltipTrigger>
+											<TooltipTrigger>
+												<ChipList items={problem.tags} w={tagsW}></ChipList>
+											</TooltipTrigger>
 											<TooltipContent className="capitalize">{problem.tags.join(' | ')}</TooltipContent>
 										</Tooltip>
 									</td>
 								) : (
-									<td className="px-6 py-4 capitalize truncate hidden md:table-cell md:max-w-24 lg:max-w-48">{problem.tags.join(' | ')}</td>
+									<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 truncate capitalize">{problem.tags.join(' | ')}</td>
 								)}
 								{user?.permission == 'Admin' && (
-									<td className="px-6 py-4 hidden lg:table-cell">{!problem.public && <img className="size-6 mx-auto" src={padlock} />}</td>
+									<td className="hidden lg:table-cell px-6 py-4">{!problem.public && <img className="mx-auto size-6" src={padlock} />}</td>
 								)}
 								<td className="px-6 py-4">{problem.point}p</td>
 								<td className="px-6 py-4">{problem.noOfSubm ? Math.round((problem.noOfSuccess / problem.noOfSubm) * 100) : 0}%</td>
