@@ -8,6 +8,17 @@ const problemControllers = {
 		try {
 			const { size = 20, page = 1, tags, q, sortBy, order, difficulty } = req.query;
 			let data = await Problem.filterAndSort({ tags, q, sortBy, order, difficulty });
+			if (sortBy === 'accuracy') {
+				data.sort((a, b) => order*((b.noOfSubm == 0 ? 1 : b.noOfSuccess / b.noOfSubm) - (a.noOfSubm==0?1:a.noOfSuccess / a.noOfSubm)));
+			}
+			if (sortBy === 'difficulty') {
+				const difficultyPoint = {
+					'easy': 0,
+					'medium': 1,
+					'hard': 2
+				};
+				data.sort((a, b) => order * (difficultyPoint[b.difficulty] - difficultyPoint[a.difficulty]));
+			}
 			data = data.map((d) => d.toObject());
 
 			if (req.userPermission != 'Admin') {

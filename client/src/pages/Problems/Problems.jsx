@@ -19,7 +19,7 @@ const Problem = () => {
 	const [list, setList] = useState([]);
 	const [numOfPage, setNumOfPage] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [sortBy, setSortBy] = useState();
+	const [sortBy, setSortBy] = useState('');
 	const [sortOrder, setSortOrder] = useState(1);
 
 	const sortHandler = (sortType) => {
@@ -56,6 +56,9 @@ const Problem = () => {
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('difficulty')}
+								<button className="ml-1" onClick={() => sortHandler('difficulty')}>
+									<FontAwesomeIcon icon="fa-solid fa-sort" />
+								</button>
 							</th>
 							<th scope="col" className="px-6 py-3 hidden md:table-cell md:max-w-24 lg:max-w-48">
 								{t('tags')}
@@ -63,16 +66,28 @@ const Problem = () => {
 							{user?.permission == 'Admin' && (
 								<th scope="col" className="px-6 py-3 hidden lg:table-cell text-center">
 									{t('private')}
+									<button className="ml-1" onClick={() => sortHandler('public')}>
+										<FontAwesomeIcon icon="fa-solid fa-sort" />
+									</button>
 								</th>
 							)}
 							<th scope="col" className="px-6 py-3">
 								{t('point')}
+								<button className="ml-1" onClick={() => sortHandler('point')}>
+									<FontAwesomeIcon icon="fa-solid fa-sort" />
+								</button>
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('ac-rate')}
+								<button className="ml-1" onClick={() => sortHandler('accuracy')}>
+									<FontAwesomeIcon icon="fa-solid fa-sort" />
+								</button>
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('ac-count')}
+								<button className="ml-1" onClick={() => sortHandler('noOfSuccess')}>
+									<FontAwesomeIcon icon="fa-solid fa-sort" />
+								</button>
 							</th>
 						</tr>
 					</thead>
@@ -91,12 +106,12 @@ const Problem = () => {
 								</th>
 								<td className="px-6 py-4 capitalize">{t(problem.difficulty)}</td>
 								{problem.tags.length != 0 ? (
-									<Tooltip>
-										<TooltipTrigger>
-											<td className="px-6 py-4 capitalize truncate hidden md:table-cell md:max-w-24 lg:max-w-48">{problem.tags.join(' | ')}</td>
-										</TooltipTrigger>
-										<TooltipContent className="capitalize">{problem.tags.join(' | ')}</TooltipContent>
-									</Tooltip>
+									<td className="px-6 py-4 capitalize truncate hidden md:table-cell md:max-w-24 lg:max-w-48">
+										<Tooltip>
+											<TooltipTrigger>{problem.tags.join(' | ')}</TooltipTrigger>
+											<TooltipContent className="capitalize">{problem.tags.join(' | ')}</TooltipContent>
+										</Tooltip>
+									</td>
 								) : (
 									<td className="px-6 py-4 capitalize truncate hidden md:table-cell md:max-w-24 lg:max-w-48">{problem.tags.join(' | ')}</td>
 								)}

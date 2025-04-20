@@ -81,7 +81,7 @@ const problemSchema = new mongoose.Schema(
 						},
 					],
 				})
-					.sort({ [sortBy || 'name']: typeof order === 'string' ? Number(order) : order || 1 })
+					.sort({ [(sortBy === 'accuracy'||sortBy==='difficulty' ? 'id' : sortBy) || 'id']: typeof order === 'string' ? Number(order) : order || 1 })
 					.select('-testcase -_id -__v');
 
 				return data.filter(
