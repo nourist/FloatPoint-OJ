@@ -10,7 +10,8 @@ const Pagination = ({ currentPage, setPage, maxPage, className = '' }) => {
 	useEffect(() => {
 		if (currentPage > maxPage) setPage(maxPage);
 		if (currentPage <= 0) setPage(1);
-	}, [maxPage, currentPage, setPage]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [maxPage]);
 
 	if (maxPage <= 0) return <></>;
 

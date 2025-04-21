@@ -9,6 +9,8 @@ import path from 'path';
 import connectDB from './config/db.js';
 import route from './routes/index.js';
 
+import { delayMiddleware } from './middlewares/delayMiddlewares.js';
+
 const app = express();
 
 connectDB();
@@ -32,6 +34,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(morgan('combined'));
+
+// app.use(delayMiddleware);
 
 route(app);
 

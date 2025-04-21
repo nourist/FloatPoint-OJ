@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { CircleCheck } from 'lucide-react';
+import { CircleCheck, Search } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
+import { Input } from '~/components/ui/input';
 
 import { getProblems } from '~/services/problem';
 import routesConfig from '~/config/routes';
@@ -12,6 +14,7 @@ import useAuthStore from '~/stores/authStore';
 import padlock from '~/assets/images/padlock.png';
 import ChipList from '~/components/ChipList';
 import ProblemTags from '~/components/ProblemTags';
+import useDebounce from '~/hooks/useDebounce';
 
 const Problem = () => {
 	const { t } = useTranslation('problems');
@@ -24,6 +27,10 @@ const Problem = () => {
 	const [sortBy, setSortBy] = useState('');
 	const [sortOrder, setSortOrder] = useState(1);
 	const [activeTags, setActiveTags] = useState([]);
+	const [difficulty, setDifficulty] = useState(''); // ['Easy', 'Medium', 'Hard']
+	const [search, setSearch] = useState('');
+
+	const searchValue = useDebounce(search, 400);
 
 	const sortHandler = (sortType) => {
 		setSortBy(sortType);
@@ -31,7 +38,7 @@ const Problem = () => {
 	};
 
 	useEffect(() => {
-		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags })
+		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags, difficulty, q: searchValue })
 			.then((res) => {
 				setList(res.data);
 				setNumOfPage(res.maxPage);
@@ -40,11 +47,52 @@ const Problem = () => {
 				toast.error(err);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage, sortBy, sortOrder, activeTags]);
+	}, [currentPage, sortBy, sortOrder, activeTags, difficulty, searchValue]);
 
 	return (
-		<div className="mx-auto mt-12 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
+		<div className="mx-auto mt-8 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
 			<ProblemTags setActiveTags={setActiveTags} className="mb-2"></ProblemTags>
+			<div className="h-12 w-full mb-1 flex gap-3">
+				<Select onValueChange={setDifficulty}>
+					<SelectTrigger className="w-[180px] dark:!bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:!text-gray-200 border-none">
+						<SelectValue />
+					</SelectTrigger>
+					<SelectContent className="dark:!bg-[rgb(55,55,55)] border-none">
+						<SelectGroup>
+							<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3">
+								<span className="capitalize text-gray-700 dark:text-gray-300">{t('difficulty')}</span>
+							</SelectItem>
+							<SelectItem
+								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-green-500 hover:!text-green-500 focus:!text-green-500"
+								value="easy"
+							>
+								<span className="capitalize text-green-500">{t('easy')}</span>
+							</SelectItem>
+							<SelectItem
+								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-yellow-600 hover:!text-yellow-600 focus:!text-yellow-600"
+								value="medium"
+							>
+								<span className="capitalize text-yellow-600">{t('medium')}</span>
+							</SelectItem>
+							<SelectItem
+								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-red-500 hover:!text-red-500 focus:!text-red-500"
+								value="hard"
+							>
+								<span className="capitalize text-red-500">{t('hard')}</span>
+							</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+				<div className="relative flex-1 max-w-96 dark:text-gray-200">
+					<Search className="absolute size-4 m-[10px]"></Search>
+					<Input
+						className="flex-1 pl-10 bg-gray-200 dark:!bg-[rgb(55,55,55)] border-none"
+						value={search}
+						placeholder={t('search-placeholder')}
+						onChange={(e) => setSearch(e.target.value)}
+					></Input>
+				</div>
+			</div>
 			<div className="block relative shadow-md sm:rounded-lg overflow-x-auto">
 				<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
 					<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
@@ -108,7 +156,12 @@ const Problem = () => {
 								>
 									<Link to={routesConfig.problem.replace(':id', problem.id)}>{problem.name}</Link>
 								</td>
-								<td className="px-6 py-4 capitalize">{t(problem.difficulty)}</td>
+								<td
+									data-difficulty={problem.difficulty}
+									className="px-6 py-4 capitalize data-[difficulty=easy]:text-green-500 data-[difficulty=medium]:text-yellow-600 data-[difficulty=hard]:text-red-500"
+								>
+									{t(problem.difficulty)}
+								</td>
 								<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 overflow-hidden" id={`abcxuz${index}`}>
 									<ChipList items={problem.tags} activeItems={activeTags} w={document.documentElement.getBoundingClientRect().width / 12}></ChipList>
 								</td>

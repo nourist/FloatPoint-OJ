@@ -10,5 +10,6 @@
 	"medium": "medium",
 	"hard": "hard",
 	"collapse": "collapse",
-	"expand": "expand"
+	"expand": "expand",
+	"search-placeholder": "Search questions"
 }
