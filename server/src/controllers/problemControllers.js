@@ -62,7 +62,7 @@ const problemControllers = {
 				throw new Error('Problem not found');
 			}
 
-			if (!problem.public && req.userPermission != 'Admin') {
+			if (!problem.public && req.userPermission !== 'Admin') {
 				return res.status(401).json({ success: false, msg: 'You cant see this content' });
 			}
 
@@ -76,6 +76,34 @@ const problemControllers = {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in get _id problem: ${err.message}`);
+		}
+	},
+
+	//[GET] /problem/tags
+	async getTags(req, res, next) {
+		try {
+			let problems = await Problem.find();
+			problems = problems.filter((item) => item.public || req.userPermission === 'Admin');
+
+			let map = new Map();
+			problems.forEach((problem) => {
+				problem.tags.forEach((tag) => {
+					if (map.has(tag)) {
+						map.set(tag, map.get(tag) + 1);
+					} else {
+						map.set(tag, 1);
+					}
+				});
+			});
+
+			res.status(200).json({
+				success: true,
+				data: Array.from(map.entries()),
+			});
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error('Error in get tags');
 		}
 	},
 

@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { CircleCheck } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 
 import { getProblems } from '~/services/problem';
 import routesConfig from '~/config/routes';
@@ -12,18 +11,19 @@ import Pagination from '~/components/Pagination';
 import useAuthStore from '~/stores/authStore';
 import padlock from '~/assets/images/padlock.png';
 import ChipList from '~/components/ChipList';
+import ProblemTags from '~/components/ProblemTags';
 
 const Problem = () => {
 	const { t } = useTranslation('problems');
 	const { user } = useAuthStore();
 
-	const tagsRef = useRef();
-	const [tagsW, setTagsW] = useState(80);
 	const [list, setList] = useState([]);
+
 	const [numOfPage, setNumOfPage] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sortBy, setSortBy] = useState('');
 	const [sortOrder, setSortOrder] = useState(1);
+	const [activeTags, setActiveTags] = useState([]);
 
 	const sortHandler = (sortType) => {
 		setSortBy(sortType);
@@ -31,13 +31,7 @@ const Problem = () => {
 	};
 
 	useEffect(() => {
-		if (tagsRef.current) {
-			setTagsW(tagsRef.current.getBoundingClientRect().width);
-		}
-	}, [tagsRef]);
-
-	useEffect(() => {
-		getProblems({ page: currentPage, sortBy, order: sortOrder })
+		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags })
 			.then((res) => {
 				setList(res.data);
 				setNumOfPage(res.maxPage);
@@ -46,10 +40,11 @@ const Problem = () => {
 				toast.error(err);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage, sortBy, sortOrder]);
+	}, [currentPage, sortBy, sortOrder, activeTags]);
 
 	return (
 		<div className="mx-auto mt-12 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
+			<ProblemTags setActiveTags={setActiveTags} className="mb-2"></ProblemTags>
 			<div className="block relative shadow-md sm:rounded-lg overflow-x-auto">
 				<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
 					<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
@@ -69,7 +64,7 @@ const Problem = () => {
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
-							<th scope="col" ref={tagsRef} className="hidden md:table-cell px-6 py-3 md:max-w-24 lg:max-w-48">
+							<th scope="col" className="hidden md:table-cell px-6 py-3 md:max-w-24 lg:max-w-48">
 								{t('tags')}
 							</th>
 							{user?.permission == 'Admin' && (
@@ -114,18 +109,9 @@ const Problem = () => {
 									<Link to={routesConfig.problem.replace(':id', problem.id)}>{problem.name}</Link>
 								</td>
 								<td className="px-6 py-4 capitalize">{t(problem.difficulty)}</td>
-								{problem.tags.length != 0 ? (
-									<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 overflow-hidden">
-										<Tooltip>
-											<TooltipTrigger>
-												<ChipList items={problem.tags} w={tagsW}></ChipList>
-											</TooltipTrigger>
-											<TooltipContent className="capitalize">{problem.tags.join(' | ')}</TooltipContent>
-										</Tooltip>
-									</td>
-								) : (
-									<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 truncate capitalize">{problem.tags.join(' | ')}</td>
-								)}
+								<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 overflow-hidden" id={`abcxuz${index}`}>
+									<ChipList items={problem.tags} activeItems={activeTags} w={document.documentElement.getBoundingClientRect().width / 12}></ChipList>
+								</td>
 								{user?.permission == 'Admin' && (
 									<td className="hidden lg:table-cell px-6 py-4">{!problem.public && <img className="mx-auto size-6" src={padlock} />}</td>
 								)}

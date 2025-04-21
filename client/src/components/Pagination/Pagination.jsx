@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 
 const Pagination = ({ currentPage, setPage, maxPage, className = '' }) => {
 	const { t } = useTranslation('pagination');
+
+	useEffect(() => {
+		if (currentPage > maxPage) setPage(maxPage);
+		if (currentPage <= 0) setPage(1);
+	}, [maxPage, currentPage, setPage]);
+
+	if (maxPage <= 0) return <></>;
 
 	return (
 		<div className={`flex items-center gap-1 dark:text-gray-100 text-gray-800 ${className}`}>

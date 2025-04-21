@@ -9,3 +9,13 @@ export const getProblems = async (options) => {
 		return err.response;
 	}
 };
+
+export const getTags = async () => {
+	try {
+		const res = await httpRequest.get('/problem/tags');
+		return res.data;
+	} catch (err) {
+		console.error(err);
+		return err.response;
+	}
+};

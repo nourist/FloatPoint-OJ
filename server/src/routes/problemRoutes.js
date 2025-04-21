@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', authMiddlewares.isSoftAuth, problemControllers.getList);
 router.get('/info/:id', authMiddlewares.isSoftAuth, problemControllers.get);
+router.get('/tags', authMiddlewares.isSoftAuth, problemControllers.getTags);
 
 router.post('/create', authMiddlewares.requireAd, problemControllers.create);
 router.post('/edit/:id', authMiddlewares.requireAd, problemControllers.edit);

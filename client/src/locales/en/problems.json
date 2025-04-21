@@ -8,5 +8,7 @@
 	"ac-count": "#AC",
 	"easy": "easy",
 	"medium": "medium",
-	"hard": "hard"
+	"hard": "hard",
+	"collapse": "collapse",
+	"expand": "expand"
 }
