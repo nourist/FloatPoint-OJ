@@ -9,6 +9,9 @@ import Submission from '~/pages/Submission';
 import Submissions from '~/pages/Submissions';
 import Contest from '~/pages/Contest';
 import Contests from '~/pages/Contests';
+import User from '~/pages/User';
+import Users from '~/pages/Users';
+import Submit from '~/pages/Submit';
 import Signup from '~/pages/Signup';
 import Login from '~/pages/Login';
 import VerifyEmail from '~/pages/VerifyEmail';
@@ -94,6 +97,19 @@ const routes = [
 		path: routesConfig.contests,
 		page: Contests,
 		layout: DefaultLayoutWithFooter,
+	},
+	{
+		path: routesConfig.user,
+		page: User,
+	},
+	{
+		path: routesConfig.users,
+		page: Users,
+		layout: DefaultLayoutWithFooter,
+	},
+	{
+		path: routesConfig.submit,
+		page: Submit,
 	},
 ];
 

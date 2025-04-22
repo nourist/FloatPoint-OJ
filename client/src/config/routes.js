@@ -12,9 +12,11 @@ const routesConfig = {
 	problems: '/problems',
 	submission: '/submission/:id',
 	submissions: '/submissions',
+	submit: '/submit',
 	contest: '/contest/:id',
 	contests: '/contests',
 	user: '/user',
+	users: '/users',
 };
 
 export default routesConfig;

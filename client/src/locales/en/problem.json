@@ -1,0 +1,13 @@
+{
+	"id": "id",
+	"submit": "submit",
+	"submissions": "submissions",
+	"point": "point",
+	"time-limit": "time limit",
+	"memory-limit": "memory limit",
+	"difficulty": "difficulty",
+	"easy": "easy",
+	"medium": "medium",
+	"hard": "hard",
+	"tags": "tags"
+}

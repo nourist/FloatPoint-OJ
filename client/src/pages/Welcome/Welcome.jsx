@@ -128,7 +128,7 @@ const Welcome = () => {
 					</div>
 					<h2 className="text-sky-500 text-xl font-semibold">{t('product-title')}</h2>
 					<p className="text-gray-400 text-[15px]">{t('product-description')}</p>
-					<Link to={routesConfig.problem} className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
+					<Link to={routesConfig.problems} className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
 						{t('view-questions')} <FontAwesomeIcon icon="fa-solid fa-angle-right" className="ml-1.5" />
 					</Link>
 				</div>
