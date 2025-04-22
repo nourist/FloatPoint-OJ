@@ -35,12 +35,17 @@ const problemControllers = {
 						data[i].solve = true;
 					}
 				}
+
+				if (user.joiningContest) {
+					data = data.filter((problem) => problem.contest.includes(user.joiningContest));
+				}
 			}
 
 			res.status(200).json({
 				success: true,
 				data: data.slice(size * (page - 1), size * page),
 				maxPage: Math.ceil(data.length / size),
+				maxProblem: data.length,
 			});
 
 			console.log('Get problem list successfull');

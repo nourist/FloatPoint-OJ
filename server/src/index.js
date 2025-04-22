@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 app.use(morgan('combined'));
 
-// app.use(delayMiddleware);
+app.use(delayMiddleware);
 
 route(app);
 

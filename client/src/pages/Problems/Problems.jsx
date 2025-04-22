@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { CircleCheck, Search } from 'lucide-react';
+import { CircleCheck, Search, Shuffle } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Input } from '~/components/ui/input';
 
 import { getProblems } from '~/services/problem';
@@ -20,6 +21,7 @@ const Problem = () => {
 	const { t } = useTranslation('problems');
 	const { user } = useAuthStore();
 
+	const [randomId, setRandomId] = useState(0);
 	const [list, setList] = useState([]);
 
 	const [numOfPage, setNumOfPage] = useState(0);
@@ -32,13 +34,24 @@ const Problem = () => {
 
 	const searchValue = useDebounce(search, 400);
 
-	const sortHandler = (sortType) => {
+	const sortHandle = (sortType) => {
 		setSortBy(sortType);
 		setSortOrder((prev) => (prev == -1 ? 1 : -1));
 	};
 
 	useEffect(() => {
-		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags, difficulty, q: searchValue })
+		getProblems({ size: 1e9 })
+			.then((res) => {
+				const index = Math.round(Math.random() * res.data.length);
+				setRandomId(res.data[index].id);
+			})
+			.catch((err) => {
+				toast.error(err);
+			});
+	}, []);
+
+	useEffect(() => {
+		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags, difficulty, q: searchValue, size: 50 })
 			.then((res) => {
 				setList(res.data);
 				setNumOfPage(res.maxPage);
@@ -92,6 +105,14 @@ const Problem = () => {
 						onChange={(e) => setSearch(e.target.value)}
 					></Input>
 				</div>
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Link to={routesConfig.problem.replace(':id', randomId)} className="rounded-full size-9 p-[10px] bg-green-500 text-white ml-auto mr-2">
+							<Shuffle className="size-4"></Shuffle>
+						</Link>
+					</TooltipTrigger>
+					<TooltipContent className="dark:bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:text-gray-200 capitalize">{t('pick')}</TooltipContent>
+				</Tooltip>
 			</div>
 			<div className="block relative shadow-md sm:rounded-lg overflow-x-auto">
 				<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
@@ -102,13 +123,13 @@ const Problem = () => {
 							</th>
 							<th scope="col" className="px-6 py-3 truncate">
 								{t('title')}
-								<button className="ml-1" onClick={() => sortHandler('name')}>
+								<button className="ml-1" onClick={() => sortHandle('name')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('difficulty')}
-								<button className="ml-1" onClick={() => sortHandler('difficulty')}>
+								<button className="ml-1" onClick={() => sortHandle('difficulty')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
@@ -118,26 +139,26 @@ const Problem = () => {
 							{user?.permission == 'Admin' && (
 								<th scope="col" className="hidden lg:table-cell px-6 py-3 text-center">
 									{t('private')}
-									<button className="ml-1" onClick={() => sortHandler('public')}>
+									<button className="ml-1" onClick={() => sortHandle('public')}>
 										<FontAwesomeIcon icon="fa-solid fa-sort" />
 									</button>
 								</th>
 							)}
 							<th scope="col" className="px-6 py-3">
 								{t('point')}
-								<button className="ml-1" onClick={() => sortHandler('point')}>
+								<button className="ml-1" onClick={() => sortHandle('point')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('ac-rate')}
-								<button className="ml-1" onClick={() => sortHandler('accuracy')}>
+								<button className="ml-1" onClick={() => sortHandle('accuracy')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
 							<th scope="col" className="px-6 py-3">
 								{t('ac-count')}
-								<button className="ml-1" onClick={() => sortHandler('noOfSuccess')}>
+								<button className="ml-1" onClick={() => sortHandle('noOfSuccess')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>

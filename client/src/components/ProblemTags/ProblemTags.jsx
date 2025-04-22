@@ -56,14 +56,14 @@ const ProblemTags = ({ setActiveTags, className = '' }) => {
 				</Tooltip>
 			))}
 			{expand ? (
-				<button onClick={handleExpand} className="float-right py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize">
+				<button onClick={handleExpand} className="float-right py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize text-gray-600 group">
 					{t('collapse')}
-					<ChevronsUp className="w-4 h-4 inline" />
+					<ChevronsUp className="w-4 h-4 inline group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-all duration-200" />
 				</button>
 			) : (
-				<button onClick={handleExpand} className="absolute right-1 top-0 py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize">
+				<button onClick={handleExpand} className="absolute right-1 top-0 py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize text-gray-600 group">
 					{t('expand')}
-					<ChevronsDown className="w-4 h-4 inline" />
+					<ChevronsDown className="w-4 h-4 inline group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-all duration-200" />
 				</button>
 			)}
 		</div>
