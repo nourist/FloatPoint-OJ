@@ -23,7 +23,7 @@ const Problem = () => {
 				setProblem(res.data);
 			})
 			.catch((err) => {
-				toast.error(err.response.data.message);
+				toast.error(err.response.data.msg);
 			});
 	}, [id]);
 

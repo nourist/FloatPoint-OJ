@@ -57,7 +57,7 @@ const Problem = () => {
 				setNumOfPage(res.maxPage);
 			})
 			.catch((err) => {
-				toast.error(err);
+				toast.error(err.response.data.msg);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage, sortBy, sortOrder, activeTags, difficulty, searchValue]);

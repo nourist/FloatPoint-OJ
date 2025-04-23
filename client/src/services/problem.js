@@ -6,7 +6,8 @@ export const getProblems = async (options) => {
 		return res.data;
 	} catch (err) {
 		console.error(err);
-		return err.response;
+		throw err;
+		// return err.response;
 	}
 };
 
@@ -16,7 +17,8 @@ export const getProblem = async (id) => {
 		return res.data;
 	} catch (err) {
 		console.error(err);
-		return err.response;
+		throw err;
+		// return err.response;
 	}
 };
 
@@ -26,6 +28,19 @@ export const getTags = async () => {
 		return res.data;
 	} catch (err) {
 		console.error(err);
-		return err.response;
+		throw err;
+		// return err.response;
 	}
 };
+
+export const getLanguages = async () => {	
+	try {
+		const res = await httpRequest.get('/problem/languages');
+		return res.data;	
+	}
+	catch (err) {
+		console.error(err);
+		throw err;
+		// return err.response;	
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"status":"status",
+	"ie":"internal error",
+	"ac":"accepted",
+	"wa":"wrong answer",
+	"tle":"time limit exceeded",
+	"mle":"memory limit exceeded",
+	"ce":"compilation error",
+	"rte":"runtime error",
+	"language":"language",
+	"mine":"mine",
+	"refresh":"refresh",
+	"search-placeholder":"Search by problem"
+}

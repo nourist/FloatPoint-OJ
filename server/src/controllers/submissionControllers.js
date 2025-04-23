@@ -10,7 +10,7 @@ const submissionControllers = {
 	async getList(req, res, next) {
 		try {
 			const { size = 20, page = 1, status, author, language, problem, contest: contestId } = req.query;
-			const data = await Submission.filter({ status, author, language, problem, contest: contestId });
+			let data = await Submission.filter({ status, author, language, problem, contest: contestId });
 
 			if (contestId) {
 				const user = await User.findById(req.userId);

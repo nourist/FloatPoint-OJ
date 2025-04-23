@@ -112,6 +112,20 @@ const problemControllers = {
 		}
 	},
 
+	//[GET] /problem/languages
+	async getLanguages(req, res, next) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: ['c', 'c11', 'c++11', 'c++14', 'c++17', 'c++20', 'python2', 'python3'],
+			});
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error('Error in get languages');
+		}
+	},
+
 	//[POST] /problem/create
 	async create(req, res, next) {
 		try {
