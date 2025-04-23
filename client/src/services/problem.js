@@ -33,14 +33,13 @@ export const getTags = async () => {
 	}
 };
 
-export const getLanguages = async () => {	
+export const getLanguages = async () => {
 	try {
 		const res = await httpRequest.get('/problem/languages');
-		return res.data;	
-	}
-	catch (err) {
+		return res.data;
+	} catch (err) {
 		console.error(err);
 		throw err;
-		// return err.response;	
+		// return err.response;
 	}
-}
+};

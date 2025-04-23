@@ -15,7 +15,7 @@ const routesConfig = {
 	submit: '/submit',
 	contest: '/contest/:id',
 	contests: '/contests',
-	user: '/user',
+	user: '/user/:name',
 	users: '/users',
 };
 

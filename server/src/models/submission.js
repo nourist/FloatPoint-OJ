@@ -69,7 +69,7 @@ const submissionSchema = new mongoose.Schema(
 				if (status) query.status = status;
 				if (author) query.author = author;
 				if (language) query.language = language;
-				if (problem) query.forProblem = { $regex: problem, $options: 'i' };
+				if (problem) query.forProblem = problem[0] == '#' ? problem.slice(1, problem.length) : { $regex: problem, $options: 'i' };
 				if (contest) query.forContest = contest;
 
 				return this.find(query).select('-src -testcase');

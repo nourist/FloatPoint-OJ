@@ -11,15 +11,25 @@ const submissionControllers = {
 		try {
 			const { size = 20, page = 1, status, author, language, problem, contest: contestId } = req.query;
 			let data = await Submission.filter({ status, author, language, problem, contest: contestId });
+			data = data.map((d) => d.toObject());
 
+			const user = await User.findById(req.userId);
 			if (contestId) {
-				const user = await User.findById(req.userId);
 				if (req.userPermission != 'Admin' && user.joiningContest != contestId) {
 					throw new Error('You cant see this content');
 				}
 				data = data.filter((submission) => submission.forContest == contestId);
 			} else if (req.userPermission != 'Admin') {
 				data = data.filter((submission) => !submission.forContest);
+			}
+
+			if (user) {
+				data = data.map((item) => {
+					if (item.author === user.name || user.permission == 'Admin') {
+						item.view = true;
+					}
+					return item;
+				});
 			}
 
 			res.status(200).json({
@@ -63,6 +73,74 @@ const submissionControllers = {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in get _id submission: ${err.message}`);
+		}
+	},
+
+	//[GET] /submission/statistic
+	async getStatistic(req, res, next) {
+		try {
+			const data = await Submission.find();
+
+			const status = [0, 0, 0, 0, 0, 0, 0];
+			const language = [0, 0, 0, 0, 0, 0, 0, 0];
+
+			const getStatusIndex = (status) => {
+				//enum: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
+				switch (status) {
+					case 'AC':
+						return 0;
+					case 'WA':
+						return 1;
+					case 'TLE':
+						return 2;
+					case 'MLE':
+						return 3;
+					case 'RTE':
+						return 4;
+					case 'CE':
+						return 5;
+					case 'IE':
+						return 6;
+				}
+			};
+			const getLanguageIndex = (language) => {
+				//enum: ['c', 'c11', 'c++11', 'c++14', 'c++17', 'c++20', 'python2', 'python3'],
+				switch (language) {
+					case 'c':
+						return 0;
+					case 'c11':
+						return 1;
+					case 'c++11':
+						return 2;
+					case 'c++14':
+						return 3;
+					case 'c++17':
+						return 4;
+					case 'c++20':
+						return 5;
+					case 'python2':
+						return 6;
+					case 'python3':
+						return 7;
+				}
+			};
+
+			data.forEach((submission) => {
+				status[getStatusIndex(submission.status)]++;
+				language[getLanguageIndex(submission.language)]++;
+			});
+
+			res.status(200).json({
+				success: true,
+				data: {
+					status,
+					language,
+				},
+			});
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in get statistic: ${err.message}`);
 		}
 	},
 

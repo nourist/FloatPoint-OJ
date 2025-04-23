@@ -10,3 +10,13 @@ export const getSubmissions = async (options) => {
 		// return err.response;
 	}
 };
+
+export const getStatistic = async () => {
+	try {
+		const res = await httpRequest.get('/submission/statistic');
+		return res.data;
+	} catch (err) {
+		console.error(err);
+		throw err;
+	}
+};

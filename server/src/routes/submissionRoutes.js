@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', authMiddlewares.isSoftAuth, submissionControllers.getList);
 router.get('/info/:id', authMiddlewares.isAuth, submissionControllers.get);
+router.get('/statistic', submissionControllers.getStatistic);
 
 router.post('/submit', authMiddlewares.isAuth, submissionControllers.submit);
 
