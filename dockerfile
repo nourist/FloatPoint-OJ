@@ -1,12 +1,11 @@
 FROM node:18
 
-WORKDIR /app/judge
-
-COPY judge/package*.json ./judge/
+COPY judger/package*.json ./judger/
 
 RUN npm install
+WORKDIR /app/judger
 
-COPY judge/ .
+COPY judger/ .
 
 EXPOSE 10000
 
