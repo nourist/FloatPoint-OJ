@@ -2,7 +2,7 @@ FROM node:18
 
 WORKDIR /app/judge
 
-COPY judge/package*.json ./
+COPY judge/package*.json ./judge/
 
 RUN npm install
 
