@@ -4,7 +4,7 @@ WORKDIR /app/judger
 
 COPY judger/ .
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y time
 RUN npm install
 
 EXPOSE 10000
