@@ -1,12 +1,11 @@
 FROM node:18
 
-WORKDIR /app/judge
+WORKDIR /app/judger
 
-COPY judge/package*.json ./judge/
+COPY judger/ .
 
+RUN apt-get update
 RUN npm install
-
-COPY judge/ .
 
 EXPOSE 10000
 
