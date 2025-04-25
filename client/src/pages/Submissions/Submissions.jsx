@@ -9,6 +9,7 @@ import { UserCheck, Search, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router';
 import { Pie } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router';
+import { Skeleton } from '~/components/ui/skeleton';
 
 import useAuthStore from '~/stores/authStore';
 import { getLanguages } from '~/services/problem';
@@ -32,6 +33,7 @@ const Submissions = () => {
 	const [page, setPage] = useState(1);
 	const [maxPage, setMaxPage] = useState(0);
 	const [loading, setLoading] = useState(false);
+	const [loadingStat, setLoadingStat] = useState(false);
 	const searchValue = useDebounce(search, 400);
 
 	const [statistic, setStatistic] = useState({});
@@ -75,13 +77,15 @@ const Submissions = () => {
 			.catch((err) => {
 				toast.error(err.response.data.msg);
 			});
+		setLoadingStat(true);
 		getStatistic()
 			.then((res) => {
 				setStatistic(res.data);
 			})
 			.catch((err) => {
 				toast.error(err.response.data.msg);
-			});
+			})
+			.finally(() => setLoadingStat(false));
 	}, []);
 
 	useEffect(() => {
@@ -247,25 +251,29 @@ const Submissions = () => {
 			<div className="w-60">
 				<h2 className="text-xl capitalize dark:text-gray-100 mb-1">{t('status')}</h2>
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
-					<Pie
-						data={{
-							labels: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
-							datasets: [
-								{
-									backgroundColor: [
-										'#22c55e', // AC - green-500
-										'#ef4444', // WA - red-500
-										'#eab308', // TLE - yellow-500
-										'#3b82f6', // MLE - blue-500
-										'#f97316', // RTE - orange-500
-										'#f43f5e', // CE - rose-500
-										'#9333ea', // IE - purple-600
-									],
-									data: statistic.status,
-								},
-							],
-						}}
-					></Pie>
+					{loadingStat ? (
+						<Skeleton className="w-full aspect-square rounded-full" />
+					) : (
+						<Pie
+							data={{
+								labels: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
+								datasets: [
+									{
+										backgroundColor: [
+											'#22c55e', // AC - green-500
+											'#ef4444', // WA - red-500
+											'#eab308', // TLE - yellow-500
+											'#3b82f6', // MLE - blue-500
+											'#f97316', // RTE - orange-500
+											'#f43f5e', // CE - rose-500
+											'#9333ea', // IE - purple-600
+										],
+										data: statistic.status,
+									},
+								],
+							}}
+						></Pie>
+					)}
 					<div className="mt-4 text-center capitalize dark:text-gray-200 text-sm">
 						{`${t('total')}: `}
 						{statistic.status?.reduce((acc, cur) => acc + cur, 0)}
@@ -273,17 +281,21 @@ const Submissions = () => {
 				</div>
 				<h2 className="text-xl capitalize mt-4 dark:text-gray-100 mb-1">{t('language')}</h2>
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
-					<Pie
-						data={{
-							labels: languages,
-							datasets: [
-								{
-									backgroundColor: ['#eab308', '#3b82f6', '#ef4444', '#6366f1', '#8b5cf6', '#14b8a6', '#f97316', '#0ea5e9'],
-									data: statistic.language,
-								},
-							],
-						}}
-					></Pie>
+					{loadingStat ? (
+						<Skeleton className="w-full aspect-square rounded-full" />
+					) : (
+						<Pie
+							data={{
+								labels: languages,
+								datasets: [
+									{
+										backgroundColor: ['#eab308', '#3b82f6', '#ef4444', '#6366f1', '#8b5cf6', '#14b8a6', '#f97316', '#0ea5e9'],
+										data: statistic.language,
+									},
+								],
+							}}
+						></Pie>
+					)}
 					<div className="mt-4 text-center capitalize dark:text-gray-200 text-sm">
 						{`${t('total')}: `}
 						{statistic.language?.reduce((acc, cur) => acc + cur, 0)}
