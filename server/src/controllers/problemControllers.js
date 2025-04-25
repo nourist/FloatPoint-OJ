@@ -6,7 +6,7 @@ const problemControllers = {
 	//[GET] /problem
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, tags, q, sortBy, order, difficulty } = req.query;
+			const { size = 20, page = 1, tags, q, sortBy, order, difficulty, minimal } = req.query;
 			let data = await Problem.filterAndSort({ tags, q, sortBy, order, difficulty });
 			if (sortBy === 'accuracy') {
 				data.sort((a, b) => order * ((b.noOfSubm == 0 ? 1 : b.noOfSuccess / b.noOfSubm) - (a.noOfSubm == 0 ? 1 : a.noOfSuccess / a.noOfSubm)));
@@ -41,6 +41,9 @@ const problemControllers = {
 				}
 			}
 
+			if (minimal) {
+				data = data.map((problem) => problem.id);
+			}
 			res.status(200).json({
 				success: true,
 				data: data.slice(size * (page - 1), size * page),

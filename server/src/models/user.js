@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		defaultLanguage: {
+			type: String,
+			default: 'c++17',
+		},
 		avatar: String,
 		resetPasswordToken: String,
 		resetPasswordExpiresAt: Date,
