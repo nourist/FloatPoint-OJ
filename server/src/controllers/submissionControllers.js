@@ -172,53 +172,50 @@ const submissionControllers = {
 				}
 			}
 
-			axios
-				.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL })
-				.catch((err) => res.status(400).json(err.response.data))
-				.then(async (response) => {
-					const submission = new Submission({
-						author: user.name,
-						src,
-						forProblem: id,
-						forContest: contestId,
-						language,
-						...response.data.data,
-					});
-					problem.noOfSubm++;
+			const response = await axios.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL });
 
-					const alreadyAC = await Submission.filter({ status: 'AC', author: user.name, problem: id });
-					if (!alreadyAC && response.data.data.status === 'AC') {
-						problem.noOfSuccess++;
-						user.totalAC++;
+			const submission = new Submission({
+				author: user.name,
+				src,
+				forProblem: id,
+				forContest: contestId,
+				language,
+				...response.data.data,
+			});
+			problem.noOfSubm++;
+
+			const alreadyAC = await Submission.filter({ status: 'AC', author: user.name, problem: id });
+			if (!alreadyAC && response.data.data.status === 'AC') {
+				problem.noOfSuccess++;
+				user.totalAC++;
+			}
+
+			const lastSubmissions = await Submission.filter({ author: user.name, problem: id });
+			const bestLastSubmit = lastSubmissions.reduce((acc, val) => Math.max(acc, val.point), 0);
+			user.totalScore -= bestLastSubmit;
+			user.totalScore += Math.max(bestLastSubmit, submission.point);
+
+			await submission.save();
+			await problem.save();
+			await user.save();
+
+			if (contest) {
+				contest.standing = contest.standing.map((usr) => {
+					if (usr.user == user.name) {
+						if (submission.point > usr.score[contest.problems.indexOf(id)]) {
+							usr.score[contest.problems.indexOf(id)] = submission.point;
+							usr.time[contest.problems.indexOf(id)] = Date.now();
+						}
 					}
-
-					const lastSubmissions = await Submission.filter({ author: user.name, problem: id });
-					const bestLastSubmit = lastSubmissions.reduce((acc, val) => max(acc, val.point));
-					user.totalScore -= bestLastSubmit;
-					user.totalScore += max(bestLastSubmit, submission.point);
-
-					await submission.save();
-					await problem.save();
-					await user.save();
-
-					if (contest) {
-						contest.standing = contest.standing.map((usr) => {
-							if (usr.user == user.name) {
-								if (submission.point > usr.score[contest.problems.indexOf(id)]) {
-									usr.score[contest.problems.indexOf(id)] = submission.point;
-									usr.time[contest.problems.indexOf(id)] = Date.now();
-								}
-							}
-							return usr;
-						});
-
-						await contest.save();
-					}
-
-					res.status(201).json({ success: true, data: submission });
-
-					console.log('Submit code successfull');
+					return usr;
 				});
+
+				await contest.save();
+			}
+
+			res.status(201).json({ success: true, data: submission });
+
+			console.log('Submit code successfull');
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });
 

@@ -9,6 +9,7 @@ import Markdown from 'react-markdown';
 
 import useAuthStore from '~/stores/authStore';
 import { getProblem } from '~/services/problem';
+import routesConfig from '~/config/routes';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -69,13 +70,18 @@ const Problem = () => {
 					{isAuth && (
 						<>
 							<Button asChild>
-								<Link className="capitalize !bg-sky-400 dark:!bg-blue-500 hover:!bg-sky-500 dark:hover:!bg-blue-400 !text-white">{t('submit')}</Link>
+								<Link
+									to={`${routesConfig.submit}?problem=${id}`}
+									className="capitalize !bg-sky-400 dark:!bg-blue-500 hover:!bg-sky-500 dark:hover:!bg-blue-400 !text-white"
+								>
+									{t('submit')}
+								</Link>
 							</Button>
 							<div className="h-[1px] bg-neutral-500 !bg-opacity-40"></div>
 						</>
 					)}
 					<Button variant="ghost" asChild>
-						<Link className="capitalize dark:text-gray-100 dark:hover:!bg-neutral-700 hover:!bg-neutral-100">
+						<Link to={`${routesConfig.submissions}?problem=${id}`} className="capitalize dark:text-gray-100 dark:hover:!bg-neutral-700 hover:!bg-neutral-100">
 							<AlignJustify></AlignJustify>
 							{t('submissions')}
 						</Link>

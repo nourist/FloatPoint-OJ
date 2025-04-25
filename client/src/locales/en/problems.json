@@ -12,5 +12,6 @@
 	"collapse": "collapse",
 	"expand": "expand",
 	"search-placeholder": "Search questions",
-	"pick": "pick one"
+	"pick": "pick one",
+	"refresh": "refresh"
 }

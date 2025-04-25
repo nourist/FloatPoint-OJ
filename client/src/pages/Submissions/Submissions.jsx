@@ -8,6 +8,7 @@ import { Button } from '~/components/ui/button';
 import { UserCheck, Search, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router';
 import { Pie } from 'react-chartjs-2';
+import { useSearchParams } from 'react-router';
 
 import useAuthStore from '~/stores/authStore';
 import { getLanguages } from '~/services/problem';
@@ -19,6 +20,7 @@ import Pagination from '~/components/Pagination';
 const Submissions = () => {
 	const { t } = useTranslation('submissions');
 	const { isAuth, user } = useAuthStore();
+	const [params] = useSearchParams();
 
 	const [languages, setLanguages] = useState([]);
 
@@ -26,9 +28,10 @@ const Submissions = () => {
 	const [status, setStatus] = useState();
 	const [language, setLanguage] = useState();
 	const [mine, setMine] = useState(false);
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState(params.get('problem') ? `#${params.get('problem')}` : '');
 	const [page, setPage] = useState(1);
 	const [maxPage, setMaxPage] = useState(0);
+	const [loading, setLoading] = useState(false);
 	const searchValue = useDebounce(search, 400);
 
 	const [statistic, setStatistic] = useState({});
@@ -51,6 +54,7 @@ const Submissions = () => {
 	};
 
 	const query = () => {
+		setLoading(true);
 		const authorValue = mine ? user.name : null;
 		getSubmissions({ status: status?.toUpperCase(), author: authorValue, language, problem: searchValue, size: 50, page })
 			.then((res) => {
@@ -59,7 +63,8 @@ const Submissions = () => {
 			})
 			.catch((err) => {
 				toast.error(err.response.data.msg);
-			});
+			})
+			.finally(() => setLoading(false));
 	};
 
 	useEffect(() => {
@@ -195,46 +200,48 @@ const Submissions = () => {
 						</tr>
 					</thead>
 					<tbody className="text-sm">
-						{submissions.map((item, index) => (
-							<tr
-								key={index}
-								className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
-							>
-								<td className="px-6 py-4">{formatedDate(new Date(item.createdAt))}</td>
-								<td className="px-6 py-4">
-									{item._id}
-									{item.view && (
-										<Link to={routesConfig.submission.replace(':id', item._id)} className="text-sky-500 hover:text-sky-600 ml-1">
-											{t('view')}
+						{!loading &&
+							submissions.map((item, index) => (
+								<tr
+									key={index}
+									className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
+								>
+									<td className="px-6 py-4">{formatedDate(new Date(item.createdAt))}</td>
+									<td className="px-6 py-4">
+										{item._id}
+										{item.view && (
+											<Link to={routesConfig.submission.replace(':id', item._id)} className="text-sky-500 hover:text-sky-600 ml-1">
+												{t('view')}
+											</Link>
+										)}
+									</td>
+									<td className="px-6 py-4">
+										<span
+											data-status={item.status}
+											className="text-xs py-1 px-2 rounded-sm data-[status=AC]:bg-green-500 data-[status=TLE]:bg-yellow-500 data-[status=MLE]:bg-blue-500 data-[status=RTE]:bg-orange-500 data-[status=CE]:bg-rose-500 data-[status=WA]:bg-red-500 data-[status=IE]:bg-purple-600 text-white"
+										>
+											{item.status}
+										</span>
+									</td>
+									<td className="px-6 py-4">
+										<Link className="text-sky-500 hover:text-sky-600" to={routesConfig.problem.replace(':id', item.forProblem)}>
+											{item.forProblem}
 										</Link>
-									)}
-								</td>
-								<td className="px-6 py-4">
-									<span
-										data-status={item.status}
-										className="text-xs py-1 px-2 rounded-sm data-[status=AC]:bg-green-500 data-[status=TLE]:bg-yellow-500 data-[status=MLE]:bg-blue-500 data-[status=RTE]:bg-orange-500 data-[status=CE]:bg-rose-500 data-[status=WA]:bg-red-500 data-[status=IE]:bg-purple-600 text-white"
-									>
-										{item.status}
-									</span>
-								</td>
-								<td className="px-6 py-4">
-									<Link className="text-sky-500 hover:text-sky-600" to={routesConfig.problem.replace(':id', item.forProblem)}>
-										{item.forProblem}
-									</Link>
-								</td>
-								<td className="px-6 py-4">{item.time}s</td>
-								<td className="px-6 py-4">{item.memory}MB</td>
-								<td className="px-6 py-4">{item.language}</td>
-								<td className="px-6 py-4">{item.point}p</td>
-								<td className="px-6 py-4">
-									<Link className="text-sky-500 hover:text-sky-600" to={routesConfig.user.replace(':name', item.author)}>
-										{item.author}
-									</Link>
-								</td>
-							</tr>
-						))}
+									</td>
+									<td className="px-6 py-4">{item.time}s</td>
+									<td className="px-6 py-4">{item.memory}MB</td>
+									<td className="px-6 py-4">{item.language}</td>
+									<td className="px-6 py-4">{item.point}p</td>
+									<td className="px-6 py-4">
+										<Link className="text-sky-500 hover:text-sky-600" to={routesConfig.user.replace(':name', item.author)}>
+											{item.author}
+										</Link>
+									</td>
+								</tr>
+							))}
 					</tbody>
 				</table>
+				{loading && <div className="flex-1 text-center dark:text-white h-[100%] mt-32">Loading...</div>}
 				<Pagination currentPage={page} setPage={setPage} maxPage={maxPage}></Pagination>
 			</div>
 			<div className="w-60">
