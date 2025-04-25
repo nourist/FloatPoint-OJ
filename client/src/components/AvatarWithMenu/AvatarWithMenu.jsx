@@ -86,7 +86,7 @@ const AvatarWithMenu = () => {
 				</div>
 				<div className="w-full">
 					<DropdownMenuItem asChild className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400">
-						<Link>
+						<Link to={routesConfig.submit}>
 							<Terminal></Terminal>
 							{t('editor')}
 						</Link>
