@@ -51,7 +51,7 @@ const Combobox = ({ data = [], value, setValue, label = '', triggerClassname = '
 
 Combobox.propTypes = {
 	data: PropTypes.array,
-	value: PropTypes.any.isRequired,
+	value: PropTypes.any,
 	setValue: PropTypes.func.isRequired,
 	label: PropTypes.string,
 	triggerClassname: PropTypes.string,

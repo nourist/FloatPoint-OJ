@@ -31,8 +31,8 @@ const DefaultLayoutWithFooter = ({ children }) => {
 									</DialogHeader>
 									<DialogFooter className="sm:justify-start">
 										<DialogClose asChild>
-											<Button type="button" variant="secondary" className="dark:!bg-neutral-800 dark:hover:!bg-neutral-700">
-												Close
+											<Button type="button" variant="secondary" className="dark:!bg-neutral-800 dark:hover:!bg-neutral-700 capitalize">
+												{t('close')}
 											</Button>
 										</DialogClose>
 									</DialogFooter>

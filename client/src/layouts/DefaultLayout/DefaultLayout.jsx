@@ -60,7 +60,7 @@ const DefaultLayout = ({ children, footer }) => {
 					<>
 						<Button variant="ghost" className="!ml-auto px-2 h-8 text-gray-70 dark:hover:!bg-zinc-700 dark:text-gray-300 group">
 							<FontAwesomeIcon icon="fa-regular fa-star" className="group-hover:text-secondary" />
-							{user.totalScore}
+							{user?.totalScore}
 						</Button>
 						<Button variant="ghost" className="h-8 w-8 text-gray-700 dark:hover:!bg-zinc-700 dark:text-gray-300 dot" size="icon">
 							<FontAwesomeIcon icon="fa-regular fa-bell" />
@@ -91,22 +91,6 @@ const DefaultLayout = ({ children, footer }) => {
 			</header>
 			<div className="min-h-[calc(100%-64px)] flex">{children}</div>
 			{footer}
-			{/* <footer className=" bg-gray-800 text-gray-300 py-6">
-				<div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
-					<div className="text-center sm:text-left">
-						<h2 className="text-lg font-semibold text-white">My Online Judge</h2>
-						<p className="text-sm">© 2025 Hồ Đình Vỹ. All rights reserved.</p>
-					</div>
-					<div className="flex gap-4 mt-4 sm:mt-0">
-						<a href="mailto:your@email.com" className="hover:text-white">
-							<Mail size={24} />
-						</a>
-						<a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-							<Github size={24} />
-						</a>
-					</div>
-				</div>
-			</footer> */}
 		</div>
 	);
 };

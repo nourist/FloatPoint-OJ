@@ -61,6 +61,7 @@ const Submissions = () => {
 		getSubmissions({ status: status?.toUpperCase(), author: authorValue, language, problem: searchValue, size: 50, page })
 			.then((res) => {
 				setMaxPage(res.maxPage);
+				res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 				setSubmissions(res.data);
 			})
 			.catch((err) => {

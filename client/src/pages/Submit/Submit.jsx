@@ -1,10 +1,12 @@
 import { Editor } from '@monaco-editor/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Button } from '~/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogClose, DialogDescription, DialogTitle, DialogFooter } from '~/components/ui/dialog';
+import { Link } from 'react-router';
 
 import codeTemplate from '~/config/codeTemplate';
 import editorConfig from '~/config/editor';
@@ -14,6 +16,7 @@ import useAuthStore from '~/stores/authStore';
 import { getProblems } from '~/services/problem';
 import Combobox from '~/components/Combobox';
 import Select from '~/components/Select';
+import routesConfig from '~/config/routes';
 
 const Submit = () => {
 	const { theme } = useThemeStore();
@@ -21,12 +24,15 @@ const Submit = () => {
 	const { t } = useTranslation('submit');
 	const { user } = useAuthStore();
 
+	const openDialogRef = useRef(null);
+
 	const [src, setSrc] = useState('');
 	const [problem, setProblem] = useState();
 	const [language, setLanguage] = useState(user.defaultLanguage || 'c++17');
 	const [languageType, setLanguageType] = useState();
 	const [problems, setProblems] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [submission, setSubmission] = useState(null);
 
 	const languageValue = { c: 'c', c11: 'c', 'c++11': 'cpp', 'c++14': 'cpp', 'c++17': 'cpp', 'c++20': 'cpp', python2: 'python', python3: 'python' };
 
@@ -43,7 +49,16 @@ const Submit = () => {
 		reader.readAsText(file);
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		setIsLoading(true);
+		submit({ src, problem, language, contest: user.joiningContest })
+			.then((res) => {
+				setSubmission(res.data);
+				openDialogRef.current.click();
+			})
+			.catch((err) => toast.error(err.response.data.msg))
+			.finally(() => setIsLoading(false));
+	};
 
 	useEffect(() => {
 		setProblem(params.get('problem'));
@@ -129,6 +144,27 @@ const Submit = () => {
 					</Button>
 				</div>
 			</div>
+			<Dialog>
+				<DialogTrigger asChild>
+					<button ref={openDialogRef} className="hidden"></button>
+				</DialogTrigger>
+				<DialogContent className="dark:!bg-neutral-900 dark:!border-neutral-800">
+					<DialogHeader>
+						<DialogTitle className="dark:text-white">{t('submit-success')}</DialogTitle>
+						<DialogDescription>{t('submit-success-msg')} </DialogDescription>
+					</DialogHeader>
+					<DialogFooter className="sm:justify-start">
+						<DialogClose asChild>
+							<Button type="button" variant="secondary" className="dark:!bg-neutral-800 capitalize dark:hover:!bg-neutral-700">
+								{t('close')}
+							</Button>
+						</DialogClose>
+						<Button asChild type="button" variant="secondary" className="from-sky-400 to-blue-500 bg-gradient-to-r text-white hover:!to-blue-400 hover:!from-sky-300">
+							<Link to={routesConfig.submission.replace(':id', submission?._id)}>{t('show')}</Link>
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 };

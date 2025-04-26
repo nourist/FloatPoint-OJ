@@ -43,14 +43,14 @@ const AvatarWithMenu = () => {
 						<UserAvatar user={user} className="size-14"></UserAvatar>
 						<span className="space-y-[2px] py-[2px] h-14">
 							<h2 className="text-lg font-medium relative">
-								{user.permission == 'Admin' && (
+								{user?.permission == 'Admin' && (
 									<span className="font-semibold text-base bg-gradient-to-r from-purple-500 to-rose-500 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(168,85,247,0.4)]">
 										AD{' '}
 									</span>
 								)}
-								{user.name}
+								{user?.name}
 							</h2>
-							<p className="text-xs text-gray-600 dark:text-gray-400">{user.email}</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400">{user?.email}</p>
 						</span>
 					</Link>
 				</DropdownMenuItem>

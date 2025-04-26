@@ -110,6 +110,7 @@ const routes = [
 	{
 		path: routesConfig.submit,
 		page: Submit,
+		type: 'auth',
 	},
 ];
 

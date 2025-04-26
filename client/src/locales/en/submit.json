@@ -1,5 +1,9 @@
 {
 	"upload-placeholder": "Click to upload or drag and drop",
 	"select-problem": "Select problem",
-	"submit": "submit"
+	"submit": "submit",
+	"close": "close",
+	"submit-success": "Submit success",
+	"submit-success-msg": "Your code has been submitted.\nYou can check the result by clicking the link below.",
+	"show": "show result"
 }
