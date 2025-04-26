@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { Tooltip, TooltipTrigger, TooltipContent } from '~/components/ui/tooltip';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
+import { Editor } from '@monaco-editor/react';
 
+import editorConfig from '~/config/editor';
 import routesConfig from '~/config/routes';
 import HexagonIcon from '~/components/HexagonIcon';
 import useThemeStore from '~/stores/themeStore';
+import LayoutFooter from '~/components/LayoutFooter';
 
 const Container = styled.div.attrs({ className: 'dark:bg-gray-900 h-full relative overflow-y-auto overflow-x-hidden' })`
 	&::-webkit-scrollbar {
@@ -22,6 +26,23 @@ const Welcome = () => {
 	const pageRef = useRef();
 	const ref1 = useRef();
 	const ref2 = useRef();
+
+	const codeExample = {
+		c: `#include <stdio.h>
+
+int main() {
+    printf("Hello, World!");
+    return 0;
+}`,
+		cpp: `#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	cout<<"Hello, World!"<<endl;
+	return 0;
+}`,
+		py: `print("Hello, World!")`,
+	};
 
 	return (
 		<Container ref={pageRef}>
@@ -75,7 +96,6 @@ const Welcome = () => {
 					<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-1 mb-[-1px]" />
 				</Link>
 			</header>
-
 			<div
 				className="absolute top-0 inset-0 m-auto max-w-xs h-[357px] blur-[118px] sm:max-w-md md:max-w-lg"
 				style={{
@@ -83,7 +103,6 @@ const Welcome = () => {
 						'linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)',
 				}}
 			></div>
-
 			<div className="w-full h-[90%] space-y-10 text-center py-36 relative mt-20">
 				<h1 className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl dark:text-white">
 					{(() => {
@@ -112,7 +131,6 @@ const Welcome = () => {
 					</a>
 				</div>
 			</div>
-
 			<div className="flex flex-row flex-wrap justify-evenly mb-[100px] gap-y-[100px]">
 				<div className="h-[300px] flex flex-col gap-6 max-w-[540px] mx-5" ref={ref1}>
 					<div className="flex flex-row space-x-[-12px]">
@@ -156,14 +174,32 @@ const Welcome = () => {
 					</Tooltip>
 				</div>
 			</div>
-
-			<div className="max-w-[584px] h-[80%] mx-auto items-center flex flex-col gap-6" ref={ref2}>
+			<div className="max-w-[584px] mb-8 mx-auto items-center flex flex-col gap-6" ref={ref2}>
 				<HexagonIcon bg="linear-gradient(to bottom right, #4db6ac 0%, #00796b 100%)">
 					<FontAwesomeIcon icon="fa-solid fa-code" className="text-teal-500" />
 				</HexagonIcon>
 				<h2 className="text-teal-500 text-xl font-semibold">{t('developer')}</h2>
 				<p className="text-gray-400 text-[15px] text-center">{t('developer-description')}</p>
 			</div>
+			<div className="w-full px-44 h-[80vh]">
+				<Tabs defaultValue="c" className="w-full">
+					<TabsList className="w-full justify-start">
+						<TabsTrigger value="c">C</TabsTrigger>
+						<TabsTrigger value="cpp">C++</TabsTrigger>
+						<TabsTrigger value="python">Python</TabsTrigger>
+					</TabsList>
+					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="c">
+						<Editor options={editorConfig} language="c" value={codeExample.c} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
+					</TabsContent>
+					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="cpp">
+						<Editor options={editorConfig} language="cpp" value={codeExample.cpp} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
+					</TabsContent>
+					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="python">
+						<Editor options={editorConfig} language="python" value={codeExample.py} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
+					</TabsContent>
+				</Tabs>
+			</div>
+			<LayoutFooter></LayoutFooter>
 		</Container>
 	);
 };
