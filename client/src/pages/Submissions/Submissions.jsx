@@ -1,11 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { Select, SelectTrigger, SelectContent, SelectGroup, SelectItem, SelectValue } from '~/components/ui/select';
 import { toast } from 'react-toastify';
 import { Toggle } from '~/components/ui/toggle';
-import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
-import { UserCheck, Search, RotateCcw } from 'lucide-react';
+import { UserCheck, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router';
 import { Pie } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router';
@@ -17,6 +15,8 @@ import { getStatistic, getSubmissions } from '~/services/submission';
 import useDebounce from '~/hooks/useDebounce';
 import routesConfig from '~/config/routes';
 import Pagination from '~/components/Pagination';
+import Select from '~/components/Select';
+import Search from '~/components/Search';
 
 const Submissions = () => {
 	const { t } = useTranslation('submissions');
@@ -107,65 +107,55 @@ const Submissions = () => {
 							{t('mine')}
 						</Toggle>
 					)}
-					<Select onValueChange={setStatus}>
-						<SelectTrigger className="w-[180px] dark:!bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:!text-gray-200 border-none">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent className="dark:!bg-[rgb(55,55,55)] border-none">
-							<SelectGroup>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3">
-									<span className="capitalize text-gray-700 dark:text-gray-300">{t('status')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="ac">
-									<span className="capitalize text-green-500">{t('ac')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="tle">
-									<span className="capitalize text-yellow-500">{t('tle')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="mle">
-									<span className="capitalize text-blue-500">{t('mle')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="rte">
-									<span className="capitalize text-orange-500">{t('rte')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="ce">
-									<span className="capitalize text-rose-500">{t('ce')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="wa">
-									<span className="capitalize text-red-500">{t('wa')}</span>
-								</SelectItem>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value="ie">
-									<span className="capitalize text-purple-600">{t('ie')}</span>
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-					<Select onValueChange={setLanguage}>
-						<SelectTrigger className="w-[180px] dark:!bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:!text-gray-200 border-none">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent className="dark:!bg-[rgb(55,55,55)] border-none">
-							<SelectGroup>
-								<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3">
-									<span className="capitalize text-gray-700 dark:text-gray-300">{t('language')}</span>
-								</SelectItem>
-								{languages.map((item, index) => (
-									<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3" value={item} key={index}>
-										<span className="capitalize text-gray-700 dark:text-gray-300">{item}</span>
-									</SelectItem>
-								))}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-					<div className="relative flex-1 max-w-96 dark:text-gray-200 ml-auto">
-						<Search className="absolute size-4 m-[10px]"></Search>
-						<Input
-							className="flex-1 pl-10 bg-gray-200 dark:!bg-[rgb(55,55,55)] border-none"
-							value={search}
-							placeholder={t('search-placeholder')}
-							onChange={(e) => setSearch(e.target.value)}
-						></Input>
-					</div>
+					<Select
+						setValue={setStatus}
+						data={[
+							{
+								label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('status')}</span>,
+							},
+							{
+								value: 'ac',
+								label: <span className="capitalize text-green-500">{t('ac')}</span>,
+							},
+							{
+								value: 'tle',
+								label: <span className="capitalize text-yellow-500">{t('tle')}</span>,
+							},
+							{
+								value: 'mle',
+								label: <span className="capitalize text-blue-500">{t('mle')}</span>,
+							},
+							{
+								value: 'rte',
+								label: <span className="capitalize text-orange-500">{t('rte')}</span>,
+							},
+							{
+								value: 'ce',
+								label: <span className="capitalize text-rose-500">{t('ce')}</span>,
+							},
+							{
+								value: 'wa',
+								label: <span className="capitalize text-red-500">{t('wa')}</span>,
+							},
+							{
+								value: 'ie',
+								label: <span className="capitalize text-purple-600">{t('ie')}</span>,
+							},
+						]}
+					></Select>
+					<Select
+						setValue={setLanguage}
+						data={[
+							{
+								label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('language')}</span>,
+							},
+							...languages.map((item) => ({
+								label: <span className="capitalize text-gray-700 dark:text-gray-300">{item}</span>,
+								value: item,
+							})),
+						]}
+					></Select>
+					<Search value={search} setValue={setSearch} className="ml-auto" placeholder={t('search-placeholder')}></Search>
 					<Button onClick={query} className="!bg-sky-400 capitalize !text-white font-light hover:!bg-sky-500">
 						<RotateCcw></RotateCcw>
 						{t('refresh')}

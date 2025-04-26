@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { RotateCcw, CircleCheck, Search, Shuffle } from 'lucide-react';
+import { RotateCcw, CircleCheck, Shuffle } from 'lucide-react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
-import { Input } from '~/components/ui/input';
 import { Button } from '~/components/ui/button';
 
 import { getProblems } from '~/services/problem';
@@ -17,6 +15,8 @@ import padlock from '~/assets/images/padlock.png';
 import ChipList from '~/components/ChipList';
 import ProblemTags from '~/components/ProblemTags';
 import useDebounce from '~/hooks/useDebounce';
+import Select from '~/components/Select';
+import Search from '~/components/Search';
 
 const Problem = () => {
 	const { t } = useTranslation('problems');
@@ -25,7 +25,7 @@ const Problem = () => {
 	const [randomId, setRandomId] = useState(0);
 	const [list, setList] = useState([]);
 
-	const [numOfPage, setNumOfPage] = useState(0);
+	const [numOfPage, setNumOfPage] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [sortBy, setSortBy] = useState('');
 	const [sortOrder, setSortOrder] = useState(1);
@@ -74,45 +74,27 @@ const Problem = () => {
 		<div className="mx-auto mt-8 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
 			<ProblemTags setActiveTags={setActiveTags} className="mb-2"></ProblemTags>
 			<div className="h-12 w-full mb-1 flex gap-3">
-				<Select onValueChange={setDifficulty}>
-					<SelectTrigger className="w-[180px] dark:!bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:!text-gray-200 border-none">
-						<SelectValue />
-					</SelectTrigger>
-					<SelectContent className="dark:!bg-[rgb(55,55,55)] border-none">
-						<SelectGroup>
-							<SelectItem className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3">
-								<span className="capitalize text-gray-700 dark:text-gray-300">{t('difficulty')}</span>
-							</SelectItem>
-							<SelectItem
-								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-green-500 hover:!text-green-500 focus:!text-green-500"
-								value="easy"
-							>
-								<span className="capitalize text-green-500">{t('easy')}</span>
-							</SelectItem>
-							<SelectItem
-								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-yellow-600 hover:!text-yellow-600 focus:!text-yellow-600"
-								value="medium"
-							>
-								<span className="capitalize text-yellow-600">{t('medium')}</span>
-							</SelectItem>
-							<SelectItem
-								className="h-10 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 px-3 text-red-500 hover:!text-red-500 focus:!text-red-500"
-								value="hard"
-							>
-								<span className="capitalize text-red-500">{t('hard')}</span>
-							</SelectItem>
-						</SelectGroup>
-					</SelectContent>
-				</Select>
-				<div className="relative flex-1 max-w-96 dark:text-gray-200">
-					<Search className="absolute size-4 m-[10px]"></Search>
-					<Input
-						className="flex-1 pl-10 bg-gray-200 dark:!bg-[rgb(55,55,55)] border-none"
-						value={search}
-						placeholder={t('search-placeholder')}
-						onChange={(e) => setSearch(e.target.value)}
-					></Input>
-				</div>
+				<Select
+					setValue={setDifficulty}
+					data={[
+						{
+							label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('difficulty')}</span>,
+						},
+						{
+							value: 'easy',
+							label: <span className="capitalize text-green-500">{t('easy')}</span>,
+						},
+						{
+							value: 'medium',
+							label: <span className="capitalize text-yellow-600">{t('medium')}</span>,
+						},
+						{
+							value: 'hard',
+							label: <span className="capitalize text-red-500">{t('hard')}</span>,
+						},
+					]}
+				></Select>
+				<Search value={search} setValue={setSearch} placeholder={t('search-placeholder')}></Search>
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Button onClick={query} className="rounded-full size-9 p-[10px] !bg-sky-500 !text-white ml-auto" size="icon">

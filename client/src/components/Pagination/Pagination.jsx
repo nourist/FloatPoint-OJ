@@ -8,7 +8,7 @@ const Pagination = ({ currentPage, setPage, maxPage, className = '' }) => {
 	const { t } = useTranslation('pagination');
 
 	useEffect(() => {
-		if (currentPage > maxPage) setPage(maxPage);
+		if (currentPage > maxPage && maxPage != 0) setPage(maxPage);
 		if (currentPage <= 0) setPage(1);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [maxPage]);
