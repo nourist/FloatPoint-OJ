@@ -11,12 +11,13 @@ import { Skeleton } from '~/components/ui/skeleton';
 
 import useAuthStore from '~/stores/authStore';
 import { getLanguages } from '~/services/problem';
-import { getStatistic, getSubmissions } from '~/services/submission';
+import { getSubmissions } from '~/services/submission';
 import useDebounce from '~/hooks/useDebounce';
 import routesConfig from '~/config/routes';
 import Pagination from '~/components/Pagination';
 import Select from '~/components/Select';
 import Search from '~/components/Search';
+import statusColors from '~/config/statusColor';
 
 const Submissions = () => {
 	const { t } = useTranslation('submissions');
@@ -25,7 +26,6 @@ const Submissions = () => {
 
 	const [languages, setLanguages] = useState([]);
 
-	const [submissions, setSubmissions] = useState([]);
 	const [status, setStatus] = useState();
 	const [language, setLanguage] = useState();
 	const [mine, setMine] = useState(false);
@@ -33,9 +33,9 @@ const Submissions = () => {
 	const [page, setPage] = useState(1);
 	const [maxPage, setMaxPage] = useState(0);
 	const [loading, setLoading] = useState(false);
-	const [loadingStat, setLoadingStat] = useState(false);
 	const searchValue = useDebounce(search, 400);
 
+	const [submissions, setSubmissions] = useState([]);
 	const [statistic, setStatistic] = useState({});
 
 	const formatedDate = (date) => {
@@ -63,6 +63,7 @@ const Submissions = () => {
 				setMaxPage(res.maxPage);
 				res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 				setSubmissions(res.data);
+				setStatistic(res.stat);
 			})
 			.catch((err) => {
 				toast.error(err.response.data.msg);
@@ -78,15 +79,6 @@ const Submissions = () => {
 			.catch((err) => {
 				toast.error(err.response.data.msg);
 			});
-		setLoadingStat(true);
-		getStatistic()
-			.then((res) => {
-				setStatistic(res.data);
-			})
-			.catch((err) => {
-				toast.error(err.response.data.msg);
-			})
-			.finally(() => setLoadingStat(false));
 	}, []);
 
 	useEffect(() => {
@@ -112,36 +104,16 @@ const Submissions = () => {
 						setValue={setStatus}
 						data={[
 							{
-								label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('status')}</span>,
+								label: <span className={`capitalize text-gray-700 dark:text-gray-300`}>{t('status')}</span>,
 							},
-							{
-								value: 'ac',
-								label: <span className="capitalize text-green-500">{t('ac')}</span>,
-							},
-							{
-								value: 'tle',
-								label: <span className="capitalize text-yellow-500">{t('tle')}</span>,
-							},
-							{
-								value: 'mle',
-								label: <span className="capitalize text-blue-500">{t('mle')}</span>,
-							},
-							{
-								value: 'rte',
-								label: <span className="capitalize text-orange-500">{t('rte')}</span>,
-							},
-							{
-								value: 'ce',
-								label: <span className="capitalize text-rose-500">{t('ce')}</span>,
-							},
-							{
-								value: 'wa',
-								label: <span className="capitalize text-red-500">{t('wa')}</span>,
-							},
-							{
-								value: 'ie',
-								label: <span className="capitalize text-purple-600">{t('ie')}</span>,
-							},
+							...['ac', 'tle', 'mle', 'rte', 'ce', 'wa', 'ie'].map((status) => ({
+								value: status,
+								label: (
+									<span style={{ color: statusColors[status] }} className={`capitalize`}>
+										{t(status)}
+									</span>
+								),
+							})),
 						]}
 					></Select>
 					<Select
@@ -201,7 +173,7 @@ const Submissions = () => {
 									key={index}
 									className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
 								>
-									<td className="px-6 py-4">{formatedDate(new Date(item.createdAt))}</td>
+									<td className="px-6 py-4">{formatedDate(new Date(item.createdAt || null))}</td>
 									<td className="px-6 py-4">
 										{item._id}
 										{item.view && (
@@ -242,7 +214,7 @@ const Submissions = () => {
 			<div className="w-60">
 				<h2 className="text-xl capitalize dark:text-gray-100 mb-1">{t('status')}</h2>
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
-					{loadingStat ? (
+					{loading ? (
 						<Skeleton className="w-full aspect-square rounded-full" />
 					) : (
 						<Pie
@@ -251,13 +223,13 @@ const Submissions = () => {
 								datasets: [
 									{
 										backgroundColor: [
-											'#22c55e', // AC - green-500
-											'#ef4444', // WA - red-500
-											'#eab308', // TLE - yellow-500
-											'#3b82f6', // MLE - blue-500
-											'#f97316', // RTE - orange-500
-											'#f43f5e', // CE - rose-500
-											'#9333ea', // IE - purple-600
+											statusColors.ac, // AC - green-500
+											statusColors.wa, // WA - red-500
+											statusColors.tle, // TLE - yellow-500
+											statusColors.mle, // MLE - blue-500
+											statusColors.rte, // RTE - orange-500
+											statusColors.ce, // CE - rose-500
+											statusColors.ie, // IE - purple-600
 										],
 										data: statistic.status,
 									},
@@ -272,7 +244,7 @@ const Submissions = () => {
 				</div>
 				<h2 className="text-xl capitalize mt-4 dark:text-gray-100 mb-1">{t('language')}</h2>
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
-					{loadingStat ? (
+					{loading ? (
 						<Skeleton className="w-full aspect-square rounded-full" />
 					) : (
 						<Pie

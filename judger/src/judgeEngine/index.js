@@ -17,7 +17,7 @@ const judger = async ({ src, language, problem }) => {
 		throw new Error(`Language "${language}" not supported`);
 	}
 
-	const finalMsg = {compiler: "", checker: ""};
+	const finalMsg = { compiler: '', checker: '' };
 
 	console.log('Starting judge...');
 	try {
@@ -38,7 +38,7 @@ const judger = async ({ src, language, problem }) => {
 
 				return {
 					status: 'CE',
-					msg: {compiler: stderr.toString()},
+					msg: { compiler: stderr.toString() },
 				};
 			}
 
@@ -61,7 +61,7 @@ const judger = async ({ src, language, problem }) => {
 				.split(' ')
 				.map((item) => Number(item));
 
-			memory = Number((memory / 1028).toFixed(1));
+			memory = Number((memory / 1024).toFixed(1));
 
 			if (status == 0) {
 				res.push({
@@ -84,7 +84,7 @@ const judger = async ({ src, language, problem }) => {
 			} else {
 				res.push({
 					status: 'RTE',
-					msg: {checker:fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}`},
+					msg: { checker: fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}` },
 					time,
 					memory,
 				});
@@ -105,7 +105,7 @@ const judger = async ({ src, language, problem }) => {
 
 		return {
 			status: 'IE',
-			msg: {server: err.message},
+			msg: { server: err.message },
 		};
 	}
 };

@@ -11,9 +11,9 @@ export const getSubmissions = async (options) => {
 	}
 };
 
-export const getStatistic = async () => {
+export const getSubmission = async (id) => {
 	try {
-		const res = await httpRequest.get('/submission/statistic');
+		const res = await httpRequest.get(`/submission/info/${id}`);
 		return res.data;
 	} catch (err) {
 		console.error(err);

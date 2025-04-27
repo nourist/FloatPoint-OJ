@@ -83,6 +83,7 @@ const routes = [
 	{
 		path: routesConfig.submission,
 		page: Submission,
+		type: 'auth',
 	},
 	{
 		path: routesConfig.submissions,
@@ -92,6 +93,7 @@ const routes = [
 	{
 		path: routesConfig.contest,
 		page: Contest,
+		type: 'auth',
 	},
 	{
 		path: routesConfig.contests,

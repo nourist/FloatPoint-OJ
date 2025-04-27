@@ -36,7 +36,7 @@ const submissionSchema = new mongoose.Schema(
 			default: 'IE',
 			enum: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
 		},
-		msg: String,
+		msg: Object,
 		point: {
 			type: Number,
 			default: 0,

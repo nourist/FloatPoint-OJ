@@ -32,57 +32,8 @@ const submissionControllers = {
 				});
 			}
 
-			res.status(200).json({
-				success: true,
-				data: data.slice(size * (page - 1), size * page),
-				maxPage: Math.ceil(data.length / size),
-			});
-
-			console.log('Get submission list successfull');
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in get submission list: ${err.message}`);
-		}
-	},
-
-	//[GET] /submission/info/:id
-	async get(req, res, next) {
-		try {
-			const { id } = req.params;
-
-			const user = await User.findById(req.userId);
-
-			const submission = await Submission.findById(id);
-
-			if (!submission) {
-				throw new Error('Submission not found');
-			}
-
-			if (user.permission != 'Admin' && user.name != submission.author) {
-				return res.status(401).json({ success: false, message: 'Unauthorized - not allowed access' });
-			}
-
-			res.status(200).json({
-				success: true,
-				data: submission,
-			});
-
-			console.log(`Get submission "${id}" successfull`);
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in get _id submission: ${err.message}`);
-		}
-	},
-
-	//[GET] /submission/statistic
-	async getStatistic(req, res, next) {
-		try {
-			const data = await Submission.find();
-
-			const status = [0, 0, 0, 0, 0, 0, 0];
-			const language = [0, 0, 0, 0, 0, 0, 0, 0];
+			const statusStat = [0, 0, 0, 0, 0, 0, 0];
+			const languageStat = [0, 0, 0, 0, 0, 0, 0, 0];
 
 			const getStatusIndex = (status) => {
 				//enum: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
@@ -126,21 +77,55 @@ const submissionControllers = {
 			};
 
 			data.forEach((submission) => {
-				status[getStatusIndex(submission.status)]++;
-				language[getLanguageIndex(submission.language)]++;
+				statusStat[getStatusIndex(submission.status)]++;
+				languageStat[getLanguageIndex(submission.language)]++;
 			});
 
 			res.status(200).json({
 				success: true,
-				data: {
-					status,
-					language,
+				data: data.slice(size * (page - 1), size * page),
+				stat: {
+					status: statusStat,
+					language: languageStat,
 				},
+				maxPage: Math.ceil(data.length / size),
 			});
+
+			console.log('Get submission list successfull');
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });
 
-			console.error(`Error in get statistic: ${err.message}`);
+			console.error(`Error in get submission list: ${err.message}`);
+		}
+	},
+
+	//[GET] /submission/info/:id
+	async get(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const user = await User.findById(req.userId);
+
+			const submission = await Submission.findById(id);
+
+			if (!submission) {
+				throw new Error('Submission not found');
+			}
+
+			if (user.permission != 'Admin' && user.name != submission.author) {
+				return res.status(401).json({ success: false, message: 'Unauthorized - not allowed access' });
+			}
+
+			res.status(200).json({
+				success: true,
+				data: submission,
+			});
+
+			console.log(`Get submission "${id}" successfull`);
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in get _id submission: ${err.message}`);
 		}
 	},
 

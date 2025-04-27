@@ -81,7 +81,7 @@ const Submit = () => {
 
 	return (
 		<div className="flex-1 flex px-12 py-8 gap-4">
-			<div className="flex-1 ml-6 rounded-md overflow-hidden">
+			<div className="flex-1 ml-6 rounded-md overflow-hidden shadow-md">
 				<Editor
 					className="shadow-md"
 					language={languageValue[language]}
