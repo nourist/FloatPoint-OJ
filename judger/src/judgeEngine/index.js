@@ -17,6 +17,8 @@ const judger = async ({ src, language, problem }) => {
 		throw new Error(`Language "${language}" not supported`);
 	}
 
+	const finalMsg = {compiler: "", checker: ""};
+
 	console.log('Starting judge...');
 	try {
 		const cwd = path.join(path.resolve(), 'tmp');
@@ -36,11 +38,12 @@ const judger = async ({ src, language, problem }) => {
 
 				return {
 					status: 'CE',
-					msg: stderr.toString(),
+					msg: {compiler: stderr.toString()},
 				};
 			}
 
 			console.log('Compile code successfull');
+			finalMsg.compiler = 'Compile code successfull';
 		}
 
 		const res = [];
@@ -48,6 +51,7 @@ const judger = async ({ src, language, problem }) => {
 			const cmd = `/bin/time -q -f "%M %U" -o testcase/${i}usage.txt prlimit -m=${problem.memoryLimit}m -t=${problem.timeLimit} ${languages[language].runCmd} < testcase/${i}.inp 2> testcase/${i}.err > testcase/${i}_.out`;
 
 			console.log(`Running on test ${i}...`);
+			finalMsg.checker += `Running on test ${i}...\n`;
 			const { code: status, stderr, stdout } = shelljs.exec(cmd, { cwd, silent: false });
 
 			let [memory, time] = fs
@@ -80,7 +84,7 @@ const judger = async ({ src, language, problem }) => {
 			} else {
 				res.push({
 					status: 'RTE',
-					msg: fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}`,
+					msg: {checker:fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}`},
 					time,
 					memory,
 				});
@@ -89,17 +93,19 @@ const judger = async ({ src, language, problem }) => {
 		}
 
 		console.log(`Judging code successfull`);
+		finalMsg.checker += `Judging code successfull\n`;
 
 		return {
 			...getFinalResult(res, { maxPoint: problem.point }),
 			testcase: res,
+			msg: finalMsg,
 		};
 	} catch (err) {
 		console.error(`Error in judging code: ${err.message}`);
 
 		return {
 			status: 'IE',
-			msg: err.message,
+			msg: {server: err.message},
 		};
 	}
 };
