@@ -62,9 +62,6 @@ const DefaultLayout = ({ children, footer }) => {
 							<FontAwesomeIcon icon="fa-regular fa-star" className="group-hover:text-secondary" />
 							{user?.totalScore}
 						</Button>
-						<Button variant="ghost" className="h-8 w-8 text-gray-700 dark:hover:!bg-zinc-700 dark:text-gray-300 dot" size="icon">
-							<FontAwesomeIcon icon="fa-regular fa-bell" />
-						</Button>
 						<AvatarWithMenu></AvatarWithMenu>
 					</>
 				) : (

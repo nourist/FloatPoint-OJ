@@ -68,7 +68,13 @@ const contestSchema = new mongoose.Schema(
 					],
 				}).select('-_id');
 
-				return data.filter((contest) => (!status || contest.startTime > Date.now() ? 'upcoming' : contest.endTime < Date.now() ? 'ended' : 'ongoing' == status));
+				return data
+					.filter((contest) => !status || (contest.startTime > Date.now() ? 'upcoming' : contest.endTime < Date.now() ? 'ended' : 'ongoing' === status))
+					.map((contest) => ({
+						...contest._doc,
+						status: contest.startTime > Date.now() ? 'upcoming' : contest.endTime < Date.now() ? 'ended' : 'ongoing',
+						duration: contest.endTime - contest.startTime,
+					}));
 			},
 		},
 	},
