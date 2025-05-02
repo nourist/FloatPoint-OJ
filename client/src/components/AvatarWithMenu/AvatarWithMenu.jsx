@@ -39,7 +39,7 @@ const AvatarWithMenu = () => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="border-none shadow-lg rounded-2xl w-[296px] dark:bg-[#303030] mr-8 mt-4 p-4 space-y-4">
 				<DropdownMenuItem asChild className="cursor-pointer hover:!bg-transparent">
-					<Link className="flex gap-2">
+					<Link className="flex gap-2" to={routesConfig.user.replace(':name', user.name)}>
 						<UserAvatar user={user} className="size-14"></UserAvatar>
 						<span className="space-y-[2px] py-[2px] h-14">
 							<h2 className="text-lg font-medium relative">

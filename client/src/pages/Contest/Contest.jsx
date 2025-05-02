@@ -181,12 +181,15 @@ const Contest = () => {
 													{index + 1}
 												</td>
 												<td className="px-6 py-4">
-													<Link className="dark:hover:text-white" to={routesConfig.user.replace(':name', item.user)}>
+													<Link
+														className="dark:hover:text-white hover:text-gray-900 text-gray-800 dark:text-gray-300"
+														to={routesConfig.user.replace(':name', item.user)}
+													>
 														{item.user}
 														{item.user === user?.name && <span className="text-red-500"> ({t('you')})</span>}
 													</Link>
 												</td>
-												<td className="px-6 py-4 border-x dark:border-neutral-700 text-center hover:underline">
+												<td className="px-6 py-4 border-x dark:border-neutral-700 text-center hover:underline hover:text-gray-900 dark:text-gray-300 text-gray-800">
 													<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}`}>
 														<div className="dark:text-white">{item.score.reduce((acc, cur) => acc + cur, 0)}</div>
 														<div className="text-[10px]">{formatDurationFromMs(item.time.reduce((acc, cur) => acc + cur, 0))}</div>
