@@ -187,9 +187,10 @@ const submissionControllers = {
 			if (contest) {
 				contest.standing = contest.standing.map((usr) => {
 					if (usr.user == user.name) {
-						if (submission.point > usr.score[contest.problems.indexOf(id)]) {
+						if (submission.point > (usr.score[contest.problems.indexOf(id)] || 0)) {
 							usr.score[contest.problems.indexOf(id)] = submission.point;
-							usr.time[contest.problems.indexOf(id)] = Date.now();
+							usr.time[contest.problems.indexOf(id)] = Date.now() - contest.startTime;
+							usr.status[contest.problems.indexOf(id)] = submission.status;
 						}
 					}
 					return usr;

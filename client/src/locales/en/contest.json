@@ -9,5 +9,8 @@
 	"ended": "The contest has ended.",
 	"upcoming": "The contest will start.",
 	"ongoing": "The contest is running.",
-	"since": "since"
+	"since": "since",
+	"top": "top",
+	"name": "name",
+	"total": "total"
 }

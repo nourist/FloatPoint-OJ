@@ -57,7 +57,7 @@ const Submissions = () => {
 
 	const query = () => {
 		setLoading(true);
-		const authorValue = mine ? user.name : null;
+		const authorValue = mine ? user.name : params.get('author');
 		getSubmissions({ status: status?.toUpperCase(), author: authorValue, language, problem: searchValue, size: 50, page, contest: params.get('contest') })
 			.then((res) => {
 				setMaxPage(res.maxPage);

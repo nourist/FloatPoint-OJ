@@ -44,6 +44,12 @@ const contestSchema = new mongoose.Schema(
 						default: null,
 					},
 				],
+				status: [
+					{
+						type: String,
+						default: null,
+					},
+				],
 			},
 		],
 	},

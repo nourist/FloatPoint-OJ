@@ -8,8 +8,8 @@ const UserAvatar = ({ user, className = '' }) => {
 	return (
 		<Avatar className={`size-8 ${className}`}>
 			<AvatarImage src={user?.avatar} alt={user?.name} />
-			<AvatarFallback style={{ background: stringToBrightColor(user?.name||"DMM") }} className="text-sm text-gray-800">
-				{getShortName(user?.name||"DCM")}
+			<AvatarFallback style={{ background: stringToBrightColor(user?.name || 'DMM') }} className="text-sm text-gray-800">
+				{getShortName(user?.name || 'DCM')}
 			</AvatarFallback>
 		</Avatar>
 	);

@@ -12,6 +12,7 @@ import { getContest, joinContest, leaveContest } from '~/services/contest';
 import routesConfig from '~/config/routes';
 import useAuthStore from '~/stores/authStore';
 import markdownComponents from '~/config/markdownComponents.jsx';
+import contestImg from '~/assets/images/1stcontest.png';
 
 const Contest = () => {
 	const { id } = useParams();
@@ -37,7 +38,7 @@ const Contest = () => {
 		}
 	};
 
-	function formatStartTime(date) {
+	const formatStartTime = (date) => {
 		const options = {
 			day: '2-digit',
 			month: 'long',
@@ -48,15 +49,23 @@ const Contest = () => {
 			hour12: false,
 		};
 		return date.toLocaleString('en-GB', options).replace(',', '');
-	}
+	};
 
-	function formatDuration(start, end) {
+	const formatDuration = (start, end) => {
 		const diffMs = end - start;
 		const diffMins = Math.floor(diffMs / 60000);
 		const hours = String(Math.floor(diffMins / 60)).padStart(2, '0');
 		const minutes = String(diffMins % 60).padStart(2, '0');
 		return `${hours} hours, ${minutes} minutes`;
-	}
+	};
+
+	const formatDurationFromMs = (diffMs) => {
+		const totalSec = Math.floor(diffMs / 1000);
+		const hours = String(Math.floor(totalSec / 3600)).padStart(2, '0');
+		const minutes = String(Math.floor((totalSec % 3600) / 60)).padStart(2, '0');
+		const seconds = String(totalSec % 60).padStart(2, '0');
+		return `${hours}:${minutes}:${seconds}`;
+	};
 
 	useEffect(() => {
 		setLoading(true);
@@ -74,7 +83,10 @@ const Contest = () => {
 
 	return (
 		<div className="flex-1 px-14 py-6">
-			<h2 className="dark:text-gray-100 text-2xl mb-1">{contest.title}</h2>
+			<h2 className="dark:text-gray-100 text-2xl mb-1 flex items-center gap-2">
+				<img src={contestImg} className="size-6" />
+				{contest.title}
+			</h2>
 			<div>
 				<Tabs defaultValue="a">
 					<TabsList className="dark:bg-neutral-800">
@@ -134,8 +146,69 @@ const Contest = () => {
 						)}
 					</TabsContent>
 					<TabsContent value="c">
-						<div>
-							<p>{'no'}</p>
+						<div className="mt-4">
+							<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
+								<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
+									<tr>
+										<th scope="col" className="px-6 py-3 text-center w-24">
+											{t('top')}
+										</th>
+										<th scope="col" className="px-6 py-3">
+											{t('name')}
+										</th>
+										<th scope="col" className="px-6 py-3 text-center w-32 border-x dark:border-neutral-700">
+											{t('total')}
+										</th>
+										{contest?.problems?.map((item, index) => (
+											<th scope="col" key={index} className="py-3 w-16 h-12 hover:dark:text-white text-center border-x dark:border-neutral-700">
+												<Link className="p-4" to={routesConfig.problem.replace(':id', item)}>
+													{index + 1}
+												</Link>
+											</th>
+										))}
+									</tr>
+								</thead>
+								<tbody>
+									{!loading &&
+										contest?.standing?.map((item, index) => (
+											<tr
+												key={index}
+												className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
+											>
+												<td
+													data-top={index + 1}
+													className="px-6 py-4 text-center data-[top=1]:text-red-500 data-[top=2]:text-yellow-500 data-[top=3]:text-cyan-500"
+												>
+													{index + 1}
+												</td>
+												<td className="px-6 py-4">
+													<Link className="dark:hover:text-white" to={routesConfig.user.replace(':name', item.user)}>
+														{item.user}
+													</Link>
+												</td>
+												<td className="px-6 py-4 border-x dark:border-neutral-700 text-center hover:underline">
+													<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}`}>
+														<div className="dark:text-white">{item.score.reduce((acc, cur) => acc + cur, 0)}</div>
+														<div className="text-[10px]">{formatDurationFromMs(item.time.reduce((acc, cur) => acc + cur, 0))}</div>
+													</Link>
+												</td>
+												{contest?.problems?.map((problem, index) => (
+													<td key={index} className="px-6 py-4 text-center border-x dark:border-neutral-700 hover:underline">
+														<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}&problem=${problem}`}>
+															<div
+																data-status={item?.score?.[index] == 0 ? '0' : item?.status?.[index] == 'AC' ? '2' : '1'}
+																className="dark:text-white data-[status=1]:!text-yellow-500 data-[status=0]:!text-red-500 data-[status=2]:text-green-500"
+															>
+																{item?.score?.[index]}
+															</div>
+															<div className="text-[10px]">{item?.time?.[index] && formatDurationFromMs(item?.time?.[index])}</div>
+														</Link>
+													</td>
+												))}
+											</tr>
+										))}
+								</tbody>
+							</table>
 						</div>
 					</TabsContent>
 				</Tabs>
