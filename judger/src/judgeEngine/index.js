@@ -51,6 +51,7 @@ const judger = async ({ src, language, problem }) => {
 			const cmd = `/bin/time -q -f "%M %U" -o testcase/${i}usage.txt prlimit -m=${problem.memoryLimit}m -t=${problem.timeLimit} ${languages[language].runCmd} < testcase/${i}.inp 2> testcase/${i}.err > testcase/${i}_.out`;
 
 			console.log(`Running on test ${i}...`);
+			finalMsg.checker += `Running on test ${i}...\n`;
 			const { code: status, stderr, stdout } = shelljs.exec(cmd, { cwd, silent: false });
 
 			let [memory, time] = fs
@@ -68,7 +69,6 @@ const judger = async ({ src, language, problem }) => {
 					time,
 					memory,
 				});
-			finalMsg.checker += `Running on test ${i}...\n`;
 			} else if (status == 137) {
 				if (memory >= problem.memoryLimit) {
 					res.push({
@@ -81,8 +81,6 @@ const judger = async ({ src, language, problem }) => {
 						memory,
 					});
 				}
-			finalMsg.checker += `Running on test ${i}...\n`;
-
 			} else {
 				const msg = fs.readFileSync(path.join(path.resolve(), 'tmp', 'testcase', `${i}.err`)).toString() || `Exit code ${status}`;
 				res.push({

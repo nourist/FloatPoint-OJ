@@ -18,7 +18,7 @@
 	"wa": "wrong answer",
 	"tle": "time limit exceeded",
 	"mle": "memory limit exceeded",
-	"re": "runtime error",
+	"rte": "runtime error",
 	"ce": "compile error",
 	"ie": "internal error"
 }

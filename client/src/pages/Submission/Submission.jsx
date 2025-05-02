@@ -90,7 +90,7 @@ const Submission = () => {
 							</div>
 							<div className="flex gap-2">
 								<span className="capitalize font-semibold dark:text-gray-100">{t('time')}:</span>
-								<span className="dark:text-gray-200">{submission?.time}s</span>
+								<span className="dark:text-gray-200">{submission?.time === -1 ? '-' : `${submission?.time}s`}</span>
 							</div>
 							<div className="flex gap-2">
 								<span className="capitalize font-semibold dark:text-gray-100">{t('language')}:</span>
@@ -98,7 +98,7 @@ const Submission = () => {
 							</div>
 							<div className="flex gap-2">
 								<span className="capitalize font-semibold dark:text-gray-100">{t('memory')}:</span>
-								<span className="dark:text-gray-200">{submission?.memory}MB</span>
+								<span className="dark:text-gray-200">{submission?.memory === -1 ? '-' : `${submission?.memory}MB`}</span>
 							</div>
 							<div className="flex gap-2">
 								<span className="capitalize font-semibold dark:text-gray-100">{t('submit-at')}:</span>
@@ -177,8 +177,8 @@ const Submission = () => {
 											<td className="p-2 dark:text-gray-200 capitalize" style={{ color: statusColors[item.status.toLowerCase()] }}>
 												{item.status}
 											</td>
-											<td className="p-2 dark:text-gray-200">{item.time}</td>
-											<td className="p-2 dark:text-gray-200">{item.memory}</td>
+											<td className="p-2 dark:text-gray-200">{item.time == -1 ? '-' : item.time}</td>
+											<td className="p-2 dark:text-gray-200">{item.memory == -1 ? '-' : item.memory}</td>
 										</tr>
 									))}
 								</tbody>

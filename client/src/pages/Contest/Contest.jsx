@@ -79,8 +79,6 @@ const Contest = () => {
 			.finally(() => setLoading(false));
 	}, [id, user]);
 
-	console.log(contest);
-
 	return (
 		<div className="flex-1 px-14 py-6">
 			<h2 className="dark:text-gray-100 text-2xl mb-1 flex items-center gap-2">
@@ -177,13 +175,15 @@ const Contest = () => {
 											>
 												<td
 													data-top={index + 1}
-													className="px-6 py-4 text-center data-[top=1]:text-red-500 data-[top=2]:text-yellow-500 data-[top=3]:text-cyan-500"
+													data-top3={index < 3}
+													className="px-6 py-4 text-center data-[top=1]:text-red-500 data-[top=2]:text-yellow-500 data-[top=3]:text-cyan-500 data-[top3=true]:font-bold"
 												>
 													{index + 1}
 												</td>
 												<td className="px-6 py-4">
 													<Link className="dark:hover:text-white" to={routesConfig.user.replace(':name', item.user)}>
 														{item.user}
+														{item.user === user?.name && <span className="text-red-500"> ({t('you')})</span>}
 													</Link>
 												</td>
 												<td className="px-6 py-4 border-x dark:border-neutral-700 text-center hover:underline">
@@ -197,7 +197,7 @@ const Contest = () => {
 														<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}&problem=${problem}`}>
 															<div
 																data-status={item?.score?.[index] == 0 ? '0' : item?.status?.[index] == 'AC' ? '2' : '1'}
-																className="dark:text-white data-[status=1]:!text-yellow-500 data-[status=0]:!text-red-500 data-[status=2]:text-green-500"
+																className="dark:text-white data-[status=1]:!text-yellow-500 data-[status=0]:!text-red-500 data-[status=2]:!text-green-500 data-[status=2]:font-bold"
 															>
 																{item?.score?.[index]}
 															</div>
