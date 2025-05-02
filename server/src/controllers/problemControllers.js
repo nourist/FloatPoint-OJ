@@ -6,7 +6,7 @@ const problemControllers = {
 	//[GET] /problem
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, tags, q, sortBy, order, difficulty, minimal } = req.query;
+			const { size = 20, page = 1, tags, q, sortBy, order, difficulty, minimal, contest } = req.query;
 			let data = await Problem.filterAndSort({ tags, q, sortBy, order, difficulty });
 			if (sortBy === 'accuracy') {
 				data.sort((a, b) => order * ((b.noOfSubm == 0 ? 1 : b.noOfSuccess / b.noOfSubm) - (a.noOfSubm == 0 ? 1 : a.noOfSuccess / a.noOfSubm)));
@@ -36,7 +36,7 @@ const problemControllers = {
 					}
 				}
 
-				if (user.joiningContest) {
+				if (user.joiningContest && Boolean(contest) && contest === 'true') {
 					data = data.filter((problem) => problem.contest.includes(user.joiningContest));
 				}
 			}

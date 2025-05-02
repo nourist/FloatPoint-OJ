@@ -25,6 +25,16 @@ const useAuthStore = create((set) => ({
 		}
 	},
 
+	async reload() {
+		try {
+			const res = await httpRequest.get('/auth');
+			set({ user: res.data.user, isAuth: true });
+		} catch (err) {
+			console.error(err);
+			set({ /*error: err.response.data.msg,*/ isAuth: false });
+		}
+	},
+
 	async login(email, password) {
 		set({ user: null, error: null, msg: null, isLoading: true });
 

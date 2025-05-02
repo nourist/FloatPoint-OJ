@@ -1,4 +1,5 @@
 import httpRequest from '~/utils/httpRequest';
+import useAuthStore from '~/stores/authStore';
 
 export const getSubmissions = async (options) => {
 	try {
@@ -23,7 +24,9 @@ export const getSubmission = async (id) => {
 
 export const submit = async (options) => {
 	try {
+		const { reload } = useAuthStore.getState();
 		const res = await httpRequest.post('/submission/submit', options);
+		await reload();
 		return res.data;
 	} catch (err) {
 		console.error(err);

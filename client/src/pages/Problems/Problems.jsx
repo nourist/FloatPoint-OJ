@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/components/ui/tooltip';
 import { Button } from '~/components/ui/button';
+import { useSearchParams } from 'react-router';
 
 import { getProblems } from '~/services/problem';
 import routesConfig from '~/config/routes';
@@ -18,9 +19,10 @@ import useDebounce from '~/hooks/useDebounce';
 import Select from '~/components/Select';
 import Search from '~/components/Search';
 
-const Problem = () => {
+const Problems = () => {
 	const { t } = useTranslation('problems');
 	const { user } = useAuthStore();
+	const [searchParams] = useSearchParams();
 
 	const [randomId, setRandomId] = useState(0);
 	const [list, setList] = useState([]);
@@ -43,7 +45,7 @@ const Problem = () => {
 
 	const query = () => {
 		setLoading(true);
-		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags, difficulty, q: searchValue, size: 50 })
+		getProblems({ page: currentPage, sortBy, order: sortOrder, tags: activeTags, difficulty, q: searchValue, size: 50, contest: Boolean(searchParams.get('contest')) })
 			.then((res) => {
 				setList(res.data);
 				setNumOfPage(res.maxPage);
@@ -68,7 +70,7 @@ const Problem = () => {
 	useEffect(() => {
 		query();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage, sortBy, sortOrder, activeTags, difficulty, searchValue]);
+	}, [currentPage, sortBy, sortOrder, activeTags, difficulty, searchValue, searchParams]);
 
 	return (
 		<div className="mx-auto mt-8 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
@@ -202,4 +204,4 @@ const Problem = () => {
 	);
 };
 
-export default Problem;
+export default Problems;

@@ -1,0 +1,13 @@
+{
+	"info": "info",
+	"statistics": "statistics",
+	"standing": "standing",
+	"problems": "problems",
+	"submissions": "submissions",
+	"join": "join",
+	"leave": "leave",
+	"ended": "The contest has ended.",
+	"upcoming": "The contest will start.",
+	"ongoing": "The contest is running.",
+	"since": "since"
+}

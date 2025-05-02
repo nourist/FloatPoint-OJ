@@ -58,7 +58,7 @@ const Submissions = () => {
 	const query = () => {
 		setLoading(true);
 		const authorValue = mine ? user.name : null;
-		getSubmissions({ status: status?.toUpperCase(), author: authorValue, language, problem: searchValue, size: 50, page })
+		getSubmissions({ status: status?.toUpperCase(), author: authorValue, language, problem: searchValue, size: 50, page, contest: params.get('contest') })
 			.then((res) => {
 				setMaxPage(res.maxPage);
 				res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -84,7 +84,7 @@ const Submissions = () => {
 	useEffect(() => {
 		query();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status, language, mine, searchValue, user, page]);
+	}, [status, language, mine, searchValue, user, page, params]);
 
 	return (
 		<div className="flex-1 mx-14 my-8 flex-row flex gap-4">
