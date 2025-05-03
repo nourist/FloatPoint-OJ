@@ -12,3 +12,11 @@ export const getTop = async (name) => {
 
 	return res;
 };
+
+export const getTopPercent = async (name) => {
+	const list = await User.find().sort({ totalScore: 'desc' });
+
+	let top = await getTop(name);
+
+	return Math.round((top / list.length) * 100);
+};

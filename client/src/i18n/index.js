@@ -12,9 +12,13 @@ i18next
 	.use(HttpApi)
 	.init({
 		lng: 'en',
-		debug: false,
 		defaultNS: 'layout',
 		interpolation: {
 			excapeValue: false,
+		},
+		debug: true,
+		saveMissing: true,
+		missingKeyHandler: function (lng, ns, key) {
+			console.warn(`[i18next] Missing key: '${key}' in namespace: '${ns}', language: '${lng}'`);
 		},
 	});

@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		totalAttempt: {
+			type: Number,
+			default: 0,
+		},
 		defaultLanguage: {
 			type: String,
 			default: 'c++17',

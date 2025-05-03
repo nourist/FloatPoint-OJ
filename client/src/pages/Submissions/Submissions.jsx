@@ -216,6 +216,8 @@ const Submissions = () => {
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
 					{loading ? (
 						<Skeleton className="w-full aspect-square rounded-full" />
+					) : statistic.status?.reduce((acc, cur) => acc + cur, 0) === 0 ? (
+						<div className="w-full aspect-square rounded-full dark:bg-neutral-700 border-2 bg-neutral-300 border-white"></div>
 					) : (
 						<Pie
 							data={{
@@ -246,6 +248,8 @@ const Submissions = () => {
 				<div className="dark:bg-neutral-800 p-8 pb-4 rounded-lg shadow-lg bg-white border dark:border-neutral-700">
 					{loading ? (
 						<Skeleton className="w-full aspect-square rounded-full" />
+					) : statistic.status?.reduce((acc, cur) => acc + cur, 0) === 0 ? (
+						<div className="w-full aspect-square rounded-full dark:bg-neutral-700 border-2 bg-neutral-300 border-white"></div>
 					) : (
 						<Pie
 							data={{

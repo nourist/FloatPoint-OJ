@@ -170,7 +170,7 @@ const submissionControllers = {
 			problem.noOfSubm++;
 
 			const alreadyAC = await Submission.filter({ status: 'AC', author: user.name, problem: id });
-			if (!alreadyAC && response.data.data.status === 'AC') {
+			if (alreadyAC.length === 0 && response.data.data.status === 'AC') {
 				problem.noOfSuccess++;
 				user.totalAC++;
 			}
@@ -179,6 +179,10 @@ const submissionControllers = {
 			const bestLastSubmit = lastSubmissions.reduce((acc, val) => Math.max(acc, val.point), 0);
 			user.totalScore -= bestLastSubmit;
 			user.totalScore += Math.max(bestLastSubmit, submission.point);
+
+			if (lastSubmissions.length === 0) {
+				user.totalAttempt++;
+			}
 
 			await submission.save();
 			await problem.save();

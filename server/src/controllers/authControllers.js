@@ -1,6 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import crypto from 'crypto';
 
+import { getTop, getTopPercent } from '../utils/user.js';
 import User from '../models/user.js';
 import { generateTokenAndSetCookie, generateVerificationCode } from '../utils/auth.js';
 import { sendResetPasswordRequestEmail, sendResetPasswordSuccessEmail, sendVerificationEmail, sendWellcomeEmail } from '../mail/emails.js';
@@ -153,11 +154,16 @@ const authControllers = {
 			user.lastLogin = new Date();
 			await user.save();
 
+			const top = await getTop(user.name);
+			const topPercent = await getTopPercent(user.name);
+
 			res.status(200).json({
 				success: true,
 				msg: 'Logged in successfully',
 				user: {
 					...user._doc,
+					top,
+					topPercent,
 					_id: undefined,
 					password: undefined,
 					resetPasswordToken: undefined,
@@ -258,11 +264,15 @@ const authControllers = {
 			if (!user) {
 				throw new Error('User does not exist');
 			}
+			const top = await getTop(user.name);
+			const topPercent = await getTopPercent(user.name);
 
 			res.status(200).json({
 				success: true,
 				user: {
 					...user._doc,
+					top,
+					topPercent,
 					_id: undefined,
 					password: undefined,
 					resetPasswordToken: undefined,
