@@ -64,17 +64,17 @@ const Home = () => {
 									<span className="text-blue-500">{100 - user?.topPercent}%</span> {t('user')}
 								</span>
 							</div>
-							<div className="dark:bg-[rgb(33,33,37)] h-2 w-full">
-								<div className={`dark:bg-[#0066B8] h-full`} style={{ width: `${100 - user?.topPercent}%` }}></div>
+							<div className="dark:bg-[rgb(33,33,37)] bg-gray-200 h-2 w-full">
+								<div className={`bg-[#0066B8] h-full`} style={{ width: `${100 - user?.topPercent}%` }}></div>
 							</div>
 						</div>
 						<div className="h-28 w-full flex px-8 mt-auto">
-							<span className="dark:bg-[rgb(33,33,37)] flex-1 h-full flex flex-col justify-between py-5">
+							<span className="dark:bg-[rgb(33,33,37)] bg-slate-200 bg-opacity-60 flex-1 h-full flex flex-col justify-between py-5">
 								<Trophy className="mx-auto"></Trophy>
 								<h3 className="text-2xl dark:text-white text-center">{user?.top}</h3>
 							</span>
 							<span className="mx-8 my-auto border dark:border-neutral-700 h-3/4"></span>
-							<span className="dark:bg-[rgb(33,33,37)] flex-1 h-full flex flex-col justify-between py-5">
+							<span className="dark:bg-[rgb(33,33,37)] bg-slate-200 bg-opacity-60 flex-1 h-full flex flex-col justify-between py-5">
 								<div className="text-center">
 									<FontAwesomeIcon className="size-8 text-[#0066B8]" icon="fa-solid fa-star" />
 								</div>
@@ -90,19 +90,19 @@ const Home = () => {
 					>
 						<h2 className="text-xl dark:text-white capitalize">{t('statistics')}</h2>
 						<div className="w-[200px] h-[200px] my-2 flex flex-col items-center justify-center border-8 rounded-full dark:border-zinc-700">
-							<div className="text-4xl dark:text-white">{user?.totalAttempt}</div>
-							<div className="dark:text-gray-400 capitalize text-sm mt-2">{t('attempted')}</div>
+							<div className="text-4xl dark:text-white ">{user?.totalAttempt}</div>
+							<div className="dark:text-gray-400 text-gray-600 capitalize text-sm mt-2">{t('attempted')}</div>
 						</div>
 						<div className="flex items-center gap-4 capitalize dark:text-white">
 							<div className="w-4 h-4 rounded-full bg-green-500"></div>
 							{t('finished')}
-							<div className="h-[2px] w-4 dark:bg-white"></div>
+							<div className="h-[2px] w-4 dark:bg-white bg-gray-600"></div>
 							{user?.totalAC}
 						</div>
 						<div className="flex items-center gap-4 capitalize dark:text-white">
 							<div className="w-4 h-4 rounded-full bg-red-500"></div>
-							<div className="dark:text-gray-400">{t('unfinished')}</div>
-							<div className="h-[2px] w-4 dark:bg-white"></div>
+							<div className="dark:text-gray-400 text-gray-600">{t('unfinished')}</div>
+							<div className="h-[2px] w-4 dark:bg-white bg-gray-600"></div>
 							{user?.totalAC}
 						</div>
 					</motion.div>
@@ -133,7 +133,7 @@ const Home = () => {
 								</div>
 								<div className="text-xl dark:text-white flex flex-col justify-around">
 									{newestProblem.name}
-									<div className="flex text-sm dark:text-gray-400 gap-1">
+									<div className="flex text-sm dark:text-gray-400 text-gray-500 gap-1">
 										<Star className="size-4" strokeWidth={1}></Star>
 										{newestProblem.point}
 										<CircleCheck className="size-4 ml-2" strokeWidth={1}></CircleCheck>
@@ -173,7 +173,7 @@ const Home = () => {
 										>
 											{currentContest?.title}
 										</Link>
-										<Countdown className="dark:text-slate-400" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
+										<Countdown className="dark:text-slate-400 text-slate-500" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
 									</div>
 								</>
 							)}
@@ -188,17 +188,48 @@ const Home = () => {
 						<h2 className="text-2xl dark:text-white capitalize mb-2">{t('your-submissions')}</h2>
 
 						<div className="grid grid-cols-2 grid-rows-4 gap-2">
-							{[
-								statusColors.ac, // AC - green-500
-								statusColors.wa, // WA - red-500
-								statusColors.tle, // TLE - yellow-500
-								statusColors.mle, // MLE - blue-500
-								statusColors.rte, // RTE - orange-500
-								statusColors.ce, // CE - rose-500
-								statusColors.ie, // IE - purple-600
-							].map((item, index) => statistic[index])}
+							{Object.entries({
+								ac: statusColors.ac, // AC - green-500
+								wa: statusColors.wa, // WA - red-500
+								tle: statusColors.tle, // TLE - yellow-500
+								mle: statusColors.mle, // MLE - blue-500
+								rte: statusColors.rte, // RTE - orange-500
+								ce: statusColors.ce, // CE - rose-500
+								ie: statusColors.ie, // IE - purple-600
+							}).map((item, index) => (
+								<div key={index} className="flex items-center gap-1 dark:text-gray-200">
+									<div style={{ backgroundColor: item[1] }} className="size-5"></div>
+									<span className="dark:text-gray-400 uppercase text-gray-600">{item[0]}</span>:<span className="dark:text-white">{statistic[index] || 0}</span>
+								</div>
+							))}
 						</div>
 					</motion.div>
+				</div>
+			</div>
+			<div className="w-full px-20 dark:text-white pt-16 grid grid-cols-2 grid-rows-8 gap-4">
+				<div className="col-span-2 lg:col-span-1 lg:row-span-2">
+					<div className="flex items-center gap-2">
+						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
+						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('newest-problems')}</h2>
+					</div>
+				</div>
+				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-2">
+					<div className="flex items-center gap-2">
+						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
+						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('ongoing-contests')}</h2>
+					</div>
+				</div>
+				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-3">
+					<div className="flex items-center gap-2">
+						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
+						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('top-user')}</h2>
+					</div>
+				</div>
+				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-4">
+					<div className="flex items-center gap-2">
+						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
+						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('activities')}</h2>
+					</div>
 				</div>
 			</div>
 		</div>

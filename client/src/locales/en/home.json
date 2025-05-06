@@ -12,5 +12,9 @@
 	"current-contest": "current contest",
 	"lets-join-contest": "lets join contest",
 	"no-contest-join-msg": "You are too boring. Please join contest...",
-	"your-submissions": "your submissions"
+	"your-submissions": "your submissions",
+	"newest-problems": "newest problems",
+	"top-user": "top user",
+	"activities": "activities",
+	"ongoing-contests": "ongoing contests"
 }

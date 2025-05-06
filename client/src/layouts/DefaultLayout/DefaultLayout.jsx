@@ -86,7 +86,7 @@ const DefaultLayout = ({ children, footer }) => {
 					</>
 				)}
 			</header>
-			<div className="min-h-[calc(100%-64px)] flex">{children}</div>
+			<div className="min-h-[calc(100%-64px)] flex flex-col">{children}</div>
 			{footer}
 		</div>
 	);
