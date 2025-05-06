@@ -14,7 +14,9 @@
 	"no-contest-join-msg": "You are too boring. Please join contest...",
 	"your-submissions": "your submissions",
 	"newest-problems": "newest problems",
-	"top-user": "top user",
+	"top-users": "top users",
 	"activities": "activities",
-	"ongoing-contests": "ongoing contests"
+	"top": "top",
+	"point": "point",
+	"solved-msg": "successfully solved problem"
 }

@@ -51,7 +51,7 @@ const ResetPassword = () => {
 	}, [msg, clearLog]);
 
 	return (
-		<div className="w-full flex items-center justify-center pb-24">
+		<div className="flex-1 flex items-center justify-center pb-24">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}

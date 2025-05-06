@@ -39,7 +39,7 @@ const SendVerifyCode = () => {
 	}, [msg, error, clearLog, t]);
 
 	return (
-		<div className="w-full pb-32 flex items-center justify-center">
+		<div className="flex-1 pb-32 flex items-center justify-center">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}

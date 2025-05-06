@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { MemoryStick, Clock9, Star, CircleCheck } from 'lucide-react';
-import { Button } from '~/components/ui/button';
 import Countdown from 'react-countdown';
 
 import useAuthStore from '~/stores/authStore';
@@ -17,18 +15,23 @@ import Contest from '~/assets/images/1stcontest.png';
 import { getContest } from '~/services/contest';
 import statusColors from '~/config/statusColor';
 import { getSubmissions } from '~/services/submission';
+import ProblemTab from '~/components/ProblemTab';
+import { getUsers } from '~/services/user';
 
 const Home = () => {
 	const { user } = useAuthStore();
 	const { t } = useTranslation('home');
-	const [newestProblem, setNewestProblem] = useState();
+
+	const [standing, setStanding] = useState([]);
+	const [newestProblem, setNewestProblem] = useState([]);
 	const [currentContest, setCurrentContest] = useState();
 	const [statistic, setStatistic] = useState({});
+	const [activities, setActivities] = useState([]);
 
 	useEffect(() => {
-		getProblems({ size: 1, sortBy: 'createdAt', order: -1 })
+		getProblems({ size: 5, sortBy: 'createdAt', order: -1 })
 			.then((res) => {
-				setNewestProblem(res.data?.[0]);
+				setNewestProblem(res.data);
 			})
 			.catch((err) => toast.error(err.response.data.msg));
 		if (user?.joiningContest)
@@ -41,7 +44,30 @@ const Home = () => {
 			getSubmissions({ author: user?.name })
 				.then((res) => setStatistic(res.stat.status))
 				.catch((err) => toast.error(err.response.data.msg));
+		getUsers({ size: 5, sortBy: 'totalScore', order: -1 })
+			.then((res) => setStanding(res.data))
+			.catch((err) => toast.error(err.response.data.msg));
+		getSubmissions({ sortBy: 'createdAt', order: -1, size: 15, status: 'AC' })
+			.then((res) => setActivities(res.data))
+			.catch((err) => toast.error(err.response.data.msg));
 	}, [user]);
+
+	const formatedDate = (date) => {
+		const datePart = new Intl.DateTimeFormat('vi-VN', {
+			day: '2-digit',
+			month: '2-digit',
+			year: 'numeric',
+		}).format(date);
+
+		const timePart = new Intl.DateTimeFormat('vi-VN', {
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit',
+		}).format(date);
+
+		const result = `${datePart.replaceAll('/', '-')} ${timePart}`;
+		return result;
+	};
 
 	return (
 		<div className="flex-1">
@@ -124,33 +150,7 @@ const Home = () => {
 								{t('no-problem-found')}!
 							</div>
 						) : (
-							<div className="flex my-auto gap-4">
-								<div
-									data-difficulty={newestProblem.difficulty}
-									className="size-16 capitalize flex items-center justify-center text-2xl font-bold data-[difficulty=easy]:bg-green-500 data-[difficulty=medium]:bg-yellow-400 data-[difficulty=hard]:bg-red-500 data-[difficulty=easy]:border-green-500 data-[difficulty=medium]:border-yellow-400 data-[difficulty=hard]:border-red-500 data-[difficulty=easy]:text-green-500 data-[difficulty=medium]:text-yellow-400 data-[difficulty=hard]:text-red-500 border-2 rounded-lg !bg-opacity-30 "
-								>
-									{newestProblem.difficulty[0]}
-								</div>
-								<div className="text-xl dark:text-white flex flex-col justify-around">
-									{newestProblem.name}
-									<div className="flex text-sm dark:text-gray-400 text-gray-500 gap-1">
-										<Star className="size-4" strokeWidth={1}></Star>
-										{newestProblem.point}
-										<CircleCheck className="size-4 ml-2" strokeWidth={1}></CircleCheck>
-										{newestProblem.noOfSubm === 0 ? 0 : Math.round((newestProblem.noOfSuccess / newestProblem.noOfSubm) * 100)}%
-										<MemoryStick className="size-4 ml-2" strokeWidth={1}></MemoryStick>
-										{newestProblem.memoryLimit}MB
-										<Clock9 className="size-4 ml-2" strokeWidth={1}></Clock9>
-										{newestProblem.timeLimit}s
-									</div>
-								</div>
-								<Button asChild className="ml-auto my-auto w-32 h-8 !bg-blue-500 rounded-sm !text-white">
-									<Link to={routesConfig.problem.replace(':id', newestProblem.id)}>
-										<div className="text-xl">{'>'}</div>
-										{t('try-now')}
-									</Link>
-								</Button>
-							</div>
+							<ProblemTab problem={newestProblem?.[0]}></ProblemTab>
 						)}
 					</motion.div>
 					<motion.div
@@ -206,29 +206,81 @@ const Home = () => {
 					</motion.div>
 				</div>
 			</div>
-			<div className="w-full px-20 dark:text-white pt-16 grid grid-cols-2 grid-rows-8 gap-4">
-				<div className="col-span-2 lg:col-span-1 lg:row-span-2">
+			<div className="w-full px-20 dark:text-white pt-16 grid grid-cols-2 grid-rows-6 gap-4 gap-x-8 pb-16">
+				<div className="lg:col-span-2 lg:row-span-3 col-span-2 row-span-2">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('newest-problems')}</h2>
+						<Link to={routesConfig.problems} className="text-2xl dark:text-gray-200 hover:text-blue-500 hover:underline text-gray-800 capitalize">
+							{t('newest-problems')}
+						</Link>
 					</div>
+					{newestProblem?.map((item, index) => (
+						<ProblemTab className="!my-8" size="small" key={index} problem={item}></ProblemTab>
+					))}
 				</div>
-				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-2">
+				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('ongoing-contests')}</h2>
+						<Link to={routesConfig.users} className="text-2xl dark:text-gray-200 text-gray-800 capitalize hover:text-blue-500 hover:underline">
+							{t('top-users')}
+						</Link>
 					</div>
+					<table className="w-full text-gray-500 mt-8 bg-white">
+						<thead className="h-12">
+							<tr className="border border-gray-200">
+								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('top')}</th>
+								<th className="text-start px-4 py-2 font-semibold text-sm capitalize">{t('user')}</th>
+								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('point')}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{standing?.map((item, index) => (
+								<tr key={index} className="border border-gray-200 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800">
+									<td className="text-center">{index + 1}</td>
+									<td>
+										<Link className="hover:text-blue-500 flex items-center gap-2" to={routesConfig.user.replace(':name', item.name)}>
+											<UserAvatar user={item}></UserAvatar>
+											{item.name}
+										</Link>
+									</td>
+									<td className="text-center">{item.totalScore}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
-				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-3">
+				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('top-user')}</h2>
+						<Link to={routesConfig.submissions} className="text-2xl dark:text-gray-200 text-gray-800 capitalize hover:text-blue-500 hover:underline">
+							{t('activities')}
+						</Link>
 					</div>
-				</div>
-				<div className="col-span-2 lg:col-span-1 lg:row-span-2 row-start-4">
-					<div className="flex items-center gap-2">
-						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<h2 className="text-2xl dark:text-gray-200 text-gray-800 capitalize">{t('activities')}</h2>
+					<div className="w-full bg-white mt-8 border  max-h-[390px] border-gray-200 py-3 overflow-auto">
+						{activities?.map((item, index) => (
+							<div key={index} className="h-[62px] w-full flex pb-5 last:!pb-0 last:h-[42px] group">
+								<div>
+									<div className="h-full w-16 relative">
+										<div className="group-first:hidden w-[2px] h-1/2 absolute left-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
+										<div className="group-last:hidden w-[2px] h-[41px] absolute left-1/2 top-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
+										<div className="size-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+									</div>
+									<div className="h-full flex-1"></div>
+								</div>
+								<div className="flex-1 pt-1">
+									<div className="text-sm text-gray-700">
+										<Link to={routesConfig.user.replace(':name', item.author)} className="text-blue-500 font-semibold capitalize">
+											{item.author}
+										</Link>
+										{` ${t('solved-msg')} `}
+										<Link to={routesConfig.problem.replace(':id', item.forProblem)} className="text-blue-500 font-semibold">
+											{item.forProblem}
+										</Link>
+									</div>
+									<div className="text-xs text-gray-400">{formatedDate(new Date(item.createdAt))}</div>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>

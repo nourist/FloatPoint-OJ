@@ -66,18 +66,15 @@ const userSchema = new mongoose.Schema(
 			filterAndSort: function ({ q = '', permission, sortBy, order }) {
 				const regex = new RegExp(q, 'i');
 
-				return this.find({
-					$and: [
-						{
-							$or: [{ name: { $regex: regex } }, { fullname: { $regex: regex } }],
-						},
-						{
-							permission,
-						},
-					],
+				let data = this.find({
+					$or: [{ name: { $regex: regex } }, { fullname: { $regex: regex } }],
 				})
 					.select('-resetPasswordToken -verificationToken -isVerified -password -email')
-					.sort({ [sortBy]: order || 1 });
+					.sort({ [sortBy]: typeof order === 'string' ? Number(order) : order || 1 });
+				if (permission) {
+					data = data.where('permission').equals(permission);
+				}
+				return data;
 			},
 		},
 	},
