@@ -225,9 +225,9 @@ const Home = () => {
 							{t('top-users')}
 						</Link>
 					</div>
-					<table className="w-full text-gray-500 mt-8 bg-white">
+					<table className="w-full text-gray-500 mt-8 bg-white dark:text-gray-200 dark:bg-neutral-800">
 						<thead className="h-12">
-							<tr className="border border-gray-200">
+							<tr className="border border-gray-200 dark:border-neutral-700">
 								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('top')}</th>
 								<th className="text-start px-4 py-2 font-semibold text-sm capitalize">{t('user')}</th>
 								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('point')}</th>
@@ -235,7 +235,10 @@ const Home = () => {
 						</thead>
 						<tbody>
 							{standing?.map((item, index) => (
-								<tr key={index} className="border border-gray-200 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800">
+								<tr
+									key={index}
+									className="border border-gray-200 dark:border-neutral-700 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800 dark:text-gray-100"
+								>
 									<td className="text-center">{index + 1}</td>
 									<td>
 										<Link className="hover:text-blue-500 flex items-center gap-2" to={routesConfig.user.replace(':name', item.name)}>
@@ -256,7 +259,7 @@ const Home = () => {
 							{t('activities')}
 						</Link>
 					</div>
-					<div className="w-full bg-white mt-8 border  max-h-[390px] border-gray-200 py-3 overflow-auto">
+					<div className="w-full bg-white dark:bg-neutral-800 dark:border-neutral-700 mt-8 border max-h-[390px] border-gray-200 py-3 overflow-auto">
 						{activities?.map((item, index) => (
 							<div key={index} className="h-[62px] w-full flex pb-5 last:!pb-0 last:h-[42px] group">
 								<div>
@@ -268,7 +271,7 @@ const Home = () => {
 									<div className="h-full flex-1"></div>
 								</div>
 								<div className="flex-1 pt-1">
-									<div className="text-sm text-gray-700">
+									<div className="text-sm text-gray-700 dark:text-gray-200">
 										<Link to={routesConfig.user.replace(':name', item.author)} className="text-blue-500 font-semibold capitalize">
 											{item.author}
 										</Link>
