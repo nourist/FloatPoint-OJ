@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Countdown from 'react-countdown';
+import { Skeleton } from '~/components/ui/skeleton';
 
 import useAuthStore from '~/stores/authStore';
 import UserAvatar from '~/components/UserAvatar';
@@ -27,29 +28,34 @@ const Home = () => {
 	const [currentContest, setCurrentContest] = useState();
 	const [statistic, setStatistic] = useState({});
 	const [activities, setActivities] = useState([]);
+	const [loading, setLoading] = useState(0);
 
 	useEffect(() => {
+		if (!user) return;
+		setLoading(4);
 		getProblems({ size: 5, sortBy: 'createdAt', order: -1 })
-			.then((res) => {
-				setNewestProblem(res.data);
-			})
-			.catch((err) => toast.error(err.response.data.msg));
-		if (user?.joiningContest)
-			getContest(user?.joiningContest)
-				.then((res) => {
-					setCurrentContest(res.data);
-				})
-				.catch((err) => toast.error(err.response.data.msg));
-		if (user)
-			getSubmissions({ author: user?.name })
-				.then((res) => setStatistic(res.stat.status))
-				.catch((err) => toast.error(err.response.data.msg));
+			.then((res) => setNewestProblem(res.data))
+			.catch((err) => toast.error(err.response.data.msg))
+			.finally(() => setLoading((prev) => prev - 1));
+		getSubmissions({ author: user?.name })
+			.then((res) => setStatistic(res.stat.status))
+			.catch((err) => toast.error(err.response.data.msg))
+			.finally(() => setLoading((prev) => prev - 1));
 		getUsers({ size: 5, sortBy: 'totalScore', order: -1 })
 			.then((res) => setStanding(res.data))
-			.catch((err) => toast.error(err.response.data.msg));
+			.catch((err) => toast.error(err.response.data.msg))
+			.finally(() => setLoading((prev) => prev - 1));
 		getSubmissions({ sortBy: 'createdAt', order: -1, size: 15, status: 'AC' })
 			.then((res) => setActivities(res.data))
-			.catch((err) => toast.error(err.response.data.msg));
+			.catch((err) => toast.error(err.response.data.msg))
+			.finally(() => setLoading((prev) => prev - 1));
+		if (user?.joiningContest) {
+			setLoading((prev) => prev + 1);
+			getContest(user?.joiningContest)
+				.then((res) => setCurrentContest(res.data))
+				.catch((err) => toast.error(err.response.data.msg))
+				.finally(() => setLoading((prev) => prev - 1));
+		}
 	}, [user]);
 
 	const formatedDate = (date) => {
@@ -150,7 +156,7 @@ const Home = () => {
 								{t('no-problem-found')}!
 							</div>
 						) : (
-							<ProblemTab problem={newestProblem?.[0]}></ProblemTab>
+							<ProblemTab loading={loading != 0} problem={newestProblem?.[0]}></ProblemTab>
 						)}
 					</motion.div>
 					<motion.div
@@ -173,7 +179,11 @@ const Home = () => {
 										>
 											{currentContest?.title}
 										</Link>
-										<Countdown className="dark:text-slate-400 text-slate-500" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
+										{loading == 0 ? (
+											<Countdown className="dark:text-slate-400 text-slate-500" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
+										) : (
+											<Skeleton className="h-6 w-24"></Skeleton>
+										)}
 									</div>
 								</>
 							)}
@@ -199,7 +209,8 @@ const Home = () => {
 							}).map((item, index) => (
 								<div key={index} className="flex items-center gap-1 dark:text-gray-200">
 									<div style={{ backgroundColor: item[1] }} className="size-5"></div>
-									<span className="dark:text-gray-400 uppercase text-gray-600">{item[0]}</span>:<span className="dark:text-white">{statistic[index] || 0}</span>
+									<span className="dark:text-gray-400 uppercase text-gray-600">{item[0]}</span>:
+									<span className="dark:text-white">{statistic[index] === 0 ? 0 : statistic[index] || <Skeleton className="h-6 w-4 rounded-sm"></Skeleton>}</span>
 								</div>
 							))}
 						</div>
@@ -214,9 +225,17 @@ const Home = () => {
 							{t('newest-problems')}
 						</Link>
 					</div>
-					{newestProblem?.map((item, index) => (
-						<ProblemTab className="!my-8" size="small" key={index} problem={item}></ProblemTab>
-					))}
+					{loading === 0 ? (
+						newestProblem?.map((item, index) => <ProblemTab className="!my-8" size="small" key={index} problem={item}></ProblemTab>)
+					) : (
+						<>
+							<ProblemTab className="!my-8" size="small" loading={true}></ProblemTab>
+							<ProblemTab className="!my-8" size="small" loading={true}></ProblemTab>
+							<ProblemTab className="!my-8" size="small" loading={true}></ProblemTab>
+							<ProblemTab className="!my-8" size="small" loading={true}></ProblemTab>
+							<ProblemTab className="!my-8" size="small" loading={true}></ProblemTab>
+						</>
+					)}
 				</div>
 				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
 					<div className="flex items-center gap-2">
@@ -225,32 +244,36 @@ const Home = () => {
 							{t('top-users')}
 						</Link>
 					</div>
-					<table className="w-full text-gray-500 mt-8 bg-white dark:text-gray-200 dark:bg-neutral-800">
-						<thead className="h-12">
-							<tr className="border border-gray-200 dark:border-neutral-700">
-								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('top')}</th>
-								<th className="text-start px-4 py-2 font-semibold text-sm capitalize">{t('user')}</th>
-								<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('point')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{standing?.map((item, index) => (
-								<tr
-									key={index}
-									className="border border-gray-200 dark:border-neutral-700 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800 dark:text-gray-100"
-								>
-									<td className="text-center">{index + 1}</td>
-									<td>
-										<Link className="hover:text-blue-500 flex items-center gap-2" to={routesConfig.user.replace(':name', item.name)}>
-											<UserAvatar user={item}></UserAvatar>
-											{item.name}
-										</Link>
-									</td>
-									<td className="text-center">{item.totalScore}</td>
+					{loading === 0 ? (
+						<table className="w-full text-gray-500 mt-8 bg-white dark:text-gray-200 dark:bg-neutral-800">
+							<thead className="h-12">
+								<tr className="border border-gray-200 dark:border-neutral-700">
+									<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('top')}</th>
+									<th className="text-start px-4 py-2 font-semibold text-sm capitalize">{t('user')}</th>
+									<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('point')}</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{standing?.map((item, index) => (
+									<tr
+										key={index}
+										className="border border-gray-200 dark:border-neutral-700 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800 dark:text-gray-100"
+									>
+										<td className="text-center">{index + 1}</td>
+										<td>
+											<Link className="hover:text-blue-500 flex items-center gap-2" to={routesConfig.user.replace(':name', item.name)}>
+												<UserAvatar user={item}></UserAvatar>
+												{item.name}
+											</Link>
+										</td>
+										<td className="text-center">{item.totalScore}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					) : (
+						<Skeleton className={'h-[368px] mt-8'}></Skeleton>
+					)}
 				</div>
 				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
 					<div className="flex items-center gap-2">
@@ -259,32 +282,36 @@ const Home = () => {
 							{t('activities')}
 						</Link>
 					</div>
-					<div className="w-full bg-white dark:bg-neutral-800 dark:border-neutral-700 mt-8 border max-h-[390px] border-gray-200 py-3 overflow-auto">
-						{activities?.map((item, index) => (
-							<div key={index} className="h-[62px] w-full flex pb-5 last:!pb-0 last:h-[42px] group">
-								<div>
-									<div className="h-full w-16 relative">
-										<div className="group-first:hidden w-[2px] h-1/2 absolute left-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
-										<div className="group-last:hidden w-[2px] h-[41px] absolute left-1/2 top-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
-										<div className="size-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+					{loading === 0 ? (
+						<div className="w-full bg-white dark:bg-neutral-800 dark:border-neutral-700 mt-8 border max-h-[368px] border-gray-200 py-3 overflow-auto">
+							{activities?.map((item, index) => (
+								<div key={index} className="h-[62px] w-full flex pb-5 last:!pb-0 last:h-[42px] group">
+									<div>
+										<div className="h-full w-16 relative">
+											<div className="group-first:hidden w-[2px] h-1/2 absolute left-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
+											<div className="group-last:hidden w-[2px] h-[41px] absolute left-1/2 top-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
+											<div className="size-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+										</div>
+										<div className="h-full flex-1"></div>
 									</div>
-									<div className="h-full flex-1"></div>
-								</div>
-								<div className="flex-1 pt-1">
-									<div className="text-sm text-gray-700 dark:text-gray-200">
-										<Link to={routesConfig.user.replace(':name', item.author)} className="text-blue-500 font-semibold capitalize">
-											{item.author}
-										</Link>
-										{` ${t('solved-msg')} `}
-										<Link to={routesConfig.problem.replace(':id', item.forProblem)} className="text-blue-500 font-semibold">
-											{item.forProblem}
-										</Link>
+									<div className="flex-1 pt-1">
+										<div className="text-sm text-gray-700 dark:text-gray-200">
+											<Link to={routesConfig.user.replace(':name', item.author)} className="text-blue-500 font-semibold capitalize">
+												{item.author}
+											</Link>
+											{` ${t('solved-msg')} `}
+											<Link to={routesConfig.problem.replace(':id', item.forProblem)} className="text-blue-500 font-semibold">
+												{item.forProblem}
+											</Link>
+										</div>
+										<div className="text-xs text-gray-400">{formatedDate(new Date(item.createdAt))}</div>
 									</div>
-									<div className="text-xs text-gray-400">{formatedDate(new Date(item.createdAt))}</div>
 								</div>
-							</div>
-						))}
-					</div>
+							))}
+						</div>
+					) : (
+						<Skeleton className={'h-[368px] mt-8'}></Skeleton>
+					)}
 				</div>
 			</div>
 		</div>
