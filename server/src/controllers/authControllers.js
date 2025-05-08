@@ -5,6 +5,7 @@ import { getTop, getTopPercent } from '../utils/user.js';
 import User from '../models/user.js';
 import { generateTokenAndSetCookie, generateVerificationCode } from '../utils/auth.js';
 import { sendResetPasswordRequestEmail, sendResetPasswordSuccessEmail, sendVerificationEmail, sendWellcomeEmail } from '../mail/emails.js';
+import Contest from '../models/contest.js';
 
 const authControllers = {
 	//[POST] /auth/signup
@@ -264,6 +265,15 @@ const authControllers = {
 			if (!user) {
 				throw new Error('User does not exist');
 			}
+
+			if (user.joiningContest) {
+				const contest = await Contest.findOne({ id: user.joiningContest });
+				if (contest && contest.endTime < Date.now()) {
+					user.joiningContest = null;
+					await user.save();
+				}
+			}
+
 			const top = await getTop(user.name);
 			const topPercent = await getTopPercent(user.name);
 

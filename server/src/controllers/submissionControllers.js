@@ -14,14 +14,6 @@ const submissionControllers = {
 			data = data.map((d) => d.toObject());
 
 			const user = await User.findById(req.userId);
-			// if (contestId) {
-			// 	if (req.userPermission != 'Admin' && user.joiningContest != contestId) {
-			// 		throw new Error('You cant see this content');
-			// 	}
-			// 	data = data.filter((submission) => submission.forContest == contestId);
-			// } else if (req.userPermission != 'Admin') {
-			// 	data = data.filter((submission) => !submission.forContest);
-			// }
 
 			if (user) {
 				data = data.map((item) => {

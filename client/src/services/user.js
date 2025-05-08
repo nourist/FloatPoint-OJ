@@ -9,3 +9,13 @@ export const getUsers = async (option) => {
 		throw err;
 	}
 };
+
+export const getUser = async (userId) => {
+	try {
+		const res = await httpRequest.get(`/user/info/${userId}`);
+		return res.data;
+	} catch (err) {
+		console.error(err);
+		throw err;
+	}
+};

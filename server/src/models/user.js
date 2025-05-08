@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			default: null,
 		},
+		bio: {
+			type: String,
+			default: '',
+		},
 		lastLogin: {
 			type: Date,
 			default: Date.now,

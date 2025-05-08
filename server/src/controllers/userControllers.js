@@ -1,6 +1,8 @@
 import User from '../models/user.js';
 import { getTop } from '../utils/user.js';
 import cloudinary from '../config/cloudinary.js';
+import Submission from '../models/submission.js';
+import Problem from '../models/problem.js';
 
 const userControllers = {
 	//[GET] /user
@@ -37,7 +39,31 @@ const userControllers = {
 
 			const top = await getTop(user.name);
 
-			res.status(200).json({ success: true, data: { ...user._doc, top } });
+			const submissions = await Submission.filter({ author: user.name });
+			const map = new Map();
+			submissions.forEach((item) => {
+				if (map.has(item.forProblem)) {
+					if (item.status === 'AC') {
+						map.set(item.forProblem, 'Accepted');
+					}
+				} else {
+					map.set(item.forProblem, item.status === 'AC' ? 'Accepted' : 'Attempted');
+				}
+			});
+			const problems = await Problem.find();
+			const problemDifficulty = new Map();
+			problems.forEach((item) => {
+				problemDifficulty.set(item.id, item.difficulty);
+			});
+
+			res.status(200).json({
+				success: true,
+				data: { ...user._doc, top },
+				problems: Array.from(map, ([key, value]) => [key, value, problemDifficulty.get(key)]).reduce(
+					(acc, [key, value, difficulty]) => ({ ...acc, [key]: { status: value, difficulty } }),
+					{},
+				),
+			});
 
 			console.log(`Get user "${name}" successfull`);
 		} catch (err) {
