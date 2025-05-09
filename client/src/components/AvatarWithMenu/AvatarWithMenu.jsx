@@ -58,17 +58,17 @@ const AvatarWithMenu = () => {
 					{[
 						{
 							title: t('problem'),
-							path: routesConfig.problem,
+							path: `${routesConfig.user.replace(':name', user.name)}?tab=2`,
 							img: list,
 						},
 						{
 							title: t('submission'),
-							path: routesConfig.submission,
+							path: `${routesConfig.user.replace(':name', user.name)}?tab=3`,
 							img: answer,
 						},
 						{
 							title: t('contest'),
-							path: routesConfig.contest,
+							path: `${routesConfig.user.replace(':name', user.name)}?tab=4`,
 							img: contest,
 						},
 					].map((item, index) => (

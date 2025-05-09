@@ -52,15 +52,17 @@ const userControllers = {
 			});
 			const problems = await Problem.find();
 			const problemDifficulty = new Map();
+			const problemName = new Map();
 			problems.forEach((item) => {
 				problemDifficulty.set(item.id, item.difficulty);
+				problemName.set(item.id, item.name);
 			});
 
 			res.status(200).json({
 				success: true,
 				data: { ...user._doc, top },
-				problems: Array.from(map, ([key, value]) => [key, value, problemDifficulty.get(key)]).reduce(
-					(acc, [key, value, difficulty]) => ({ ...acc, [key]: { status: value, difficulty } }),
+				problems: Array.from(map, ([key, value]) => [key, value, problemDifficulty.get(key), problemName.get(key)]).reduce(
+					(acc, [key, value, difficulty, name]) => ({ ...acc, [key]: { status: value, difficulty, name } }),
 					{},
 				),
 			});

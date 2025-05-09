@@ -4,5 +4,11 @@
 	"score": "score",
 	"solved": "solved",
 	"submissions": "submissions",
-	"about-me": "about me"
+	"about-me": "about me",
+	"accepted": "accepted",
+	"attempting": "attempting",
+	"hard": "hard",
+	"easy": "easy",
+	"medium": "medium",
+	"problems": "problems"
 }
