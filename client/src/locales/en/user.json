@@ -10,5 +10,9 @@
 	"hard": "hard",
 	"easy": "easy",
 	"medium": "medium",
-	"problems": "problems"
+	"problems": "problems",
+	"participants": "participants",
+	"user-rank": "user rank",
+	"problem": "problem",
+	"user": "user"
 }

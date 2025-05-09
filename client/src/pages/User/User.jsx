@@ -17,6 +17,7 @@ import ContestImg from '~/assets/images/contest.png';
 import markdownComponents from '~/config/markdownComponents';
 import ProblemPanel from '~/components/ProblemPanel';
 import routesConfig from '~/config/routes';
+import ContestCard from '~/components/ContestCard';
 
 const User = () => {
 	const { name } = useParams();
@@ -93,17 +94,19 @@ const User = () => {
 
 			<div className="flex-1 bg-white dark:bg-neutral-800 rounded-lg shadow p-4">
 				<Tabs defaultValue={searchParams.get('tab') || '1'} className="w-full h-full">
-					<TabsList className="mb-4 h-14 gap-6 !bg-zinc-900">
-						<TabsTrigger className="h-12 w-16 p-1 data-[state=active]:!bg-neutral-700" value="1">
+					<TabsList className="mb-4 h-14 gap-6 dark:!bg-zinc-900">
+						<TabsTrigger className="h-12 w-16 p-1 dark:data-[state=active]:!bg-neutral-700" value="1">
 							{loading ? <Skeleton className={'size-8 rounded-full'}></Skeleton> : <UserAvatar user={user}></UserAvatar>}
 						</TabsTrigger>
-						<TabsTrigger className="h-12 w-16 p-1 data-[state=active]:!bg-neutral-700" value="2">
+						<TabsTrigger className="h-12 w-16 p-1 dark:data-[state=active]:!bg-neutral-700" value="2">
 							<img src={ProblemImg} alt="problem" className="size-8" />
 						</TabsTrigger>
-						<TabsTrigger className="h-12 w-16 p-1 data-[state=active]:!bg-neutral-700" value="3">
-							<img src={SubmissionImg} alt="submission" className="size-8" />
+						<TabsTrigger className="h-12 w-16 p-1 dark:data-[state=active]:!bg-neutral-700" asChild value="3">
+							<Link to={`${routesConfig.submissions}?author=${name}`}>
+								<img src={SubmissionImg} alt="submission" className="size-8" />
+							</Link>
 						</TabsTrigger>
-						<TabsTrigger className="h-12 w-16 p-1 data-[state=active]:!bg-neutral-700" value="4">
+						<TabsTrigger className="h-12 w-16 p-1 dark:data-[state=active]:!bg-neutral-700" value="4">
 							<img src={ContestImg} alt="contest" className="size-8" />
 						</TabsTrigger>
 					</TabsList>
@@ -174,8 +177,13 @@ const User = () => {
 							</div>
 						</div>
 					</TabsContent>
-					<TabsContent value="3"></TabsContent>
-					<TabsContent value="4"></TabsContent>
+					<TabsContent value="4">
+						<div className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-4">
+							{user?.joinedContest?.map((contest, index) => (
+								<ContestCard key={index} id={contest} username={name}></ContestCard>
+							))}
+						</div>
+					</TabsContent>
 				</Tabs>
 			</div>
 		</div>

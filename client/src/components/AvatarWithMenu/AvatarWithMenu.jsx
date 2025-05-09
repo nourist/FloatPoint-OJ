@@ -63,7 +63,7 @@ const AvatarWithMenu = () => {
 						},
 						{
 							title: t('submission'),
-							path: `${routesConfig.user.replace(':name', user.name)}?tab=3`,
+							path: `${routesConfig.submissions}?author=${user.name}`,
 							img: answer,
 						},
 						{
