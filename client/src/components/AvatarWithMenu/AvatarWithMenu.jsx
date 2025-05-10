@@ -92,7 +92,7 @@ const AvatarWithMenu = () => {
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400">
-						<Link>
+						<Link to={routesConfig.setting}>
 							<Settings></Settings>
 							{t('setting')}
 						</Link>

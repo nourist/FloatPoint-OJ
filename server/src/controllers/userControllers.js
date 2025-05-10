@@ -75,6 +75,25 @@ const userControllers = {
 		}
 	},
 
+	//[GET] /user/edit
+	async edit(req, res, next) {
+		try {
+			const user = await User.findByIdAndUpdate(req.userId, req.body, { new: true });
+
+			res.status(200).json({
+				success: true,
+				msg: 'Edit user successfull',
+				data: user._doc,
+			});
+
+			console.log(`Edit user successfull`);
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in edit user: ${err.message}`);
+		}
+	},
+
 	//[POST] /user/change-avatar
 	async changeAvatar(req, res, next) {
 		try {

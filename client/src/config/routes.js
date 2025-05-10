@@ -17,6 +17,8 @@ const routesConfig = {
 	contests: '/contests',
 	user: '/user/:name',
 	users: '/users',
+	setting: '/setting',
+	avatarChange: '/avatar-change',
 };
 
 export default routesConfig;

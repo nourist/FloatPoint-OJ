@@ -18,6 +18,7 @@ import VerifyEmail from '~/pages/VerifyEmail';
 import ForgotPassword from '~/pages/ForgotPassword';
 import ResetPassword from '~/pages/ResetPassword';
 import SendVerifyCode from '~/pages/SendVerifyCode';
+import Setting from '~/pages/Setting';
 
 const routes = [
 	{
@@ -112,6 +113,11 @@ const routes = [
 	{
 		path: routesConfig.submit,
 		page: Submit,
+		type: 'auth',
+	},
+	{
+		path: routesConfig.setting,
+		page: Setting,
 		type: 'auth',
 	},
 ];
