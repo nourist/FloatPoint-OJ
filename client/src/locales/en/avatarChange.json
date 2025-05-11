@@ -1,0 +1,11 @@
+{
+	"change-your-avatar": "Change your avatar",
+	"upload-a-file": "Upload a file",
+	"drag-and-drop": "or Drag and drop",
+	"file-msg": "PNG, JPG, JPEG up to 10MB",
+	"success-msg": "Successfully changed your avatar",
+	"error-msg": "Error changing your avatar",
+	"change": "change",
+	"avatar-warn": "Your avatar may be take very long time to apply",
+	"set-to-default": "Set to default"
+}

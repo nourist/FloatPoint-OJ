@@ -12,7 +12,7 @@ const LayoutFooter = () => {
 			<div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
 				<div className="text-center sm:text-left">
 					<h2 className="text-lg dark:text-gray-100 text-gray-700 font-medium">My Online Judge</h2>
-					<p className="text-sm">© 2025 Hồ Đình Vỹ. All rights reserved.</p>
+					<p className="text-sm">© 2025 Nourist. All rights reserved.</p>
 				</div>
 				<div className="flex gap-4 mt-4 sm:mt-0">
 					<Dialog>

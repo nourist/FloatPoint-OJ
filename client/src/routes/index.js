@@ -19,6 +19,7 @@ import ForgotPassword from '~/pages/ForgotPassword';
 import ResetPassword from '~/pages/ResetPassword';
 import SendVerifyCode from '~/pages/SendVerifyCode';
 import Setting from '~/pages/Setting';
+import AvatarChange from '~/pages/AvatarChange';
 
 const routes = [
 	{
@@ -118,6 +119,11 @@ const routes = [
 	{
 		path: routesConfig.setting,
 		page: Setting,
+		type: 'auth',
+	},
+	{
+		path: routesConfig.avatarChange,
+		page: AvatarChange,
 		type: 'auth',
 	},
 ];

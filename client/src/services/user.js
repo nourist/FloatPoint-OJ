@@ -32,3 +32,17 @@ export const editUser = async (data) => {
 		throw err;
 	}
 };
+
+export const changeAvatar = async (img) => {
+	try {
+		const { reload } = useAuthStore.getState();
+		const formData = new FormData();
+		formData.append('file', img);
+		const res = await httpRequest.post('/user/change-avatar', formData);
+		await reload();
+		return res.data;
+	} catch (err) {
+		console.error(err);
+		throw err;
+	}
+};

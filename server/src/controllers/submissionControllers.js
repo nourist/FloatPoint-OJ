@@ -149,7 +149,7 @@ const submissionControllers = {
 				}
 			}
 
-			const response = await axios.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL });
+			const response = await axios.post(`/judge`, { src, problem, language }, { baseURL: process.env.JUDGER_URL || 'http://localhost:8090' });
 
 			const submission = new Submission({
 				author: user.name,
