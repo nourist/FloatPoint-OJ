@@ -1,6 +1,6 @@
 # Float-Point
-![License: MIT](https://img.shields.io/github/license/nourist/Float-Point)
 ![Issues](https://img.shields.io/github/issues/nourist/Float-Point)
+![Watchers](https://img.shields.io/github/watchers/nourist/Float-Point?style=social)
 ![Stars](https://img.shields.io/github/stars/nourist/Float-Point?style=social)
 
 A web application for online judge(algorithm questions), build with MERN stack(MongoDB, Express, React and NodeJs).
