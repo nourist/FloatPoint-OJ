@@ -1,1 +1,13 @@
-{"id":"id","submit":"nộp","submissions":"bài nộp","point":"điểm","time-limit":"giới hạn thời gian","memory-limit":"giới hạn bộ nhớ","difficulty":"độ khó","easy":"dễ","medium":"trung bình","hard":"khó","tags":"thẻ"}
+{
+	"id": "id",
+	"submit": "nộp",
+	"submissions": "bài nộp",
+	"point": "điểm",
+	"time-limit": "giới hạn thời gian",
+	"memory-limit": "giới hạn bộ nhớ",
+	"difficulty": "độ khó",
+	"easy": "dễ",
+	"medium": "trung bình",
+	"hard": "khó",
+	"tags": "thẻ"
+}

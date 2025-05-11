@@ -1,1 +1,26 @@
-{"title":"Tạo tài khoản","username-required":"Vui lòng nhập tên người dùng","email-required":"Vui lòng nhập email","password-required":"Vui lòng nhập mật khẩu","username-error":"Vui lòng nhập tên người dùng hợp lệ","email-error":"Vui lòng nhập email hợp lệ","password-error":"Vui lòng nhập mật khẩu mạnh","username":"Tên người dùng","email":"Email","password":"Mật khẩu","signup":"Đăng ký","login":"Đăng nhập","already-have-account":"Đã có tài khoản?","password-strength":"Độ mạnh mật khẩu","password-criteria-1":"Ít nhất 6 ký tự","password-criteria-2":"Chứa chữ cái hoa","password-criteria-3":"Chứa chữ cái thường","password-criteria-4":"Chứa số","password-criteria-5":"Chứa ký tự đặc biệt","password-strong-1":"Rất yếu","password-strong-2":"Yếu","password-strong-3":"Khá","password-strong-4":"Tốt","password-strong-5":"Mạnh"}
+{
+	"title": "Tạo tài khoản",
+	"username-required": "Vui lòng nhập tên người dùng",
+	"email-required": "Vui lòng nhập email",
+	"password-required": "Vui lòng nhập mật khẩu",
+	"username-error": "Vui lòng nhập tên người dùng hợp lệ",
+	"email-error": "Vui lòng nhập email hợp lệ",
+	"password-error": "Vui lòng nhập mật khẩu mạnh",
+	"username": "Tên người dùng",
+	"email": "Email",
+	"password": "Mật khẩu",
+	"signup": "Đăng ký",
+	"login": "Đăng nhập",
+	"already-have-account": "Đã có tài khoản?",
+	"password-strength": "Độ mạnh mật khẩu",
+	"password-criteria-1": "Ít nhất 6 ký tự",
+	"password-criteria-2": "Chứa chữ cái hoa",
+	"password-criteria-3": "Chứa chữ cái thường",
+	"password-criteria-4": "Chứa số",
+	"password-criteria-5": "Chứa ký tự đặc biệt",
+	"password-strong-1": "Rất yếu",
+	"password-strong-2": "Yếu",
+	"password-strong-3": "Khá",
+	"password-strong-4": "Tốt",
+	"password-strong-5": "Mạnh"
+}

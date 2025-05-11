@@ -1,1 +1,26 @@
-{"profile":"hồ sơ","profile-warn":"Thông tin này sẽ được hiển thị công khai nên hãy cẩn thận với những gì bạn chia sẻ.","fullname":"họ và tên","fullname-msg":"Nhập họ và tên của bạn.","required":"bắt buộc","about":"về tôi","about-msg":"Viết vài câu về bản thân.","avatar":"ảnh đại diện","personal-information":"thông tin cá nhân","personal-warn":"Thông tin này là riêng tư.","change":"thay đổi","default-language":"ngôn ngữ mặc định","default-language-msg":"Đây là ngôn ngữ mặc định khi bạn nộp mã.","language":"ngôn ngữ","language-msg":"Chọn ngôn ngữ ưa thích của bạn.","theme":"chủ đề","theme-msg":"Chọn chủ đề bạn ưa thích.","change-password":"thay đổi mật khẩu","light":"sáng","dark":"tối","system":"hệ thống","password-success":"Vui lòng kiểm tra hộp thư của bạn để nhận liên kết đặt lại mật khẩu!","save":"lưu","success-msg":"Hồ sơ của bạn đã được cập nhật thành công."}
+{
+	"profile": "hồ sơ",
+	"profile-warn": "Thông tin này sẽ được hiển thị công khai nên hãy cẩn thận với những gì bạn chia sẻ.",
+	"fullname": "họ và tên",
+	"fullname-msg": "Nhập họ và tên của bạn.",
+	"required": "bắt buộc",
+	"about": "về tôi",
+	"about-msg": "Viết vài câu về bản thân.",
+	"avatar": "ảnh đại diện",
+	"personal-information": "thông tin cá nhân",
+	"personal-warn": "Thông tin này là riêng tư.",
+	"change": "thay đổi",
+	"default-language": "ngôn ngữ mặc định",
+	"default-language-msg": "Đây là ngôn ngữ mặc định khi bạn nộp mã.",
+	"language": "ngôn ngữ",
+	"language-msg": "Chọn ngôn ngữ ưa thích của bạn.",
+	"theme": "chủ đề",
+	"theme-msg": "Chọn chủ đề bạn ưa thích.",
+	"change-password": "thay đổi mật khẩu",
+	"light": "sáng",
+	"dark": "tối",
+	"system": "hệ thống",
+	"password-success": "Vui lòng kiểm tra hộp thư của bạn để nhận liên kết đặt lại mật khẩu!",
+	"save": "lưu",
+	"success-msg": "Hồ sơ của bạn đã được cập nhật thành công."
+}

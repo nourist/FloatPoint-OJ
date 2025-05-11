@@ -1,0 +1,8 @@
+FROM node:18-alpine
+
+WORKDIR /app
+COPY server ./server
+RUN cd server && npm install --legacy-peer-deps
+
+EXPOSE 8080
+CMD ["npm", "--prefix", "server", "start"]

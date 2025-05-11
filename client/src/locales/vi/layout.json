@@ -1,1 +1,19 @@
-{"home":"Trang chủ","problem":"Bài tập","submission":"Bài nộp","contest":"Cuộc thi","user":"Người dùng","login":"Đăng nhập","editor":"Trình soạn thảo","setting":"Cài đặt","appearance":"Giao diện","language":"Ngôn ngữ","log-out":"Đăng xuất","light":"Sáng","dark":"Tối","system":"Hệ thống","oops":"Ôi!","no-mail":"Rất tiếc, tôi sẽ không tiết lộ thông tin của mình.","close":"đóng"}
+{
+	"home": "Trang chủ",
+	"problem": "Bài tập",
+	"submission": "Bài nộp",
+	"contest": "Cuộc thi",
+	"user": "Người dùng",
+	"login": "Đăng nhập",
+	"editor": "Trình soạn thảo",
+	"setting": "Cài đặt",
+	"appearance": "Giao diện",
+	"language": "Ngôn ngữ",
+	"log-out": "Đăng xuất",
+	"light": "Sáng",
+	"dark": "Tối",
+	"system": "Hệ thống",
+	"oops": "Ôi!",
+	"no-mail": "Rất tiếc, tôi sẽ không tiết lộ thông tin của mình.",
+	"close": "đóng"
+}

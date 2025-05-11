@@ -6,7 +6,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { loader } from '@monaco-editor/react';
-import blackboard from 'monaco-themes/themes/blackboard.json';
+import blackboard from 'monaco-themes/themes/Blackboard.json';
 
 import './i18n';
 import './assets/css/main.css';

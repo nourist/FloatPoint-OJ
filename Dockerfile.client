@@ -1,0 +1,10 @@
+FROM node:20-alpine
+
+WORKDIR /app
+COPY client ./client
+RUN cd client && npm install && npm run build
+
+RUN npm install -g serve
+
+EXPOSE 5173
+CMD ["serve", "-s", "client/dist", "-l", "5173"]
