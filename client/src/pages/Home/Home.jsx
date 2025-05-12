@@ -77,40 +77,40 @@ const Home = () => {
 
 	return (
 		<div className="flex-1">
-			<div className="lg:h-[90%] h-[100%] w-full bg-white dark:bg-[rgb(27,27,29)] mt-[2px] px-20 pt-12 pb-[88px]">
-				<div className="grid grid-cols-4 grid-rows-4 gap-4 h-full">
+			<div className="mt-[2px] h-[100%] w-full bg-white px-20 pb-[88px] pt-12 lg:h-[90%] dark:bg-[rgb(27,27,29)]">
+				<div className="grid h-full grid-cols-4 grid-rows-4 gap-4">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
-						className="col-span-2 row-span-2 rounded-lg dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)] bg-white shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:row-span-4 lg:col-span-1 py-8 gap-y-4 flex flex-col"
+						className="col-span-2 row-span-2 flex flex-col gap-y-4 rounded-lg bg-white py-8 shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-1 lg:row-span-4 dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)]"
 					>
 						<Link to={routesConfig.user.replace(':name', user.name)}>
-							<UserAvatar className="size-36 mx-auto" user={user}></UserAvatar>
+							<UserAvatar className="mx-auto size-36" user={user}></UserAvatar>
 						</Link>
-						<h2 className="text-xl dark:text-white text-center">{user?.fullname || user?.name}</h2>
+						<h2 className="text-center text-xl dark:text-white">{user?.fullname || user?.name}</h2>
 						<div className="w-full px-8">
 							<div className="flex font-light">
 								<span className="text-sm dark:text-white">{t('better-than')}</span>
-								<span className="text-sm dark:text-white ml-auto">
+								<span className="ml-auto text-sm dark:text-white">
 									<span className="text-blue-500">{100 - user?.topPercent}%</span> {t('user')}
 								</span>
 							</div>
-							<div className="dark:bg-[rgb(33,33,37)] bg-gray-200 h-2 w-full">
-								<div className={`bg-[#0066B8] h-full`} style={{ width: `${100 - user?.topPercent}%` }}></div>
+							<div className="h-2 w-full bg-gray-200 dark:bg-[rgb(33,33,37)]">
+								<div className={`h-full bg-[#0066B8]`} style={{ width: `${100 - user?.topPercent}%` }}></div>
 							</div>
 						</div>
-						<div className="h-28 w-full flex px-8 mt-auto">
-							<span className="dark:bg-[rgb(33,33,37)] bg-slate-200 bg-opacity-60 flex-1 h-full flex flex-col justify-between py-5">
+						<div className="mt-auto flex h-28 w-full px-8">
+							<span className="flex h-full flex-1 flex-col justify-between bg-slate-200 bg-opacity-60 py-5 dark:bg-[rgb(33,33,37)]">
 								<Trophy className="mx-auto"></Trophy>
-								<h3 className="text-2xl dark:text-white text-center">{user?.top}</h3>
+								<h3 className="text-center text-2xl dark:text-white">{user?.top}</h3>
 							</span>
-							<span className="mx-8 my-auto border dark:border-neutral-700 h-3/4"></span>
-							<span className="dark:bg-[rgb(33,33,37)] bg-slate-200 bg-opacity-60 flex-1 h-full flex flex-col justify-between py-5">
+							<span className="mx-8 my-auto h-3/4 border dark:border-neutral-700"></span>
+							<span className="flex h-full flex-1 flex-col justify-between bg-slate-200 bg-opacity-60 py-5 dark:bg-[rgb(33,33,37)]">
 								<div className="text-center">
 									<FontAwesomeIcon className="size-8 text-[#0066B8]" icon="fa-solid fa-star" />
 								</div>
-								<h3 className="text-2xl dark:text-white text-center">{user?.totalScore}</h3>
+								<h3 className="text-center text-2xl dark:text-white">{user?.totalScore}</h3>
 							</span>
 						</div>
 					</motion.div>
@@ -118,23 +118,23 @@ const Home = () => {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
-						className="flex flex-col items-center gap-4 py-8 col-span-2 row-span-2 col-start-3 rounded-lg dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)] bg-white shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:row-span-4 lg:col-span-1"
+						className="col-span-2 col-start-3 row-span-2 flex flex-col items-center gap-4 rounded-lg bg-white py-8 shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-1 lg:row-span-4 dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)]"
 					>
-						<h2 className="text-xl dark:text-white capitalize">{t('statistics')}</h2>
-						<div className="w-[200px] h-[200px] my-2 flex flex-col items-center justify-center border-8 rounded-full dark:border-zinc-700">
-							<div className="text-4xl dark:text-white ">{user?.totalAttempt}</div>
-							<div className="dark:text-gray-400 text-gray-600 capitalize text-sm mt-2">{t('attempted')}</div>
+						<h2 className="text-xl capitalize dark:text-white">{t('statistics')}</h2>
+						<div className="my-2 flex h-[200px] w-[200px] flex-col items-center justify-center rounded-full border-8 dark:border-zinc-700">
+							<div className="text-4xl dark:text-white">{user?.totalAttempt}</div>
+							<div className="mt-2 text-sm capitalize text-gray-600 dark:text-gray-400">{t('attempted')}</div>
 						</div>
 						<div className="flex items-center gap-4 capitalize dark:text-white">
-							<div className="w-4 h-4 rounded-full bg-green-500"></div>
+							<div className="h-4 w-4 rounded-full bg-green-500"></div>
 							{t('finished')}
-							<div className="h-[2px] w-4 dark:bg-white bg-gray-600"></div>
+							<div className="h-[2px] w-4 bg-gray-600 dark:bg-white"></div>
 							{user?.totalAC}
 						</div>
 						<div className="flex items-center gap-4 capitalize dark:text-white">
-							<div className="w-4 h-4 rounded-full bg-red-500"></div>
-							<div className="dark:text-gray-400 text-gray-600">{t('unfinished')}</div>
-							<div className="h-[2px] w-4 dark:bg-white bg-gray-600"></div>
+							<div className="h-4 w-4 rounded-full bg-red-500"></div>
+							<div className="text-gray-600 dark:text-gray-400">{t('unfinished')}</div>
+							<div className="h-[2px] w-4 bg-gray-600 dark:bg-white"></div>
 							{user?.totalAC}
 						</div>
 					</motion.div>
@@ -142,16 +142,16 @@ const Home = () => {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
-						className="col-span-4 row-start-3 py-8 px-12 rounded-lg flex flex-col dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)] bg-white shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-2 lg:row-span-2"
+						className="col-span-4 row-start-3 flex flex-col rounded-lg bg-white px-12 py-8 shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-2 lg:row-span-2 dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)]"
 					>
 						<div className="flex">
-							<h2 className="text-2xl dark:text-white capitalize">{t('newest-problem')}</h2>
-							<Link to={routesConfig.problems} className="ml-auto text-blue-600 hover:underline capitalize text-sm">
+							<h2 className="text-2xl capitalize dark:text-white">{t('newest-problem')}</h2>
+							<Link to={routesConfig.problems} className="ml-auto text-sm capitalize text-blue-600 hover:underline">
 								{t('view-more')}
 							</Link>
 						</div>
 						{!newestProblem ? (
-							<div className="flex flex-1 text-sm items-center capitalize justify-center flex-col dark:text-gray-300 gap-2">
+							<div className="flex flex-1 flex-col items-center justify-center gap-2 text-sm capitalize dark:text-gray-300">
 								<h2 className="text-2xl dark:text-white">{'(╯°□°）╯︵ ┻━┻'}</h2>
 								{t('no-problem-found')}!
 							</div>
@@ -163,24 +163,24 @@ const Home = () => {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
-						className="col-span-2 row-start-4 py-6 px-12 rounded-lg flex flex-col dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)] bg-white shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:row-span-2 lg:col-start-3 lg:row-start-3 lg:col-span-1"
+						className="col-span-2 row-start-4 flex flex-col rounded-lg bg-white px-12 py-6 shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-1 lg:col-start-3 lg:row-span-2 lg:row-start-3 dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)]"
 					>
-						<h2 className="text-2xl dark:text-white capitalize">{t('current-contest')}</h2>
+						<h2 className="text-2xl capitalize dark:text-white">{t('current-contest')}</h2>
 						<div className="flex flex-1 items-center justify-center gap-4">
 							{!user.joiningContest ? (
 								<h3 className="dark:text-gray-400">{t('no-contest-join-msg')}</h3>
 							) : (
 								<>
 									<img src={Contest} alt="" />
-									<div className="flex-col flex">
+									<div className="flex flex-col">
 										<Link
 											to={routesConfig.contest.replace(':id', user.joiningContest)}
-											className="hover:underline hover:!text-yellow-400 text-lg capitalize dark:text-white"
+											className="text-lg capitalize hover:!text-yellow-400 hover:underline dark:text-white"
 										>
 											{currentContest?.title}
 										</Link>
 										{loading == 0 ? (
-											<Countdown className="dark:text-slate-400 text-slate-500" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
+											<Countdown className="text-slate-500 dark:text-slate-400" date={new Date(currentContest?.endTime) || Date.now()}></Countdown>
 										) : (
 											<Skeleton className="h-6 w-24"></Skeleton>
 										)}
@@ -193,9 +193,9 @@ const Home = () => {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5 }}
-						className="col-span-2 col-start-3 row-start-4 py-6 px-12 rounded-lg dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)] bg-white shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:row-span-2 lg:col-start-4 lg:row-start-3 lg:col-span-1"
+						className="col-span-2 col-start-3 row-start-4 rounded-lg bg-white px-12 py-6 shadow-[0px_0px_7px_rgba(0,70,155,0.2)] lg:col-span-1 lg:col-start-4 lg:row-span-2 lg:row-start-3 dark:bg-zinc-800 dark:shadow-[0px_0px_7px_rgba(0,0,0,0.2)]"
 					>
-						<h2 className="text-2xl dark:text-white capitalize mb-2">{t('your-submissions')}</h2>
+						<h2 className="mb-2 text-2xl capitalize dark:text-white">{t('your-submissions')}</h2>
 
 						<div className="grid grid-cols-2 grid-rows-4 gap-2">
 							{Object.entries({
@@ -209,7 +209,7 @@ const Home = () => {
 							}).map((item, index) => (
 								<div key={index} className="flex items-center gap-1 dark:text-gray-200">
 									<div style={{ backgroundColor: item[1] }} className="size-5"></div>
-									<span className="dark:text-gray-400 uppercase text-gray-600">{item[0]}</span>:
+									<span className="uppercase text-gray-600 dark:text-gray-400">{item[0]}</span>:
 									<span className="dark:text-white">{statistic[index] === 0 ? 0 : statistic[index] || <Skeleton className="h-6 w-4 rounded-sm"></Skeleton>}</span>
 								</div>
 							))}
@@ -217,11 +217,11 @@ const Home = () => {
 					</motion.div>
 				</div>
 			</div>
-			<div className="w-full px-20 dark:text-white pt-16 grid grid-cols-2 grid-rows-6 gap-4 gap-x-8 pb-16">
-				<div className="lg:col-span-2 lg:row-span-3 col-span-2 row-span-2">
+			<div className="grid w-full grid-cols-2 grid-rows-6 gap-4 gap-x-8 px-20 pb-16 pt-16 dark:text-white">
+				<div className="col-span-2 row-span-2 lg:col-span-2 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.problems} className="text-2xl dark:text-gray-200 hover:text-blue-500 hover:underline text-gray-800 capitalize">
+						<Link to={routesConfig.problems} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('newest-problems')}
 						</Link>
 					</div>
@@ -237,31 +237,31 @@ const Home = () => {
 						</>
 					)}
 				</div>
-				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
+				<div className="col-span-2 row-span-2 lg:col-span-1 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.users} className="text-2xl dark:text-gray-200 text-gray-800 capitalize hover:text-blue-500 hover:underline">
+						<Link to={routesConfig.users} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('top-users')}
 						</Link>
 					</div>
 					{loading === 0 ? (
-						<table className="w-full text-gray-500 mt-8 bg-white dark:text-gray-200 dark:bg-neutral-800">
+						<table className="mt-8 w-full bg-white text-gray-500 dark:bg-neutral-800 dark:text-gray-200">
 							<thead className="h-12">
 								<tr className="border border-gray-200 dark:border-neutral-700">
-									<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('top')}</th>
-									<th className="text-start px-4 py-2 font-semibold text-sm capitalize">{t('user')}</th>
-									<th className="w-20 px-4 py-2 font-semibold text-sm capitalize">{t('point')}</th>
+									<th className="w-20 px-4 py-2 text-sm font-semibold capitalize">{t('top')}</th>
+									<th className="px-4 py-2 text-start text-sm font-semibold capitalize">{t('user')}</th>
+									<th className="w-20 px-4 py-2 text-sm font-semibold capitalize">{t('point')}</th>
 								</tr>
 							</thead>
 							<tbody>
 								{standing?.map((item, index) => (
 									<tr
 										key={index}
-										className="border border-gray-200 dark:border-neutral-700 h-16 hover:bg-blue-500 !bg-opacity-5 text-sm text-gray-800 dark:text-gray-100"
+										className="h-16 border border-gray-200 !bg-opacity-5 text-sm text-gray-800 hover:bg-blue-500 dark:border-neutral-700 dark:text-gray-100"
 									>
 										<td className="text-center">{index + 1}</td>
 										<td>
-											<Link className="hover:text-blue-500 flex items-center gap-2" to={routesConfig.user.replace(':name', item.name)}>
+											<Link className="flex items-center gap-2 hover:text-blue-500" to={routesConfig.user.replace(':name', item.name)}>
 												<UserAvatar user={item}></UserAvatar>
 												{item.name}
 											</Link>
@@ -272,35 +272,35 @@ const Home = () => {
 							</tbody>
 						</table>
 					) : (
-						<Skeleton className={'h-[368px] mt-8'}></Skeleton>
+						<Skeleton className={'mt-8 h-[368px]'}></Skeleton>
 					)}
 				</div>
-				<div className="lg:col-span-1 lg:row-span-3 col-span-2 row-span-2">
+				<div className="col-span-2 row-span-2 lg:col-span-1 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.submissions} className="text-2xl dark:text-gray-200 text-gray-800 capitalize hover:text-blue-500 hover:underline">
+						<Link to={routesConfig.submissions} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('activities')}
 						</Link>
 					</div>
 					{loading === 0 ? (
-						<div className="w-full bg-white dark:bg-neutral-800 dark:border-neutral-700 mt-8 border max-h-[368px] border-gray-200 py-3 overflow-auto">
+						<div className="mt-8 max-h-[368px] w-full overflow-auto border border-gray-200 bg-white py-3 dark:border-neutral-700 dark:bg-neutral-800">
 							{activities?.map((item, index) => (
-								<div key={index} className="h-[62px] w-full flex pb-5 last:!pb-0 last:h-[42px] group">
+								<div key={index} className="group flex h-[62px] w-full pb-5 last:h-[42px] last:!pb-0">
 									<div>
-										<div className="h-full w-16 relative">
-											<div className="group-first:hidden w-[2px] h-1/2 absolute left-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
-											<div className="group-last:hidden w-[2px] h-[41px] absolute left-1/2 top-1/2 -translate-x-1/2 bg-blue-200 bg-opacity-50"></div>
-											<div className="size-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+										<div className="relative h-full w-16">
+											<div className="absolute left-1/2 h-1/2 w-[2px] -translate-x-1/2 bg-blue-200 bg-opacity-50 group-first:hidden"></div>
+											<div className="absolute left-1/2 top-1/2 h-[41px] w-[2px] -translate-x-1/2 bg-blue-200 bg-opacity-50 group-last:hidden"></div>
+											<div className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500"></div>
 										</div>
 										<div className="h-full flex-1"></div>
 									</div>
 									<div className="flex-1 pt-1">
 										<div className="text-sm text-gray-700 dark:text-gray-200">
-											<Link to={routesConfig.user.replace(':name', item.author)} className="text-blue-500 font-semibold capitalize">
+											<Link to={routesConfig.user.replace(':name', item.author)} className="font-semibold capitalize text-blue-500">
 												{item.author}
 											</Link>
 											{` ${t('solved-msg')} `}
-											<Link to={routesConfig.problem.replace(':id', item.forProblem)} className="text-blue-500 font-semibold">
+											<Link to={routesConfig.problem.replace(':id', item.forProblem)} className="font-semibold text-blue-500">
 												{item.forProblem}
 											</Link>
 										</div>
@@ -310,7 +310,7 @@ const Home = () => {
 							))}
 						</div>
 					) : (
-						<Skeleton className={'h-[368px] mt-8'}></Skeleton>
+						<Skeleton className={'mt-8 h-[368px]'}></Skeleton>
 					)}
 				</div>
 			</div>

@@ -69,10 +69,10 @@
 	}
 	.dot::after {
 		content: '';
-		@apply bg-red-500 rounded-full w-2 h-2 right-[10%] top-[10%] absolute block;
+		@apply absolute right-[10%] top-[10%] block h-2 w-2 rounded-full bg-red-500;
 	}
 	.input-error {
-		@apply !text-red-500 !ring-red-500 !border-red-500 !caret-red-500 focus-within:!border-red-500 focus-within:!ring-red-500;
+		@apply !border-red-500 !text-red-500 !caret-red-500 !ring-red-500 focus-within:!border-red-500 focus-within:!ring-red-500;
 	}
 }
 

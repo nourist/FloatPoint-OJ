@@ -34,36 +34,36 @@ const Problem = () => {
 	}, [id]);
 
 	return (
-		<div className="flex-1 flex gap-4 px-28 py-4">
-			<div className=" flex-1 dark:bg-neutral-800 bg-white shadow-md rounded-md px-8 py-4">
+		<div className="flex flex-1 gap-4 px-28 py-4">
+			<div className="flex-1 rounded-md bg-white px-8 py-4 shadow-md dark:bg-neutral-800">
 				{loading ? (
 					<div className="space-y-5">
-						<Skeleton className="rounded-xl h-9 w-1/3" />
-						<Skeleton className="rounded-xl h-5 w-3/4" />
-						<Skeleton className="rounded-xl h-5 w-2/3" />
+						<Skeleton className="h-9 w-1/3 rounded-xl" />
+						<Skeleton className="h-5 w-3/4 rounded-xl" />
+						<Skeleton className="h-5 w-2/3 rounded-xl" />
 
 						<div className="space-y-2">
-							<Skeleton className="rounded-xl h-7 w-1/4" />
-							<Skeleton className="rounded-xl h-5 w-full" />
-							<Skeleton className="rounded-xl h-5 w-5/6" />
+							<Skeleton className="h-7 w-1/4 rounded-xl" />
+							<Skeleton className="h-5 w-full rounded-xl" />
+							<Skeleton className="h-5 w-5/6 rounded-xl" />
 						</div>
 
 						<div className="space-y-2">
-							<Skeleton className="rounded-xl h-7 w-1/4" />
-							<Skeleton className="rounded-xl h-5 w-1/2" />
+							<Skeleton className="h-7 w-1/4 rounded-xl" />
+							<Skeleton className="h-5 w-1/2 rounded-xl" />
 						</div>
 
 						<div className="space-y-2">
-							<Skeleton className="rounded-xl h-7 w-1/4" />
-							<Skeleton className="rounded-xl h-5 w-2/3" />
-							<Skeleton className="rounded-xl h-5 w-2/3" />
-							<Skeleton className="rounded-xl h-5 w-2/3" />
+							<Skeleton className="h-7 w-1/4 rounded-xl" />
+							<Skeleton className="h-5 w-2/3 rounded-xl" />
+							<Skeleton className="h-5 w-2/3 rounded-xl" />
+							<Skeleton className="h-5 w-2/3 rounded-xl" />
 						</div>
 
 						<div className="space-y-2">
-							<Skeleton className="rounded-xl h-7 w-1/4" />
-							<Skeleton className="rounded-xl h-5 w-1/6" />
-							<Skeleton className="rounded-xl h-5 w-1/4" />
+							<Skeleton className="h-7 w-1/4 rounded-xl" />
+							<Skeleton className="h-5 w-1/6 rounded-xl" />
+							<Skeleton className="h-5 w-1/4 rounded-xl" />
 						</div>
 					</div>
 				) : (
@@ -71,13 +71,13 @@ const Problem = () => {
 				)}
 			</div>
 			<div className="w-56">
-				<div className="flex h-fit dark:bg-neutral-800 bg-white shadow-md rounded-md mb-4 flex-col p-2 gap-3">
+				<div className="mb-4 flex h-fit flex-col gap-3 rounded-md bg-white p-2 shadow-md dark:bg-neutral-800">
 					{isAuth && (
 						<>
 							<Button asChild>
 								<Link
 									to={`${routesConfig.submit}?problem=${id}`}
-									className="capitalize !bg-sky-400 dark:!bg-blue-500 hover:!bg-sky-500 dark:hover:!bg-blue-400 !text-white"
+									className="!bg-sky-400 capitalize !text-white hover:!bg-sky-500 dark:!bg-blue-500 dark:hover:!bg-blue-400"
 								>
 									{t('submit')}
 								</Link>
@@ -86,43 +86,43 @@ const Problem = () => {
 						</>
 					)}
 					<Button variant="ghost" asChild>
-						<Link to={`${routesConfig.submissions}?problem=${id}`} className="capitalize dark:text-gray-100 dark:hover:!bg-neutral-700 hover:!bg-neutral-100">
+						<Link to={`${routesConfig.submissions}?problem=${id}`} className="capitalize hover:!bg-neutral-100 dark:text-gray-100 dark:hover:!bg-neutral-700">
 							<AlignJustify></AlignJustify>
 							{t('submissions')}
 						</Link>
 					</Button>
 				</div>
-				<div className="flex text-sm dark:text-gray-200 h-fit bg-white dark:bg-neutral-800 shadow-md rounded-md mb-4 flex-col p-4 gap-3">
+				<div className="mb-4 flex h-fit flex-col gap-3 rounded-md bg-white p-4 text-sm shadow-md dark:bg-neutral-800 dark:text-gray-200">
 					{loading ? (
-						<div className="w-50 p-4 rounded-xl bg-muted/20 space-y-4">
+						<div className="w-50 bg-muted/20 space-y-4 rounded-xl p-4">
 							<div className="space-y-2">
-								<Skeleton className="h-4 w-1/2 inline-block" /> {/* ID */}
-								<Skeleton className="h-4 w-1/3 inline-block" /> {/* ID Value */}
+								<Skeleton className="inline-block h-4 w-1/2" /> {/* ID */}
+								<Skeleton className="inline-block h-4 w-1/3" /> {/* ID Value */}
 							</div>
 
 							<div className="space-y-2">
-								<Skeleton className="h-4 w-1/2 inline-block" /> {/* Point label */}
-								<Skeleton className="h-4 w-1/3 inline-block" /> {/* Point value */}
+								<Skeleton className="inline-block h-4 w-1/2" /> {/* Point label */}
+								<Skeleton className="inline-block h-4 w-1/3" /> {/* Point value */}
 							</div>
 
 							<div className="space-y-2">
-								<Skeleton className="h-4 w-1/2 inline-block" /> {/* Difficulty label */}
-								<Skeleton className="h-4 w-1/3 inline-block" /> {/* Difficulty value */}
+								<Skeleton className="inline-block h-4 w-1/2" /> {/* Difficulty label */}
+								<Skeleton className="inline-block h-4 w-1/3" /> {/* Difficulty value */}
 							</div>
 
-							<Skeleton className="h-px w-full bg-border" />
+							<Skeleton className="bg-border h-px w-full" />
 
 							<div className="space-y-2">
-								<Skeleton className="h-4 w-2/3 inline-block" /> {/* Time Limit */}
-								<Skeleton className="h-4 w-1/4 inline-block" /> {/* Time value */}
+								<Skeleton className="inline-block h-4 w-2/3" /> {/* Time Limit */}
+								<Skeleton className="inline-block h-4 w-1/4" /> {/* Time value */}
 							</div>
 
 							<div className="space-y-2">
-								<Skeleton className="h-4 w-2/3 inline-block" /> {/* Memory Limit */}
-								<Skeleton className="h-4 w-1/3 inline-block" /> {/* Memory value */}
+								<Skeleton className="inline-block h-4 w-2/3" /> {/* Memory Limit */}
+								<Skeleton className="inline-block h-4 w-1/3" /> {/* Memory value */}
 							</div>
 
-							<Skeleton className="h-px w-full bg-border" />
+							<Skeleton className="bg-border h-px w-full" />
 
 							<div className="space-y-2">
 								<Skeleton className="h-4 w-1/3" /> {/* Tags */}
@@ -146,7 +146,7 @@ const Problem = () => {
 								<span className="capitalize">{t('difficulty')}</span>
 								<span className="float-right capitalize">{t(problem?.difficulty)}</span>
 							</div>
-							<div className="h-[1px] bg-neutral-500 w-[95%] mx-auto !bg-opacity-40"></div>
+							<div className="mx-auto h-[1px] w-[95%] bg-neutral-500 !bg-opacity-40"></div>
 							<div>
 								<span className="capitalize">{t('time-limit')}</span>
 								<span className="float-right">{problem?.timeLimit}s</span>
@@ -155,11 +155,11 @@ const Problem = () => {
 								<span className="capitalize">{t('memory-limit')}</span>
 								<span className="float-right">{problem?.memoryLimit}MB</span>
 							</div>
-							<div className="h-[1px] bg-neutral-500 w-[95%] mx-auto !bg-opacity-40"></div>
+							<div className="mx-auto h-[1px] w-[95%] bg-neutral-500 !bg-opacity-40"></div>
 							<div className="capitalize">{t('tags')}:</div>
-							<div className="flex-wrap flex gap-2">
+							<div className="flex flex-wrap gap-2">
 								{problem?.tags?.map((item, index) => (
-									<span className="px-2 py-1 dark:bg-neutral-700 bg-neutral-200 rounded-full text-xs cursor-default whitespace-nowrap" key={index}>
+									<span className="cursor-default whitespace-nowrap rounded-full bg-neutral-200 px-2 py-1 text-xs dark:bg-neutral-700" key={index}>
 										{item}
 									</span>
 								))}

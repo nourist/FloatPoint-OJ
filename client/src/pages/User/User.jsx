@@ -40,14 +40,14 @@ const User = () => {
 	}, [name]);
 
 	return (
-		<div className="p-6 px-14 flex-1 flex gap-4">
-			<div className="bg-white dark:bg-neutral-800 rounded-lg shadow p-6 py-8 w-64">
+		<div className="flex flex-1 gap-4 p-6 px-14">
+			<div className="w-64 rounded-lg bg-white p-6 py-8 shadow dark:bg-neutral-800">
 				{loading ? (
 					<>
 						<div className="flex flex-col items-center text-center">
-							<Skeleton className="w-28 h-28 rounded-full mb-2" />
-							<Skeleton className="w-32 h-8 mb-1" />
-							<Skeleton className="w-24 h-3" />
+							<Skeleton className="mb-2 h-28 w-28 rounded-full" />
+							<Skeleton className="mb-1 h-8 w-32" />
+							<Skeleton className="h-3 w-24" />
 						</div>
 						<div className="mt-8 space-y-2 text-sm text-gray-700">
 							<Skeleton className="h-5"></Skeleton>
@@ -61,7 +61,7 @@ const User = () => {
 					<>
 						<div className="flex flex-col items-center text-center">
 							<UserAvatar className="size-28" user={user}></UserAvatar>
-							<h2 className="text-xl font-bold mt-2 dark:text-white">{user.fullname}</h2>
+							<h2 className="mt-2 text-xl font-bold dark:text-white">{user.fullname}</h2>
 							<p className="text-sm text-gray-500 dark:text-gray-400">@{user.name}</p>
 						</div>
 						<div className="mt-8 space-y-2 text-sm text-gray-700 dark:text-gray-300">
@@ -92,8 +92,8 @@ const User = () => {
 				)}
 			</div>
 
-			<div className="flex-1 bg-white dark:bg-neutral-800 rounded-lg shadow p-4">
-				<Tabs defaultValue={searchParams.get('tab') || '1'} className="w-full h-full">
+			<div className="flex-1 rounded-lg bg-white p-4 shadow dark:bg-neutral-800">
+				<Tabs defaultValue={searchParams.get('tab') || '1'} className="h-full w-full">
 					<TabsList className="mb-4 h-14 gap-6 dark:!bg-zinc-900">
 						<TabsTrigger className="h-12 w-16 p-1 dark:data-[state=active]:!bg-neutral-700" value="1">
 							{loading ? <Skeleton className={'size-8 rounded-full'}></Skeleton> : <UserAvatar user={user}></UserAvatar>}
@@ -113,14 +113,14 @@ const User = () => {
 
 					<TabsContent value="1">
 						<div className="px-4">
-							<h3 className="text-2xl font-semibold mb-2 capitalize dark:text-gray-100">{t('about-me')}:</h3>
+							<h3 className="mb-2 text-2xl font-semibold capitalize dark:text-gray-100">{t('about-me')}:</h3>
 							<Markdown components={markdownComponents}>{user?.bio}</Markdown>
 						</div>
 					</TabsContent>
 					<TabsContent value="2" className="h-full">
-						<div className="flex-1 flex gap-2">
-							<div className="w-[338px]  gap-1 flex flex-col h-auto">
-								<h3 className="text-sm capitalize font-semibold text-green-500">{t('accepted')}</h3>
+						<div className="flex flex-1 gap-2">
+							<div className="flex h-auto w-[338px] flex-col gap-1">
+								<h3 className="text-sm font-semibold capitalize text-green-500">{t('accepted')}</h3>
 								<ProblemPanel
 									loading={loading}
 									problems={Object.entries(problems)
@@ -129,7 +129,7 @@ const User = () => {
 										// eslint-disable-next-line no-unused-vars
 										.map(([key, item]) => item)}
 								></ProblemPanel>
-								<h3 className="text-sm capitalize mt-5 font-semibold text-orange-500">{t('attempting')}</h3>
+								<h3 className="mt-5 text-sm font-semibold capitalize text-orange-500">{t('attempting')}</h3>
 								<ProblemPanel
 									loading={loading}
 									problems={Object.entries(problems)
@@ -139,9 +139,9 @@ const User = () => {
 										.map(([key, item]) => item)}
 								></ProblemPanel>
 							</div>
-							<div className="flex-1 -mt-20 flex items-center">
+							<div className="-mt-20 flex flex-1 items-center">
 								<div className="h-[90%] w-[1px] border border-gray-200 dark:border-neutral-700"></div>
-								<div className="flex-1 ml-2 h-full space-y-2 overflow-auto">
+								<div className="ml-2 h-full flex-1 space-y-2 overflow-auto">
 									<h2 className="text-xl capitalize dark:text-white">{t('problems')}</h2>
 									{loading ? (
 										<>
@@ -156,7 +156,7 @@ const User = () => {
 											<Link
 												to={routesConfig.problem.replace(':id', id)}
 												key={index}
-												className="h-14 rounded-md px-4 bg-gray-50 dark:bg-neutral-700 dark:border-zinc-700 !bg-opacity-60 border gap-2 border-gray-100 hover:shadow-md transition-all duration-150 hover:cursor-pointer items-center flex"
+												className="flex h-14 items-center gap-2 rounded-md border border-gray-100 bg-gray-50 !bg-opacity-60 px-4 transition-all duration-150 hover:cursor-pointer hover:shadow-md dark:border-zinc-700 dark:bg-neutral-700"
 											>
 												{item.status === 'Accepted' ? (
 													<Check className="size-5 text-green-500"></Check>
@@ -166,7 +166,7 @@ const User = () => {
 												<p className="text-[15px] dark:text-gray-100">{item.name}</p>
 												<p
 													data-diff={item.difficulty}
-													className="capitalize text-sm ml-auto data-[diff=easy]:text-green-500 data-[diff=medium]:text-yellow-500 data-[diff=hard]:text-red-500"
+													className="ml-auto text-sm capitalize data-[diff=easy]:text-green-500 data-[diff=hard]:text-red-500 data-[diff=medium]:text-yellow-500"
 												>
 													{t(item.difficulty)}
 												</p>

@@ -16,7 +16,7 @@ const Pagination = ({ currentPage, setPage, maxPage, className = '' }) => {
 	if (maxPage <= 0) return <></>;
 
 	return (
-		<div className={`flex items-center gap-1 dark:text-gray-100 text-gray-800 ${className}`}>
+		<div className={`flex items-center gap-1 text-gray-800 dark:text-gray-100 ${className}`}>
 			<Button
 				disabled={currentPage == 1}
 				className="mr-4 bg-neutral-200 text-gray-700 hover:bg-neutral-300 dark:!bg-neutral-700 dark:!text-gray-300 dark:hover:!bg-neutral-600"
@@ -28,7 +28,7 @@ const Pagination = ({ currentPage, setPage, maxPage, className = '' }) => {
 			<span className="capitalize">{t('page')}</span> <strong>{currentPage}</strong> {t('of')} <strong>{maxPage}</strong>
 			<Button
 				disabled={currentPage == maxPage}
-				className="ml-4 bg-neutral-200 text-gray-700 hover:bg-neutral-300 dark:!bg-neutral-700 dark:!text-gray-300 dark:hover:!bg-neutral-600 "
+				className="ml-4 bg-neutral-200 text-gray-700 hover:bg-neutral-300 dark:!bg-neutral-700 dark:!text-gray-300 dark:hover:!bg-neutral-600"
 				onClick={() => setPage((prev) => prev + 1)}
 				size="icon"
 			>

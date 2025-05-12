@@ -1,33 +1,33 @@
 version: '3'
 services:
-  client:
-    build:
-      context: .
-      dockerfile: Dockerfile.client
-    ports:
-      - '5173:5173'
-    networks:
-      - app-network
+    client:
+        build:
+            context: .
+            dockerfile: Dockerfile.client
+        ports:
+            - '5173:5173'
+        networks:
+            - app-network
 
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile.server
-    ports:
-      - '8080:8080'
-    networks:
-      - app-network
-    environment:
-      - JUDGER_URL=http://judger:8090
-  judger:
-    build:
-      context: .
-      dockerfile: Dockerfile.judger
-    ports:
-      - '8090:8090'
-    networks:
-      - app-network
+    server:
+        build:
+            context: .
+            dockerfile: Dockerfile.server
+        ports:
+            - '8080:8080'
+        networks:
+            - app-network
+        environment:
+            - JUDGER_URL=http://judger:8090
+    judger:
+        build:
+            context: .
+            dockerfile: Dockerfile.judger
+        ports:
+            - '8090:8090'
+        networks:
+            - app-network
 
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge

@@ -97,8 +97,8 @@ const Contests = () => {
 	}, [currentPage, status, searchValue]);
 
 	return (
-		<div className="flex-1 px-14 pt-8 space-y-4">
-			<div className="w-full flex justify-between">
+		<div className="flex-1 space-y-4 px-14 pt-8">
+			<div className="flex w-full justify-between">
 				<h2 className="text-xl capitalize dark:text-white">{t('all-contests')}</h2>
 				<span className="flex gap-2">
 					<Select
@@ -111,7 +111,7 @@ const Contests = () => {
 						]}
 					></Select>
 					<Search placeholder={t('search-placeholder')} value={search} setValue={setSearch}></Search>
-					<Button onClick={query} className="!bg-sky-400 capitalize !text-white font-light hover:!bg-sky-500">
+					<Button onClick={query} className="!bg-sky-400 font-light capitalize !text-white hover:!bg-sky-500">
 						<RotateCcw></RotateCcw>
 						{t('refresh')}
 					</Button>
@@ -119,20 +119,20 @@ const Contests = () => {
 			</div>
 			<div className="w-full space-y-3">
 				{loading ? (
-					<div className="w-full text-center dark:text-white my-44">{t('loading')}...</div>
+					<div className="my-44 w-full text-center dark:text-white">{t('loading')}...</div>
 				) : (
 					contests.map((item, index) => {
 						const itemstatus = user?.joiningContest === item.id && item.status == 'ongoing' ? 'joined' : item.status;
 						item.startTime = new Date(item.startTime);
 						return (
-							<div className="dark:bg-neutral-800 rounded-md bg-white shadow-sm py-5 px-8 w-full h-[100px] flex" key={index}>
+							<div className="flex h-[100px] w-full rounded-md bg-white px-8 py-5 shadow-sm dark:bg-neutral-800" key={index}>
 								<div className="flex items-center">
-									<img className="size-10 mr-4" src={contestImg} alt="" />
+									<img className="mr-4 size-10" src={contestImg} alt="" />
 									<div className="space-y-1">
-										<Link className="dark:text-white text-lg font-light hover:!text-sky-400 hover:underline" to={routesConfig.contest.replace(':id', item.id)}>
+										<Link className="text-lg font-light hover:!text-sky-400 hover:underline dark:text-white" to={routesConfig.contest.replace(':id', item.id)}>
 											{item.title}
 										</Link>
-										<div className="text-sm flex gap-x-2 dark:text-gray-300">
+										<div className="flex gap-x-2 text-sm dark:text-gray-300">
 											<span className="flex gap-x-1">
 												<Calendar className="size-4 text-sky-500"></Calendar>
 												{`${item.startTime.getFullYear()}-${item.startTime.getMonth() + 1}-${item.startTime.getDate()} ${item.startTime.getHours()}:00`}
@@ -145,10 +145,10 @@ const Contests = () => {
 									</div>
 								</div>
 								<div className="ml-auto flex items-center">
-									<button className="h-8 dark:bg-neutral-700 rounded-sm border flex items-center gap-2 dark:border-neutral-600 text-xs dark:text-white font-light px-2 capitalize">
+									<button className="flex h-8 items-center gap-2 rounded-sm border px-2 text-xs font-light capitalize dark:border-neutral-600 dark:bg-neutral-700 dark:text-white">
 										<div
 											data-status={itemstatus}
-											className="size-3 data-[status=joined]:bg-purple-600 data-[status=ended]:bg-red-500 data-[status=ongoing]:bg-green-500 data-[status=upcoming]:bg-yellow-400 rounded-full"
+											className="size-3 rounded-full data-[status=ended]:bg-red-500 data-[status=joined]:bg-purple-600 data-[status=ongoing]:bg-green-500 data-[status=upcoming]:bg-yellow-400"
 										></div>
 										{itemstatus}
 									</button>

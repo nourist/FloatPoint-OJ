@@ -73,9 +73,9 @@ const Problems = () => {
 	}, [currentPage, sortBy, sortOrder, activeTags, difficulty, searchValue, searchParams]);
 
 	return (
-		<div className="mx-auto mt-8 w-[90%] max-w-[1184px] h-[calc(100%-64px)]">
+		<div className="mx-auto mt-8 h-[calc(100%-64px)] w-[90%] max-w-[1184px]">
 			<ProblemTags setActiveTags={setActiveTags} className="mb-2"></ProblemTags>
-			<div className="h-12 w-full mb-1 flex gap-3">
+			<div className="mb-1 flex h-12 w-full gap-3">
 				<Select
 					setValue={setDifficulty}
 					data={[
@@ -99,29 +99,29 @@ const Problems = () => {
 				<Search value={search} setValue={setSearch} placeholder={t('search-placeholder')}></Search>
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<Button onClick={query} className="rounded-full size-9 p-[10px] !bg-sky-500 !text-white ml-auto" size="icon">
+						<Button onClick={query} className="ml-auto size-9 rounded-full !bg-sky-500 p-[10px] !text-white" size="icon">
 							<RotateCcw className="size-4"></RotateCcw>
 						</Button>
 					</TooltipTrigger>
-					<TooltipContent className="dark:bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:text-gray-200 capitalize">{t('refresh')}</TooltipContent>
+					<TooltipContent className="bg-gray-200 capitalize text-gray-700 dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('refresh')}</TooltipContent>
 				</Tooltip>
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<Link to={routesConfig.problem.replace(':id', randomId)} className="rounded-full size-9 p-[10px] bg-green-500 text-white mr-2">
+						<Link to={routesConfig.problem.replace(':id', randomId)} className="mr-2 size-9 rounded-full bg-green-500 p-[10px] text-white">
 							<Shuffle className="size-4"></Shuffle>
 						</Link>
 					</TooltipTrigger>
-					<TooltipContent className="dark:bg-[rgb(55,55,55)] bg-gray-200 text-gray-700 dark:text-gray-200 capitalize">{t('pick')}</TooltipContent>
+					<TooltipContent className="bg-gray-200 capitalize text-gray-700 dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('pick')}</TooltipContent>
 				</Tooltip>
 			</div>
-			<div className="block relative shadow-md sm:rounded-lg overflow-x-auto">
-				<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
-					<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
+			<div className="relative block overflow-x-auto shadow-md sm:rounded-lg">
+				<table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+					<thead className="bg-white text-xs uppercase text-gray-700 dark:bg-neutral-800 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3 text-center">
 								{t('status')}
 							</th>
-							<th scope="col" className="px-6 py-3 truncate">
+							<th scope="col" className="truncate px-6 py-3">
 								{t('title')}
 								<button className="ml-1" onClick={() => sortHandle('name')}>
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
@@ -133,11 +133,11 @@ const Problems = () => {
 									<FontAwesomeIcon icon="fa-solid fa-sort" />
 								</button>
 							</th>
-							<th scope="col" className="hidden md:table-cell px-6 py-3 md:max-w-24 lg:max-w-48">
+							<th scope="col" className="hidden px-6 py-3 md:table-cell md:max-w-24 lg:max-w-48">
 								{t('tags')}
 							</th>
 							{user?.permission == 'Admin' && (
-								<th scope="col" className="hidden lg:table-cell px-6 py-3 text-center">
+								<th scope="col" className="hidden px-6 py-3 text-center lg:table-cell">
 									{t('private')}
 									<button className="ml-1" onClick={() => sortHandle('public')}>
 										<FontAwesomeIcon icon="fa-solid fa-sort" />
@@ -169,26 +169,26 @@ const Problems = () => {
 							list.map((problem, index) => (
 								<tr
 									key={index}
-									className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
+									className="h-14 border-b border-gray-200 odd:bg-gray-100 even:bg-white dark:border-gray-700 odd:dark:bg-neutral-900 even:dark:bg-neutral-800"
 								>
 									<td className="px-6 py-4">{problem.solve && <CircleCheck className="mx-auto size-5 text-green-500"></CircleCheck>}</td>
 									<td
 										scope="row"
-										className="px-6 py-4 md:max-w-24 lg:max-w-48 font-medium text-gray-900 hover:text-blue-400 dark:hover:text-blue-400 dark:text-white truncate whitespace-nowrap"
+										className="truncate whitespace-nowrap px-6 py-4 font-medium text-gray-900 hover:text-blue-400 md:max-w-24 lg:max-w-48 dark:text-white dark:hover:text-blue-400"
 									>
 										<Link to={routesConfig.problem.replace(':id', problem.id)}>{problem.name}</Link>
 									</td>
 									<td
 										data-difficulty={problem.difficulty}
-										className="px-6 py-4 capitalize data-[difficulty=easy]:text-green-500 data-[difficulty=medium]:text-yellow-600 data-[difficulty=hard]:text-red-500"
+										className="px-6 py-4 capitalize data-[difficulty=easy]:text-green-500 data-[difficulty=hard]:text-red-500 data-[difficulty=medium]:text-yellow-600"
 									>
 										{t(problem.difficulty)}
 									</td>
-									<td className="hidden md:table-cell px-6 py-4 md:max-w-24 lg:max-w-48 overflow-hidden" id={`abcxuz${index}`}>
+									<td className="hidden overflow-hidden px-6 py-4 md:table-cell md:max-w-24 lg:max-w-48" id={`abcxuz${index}`}>
 										<ChipList items={problem.tags} activeItems={activeTags} w={document.documentElement.getBoundingClientRect().width / 12}></ChipList>
 									</td>
 									{user?.permission == 'Admin' && (
-										<td className="hidden lg:table-cell px-6 py-4">{!problem.public && <img className="mx-auto size-6" src={padlock} />}</td>
+										<td className="hidden px-6 py-4 lg:table-cell">{!problem.public && <img className="mx-auto size-6" src={padlock} />}</td>
 									)}
 									<td className="px-6 py-4">{problem.point}p</td>
 									<td className="px-6 py-4">{problem.noOfSubm ? Math.round((problem.noOfSuccess / problem.noOfSubm) * 100) : 0}%</td>
@@ -197,7 +197,7 @@ const Problems = () => {
 							))}
 					</tbody>
 				</table>
-				{loading && <div className="flex-1 text-center dark:text-white h-[100vh] mt-32">Loading...</div>}
+				{loading && <div className="mt-32 h-[100vh] flex-1 text-center dark:text-white">Loading...</div>}
 			</div>
 			<Pagination maxPage={numOfPage} currentPage={currentPage} setPage={setCurrentPage} className="my-8"></Pagination>
 		</div>

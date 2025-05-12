@@ -38,32 +38,32 @@ const ProblemTags = ({ setActiveTags, className = '' }) => {
 	}, []);
 
 	return (
-		<div data-expand={expand} className={`relative w-full h-12 data-[expand=true]:h-auto overflow-hidden data-[expand=false]:pr-16 ${className}`}>
+		<div data-expand={expand} className={`relative h-12 w-full overflow-hidden data-[expand=true]:h-auto data-[expand=false]:pr-16 ${className}`}>
 			{tags.map((tag, index) => (
 				<Tooltip key={index}>
 					<TooltipTrigger
 						asChild
-						className="m-2 py-2 px-3 dark:text-gray-100 capitalize whitespace-nowrap text-sm hover:text-blue-500 dark:hover:text-blue-500 data-[active=true]:bg-blue-500 data-[active=true]:text-blue-500 !bg-opacity-30 rounded-full"
+						className="m-2 whitespace-nowrap rounded-full !bg-opacity-30 px-3 py-2 text-sm capitalize hover:text-blue-500 data-[active=true]:bg-blue-500 data-[active=true]:text-blue-500 dark:text-gray-100 dark:hover:text-blue-500"
 					>
 						<button data-active={false} data-name={tag[0]} onClick={handleTagClick}>
 							{tag[0]}
 						</button>
 					</TooltipTrigger>
-					<TooltipContent className="capitalize bg-gray-400 dark:bg-gray-800 dark:text-gray-100">
+					<TooltipContent className="bg-gray-400 capitalize dark:bg-gray-800 dark:text-gray-100">
 						{tag[0]}
-						<span className="bg-orange-400 ml-1 px-1 rounded-full">{tag[1]}</span>
+						<span className="ml-1 rounded-full bg-orange-400 px-1">{tag[1]}</span>
 					</TooltipContent>
 				</Tooltip>
 			))}
 			{expand ? (
-				<button onClick={handleExpand} className="float-right py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize text-gray-600 group">
+				<button onClick={handleExpand} className="group float-right m-2 px-3 py-2 text-sm capitalize text-gray-600 dark:text-gray-400">
 					{t('collapse')}
-					<ChevronsUp className="w-4 h-4 inline group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-all duration-200" />
+					<ChevronsUp className="inline h-4 w-4 transition-all duration-200 group-hover:text-orange-600 dark:group-hover:text-orange-500" />
 				</button>
 			) : (
-				<button onClick={handleExpand} className="absolute right-1 top-0 py-2 px-3 m-2 text-sm dark:text-gray-400 capitalize text-gray-600 group">
+				<button onClick={handleExpand} className="group absolute right-1 top-0 m-2 px-3 py-2 text-sm capitalize text-gray-600 dark:text-gray-400">
 					{t('expand')}
-					<ChevronsDown className="w-4 h-4 inline group-hover:text-orange-600 dark:group-hover:text-orange-500 transition-all duration-200" />
+					<ChevronsDown className="inline h-4 w-4 transition-all duration-200 group-hover:text-orange-600 dark:group-hover:text-orange-500" />
 				</button>
 			)}
 		</div>

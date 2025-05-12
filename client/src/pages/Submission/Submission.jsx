@@ -55,9 +55,9 @@ const Submission = () => {
 	};
 
 	return (
-		<div className="p-6 flex-1 mx-28">
-			<div className="rounded-2xl shadow-md p-6 bg-white dark:bg-neutral-800">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+		<div className="mx-28 flex-1 p-6">
+			<div className="rounded-2xl bg-white p-6 shadow-md dark:bg-neutral-800">
+				<div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 					{loading ? (
 						<>
 							<Skeleton className="h-6 rounded-full" style={{ width: Math.round(Math.random() * 160 + 80) }}></Skeleton>
@@ -72,10 +72,10 @@ const Submission = () => {
 					) : (
 						<>
 							<div className="flex items-center gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('status')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('status')}:</span>
 								<Tooltip>
 									<TooltipTrigger>
-										<Badge style={{ backgroundColor: statusColors[submission?.status?.toLowerCase()] }} className=" !text-white">
+										<Badge style={{ backgroundColor: statusColors[submission?.status?.toLowerCase()] }} className="!text-white">
 											{submission?.status}
 										</Badge>
 									</TooltipTrigger>
@@ -83,33 +83,33 @@ const Submission = () => {
 								</Tooltip>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('problem')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('problem')}:</span>
 								<Link to={routesConfig.problem.replace(':id', submission?.forProblem)} className="text-blue-600 hover:underline dark:text-blue-500">
 									{submission?.forProblem}
 								</Link>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('time')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('time')}:</span>
 								<span className="dark:text-gray-200">{submission?.time === -1 ? '-' : `${submission?.time}s`}</span>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('language')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('language')}:</span>
 								<span className="dark:text-gray-200">{submission?.language.toUpperCase()}</span>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('memory')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('memory')}:</span>
 								<span className="dark:text-gray-200">{submission?.memory === -1 ? '-' : `${submission?.memory}MB`}</span>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('submit-at')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('submit-at')}:</span>
 								<span className="dark:text-gray-200">{formatedDate(new Date(submission?.createdAt || null))}</span>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('point')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('point')}:</span>
 								<span className="dark:text-gray-200">{submission?.point}</span>
 							</div>
 							<div className="flex gap-2">
-								<span className="capitalize font-semibold dark:text-gray-100">{t('author')}:</span>
+								<span className="font-semibold capitalize dark:text-gray-100">{t('author')}:</span>
 								<Link to={routesConfig.user.replace(':id', submission?.author)} className="text-blue-600 hover:underline dark:text-blue-500">
 									{submission?.author}
 								</Link>
@@ -119,7 +119,7 @@ const Submission = () => {
 				</div>
 
 				<Tabs defaultValue="source">
-					<TabsList className="bg-gray-100 dark:bg-neutral-700 p-1 rounded-xl mb-4">
+					<TabsList className="mb-4 rounded-xl bg-gray-100 p-1 dark:bg-neutral-700">
 						<TabsTrigger className="capitalize dark:data-[state=active]:!bg-neutral-800" value="source">
 							{t('source')}
 						</TabsTrigger>
@@ -140,9 +140,9 @@ const Submission = () => {
 					</TabsList>
 
 					<TabsContent value="source">
-						<div className="h-[400px] rounded-xl overflow-hidden border dark:border-neutral-700">
+						<div className="h-[400px] overflow-hidden rounded-xl border dark:border-neutral-700">
 							{loading ? (
-								<Skeleton className="w-full h-full"></Skeleton>
+								<Skeleton className="h-full w-full"></Skeleton>
 							) : (
 								<MonacoEditor
 									height="100%"
@@ -160,21 +160,21 @@ const Submission = () => {
 					</TabsContent>
 
 					<TabsContent value="testcase">
-						<div className="overflow-x-auto dark:rounded-lg overflow-hidden">
+						<div className="overflow-hidden overflow-x-auto dark:rounded-lg">
 							<table className="w-full text-left">
 								<thead className="bg-gray-50 dark:bg-neutral-700">
 									<tr>
-										<th className="p-2 capitalize dark:text-white w-1/4">{t('testcase')}</th>
-										<th className="p-2 capitalize dark:text-white w-1/4">{t('status')}</th>
-										<th className="p-2 capitalize dark:text-white w-1/4">{t('time')} (s)</th>
-										<th className="p-2 capitalize dark:text-white w-1/4">{t('memory')} (MB)</th>
+										<th className="w-1/4 p-2 capitalize dark:text-white">{t('testcase')}</th>
+										<th className="w-1/4 p-2 capitalize dark:text-white">{t('status')}</th>
+										<th className="w-1/4 p-2 capitalize dark:text-white">{t('time')} (s)</th>
+										<th className="w-1/4 p-2 capitalize dark:text-white">{t('memory')} (MB)</th>
 									</tr>
 								</thead>
 								<tbody>
 									{submission?.testcase?.map((item, index) => (
-										<tr className="hover:bg-gray-100 even:bg-white even:dark:bg-[rgb(55,55,55)] odd:bg-gray-100 odd:dark:bg-neutral-800" key={index}>
+										<tr className="odd:bg-gray-100 even:bg-white hover:bg-gray-100 odd:dark:bg-neutral-800 even:dark:bg-[rgb(55,55,55)]" key={index}>
 											<td className="p-2 dark:text-gray-200">#{index + 1}</td>
-											<td className="p-2 dark:text-gray-200 capitalize" style={{ color: statusColors[item.status.toLowerCase()] }}>
+											<td className="p-2 capitalize dark:text-gray-200" style={{ color: statusColors[item.status.toLowerCase()] }}>
 												{item.status}
 											</td>
 											<td className="p-2 dark:text-gray-200">{item.time == -1 ? '-' : item.time}</td>
@@ -187,21 +187,21 @@ const Submission = () => {
 					</TabsContent>
 
 					<TabsContent value="compiler">
-						<div className="bg-gray-100 dark:bg-neutral-700 dark:text-gray-100 p-4 rounded-xl font-mono text-sm whitespace-pre-line">
-							{submission?.msg?.compiler || <span className="text-red-400 capitalize">{t('nothing-here')}</span>}
+						<div className="whitespace-pre-line rounded-xl bg-gray-100 p-4 font-mono text-sm dark:bg-neutral-700 dark:text-gray-100">
+							{submission?.msg?.compiler || <span className="capitalize text-red-400">{t('nothing-here')}</span>}
 						</div>
 					</TabsContent>
 
 					<TabsContent value="judge">
-						<div className="bg-gray-100 dark:bg-neutral-700 dark:text-gray-100 p-4 rounded-xl font-mono text-sm whitespace-pre-line">
-							{submission?.msg?.checker || <span className="text-red-400 capitalize">{t('nothing-here')}</span>}
+						<div className="whitespace-pre-line rounded-xl bg-gray-100 p-4 font-mono text-sm dark:bg-neutral-700 dark:text-gray-100">
+							{submission?.msg?.checker || <span className="capitalize text-red-400">{t('nothing-here')}</span>}
 						</div>
 					</TabsContent>
 
 					{submission?.status === 'IE' && (
 						<TabsContent value="server">
-							<div className="bg-gray-100 dark:bg-neutral-700 dark:text-gray-100 p-4 rounded-xl font-mono text-sm whitespace-pre-line">
-								{submission?.msg?.server || <span className="text-red-400 capitalize">{t('nothing-here')}</span>}
+							<div className="whitespace-pre-line rounded-xl bg-gray-100 p-4 font-mono text-sm dark:bg-neutral-700 dark:text-gray-100">
+								{submission?.msg?.server || <span className="capitalize text-red-400">{t('nothing-here')}</span>}
 							</div>
 						</TabsContent>
 					)}

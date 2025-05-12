@@ -24,7 +24,7 @@ const DefaultLayout = ({ children, footer }) => {
 
 	return (
 		<div className="h-full w-full overflow-auto bg-gray-100 dark:bg-neutral-900">
-			<header className="h-16 px-16 flex items-center space-x-4 dark:bg-neutral-800 bg-white shadow">
+			<header className="flex h-16 items-center space-x-4 bg-white px-16 shadow dark:bg-neutral-800">
 				<Link to={routesConfig.home}>
 					<img src={Logo} className="size-8" alt="" />
 				</Link>
@@ -49,7 +49,7 @@ const DefaultLayout = ({ children, footer }) => {
 				].map((item, index) => (
 					<Button key={index} variant="ghost" asChild>
 						<Link
-							className={`text-gray-600 font-medium text-sm hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 ${isActive(item.path) ? 'bg-zinc-200 text-gray-800 dark:!bg-zinc-900' : 'dark:hover:!bg-zinc-700'}`}
+							className={`text-sm font-medium text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 ${isActive(item.path) ? 'bg-zinc-200 text-gray-800 dark:!bg-zinc-900' : 'dark:hover:!bg-zinc-700'}`}
 							to={item.path}
 						>
 							{item.title}
@@ -58,7 +58,7 @@ const DefaultLayout = ({ children, footer }) => {
 				))}
 				{isAuth ? (
 					<>
-						<Button variant="ghost" className="!ml-auto px-2 h-8 text-gray-70 dark:hover:!bg-zinc-700 dark:text-gray-300 group">
+						<Button variant="ghost" className="text-gray-70 group !ml-auto h-8 px-2 dark:text-gray-300 dark:hover:!bg-zinc-700">
 							<FontAwesomeIcon icon="fa-regular fa-star" className="group-hover:text-secondary" />
 							{user?.totalScore}
 						</Button>
@@ -66,13 +66,13 @@ const DefaultLayout = ({ children, footer }) => {
 					</>
 				) : (
 					<>
-						<Button className="!bg-sky-500 !ml-auto h-8 dark:!bg-sky-500/20">
-							<Link to={routesConfig.login} className="text-white dark:text-sky-400 font-medium text-xs">
+						<Button className="!ml-auto h-8 !bg-sky-500 dark:!bg-sky-500/20">
+							<Link to={routesConfig.login} className="text-xs font-medium text-white dark:text-sky-400">
 								{t('login')}
 							</Link>
 						</Button>
 						<button
-							className={`size-8 bg-slate-200 hover:bg-slate-300 dark:bg-neutral-900 dark:hover:bg-gray-700 rounded-md flex items-center justify-center`}
+							className={`flex size-8 items-center justify-center rounded-md bg-slate-200 hover:bg-slate-300 dark:bg-neutral-900 dark:hover:bg-gray-700`}
 							onClick={() => setMode(theme == 'dark' ? 'light' : 'dark')}
 						>
 							{theme == 'dark' ? (
@@ -86,7 +86,7 @@ const DefaultLayout = ({ children, footer }) => {
 					</>
 				)}
 			</header>
-			<div className="min-h-[calc(100%-64px)] flex flex-col">{children}</div>
+			<div className="flex min-h-[calc(100%-64px)] flex-col">{children}</div>
 			{footer}
 		</div>
 	);

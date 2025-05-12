@@ -47,7 +47,7 @@ int main(){
 	return (
 		<Container ref={pageRef}>
 			<header
-				className="w-full h-20 flex justify-between items-center py-6 px-12 fixed top-0 z-50 backdrop-blur-md"
+				className="fixed top-0 z-50 flex h-20 w-full items-center justify-between px-12 py-6 backdrop-blur-md"
 				style={{
 					maskImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)',
 				}}
@@ -57,13 +57,13 @@ int main(){
 				</Link>
 				<div>
 					<button
-						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						className="mx-6 text-sm font-semibold text-gray-900 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
 						onClick={() => pageRef.current.scrollTo({ top: 0, behavior: 'smooth' })}
 					>
 						{t('home')}
 					</button>
 					<button
-						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						className="mx-6 text-sm font-semibold text-gray-900 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
 						onClick={() =>
 							pageRef.current.scrollTo({
 								top: ref1.current.offsetTop - 180,
@@ -74,7 +74,7 @@ int main(){
 						{t('product')}
 					</button>
 					<button
-						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						className="mx-6 text-sm font-semibold text-gray-900 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
 						onClick={() =>
 							pageRef.current.scrollTo({
 								top: ref2.current.offsetTop - 80,
@@ -85,57 +85,57 @@ int main(){
 						{t('developer')}
 					</button>
 					<a
-						className="font-semibold text-gray-900 text-sm mx-6 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						className="mx-6 text-sm font-semibold text-gray-900 transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
 						href="https://github.com/nourist"
 					>
 						{t('about-me')}
 					</a>
 				</div>
-				<Link to={routesConfig.login} className="font-semibold text-gray-900 text-sm transition-all hover:text-sky-500 dark:text-gray-50 dark:hover:text-sky-500">
+				<Link to={routesConfig.login} className="text-sm font-semibold text-gray-900 transition-all hover:text-sky-500 dark:text-gray-50 dark:hover:text-sky-500">
 					{t('login')}
-					<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-1 mb-[-1px]" />
+					<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="mb-[-1px] ml-1" />
 				</Link>
 			</header>
 			<div
-				className="absolute top-0 inset-0 m-auto max-w-xs h-[357px] blur-[118px] sm:max-w-md md:max-w-lg"
+				className="absolute inset-0 top-0 m-auto h-[357px] max-w-xs blur-[118px] sm:max-w-md md:max-w-lg"
 				style={{
 					background:
 						'linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)',
 				}}
 			></div>
-			<div className="w-full h-[90%] space-y-10 text-center py-36 relative mt-20">
-				<h1 className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl dark:text-white">
+			<div className="relative mt-20 h-[90%] w-full space-y-10 py-36 text-center">
+				<h1 className="mx-auto text-4xl font-extrabold text-gray-800 md:text-5xl dark:text-white">
 					{(() => {
 						const arr = t('slogan')
 							.split(' ')
 							.map((item) => ` ${item}`);
 						arr[arr.length - 1] = (
-							<span key={arr.length - 1} className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#E114E5]">
+							<span key={arr.length - 1} className="bg-gradient-to-r from-[#4F46E5] to-[#E114E5] bg-clip-text text-transparent">
 								{arr[arr.length - 1]}
 							</span>
 						);
 						return arr;
 					})()}
 				</h1>
-				<p className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">{t('description')}</p>
+				<p className="mx-auto max-w-2xl text-gray-500 dark:text-gray-400">{t('description')}</p>
 				<div className="space-x-2">
-					<Link to={routesConfig.signup} className="px-3.5 py-2.5 bg-sky-500 rounded-md font-semibold text-white text-sm transition-all hover:bg-sky-400">
+					<Link to={routesConfig.signup} className="rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-sky-400">
 						{t('get-started')}
 					</Link>
 					<a
-						className="px-3.5 py-2.5 font-semibold text-sm transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
+						className="px-3.5 py-2.5 text-sm font-semibold transition-all hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300"
 						href="https://github.com/nourist/Float-Point"
 					>
 						{t('learn-more')}
-						<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-1 mb-[-1px]" />
+						<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="mb-[-1px] ml-1" />
 					</a>
 				</div>
 			</div>
-			<div className="flex flex-row flex-wrap justify-evenly mb-[100px] gap-y-[100px]">
-				<div className="h-[300px] flex flex-col gap-6 max-w-[540px] mx-5" ref={ref1}>
+			<div className="mb-[100px] flex flex-row flex-wrap justify-evenly gap-y-[100px]">
+				<div className="mx-5 flex h-[300px] max-w-[540px] flex-col gap-6" ref={ref1}>
 					<div className="flex flex-row space-x-[-12px]">
 						<HexagonIcon className="z-20">
-							<p className="text-sky-500 font-bold text-xs">7749</p>
+							<p className="text-xs font-bold text-sky-500">7749</p>
 						</HexagonIcon>
 						<HexagonIcon bg="linear-gradient(to bottom right, #cddc39 0%, #8bc34a 100%)" className="z-10">
 							<FontAwesomeIcon className="text-lime-400" icon="fa-solid fa-users" />
@@ -144,27 +144,27 @@ int main(){
 							<FontAwesomeIcon className="text-yellow-400" icon="fa-solid fa-trophy" />
 						</HexagonIcon>
 					</div>
-					<h2 className="text-sky-500 text-xl font-semibold">{t('product-title')}</h2>
-					<p className="text-gray-400 text-[15px]">{t('product-description')}</p>
-					<Link to={routesConfig.problems} className="text-sky-500 hover:text-sky-400 text-[15px] w-full transition-all">
+					<h2 className="text-xl font-semibold text-sky-500">{t('product-title')}</h2>
+					<p className="text-[15px] text-gray-400">{t('product-description')}</p>
+					<Link to={routesConfig.problems} className="w-full text-[15px] text-sky-500 transition-all hover:text-sky-400">
 						{t('view-questions')} <FontAwesomeIcon icon="fa-solid fa-angle-right" className="ml-1.5" />
 					</Link>
 				</div>
 
-				<div className="h-[300px] max-w-[540px] flex flex-col gap-6 mx-5">
+				<div className="mx-5 flex h-[300px] max-w-[540px] flex-col gap-6">
 					<HexagonIcon bg="linear-gradient(to bottom right, rgb(155,155,155) 0%, rgb(44,44,44) 100%)" className="z-10">
-						<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-700 dark:text-zinc-500 size-5" />
+						<FontAwesomeIcon icon="fa-solid fa-moon" className="size-5 text-slate-700 dark:text-zinc-500" />
 					</HexagonIcon>
-					<h2 className="text-slate-700 dark:text-zinc-400 text-xl font-semibold">{t('appearance')}</h2>
-					<p className="text-gray-400 text-[15px]">{t('appearance-description')}</p>
+					<h2 className="text-xl font-semibold text-slate-700 dark:text-zinc-400">{t('appearance')}</h2>
+					<p className="text-[15px] text-gray-400">{t('appearance-description')}</p>
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<button
-								className={`size-8 bg-slate-200 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md`}
+								className={`size-8 rounded-md bg-slate-200 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-700`}
 								onClick={() => setMode(theme == 'dark' ? 'light' : 'dark')}
 							>
 								{theme == 'dark' ? (
-									<FontAwesomeIcon icon="fa-solid fa-moon" className="text-slate-400 rotate-[-15deg]" />
+									<FontAwesomeIcon icon="fa-solid fa-moon" className="rotate-[-15deg] text-slate-400" />
 								) : (
 									<FontAwesomeIcon icon="fa-solid fa-sun" className="text-gray-600" />
 								)}
@@ -174,27 +174,27 @@ int main(){
 					</Tooltip>
 				</div>
 			</div>
-			<div className="max-w-[584px] mb-8 mx-auto items-center flex flex-col gap-6" ref={ref2}>
+			<div className="mx-auto mb-8 flex max-w-[584px] flex-col items-center gap-6" ref={ref2}>
 				<HexagonIcon bg="linear-gradient(to bottom right, #4db6ac 0%, #00796b 100%)">
 					<FontAwesomeIcon icon="fa-solid fa-code" className="text-teal-500" />
 				</HexagonIcon>
-				<h2 className="text-teal-500 text-xl font-semibold">{t('developer')}</h2>
-				<p className="text-gray-400 text-[15px] text-center">{t('developer-description')}</p>
+				<h2 className="text-xl font-semibold text-teal-500">{t('developer')}</h2>
+				<p className="text-center text-[15px] text-gray-400">{t('developer-description')}</p>
 			</div>
-			<div className="w-full px-44 h-[80vh]">
+			<div className="h-[80vh] w-full px-44">
 				<Tabs defaultValue="c" className="w-full">
 					<TabsList className="w-full justify-start">
 						<TabsTrigger value="c">C</TabsTrigger>
 						<TabsTrigger value="cpp">C++</TabsTrigger>
 						<TabsTrigger value="python">Python</TabsTrigger>
 					</TabsList>
-					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="c">
+					<TabsContent className="h-[60vh] overflow-hidden rounded-md shadow-md" value="c">
 						<Editor options={editorConfig} language="c" value={codeExample.c} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
 					</TabsContent>
-					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="cpp">
+					<TabsContent className="h-[60vh] overflow-hidden rounded-md shadow-md" value="cpp">
 						<Editor options={editorConfig} language="cpp" value={codeExample.cpp} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
 					</TabsContent>
-					<TabsContent className="h-[60vh] rounded-md overflow-hidden shadow-md" value="python">
+					<TabsContent className="h-[60vh] overflow-hidden rounded-md shadow-md" value="python">
 						<Editor options={editorConfig} language="python" value={codeExample.py} theme={theme == 'dark' ? 'blackboard' : 'light'}></Editor>
 					</TabsContent>
 				</Tabs>

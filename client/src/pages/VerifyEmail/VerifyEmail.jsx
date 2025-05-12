@@ -39,17 +39,16 @@ const VerifyEmail = () => {
 	}, [t, msg, error, clearLog]);
 
 	return (
-		<div className="flex-1 flex items-center justify-center pb-28">
+		<div className="flex flex-1 items-center justify-center pb-28">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="max-w-[25rem] w-full bg-white dark:bg-neutral-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
-			overflow-hidden"
+				className="w-full max-w-[25rem] overflow-hidden rounded-2xl bg-white bg-opacity-50 shadow-xl backdrop-blur-xl backdrop-filter dark:bg-neutral-800"
 			>
-				<div className="p-8 space-y-6">
-					<h2 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-sky-400 to-blue-400 text-transparent bg-clip-text">{t('title')}</h2>
-					<p className="text-[13px] dark:text-gray-400 text-center">{t('enter-otp')}</p>
+				<div className="space-y-6 p-8">
+					<h2 className="mb-4 bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-center text-3xl font-bold text-transparent">{t('title')}</h2>
+					<p className="text-center text-[13px] dark:text-gray-400">{t('enter-otp')}</p>
 					<OtpInput
 						value={otp}
 						onChange={setOtp}
@@ -58,19 +57,19 @@ const VerifyEmail = () => {
 							<input
 								{...props}
 								style={{ width: '46px', height: '46px' }}
-								className="mx-auto dark:bg-neutral-700 dark:text-gray-200 text-gray-800 dark:border-none dark:bg-opacity-40 border focus:border-sky-400 dark:focus:border-sky-400 rounded-md outline-none border-neutral-300 focus:ring-1 focus:ring-sky-400 caret-sky-400 transition-all duration-200 text-center text-lg"
+								className="mx-auto rounded-md border border-neutral-300 text-center text-lg text-gray-800 caret-sky-400 outline-none transition-all duration-200 focus:border-sky-400 focus:ring-1 focus:ring-sky-400 dark:border-none dark:bg-neutral-700 dark:bg-opacity-40 dark:text-gray-200 dark:focus:border-sky-400"
 							/>
 						)}
 					/>
 					<Button
 						disabled={otp.length != 6 || isLoading}
-						className="h-9 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold hover:ring-2 hover:ring-opacity-50 hover:ring-sky-400 transition-all duration-200"
+						className="h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400 hover:ring-opacity-50"
 						onClick={handleVerify}
 					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('verify')}
 					</Button>
 				</div>
-				<div className="h-12 dark:bg-neutral-900 bg-neutral-200 bg-opacity-50 dark:bg-opacity-60 dark:text-gray-400 text-gray-500 text-sm flex items-center justify-center gap-1">
+				<div className="flex h-12 items-center justify-center gap-1 bg-neutral-200 bg-opacity-50 text-sm text-gray-500 dark:bg-neutral-900 dark:bg-opacity-60 dark:text-gray-400">
 					{t('re-verify-msg')}{' '}
 					<Link to={routesConfig.sendVerifyCode} className="text-sky-400">
 						{t('re-send')}

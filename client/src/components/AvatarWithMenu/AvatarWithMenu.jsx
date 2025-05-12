@@ -37,14 +37,14 @@ const AvatarWithMenu = () => {
 			<DropdownMenuTrigger>
 				<UserAvatar user={user}></UserAvatar>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="border-none shadow-lg rounded-2xl w-[296px] dark:bg-[#303030] mr-8 mt-4 p-4 space-y-4">
+			<DropdownMenuContent className="mr-8 mt-4 w-[296px] space-y-4 rounded-2xl border-none p-4 shadow-lg dark:bg-[#303030]">
 				<DropdownMenuItem asChild className="cursor-pointer hover:!bg-transparent">
 					<Link className="flex gap-2" to={routesConfig.user.replace(':name', user.name)}>
 						<UserAvatar user={user} className="size-14"></UserAvatar>
-						<span className="space-y-[2px] py-[2px] h-14">
-							<h2 className="text-lg font-medium relative">
+						<span className="h-14 space-y-[2px] py-[2px]">
+							<h2 className="relative text-lg font-medium">
 								{user?.permission == 'Admin' && (
-									<span className="font-semibold text-base bg-gradient-to-r from-purple-500 to-rose-500 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(168,85,247,0.4)]">
+									<span className="bg-gradient-to-r from-purple-500 to-rose-500 bg-clip-text text-base font-semibold text-transparent drop-shadow-[0_0_6px_rgba(168,85,247,0.4)]">
 										AD{' '}
 									</span>
 								)}
@@ -54,7 +54,7 @@ const AvatarWithMenu = () => {
 						</span>
 					</Link>
 				</DropdownMenuItem>
-				<div className="w-full flex justify-between">
+				<div className="flex w-full justify-between">
 					{[
 						{
 							title: t('problem'),
@@ -75,7 +75,7 @@ const AvatarWithMenu = () => {
 						<DropdownMenuItem
 							asChild
 							key={index}
-							className="h-20 w-20 rounded-xl bg-neutral-100 dark:bg-neutral-700 flex flex-col items-center justify-center hover:!bg-neutral-200 dark:hover:!bg-neutral-600 cursor-pointer"
+							className="flex h-20 w-20 cursor-pointer flex-col items-center justify-center rounded-xl bg-neutral-100 hover:!bg-neutral-200 dark:bg-neutral-700 dark:hover:!bg-neutral-600"
 						>
 							<Link to={item.path}>
 								<img className="size-10" src={item.img} alt="" />
@@ -85,32 +85,32 @@ const AvatarWithMenu = () => {
 					))}
 				</div>
 				<div className="w-full">
-					<DropdownMenuItem asChild className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400">
+					<DropdownMenuItem asChild className="flex h-[42px] cursor-pointer rounded-md px-4 text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700">
 						<Link to={routesConfig.submit}>
 							<Terminal></Terminal>
 							{t('editor')}
 						</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem asChild className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400">
+					<DropdownMenuItem asChild className="flex h-[42px] cursor-pointer rounded-md px-4 text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700">
 						<Link to={routesConfig.setting}>
 							<Settings></Settings>
 							{t('setting')}
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuSub>
-						<DropdownMenuSubTrigger className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 dark:data-[state=open]:bg-neutral-700 dark:text-gray-400">
+						<DropdownMenuSubTrigger className="flex h-[42px] cursor-pointer rounded-md px-4 text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 dark:data-[state=open]:bg-neutral-700">
 							{theme == 'dark' ? <Dark></Dark> : <Light></Light>}
 							{t('appearance')}
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
-							<DropdownMenuSubContent className="mr-5 p-4 rounded-xl w-48 border-none dark:!bg-neutral-800">
+							<DropdownMenuSubContent className="mr-5 w-48 rounded-xl border-none p-4 dark:!bg-neutral-800">
 								<DropdownMenuRadioGroup value={mode} onValueChange={setMode}>
 									{['light', 'dark', 'system'].map((item, index) => (
 										<DropdownMenuRadioItem
 											key={index}
 											value={item}
 											icon={<Check className="size-4" />}
-											className="cursor-pointer h-[42px] text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400"
+											className="h-[42px] cursor-pointer rounded-md text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700"
 										>
 											{t(item)}
 										</DropdownMenuRadioItem>
@@ -120,19 +120,19 @@ const AvatarWithMenu = () => {
 						</DropdownMenuPortal>
 					</DropdownMenuSub>
 					<DropdownMenuSub>
-						<DropdownMenuSubTrigger className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 dark:data-[state=open]:bg-neutral-700 dark:text-gray-400">
+						<DropdownMenuSubTrigger className="flex h-[42px] cursor-pointer rounded-md px-4 text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700 dark:data-[state=open]:bg-neutral-700">
 							<Languages></Languages>
 							{t('language')}
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
-							<DropdownMenuSubContent className="mr-5 p-4 rounded-xl w-48 border-none dark:!bg-neutral-800 max-h-[452px] overflow-auto">
+							<DropdownMenuSubContent className="mr-5 max-h-[452px] w-48 overflow-auto rounded-xl border-none p-4 dark:!bg-neutral-800">
 								<DropdownMenuRadioGroup value={i18n.language} onValueChange={i18n.changeLanguage}>
 									{Object.keys(locales).map((item, index) => (
 										<DropdownMenuRadioItem
 											key={index}
 											value={item}
 											icon={<Check className="size-4" />}
-											className="cursor-pointer h-[42px] text-gray-600 rounded-md dark:hover:!bg-neutral-700 dark:text-gray-400"
+											className="h-[42px] cursor-pointer rounded-md text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700"
 										>
 											{locales[item]}
 										</DropdownMenuRadioItem>
@@ -143,7 +143,7 @@ const AvatarWithMenu = () => {
 					</DropdownMenuSub>
 					<DropdownMenuItem
 						asChild
-						className="cursor-pointer h-[42px] flex px-4 text-gray-600 rounded-md dark:text-gray-400 hover:!text-red-500 hover:!bg-red-600/10 w-full"
+						className="flex h-[42px] w-full cursor-pointer rounded-md px-4 text-gray-600 hover:!bg-red-600/10 hover:!text-red-500 dark:text-gray-400"
 					>
 						<button onClick={logout}>
 							<LogOut></LogOut>

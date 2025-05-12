@@ -51,16 +51,15 @@ const ResetPassword = () => {
 	}, [msg, clearLog]);
 
 	return (
-		<div className="flex-1 flex items-center justify-center pb-24">
+		<div className="flex flex-1 items-center justify-center pb-24">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="max-w-[25rem] w-full bg-white dark:bg-neutral-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
-			overflow-hidden"
+				className="w-full max-w-[25rem] overflow-hidden rounded-2xl bg-white bg-opacity-50 shadow-xl backdrop-blur-xl backdrop-filter dark:bg-neutral-800"
 			>
-				<div className="p-8 space-y-5">
-					<h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-sky-400 to-blue-400 text-transparent bg-clip-text">{t('title')}</h2>
+				<div className="space-y-5 p-8">
+					<h2 className="mb-8 bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-center text-3xl font-bold text-transparent">{t('title')}</h2>
 					<Input
 						icon={<Lock size={'16px'} className="translate-y-[-1px]" />}
 						placeholder={t('password')}
@@ -80,7 +79,7 @@ const ResetPassword = () => {
 					<PasswordIndicator password={password} setOk={setPasswordOK}></PasswordIndicator>
 					<Button
 						disabled={isLoading}
-						className="h-9 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold hover:ring-2 transition-all duration-200 hover:ring-opacity-50 hover:ring-sky-400"
+						className="h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400 hover:ring-opacity-50"
 						onClick={handleReset}
 					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('reset')}

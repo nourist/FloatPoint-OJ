@@ -81,7 +81,7 @@ const Contest = () => {
 
 	return (
 		<div className="flex-1 px-14 py-6">
-			<h2 className="dark:text-gray-100 text-2xl mb-1 flex items-center gap-2">
+			<h2 className="mb-1 flex items-center gap-2 text-2xl dark:text-gray-100">
 				<img src={contestImg} className="size-6" />
 				{contest.title}
 			</h2>
@@ -108,7 +108,7 @@ const Contest = () => {
 
 					<Button
 						data-type={user?.joiningContest === id ? 'leave' : 'join'}
-						className="capitalize float-right data-[type=join]:!bg-green-500 data-[type=leave]:!bg-red-600 hover:data-[type=join]:!bg-green-600 hover:data-[type=leave]:!bg-red-500 dark:text-white"
+						className="float-right capitalize data-[type=join]:!bg-green-500 data-[type=leave]:!bg-red-600 hover:data-[type=join]:!bg-green-600 hover:data-[type=leave]:!bg-red-500 dark:text-white"
 						disabled={jloining}
 						onClick={handleJoinLeave}
 					>
@@ -117,25 +117,25 @@ const Contest = () => {
 
 					<TabsContent value="a">
 						{loading ? (
-							<div className="pt-2 border-t border-gray-500 dark:border-neutral-700">
-								<Skeleton className="w-1/3 h-8 mb-2 rounded-full mx-auto"></Skeleton>
-								<Skeleton className="w-1/2 h-6 mb-4 rounded-full mx-auto"></Skeleton>
-								<Skeleton className={`w-[562px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[123px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[532px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[862px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[264px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[752px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[562px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[123px] h-5 rounded-full my-1`}></Skeleton>
-								<Skeleton className={`w-[532px] h-5 rounded-full my-1`}></Skeleton>
+							<div className="border-t border-gray-500 pt-2 dark:border-neutral-700">
+								<Skeleton className="mx-auto mb-2 h-8 w-1/3 rounded-full"></Skeleton>
+								<Skeleton className="mx-auto mb-4 h-6 w-1/2 rounded-full"></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[562px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[123px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[532px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[862px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[264px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[752px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[562px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[123px] rounded-full`}></Skeleton>
+								<Skeleton className={`my-1 h-5 w-[532px] rounded-full`}></Skeleton>
 							</div>
 						) : (
-							<div className="pt-2 border-t border-gray-500 dark:border-neutral-700">
-								<h3 className="text-sky-500 w-full text-center text-2xl">
+							<div className="border-t border-gray-500 pt-2 dark:border-neutral-700">
+								<h3 className="w-full text-center text-2xl text-sky-500">
 									{t(contest.startTime > Date.now() ? 'upcoming' : contest.endTime < Date.now() ? 'ended' : 'ongoing')}
 								</h3>
-								<div className="dark:text-gray-200 capitalize w-full text-center font-semibold mb-3">
+								<div className="mb-3 w-full text-center font-semibold capitalize dark:text-gray-200">
 									{formatDuration(contest?.startTime || new Date(), contest?.endTime || new Date())} <span className="font-light lowercase">{t('since')}</span>{' '}
 									{formatStartTime(contest?.startTime || new Date())}
 								</div>
@@ -145,20 +145,20 @@ const Contest = () => {
 					</TabsContent>
 					<TabsContent value="c">
 						<div className="mt-4">
-							<table className="w-full text-gray-500 dark:text-gray-400 text-sm text-left rtl:text-right">
-								<thead className="bg-white dark:bg-neutral-800 text-gray-700 dark:text-gray-400 text-xs uppercase">
+							<table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+								<thead className="bg-white text-xs uppercase text-gray-700 dark:bg-neutral-800 dark:text-gray-400">
 									<tr>
-										<th scope="col" className="px-6 py-3 text-center w-24">
+										<th scope="col" className="w-24 px-6 py-3 text-center">
 											{t('top')}
 										</th>
 										<th scope="col" className="px-6 py-3">
 											{t('name')}
 										</th>
-										<th scope="col" className="px-6 py-3 text-center w-32 border-x dark:border-neutral-700">
+										<th scope="col" className="w-32 border-x px-6 py-3 text-center dark:border-neutral-700">
 											{t('total')}
 										</th>
 										{contest?.problems?.map((item, index) => (
-											<th scope="col" key={index} className="py-3 w-16 h-12 hover:dark:text-white text-center border-x dark:border-neutral-700">
+											<th scope="col" key={index} className="h-12 w-16 border-x py-3 text-center dark:border-neutral-700 hover:dark:text-white">
 												<Link className="p-4" to={routesConfig.problem.replace(':id', item)}>
 													{index + 1}
 												</Link>
@@ -171,36 +171,36 @@ const Contest = () => {
 										contest?.standing?.map((item, index) => (
 											<tr
 												key={index}
-												className="even:bg-white even:dark:bg-neutral-800 odd:bg-gray-100 odd:dark:bg-neutral-900 border-gray-200 dark:border-gray-700 border-b h-14"
+												className="h-14 border-b border-gray-200 odd:bg-gray-100 even:bg-white dark:border-gray-700 odd:dark:bg-neutral-900 even:dark:bg-neutral-800"
 											>
 												<td
 													data-top={index + 1}
 													data-top3={index < 3}
-													className="px-6 py-4 text-center data-[top=1]:text-red-500 data-[top=2]:text-yellow-500 data-[top=3]:text-cyan-500 data-[top3=true]:font-bold"
+													className="px-6 py-4 text-center data-[top3=true]:font-bold data-[top=1]:text-red-500 data-[top=2]:text-yellow-500 data-[top=3]:text-cyan-500"
 												>
 													{index + 1}
 												</td>
 												<td className="px-6 py-4">
 													<Link
-														className="dark:hover:text-white hover:text-gray-900 text-gray-800 dark:text-gray-300"
+														className="text-gray-800 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
 														to={routesConfig.user.replace(':name', item.user)}
 													>
 														{item.user}
 														{item.user === user?.name && <span className="text-red-500"> ({t('you')})</span>}
 													</Link>
 												</td>
-												<td className="px-6 py-4 border-x dark:border-neutral-700 text-center hover:underline hover:text-gray-900 dark:text-gray-300 text-gray-800">
+												<td className="border-x px-6 py-4 text-center text-gray-800 hover:text-gray-900 hover:underline dark:border-neutral-700 dark:text-gray-300">
 													<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}`}>
 														<div className="dark:text-white">{item.score.reduce((acc, cur) => acc + cur, 0)}</div>
 														<div className="text-[10px]">{formatDurationFromMs(item.time.reduce((acc, cur) => acc + cur, 0))}</div>
 													</Link>
 												</td>
 												{contest?.problems?.map((problem, index) => (
-													<td key={index} className="px-6 py-4 text-center border-x dark:border-neutral-700 hover:underline">
+													<td key={index} className="border-x px-6 py-4 text-center hover:underline dark:border-neutral-700">
 														<Link to={`${routesConfig.submissions}?contest=${id}&author=${item.user}&problem=${problem}`}>
 															<div
 																data-status={item?.score?.[index] == 0 ? '0' : item?.status?.[index] == 'AC' ? '2' : '1'}
-																className="dark:text-white data-[status=1]:!text-yellow-500 data-[status=0]:!text-red-500 data-[status=2]:!text-green-500 data-[status=2]:font-bold"
+																className="data-[status=2]:font-bold data-[status=0]:!text-red-500 data-[status=1]:!text-yellow-500 data-[status=2]:!text-green-500 dark:text-white"
 															>
 																{item?.score?.[index]}
 															</div>

@@ -47,10 +47,10 @@ const Users = () => {
 
 	return (
 		<div className="flex-1 px-28 py-6">
-			<h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-gray-100">{t('leaderboard')}</h2>
-			<div className="h-[538px] mt-4 p-24 flex items-center justify-around rounded-xl bg-zinc-200 bg-opacity-50 dark:bg-zinc-800">
-				<div className="relative size-60 bg-white dark:bg-neutral-700 dark:border-opacity-40 rounded-2xl border border-orange-600 shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px]">
-					<div className="absolute right-4 -top-6 size-12 bg-orange-600 rounded-full text-white font-semibold text-xl flex items-center justify-center">2</div>
+			<h2 className="text-xl font-semibold capitalize text-gray-700 dark:text-gray-100">{t('leaderboard')}</h2>
+			<div className="mt-4 flex h-[538px] items-center justify-around rounded-xl bg-zinc-200 bg-opacity-50 p-24 dark:bg-zinc-800">
+				<div className="relative size-60 rounded-2xl border border-orange-600 bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:border-opacity-40 dark:bg-neutral-700">
+					<div className="absolute -top-6 right-4 flex size-12 items-center justify-center rounded-full bg-orange-600 text-xl font-semibold text-white">2</div>
 					{standing?.[1] ? (
 						<>
 							<Link to={routesConfig.user.replace(':name', standing[1].name)} className="flex flex-col items-center gap-2 pt-6">
@@ -58,18 +58,18 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[1].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="h-[30px] py-1 px-[10px] dark:text-white dark:bg-neutral-800 dark:border-neutral-600 border rounded-sm text-gray-700 border-blue-300 inline mx-5 bg-blue-100 bg-opacity-30 text-sm capitalize">
-									<FontAwesomeIcon className="size-4 text-yellow-500 mr-2" icon="fa-solid fa-star" />
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[1].totalScore}
 								</div>
 							</div>
 						</>
 					) : (
-						<div className="size-40 bg-slate-300 rounded-full my-8 mx-auto flex items-center justify-center text-8xl text-white font-bold">?</div>
+						<div className="mx-auto my-8 flex size-40 items-center justify-center rounded-full bg-slate-300 text-8xl font-bold text-white">?</div>
 					)}
 				</div>
-				<div className="relative size-[270px] bg-white dark:bg-neutral-700 dark:border-opacity-30 rounded-2xl border-4 border-blue-300 shadow-[#93c5fd_0px_0px_12px_0px] dark:border-white dark:shadow-[rgb(155,155,155)_0px_0px_28px_0px]">
-					<Crown className="absolute right-8 -top-10"></Crown>
+				<div className="relative size-[270px] rounded-2xl border-4 border-blue-300 bg-white shadow-[#93c5fd_0px_0px_12px_0px] dark:border-white dark:border-opacity-30 dark:bg-neutral-700 dark:shadow-[rgb(155,155,155)_0px_0px_28px_0px]">
+					<Crown className="absolute -top-10 right-8"></Crown>
 					{standing?.[0] ? (
 						<>
 							<Link to={routesConfig.user.replace(':name', standing[0].name)} className="flex flex-col items-center gap-2 pt-6">
@@ -77,18 +77,18 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[0].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="h-[30px] py-1 px-[10px] border rounded-sm text-gray-700 dark:text-white dark:bg-neutral-800 dark:border-neutral-600 border-blue-300 inline mx-5 bg-blue-100 bg-opacity-30 text-sm capitalize">
-									<FontAwesomeIcon className="size-4 text-yellow-500 mr-2" icon="fa-solid fa-star" />
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[0].totalScore}
 								</div>
 							</div>
 						</>
 					) : (
-						<div className="size-48 bg-slate-300 rounded-full my-8 mx-auto flex items-center justify-center text-9xl text-white font-bold">?</div>
+						<div className="mx-auto my-8 flex size-48 items-center justify-center rounded-full bg-slate-300 text-9xl font-bold text-white">?</div>
 					)}
 				</div>
-				<div className="relative size-60 bg-white dark:bg-neutral-700 dark:border-opacity-40 rounded-2xl border border-[#c5b083] shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px]">
-					<div className="absolute right-4 -top-6 size-12 bg-[#c5b083] rounded-full text-white font-semibold text-xl flex items-center justify-center">3</div>
+				<div className="relative size-60 rounded-2xl border border-[#c5b083] bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:border-opacity-40 dark:bg-neutral-700">
+					<div className="absolute -top-6 right-4 flex size-12 items-center justify-center rounded-full bg-[#c5b083] text-xl font-semibold text-white">3</div>
 					{standing?.[2] ? (
 						<>
 							<Link to={routesConfig.user.replace(':name', standing[2].name)} className="flex flex-col items-center gap-2 pt-6">
@@ -96,32 +96,32 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[2].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="h-[30px] py-1 dark:text-white dark:bg-neutral-800 dark:border-neutral-600 px-[10px] border rounded-sm text-gray-700 border-blue-300 inline mx-5 bg-blue-100 bg-opacity-30 text-sm capitalize">
-									<FontAwesomeIcon className="size-4 text-yellow-500 mr-2" icon="fa-solid fa-star" />
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[2].totalScore}
 								</div>
 							</div>
 						</>
 					) : (
-						<div className="size-40 bg-slate-300 rounded-full my-8 mx-auto flex items-center justify-center text-8xl text-white font-bold">?</div>
+						<div className="mx-auto my-8 flex size-40 items-center justify-center rounded-full bg-slate-300 text-8xl font-bold text-white">?</div>
 					)}
 				</div>
 			</div>
-			<div className="flex gap-2 mt-12">
+			<div className="mt-12 flex gap-2">
 				<Pagination maxPage={maxPage} currentPage={page} setPage={setPage}></Pagination>
 				<Search value={search} setValue={setSearch} placeholder={t('search-placeholder')} className="ml-auto"></Search>
-				<Button onClick={query} className="!bg-sky-400 capitalize !text-white font-light hover:!bg-sky-500">
+				<Button onClick={query} className="!bg-sky-400 font-light capitalize !text-white hover:!bg-sky-500">
 					<RotateCcw></RotateCcw>
 					{t('refresh')}
 				</Button>
 			</div>
 			{loading ? (
-				<Skeleton className={'h-[1344px] my-3'}></Skeleton>
+				<Skeleton className={'my-3 h-[1344px]'}></Skeleton>
 			) : (
-				<table className="w-full text-gray-700 dark:text-gray-200 text-sm text-left rtl:text-right my-3">
-					<thead className="bg-white dark:bg-neutral-800 text-gray-800 dark:text-gray-400 text-xs uppercase h-16">
+				<table className="my-3 w-full text-left text-sm text-gray-700 rtl:text-right dark:text-gray-200">
+					<thead className="h-16 bg-white text-xs uppercase text-gray-800 dark:bg-neutral-800 dark:text-gray-400">
 						<tr>
-							<th scope="col" className="px-6 py-3 text-center w-28">
+							<th scope="col" className="w-28 px-6 py-3 text-center">
 								{t('top')}
 							</th>
 							<th scope="col" className="px-6 py-3">
@@ -139,7 +139,7 @@ const Users = () => {
 						{list?.map((item, index) => (
 							<tr
 								key={index}
-								className="even:bg-white even:dark:bg-neutral-800 odd:bg-slate-100 odd:dark:bg-neutral-900 hover:bg-blue-50 hover:cursor-pointer border-gray-200 dark:border-gray-700 border-b h-16"
+								className="h-16 border-b border-gray-200 odd:bg-slate-100 even:bg-white hover:cursor-pointer hover:bg-blue-50 dark:border-gray-700 odd:dark:bg-neutral-900 even:dark:bg-neutral-800"
 							>
 								<td className="px-6 py-4 text-center">
 									<Link to={routesConfig.user.replace(':name', item.name)}>{index + 1}</Link>

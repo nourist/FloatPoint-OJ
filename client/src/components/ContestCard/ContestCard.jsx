@@ -48,8 +48,8 @@ const ContestCard = ({ id, username }) => {
 	};
 
 	return (
-		<div className="bg-white dark:bg-neutral-700 dark:border-neutral-600 rounded-lg shadow-md p-6 space-y-3 border">
-			<Link to={routesConfig.contest.replace(':id', id)} className="text-2xl font-bold text-blue-600 dark:text-blue-500 hover:underline">
+		<div className="space-y-3 rounded-lg border bg-white p-6 shadow-md dark:border-neutral-600 dark:bg-neutral-700">
+			<Link to={routesConfig.contest.replace(':id', id)} className="text-2xl font-bold text-blue-600 hover:underline dark:text-blue-500">
 				{title}
 			</Link>
 

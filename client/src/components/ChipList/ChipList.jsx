@@ -37,7 +37,7 @@ const ChipList = ({ items = [], activeItems = [], w, className = '' }) => {
 			{renderItems.map((item, index) => (
 				<span
 					data-active={Object.values(item)}
-					className={`py-1 px-2 capitalize dark:bg-neutral-700 bg-neutral-200 text-gray-600 dark:text-gray-100 rounded-full mx-1 text-xs data-[active=true]:!bg-blue-500 data-[active=true]:!bg-opacity-20 data-[active=true]:text-blue-500 dark:!bg-opacity-100  ${className}`}
+					className={`mx-1 rounded-full bg-neutral-200 px-2 py-1 text-xs capitalize text-gray-600 data-[active=true]:!bg-blue-500 data-[active=true]:!bg-opacity-20 data-[active=true]:text-blue-500 dark:bg-neutral-700 dark:!bg-opacity-100 dark:text-gray-100 ${className}`}
 					key={index}
 				>
 					{Object.keys(item)}

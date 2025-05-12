@@ -8,34 +8,34 @@ const LayoutFooter = () => {
 	const { t } = useTranslation();
 
 	return (
-		<footer className=" border-t-gray-300 dark:border-gray-600 border-t dark:text-gray-300 text-gray-600 py-4">
-			<div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
+		<footer className="border-t border-t-gray-300 py-4 text-gray-600 dark:border-gray-600 dark:text-gray-300">
+			<div className="mx-auto flex max-w-6xl flex-col items-center justify-between px-4 sm:flex-row">
 				<div className="text-center sm:text-left">
-					<h2 className="text-lg dark:text-gray-100 text-gray-700 font-medium">My Online Judge</h2>
+					<h2 className="text-lg font-medium text-gray-700 dark:text-gray-100">My Online Judge</h2>
 					<p className="text-sm">© 2025 Nourist. All rights reserved.</p>
 				</div>
-				<div className="flex gap-4 mt-4 sm:mt-0">
+				<div className="mt-4 flex gap-4 sm:mt-0">
 					<Dialog>
 						<DialogTrigger asChild>
-							<button className="hover:dark:text-gray-100 hover:text-gray-500">
+							<button className="hover:text-gray-500 hover:dark:text-gray-100">
 								<Mail size={24} />
 							</button>
 						</DialogTrigger>
-						<DialogContent className="sm:max-w-md dark:!bg-neutral-900 dark:!border-neutral-800">
+						<DialogContent className="sm:max-w-md dark:!border-neutral-800 dark:!bg-neutral-900">
 							<DialogHeader>
 								<DialogTitle className="dark:text-white">{t('oops')}</DialogTitle>
 								<DialogDescription>{t('no-mail')} ✉️❌</DialogDescription>
 							</DialogHeader>
 							<DialogFooter className="sm:justify-start">
 								<DialogClose asChild>
-									<Button type="button" variant="secondary" className="dark:!bg-neutral-800 dark:hover:!bg-neutral-700 capitalize">
+									<Button type="button" variant="secondary" className="capitalize dark:!bg-neutral-800 dark:hover:!bg-neutral-700">
 										{t('close')}
 									</Button>
 								</DialogClose>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
-					<a href="https://github.com/nourist" target="_blank" rel="noopener noreferrer" className="hover:dark:text-white hover:text-gray-500 ">
+					<a href="https://github.com/nourist" target="_blank" rel="noopener noreferrer" className="hover:text-gray-500 hover:dark:text-white">
 						<Github size={24} />
 					</a>
 				</div>

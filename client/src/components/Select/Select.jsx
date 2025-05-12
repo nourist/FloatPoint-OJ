@@ -5,14 +5,14 @@ const Select = ({ setValue, data, triggerClassname = '', contentClassname = '', 
 	return (
 		<Selectcontainer defaultValue={defaultValue} onValueChange={setValue}>
 			<SelectTrigger
-				className={`w-[180px] dark:!bg-[rgb(55,55,55)] bg-gray-200 hover:bg-neutral-100 dark:hover:!bg-neutral-800 text-gray-700 dark:!text-gray-200 dark:border-none ${triggerClassname}`}
+				className={`w-[180px] bg-gray-200 text-gray-700 hover:bg-neutral-100 dark:border-none dark:!bg-[rgb(55,55,55)] dark:!text-gray-200 dark:hover:!bg-neutral-800 ${triggerClassname}`}
 			>
 				<SelectValue className="capitalize" placeholder={placeholder} />
 			</SelectTrigger>
-			<SelectContent className={`dark:!bg-[rgb(55,55,55)] border-none ${contentClassname}`}>
+			<SelectContent className={`border-none dark:!bg-[rgb(55,55,55)] ${contentClassname}`}>
 				<SelectGroup>
 					{data.map((item, index) => (
-						<SelectItem value={item.value} key={index} className="h-10 dark:hover:!bg-neutral-700 capitalize dark:focus:!bg-neutral-700 px-3">
+						<SelectItem value={item.value} key={index} className="h-10 px-3 capitalize dark:hover:!bg-neutral-700 dark:focus:!bg-neutral-700">
 							{item.label}
 						</SelectItem>
 					))}

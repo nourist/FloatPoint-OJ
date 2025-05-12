@@ -80,8 +80,8 @@ const Submit = () => {
 	}, []);
 
 	return (
-		<div className="flex-1 flex px-12 py-8 gap-4">
-			<div className="flex-1 ml-6 rounded-md overflow-hidden shadow-md">
+		<div className="flex flex-1 gap-4 px-12 py-8">
+			<div className="ml-6 flex-1 overflow-hidden rounded-md shadow-md">
 				<Editor
 					className="shadow-md"
 					language={languageValue[language]}
@@ -91,7 +91,7 @@ const Submit = () => {
 					theme={theme == 'dark' ? 'vs-dark' : 'light'}
 				></Editor>
 			</div>
-			<div className="w-52 justify-between flex flex-col">
+			<div className="flex w-52 flex-col justify-between">
 				<div className="space-y-3">
 					<Select
 						defaultValue={user.defaultLanguage || 'c++17'}
@@ -99,15 +99,14 @@ const Submit = () => {
 						setValue={setLanguage}
 						data={Object.keys(languageValue).map((item) => ({ value: item, label: <span className="capitalize text-gray-700 dark:text-gray-300">{item}</span> }))}
 					></Select>
-					<div className="flex items-center justify-center w-full">
+					<div className="flex w-full items-center justify-center">
 						<label
 							htmlFor="dropzone-file-13617263816"
-							className="flex flex-col items-center justify-center w-full h-32 border-2 border-blue-300 border-dashed rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100 transition-colors
-			dark:bg-[#1e293b] dark:border-blue-700 dark:hover:border-blue-500 dark:hover:bg-[#273449]"
+							className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-blue-300 bg-blue-50 transition-colors hover:bg-blue-100 dark:border-blue-700 dark:bg-[#1e293b] dark:hover:border-blue-500 dark:hover:bg-[#273449]"
 						>
-							<div className="flex flex-col items-center justify-center pt-5 pb-6">
+							<div className="flex flex-col items-center justify-center pb-6 pt-5">
 								<svg
-									className="w-8 h-8 mb-4 text-blue-500 dark:text-blue-400"
+									className="mb-4 h-8 w-8 text-blue-500 dark:text-blue-400"
 									aria-hidden="true"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
@@ -121,7 +120,7 @@ const Submit = () => {
 										d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
 									/>
 								</svg>
-								<p className="text-center mb-2 text-sm text-blue-600 dark:text-blue-300">{t('upload-placeholder')}</p>
+								<p className="mb-2 text-center text-sm text-blue-600 dark:text-blue-300">{t('upload-placeholder')}</p>
 							</div>
 							<input id="dropzone-file-13617263816" accept=".txt,.py,.cpp,.c" onChange={handleUpload} type="file" className="hidden" />
 						</label>
@@ -137,7 +136,7 @@ const Submit = () => {
 					></Combobox>
 					<Button
 						disabled={isLoading}
-						className="h-9 transition-all capitalize duration-200 w-full from-sky-400 to-blue-500 bg-gradient-to-r !text-white font-bold hover:ring-2 hover:ring-opacity-50 hover:ring-sky-400"
+						className="h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold capitalize !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400 hover:ring-opacity-50"
 						onClick={handleSubmit}
 					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('submit')}
@@ -148,18 +147,18 @@ const Submit = () => {
 				<DialogTrigger asChild>
 					<button ref={openDialogRef} className="hidden"></button>
 				</DialogTrigger>
-				<DialogContent className="dark:!bg-neutral-900 dark:!border-neutral-800">
+				<DialogContent className="dark:!border-neutral-800 dark:!bg-neutral-900">
 					<DialogHeader>
 						<DialogTitle className="dark:text-white">{t('submit-success')}</DialogTitle>
 						<DialogDescription>{t('submit-success-msg')} </DialogDescription>
 					</DialogHeader>
 					<DialogFooter className="sm:justify-start">
 						<DialogClose asChild>
-							<Button type="button" variant="secondary" className="dark:!bg-neutral-800 capitalize dark:hover:!bg-neutral-700">
+							<Button type="button" variant="secondary" className="capitalize dark:!bg-neutral-800 dark:hover:!bg-neutral-700">
 								{t('close')}
 							</Button>
 						</DialogClose>
-						<Button asChild type="button" variant="secondary" className="from-sky-400 to-blue-500 bg-gradient-to-r text-white hover:!to-blue-400 hover:!from-sky-300">
+						<Button asChild type="button" variant="secondary" className="bg-gradient-to-r from-sky-400 to-blue-500 text-white hover:!from-sky-300 hover:!to-blue-400">
 							<Link to={routesConfig.submission.replace(':id', submission?._id)}>{t('show')}</Link>
 						</Button>
 					</DialogFooter>

@@ -43,11 +43,11 @@ const AvatarChange = () => {
 	};
 
 	return (
-		<div className="flex-1 justify-center flex py-6 px-2">
-			<div className="bg-white dark:bg-neutral-800 shadow-md rounded-md max-w-[544px] flex-1 p-8 flex flex-col items-center gap-4">
-				<h2 className="text-xl font-semibold mb-2 dark:text-white">{t('change-your-avatar')}</h2>
+		<div className="flex flex-1 justify-center px-2 py-6">
+			<div className="flex max-w-[544px] flex-1 flex-col items-center gap-4 rounded-md bg-white p-8 shadow-md dark:bg-neutral-800">
+				<h2 className="mb-2 text-xl font-semibold dark:text-white">{t('change-your-avatar')}</h2>
 				{file ? <img src={URL.createObjectURL(file)} alt="" className="size-44 rounded-full" /> : <UserAvatar className="size-44" user={user}></UserAvatar>}
-				<div className="text-center rounded-lg border border-dashed border-gray-900/25 dark:border-white px-6 py-10 w-[calc(100%-32px)]">
+				<div className="w-[calc(100%-32px)] rounded-lg border border-dashed border-gray-900/25 px-6 py-10 text-center dark:border-white">
 					<svg className="mx-auto size-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon">
 						<path
 							fillRule="evenodd"
@@ -58,7 +58,7 @@ const AvatarChange = () => {
 					<div className="mt-4 flex justify-center text-sm/6 text-gray-600">
 						<label
 							htmlFor="file-upload"
-							className="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
+							className="focus-within:outline-hidden relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
 						>
 							<span>{t('upload-a-file')}</span>
 							<input onChange={handleChange} id="file-upload" name="file-upload" type="file" className="sr-only" />
@@ -67,12 +67,12 @@ const AvatarChange = () => {
 					</div>
 					<p className="text-xs/5 text-gray-600 dark:text-gray-200">{t('file-msg')}</p>
 				</div>
-				<p className="text-gray-400 self-start px-4 text-sm dark:text-gray-300">{t('avatar-warn')}</p>
+				<p className="self-start px-4 text-sm text-gray-400 dark:text-gray-300">{t('avatar-warn')}</p>
 				<div className="self-start">
-					<Button disabled={!file} onClick={handleUpdate} className="w-24 mx-4 capitalize !bg-sky-500 hover:!bg-sky-600 dark:text-white">
+					<Button disabled={!file} onClick={handleUpdate} className="mx-4 w-24 !bg-sky-500 capitalize hover:!bg-sky-600 dark:text-white">
 						{loading ? <RotateCcw className="animate-spin" /> : t('change')}
 					</Button>
-					<Button onClick={handleDelete} className="capitalize w-36 !bg-red-500 hover:!bg-red-600 dark:text-white">
+					<Button onClick={handleDelete} className="w-36 !bg-red-500 capitalize hover:!bg-red-600 dark:text-white">
 						{loading ? <RotateCcw className="animate-spin" /> : t('set-to-default')}
 					</Button>
 				</div>
