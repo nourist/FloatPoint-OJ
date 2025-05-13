@@ -70,7 +70,9 @@ This project uses the following third-party services:
 	```
 	### Server Service
 	```env
-	CLIENT_URL=       # Frontend URL (default http://localhost:5173)
+ 	PORT=             # Port for the Server service (default 8080)
+
+ 	CLIENT_URL=       # Frontend URL (default http://localhost:5173)
 
 	JUDGER_URL=       # Judger service URL (default http://localhost:8090)
 
