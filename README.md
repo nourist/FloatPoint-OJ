@@ -70,9 +70,13 @@ This project uses the following third-party services:
 	```
 	### Server Service
 	```env
+	NODE_ENV=         # Environment for server [production | development]
+
  	PORT=             # Port for the Server service (default 8080)
 
  	CLIENT_URL=       # Frontend URL (default http://localhost:5173)
+
+	ADMIN_URL         # Admin dashboard URL (default http://localhost:7749)
 
 	JUDGER_URL=       # Judger service URL (default http://localhost:8090)
 

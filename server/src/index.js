@@ -25,7 +25,7 @@ app.use(
 
 app.use(
 	cors({
-		origin: [process.env.CLIENT_URL || 'http://localhost:5173'],
+		origin: [process.env.CLIENT_URL || 'http://localhost:5173', process.env.ADMIN_URL || 'http://localhost:7749'],
 		credentials: true,
 	}),
 );
@@ -35,7 +35,9 @@ app.use(cookieParser());
 
 app.use(morgan('combined'));
 
-app.use(delayMiddleware);
+if (process.env.NODE_ENV === 'development') {
+	app.use(delayMiddleware);
+}
 
 route(app);
 

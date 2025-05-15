@@ -127,7 +127,7 @@ const authControllers = {
 
 	//[GET] /auth/login
 	async login(req, res, next) {
-		const { email, password } = req.body;
+		const { email, password, admin } = req.body;
 
 		try {
 			if (!email || !password) {
@@ -135,6 +135,10 @@ const authControllers = {
 			}
 
 			const user = await User.findOne({ email });
+
+			if (admin && user.permission !== "Admin") {
+				throw new Error("You are not Admin")
+			}
 
 			if (!user) {
 				throw new Error('User does not exist');
