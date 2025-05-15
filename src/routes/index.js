@@ -11,6 +11,7 @@ const routes = [
 	{
 		path: '/404',
 		page: NotFound,
+		layout: null,
 	},
 	{
 		path: '/',
