@@ -1,5 +1,6 @@
 @keyframes loading {
-	0%, 100% {
+	0%,
+	100% {
 		background-color: var(--color-secondary);
 		height: 16px;
 	}
