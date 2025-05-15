@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Button } from '~/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Code } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogClose, DialogDescription, DialogTitle, DialogFooter } from '~/components/ui/dialog';
 import { Link } from 'react-router';
 
@@ -81,7 +81,16 @@ const Submit = () => {
 
 	return (
 		<div className="flex flex-1 gap-4 px-12 py-8">
-			<div className="ml-6 flex-1 overflow-hidden rounded-md shadow-md">
+			<div className="ml-6 flex flex-1 flex-col overflow-hidden rounded-md shadow-md">
+				<div className="flex h-10 items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-gray-700 dark:bg-gray-800">
+					<div className="flex items-center gap-2">
+						<Code size={18} className="text-blue-500" />
+						<span className="font-medium text-gray-700 dark:text-gray-200">{t('code-editor')}</span>
+					</div>
+					<div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+						<span>{language}</span>
+					</div>
+				</div>
 				<Editor
 					className="shadow-md"
 					language={languageValue[language]}

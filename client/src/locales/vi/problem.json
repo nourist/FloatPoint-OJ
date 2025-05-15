@@ -9,5 +9,11 @@
 	"easy": "dễ",
 	"medium": "trung bình",
 	"hard": "khó",
-	"tags": "thẻ"
+	"tags": "thẻ",
+	"ac-rate": "%AC",
+	"ac-count": "#AC",
+	"constraints": "hằng số",
+	"details": "chi tiết",
+	"problems": "những bài tập",
+	"no-tags": "không có thẻ"
 }

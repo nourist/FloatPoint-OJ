@@ -6,12 +6,13 @@
 	"submissions": "bài nộp",
 	"join": "tham gia",
 	"leave": "rời khỏi",
-	"ended": "Cuộc thi đã kết thúc.",
-	"upcoming": "Cuộc thi sẽ bắt đầu.",
-	"ongoing": "Cuộc thi đang diễn ra.",
+	"ended": "Cuộc thi đã kết thúc",
+	"upcoming": "Cuộc thi sẽ bắt đầu",
+	"ongoing": "Cuộc thi đang diễn ra",
 	"since": "kể từ",
 	"top": "top",
 	"name": "tên",
 	"total": "tổng",
-	"you": "bạn"
+	"you": "bạn",
+	"time_remaining": "thời gian còn lại"
 }

@@ -61,6 +61,10 @@ const contestControllers = {
 			const contest = await Contest.findOne({ id });
 			const user = await User.findById(req.userId);
 
+			if (contest.get('status') !== 'ongoing') {
+				throw new Error('You cant join this contest');
+			}
+
 			if (!contest) {
 				throw new Error('Contest not found');
 			}

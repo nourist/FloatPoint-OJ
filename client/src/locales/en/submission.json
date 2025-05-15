@@ -20,5 +20,10 @@
 	"mle": "memory limit exceeded",
 	"rte": "runtime error",
 	"ce": "compile error",
-	"ie": "internal error"
+	"ie": "internal error",
+	"submitted-for": "submitted for",
+	"try-again": "try again",
+	"partial": "partial",
+	"back-to-submissions": "back to submissions",
+	"submissions": "submissions"
 }

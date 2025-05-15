@@ -20,5 +20,10 @@
 	"mle": "vượt quá giới hạn bộ nhớ",
 	"rte": "lỗi thời gian chạy",
 	"ce": "lỗi biên dịch",
-	"ie": "lỗi nội bộ"
+	"ie": "lỗi nội bộ",
+	"submitted-for": "nộp cho",
+	"try-again": "thử lại",
+	"partial": "một phần",
+	"back-to-submissions": "trở về những bài nộp",
+	"submissions": "những bài nộp"
 }

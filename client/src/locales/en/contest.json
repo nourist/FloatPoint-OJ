@@ -6,12 +6,13 @@
 	"submissions": "submissions",
 	"join": "join",
 	"leave": "leave",
-	"ended": "The contest has ended.",
-	"upcoming": "The contest will start.",
-	"ongoing": "The contest is running.",
+	"ended": "The contest has ended",
+	"upcoming": "The contest will start",
+	"ongoing": "The contest is running",
 	"since": "since",
 	"top": "top",
 	"name": "name",
 	"total": "total",
-	"you": "you"
+	"you": "you",
+	"time_remaining": "time remaining"
 }

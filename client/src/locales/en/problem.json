@@ -9,5 +9,11 @@
 	"easy": "easy",
 	"medium": "medium",
 	"hard": "hard",
-	"tags": "tags"
+	"tags": "tags",
+	"ac-rate": "%AC",
+	"ac-count": "#AC",
+	"constraints": "constraints",
+	"details": "details",
+	"problems": "problems",
+	"no-tags": "no tags"
 }

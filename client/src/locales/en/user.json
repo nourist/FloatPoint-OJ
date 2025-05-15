@@ -14,5 +14,10 @@
 	"participants": "participants",
 	"user-rank": "user rank",
 	"problem": "problem",
-	"user": "user"
+	"user": "user",
+	"user-profile": "user profile",
+	"no-bio": "no bio",
+	"contests": "contests",
+	"all-problems": "all problems",
+	"profile": "profile"
 }
