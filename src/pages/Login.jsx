@@ -2,19 +2,55 @@ import { useTranslation } from 'react-i18next';
 import { UserRound, Eye, EyeClosed } from 'lucide-react';
 import { Button, Input, Checkbox, IconButton } from '@material-tailwind/react';
 import { Link } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { isEmail } from 'validator';
+import { toast } from 'react-toastify';
 
-import { login, logout } from '~/services/auth';
+import { login } from '~/services/auth';
 
 const Login = () => {
 	const { t } = useTranslation('login');
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
+	const [passwordError, setPasswordError] = useState(false);
+	const [emailError, setEmailError] = useState(false);
+	const [remember, setRemember] = useState(false);
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		if (!email) {
+			setEmailError(false);
+		} else {
+			setEmailError(!isEmail(email));
+		}
+	}, [email]);
+
+	const handleLogin = () => {
+		let ok = true;
+		if (!password) {
+			setPasswordError(true);
+			ok = false;
+		}
+		if (!email) {
+			setEmailError(true);
+			ok = false;
+		}
+		if (!ok) {
+			return;
+		}
+		setLoading(true);
+		login(email, password, remember)
+			.then(toast.success)
+			.catch(toast.error)
+			.finally(() => setLoading(false));
+	};
 
 	return (
-		<div className="flex-center h-[100vh] w-full px-12 py-28">
-			<div className="bg-base-100 shadow-cxl flex h-full w-full max-w-4xl overflow-hidden shadow-gray-300">
-				<div className="flex h-full w-1/2 flex-col gap-6 p-12 pb-0">
+		<div className="flex-center h-[100vh] w-full px-12 py-12 lg:py-28">
+			<div className="bg-base-100 shadow-cxl flex h-full w-full max-w-4xl flex-col-reverse shadow-gray-300 lg:flex-row lg:overflow-hidden">
+				<div className="flex h-full flex-col gap-6 p-12 pb-0 lg:w-1/2">
 					<div className="mb-4 flex">
 						<h2 className="text-[1.75rem] font-light">FloatPoint</h2>
 						<IconButton className="border-neutral/10 ml-auto size-10 cursor-pointer rounded-full" variant="outlined">
@@ -23,13 +59,21 @@ const Login = () => {
 					</div>
 					<div className="flex flex-col gap-2">
 						<label htmlFor="email" className="text-sm capitalize">
-							{t('email')}
+							{t('email')} <span className="text-error font-bold">*</span>
 						</label>
 						<Input
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							onFocus={() => {
+								if (!email) {
+									setEmailError(false);
+								}
+							}}
 							id="email"
-							type='email'
+							type="email"
 							size="lg"
-							className="focus:!border-primary !border-t-blue-gray-200 placeholder:!opacity-100"
+							data-error={emailError}
+							className="focus:!border-primary !border-t-blue-gray-200 data-[error=true]:placeholder:text-error data-[error=true]:!border-error placeholder:!opacity-100"
 							labelProps={{
 								className: 'hidden',
 							}}
@@ -38,13 +82,17 @@ const Login = () => {
 					</div>
 					<div className="relative flex flex-col gap-2">
 						<label htmlFor="password" className="text-sm capitalize">
-							{t('password')}
+							{t('password')} <span className="text-error font-bold">*</span>
 						</label>
 						<Input
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							onFocus={() => setPasswordError(false)}
+							data-error={passwordError}
 							id="password"
 							size="lg"
 							type={showPassword ? 'text' : 'password'}
-							className="focus:!border-primary !border-t-blue-gray-200 pr-[44px] placeholder:!opacity-100"
+							className="focus:!border-primary !border-t-blue-gray-200 data-[error=true]:placeholder:text-error data-[error=true]:!border-error pr-[44px] placeholder:!opacity-100"
 							labelProps={{
 								className: 'hidden',
 							}}
@@ -60,18 +108,27 @@ const Login = () => {
 						</IconButton>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Button className="bg-primary cursor-pointer">{t('login')}</Button>
+						<Button className="bg-primary cursor-pointer justify-center" loading={loading} onClick={handleLogin}>
+							{t('login')}
+						</Button>
 						<div className="ml-[-14px] flex items-center">
-							<Checkbox ripple={false} className="before:!opacity-0" id="remember-me" color="blue"></Checkbox>
-							<label htmlFor="remember-me" className="mb-[1px] from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent capitalize">
+							<Checkbox
+								value={remember}
+								onChange={(e) => setRemember(e.target.checked)}
+								ripple={false}
+								className="before:!opacity-0"
+								id="remember-me"
+								color="blue"
+							></Checkbox>
+							<label htmlFor="remember-me" className="from-primary to-secondary mb-[1px] bg-gradient-to-r bg-clip-text text-transparent capitalize">
 								{t('remember-me')}
 							</label>
 							<Link className="text-neutral/50 ml-auto capitalize">{t('forgot-password')}?</Link>
 						</div>
 					</div>
 				</div>
-				<div className="from-secondary to-primary text-neutral-content flex h-full w-1/2 flex-col items-center justify-center gap-2 bg-gradient-to-r pb-20">
-					<UserRound size="128" />
+				<div className="from-secondary to-primary text-neutral-content flex flex-col items-center justify-center gap-2 bg-gradient-to-r py-4 lg:h-full lg:w-1/2 lg:pb-20">
+					<UserRound className="size-16 lg:!size-32" />
 					<h1 className="text-[2rem] font-bold">{t('welcome')}</h1>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ export const auth = () => {
 	useAuthStore.setState({ isAuth: false, user: null });
 
 	return httpRequest
-		.get('/auth')
+		.get('/auth?admin=true')
 		.then((res) => {
 			useAuthStore.setState({ user: res.data.user, isAuth: true });
 			useLoadingStore.setState({ loading: false });
@@ -19,35 +19,28 @@ export const auth = () => {
 		});
 };
 
-export const login = (email, password) => {
-	useLoadingStore.setState({ loading: true });
+export const login = (email, password, remember) => {
 	useAuthStore.setState({ isAuth: false, user: null });
 
 	return httpRequest
-		.post('/auth/login', { email, password, admin: true })
+		.post('/auth/login', { email, password, admin: true, remember })
 		.then((res) => {
 			useAuthStore.setState({ user: res.data.user, isAuth: true });
-			useLoadingStore.setState({ loading: false });
 			return res.data.msg;
 		})
 		.catch((err) => {
-			useLoadingStore.setState({ loading: false });
 			throw err.response.data.msg;
 		});
 };
 
 export const logout = () => {
-	useLoadingStore.setState({ loading: true });
-
 	return httpRequest
 		.post('/auth/logout')
 		.then((res) => {
 			useAuthStore.setState({ user: null, isAuth: false });
-			useLoadingStore.setState({ loading: false });
 			return res.data.msg;
 		})
 		.catch((err) => {
-			useLoadingStore.setState({ loading: false });
 			throw err.response.data.msg;
 		});
 };
