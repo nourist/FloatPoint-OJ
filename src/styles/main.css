@@ -115,8 +115,8 @@
 	--color-base-300: oklch(95% 0 0);
 	--color-base-content: oklch(21% 0.006 285.885);
 
-	--color-primary: oklch(0.55 0.2455 262.87);
-	--color-primary-content: oklch(0.97 0.025 262.87);
+	--color-primary: oklch(0.693 0.2 256.72);
+	--color-primary-content: oklch(0.98 0.01 256.72);
 
 	--color-secondary: oklch(0.69 0.1608 304.78);
 	--color-secondary-content: oklch(0.95 0.02 304.78);
@@ -125,7 +125,7 @@
 	--color-accent-content: oklch(38% 0.063 188.416);
 
 	--color-neutral: oklch(14% 0.005 285.823);
-	--color-neutral-content: oklch(98% 0.004 286.32);
+	--color-neutral-content: oklch(100% 0.004 286.32);
 
 	--color-info: oklch(74% 0.16 232.661);
 	--color-info-content: oklch(29% 0.066 243.157);
@@ -157,8 +157,8 @@
 		--color-base-300: oklch(21.15% 0.012 254.09);
 		--color-base-content: oklch(97.807% 0.029 256.847);
 
-		--color-primary: oklch(0.45 0.2455 262.87);
-		--color-primary-content: oklch(0.97 0.015 262.87);
+		--color-primary: oklch(0.55 0.2 256.72);
+		--color-primary-content: oklch(0.95 0.015 256.72);
 
 		--color-secondary: oklch(0.55 0.1608 304.78);
 		--color-secondary-content: oklch(0.95 0.015 304.78);
@@ -167,7 +167,7 @@
 		--color-accent-content: oklch(38% 0.063 188.416);
 
 		--color-neutral: oklch(14% 0.005 285.823);
-		--color-neutral-content: oklch(99% 0.004 286.32);
+		--color-neutral-content: oklch(100% 0.004 286.32);
 
 		--color-info: oklch(74% 0.16 232.661);
 		--color-info-content: oklch(29% 0.066 243.157);
@@ -201,6 +201,10 @@
 
 @utility flex-center {
 	@apply flex items-center justify-center;
+}
+
+html {
+	font-family: 'Lato', sans-serif;
 }
 
 #root {
