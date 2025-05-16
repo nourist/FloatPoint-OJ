@@ -127,7 +127,7 @@ const authControllers = {
 
 	//[GET] /auth/login
 	async login(req, res, next) {
-		const { email, password, admin } = req.body;
+		const { email, password, admin, remember=true } = req.body;
 
 		try {
 			if (!email || !password) {
@@ -154,7 +154,7 @@ const authControllers = {
 				throw new Error("User doesn't verified");
 			}
 
-			generateTokenAndSetCookie(res, user._id);
+			generateTokenAndSetCookie(res, user._id, remember);
 
 			user.lastLogin = new Date();
 			await user.save();
@@ -263,11 +263,17 @@ const authControllers = {
 
 	//[GET] /auth
 	async getSelfInfo(req, res, next) {
+		const { admin } = req.query;
+		
 		try {
 			const user = await User.findById(req.userId);
 
 			if (!user) {
 				throw new Error('User does not exist');
+			}
+
+			if (admin && user.permission !== 'Admin') {
+				throw new Error('You are not Admin');
 			}
 
 			if (user.joiningContest) {
