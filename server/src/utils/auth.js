@@ -9,7 +9,7 @@ export const generateTokenAndSetCookie = (res, userId, remember) => {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === 'production',
 		sameSite: 'strict',
-		maxAge: remember?30 * 24 * 60 * 60 * 1000:undefined, //30 days
+		maxAge: remember ? 30 * 24 * 60 * 60 * 1000 : undefined, //30 days
 	});
 
 	return token;

@@ -127,7 +127,7 @@ const authControllers = {
 
 	//[GET] /auth/login
 	async login(req, res, next) {
-		const { email, password, admin, remember=true } = req.body;
+		const { email, password, admin, remember = true } = req.body;
 
 		try {
 			if (!email || !password) {
@@ -136,8 +136,8 @@ const authControllers = {
 
 			const user = await User.findOne({ email });
 
-			if (admin && user.permission !== "Admin") {
-				throw new Error("You are not Admin")
+			if (admin && user.permission !== 'Admin') {
+				throw new Error('You are not Admin');
 			}
 
 			if (!user) {
@@ -264,7 +264,7 @@ const authControllers = {
 	//[GET] /auth
 	async getSelfInfo(req, res, next) {
 		const { admin } = req.query;
-		
+
 		try {
 			const user = await User.findById(req.userId);
 
@@ -280,9 +280,11 @@ const authControllers = {
 				const contest = await Contest.findOne({ id: user.joiningContest });
 				if (contest && contest.endTime < Date.now()) {
 					user.joiningContest = null;
-					await user.save();
 				}
 			}
+
+			user.lastLogin = Date.now();
+			await user.save();
 
 			const top = await getTop(user.name);
 			const topPercent = await getTopPercent(user.name);
