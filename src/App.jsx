@@ -13,6 +13,7 @@ import useLoadingStore from './stores/loadingStore';
 import Loading from './components/Loading';
 import useDebounce from './hooks/useDebounce';
 import useThemeStore from './stores/themeStore';
+import themeValue from './config/theme';
 
 const queryClient = new QueryClient();
 
@@ -61,7 +62,7 @@ const App = () => {
 	}
 
 	return (
-		<ThemeProvider>
+		<ThemeProvider value={themeValue}>
 			<QueryClientProvider client={queryClient}>
 				<AppRouter />
 				<ToastContainer

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Button } from '@material-tailwind/react';
 import { LayoutDashboard, Code, Activity, Trophy, User, LogOut } from 'lucide-react';
@@ -9,17 +10,17 @@ import { toast } from 'react-toastify';
 import logo from '~/assets/logo.png';
 import { logout } from '~/services/auth';
 
-const Sidebar = () => {
+const Sidebar = ({ classname = '' }) => {
 	const { t } = useTranslation();
 	const { pathname } = useLocation();
 	const [loading, setLoading] = useState(false);
 
 	return (
-		<div className="bg-base-100 shadow-cmd fixed flex h-[100vh] w-[250px] flex-col px-4">
+		<div className={`bg-base-100 shadow-cmd fixed hidden h-[100vh] w-[250px] flex-col px-4 lg:flex ${classname}`}>
 			<div className="px-4 py-6">
 				<Link to="/" className="flex items-center gap-2">
 					<img src={logo} className="size-8" alt="" />
-					<h2 className="text-blue-gray-800 text-2xl font-bold">FloatPoint</h2>
+					<h2 className="text-neutral text-2xl font-bold">FloatPoint</h2>
 				</Link>
 			</div>
 			{[
@@ -84,6 +85,10 @@ const Sidebar = () => {
 			</Button>
 		</div>
 	);
+};
+
+Sidebar.propTypes = {
+	classname: PropTypes.string,
 };
 
 export default Sidebar;

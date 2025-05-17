@@ -8,7 +8,7 @@ const DefaultLayout = ({ children }) => {
 		<>
 			<Sidebar />
 			<Header />
-			<div className="pt-[102px] pr-6 pl-[274px]">{children}</div>
+			<div className="px-6 pt-[102px] lg:pl-[274px]">{children}</div>
 		</>
 	);
 };
