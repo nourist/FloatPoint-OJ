@@ -12,12 +12,14 @@ import { auth, logout } from './services/auth';
 import useLoadingStore from './stores/loadingStore';
 import Loading from './components/Loading';
 import useDebounce from './hooks/useDebounce';
+import useThemeStore from './stores/themeStore';
 
 const queryClient = new QueryClient();
 
 const App = () => {
 	const { i18n } = useTranslation();
 	const { loading } = useLoadingStore();
+	const { theme, updateSystemTheme } = useThemeStore();
 
 	const isLoading = useDebounce(loading, 50);
 
@@ -30,6 +32,19 @@ const App = () => {
 			i18n.off('languageChanged', (lng) => {
 				localStorage.setItem('lang', lng);
 			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		document.documentElement.classList.remove('light', 'dark');
+		document.documentElement.classList.add(theme);
+	}, [theme]);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+		mediaQuery.addEventListener('change', updateSystemTheme);
+		return () => mediaQuery.removeEventListener('change', updateSystemTheme);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

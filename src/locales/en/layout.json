@@ -1,1 +1,10 @@
-{}
+{
+	"dashboard": "dashboard",
+	"problem": "problem",
+	"submission": "submission",
+	"contest": "contest",
+	"user": "user",
+	"logout": "logout",
+	"admin": "admin",
+	"hey": "hey"
+}
