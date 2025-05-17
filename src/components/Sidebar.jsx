@@ -20,7 +20,7 @@ const Sidebar = ({ classname = '' }) => {
 			<div className="px-4 py-6">
 				<Link to="/" className="flex items-center gap-2">
 					<img src={logo} className="size-8" alt="" />
-					<h2 className="text-neutral text-2xl font-bold">FloatPoint</h2>
+					<h2 className="text-base-content text-2xl font-bold">FloatPoint</h2>
 				</Link>
 			</div>
 			{[

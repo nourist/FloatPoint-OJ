@@ -48,18 +48,18 @@ const Header = () => {
 			>
 				<div>
 					<Breadcrumbs className="bg-transparent p-0">
-						<Link to="/" className="text-neutral/60 hover:text-secondary">
+						<Link to="/" className="text-base-content/60 hover:text-secondary">
 							<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
 								<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
 							</svg>
 						</Link>
 						{list.map((item, index) => (
-							<Link to={index === list.length - 1 ? '#' : `/${item}`} className="text-neutral/60 hover:text-secondary capitalize" key={index}>
+							<Link to={index === list.length - 1 ? '#' : `/${item}`} className="text-base-content/60 hover:text-secondary capitalize" key={index}>
 								{index === 0 ? t(item) : item}
 							</Link>
 						))}
 					</Breadcrumbs>
-					<h3 className="text-neutral/90 mt-1 ml-[3px] font-semibold capitalize">{list[0]}</h3>
+					<h3 className="text-base-content/90 mt-1 ml-[3px] font-semibold capitalize">{list[0]}</h3>
 				</div>
 				<IconButton variant="text" className="hover:bg-base-300 ml-auto size-[38px] cursor-pointer rounded-full lg:hidden" onClick={() => setOpenDrawer(true)}>
 					<AlignJustify strokeWidth="1.5" size="20" />
@@ -98,10 +98,10 @@ const Header = () => {
 				</Menu>
 				<UserAvatar user={user} className="mx-1 !size-[38px]" />
 				<div className="hidden sm:block">
-					<h4 className="text-neutral/70 text-[15px] capitalize">
-						{t('hey')}, <span className="text-neutral">{user?.fullname || user?.name}</span>
+					<h4 className="text-base-content/70 text-[15px] capitalize">
+						{t('hey')}, <span className="text-base-content">{user?.fullname || user?.name}</span>
 					</h4>
-					<p className="text-neutral/70 text-xs capitalize">{t('admin')}</p>
+					<p className="text-base-content/70 text-xs capitalize">{t('admin')}</p>
 				</div>
 			</div>
 			<Drawer className="w-[150px]" open={openDrawer} onClose={() => setOpenDrawer(false)}>

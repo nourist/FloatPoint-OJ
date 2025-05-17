@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { UserRound, Eye, EyeClosed } from 'lucide-react';
 import { Button, Input, Checkbox, IconButton } from '@material-tailwind/react';
-import { Link } from 'react-router';
 import { useEffect, useState } from 'react';
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 
+import useThemeStore from '~/stores/themeStore';
 import { login } from '~/services/auth';
 
 const Login = () => {
 	const { t } = useTranslation('login');
+	const { theme } = useThemeStore();
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [password, setPassword] = useState('');
@@ -52,13 +53,13 @@ const Login = () => {
 			<div className="bg-base-100 shadow-cxl/3 flex h-full w-full max-w-4xl flex-col-reverse lg:flex-row lg:overflow-hidden">
 				<div className="flex h-full flex-col gap-6 p-12 pb-0 lg:w-1/2">
 					<div className="mb-4 flex">
-						<h2 className="text-[1.75rem] font-light">FloatPoint</h2>
-						<IconButton className="border-neutral/10 ml-auto size-10 cursor-pointer rounded-full" variant="outlined">
+						<h2 className="text-neutral-content text-[1.75rem] font-light">FloatPoint</h2>
+						<IconButton className="border-base-content/10 ml-auto size-10 cursor-pointer rounded-full" variant="outlined">
 							<img src="/logo.png" alt="" />
 						</IconButton>
 					</div>
 					<div className="flex flex-col gap-2">
-						<label htmlFor="email" className="text-sm capitalize">
+						<label htmlFor="email" className="text-neutral-content text-sm capitalize">
 							{t('email')} <span className="text-error font-bold">*</span>
 						</label>
 						<Input
@@ -81,7 +82,7 @@ const Login = () => {
 						></Input>
 					</div>
 					<div className="relative flex flex-col gap-2">
-						<label htmlFor="password" className="text-sm capitalize">
+						<label htmlFor="password" className="text-neutral-content text-sm capitalize">
 							{t('password')} <span className="text-error font-bold">*</span>
 						</label>
 						<Input
@@ -100,7 +101,7 @@ const Login = () => {
 						></Input>
 						<IconButton
 							variant="text"
-							className="text-neutral/80 hover:text-neutral !absolute top-[34px] right-[6px] !size-8 cursor-pointer !bg-transparent"
+							className="text-base-content/80 hover:text-base-content !absolute top-[34px] right-[6px] !size-8 cursor-pointer !bg-transparent"
 							ripple={false}
 							onClick={() => setShowPassword((prev) => !prev)}
 						>
@@ -118,12 +119,14 @@ const Login = () => {
 								ripple={false}
 								className="before:!opacity-0"
 								id="remember-me"
-								color="blue"
-							></Checkbox>
-							<label htmlFor="remember-me" className="from-primary to-secondary mb-[1px] bg-gradient-to-r bg-clip-text text-transparent capitalize">
+								color={theme === 'light' ? 'blue' : 'pink'}
+							/>
+							<label htmlFor="remember-me" className="from-secondary to-primary mb-[1px] bg-gradient-to-r bg-clip-text text-transparent capitalize">
 								{t('remember-me')}
 							</label>
-							<Link className="text-neutral/50 ml-auto capitalize">{t('forgot-password')}?</Link>
+							<a href={`${import.meta.env.VITE_CLIENT_URL}/forgot-password`} className="text-base-content/60 ml-auto capitalize">
+								{t('forgot-password')}?
+							</a>
 						</div>
 					</div>
 				</div>

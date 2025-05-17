@@ -4,7 +4,7 @@ const Footer = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="text-neutral/70 mb-5 flex items-center gap-1">
+		<div className="text-base-content/70 flex items-center gap-1 pb-5">
 			© 2025, {t('made-with')}
 			<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -21,7 +21,7 @@ const Footer = () => {
 			>
 				Nourist
 			</a>
-			<a href="https://github.com/nourist/Float-Point-Admin/blob/main/LICENSE" className="hover:text-neutral ml-auto capitalize">
+			<a href="https://github.com/nourist/Float-Point-Admin/blob/main/LICENSE" className="hover:text-base-content ml-auto capitalize">
 				{t('license')}
 			</a>
 		</div>
