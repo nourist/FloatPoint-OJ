@@ -6,5 +6,8 @@
 	"user": "user",
 	"logout": "logout",
 	"admin": "admin",
-	"hey": "hey"
+	"hey": "hey",
+	"made-with": "made with",
+	"by": "by",
+	"license": "license"
 }
