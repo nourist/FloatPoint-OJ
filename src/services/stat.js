@@ -7,3 +7,19 @@ export const getStat = (day) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getWeeklySubmissions = (day) =>
+	httpRequest
+		.get('/stat/weekly-submission', { params: { day } })
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
+export const getWeeklyAccepted = (day) =>
+	httpRequest
+		.get('/stat/weekly-accepted', { params: { day } })
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

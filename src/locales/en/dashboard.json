@@ -1,6 +1,18 @@
 {
 	"today-submissions": "today's submissions",
 	"today-accepted": "today's accepted",
-	"today-users": "today's users",
-	"new-users": "new users"
+	"today-problems": "today's problems",
+	"new-users": "new users",
+	"sun": "sun",
+	"mon": "mon",
+	"tue": "tue",
+	"wed": "wed",
+	"thu": "thu",
+	"fri": "fri",
+	"sat": "sat",
+	"weekly-accepted": "weekly accepted",
+	"than-last-week": "than last week",
+	"weekly-submissions": "weekly submissions",
+	"thisWeek": "this week",
+	"lastWeek": "last week"
 }

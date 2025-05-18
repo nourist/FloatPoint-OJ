@@ -4,7 +4,7 @@ const Footer = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="text-base-content/70 flex items-center gap-1 pb-5">
+		<div className="text-base-content/70 flex items-center gap-1 py-5">
 			© 2025, {t('made-with')}
 			<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 				<path
