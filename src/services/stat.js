@@ -23,3 +23,11 @@ export const getWeeklyAccepted = (day) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getMonthlySubmissions = (day) =>
+	httpRequest
+		.get('/stat/monthly-submission', { params: { day } })
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

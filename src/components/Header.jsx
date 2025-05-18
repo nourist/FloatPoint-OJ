@@ -44,7 +44,7 @@ const Header = () => {
 		<>
 			<div
 				data-scroll={scroll}
-				className="shadow-shadow-color/3 data-[scroll=true]:bg-base-100 fixed top-3 left-6 flex h-[78px] w-[calc(100%-48px)] items-center gap-1 rounded-md px-5 py-4 transition-all duration-200 ease-in-out data-[scroll=true]:shadow-xl lg:left-[274px] lg:w-[calc(100%-298px)]"
+				className="shadow-shadow-color/3 data-[scroll=true]:bg-base-100 fixed top-3 left-6 z-50 flex h-[78px] w-[calc(100%-48px)] items-center gap-1 rounded-md px-5 py-4 transition-all duration-200 ease-in-out data-[scroll=true]:shadow-xl lg:left-[274px] lg:w-[calc(100%-298px)]"
 			>
 				<div>
 					<Breadcrumbs className="bg-transparent p-0">

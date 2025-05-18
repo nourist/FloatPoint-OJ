@@ -2,10 +2,12 @@ import { UserPlus, Braces, Send, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Line, LineChart, CartesianGrid } from 'recharts';
+import Chart from 'react-apexcharts';
 
-import { getStat, getWeeklySubmissions, getWeeklyAccepted } from '~/services/stat';
+import { getStat, getWeeklySubmissions, getWeeklyAccepted, getMonthlySubmissions } from '~/services/stat';
 import Error from '~/components/Error';
 import PercentChange from '~/components/PercentChange';
+import statusColors from '~/config/statusColor';
 
 const Dashboard = () => {
 	const { t } = useTranslation('dashboard');
@@ -110,8 +112,19 @@ const Dashboard = () => {
 		retry: 3,
 	});
 
-	if (statErr || prevStatErr || weeklyAcceptedErr || lastWeekAcceptedErr || weeklySubmissionsErr || lastWeekSubmissionsErr)
-		return <Error>{statErr || prevStatErr || weeklyAcceptedErr || lastWeekAcceptedErr || weeklySubmissionsErr || lastWeekSubmissionsErr}</Error>;
+	const {
+		data: monthlySubmissions,
+		isLoading: monthlySubmissionsLoading,
+		error: monthlySubmissionsErr,
+	} = useQuery({
+		queryKey: ['monthlySubmissions'],
+		queryFn: getMonthlySubmissions,
+		refetchInterval: 180000,
+		retry: 3,
+	});
+
+	if (statErr || prevStatErr || weeklyAcceptedErr || lastWeekAcceptedErr || weeklySubmissionsErr || lastWeekSubmissionsErr || monthlySubmissionsErr)
+		return <Error>{statErr || prevStatErr || weeklyAcceptedErr || lastWeekAcceptedErr || weeklySubmissionsErr || lastWeekSubmissionsErr || monthlySubmissionsErr}</Error>;
 
 	const getWeeklySubmissionChartData = () => {
 		if (!weeklySubmissions || !lastWeekSubmissions) return;
@@ -187,17 +200,22 @@ const Dashboard = () => {
 									<XAxis style={{ textTransform: 'capitalize', fontSize: '14px' }} dataKey="name" stroke="#fff" />
 									<YAxis style={{ fontSize: '13px' }} stroke="#fff" tickFormatter={(val) => val.toLocaleString()} />
 									<Tooltip
-										contentStyle={{ backgroundColor: 'var(--color-base-300)', borderRadius: '6px', border: 'none' }}
+										contentStyle={{
+											backdropFilter: 'blur(10px)',
+											backgroundColor: 'color-mix(in srgb, var(--color-base-content) 5%, transparent)',
+											borderRadius: '6px',
+											border: 'none',
+										}}
 										formatter={(value) => [value, 'Accepted']}
 										labelStyle={{
-											color: 'var(--color-base-content)',
+											color: 'var(--color-neutral)',
 											fontSize: '14px',
 											textTransform: 'capitalize',
 										}}
 										itemStyle={{
-											color: 'var(--color-base-content)',
-											opacity: '80%',
 											fontSize: '12px',
+											color: 'var(--color-neutral)',
+											opacity: '70%',
 										}}
 										cursor={false}
 									/>
@@ -232,15 +250,24 @@ const Dashboard = () => {
 					) : (
 						<ResponsiveContainer width="100%" height={280} style={{ marginLeft: '-10px' }}>
 							<LineChart data={getWeeklySubmissionChartData()}>
-								<XAxis dataKey="name" style={{ fontSize: '14px',textTransform: 'capitalize' }} />
+								<XAxis dataKey="name" style={{ fontSize: '14px', textTransform: 'capitalize' }} />
 								<YAxis style={{ fontSize: '13px' }} />
 								<CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
 								<Tooltip
-									contentStyle={{ textTransform: 'capitalize', backgroundColor: 'var(--color-base-300)', borderRadius: '6px', border: 'none' }}
+									contentStyle={{
+										backdropFilter: 'blur(5px)',
+										backgroundColor: 'color-mix(in srgb, var(--color-base-content) 5%, transparent)',
+										textTransform: 'capitalize',
+										borderRadius: '6px',
+										border: 'none',
+									}}
 									labelStyle={{
 										color: 'var(--color-base-content)',
 										fontSize: '14px',
 										textTransform: 'capitalize',
+									}}
+									itemStyle={{
+										fontSize: '12px',
 									}}
 									formatter={(value, name) => [value, t(name)]}
 								/>
@@ -248,6 +275,32 @@ const Dashboard = () => {
 								<Line type="monotone" dataKey="lastWeek" stroke="var(--color-secondary)" strokeWidth={3} dot={false} />
 							</LineChart>
 						</ResponsiveContainer>
+					)}
+				</div>
+			</div>
+			<div className="flex">
+				<div className="bg-base-100 shadow-shadow-color/5 w-[360px] rounded-xl p-8 pt-5 shadow-lg">
+					<h2 className="pb-3 text-center text-[15px] font-semibold capitalize">{t('monthly-submissions')}</h2>
+					{monthlySubmissionsLoading && !monthlySubmissions ? (
+						<>
+							<div className="skeleton m-3 mb-6 size-[272px] rounded-full"></div>
+							<div className="skeleton mb-[6px] h-5 w-full rounded-lg"></div>
+							<div className="skeleton h-5 w-full rounded-lg"></div>
+						</>
+					) : (
+						<Chart
+							width={296}
+							height={360}
+							type="pie"
+							series={monthlySubmissions?.map((item) => item.count)}
+							options={{
+								labels: monthlySubmissions?.map((item) => item._id),
+								colors: monthlySubmissions?.map((item) => statusColors[item._id.toLowerCase()]),
+								legend: {
+									position: 'bottom',
+								},
+							}}
+						/>
 					)}
 				</div>
 			</div>
