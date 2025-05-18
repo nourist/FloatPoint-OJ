@@ -279,30 +279,36 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<div className="flex">
-				<div className="bg-base-100 shadow-shadow-color/5 w-[360px] rounded-xl p-8 pt-5 shadow-lg">
-					<h2 className="pb-3 text-center text-[15px] font-semibold capitalize">{t('monthly-submissions')}</h2>
+				<div className="bg-base-100 shadow-shadow-color/5 h-[445px] w-full rounded-xl p-8 pt-5 shadow-lg md:w-[360px]">
+					<h2 className="text-base-content pb-3 text-center text-[15px] font-semibold capitalize">{t('monthly-submissions')}</h2>
 					{monthlySubmissionsLoading && !monthlySubmissions ? (
 						<>
-							<div className="skeleton m-3 mb-6 size-[272px] rounded-full"></div>
-							<div className="skeleton mb-[6px] h-5 w-full rounded-lg"></div>
-							<div className="skeleton h-5 w-full rounded-lg"></div>
+							<div className="skeleton mx-auto mb-6 size-[290px] rounded-full md:size-[272px]"></div>
+							<div className="skeleton mx-auto mb-[6px] h-5 w-full rounded-lg"></div>
+							<div className="skeleton mx-auto h-5 w-full rounded-lg"></div>
 						</>
 					) : (
-						<Chart
-							width={296}
-							height={360}
-							type="pie"
-							series={monthlySubmissions?.map((item) => item.count)}
-							options={{
-								labels: monthlySubmissions?.map((item) => item._id),
-								colors: monthlySubmissions?.map((item) => statusColors[item._id.toLowerCase()]),
-								legend: {
-									position: 'bottom',
-								},
-							}}
-						/>
+						<div className="flex-center h-[360px]">
+							<Chart
+								width={'100%'}
+								height={'100%'}
+								type="pie"
+								series={monthlySubmissions?.map((item) => item.count)}
+								options={{
+									labels: monthlySubmissions?.map((item) => item._id),
+									colors: monthlySubmissions?.map((item) => statusColors[item._id.toLowerCase()]),
+									legend: {
+										position: 'bottom',
+										labels: {
+											colors: Array(monthlySubmissions?.length).fill('var(--color-base-content)'),
+										},
+									},
+								}}
+							/>
+						</div>
 					)}
 				</div>
+				<div className="flex-1"></div>
 			</div>
 		</div>
 	);
