@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const PercentChange = ({ className = '', prev, next, ...props }) => {
-	const rateChange = (prev, next) => Math.round(prev <= 0 ? next * 100 : ((next - prev) / prev) * 100);
+	const rateChange = (prev, next) => Math.round(prev <= 0 ? next * 100 : next <= 0 ? prev * -100 : ((next - prev) / prev) * 100);
 
 	const rate = rateChange(prev, next);
 

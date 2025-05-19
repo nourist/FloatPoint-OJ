@@ -4,6 +4,7 @@ const theme = {
 			base: {
 				overlay: {
 					backgroundColor: '#fff',
+					position: 'fixed',
 				},
 			},
 		},
