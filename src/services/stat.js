@@ -31,3 +31,19 @@ export const getMonthlySubmissions = (day) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getMonthlyLanguages = (day) =>
+	httpRequest
+		.get('/stat/monthly-language', { params: { day } })
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
+export const getNewestActivities = () =>
+	httpRequest
+		.get('/stat/newest-activity')
+		.then((res) => res.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

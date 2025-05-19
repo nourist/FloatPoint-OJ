@@ -60,26 +60,25 @@ const WeeklyAcceptedCard = () => {
 									<YAxis style={{ fontSize: '13px' }} stroke="#fff" tickFormatter={(val) => val.toLocaleString()} />
 									<Tooltip
 										contentStyle={{
-											backdropFilter: 'blur(10px)',
-											backgroundColor: 'color-mix(in srgb, var(--color-base-content) 5%, transparent)',
+											backgroundColor: 'var(--color-base-200)',
 											borderRadius: '6px',
 											border: 'none',
 										}}
 										formatter={(value) => [value, 'Accepted']}
 										labelStyle={{
-											color: 'var(--color-neutral)',
-											opacity: '80%',
+											color: 'var(--color-base-content)',
 											fontSize: '14px',
 											textTransform: 'capitalize',
 										}}
 										itemStyle={{
 											fontSize: '12px',
-											color: 'var(--color-neutral)',
-											opacity: '50%',
+											color: 'transparent',
+											background: 'linear-gradient(90deg, var(--color-secondary), var(--color-primary))',
+											backgroundClip: 'text',
 										}}
 										cursor={false}
 									/>
-									<Bar dataKey="value" fill="#fff" radius={[8, 8, 8, 8]} barSize={24} />
+									<Bar dataKey="value" fill="#fff" radius={[6, 6, 6, 6]} barSize={22} />
 								</BarChart>
 							</ResponsiveContainer>
 						</div>

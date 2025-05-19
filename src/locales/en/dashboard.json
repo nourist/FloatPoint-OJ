@@ -15,5 +15,11 @@
 	"weekly-submissions": "weekly submissions",
 	"thisWeek": "this week",
 	"lastWeek": "last week",
-	"monthly-submissions": "monthly submissions"
+	"monthly-submissions": "monthly submissions",
+	"monthly-languages": "monthly languages",
+	"newest-activities": "newest activities",
+	"has-registered-to": "has registered to",
+	"success-solve": "successfully solved problem",
+	"recording": "recording",
+	"user": "User"
 }

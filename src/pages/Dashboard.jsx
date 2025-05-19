@@ -1,13 +1,11 @@
-import { useTranslation } from 'react-i18next';
-
 import StatCard from '~/components/StatCard';
 import WeeklyAcceptedCard from '~/components/WeeklyAcceptedCard';
 import WeeklySubmissionsCard from '~/components/WeeklySubmissionsCard';
 import MonthlySubmissionsCard from '~/components/MonthlySubmissionsCard';
+import MonthlyLanguagesCard from '~/components/MonthlyLanguagesCard';
+import NewestActivitiesCard from '~/components/NewestActivitiesCard';
 
 const Dashboard = () => {
-	const { t } = useTranslation('dashboard');
-
 	return (
 		<div className="min-h-[100vh] space-y-6">
 			<StatCard />
@@ -17,8 +15,8 @@ const Dashboard = () => {
 			</div>
 			<div className="flex flex-wrap gap-6">
 				<MonthlySubmissionsCard />
-				<div className="bg-base-100 shadow-shadow-color/5 min-h-40 w-full rounded-xl shadow-lg md:flex-1 xl:max-w-80"></div>
-				<div className="bg-base-100 shadow-shadow-color/5 min-h-40 w-full rounded-xl shadow-lg xl:flex-1"></div>
+				<MonthlyLanguagesCard />
+				<NewestActivitiesCard />
 			</div>
 		</div>
 	);

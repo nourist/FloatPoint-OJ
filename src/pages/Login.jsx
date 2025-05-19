@@ -130,7 +130,7 @@ const Login = () => {
 						</div>
 					</div>
 				</div>
-				<div className="from-secondary to-primary text-neutral-content flex flex-col items-center justify-center gap-2 bg-gradient-to-r py-4 lg:h-full lg:w-1/2 lg:pb-20">
+				<div className="from-secondary to-primary flex flex-col items-center justify-center gap-2 bg-gradient-to-r py-4 text-white lg:h-full lg:w-1/2 lg:pb-20">
 					<UserRound className="size-16 lg:!size-32" />
 					<h1 className="text-[2rem] font-bold">{t('welcome')}</h1>
 				</div>
