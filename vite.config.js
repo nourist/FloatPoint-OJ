@@ -8,7 +8,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 // https://vite.dev/config/
 export default defineConfig({
 	server: {
-		port: 7749,
+		port: 5174,
 	},
 	plugins: [
 		react(),

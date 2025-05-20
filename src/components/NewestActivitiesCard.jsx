@@ -11,8 +11,6 @@ const NewestActivitiesCard = () => {
 	const { data: newestActivities, error: newestActivitiesErr } = useQuery({
 		queryKey: ['newestActivities'],
 		queryFn: getNewestActivities,
-		refetchInterval: 180000,
-		retry: 3,
 	});
 
 	const getMessage = (item) => {

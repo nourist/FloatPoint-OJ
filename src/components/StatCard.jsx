@@ -31,8 +31,6 @@ const StatCard = () => {
 			yesterday.setDate(new Date().getDate() - 1);
 			return getStat(yesterday);
 		},
-		refetchInterval: 180000,
-		retry: 3,
 	});
 
 	return (

@@ -16,8 +16,6 @@ const MonthlyLanguagesCard = () => {
 	} = useQuery({
 		queryKey: ['monthlyLanguages'],
 		queryFn: getMonthlyLanguages,
-		refetchInterval: 180000,
-		retry: 3,
 	});
 
 	return (

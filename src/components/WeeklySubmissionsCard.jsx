@@ -25,8 +25,6 @@ const WeeklySubmissionsCard = () => {
 					value: countMap.get(day) || 0,
 				}));
 			}),
-		refetchInterval: 180000,
-		retry: 3,
 	});
 
 	const {

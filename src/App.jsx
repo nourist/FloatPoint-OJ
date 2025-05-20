@@ -15,7 +15,7 @@ import useDebounce from './hooks/useDebounce';
 import useThemeStore from './stores/themeStore';
 import themeValue from './config/theme';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 3, refetchInterval: 180000 } } });
 
 const App = () => {
 	const { i18n } = useTranslation();

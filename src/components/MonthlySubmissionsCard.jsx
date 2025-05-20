@@ -17,8 +17,6 @@ const MonthlySubmissionsCard = () => {
 	} = useQuery({
 		queryKey: ['monthlySubmissions'],
 		queryFn: getMonthlySubmissions,
-		refetchInterval: 180000,
-		retry: 3,
 	});
 
 	return (
