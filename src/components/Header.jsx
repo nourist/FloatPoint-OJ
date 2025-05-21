@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Breadcrumbs, IconButton, Menu, MenuHandler, MenuList, MenuItem, Drawer } from '@material-tailwind/react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Languages, Moon, Sun, AlignJustify } from 'lucide-react';
+import { Languages, Moon, Sun, AlignJustify, Check } from 'lucide-react';
 
 import { locales } from '~/i18n';
 import useAuthStore from '~/stores/authStore';
@@ -14,7 +14,7 @@ const Header = () => {
 	const { pathname } = useLocation();
 	const { user } = useAuthStore();
 	const { t, i18n } = useTranslation();
-	const { theme, setMode } = useThemeStore();
+	const { theme, setMode, mode } = useThemeStore();
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -72,8 +72,9 @@ const Header = () => {
 					</MenuHandler>
 					<MenuList>
 						{Object.keys(locales).map((item, index) => (
-							<MenuItem onClick={() => i18n.changeLanguage(item)} key={index}>
+							<MenuItem className="flex" onClick={() => i18n.changeLanguage(item)} key={index}>
 								{locales[item]}
+								{item === i18n.language && <Check className="ml-auto size-4" />}
 							</MenuItem>
 						))}
 					</MenuList>
@@ -85,14 +86,17 @@ const Header = () => {
 						</IconButton>
 					</MenuHandler>
 					<MenuList>
-						<MenuItem className="capitalize" onClick={() => setMode('light')}>
+						<MenuItem className="flex capitalize" onClick={() => setMode('light')}>
 							{t('light')}
+							{mode == 'light' && <Check className="ml-auto size-4" />}
 						</MenuItem>
-						<MenuItem className="capitalize" onClick={() => setMode('dark')}>
+						<MenuItem className="flex capitalize" onClick={() => setMode('dark')}>
 							{t('dark')}
+							{mode == 'dark' && <Check className="ml-auto size-4" />}
 						</MenuItem>
-						<MenuItem className="capitalize" onClick={() => setMode('system')}>
+						<MenuItem className="flex capitalize" onClick={() => setMode('system')}>
 							{t('system')}
+							{mode == 'system' && <Check className="ml-auto size-4" />}
 						</MenuItem>
 					</MenuList>
 				</Menu>

@@ -3,7 +3,7 @@ const theme = {
 		styles: {
 			base: {
 				overlay: {
-					backgroundColor: '#fff',
+					backgroundColor: '',
 					position: 'fixed',
 				},
 			},
@@ -44,7 +44,7 @@ const theme = {
 				outlined: {
 					base: {
 						input: {
-							borderColor: '!border-blue-gray-200 dark:!border-blue-gray-700',
+							borderColor: '!border-blue-gray-200 dark:!border-blue-gray-800',
 						},
 					},
 				},
