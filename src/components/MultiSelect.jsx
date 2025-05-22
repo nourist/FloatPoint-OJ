@@ -42,13 +42,13 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 	}, [value, data]);
 
 	return (
-		<div className={`relative w-72 ${className}`} ref={containerRef}>
+		<div className={`relative w-64 ${className}`} ref={containerRef}>
 			<Menu>
 				<MenuHandler>
 					<Button
 						loading={loading}
 						variant="outlined"
-						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!border-blue-gray-900 aria-expanded:dark:!border-blue-gray-200 relative flex h-10 w-72 items-center p-3 pr-8 hover:!opacity-100 aria-expanded:border-2`}
+						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!border-blue-gray-900 aria-expanded:dark:!border-blue-gray-200 relative flex h-10 w-64 items-center p-3 pr-8 hover:!opacity-100 aria-expanded:border-2`}
 						ripple={false}
 					>
 						<span
@@ -86,7 +86,7 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`w-72`}>
+				<MenuList className={`max-h-[344px] w-64 overflow-auto`}>
 					{data?.map((item, index) => (
 						<MenuItem
 							className="flex h-10 items-center gap-2 capitalize"

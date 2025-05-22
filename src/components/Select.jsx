@@ -4,12 +4,12 @@ import { Check } from 'lucide-react';
 
 const Select = ({ label, data, value, setValue, className = '' }) => {
 	return (
-		<div className={`relative w-52 ${className}`}>
+		<div className={`relative w-48 ${className}`}>
 			<Menu>
 				<MenuHandler>
 					<Button
 						variant="outlined"
-						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!border-blue-gray-900 aria-expanded:dark:!border-blue-gray-200 relative flex h-10 w-52 items-center p-3 hover:!opacity-100 aria-expanded:border-2`}
+						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!border-blue-gray-900 aria-expanded:dark:!border-blue-gray-200 relative flex h-10 w-48 items-center p-3 hover:!opacity-100 aria-expanded:border-2`}
 						ripple={false}
 					>
 						<span
@@ -31,7 +31,7 @@ const Select = ({ label, data, value, setValue, className = '' }) => {
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`w-52`}>
+				<MenuList className={`w-48`}>
 					{data?.map((item, index) => (
 						<MenuItem className="flex gap-2 capitalize" key={index} onClick={() => setValue(item.value)}>
 							<div className="-ml-1 size-4">{item.value === value && <Check className="size-4" />}</div>

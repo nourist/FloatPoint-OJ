@@ -12,12 +12,12 @@ const NotFound = () => {
 
 	return (
 		<div className="flex-center h-[100vh] w-full flex-col">
-			<div className="text-blue-gray-800 flex-center max-h-[252px] gap-4 text-[168px] font-bold text-shadow-[.05em_.05em_0_rgba(0,0,0,0.25)]">
+			<div className="text-blue-gray-800 dark:text-blue-gray-50 flex-center max-h-[252px] gap-4 text-[168px] font-bold text-shadow-[.05em_.05em_0_rgba(0,0,0,0.25)]">
 				4
 				<div className="animate-bounce">
 					<div
 						data-love={love}
-						className="bg-blue-gray-100 data-[love=true]:flex-center mx-auto w-full overflow-hidden rounded-md py-1 text-center text-base whitespace-nowrap transition-all duration-150 text-shadow-none data-[love=true]:size-8"
+						className="bg-blue-gray-100 data-[love=true]:flex-center text-blue-gray-800 mx-auto w-full overflow-hidden rounded-md py-1 text-center text-base whitespace-nowrap transition-all duration-150 text-shadow-none data-[love=true]:size-8"
 					>
 						{love ? <Heart className="size-5" color="#fb6f92" fill="#fb6f92" /> : t('smash')}
 					</div>
@@ -32,7 +32,7 @@ const NotFound = () => {
 				</div>
 				4
 			</div>
-			<h2 className="text-blue-gray-700 text-lg">{t('msg')}</h2>
+			<h2 className="text-blue-gray-700 dark:text-blue-gray-100 text-lg">{t('msg')}</h2>
 		</div>
 	);
 };

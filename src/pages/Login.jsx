@@ -74,7 +74,7 @@ const Login = () => {
 							type="email"
 							size="lg"
 							data-error={emailError}
-							className="focus:!border-primary data-[error=true]:placeholder:text-error dark:data-[error=true]:!border-error data-[error=true]:!border-error placeholder:!opacity-100"
+							className="focus:!border-primary dark:focus:!border-primary data-[error=true]:placeholder:text-error dark:data-[error=true]:!border-error data-[error=true]:!border-error placeholder:!opacity-100"
 							labelProps={{
 								className: 'hidden',
 							}}
@@ -93,7 +93,7 @@ const Login = () => {
 							id="password"
 							size="lg"
 							type={showPassword ? 'text' : 'password'}
-							className="focus:!border-primary data-[error=true]:placeholder:text-error data-[error=true]:!border-error dark:data-[error=true]:!border-error pr-[44px] placeholder:!opacity-100"
+							className="focus:!border-primary dark:focus:!border-primary data-[error=true]:placeholder:text-error data-[error=true]:!border-error dark:data-[error=true]:!border-error pr-[44px] placeholder:!opacity-100"
 							labelProps={{
 								className: 'hidden',
 							}}

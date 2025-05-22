@@ -3,5 +3,8 @@
 	"medium": "medium",
 	"hard": "hard",
 	"difficulty": "difficulty",
-	"tags": "tags"
+	"tags": "tags",
+	"create-new": "create new",
+	"close-it": "close it",
+	"open-it": "open it"
 }

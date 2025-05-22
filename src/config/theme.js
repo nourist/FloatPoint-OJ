@@ -44,7 +44,13 @@ const theme = {
 				outlined: {
 					base: {
 						input: {
-							borderColor: '!border-blue-gray-200 dark:!border-blue-gray-800',
+							borderColor:
+								'dark:focus:!border-blue-gray-200 dark:border-blue-gray-800 dark:!border-t-blue-gray-800 !border-t-blue-gray-200 data-[label=true]:dark:focus:!border-t-transparent data-[label=true]:focus:!border-t-transparent',
+						},
+						label: {
+							borderColor:
+								'dark:peer-focus:before:!border-blue-gray-200 dark:peer-focus:after:!border-blue-gray-200 dark:before:border-blue-gray-800 dark:after:border-blue-gray-800 peer-focus:!text-base-content',
+							text: 'capitalize',
 						},
 					},
 				},
@@ -56,6 +62,16 @@ const theme = {
 			base: {
 				input: {
 					borderColor: 'border-blue-gray-200 dark:border-blue-gray-700',
+				},
+			},
+		},
+	},
+	tooltip: {
+		styles: {
+			base: {
+				tooltip: {
+					text: 'capitalize',
+					bg: 'bg-base-content/40',
 				},
 			},
 		},
