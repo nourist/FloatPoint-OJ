@@ -10,6 +10,7 @@ import MultiSelect from '~/components/MultiSelect';
 import { getProblems, getTags } from '~/services/problem';
 import useDebounce from '~/hooks/useDebounce';
 import Pagination from '~/components/Pagination';
+import ChipList from '~/components/ChipList';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -108,7 +109,9 @@ const Problem = () => {
 												</IconButton>
 											</Tooltip>
 										</td>
-										<td className="p-4 text-sm">{item.tags}</td>
+										<td className="max-w-sm p-4 text-sm md:max-w-xs">
+											<ChipList data={item.tags} activeTags={tags} />
+										</td>
 										<td
 											data-difficulty={item.difficulty}
 											className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize"
