@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';	
+import PropTypes from 'prop-types';
 import { Chip } from '@material-tailwind/react';
 
 const ChipList = ({ data = [], activeTags = [] }) => {
@@ -10,16 +10,16 @@ const ChipList = ({ data = [], activeTags = [] }) => {
 					value={tag}
 					size="sm"
 					data-active={activeTags.includes(tag)}
-					className="bg-base-content data-[active=true]:text-white data-[active=true]:bg-accent text-base-100 rounded-xl text-xs capitalize"
+					className="bg-base-content data-[active=true]:bg-accent text-base-100 rounded-xl text-xs capitalize data-[active=true]:text-white"
 				/>
 			))}
 		</div>
 	);
-}
- 
+};
+
 ChipList.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.string),
 	activeTags: PropTypes.arrayOf(PropTypes.string),
-}
+};
 
 export default ChipList;

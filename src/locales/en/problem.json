@@ -16,5 +16,9 @@
 	"point": "point",
 	"%ac": "%ac",
 	"#ac": "#ac",
-	"per-page": "Per page"
+	"per-page": "Per page",
+	"are-you-sure": "Are you sure",
+	"open-msg": "Everyone can see this problem",
+	"close-msg": "Only Admin can see this problem",
+	"cancel": "cancel"
 }

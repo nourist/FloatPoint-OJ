@@ -76,6 +76,15 @@ const theme = {
 			},
 		},
 	},
+	dialog: {
+		styles: {
+			base: {
+				backdrop: {
+					backgroundColor: '',
+				},
+			},
+		},
+	},
 };
 
 export default theme;

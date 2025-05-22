@@ -15,3 +15,11 @@ export const getTags = () =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const editProblem = (problemId, data) =>
+	httpRequest
+		.post(`/problem/edit/${problemId}`, data)
+		.then((res) => res.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

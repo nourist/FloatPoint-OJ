@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, Button, IconButton, Tooltip } from '@material-tailwind/react';
+import { Input, Button, IconButton, Tooltip, Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
 import { Search, Plus, Lock, LockOpen, Trash, Pencil } from 'lucide-react';
-import { Link } from 'react-router';
+import { toast } from 'react-toastify';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Select from '~/components/Select';
 import MultiSelect from '~/components/MultiSelect';
-import { getProblems, getTags } from '~/services/problem';
+import { getProblems, getTags, editProblem } from '~/services/problem';
 import useDebounce from '~/hooks/useDebounce';
 import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
@@ -15,6 +16,7 @@ import Error from '~/components/Error';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
+	const queryClient = useQueryClient();
 
 	const [difficulty, setDifficulty] = useState();
 	const [tags, setTags] = useState([]);
@@ -23,6 +25,28 @@ const Problem = () => {
 	const [perPage, setPerPage] = useState(50);
 	const [maxPage, setMaxPage] = useState(1);
 	const q = useDebounce(search, 400);
+
+	const [openPrivatePublicDialog, setPrivatePublicDialog] = useState(false);
+	const [selectId, setSelectId] = useState();
+	const [selectValue, setSelectValue] = useState();
+	const [privatePublicLoading, setPrivatePublicLoading] = useState(false);
+
+	const handlePrivatePublic = async () => {
+		if (!selectValue || !selectId) return;
+		setPrivatePublicLoading(true);
+		editProblem(selectId, { public: !selectValue.public })
+			.then((res) => {
+				toast.success(res.msg);
+				queryClient.invalidateQueries(['problems', { tags, q, difficulty, perPage, page }]);
+			})
+			.catch((err) => {
+				toast.error(err);
+			})
+			.finally(() => {
+				setPrivatePublicLoading(false);
+				setPrivatePublicDialog(false);
+			});
+	};
 
 	const {
 		data: problems,
@@ -49,19 +73,48 @@ const Problem = () => {
 		}
 	}, [problems]);
 
-	if (tagsErr) return (
-		<div className="min-h-[100vh]">
-			<Error keys={[['tags']]}>{tagsErr}</Error>
-		</div>
-	);
-	if (problemsErr) return (
-		<div className="min-h-[100vh]">
-			<Error keys={[['problems', { tags, q, difficulty, perPage, page }]]}>{problemsErr}</Error>
-		</div>
-	);
+	useEffect(() => {
+		if (!problems || !selectId) return;
+		setSelectValue(problems.data.find((item) => item.id === selectId));
+	}, [problems, selectId]);
+
+	if (tagsErr)
+		return (
+			<div className="min-h-[100vh]">
+				<Error keys={[['tags']]}>{tagsErr}</Error>
+			</div>
+		);
+	if (problemsErr)
+		return (
+			<div className="min-h-[100vh]">
+				<Error keys={[['problems', { tags, q, difficulty, perPage, page }]]}>{problemsErr}</Error>
+			</div>
+		);
 
 	return (
 		<div className="min-h-[100vh]">
+			<Dialog size="sm" className="p-4" open={openPrivatePublicDialog} handler={() => setPrivatePublicDialog((prev) => !prev)}>
+				<DialogHeader>{t('are-you-sure')}?</DialogHeader>
+				<DialogBody className="py-1">{selectValue?.public ? t('close-msg') : t('open-msg')}</DialogBody>
+				<DialogFooter className="space-x-2">
+					<Button size="sm" variant="text" className="text-error cursor-pointer" onClick={() => setPrivatePublicDialog(false)}>
+						{t('cancel')}
+					</Button>
+					<Button size="sm" className="bg-success flex-center cursor-pointer gap-2" onClick={handlePrivatePublic} loading={privatePublicLoading}>
+						{selectValue?.public ? (
+							<>
+								{t('close-it')}
+								<Lock strokeWidth={3} size="14" />
+							</>
+						) : (
+							<>
+								{t('open-it')}
+								<LockOpen strokeWidth={3} size="14" />
+							</>
+						)}
+					</Button>
+				</DialogFooter>
+			</Dialog>
 			<div className="mb-4 flex flex-wrap gap-2">
 				<Select
 					value={difficulty}
@@ -105,14 +158,17 @@ const Problem = () => {
 							: problems?.data?.map((item, index) => (
 									<tr key={index} className="even:bg-blue-gray-50/50 dark:bg-base-200 dark:even:bg-base-100 dark:text-base-content/80">
 										<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
-										<td className="p-4 text-sm">
-											<Link to={`/problem/${item.id}`} className="text-blue-gray-900 hover:!text-secondary dark:text-white">
-												{item.name}
-											</Link>
-										</td>
+										<td className="p-4 text-sm">{item.name}</td>
 										<td className="p-4 text-sm">
 											<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
-												<IconButton size="sm" className="group !shadow-cmd cursor-pointer rounded-full bg-transparent">
+												<IconButton
+													onClick={() => {
+														setSelectId(item.id);
+														setPrivatePublicDialog(true);
+													}}
+													size="sm"
+													className="group !shadow-cmd cursor-pointer rounded-full bg-transparent"
+												>
 													{item.public ? (
 														<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
 													) : (
