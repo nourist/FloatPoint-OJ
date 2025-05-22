@@ -209,6 +209,10 @@
 	@apply bg-base-content/15 animate-pulse;
 }
 
+@utility skeleton-variant {
+	@apply bg-base-content/10 animate-pulse;
+}
+
 html {
 	font-family: 'Lato', sans-serif;
 }

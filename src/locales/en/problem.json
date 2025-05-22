@@ -6,5 +6,15 @@
 	"tags": "tags",
 	"create-new": "create new",
 	"close-it": "close it",
-	"open-it": "open it"
+	"open-it": "open it",
+	"edit": "edit",
+	"delete": "delete",
+	"search": "search",
+	"id": "id",
+	"private": "private",
+	"name": "name",
+	"point": "point",
+	"%ac": "%ac",
+	"#ac": "#ac",
+	"per-page": "Per page"
 }

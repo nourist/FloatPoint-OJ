@@ -9,36 +9,28 @@ import Select from '~/components/Select';
 import MultiSelect from '~/components/MultiSelect';
 import { getProblems, getTags } from '~/services/problem';
 import useDebounce from '~/hooks/useDebounce';
+import Pagination from '~/components/Pagination';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
 
-	const [showDial, setShowDial] = useState(false);
-
 	const [difficulty, setDifficulty] = useState();
 	const [tags, setTags] = useState([]);
 	const [search, setSearch] = useState('');
+	const [page, setPage] = useState(1);
+	const [perPage, setPerPage] = useState(50);
+	const [maxPage, setMaxPage] = useState(1);
 	const q = useDebounce(search, 400);
-
-	useEffect(() => {
-		window.addEventListener('scroll', () => {
-			setShowDial(window.scrollY > 160);
-		});
-		return () => {
-			window.removeEventListener('scroll', () => {
-				setShowDial(window.scrollY > 160);
-			});
-		};
-	}, []);
 
 	const {
 		data: problems,
 		isLoading: problemsLoading,
 		isError: problemsErr,
 	} = useQuery({
-		queryKey: ['problems', { tags, q, difficulty }],
-		queryFn: () => getProblems({ tags, q, difficulty }),
+		queryKey: ['problems', { tags, q, difficulty, perPage, page }],
+		queryFn: () => getProblems({ tags, q, difficulty, size: perPage, page }),
 	});
+	const problemSmoothLoading = useDebounce(problemsLoading, 50);
 
 	const {
 		data: tagList,
@@ -49,13 +41,14 @@ const Problem = () => {
 		queryFn: getTags,
 	});
 
-	console.log('problem', problems);
+	useEffect(() => {
+		if (problems) {
+			setMaxPage(Math.max(problems.maxPage, 1));
+		}
+	}, [problems]);
 
 	return (
-		<div>
-			<IconButton data-hide={!showDial} size="lg" className="bg-primary group !fixed right-8 bottom-10 z-20 cursor-pointer rounded-full data-[hide=true]:hidden">
-				<Plus strokeWidth="1.5" size="24" color="#fff" className="transition-all duration-200 group-hover:!size-8" />
-			</IconButton>
+		<div className="min-h-[100vh]">
 			<div className="mb-4 flex flex-wrap gap-2">
 				<Select
 					value={difficulty}
@@ -88,51 +81,70 @@ const Problem = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{problems?.data?.map((item, index) => (
-							<tr key={index} className="even:bg-blue-gray-50/50 dark:bg-base-200 dark:even:bg-base-100 dark:text-base-content/80">
-								<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
-								<td className="p-4 text-sm">
-									<Link to={`/problem/${item.id}`} className="text-blue-gray-900 hover:!text-secondary dark:text-white">
-										{item.name}
-									</Link>
-								</td>
-								<td className="p-4 text-sm">
-									<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
-										<IconButton size="sm" className="group !shadow-cmd cursor-pointer rounded-full bg-transparent">
-											{item.public ? (
-												<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
-											) : (
-												<Lock size="18" className="text-error transition-all duration-300 group-hover:mb-1" />
-											)}
-										</IconButton>
-									</Tooltip>
-								</td>
-								<td className="p-4 text-sm">{item.tags}</td>
-								<td
-									data-difficulty={item.difficulty}
-									className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize"
-								>
-									{item.difficulty}
-								</td>
-								<td className="p-4 text-sm">{item.point}p</td>
-								<td className="p-4 text-sm">{item.noOfSuccess}</td>
-								<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
-								<td className="space-x-3 p-4 text-sm">
-									<Tooltip content={t('edit')}>
-										<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
-											<Pencil color="#fff" size="16" />
-										</IconButton>
-									</Tooltip>
-									<Tooltip content={t('delete')}>
-										<IconButton size="sm" className="bg-error hover:!shadow-cmd cursor-pointer rounded-full">
-											<Trash color="#fff" size="16" />
-										</IconButton>
-									</Tooltip>
-								</td>
-							</tr>
-						))}
+						{problemSmoothLoading
+							? [...Array(perPage)].map((_, index) => (
+									<tr key={index} className="skeleton odd:skeleton-variant h-16">
+										{[...Array(9)].map((_, index) => (
+											<td key={index} className="p-4"></td>
+										))}
+									</tr>
+								))
+							: problems?.data?.map((item, index) => (
+									<tr key={index} className="even:bg-blue-gray-50/50 dark:bg-base-200 dark:even:bg-base-100 dark:text-base-content/80">
+										<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
+										<td className="p-4 text-sm">
+											<Link to={`/problem/${item.id}`} className="text-blue-gray-900 hover:!text-secondary dark:text-white">
+												{item.name}
+											</Link>
+										</td>
+										<td className="p-4 text-sm">
+											<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
+												<IconButton size="sm" className="group !shadow-cmd cursor-pointer rounded-full bg-transparent">
+													{item.public ? (
+														<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
+													) : (
+														<Lock size="18" className="text-error transition-all duration-300 group-hover:mb-1" />
+													)}
+												</IconButton>
+											</Tooltip>
+										</td>
+										<td className="p-4 text-sm">{item.tags}</td>
+										<td
+											data-difficulty={item.difficulty}
+											className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize"
+										>
+											{item.difficulty}
+										</td>
+										<td className="p-4 text-sm">{item.point}p</td>
+										<td className="p-4 text-sm">{item.noOfSuccess}</td>
+										<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
+										<td className="space-x-3 p-4 text-sm">
+											<Tooltip content={t('edit')}>
+												<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
+													<Pencil color="#fff" size="16" />
+												</IconButton>
+											</Tooltip>
+											<Tooltip content={t('delete')}>
+												<IconButton size="sm" className="bg-error hover:!shadow-cmd cursor-pointer rounded-full">
+													<Trash color="#fff" size="16" />
+												</IconButton>
+											</Tooltip>
+										</td>
+									</tr>
+								))}
 					</tbody>
 				</table>
+			</div>
+			<div className="mt-4 flex flex-wrap gap-2">
+				<Select
+					prefix={t('per-page')}
+					value={perPage}
+					clearable={false}
+					setValue={setPerPage}
+					className="mr-auto"
+					data={[...Array(4)].map((_, i) => (i + 1) * 25).map((i) => ({ value: i, label: i }))}
+				/>
+				<Pagination maxPage={maxPage} page={page} setPage={setPage} />
 			</div>
 		</div>
 	);

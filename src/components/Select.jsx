@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Menu, MenuHandler, MenuList, MenuItem, Button } from '@material-tailwind/react';
 import { Check } from 'lucide-react';
 
-const Select = ({ label, data, value, setValue, className = '' }) => {
+const Select = ({ label, data, value, setValue, className = '', clearable = true, prefix }) => {
 	return (
 		<div className={`relative w-48 ${className}`}>
 			<Menu>
@@ -16,9 +16,16 @@ const Select = ({ label, data, value, setValue, className = '' }) => {
 							data-label={!value}
 							className="data-[label=true]:!text-blue-gray-400 dark:data-[label=true]:!text-blue-gray-200 text-blue-gray-800 dark:text-blue-gray-100 text-sm font-normal capitalize"
 						>
-							{data?.filter((item) => item.value === value)?.[0]?.label || label}
+							{value ? (
+								<>
+									{prefix && <span className="font-semibold normal-case">{prefix}: </span>}
+									{data?.filter((item) => item.value === value)?.[0]?.label}
+								</>
+							) : (
+								label
+							)}
 						</span>
-						{!value && (
+						{(!value || !clearable) && (
 							<div className="text-blue-gray-400 absolute top-2/4 right-2 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all group-aria-expanded:rotate-180">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 									<path
@@ -39,7 +46,7 @@ const Select = ({ label, data, value, setValue, className = '' }) => {
 						</MenuItem>
 					))}
 				</MenuList>
-				{value && (
+				{value && clearable && (
 					<div className="text-blue-gray-400 flex-center absolute top-2/4 right-2 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all">
 						<button className="cursor-pointer" onClick={() => setValue(null)}>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
@@ -63,6 +70,8 @@ Select.propTypes = {
 	value: PropTypes.string.isRequired,
 	setValue: PropTypes.func.isRequired,
 	className: PropTypes.string,
+	clearable: PropTypes.bool,
+	prefix: PropTypes.string,
 };
 
 export default Select;
