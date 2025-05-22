@@ -22,7 +22,7 @@ const MonthlySubmissionsCard = () => {
 	return (
 		<div className="bg-base-100 shadow-shadow-color/5 h-[445px] w-full rounded-xl px-8 pt-5 pb-16 shadow-lg xl:max-w-[360px]">
 			{monthlySubmissionsErr ? (
-				<Error keys={['monthlySubmissions']}>{monthlySubmissionsErr}</Error>
+				<Error keys={[['monthlySubmissions']]}>{monthlySubmissionsErr}</Error>
 			) : (
 				<>
 					<h2 className="text-base-content pb-3 text-center font-semibold capitalize">{t('monthly-submissions')}</h2>

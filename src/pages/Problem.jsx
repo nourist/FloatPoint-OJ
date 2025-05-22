@@ -11,6 +11,7 @@ import { getProblems, getTags } from '~/services/problem';
 import useDebounce from '~/hooks/useDebounce';
 import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
+import Error from '~/components/Error';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -47,6 +48,17 @@ const Problem = () => {
 			setMaxPage(Math.max(problems.maxPage, 1));
 		}
 	}, [problems]);
+
+	if (tagsErr) return (
+		<div className="min-h-[100vh]">
+			<Error keys={[['tags']]}>{tagsErr}</Error>
+		</div>
+	);
+	if (problemsErr) return (
+		<div className="min-h-[100vh]">
+			<Error keys={[['problems', { tags, q, difficulty, perPage, page }]]}>{problemsErr}</Error>
+		</div>
+	);
 
 	return (
 		<div className="min-h-[100vh]">

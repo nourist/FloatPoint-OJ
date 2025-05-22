@@ -45,7 +45,7 @@ const WeeklyAcceptedCard = () => {
 	return (
 		<div className="bg-base-100 shadow-shadow-color/5 min-h-[350px] w-full gap-6 rounded-xl p-4 shadow-lg xl:w-2/5">
 			{weeklyAcceptedErr || lastWeekAcceptedErr ? (
-				<Error keys={['weeklyAccepted', 'lastWeekAccepted']}>{weeklyAcceptedErr || lastWeekAcceptedErr}</Error>
+				<Error keys={[['weeklyAccepted'], ['lastWeekAccepted']]}>{weeklyAcceptedErr || lastWeekAcceptedErr}</Error>
 			) : (
 				<>
 					{weeklyAcceptedLoading || lastWeekAcceptedLoading ? (

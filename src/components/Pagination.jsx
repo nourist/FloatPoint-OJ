@@ -151,11 +151,11 @@ const Pagination = ({ maxPage, page, setPage, maxButton = 5, className = '' }) =
 	}
 	return (
 		<div className={`space-x-2 ${className}`}>
-			<CustomButton variant="text" className="cursor-pointer" disabled={page == 1} onClick={() => setPage((prev) => prev - 1)}>
+			<CustomButton variant="text" className="cursor-pointer hover:-translate-x-1" disabled={page == 1} onClick={() => setPage((prev) => prev - 1)}>
 				<ArrowLeft size={20} />
 			</CustomButton>
 			<PaginButton maxPage={maxPage} page={page} setPage={setPage} maxButton={maxButton} />
-			<CustomButton variant="text" className="cursor-pointer" disabled={page == maxPage} onClick={() => setPage((prev) => prev + 1)}>
+			<CustomButton variant="text" className="cursor-pointer hover:translate-x-1" disabled={page == maxPage} onClick={() => setPage((prev) => prev + 1)}>
 				<ArrowRight size={20} />
 			</CustomButton>
 		</div>

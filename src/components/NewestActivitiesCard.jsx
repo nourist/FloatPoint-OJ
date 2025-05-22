@@ -21,7 +21,7 @@ const NewestActivitiesCard = () => {
 	return (
 		<div className="bg-base-100 shadow-shadow-color/5 h-[445px] w-full rounded-xl p-6 pt-5 shadow-lg xl:flex-1">
 			{newestActivitiesErr ? (
-				<Error keys={['newestActivities']}>{newestActivitiesErr}</Error>
+				<Error keys={[['newestActivities']]}>{newestActivitiesErr}</Error>
 			) : (
 				<>
 					<h2 className="text-base-content mb-8 font-semibold capitalize">

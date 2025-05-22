@@ -36,7 +36,7 @@ const StatCard = () => {
 	return (
 		<div className="grid grid-cols-4 grid-rows-4 gap-6">
 			{statErr || prevStatErr ? (
-				<Error className="col-span-4 row-span-4 !h-[432px] sm:!h-[216px] xl:!h-[96px]" keys={['stat', 'prevStat']}>
+				<Error className="col-span-4 row-span-4 !h-[432px] sm:!h-[216px] xl:!h-[96px]" keys={[['stat'], ['prevStat']]}>
 					{statErr || prevStatErr}
 				</Error>
 			) : (

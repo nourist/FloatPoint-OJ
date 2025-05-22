@@ -16,7 +16,7 @@ const Error = ({ children, onRefresh, keys = [], className = '' }) => {
 			</p>
 			<Button
 				className="bg-primary cursor-pointer hover:shadow-none"
-				onClick={onRefresh || (() => keys.forEach((item) => queryClient.invalidateQueries({ queryKey: [item], exact: true })))}
+				onClick={onRefresh || (() => keys.forEach((item) => queryClient.invalidateQueries({ queryKey: item, exact: true })))}
 			>
 				{t('refresh')}
 			</Button>

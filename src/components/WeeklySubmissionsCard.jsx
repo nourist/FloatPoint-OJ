@@ -60,7 +60,7 @@ const WeeklySubmissionsCard = () => {
 	return (
 		<div className="bg-base-100 shadow-shadow-color/5 min-h-[350px] flex-1 rounded-xl p-4 !pl-0 shadow-lg">
 			{weeklySubmissionsErr || lastWeekSubmissionsErr ? (
-				<Error keys={['weeklySubmissions', 'lastWeekSubmissions']}>{weeklySubmissionsErr || lastWeekSubmissionsErr}</Error>
+				<Error keys={[['weeklySubmissions'], ['lastWeekSubmissions']]}>{weeklySubmissionsErr || lastWeekSubmissionsErr}</Error>
 			) : (
 				<>
 					<h3 className="text-base-content mb-4 pl-6 text-[15px] font-semibold capitalize">
