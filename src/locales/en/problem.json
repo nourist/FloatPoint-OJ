@@ -19,7 +19,7 @@
 	"per-page": "Per page",
 	"are-you-sure": "Are you sure",
 	"open-msg": "Everyone can see this problem",
-	"close-msg": "Only Admin can see this problem",
+	"close-msg": "Only Admin and contest participant can see this problem",
 	"cancel": "cancel",
 	"delete-msg": "The problem will be gone forever",
 	"create-new-problem": "create new problem",

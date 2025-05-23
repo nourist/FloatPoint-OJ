@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { IconButton, Dialog, DialogBody, DialogHeader, DialogFooter, Checkbox } from '@material-tailwind/react';
+import { IconButton, Dialog, DialogBody, DialogHeader, DialogFooter, Checkbox} from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -47,6 +47,11 @@ const CreateProblemDialog = ({ handler, open }) => {
 					]}
 					clearable={false}
 				/>
+				{/* <Select>
+					<Option>easy</Option>
+					<Option>medium</Option>
+					<Option>hard</Option>
+				</Select> */}
 				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">{t('tags')}</h2>
 				<TagInput className="mt-2" tags={tags} setTags={setTags} suggestTags={suggestTags || []} placeholder={`${t('select-tag')}...`} />
 				<h2 className="text-base-content mt-6 flex items-center gap-2 text-sm/6 font-medium capitalize">

@@ -15,6 +15,7 @@ import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
 import Error from '~/components/Error';
 import CreateProblemDialog from '~/components/CreateProblemDialog';
+import FullOutlineInput from '~/components/FullOutlineInput';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -159,8 +160,9 @@ const Problem = () => {
 					label={t('difficulty')}
 				/>
 				<MultiSelect loading={tagsLoading} value={tags} setValue={setTags} label={t('tags')} data={tagList?.map((item) => ({ value: item[0], label: item[0] }))} />
-				<div className="max-w-sm">
-					<Input label={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} icon={<Search size="16" />} />
+				<div className="max-w-sm relative">
+					<FullOutlineInput className='placeholder:capitalize pr-10' placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
+					<Search className="absolute right-3 top-3 text-base-content/70" size="16" />
 				</div>
 				<Button className="bg-primary ml-auto flex !h-10 cursor-pointer items-center gap-1 capitalize" onClick={() => setOpenCreateProblemDialog(true)}>
 					<Plus size="18" />
