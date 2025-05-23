@@ -19,7 +19,15 @@ export const getTags = () =>
 export const editProblem = (problemId, data) =>
 	httpRequest
 		.post(`/problem/edit/${problemId}`, data)
-		.then((res) => res.data)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
+export const deleteProblem = (problemId) =>
+	httpRequest
+		.delete(`/problem/delete/${problemId}`)
+		.then((res) => res.data.msg)
 		.catch((err) => {
 			throw err.response.data.msg;
 		});

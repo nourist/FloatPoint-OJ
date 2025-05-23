@@ -1,0 +1,13 @@
+@import './main.css';
+
+ul.react-autocomplete-input {
+	@apply bg-base-100 border-base-300 rounded-sm p-2;
+}
+
+ul.react-autocomplete-input > li {
+	@apply text-base-content/60 rounded-sm;
+}
+
+ul.react-autocomplete-input > li.active {
+	@apply bg-secondary;
+}

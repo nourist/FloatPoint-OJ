@@ -5,14 +5,16 @@ import { Input, Button, IconButton, Tooltip, Dialog, DialogHeader, DialogBody, D
 import { Search, Plus, Lock, LockOpen, Trash, Pencil } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
+import { Link } from 'react-router';
 
 import Select from '~/components/Select';
 import MultiSelect from '~/components/MultiSelect';
-import { getProblems, getTags, editProblem } from '~/services/problem';
+import { getProblems, getTags, editProblem, deleteProblem } from '~/services/problem';
 import useDebounce from '~/hooks/useDebounce';
 import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
 import Error from '~/components/Error';
+import CreateProblemDialog from '~/components/CreateProblemDialog';
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -27,24 +29,40 @@ const Problem = () => {
 	const q = useDebounce(search, 400);
 
 	const [openPrivatePublicDialog, setPrivatePublicDialog] = useState(false);
+	const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+	const [openCreateProblemDialog, setOpenCreateProblemDialog] = useState(false);
 	const [selectId, setSelectId] = useState();
 	const [selectValue, setSelectValue] = useState();
 	const [privatePublicLoading, setPrivatePublicLoading] = useState(false);
+	const [deleteLoading, setDeleteLoading] = useState(false);
 
-	const handlePrivatePublic = async () => {
+	const handlePrivatePublic = () => {
 		if (!selectValue || !selectId) return;
 		setPrivatePublicLoading(true);
 		editProblem(selectId, { public: !selectValue.public })
 			.then((res) => {
-				toast.success(res.msg);
+				toast.success(res);
 				queryClient.invalidateQueries(['problems', { tags, q, difficulty, perPage, page }]);
 			})
-			.catch((err) => {
-				toast.error(err);
-			})
+			.catch(toast.error)
 			.finally(() => {
 				setPrivatePublicLoading(false);
 				setPrivatePublicDialog(false);
+			});
+	};
+
+	const handleDelete = () => {
+		if (!selectId || !selectValue) return;
+		setDeleteLoading(true);
+		deleteProblem(selectId)
+			.then((res) => {
+				toast.success(res);
+				queryClient.invalidateQueries(['problems', { tags, q, difficulty, perPage, page }]);
+			})
+			.catch(toast.error)
+			.finally(() => {
+				setDeleteLoading(false);
+				setOpenDeleteDialog(false);
 			});
 	};
 
@@ -115,6 +133,20 @@ const Problem = () => {
 					</Button>
 				</DialogFooter>
 			</Dialog>
+			<Dialog size="sm" className="p-4" open={openDeleteDialog} handler={() => setOpenDeleteDialog((prev) => !prev)}>
+				<DialogHeader>{t('are-you-sure')}?</DialogHeader>
+				<DialogBody className="py-1">{t('delete-msg')}</DialogBody>
+				<DialogFooter className="space-x-2">
+					<Button size="sm" variant="text" className="text-error cursor-pointer" onClick={() => setOpenDeleteDialog(false)}>
+						{t('cancel')}
+					</Button>
+					<Button size="sm" className="bg-error flex-center cursor-pointer gap-2" onClick={handleDelete} loading={deleteLoading}>
+						{t('delete')}
+						<Trash strokeWidth={3} size="14" />
+					</Button>
+				</DialogFooter>
+			</Dialog>
+			<CreateProblemDialog open={openCreateProblemDialog} handler={() => setOpenCreateProblemDialog((prev) => !prev)} />
 			<div className="mb-4 flex flex-wrap gap-2">
 				<Select
 					value={difficulty}
@@ -128,9 +160,9 @@ const Problem = () => {
 				/>
 				<MultiSelect loading={tagsLoading} value={tags} setValue={setTags} label={t('tags')} data={tagList?.map((item) => ({ value: item[0], label: item[0] }))} />
 				<div className="max-w-sm">
-					<Input data-label="true" label={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} icon={<Search size="16" />} />
+					<Input label={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} icon={<Search size="16" />} />
 				</div>
-				<Button className="bg-primary ml-auto flex !h-10 cursor-pointer items-center gap-1 capitalize">
+				<Button className="bg-primary ml-auto flex !h-10 cursor-pointer items-center gap-1 capitalize" onClick={() => setOpenCreateProblemDialog(true)}>
 					<Plus size="18" />
 					{t('create-new')}
 				</Button>
@@ -156,7 +188,7 @@ const Problem = () => {
 									</tr>
 								))
 							: problems?.data?.map((item, index) => (
-									<tr key={index} className="even:bg-blue-gray-50/50 dark:bg-base-200 dark:even:bg-base-100 dark:text-base-content/80">
+									<tr key={index} className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 dark:text-base-content/80">
 										<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
 										<td className="p-4 text-sm">{item.name}</td>
 										<td className="p-4 text-sm">
@@ -190,13 +222,22 @@ const Problem = () => {
 										<td className="p-4 text-sm">{item.noOfSuccess}</td>
 										<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
 										<td className="space-x-3 p-4 text-sm">
-											<Tooltip content={t('edit')}>
-												<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
-													<Pencil color="#fff" size="16" />
-												</IconButton>
-											</Tooltip>
+											<Link to={`/problem/${item.id}`}>
+												<Tooltip content={t('edit')}>
+													<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
+														<Pencil color="#fff" size="16" />
+													</IconButton>
+												</Tooltip>
+											</Link>
 											<Tooltip content={t('delete')}>
-												<IconButton size="sm" className="bg-error hover:!shadow-cmd cursor-pointer rounded-full">
+												<IconButton
+													onClick={() => {
+														setSelectId(item.id);
+														setOpenDeleteDialog(true);
+													}}
+													size="sm"
+													className="bg-error hover:!shadow-cmd cursor-pointer rounded-full"
+												>
 													<Trash color="#fff" size="16" />
 												</IconButton>
 											</Tooltip>

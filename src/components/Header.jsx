@@ -59,7 +59,7 @@ const Header = () => {
 							</Link>
 						))}
 					</Breadcrumbs>
-					<h3 className="text-base-content/90 mt-1 ml-[3px] font-semibold capitalize">{list[0]}</h3>
+					<h3 className="text-base-content/90 mt-1 ml-[3px] font-semibold capitalize">{list.join(' ')}</h3>
 				</div>
 				<IconButton variant="text" className="hover:bg-base-300 ml-auto size-[38px] cursor-pointer rounded-full lg:hidden" onClick={() => setOpenDrawer(true)}>
 					<AlignJustify strokeWidth="1.5" size="20" />

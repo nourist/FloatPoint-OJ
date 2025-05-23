@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { UserRound, Eye, EyeClosed } from 'lucide-react';
-import { Button, Input, Checkbox, IconButton } from '@material-tailwind/react';
+import { Button, Checkbox, IconButton } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 
+import FullOutlineInput from '~/components/FullOutlineInput';
 import useThemeStore from '~/stores/themeStore';
 import { login } from '~/services/auth';
 
@@ -62,7 +63,7 @@ const Login = () => {
 						<label htmlFor="email" className="text-base-content text-sm capitalize">
 							{t('email')} <span className="text-error font-bold">*</span>
 						</label>
-						<Input
+						<FullOutlineInput
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							onFocus={() => {
@@ -73,32 +74,25 @@ const Login = () => {
 							id="email"
 							type="email"
 							size="lg"
-							data-error={emailError}
-							className="focus:!border-primary dark:focus:!border-primary data-[error=true]:placeholder:text-error dark:data-[error=true]:!border-error data-[error=true]:!border-error placeholder:!opacity-100"
-							labelProps={{
-								className: 'hidden',
-							}}
+							error={emailError}
 							placeholder={t('email-placeholder')}
-						></Input>
+						></FullOutlineInput>
 					</div>
 					<div className="relative flex flex-col gap-2">
 						<label htmlFor="password" className="text-base-content text-sm capitalize">
 							{t('password')} <span className="text-error font-bold">*</span>
 						</label>
-						<Input
+						<FullOutlineInput
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							onFocus={() => setPasswordError(false)}
-							data-error={passwordError}
+							error={passwordError}
 							id="password"
 							size="lg"
 							type={showPassword ? 'text' : 'password'}
-							className="focus:!border-primary dark:focus:!border-primary data-[error=true]:placeholder:text-error data-[error=true]:!border-error dark:data-[error=true]:!border-error pr-[44px] placeholder:!opacity-100"
-							labelProps={{
-								className: 'hidden',
-							}}
+							className="pr-[44px]"
 							placeholder={t('password-placeholder')}
-						></Input>
+						></FullOutlineInput>
 						<IconButton
 							variant="text"
 							className="text-base-content/80 hover:text-base-content !absolute top-[34px] right-[6px] !size-8 cursor-pointer !bg-transparent"

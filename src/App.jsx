@@ -6,6 +6,8 @@ import { ToastContainer } from 'react-toastify';
 
 import './styles/main.css';
 import './styles/toast.css';
+import 'react-autocomplete-input/dist/bundle.css';
+import './styles/autocomplete.css';
 
 import AppRouter from './components/AppRouter';
 import { auth, logout } from './services/auth';

@@ -45,7 +45,7 @@ const theme = {
 					base: {
 						input: {
 							borderColor:
-								'dark:focus:!border-blue-gray-200 dark:border-blue-gray-800 dark:!border-t-blue-gray-800 !border-t-blue-gray-200 data-[label=true]:dark:focus:!border-t-transparent data-[label=true]:focus:!border-t-transparent',
+								'dark:focus:!border-blue-gray-200 dark:border-blue-gray-800 dark:!border-t-blue-gray-800 !border-t-blue-gray-200 dark:focus:!border-t-transparent focus:!border-t-transparent',
 						},
 						label: {
 							borderColor:
@@ -82,6 +82,23 @@ const theme = {
 				backdrop: {
 					backgroundColor: '',
 				},
+				container: {
+					backgroundColor: 'bg-base-100',
+				},
+			},
+		},
+	},
+	dialogHeader: {
+		styles: {
+			base: {
+				color: 'text-base-content',
+			},
+		},
+	},
+	dialogBody: {
+		styles: {
+			base: {
+				color: 'text-base-content/80',
 			},
 		},
 	},
