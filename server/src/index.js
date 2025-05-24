@@ -25,7 +25,7 @@ app.use(
 
 app.use(
 	cors({
-		origin: [process.env.CLIENT_URL || 'http://localhost:5173', process.env.ADMIN_URL || 'http://localhost:7749'],
+		origin: [process.env.CLIENT_URL || 'http://localhost:5173', process.env.ADMIN_URL || 'http://localhost:5174'],
 		credentials: true,
 	}),
 );
