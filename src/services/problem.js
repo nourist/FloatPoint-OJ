@@ -31,3 +31,11 @@ export const deleteProblem = (problemId) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const createProblem = (data) =>
+	httpRequest
+		.post('/problem/create', data)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
