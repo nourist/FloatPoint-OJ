@@ -160,9 +160,9 @@ const Problem = () => {
 					label={t('difficulty')}
 				/>
 				<MultiSelect loading={tagsLoading} value={tags} setValue={setTags} label={t('tags')} data={tagList?.map((item) => ({ value: item[0], label: item[0] }))} />
-				<div className="max-w-sm relative">
-					<FullOutlineInput className='placeholder:capitalize pr-10' placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
-					<Search className="absolute right-3 top-3 text-base-content/70" size="16" />
+				<div className="relative max-w-sm">
+					<FullOutlineInput className="pr-10 placeholder:capitalize" placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
+					<Search className="text-base-content/70 absolute top-3 right-3" size="16" />
 				</div>
 				<Button className="bg-primary ml-auto flex !h-10 cursor-pointer items-center gap-1 capitalize" onClick={() => setOpenCreateProblemDialog(true)}>
 					<Plus size="18" />

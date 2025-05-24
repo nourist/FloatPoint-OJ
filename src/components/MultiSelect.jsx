@@ -48,7 +48,7 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 					<Button
 						loading={loading}
 						variant="outlined"
-						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative outline-2 outline-transparent flex h-10 w-64 items-center p-3 pr-8 hover:!opacity-100`}
+						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative flex h-10 w-64 items-center p-3 pr-8 outline-2 outline-transparent hover:!opacity-100`}
 						ripple={false}
 					>
 						<span

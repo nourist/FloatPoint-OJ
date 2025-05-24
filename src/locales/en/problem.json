@@ -25,5 +25,6 @@
 	"create-new-problem": "create new problem",
 	"problem-id": "Problem id",
 	"problem-name": "Problem name",
-	"select-tag": "Select tag"
+	"select-tag": "Select tag",
+	"edit-task": "Edit task"
 }

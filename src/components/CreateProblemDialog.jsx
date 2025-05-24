@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { IconButton, Dialog, DialogBody, DialogHeader, DialogFooter, Checkbox} from '@material-tailwind/react';
+import { IconButton, Dialog, DialogBody, DialogHeader, DialogFooter, Checkbox } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +9,7 @@ import FullOutlineInput from './FullOutlineInput';
 import TagInput from './TagInput';
 import { getTags } from '~/services/problem';
 import Select from './Select';
+import MdEditor from './MdEditor';
 
 const CreateProblemDialog = ({ handler, open }) => {
 	const { t } = useTranslation('problem');
@@ -17,6 +18,7 @@ const CreateProblemDialog = ({ handler, open }) => {
 	const [isPublic, setIsPublic] = useState(true);
 	const [tags, setTags] = useState([]);
 	const [difficulty, setDifficulty] = useState('medium');
+	const [task, setTask] = useState('');
 
 	const { data: suggestTags } = useQuery({
 		queryKey: ['tags'],
@@ -24,7 +26,7 @@ const CreateProblemDialog = ({ handler, open }) => {
 	});
 
 	return (
-		<Dialog className="p-4" size="xl" open={open}>
+		<Dialog className="max-h-[calc(100vh-32px)] overflow-auto p-4" size="xl" open={open}>
 			<DialogHeader className="capitalize">
 				{t('create-new-problem')}
 				<IconButton onClick={handler} variant="text" className="!text-base-content/65 hover:!text-base-content ml-auto cursor-pointer rounded-full">
@@ -32,11 +34,15 @@ const CreateProblemDialog = ({ handler, open }) => {
 				</IconButton>
 			</DialogHeader>
 			<DialogBody>
-				<h2 className="text-base-content text-sm/6 font-medium capitalize">{t('problem-id')}</h2>
+				<h2 className="text-base-content text-sm/6 font-medium capitalize">
+					{t('problem-id')} <span className="text-error font-bold">*</span>
+				</h2>
 				<FullOutlineInput value={id} onChange={(e) => setId(e.target.value)} className="mt-2 w-2/6 min-w-52" placeholder={t('problem-id')} />
-				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">{t('problem-name')}</h2>
+				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">
+					{t('problem-name')} <span className="text-error font-bold">*</span>
+				</h2>
 				<FullOutlineInput value={name} onChange={(e) => setName(e.target.value)} className="mt-2 w-1/2 min-w-60" placeholder={t('problem-name')} />
-				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">{t('difficulty')}</h2>
+				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('difficulty')}</h2>
 				<Select
 					value={difficulty}
 					setValue={setDifficulty}
@@ -47,11 +53,6 @@ const CreateProblemDialog = ({ handler, open }) => {
 					]}
 					clearable={false}
 				/>
-				{/* <Select>
-					<Option>easy</Option>
-					<Option>medium</Option>
-					<Option>hard</Option>
-				</Select> */}
 				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">{t('tags')}</h2>
 				<TagInput className="mt-2" tags={tags} setTags={setTags} suggestTags={suggestTags || []} placeholder={`${t('select-tag')}...`} />
 				<h2 className="text-base-content mt-6 flex items-center gap-2 text-sm/6 font-medium capitalize">
@@ -64,6 +65,8 @@ const CreateProblemDialog = ({ handler, open }) => {
 					/>
 				</h2>
 				<p className="text-base-content/60 text-sm/6">{isPublic ? t('open-msg') : t('close-msg')}</p>
+				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('edit-task')}</h2>
+				<MdEditor markdown={task} onChange={setTask} />
 			</DialogBody>
 			<DialogFooter></DialogFooter>
 		</Dialog>

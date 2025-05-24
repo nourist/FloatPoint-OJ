@@ -9,7 +9,7 @@ const Select = ({ label, data, value, setValue, className = '', clearable = true
 				<MenuHandler>
 					<Button
 						variant="outlined"
-						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative flex h-10 w-48 items-center p-3 hover:!opacity-100 outline-2 outline-transparent transition-all`}
+						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative flex h-10 w-48 items-center p-3 outline-2 outline-transparent transition-all hover:!opacity-100`}
 						ripple={false}
 					>
 						<span
@@ -38,7 +38,7 @@ const Select = ({ label, data, value, setValue, className = '', clearable = true
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`w-48 z-[9999]`}>
+				<MenuList className={`z-[9999] w-48`}>
 					{data?.map((item, index) => (
 						<MenuItem className="flex gap-2 capitalize" key={index} onClick={() => setValue(item.value)}>
 							<div className="-ml-1 size-4">{item.value === value && <Check className="size-4" />}</div>

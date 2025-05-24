@@ -1,0 +1,40 @@
+@import './main.css';
+
+.mdxeditor-popup-container {
+	@apply !z-[99999];
+}
+
+[class^='_dialogOverlay_'] {
+	@apply bg-transparent;
+}
+
+.mdxeditor-toolbar {
+	@apply dark:bg-gray-800/50 dark:text-white;
+}
+
+[class^='_toolbarToggleItem_'],
+[class^='_toolbarButton_'] {
+	@apply dark:**:fill-white dark:hover:bg-neutral-700 dark:data-[state=on]:bg-neutral-800;
+}
+
+[class^='_tooltipTrigger_'],
+[class^='_selectTrigger_'] {
+	@apply dark:bg-neutral-800/80 dark:text-white dark:**:fill-white;
+}
+
+[class^='_toolbarToggleItem_'][aria-label='Diff mode'] {
+	@apply hidden;
+}
+
+.mdxeditor-rich-text-editor {
+	@apply **:text-base-content;
+}
+
+[class^='_dialogContent_'],
+[class^='_linkDialogPopoverContent_'] {
+	@apply dark:bg-base-100 *:text-base-content border-base-300;
+}
+
+[class^='_textInput_'] {
+	@apply dark:bg-base-200 border-base-300 dark:text-white;
+}
