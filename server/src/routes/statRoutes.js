@@ -11,5 +11,6 @@ router.get('/weekly-accepted', authMiddlewares.requireAd, statControllers.getWee
 router.get('/monthly-submission', authMiddlewares.requireAd, statControllers.getMonthlySubmission);
 router.get('/monthly-language', authMiddlewares.requireAd, statControllers.getMonthlyLanguage);
 router.get('/newest-activity', authMiddlewares.requireAd, statControllers.getNewestActivity);
+router.get('/problem/:id', authMiddlewares.requireAd, statControllers.getProblemStat)
 
 export default router;

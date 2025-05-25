@@ -64,7 +64,7 @@ const problemControllers = {
 		try {
 			const { id } = req.params;
 
-			const problem = await Problem.findOne({ id }, '-testcase -_id -__v');
+			const problem = await Problem.findOne({ id }, '-_id -__v');
 
 			if (!problem) {
 				throw new Error('Problem not found');
@@ -74,10 +74,17 @@ const problemControllers = {
 				return res.status(401).json({ success: false, msg: 'You cant see this content' });
 			}
 
-			res.status(200).json({
-				success: true,
-				data: problem,
-			});
+			if (req.userPermission === 'Admin') {
+				res.status(200).json({
+					success: true,
+					data: problem,
+				});
+			} else {
+				res.status(200).json({
+					success: true,
+					data: {...problem, testcase: undefined},
+				});
+			}
 
 			console.log(`Get problem "${id}" successfull`);
 		} catch (err) {

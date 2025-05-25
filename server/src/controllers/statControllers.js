@@ -332,6 +332,54 @@ const statControllers = {
 			console.error(`Error in get newest activities: ${err.message}`);
 		}
 	},
+
+	//[GET] /stat/problem/:id
+	async getProblemStat(req, res, next) {
+		const { id } = req.params;
+
+		try {
+			const status = await Submission.aggregate([
+				{
+					$match: {
+						forProblem: id
+					},
+				},
+				{
+					$group: {
+						_id: '$status',
+						count: { $sum: 1 },
+					},
+				},
+				{
+					$sort: { _id: -1 },
+				},
+			]);
+			
+			const language = await Submission.aggregate([
+				{
+					$match: {
+						forProblem: id
+					},
+				},
+				{
+					$group: {
+						_id: '$language',
+						count: { $sum: 1 },
+					},
+				},
+				{
+					$sort: { _id: -1 },
+				},
+			]);
+
+			res.status(200).json({success: true, data:{status, language}})
+			console.log('Get problem stat successful');
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in get problem stat: ${err.message}`);
+		}
+	}
 };
 
 export default statControllers;
