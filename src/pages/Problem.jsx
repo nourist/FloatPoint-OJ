@@ -14,7 +14,6 @@ import useDebounce from '~/hooks/useDebounce';
 import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
 import Error from '~/components/Error';
-import CreateProblemDialog from '~/components/CreateProblemDialog';
 import FullOutlineInput from '~/components/FullOutlineInput';
 
 const Problem = () => {
@@ -31,7 +30,6 @@ const Problem = () => {
 
 	const [openPrivatePublicDialog, setPrivatePublicDialog] = useState(false);
 	const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-	const [openCreateProblemDialog, setOpenCreateProblemDialog] = useState(false);
 	const [selectId, setSelectId] = useState();
 	const [selectValue, setSelectValue] = useState();
 	const [privatePublicLoading, setPrivatePublicLoading] = useState(false);
@@ -147,7 +145,6 @@ const Problem = () => {
 					</Button>
 				</DialogFooter>
 			</Dialog>
-			<CreateProblemDialog open={openCreateProblemDialog} handler={() => setOpenCreateProblemDialog((prev) => !prev)} />
 			<div className="mb-4 flex flex-wrap gap-2">
 				<Select
 					value={difficulty}
@@ -164,10 +161,12 @@ const Problem = () => {
 					<FullOutlineInput className="pr-10 placeholder:capitalize" placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
 					<Search className="text-base-content/70 absolute top-3 right-3" size="16" />
 				</div>
-				<Button className="bg-primary ml-auto flex !h-10 cursor-pointer items-center gap-1 capitalize" onClick={() => setOpenCreateProblemDialog(true)}>
-					<Plus size="18" />
-					{t('create-new')}
-				</Button>
+				<Link to="/problem/create" className="ml-auto">
+					<Button className="bg-primary flex !h-10 cursor-pointer items-center gap-1 capitalize">
+						<Plus size="18" />
+						{t('create-new')}
+					</Button>
+				</Link>
 			</div>
 			<div className="shadow-clg shadow-shadow-color/5 w-full overflow-auto rounded-xl">
 				<table className="w-full min-w-max table-auto text-left">

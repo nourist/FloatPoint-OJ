@@ -7,6 +7,7 @@ import Submission from '~/pages/Submission';
 import Contest from '~/pages/Contest';
 import Setting from '~/pages/Setting';
 import ProblemId from '~/pages/ProblemId';
+import CreateProblem from '~/pages/CreateProblem';
 
 const routes = [
 	{
@@ -46,6 +47,10 @@ const routes = [
 	{
 		path: '/problem/:id',
 		page: ProblemId,
+	},
+	{
+		path: '/problem/create',
+		page: CreateProblem,
 	},
 ];
 

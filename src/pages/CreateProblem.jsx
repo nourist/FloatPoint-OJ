@@ -1,19 +1,18 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { IconButton, Dialog, DialogBody, DialogHeader, DialogFooter, Checkbox, Input, Button, Accordion, AccordionHeader, AccordionBody, Textarea } from '@material-tailwind/react';
+import { IconButton, Checkbox, Input, Button, Accordion, AccordionHeader, AccordionBody, Textarea } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
-import FullOutlineInput from './FullOutlineInput';
-import TagInput from './TagInput';
+import FullOutlineInput from '~/components/FullOutlineInput';
+import TagInput from '~/components/TagInput';
 import { getTags } from '~/services/problem';
-import Select from './Select';
-import MdEditor from './MdEditor';
+import Select from '~/components/Select';
+import MdEditor from '~/components/MdEditor';
 import { createProblem } from '~/services/problem';
 
-const CreateProblemDialog = ({ handler, open }) => {
+const CreateProblem = () => {
 	const { t } = useTranslation('problem');
 	const [id, setId] = useState('');
 	const [name, setName] = useState('');
@@ -33,17 +32,8 @@ const CreateProblemDialog = ({ handler, open }) => {
 		queryFn: getTags,
 	});
 
-	console.log(testcase);
-
 	return (
-		<Dialog className="max-h-[calc(100vh-32px)] overflow-auto p-4" size="xl" open={open}>
-			<DialogHeader className="capitalize">
-				{t('create-new-problem')}
-				<IconButton onClick={handler} variant="text" className="!text-base-content/65 hover:!text-base-content ml-auto cursor-pointer rounded-full">
-					<X />
-				</IconButton>
-			</DialogHeader>
-			<DialogBody>
+		<div className="p-8 bg-base-100 rounded-xl shadow-clg shadow-shadow-color/3">
 				<h2 className="text-base-content text-sm/6 font-medium capitalize">
 					{t('problem-id')} <span className="text-error font-bold">*</span>
 				</h2>
@@ -137,11 +127,7 @@ const CreateProblemDialog = ({ handler, open }) => {
 						+ {t('new')}
 					</Button>
 				</div>
-			</DialogBody>
-			<DialogFooter className="space-x-2">
-				<Button className="text-error cursor-pointer capitalize" variant="text" onClick={handler}>
-					{t('cancel')}
-				</Button>
+			<div className="flex justify-end gap-3 mt-6">
 				<Button
 					className="bg-error cursor-pointer text-white capitalize"
 					onClick={() => {
@@ -181,20 +167,14 @@ const CreateProblemDialog = ({ handler, open }) => {
 							.catch(toast.error)
 							.finally(() => {
 								setCreating(false);
-								handler();
 							});
 					}}
 				>
 					{t('save')}
 				</Button>
-			</DialogFooter>
-		</Dialog>
+			</div>
+		</div>
 	);
 };
 
-CreateProblemDialog.propTypes = {
-	handler: PropTypes.func.isRequired,
-	open: PropTypes.bool.isRequired,
-};
-
-export default CreateProblemDialog;
+export default CreateProblem;
