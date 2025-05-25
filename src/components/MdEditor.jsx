@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import {
 	MDXEditor,
 	headingsPlugin,
@@ -62,4 +64,4 @@ const MdEditor = ({ ...props }) => {
 	);
 };
 
-export default MdEditor;
+export default memo(MdEditor);

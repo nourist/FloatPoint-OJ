@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, Button, IconButton, Tooltip, Dialog, DialogHeader, DialogBody, DialogFooter } from '@material-tailwind/react';
+import { Button, IconButton, Dialog, DialogHeader, DialogBody, DialogFooter, Tooltip } from '@material-tailwind/react';
 import { Search, Plus, Lock, LockOpen, Trash, Pencil } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
@@ -15,6 +15,86 @@ import Pagination from '~/components/Pagination';
 import ChipList from '~/components/ChipList';
 import Error from '~/components/Error';
 import FullOutlineInput from '~/components/FullOutlineInput';
+
+// eslint-disable-next-line react/display-name, react/prop-types
+const TableSkeleton = memo(({ perPage }) =>
+	[...Array(perPage)].map((_, index) => (
+		<tr key={index} className="skeleton odd:skeleton-variant h-16">
+			{[...Array(9)].map((_, idx) => (
+				<td key={idx} className="p-4"></td>
+			))}
+		</tr>
+	)),
+);
+
+// eslint-disable-next-line react/display-name, react/prop-types
+const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePublicDialog, tags, t }) => (
+	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 dark:text-base-content/80">
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td className="p-4 text-sm">{item.name}</td>
+		<td className="p-4 text-sm">
+			{/* eslint-disable-next-line react/prop-types*/}
+			<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
+				<IconButton
+					onClick={() => {
+						// eslint-disable-next-line react/prop-types
+						setSelectId(item.id);
+						setPrivatePublicDialog(true);
+					}}
+					size="sm"
+					className="group !shadow-cmd cursor-pointer rounded-full bg-transparent"
+				>
+					{/* eslint-disable-next-line react/prop-types*/}
+					{item.public ? (
+						<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
+					) : (
+						<Lock size="18" className="text-error transition-all duration-300 group-hover:mb-1" />
+					)}
+				</IconButton>
+			</Tooltip>
+		</td>
+		<td className="max-w-sm p-4 text-sm md:max-w-xs">
+			{/* eslint-disable-next-line react/prop-types*/}
+			<ChipList data={item.tags} activeTags={tags} />
+		</td>
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td data-difficulty={item.difficulty} className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize">
+			{/* eslint-disable-next-line react/prop-types*/}
+			{item.difficulty}
+		</td>
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td className="p-4 text-sm">{item.point}p</td>
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td className="p-4 text-sm">{item.noOfSuccess}</td>
+		{/* eslint-disable-next-line react/prop-types*/}
+		<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
+		<td className="space-x-3 p-4 text-sm">
+			{/* eslint-disable-next-line react/prop-types*/}
+			<Link to={`/problem/${item.id}`}>
+				<Tooltip content={t('edit')}>
+					<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
+						<Pencil color="#fff" size="16" />
+					</IconButton>
+				</Tooltip>
+			</Link>
+			<Tooltip content={t('delete')}>
+				<IconButton
+					onClick={() => {
+						// eslint-disable-next-line react/prop-types
+						setSelectId(item.id);
+						setOpenDeleteDialog(true);
+					}}
+					size="sm"
+					className="bg-error hover:!shadow-cmd cursor-pointer rounded-full"
+				>
+					<Trash color="#fff" size="16" />
+				</IconButton>
+			</Tooltip>
+		</td>
+	</tr>
+));
 
 const Problem = () => {
 	const { t } = useTranslation('problem');
@@ -180,71 +260,21 @@ const Problem = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{problemSmoothLoading
-							? [...Array(perPage)].map((_, index) => (
-									<tr key={index} className="skeleton odd:skeleton-variant h-16">
-										{[...Array(9)].map((_, index) => (
-											<td key={index} className="p-4"></td>
-										))}
-									</tr>
-								))
-							: problems?.data?.map((item, index) => (
-									<tr key={index} className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 dark:text-base-content/80">
-										<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
-										<td className="p-4 text-sm">{item.name}</td>
-										<td className="p-4 text-sm">
-											<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
-												<IconButton
-													onClick={() => {
-														setSelectId(item.id);
-														setPrivatePublicDialog(true);
-													}}
-													size="sm"
-													className="group !shadow-cmd cursor-pointer rounded-full bg-transparent"
-												>
-													{item.public ? (
-														<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
-													) : (
-														<Lock size="18" className="text-error transition-all duration-300 group-hover:mb-1" />
-													)}
-												</IconButton>
-											</Tooltip>
-										</td>
-										<td className="max-w-sm p-4 text-sm md:max-w-xs">
-											<ChipList data={item.tags} activeTags={tags} />
-										</td>
-										<td
-											data-difficulty={item.difficulty}
-											className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize"
-										>
-											{item.difficulty}
-										</td>
-										<td className="p-4 text-sm">{item.point}p</td>
-										<td className="p-4 text-sm">{item.noOfSuccess}</td>
-										<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
-										<td className="space-x-3 p-4 text-sm">
-											<Link to={`/problem/${item.id}`}>
-												<Tooltip content={t('edit')}>
-													<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
-														<Pencil color="#fff" size="16" />
-													</IconButton>
-												</Tooltip>
-											</Link>
-											<Tooltip content={t('delete')}>
-												<IconButton
-													onClick={() => {
-														setSelectId(item.id);
-														setOpenDeleteDialog(true);
-													}}
-													size="sm"
-													className="bg-error hover:!shadow-cmd cursor-pointer rounded-full"
-												>
-													<Trash color="#fff" size="16" />
-												</IconButton>
-											</Tooltip>
-										</td>
-									</tr>
-								))}
+						{problemSmoothLoading ? (
+							<TableSkeleton perPage={perPage} />
+						) : (
+							problems?.data?.map((item, index) => (
+								<TableRow
+									tags={tags}
+									item={item}
+									key={index}
+									setSelectId={setSelectId}
+									setOpenDeleteDialog={setOpenDeleteDialog}
+									setPrivatePublicDialog={setPrivatePublicDialog}
+									t={t}
+								/>
+							))
+						)}
 					</tbody>
 				</table>
 			</div>
