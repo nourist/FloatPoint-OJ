@@ -22,6 +22,8 @@ import {
 	markdownShortcutPlugin,
 	InsertThematicBreak,
 	Separator,
+	codeBlockPlugin,
+	codeMirrorPlugin,
 } from '@mdxeditor/editor';
 
 const MdEditor = ({ ...props }) => {
@@ -38,6 +40,8 @@ const MdEditor = ({ ...props }) => {
 				linkDialogPlugin(),
 				diffSourcePlugin(),
 				markdownShortcutPlugin(),
+				codeBlockPlugin(),
+				codeMirrorPlugin(),
 				toolbarPlugin({
 					toolbarContents: () => (
 						<>

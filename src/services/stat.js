@@ -47,3 +47,11 @@ export const getNewestActivities = () =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getProblemStat = (id) =>
+	httpRequest
+		.get(`/stat/problem/${id}`)
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

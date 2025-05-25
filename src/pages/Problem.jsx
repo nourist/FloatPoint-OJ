@@ -32,8 +32,13 @@ const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePubli
 	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 dark:text-base-content/80">
 		{/* eslint-disable-next-line react/prop-types*/}
 		<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
-		{/* eslint-disable-next-line react/prop-types*/}
-		<td className="p-4 text-sm">{item.name}</td>
+		<td className="p-4 text-sm">
+			{/* eslint-disable-next-line react/prop-types*/}
+			<Link to={`/problem/${item.id}`} className="hover:!text-secondary">
+				{/* eslint-disable-next-line react/prop-types*/}
+				{item.name}
+			</Link>
+		</td>
 		<td className="p-4 text-sm">
 			{/* eslint-disable-next-line react/prop-types*/}
 			<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
@@ -148,7 +153,7 @@ const Problem = () => {
 	const {
 		data: problems,
 		isLoading: problemsLoading,
-		isError: problemsErr,
+		error: problemsErr,
 	} = useQuery({
 		queryKey: ['problems', { tags, q, difficulty, perPage, page }],
 		queryFn: () => getProblems({ tags, q, difficulty, size: perPage, page }),
@@ -158,7 +163,7 @@ const Problem = () => {
 	const {
 		data: tagList,
 		isLoading: tagsLoading,
-		isError: tagsErr,
+		error: tagsErr,
 	} = useQuery({
 		queryKey: ['tags'],
 		queryFn: getTags,

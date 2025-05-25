@@ -8,6 +8,14 @@ export const getProblems = (options) =>
 			throw err.response.data.msg;
 		});
 
+export const getProblem = (id) =>
+	httpRequest
+		.get(`/problem/info/${id}`)
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
 export const getTags = () =>
 	httpRequest
 		.get('/problem/tags')
