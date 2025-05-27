@@ -86,7 +86,7 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`max-h-[344px] w-64 overflow-auto`}>
+				<MenuList className={`card-scrollbar max-h-[344px] w-64 overflow-auto`}>
 					{data?.map((item, index) => (
 						<MenuItem
 							className="flex h-10 items-center gap-2 capitalize"

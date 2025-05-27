@@ -1,5 +1,5 @@
 const UserId = () => {
-	return (<></>  );
-}
- 
+	return <></>;
+};
+
 export default UserId;

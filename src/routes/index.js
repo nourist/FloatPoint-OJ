@@ -61,7 +61,7 @@ const routes = [
 	{
 		path: '/user/:name',
 		page: UserId,
-	}
+	},
 ];
 
 export default routes;

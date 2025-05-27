@@ -95,7 +95,7 @@ TableRow.propTypes = {
 	setPrivatePublicDialog: PropTypes.func.isRequired,
 	tags: PropTypes.array.isRequired,
 	t: PropTypes.func.isRequired,
-}
+};
 
 const Problems = () => {
 	const { t } = useTranslation('problem');
@@ -154,7 +154,6 @@ const Problems = () => {
 		queryKey: ['problems', { tags, q, difficulty, perPage, page }],
 		queryFn: () => getProblems({ tags, q, difficulty, size: perPage, page }),
 	});
-	const problemSmoothLoading = useDebounce(problemsLoading, 50);
 
 	const {
 		data: tagList,
@@ -261,7 +260,7 @@ const Problems = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{problemSmoothLoading ? (
+						{problemsLoading ? (
 							<TableSkeleton perPage={perPage} />
 						) : (
 							problems?.data?.map((item, index) => (

@@ -1,5 +1,5 @@
 const SubmissionId = () => {
-	return ( <></> );
-}
- 
+	return <></>;
+};
+
 export default SubmissionId;

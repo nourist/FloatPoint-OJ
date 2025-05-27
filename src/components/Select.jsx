@@ -39,7 +39,7 @@ const Select = ({ label, data, value, setValue, className = '', clearable = true
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`z-[9999] max-h-[369px] w-48 overflow-auto`}>
+				<MenuList className={`card-scrollbar z-[9999] max-h-[369px] w-48 overflow-auto`}>
 					{data?.map((item, index) => (
 						<MenuItem className="flex gap-2 capitalize" key={index} onClick={() => setValue(item.value)}>
 							<div className="-ml-1 size-4">{item.value === value && <Check className="size-4" />}</div>

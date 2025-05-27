@@ -5,7 +5,7 @@ import Chart from 'react-apexcharts';
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { Chip,Tooltip,IconButton } from '@material-tailwind/react';
+import { Chip, Tooltip, IconButton } from '@material-tailwind/react';
 import { Trash } from 'lucide-react';
 
 import Pagination from '~/components/Pagination';
@@ -43,10 +43,10 @@ const formatedDate = (date) => {
 	return result;
 };
 
-const TableRow = ({ item,t }) => (
+const TableRow = ({ item, t }) => (
 	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80">
 		<td className="p-4 text-sm">{formatedDate(new Date(item.createdAt || null))}</td>
-		<td className="p-4 text-sm truncate">
+		<td className="truncate p-4 text-sm">
 			<Link to={`/submission/${item._id}`} className="hover:!text-secondary hover:underline">
 				{item._id}
 			</Link>
@@ -93,7 +93,7 @@ const TableRow = ({ item,t }) => (
 
 TableRow.propTypes = {
 	item: PropTypes.object.isRequired,
-		t: PropTypes.func.isRequired,
+	t: PropTypes.func.isRequired,
 };
 
 const Submissions = () => {
