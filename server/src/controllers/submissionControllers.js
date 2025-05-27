@@ -204,6 +204,86 @@ const submissionControllers = {
 			console.error(`Error in submit: ${err.message}`);
 		}
 	},
+
+	//[DELETE] /submission/delete/:id
+	async deleteSubm(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const submission = await Submission.findById(id);
+			if (!submission) throw new Error('Submission not found');
+
+			const problem = await Problem.findOne({ id: submission.forProblem });
+			if (problem) {
+				problem.noOfSubm = Math.max(0, problem.noOfSubm - 1);
+
+				if (submission.status === 'AC') {
+					const otherAC = await Submission.filter({ status: 'AC', author: submission.author, problem: submission.forProblem, _id: { $ne: id } });
+					if (otherAC.length === 0) {
+						problem.noOfSuccess = Math.max(0, problem.noOfSuccess - 1);
+					}
+				}
+				await problem.save();
+			}
+
+			await Submission.deleteOne({ _id: id });
+
+			const userOfSubm = await User.findOne({ name: submission.author });
+			if (userOfSubm) {
+				// Kiểm tra các submission còn lại của user cho problem này
+				const lastSubmissions = await Submission.filter({ author: userOfSubm.name, problem: submission.forProblem });
+				// Tính điểm tốt nhất hiện tại
+				const bestLastSubmit = lastSubmissions.reduce((acc, val) => Math.max(acc, val.point), 0);
+
+				// Giảm điểm cũ
+				userOfSubm.totalScore -= submission.point;
+				// Cộng điểm tốt nhất còn lại (hoặc 0 nếu không còn)
+				userOfSubm.totalScore += bestLastSubmit;
+
+				// Nếu không còn submission nào nữa, giảm totalAttempt
+				if (lastSubmissions.length === 0) {
+					userOfSubm.totalAttempt = Math.max(0, userOfSubm.totalAttempt - 1);
+				}
+
+				// Nếu submission AC và user không còn AC nào cho problem này thì giảm totalAC
+				if (submission.status === 'AC') {
+					const otherAC = lastSubmissions.filter((s) => s.status === 'AC');
+					if (otherAC.length === 0) {
+						userOfSubm.totalAC = Math.max(0, userOfSubm.totalAC - 1);
+					}
+				}
+
+				await userOfSubm.save();
+			}
+
+			if (submission.forContest) {
+				const contest = await Contest.findOne({ id: submission.forContest });
+				if (contest) {
+					contest.standing = contest.standing.map((usr) => {
+						if (usr.user === submission.author) {
+							const idx = contest.problems.indexOf(submission.forProblem);
+							if (idx !== -1) {
+								if (usr.score[idx] === submission.point) {
+									usr.score[idx] = 0;
+									usr.time[idx] = 0;
+									usr.status[idx] = '';
+								}
+							}
+						}
+						return usr;
+					});
+					await contest.save();
+				}
+			}
+
+			res.status(200).json({ success: true, msg: 'Submission deleted successfully' });
+			console.log(`Deleted submission "${id}" successfully`);
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error delete submission: ${err.message}`);
+		}
+	},
 };
 
 export default submissionControllers;

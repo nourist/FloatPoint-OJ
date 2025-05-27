@@ -8,9 +8,13 @@ const userControllers = {
 	//[GET] /user
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, q, permission, sortBy, order } = req.query;
+			const { size = 20, page = 1, q, permission, sortBy, order, minimal } = req.query;
 
-			const data = await User.filterAndSort({ q, permission, sortBy, order });
+			let data = await User.filterAndSort({ q, permission, sortBy, order });
+
+			if (minimal) {
+				data = data.map((user) => user.name);
+			}
 
 			res.status(200).json({
 				success: true,

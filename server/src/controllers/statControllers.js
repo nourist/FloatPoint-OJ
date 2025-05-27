@@ -186,6 +186,51 @@ const statControllers = {
 		}
 	},
 
+	//[GET] /stat/daily-submission
+	async getDailySubmission(req, res, next) {
+		const { day } = req.query;
+
+		try {
+			const baseDay = parseDate(day);
+			const startOfDay = new Date(baseDay);
+			startOfDay.setHours(0, 0, 0, 0);
+
+			const endOfDay = new Date(baseDay);
+			endOfDay.setHours(23, 59, 59, 999);
+
+			const data = await Submission.aggregate([
+				{
+					$match: {
+						createdAt: {
+							$gte: startOfDay,
+							$lte: endOfDay,
+						},
+					},
+				},
+				{
+					$group: {
+						_id: '$status',
+						count: { $sum: 1 },
+					},
+				},
+				{
+					$sort: { _id: -1 },
+				},
+			]);
+
+			res.status(200).json({
+				success: true,
+				data,
+			});
+
+			console.log('Get daily submission successful');
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in get daily submission: ${err.message}`);
+		}
+	},
+
 	//[GET] /stat/monthly-submission
 	async getMonthlySubmission(req, res, next) {
 		const { day } = req.query;
@@ -341,7 +386,7 @@ const statControllers = {
 			const status = await Submission.aggregate([
 				{
 					$match: {
-						forProblem: id
+						forProblem: id,
 					},
 				},
 				{
@@ -354,11 +399,11 @@ const statControllers = {
 					$sort: { _id: -1 },
 				},
 			]);
-			
+
 			const language = await Submission.aggregate([
 				{
 					$match: {
-						forProblem: id
+						forProblem: id,
 					},
 				},
 				{
@@ -372,14 +417,14 @@ const statControllers = {
 				},
 			]);
 
-			res.status(200).json({success: true, data:{status, language}})
+			res.status(200).json({ success: true, data: { status, language } });
 			console.log('Get problem stat successful');
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in get problem stat: ${err.message}`);
 		}
-	}
+	},
 };
 
 export default statControllers;

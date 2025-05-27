@@ -82,7 +82,7 @@ const problemControllers = {
 			} else {
 				res.status(200).json({
 					success: true,
-					data: {...problem, testcase: undefined},
+					data: { ...problem, testcase: undefined },
 				});
 			}
 
