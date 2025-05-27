@@ -6,6 +6,7 @@ import { Search, Plus, Lock, LockOpen, Trash, Pencil } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router';
+import PropTypes from 'prop-types';
 
 import Select from '~/components/Select';
 import MultiSelect from '~/components/MultiSelect';
@@ -27,31 +28,25 @@ const TableSkeleton = memo(({ perPage }) =>
 	)),
 );
 
-// eslint-disable-next-line react/display-name, react/prop-types
+// eslint-disable-next-line react/display-name
 const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePublicDialog, tags, t }) => (
-	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 dark:text-base-content/80">
-		{/* eslint-disable-next-line react/prop-types*/}
+	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80">
 		<td className="text-blue-gray-900 p-4 text-sm dark:text-white">#{item.id}</td>
 		<td className="p-4 text-sm">
-			{/* eslint-disable-next-line react/prop-types*/}
-			<Link to={`/problem/${item.id}`} className="hover:!text-secondary">
-				{/* eslint-disable-next-line react/prop-types*/}
+			<Link to={`/problem/${item.id}`} className="hover:!text-secondary hover:underline">
 				{item.name}
 			</Link>
 		</td>
 		<td className="p-4 text-sm">
-			{/* eslint-disable-next-line react/prop-types*/}
 			<Tooltip content={item.public ? t('close-it') : t('open-it')} placement="top">
 				<IconButton
 					onClick={() => {
-						// eslint-disable-next-line react/prop-types
 						setSelectId(item.id);
 						setPrivatePublicDialog(true);
 					}}
 					size="sm"
 					className="group !shadow-cmd cursor-pointer rounded-full bg-transparent"
 				>
-					{/* eslint-disable-next-line react/prop-types*/}
 					{item.public ? (
 						<LockOpen size="18" className="text-success mx-3 transition-all duration-300 group-hover:mb-1" />
 					) : (
@@ -61,22 +56,15 @@ const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePubli
 			</Tooltip>
 		</td>
 		<td className="max-w-sm p-4 text-sm md:max-w-xs">
-			{/* eslint-disable-next-line react/prop-types*/}
 			<ChipList data={item.tags} activeTags={tags} />
 		</td>
-		{/* eslint-disable-next-line react/prop-types*/}
 		<td data-difficulty={item.difficulty} className="data-[difficulty=medium]:text-warning data-[difficulty=hard]:text-error text-success p-4 text-sm capitalize">
-			{/* eslint-disable-next-line react/prop-types*/}
 			{item.difficulty}
 		</td>
-		{/* eslint-disable-next-line react/prop-types*/}
 		<td className="p-4 text-sm">{item.point}p</td>
-		{/* eslint-disable-next-line react/prop-types*/}
 		<td className="p-4 text-sm">{item.noOfSuccess}</td>
-		{/* eslint-disable-next-line react/prop-types*/}
 		<td className="p-4 text-sm">{item.noOfSubm == 0 ? 0 : Math.round((item.noOfSuccess / item.noOfSubm) * 100)}%</td>
 		<td className="space-x-3 p-4 text-sm">
-			{/* eslint-disable-next-line react/prop-types*/}
 			<Link to={`/problem/${item.id}`}>
 				<Tooltip content={t('edit')}>
 					<IconButton size="sm" className="bg-info hover:!shadow-cmd cursor-pointer rounded-full">
@@ -87,7 +75,6 @@ const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePubli
 			<Tooltip content={t('delete')}>
 				<IconButton
 					onClick={() => {
-						// eslint-disable-next-line react/prop-types
 						setSelectId(item.id);
 						setOpenDeleteDialog(true);
 					}}
@@ -100,6 +87,15 @@ const TableRow = memo(({ item, setSelectId, setOpenDeleteDialog, setPrivatePubli
 		</td>
 	</tr>
 ));
+
+TableRow.propTypes = {
+	item: PropTypes.object.isRequired,
+	setSelectId: PropTypes.func.isRequired,
+	setOpenDeleteDialog: PropTypes.func.isRequired,
+	setPrivatePublicDialog: PropTypes.func.isRequired,
+	tags: PropTypes.array.isRequired,
+	t: PropTypes.func.isRequired,
+}
 
 const Problem = () => {
 	const { t } = useTranslation('problem');

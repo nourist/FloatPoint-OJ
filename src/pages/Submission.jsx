@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import Chart from 'react-apexcharts';
+import { memo } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { Chip,Tooltip,IconButton } from '@material-tailwind/react';
+import { Trash } from 'lucide-react';
 
 import Pagination from '~/components/Pagination';
 import Select from '~/components/Select';
@@ -10,6 +15,86 @@ import { getProblems } from '~/services/problem';
 import { getUsers } from '~/services/user';
 import { getSubmissions } from '~/services/submission';
 import Error from '~/components/Error';
+
+// eslint-disable-next-line react/display-name, react/prop-types
+const TableSkeleton = memo(({ perPage }) =>
+	[...Array(perPage)].map((_, index) => (
+		<tr key={index} className="skeleton odd:skeleton-variant h-16">
+			{[...Array(10)].map((_, idx) => (
+				<td key={idx} className="p-4"></td>
+			))}
+		</tr>
+	)),
+);
+
+const formatedDate = (date) => {
+	const datePart = new Intl.DateTimeFormat('vi-VN', {
+		day: '2-digit',
+		month: '2-digit',
+	}).format(date);
+
+	const timePart = new Intl.DateTimeFormat('vi-VN', {
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+	}).format(date);
+
+	const result = `${datePart.replaceAll('/', '-')} ${timePart}`;
+	return result;
+};
+
+const TableRow = ({ item,t }) => (
+	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80">
+		<td className="p-4 text-sm">{formatedDate(new Date(item.createdAt || null))}</td>
+		<td className="p-4 text-sm truncate">
+			<Link to={`/submission/${item._id}`} className="hover:!text-secondary hover:underline">
+				{item._id}
+			</Link>
+		</td>
+		<td className="p-4 text-sm">
+			<Chip
+				className="!w-12 text-center"
+				style={{
+					backgroundColor: statusColors[item.status.toLowerCase()],
+				}}
+				value={item.status}
+			/>
+		</td>
+		<td className="p-4 text-sm">
+			<Link className="text-secondary hover:underline" to={`/problem/${item.forProblem}`}>
+				{item.forProblem}
+			</Link>
+		</td>
+		<td className="p-4 text-sm">{item.time}</td>
+		<td className="p-4 text-sm">{item.memory}</td>
+		<td className="p-4 text-sm capitalize">{item.language}</td>
+		<td className="p-4 text-sm">{item.point}</td>
+		<td className="p-4 text-sm">
+			<Link className="text-secondary hover:underline" to={`/user/${item.forProblem}`}>
+				{item.author}
+			</Link>
+		</td>
+		<td className="p-4 text-sm">
+			<Tooltip content={t('delete')}>
+				<IconButton
+					onClick={() => {
+						// setSelectId(item.id);
+						// setOpenDeleteDialog(true);
+					}}
+					size="sm"
+					className="bg-error hover:!shadow-cmd cursor-pointer rounded-full"
+				>
+					<Trash color="#fff" size="16" />
+				</IconButton>
+			</Tooltip>
+		</td>
+	</tr>
+);
+
+TableRow.propTypes = {
+	item: PropTypes.object.isRequired,
+		t: PropTypes.func.isRequired,
+};
 
 const Submission = () => {
 	const { t } = useTranslation('submission');
@@ -61,9 +146,9 @@ const Submission = () => {
 	}
 
 	return (
-		<div className="flex min-h-[100vh] flex-col-reverse flex-wrap gap-6 xl:flex-row">
+		<div className="flex min-h-[100vh] flex-col-reverse gap-6 xl:flex-row">
 			<div className="flex-1 rounded-xl">
-				<div className="flex flex-wrap gap-2">
+				<div className="mb-4 flex flex-wrap gap-2">
 					<Select
 						label={t('status')}
 						value={status}
@@ -85,6 +170,23 @@ const Submission = () => {
 					/>
 					<Select label={t('problem')} value={problem} loading={problemsLoading} setValue={setProblem} data={problems?.map((item) => ({ value: item, label: item }))} />
 					<Select label={t('author')} value={author} loading={usersLoading} setValue={setAuthor} data={users?.map((item) => ({ value: item, label: item }))} />
+				</div>
+				<div className="shadow-clg shadow-shadow-color/5 overflow-auto rounded-xl">
+					<table className="w-full table-fixed text-left">
+						<thead>
+							<tr>
+								{[t('when'), t('id'), t('status'), t('problem'), `${t('time')}(s)`, `${t('memory')}(MB)`, t('language'), t('point'), t('author')].map(
+									(item, index) => (
+										<th key={index} className="border-base-content/30 bg-blue-gray-50 dark:bg-base-300 border-b p-4 text-sm capitalize dark:text-white">
+											{item}
+										</th>
+									),
+								)}
+								<th className="border-base-content/30 bg-blue-gray-50 dark:bg-base-300 w-16 border-b p-4 text-sm capitalize dark:text-white"></th>
+							</tr>
+						</thead>
+						<tbody>{loading ? <TableSkeleton perPage={perPage} /> : data?.data?.map((item, index) => <TableRow item={item} key={index} t={t} />)}</tbody>
+					</table>
 				</div>
 				<div className="mt-4 flex flex-wrap gap-2">
 					<Select

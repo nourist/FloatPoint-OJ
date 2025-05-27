@@ -10,5 +10,11 @@
 	"status": "status",
 	"per-page": "Per page",
 	"author": "author",
-	"problem": "problem"
+	"problem": "problem",
+	"when":"when",
+	"id": "id",
+	"time": "time",
+	"memory": "memory",
+	"point": "point",
+	"delete": "delete"
 }

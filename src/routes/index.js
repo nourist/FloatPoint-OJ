@@ -8,6 +8,7 @@ import Contest from '~/pages/Contest';
 import Setting from '~/pages/Setting';
 import ProblemId from '~/pages/ProblemId';
 import CreateProblem from '~/pages/CreateProblem';
+import SubmissionId from '~/pages/SubmissionId';
 
 const routes = [
 	{
@@ -52,6 +53,10 @@ const routes = [
 		path: '/problem/create',
 		page: CreateProblem,
 	},
+	{
+		path: '/submission/:id',
+		page: SubmissionId,
+	}
 ];
 
 export default routes;
