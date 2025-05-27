@@ -55,3 +55,11 @@ export const getProblemStat = (id) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getDailySubmissions = (day) =>
+	httpRequest
+		.get('/stat/daily-submission', { params: { day } })
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

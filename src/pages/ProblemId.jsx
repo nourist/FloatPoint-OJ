@@ -58,10 +58,10 @@ const ProblemId = () => {
 
 	return (
 		<>
-			<h2 className="text-base-content mb-1 text-lg font-semibold capitalize">{t('stat')}</h2>
+			<h2 className="text-base-content mb-1 text-xl font-semibold capitalize">{t('stat')}</h2>
 			<div className="mb-6 flex flex-wrap gap-6">
 				<div className="bg-base-100 flex-center shadow-shadow-color/3 shadow-clg min-w-80 flex-1 flex-col gap-2 rounded-xl px-2 py-4">
-					<h2 className="text-base-content text-center capitalize">{t('status')}</h2>
+					<h2 className="text-base-content text-center text-lg font-semibold capitalize">{t('status')}</h2>
 					<Chart
 						width={'100%'}
 						type="pie"
@@ -78,7 +78,7 @@ const ProblemId = () => {
 					/>
 				</div>
 				<div className="bg-base-100 flex-center shadow-shadow-color/3 shadow-clg min-w-80 flex-1 flex-col gap-2 rounded-xl px-2 py-4 pb-0">
-					<h2 className="text-base-content mb-auto text-center capitalize">{t('language')}</h2>
+					<h2 className="text-base-content mb-auto text-center text-lg font-semibold capitalize">{t('language')}</h2>
 					<Chart
 						width="100%"
 						type="bar"
@@ -108,7 +108,7 @@ const ProblemId = () => {
 					/>
 				</div>
 			</div>
-			<h2 className="text-base-content mb-1 text-lg font-semibold capitalize">{t('setting')}</h2>
+			<h2 className="text-base-content mb-1 text-xl font-semibold capitalize">{t('setting')}</h2>
 			<ProblemSetting defaultData={data} handler={(data) => editProblem(id, data)} />
 		</>
 	);

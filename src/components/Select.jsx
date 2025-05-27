@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import { Menu, MenuHandler, MenuList, MenuItem, Button } from '@material-tailwind/react';
 import { Check } from 'lucide-react';
 
-const Select = ({ label, data, value, setValue, className = '', clearable = true, prefix }) => {
+const Select = ({ label, data, value, setValue, className = '', clearable = true, prefix, loading }) => {
 	return (
 		<div className={`relative w-48 ${className}`}>
 			<Menu>
 				<MenuHandler>
 					<Button
+						loading={loading}
 						variant="outlined"
 						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative flex h-10 w-48 items-center p-3 outline-2 outline-transparent transition-all hover:!opacity-100`}
 						ripple={false}
@@ -38,7 +39,7 @@ const Select = ({ label, data, value, setValue, className = '', clearable = true
 						)}
 					</Button>
 				</MenuHandler>
-				<MenuList className={`z-[9999] w-48`}>
+				<MenuList className={`z-[9999] max-h-[369px] w-48 overflow-auto`}>
 					{data?.map((item, index) => (
 						<MenuItem className="flex gap-2 capitalize" key={index} onClick={() => setValue(item.value)}>
 							<div className="-ml-1 size-4">{item.value === value && <Check className="size-4" />}</div>
@@ -72,6 +73,7 @@ Select.propTypes = {
 	className: PropTypes.string,
 	clearable: PropTypes.bool,
 	prefix: PropTypes.string,
+	loading: PropTypes.bool,
 };
 
 export default Select;
