@@ -16,5 +16,8 @@
 	"time": "time",
 	"memory": "memory",
 	"point": "point",
-	"delete": "delete"
+	"delete": "delete",
+	"are-you-sure": "Are you sure",
+	"delete-msg": "The submission will be gone forever, the user will lost point",
+	"cancel": "cancel"
 }

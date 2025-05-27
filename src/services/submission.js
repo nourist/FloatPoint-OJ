@@ -7,3 +7,11 @@ export const getSubmissions = (params) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const deleteSubmission = (id) =>
+	httpRequest
+		.delete(`/submission/delete/${id}`)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
