@@ -97,7 +97,7 @@ TableRow.propTypes = {
 	t: PropTypes.func.isRequired,
 }
 
-const Problem = () => {
+const Problems = () => {
 	const { t } = useTranslation('problem');
 	const queryClient = useQueryClient();
 
@@ -294,4 +294,4 @@ const Problem = () => {
 	);
 };
 
-export default Problem;
+export default Problems;

@@ -96,7 +96,7 @@ TableRow.propTypes = {
 		t: PropTypes.func.isRequired,
 };
 
-const Submission = () => {
+const Submissions = () => {
 	const { t } = useTranslation('submission');
 
 	const [status, setStatus] = useState(null);
@@ -247,4 +247,4 @@ const Submission = () => {
 	);
 };
 
-export default Submission;
+export default Submissions;

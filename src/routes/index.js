@@ -1,14 +1,15 @@
 import Login from '~/pages/Login';
 import NotFound from '~/pages/NotFound';
 import Dashboard from '~/pages/Dashboard';
-import User from '~/pages/User';
-import Problem from '~/pages/Problem';
-import Submission from '~/pages/Submission';
+import Users from '~/pages/Users';
+import Problems from '~/pages/Problems';
+import Submissions from '~/pages/Submissions';
 import Contest from '~/pages/Contest';
 import Setting from '~/pages/Setting';
 import ProblemId from '~/pages/ProblemId';
 import CreateProblem from '~/pages/CreateProblem';
 import SubmissionId from '~/pages/SubmissionId';
+import UserId from '~/pages/UserId';
 
 const routes = [
 	{
@@ -27,15 +28,15 @@ const routes = [
 	},
 	{
 		path: '/user',
-		page: User,
+		page: Users,
 	},
 	{
 		path: '/problem',
-		page: Problem,
+		page: Problems,
 	},
 	{
 		path: '/submission',
-		page: Submission,
+		page: Submissions,
 	},
 	{
 		path: '/contest',
@@ -56,6 +57,10 @@ const routes = [
 	{
 		path: '/submission/:id',
 		page: SubmissionId,
+	},
+	{
+		path: '/user/:name',
+		page: UserId,
 	}
 ];
 
