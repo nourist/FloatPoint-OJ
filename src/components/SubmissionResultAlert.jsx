@@ -17,7 +17,7 @@ const SubmissionResultAlert = ({ data }) => {
 			<div>
 				<h3
 					data-ac={data.status == 'AC'}
-					className="text-warning-content data-[ac=true]:text-success-content dark:text-warning dark:data-[ac=true]:text-success text-lg font-bold capitalize flex items-center"
+					className="text-warning-content data-[ac=true]:text-success-content dark:text-warning dark:data-[ac=true]:text-success flex items-center text-lg font-bold capitalize"
 				>
 					{t(data.status.toLowerCase())}
 					{data.status != 'AC' && data.point != 0 && (

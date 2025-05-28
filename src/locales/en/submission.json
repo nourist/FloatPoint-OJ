@@ -20,10 +20,11 @@
 	"are-you-sure": "Are you sure",
 	"delete-msg": "The submission will be gone forever, the user will lost point",
 	"cancel": "cancel",
-	"submitted-for":"submitted for",
-	"partial":"partial",
-	"submit-at":"submit at",
-	"source":"source",
-	"compiler-log":"compiler log",
-	"checker-log":"checker log"
+	"submitted-for": "submitted for",
+	"partial": "partial",
+	"submit-at": "submit at",
+	"source": "source",
+	"compiler-log": "compiler log",
+	"checker-log": "checker log",
+	"testcase-details": "testcase details"
 }

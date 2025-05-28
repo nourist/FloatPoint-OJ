@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router';
 import { LoaderCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Chip } from '@material-tailwind/react';
-import { CodeBlock,dracula,CopyBlock } from 'react-code-blocks';
+import { CodeBlock, dracula, CopyBlock } from 'react-code-blocks';
 
 import statusColors from '~/config/statusColor';
 import { getSubmission } from '~/services/submission';
@@ -33,32 +33,32 @@ const SubmissionId = () => {
 		return <Error keys={[['submission', id]]}>{error}</Error>;
 	}
 
-		const formatedDate = (date) => {
-			const datePart = new Intl.DateTimeFormat('vi-VN', {
-				day: '2-digit',
-				month: '2-digit',
-				year: 'numeric',
-			}).format(date);
-	
-			const timePart = new Intl.DateTimeFormat('vi-VN', {
-				hour: '2-digit',
-				minute: '2-digit',
-				// second: '2-digit',
-			}).format(date);
-	
-			const result = `${datePart.replaceAll('/', '-')} ${timePart}`;
-			return result;
-		};
+	const formatedDate = (date) => {
+		const datePart = new Intl.DateTimeFormat('vi-VN', {
+			day: '2-digit',
+			month: '2-digit',
+			year: 'numeric',
+		}).format(date);
 
-		const languageValue = { c: 'c', c11: 'c', 'c++11': 'cpp', 'c++14': 'cpp', 'c++17': 'cpp', 'c++20': 'cpp', python2: 'python', python3: 'python' };
-	
-console.log(data);	
+		const timePart = new Intl.DateTimeFormat('vi-VN', {
+			hour: '2-digit',
+			minute: '2-digit',
+			// second: '2-digit',
+		}).format(date);
+
+		const result = `${datePart.replaceAll('/', '-')} ${timePart}`;
+		return result;
+	};
+
+	const languageValue = { c: 'c', c11: 'c', 'c++11': 'cpp', 'c++14': 'cpp', 'c++17': 'cpp', 'c++20': 'cpp', python2: 'python', python3: 'python' };
+
+	console.log(data);
 
 	return (
 		<>
 			<SubmissionResultAlert data={data} />
 
-			<div className="*:bg-base-100 *:shadow-clg *:shadow-shadow-color/3 mt-6 grid grid-cols-6 grid-rows-12 gap-6 *:rounded-xl *:p-5">
+			<div className="*:bg-base-100 *:shadow-clg *:shadow-shadow-color/3 my-6 grid grid-cols-6 grid-rows-12 gap-6 *:rounded-xl *:p-5">
 				<div className="col-span-6 row-span-3 grid grid-cols-8 grid-rows-8 gap-4 *:col-span-4 *:row-span-2 md:col-span-4 md:row-span-4 *:xl:col-span-2 *:xl:row-span-4">
 					{[
 						{
@@ -119,6 +119,35 @@ console.log(data);
 				<div className="col-span-3 col-start-4 row-span-3 row-start-4 md:col-span-2 md:col-start-5 md:row-span-6 md:row-start-7">
 					<h3 className="text-base-content mb-2 text-lg font-semibold capitalize">{t('checker-log')}</h3>
 					<CodeBlock text={data.msg.checker} language="bash" showLineNumbers theme={theme == 'dark' ? dracula : undefined} />
+				</div>
+			</div>
+
+			<div className="bg-base-100 shadow-shadow-color/3 shadow-clg rounded-xl p-5">
+				<h3 className="text-base-content mb-2 text-lg font-semibold capitalize">{t('testcase-details')}</h3>
+				<div className="border-base-content/10 w-full overflow-auto rounded-lg border">
+					<table className="w-full table-fixed text-left">
+						<thead className="text-base-content capitalize">
+							<tr>
+								{[t('testcase'), t('status'), `${t('time')} (s)`, `${t('memory')} (Mb)`].map((item, index) => (
+									<th className="border-base-content/10 bg-blue-gray-50 dark:bg-base-300 border-b p-4 text-sm capitalize dark:text-white" key={index}>
+										{item}
+									</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							{data.testcase.map((item, index) => (
+								<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80 *:p-4" key={index}>
+									<td className="text-base-content font-bold">#{index + 1}</td>
+									<td>
+										<Chip className="inline" value={item.status} style={{ background: statusColors[item.status.toLowerCase()] }} />
+									</td>
+									<td>{item.time}</td>
+									<td>{item.memory}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</>

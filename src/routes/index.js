@@ -4,12 +4,13 @@ import Dashboard from '~/pages/Dashboard';
 import Users from '~/pages/Users';
 import Problems from '~/pages/Problems';
 import Submissions from '~/pages/Submissions';
-import Contest from '~/pages/Contest';
+import Contests from '~/pages/Contests';
 import Setting from '~/pages/Setting';
 import ProblemId from '~/pages/ProblemId';
 import CreateProblem from '~/pages/CreateProblem';
 import SubmissionId from '~/pages/SubmissionId';
 import UserId from '~/pages/UserId';
+import ContestId from '~/pages/ContestId';
 
 const routes = [
 	{
@@ -40,7 +41,7 @@ const routes = [
 	},
 	{
 		path: '/contest',
-		page: Contest,
+		page: Contests,
 	},
 	{
 		path: '/setting',
@@ -61,6 +62,10 @@ const routes = [
 	{
 		path: '/user/:name',
 		page: UserId,
+	},
+	{
+		path: '/contest/:id',
+		page: ContestId,
 	},
 ];
 
