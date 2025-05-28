@@ -8,6 +8,14 @@ export const getSubmissions = (params) =>
 			throw err.response.data.msg;
 		});
 
+export const getSubmission = (id) =>
+	httpRequest
+		.get(`/submission/info/${id}`)
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
 export const deleteSubmission = (id) =>
 	httpRequest
 		.delete(`/submission/delete/${id}`)

@@ -128,16 +128,16 @@
 	--color-neutral-content: oklch(92% 0.004 286.32);
 
 	--color-info: oklch(74% 0.16 232.661);
-	--color-info-content: oklch(29% 0.066 243.157);
+	--color-info-content: oklch(49% 0.166 243.157);
 
 	--color-success: oklch(76% 0.177 163.223);
-	--color-success-content: oklch(37% 0.077 168.94);
+	--color-success-content: oklch(57% 0.277 168.94);
 
 	--color-warning: oklch(82% 0.189 84.429);
-	--color-warning-content: oklch(41% 0.112 45.904);
+	--color-warning-content: oklch(61% 0.212 45.904);
 
 	--color-error: oklch(71% 0.194 13.428);
-	--color-error-content: oklch(27% 0.105 12.094);
+	--color-error-content: oklch(47% 0.105 12.094);
 
 	--color-shadow-color: oklch(0.3 0.0317 248.91);
 

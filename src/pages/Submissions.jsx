@@ -44,7 +44,8 @@ const formatedDate = (date) => {
 	return result;
 };
 
-const TableRow = ({ item, t, setSelectId, setOpenDeleteDialog }) => (
+// eslint-disable-next-line react/display-name
+const TableRow = memo(({ item, t, setSelectId, setOpenDeleteDialog }) => (
 	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80">
 		<td className="p-4 text-sm">{formatedDate(new Date(item.createdAt || null))}</td>
 		<td className="truncate p-4 text-sm">
@@ -90,7 +91,7 @@ const TableRow = ({ item, t, setSelectId, setOpenDeleteDialog }) => (
 			</Tooltip>
 		</td>
 	</tr>
-);
+));
 
 TableRow.propTypes = {
 	item: PropTypes.object.isRequired,
