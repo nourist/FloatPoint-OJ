@@ -49,7 +49,7 @@ const TableRow = memo(({ item, t, setSelectId, setOpenDeleteDialog }) => (
 	<tr className="even:bg-base-200 dark:bg-base-200 dark:even:bg-base-100 bg-base-100 text-base-content/80">
 		<td className="p-4 text-sm">{formatedDate(new Date(item.createdAt || null))}</td>
 		<td className="truncate p-4 text-sm">
-			<Link to={`/submission/${item._id}`} className="hover:!text-secondary hover:underline">
+			<Link to={`/submission/${item._id}`} className="!text-secondary hover:underline">
 				{item._id}
 			</Link>
 		</td>
