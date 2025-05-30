@@ -38,7 +38,7 @@ const contestControllers = {
 
 			res.status(200).json({
 				success: true,
-				data: contest._doc,
+				data: {...contest._doc, status: contest.get('status')},
 			});
 
 			console.log(`Get id: "${id}" contest successfull`);
@@ -305,6 +305,7 @@ const contestControllers = {
 			contest.standing = contest.standing.map((usr) => {
 				usr.score.splice(index, 1);
 				usr.time.splice(index, 1);
+				usr.status.splice(index, 1);
 				return usr;
 			});
 

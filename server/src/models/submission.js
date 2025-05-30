@@ -72,7 +72,7 @@ const submissionSchema = new mongoose.Schema(
 				if (problem) query.forProblem = problem[0] == '#' ? problem.slice(1, problem.length) : { $regex: problem, $options: 'i' };
 				if (contest) query.forContest = contest;
 
-				return this.find(query).select('-src -testcase');
+				return this.find(query).sort({createdAt: -1}).select('-src -testcase');
 			},
 		},
 	},
