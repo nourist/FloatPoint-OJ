@@ -12,5 +12,11 @@
 	"edit": "edit",
 	"problem": "problem",
 	"duration": "duration",
-	"participant": "participant"
+	"participant": "participant",
+	"create-new": "create new",
+	"standing": "standing",
+	"time-remaining": "time remaining",
+	"top": "top",
+	"user": "user",
+	"total": "total"
 }

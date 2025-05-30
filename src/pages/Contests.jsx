@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Search, Clock } from 'lucide-react';
+import { Search, Clock, Plus, Trophy } from 'lucide-react';
 import PropTypes from 'prop-types';
 import { Chip, Button } from '@material-tailwind/react';
 import { Link } from 'react-router';
@@ -34,10 +34,11 @@ const formatedDate = (date) => {
 const ContestCard = memo(({ data, t }) => (
 	<div
 		data-loading={!data}
-		className="data-[loading=true]:skeleton bg-base-100 shadow-clg shadow-shadow-color/3 min-h-[348px] max-w-[540px] min-w-[400px] flex-1 space-y-6 rounded-xl p-6 data-[loading=true]:*:hidden"
+		className="data-[loading=true]:skeleton bg-base-100 shadow-clg shadow-shadow-color/3 min-h-[344px] max-w-[540px] min-w-[400px] flex-1 space-y-6 rounded-xl p-6 data-[loading=true]:*:hidden"
 	>
-		<div className="mb-8 flex justify-between">
-			<h3 className="text-base-content text-xl font-semibold capitalize">{data?.title}</h3>
+		<div className="mb-8 flex items-center gap-3">
+			<Trophy size={24} color="#fbc02d" />
+			<h3 className="text-base-content mr-auto text-xl font-semibold capitalize">{data?.title}</h3>
 			<Chip data-status={data?.status} className="bg-warning data-[status=ended]:bg-error data-[status=ongoing]:bg-success text-white" value={t(data?.status)} size="lg" />
 		</div>
 		<div className="bg-base-300 text-base-content flex h-11 items-center gap-2 rounded-md p-3 text-sm capitalize">
@@ -66,11 +67,14 @@ const ContestCard = memo(({ data, t }) => (
 				<div className="text-base-content/50 text-xs uppercase">{t('duration')}</div>
 			</div>
 		</div>
-		<Link to={`/contest/${data?.id}`}>
-			<Button className="bg-secondary hover:bg-secondary/90 h-12 w-full cursor-pointer text-sm capitalize">
-				{t('view')} & {t('edit')}
-			</Button>
-		</Link>
+		<div className="flex gap-3">
+			<Link to={`/contest/${data?.id}?tab=1`} className="flex-1">
+				<Button className="bg-base-content hover:bg-base-content/90 text-base-100 h-11 w-full cursor-pointer capitalize">{t('view')}</Button>
+			</Link>
+			<Link to={`/contest/${data?.id}?tab=2`} className="flex-1">
+				<Button className="bg-secondary hover:bg-secondary/90 h-11 w-full cursor-pointer capitalize">{t('edit')}</Button>
+			</Link>
+		</div>
 	</div>
 ));
 
@@ -130,6 +134,12 @@ const Contests = () => {
 					<FullOutlineInput className="pr-10 placeholder:capitalize" placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
 					<Search className="text-base-content/70 absolute top-3 right-3" size="16" />
 				</div>
+				<Link to="/contest/create" className="ml-auto">
+					<Button className="bg-primary flex !h-10 cursor-pointer items-center gap-1 capitalize">
+						<Plus size="18" />
+						{t('create-new')}
+					</Button>
+				</Link>
 			</div>
 			<div className="flex w-full flex-wrap gap-6">
 				{isLoading

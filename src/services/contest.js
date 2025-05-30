@@ -7,3 +7,11 @@ export const getContests = (options) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getContest = (id) =>
+	httpRequest
+		.get(`/contest/info/${id}`)
+		.then((res) => res.data.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

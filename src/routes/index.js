@@ -11,6 +11,7 @@ import CreateProblem from '~/pages/CreateProblem';
 import SubmissionId from '~/pages/SubmissionId';
 import UserId from '~/pages/UserId';
 import ContestId from '~/pages/ContestId';
+import CreateContest from '~/pages/CreateContest';
 
 const routes = [
 	{
@@ -66,6 +67,10 @@ const routes = [
 	{
 		path: '/contest/:id',
 		page: ContestId,
+	},
+	{
+		path: '/contest/create',
+		page: CreateContest,
 	},
 ];
 

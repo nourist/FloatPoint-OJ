@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Chart from 'react-apexcharts';
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { Chip, Tooltip, IconButton, Dialog, DialogBody, DialogFooter, DialogHeader, Button } from '@material-tailwind/react';
 import { Trash } from 'lucide-react';
 import { toast } from 'react-toastify';
@@ -103,11 +103,12 @@ TableRow.propTypes = {
 const Submissions = () => {
 	const { t } = useTranslation('submission');
 	const queryClient = useQueryClient();
+	const [searchParams] = useSearchParams();
 
 	const [status, setStatus] = useState(null);
 	const [language, setLanguage] = useState(null);
-	const [problem, setProblem] = useState(null);
-	const [author, setAuthor] = useState(null);
+	const [problem, setProblem] = useState(searchParams.get('problem'));
+	const [author, setAuthor] = useState(searchParams.get('author'));
 	const [page, setPage] = useState(1);
 	const [perPage, setPerPage] = useState(50);
 	const [maxPage, setMaxPage] = useState(1);
@@ -139,8 +140,17 @@ const Submissions = () => {
 		isLoading: loading,
 		error,
 	} = useQuery({
-		queryKey: ['submissions', { status, language, problem, author, perPage, page }],
-		queryFn: () => getSubmissions({ status: status?.toUpperCase(), language, problem: problem ? `#${problem}` : undefined, author, size: perPage, page }),
+		queryKey: ['submissions', { status, language, problem, author, perPage, page, contest: searchParams.get('contest') }],
+		queryFn: () =>
+			getSubmissions({
+				status: status?.toUpperCase(),
+				language,
+				problem: problem ? `#${problem}` : undefined,
+				author,
+				size: perPage,
+				page,
+				contest: searchParams.get('contest'),
+			}),
 	});
 
 	useEffect(() => {
@@ -154,7 +164,7 @@ const Submissions = () => {
 		deleteSubmission(selectId)
 			.then((res) => {
 				toast.success(res);
-				queryClient.invalidateQueries(['submissions', { status, language, problem, author, perPage, page }]);
+				queryClient.invalidateQueries(['submissions', { status, language, problem, author, perPage, page, contest: searchParams.get('contest') }]);
 			})
 			.catch(toast.error)
 			.finally(() => {

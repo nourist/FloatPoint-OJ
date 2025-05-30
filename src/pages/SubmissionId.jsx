@@ -30,7 +30,11 @@ const SubmissionId = () => {
 	}
 
 	if (error) {
-		return <Error keys={[['submission', id]]}>{error}</Error>;
+		return (
+			<div className="h-[calc(100vh-100px)]">
+				<Error keys={[['submission', id]]}>{error}</Error>
+			</div>
+		);
 	}
 
 	const formatedDate = (date) => {
@@ -51,8 +55,6 @@ const SubmissionId = () => {
 	};
 
 	const languageValue = { c: 'c', c11: 'c', 'c++11': 'cpp', 'c++14': 'cpp', 'c++17': 'cpp', 'c++20': 'cpp', python2: 'python', python3: 'python' };
-
-	console.log(data);
 
 	return (
 		<>
