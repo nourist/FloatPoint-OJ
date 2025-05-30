@@ -39,5 +39,7 @@
 	"reset-to-default": "reset to default",
 	"stat": "stat",
 	"status": "status",
-	"language": "language"
+	"language": "language",
+	"submission":"submission",
+	"view":"view"
 }

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router';
 import { LoaderCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Chart from 'react-apexcharts';
@@ -108,6 +108,9 @@ const ProblemId = () => {
 					/>
 				</div>
 			</div>
+			<h2 className="text-base-content mb-4 text-xl font-semibold capitalize">
+				{t('submission')} <Link className="text-base text-secondary hover:underline" to={`/submission?problem=${id}` }>{t('view')}</Link>
+			</h2>
 			<h2 className="text-base-content mb-1 text-xl font-semibold capitalize">{t('setting')}</h2>
 			<ProblemSetting defaultData={data} handler={(data) => editProblem(id, data)} />
 		</>
