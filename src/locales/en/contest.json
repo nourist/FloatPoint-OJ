@@ -18,5 +18,11 @@
 	"time-remaining": "time remaining",
 	"top": "top",
 	"user": "user",
-	"total": "total"
+	"total": "total",
+	"delete": "delete",
+	"are-you-sure": "Are you sure",
+	"delete-msg": "The contest will be gone forever",
+	"cancel": "cancel",
+	"stop": "stop",
+	"start-now": "start now"
 }

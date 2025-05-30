@@ -164,7 +164,7 @@ const Submissions = () => {
 		deleteSubmission(selectId)
 			.then((res) => {
 				toast.success(res);
-				queryClient.invalidateQueries(['submissions', { status, language, problem, author, perPage, page, contest: searchParams.get('contest') }]);
+				queryClient.invalidateQueries({ queryKey: ['submissions', { status, language, problem, author, perPage, page, contest: searchParams.get('contest') }] });
 			})
 			.catch(toast.error)
 			.finally(() => {

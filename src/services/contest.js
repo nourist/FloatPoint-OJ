@@ -15,3 +15,19 @@ export const getContest = (id) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const editContest = (id, data) =>
+	httpRequest
+		.post(`/contest/edit/${id}`, data)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
+
+export const deleteContest = (id) =>
+	httpRequest
+		.delete(`/contest/delete/${id}`)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

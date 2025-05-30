@@ -109,7 +109,10 @@ const ProblemId = () => {
 				</div>
 			</div>
 			<h2 className="text-base-content mb-4 text-xl font-semibold capitalize">
-				{t('submission')} <Link className="text-base text-secondary hover:underline" to={`/submission?problem=${id}` }>{t('view')}</Link>
+				{t('submission')}{' '}
+				<Link className="text-secondary text-base hover:underline" to={`/submission?problem=${id}`}>
+					{t('view')}
+				</Link>
 			</h2>
 			<h2 className="text-base-content mb-1 text-xl font-semibold capitalize">{t('setting')}</h2>
 			<ProblemSetting defaultData={data} handler={(data) => editProblem(id, data)} />

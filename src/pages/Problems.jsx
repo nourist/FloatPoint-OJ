@@ -122,7 +122,7 @@ const Problems = () => {
 		editProblem(selectId, { public: !selectValue.public })
 			.then((res) => {
 				toast.success(res);
-				queryClient.invalidateQueries(['problems', { tags, q, difficulty, perPage, page }]);
+				queryClient.invalidateQueries({ queryKey: ['problems', { tags, q, difficulty, perPage, page }] });
 			})
 			.catch(toast.error)
 			.finally(() => {
@@ -137,7 +137,7 @@ const Problems = () => {
 		deleteProblem(selectId)
 			.then((res) => {
 				toast.success(res);
-				queryClient.invalidateQueries(['problems', { tags, q, difficulty, perPage, page }]);
+				queryClient.invalidateQueries({ queryKey: ['problems', { tags, q, difficulty, perPage, page }] });
 			})
 			.catch(toast.error)
 			.finally(() => {
