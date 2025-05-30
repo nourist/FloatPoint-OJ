@@ -61,8 +61,6 @@ const ContestId = () => {
 		);
 	}
 
-	console.log(startTime, endTime);
-
 	return (
 		<div className="relative min-h-[100vh]">
 			<Dialog size="xs" className="p-4" open={openStartDialog} handler={() => setOpenStartDialog(false)}>
@@ -163,7 +161,13 @@ const ContestId = () => {
 						<ContestStanding data={data} />
 					</TabPanel>
 					<TabPanel className="px-1" value={2}>
-						<ContestSetting defaultData={data} />
+						<ContestSetting
+							defaultData={data}
+							handler={(newData) => editContest(id, newData)}
+							finallyHandler={() => {
+								queryClient.invalidateQueries({ queryKey: ['contest', id] });
+							}}
+						/>
 					</TabPanel>
 				</TabsBody>
 			</Tabs>

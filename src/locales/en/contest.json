@@ -24,5 +24,17 @@
 	"delete-msg": "The contest will be gone forever",
 	"cancel": "cancel",
 	"stop": "stop",
-	"start-now": "start now"
+	"start-now": "start now",
+	"start-time": "start time",
+	"end-time": "end time",
+	"start-contest": "start contest",
+	"contest-id": "contest id",
+	"contest-title": "contest title",
+	"time": "time",
+	"description": "description",
+	"save": "save",
+	"reset-to-default": "reset to default",
+	"problems": "problems",
+	"add": "add",
+	"select-problem": "select problem"
 }

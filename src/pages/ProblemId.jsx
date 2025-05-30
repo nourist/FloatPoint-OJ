@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router';
 import { LoaderCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import statusColors from '~/config/statusColor';
 const ProblemId = () => {
 	const { t } = useTranslation('problem');
 	const { id } = useParams();
+	const queryClient = useQueryClient();
 
 	const {
 		data,
@@ -115,7 +116,13 @@ const ProblemId = () => {
 				</Link>
 			</h2>
 			<h2 className="text-base-content mb-1 text-xl font-semibold capitalize">{t('setting')}</h2>
-			<ProblemSetting defaultData={data} handler={(data) => editProblem(id, data)} />
+			<ProblemSetting
+				defaultData={data}
+				handler={(data) => editProblem(id, data)}
+				finallyHandler={() => {
+					queryClient.invalidateQueries({ queryKey: ['problem', id] });
+				}}
+			/>
 		</>
 	);
 };

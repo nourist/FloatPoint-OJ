@@ -12,7 +12,7 @@ import { getTags } from '~/services/problem';
 import Select from '~/components/Select';
 import MdEditor from '~/components/MdEditor';
 
-const ProblemSetting = ({ handler, defaultData }) => {
+const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => {
 	const { t } = useTranslation('problem');
 
 	const [id, setId] = useState(defaultData?.id || '');
@@ -170,7 +170,8 @@ const ProblemSetting = ({ handler, defaultData }) => {
 							.catch(toast.error)
 							.finally(() => {
 								setLoading(false);
-							});
+							})
+							.finally(finallyHandler);
 					}}
 				>
 					{t('save')}
@@ -182,6 +183,7 @@ const ProblemSetting = ({ handler, defaultData }) => {
 
 ProblemSetting.propTypes = {
 	handler: PropTypes.func.isRequired,
+	finallyHandler: PropTypes.func,
 	defaultData: PropTypes.object,
 };
 
