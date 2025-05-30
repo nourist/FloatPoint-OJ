@@ -153,12 +153,42 @@ const contestControllers = {
 				throw new Error('Id field is required');
 			}
 
-			const contest = await Contest.findOneAndUpdate({ id }, { ...req.body, problems: undefined }, { new: true });
+			const contest = await Contest.findOne({ id });
 
 			if (!contest) {
 				throw new Error('Contest not found');
 			}
 
+			const newStanding = req.body.problems ? contest.standing.map((item) => {
+				const newScore = req.body.problems.map((problemId) => {
+					const idx = contest.problems.indexOf(problemId);
+					return {
+						score: item.score[idx],
+						time: item.time[idx],
+						status: item.status[idx]
+					}; 
+				});
+
+				return {
+					user: item.user,
+					score: newScore.map(item=>item.score),
+					time: newScore.map(item=>item.time), 
+					status: newScore.map(item=>item.status), 
+				};
+			}):contest.standing;
+
+			contest.set({...req.body, standing: newStanding})
+
+			Promise.all(req.body?.problems?.map(async(pid) => {
+				const problem = await Problem.findOne({id:pid})
+				if (!problem.contest.includes(id)) {
+					problem.contest.push(id);
+				}
+				await problem.save();
+			}) || [])
+
+			await contest.save();
+			
 			res.status(200).json({ success: true, msg: 'Edit contest successfull', data: contest._doc });
 
 			console.log('Edit contest successfull');
@@ -166,165 +196,6 @@ const contestControllers = {
 			res.status(400).json({ success: false, msg: err.message });
 
 			console.error(`Error in edit contest: ${err.message}`);
-		}
-	},
-
-	//[POST] /contest/add-problem/:id
-	async addProblem(req, res, next) {
-		try {
-			const { id } = req.params;
-			const { problem: problemId } = req.query;
-
-			if (!id || !problemId) {
-				throw new Error('All fields are required');
-			}
-
-			const contest = await Contest.findOne({ id });
-			const problem = await Problem.findOne({ id: problemId });
-
-			if (!contest) {
-				throw new Error('Contest not found');
-			}
-
-			if (!problem) {
-				throw new Error('Problem not found');
-			}
-
-			contest.problems.push(problemId);
-
-			if (!problem.contest.includes(id)) {
-				problem.contest.push(id);
-			}
-
-			await problem.save();
-			await contest.save();
-
-			res.status(200).json({
-				success: true,
-				msg: 'Add contest problem successfull',
-				data: contest._doc,
-			});
-
-			console.log('Add contest problem successfull');
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in add problem to contest: ${err.message}`);
-		}
-	},
-
-	//[POST] /contest/edit-problem/:id
-	async editProblem(req, res, next) {
-		try {
-			const { id } = req.params;
-			const { index, problem: problemId } = req.body;
-
-			if (!id || (!index && index != 0) || !problemId) {
-				throw new Error('All fields are required');
-			}
-
-			const contest = await Contest.findOne({ id });
-			if (!contest) {
-				throw new Error('Contest not found');
-			}
-
-			if (index >= contest.problems.length || index < 0) {
-				throw new Error('Index not valid');
-			}
-
-			const problem = await Problem.findOne({ id: problemId });
-			if (!problem) {
-				throw new Error('Problem not found');
-			}
-
-			const lastProblem = await Problem.findOne({ id: contest.problems[index] });
-
-			const lastProblemContestIdx = lastProblem.contest.indexOf(id);
-
-			if (lastProblemContestIdx >= 0) {
-				lastProblem.contest.splice(lastProblemContestIdx, 1);
-			}
-
-			contest.problems[index] = problemId;
-
-			contest.standing = contest.standing.map((usr) => {
-				usr.score[index] = null;
-				usr.time[index] = null;
-				return usr;
-			});
-
-			if (!problem.contest.includes(id)) {
-				problem.contest.push(id);
-			}
-
-			await lastProblem.save();
-			await problem.save();
-			await contest.save();
-
-			res.status(200).json({
-				success: true,
-				msg: 'Edit contest problem successfull',
-				data: contest._doc,
-			});
-
-			console.log('Edit contest problem successfull');
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in edit contest problem: ${err.message}`);
-		}
-	},
-
-	//[POST] /contest/remove-problem/:id
-	async removeProblem(req, res, next) {
-		try {
-			const { id } = req.params;
-			const { index } = req.query;
-
-			if (!id || (!index && index != 0)) {
-				throw new Error('All fields are required');
-			}
-
-			const contest = await Contest.findOne({ id });
-			if (!contest) {
-				throw new Error('Contest not found');
-			}
-
-			if (index >= contest.problems.length || index < 0) {
-				throw new Error('Index not valid');
-			}
-
-			const lastProblem = await Problem.findOne({ id: contest.problems[index] });
-
-			const lastProblemContestIdx = lastProblem.contest.indexOf(id);
-
-			if (lastProblemContestIdx >= 0) {
-				lastProblem.contest.splice(lastProblemContestIdx, 1);
-			}
-
-			contest.standing = contest.standing.map((usr) => {
-				usr.score.splice(index, 1);
-				usr.time.splice(index, 1);
-				usr.status.splice(index, 1);
-				return usr;
-			});
-
-			contest.problems.splice(index, 1);
-
-			await lastProblem.save();
-			await contest.save();
-
-			res.status(200).json({
-				success: true,
-				msg: 'Remove contest problem successfull',
-				data: contest._doc,
-			});
-
-			console.log('Remove contest problem successfull');
-		} catch (err) {
-			res.status(400).json({ success: false, msg: err.message });
-
-			console.error(`Error in remove contest problem: ${err.message}`);
 		}
 	},
 
