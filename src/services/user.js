@@ -15,3 +15,11 @@ export const deleteUser = (name) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const getUser = (name) =>
+	httpRequest
+		.get(`/user/info/${name}`)
+		.then((res) => res.data)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

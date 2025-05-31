@@ -15,10 +15,7 @@ const SubmissionResultAlert = ({ data }) => {
 				{data.status == 'AC' ? <CircleCheckBig /> : <TriangleAlert />}
 			</div>
 			<div>
-				<h3
-					data-ac={data.status == 'AC'}
-					className="text-warning-content data-[ac=true]:text-success-content dark:text-warning dark:data-[ac=true]:text-success flex items-center text-lg font-bold capitalize"
-				>
+				<h3 data-ac={data.status == 'AC'} className="text-warning-content data-[ac=true]:text-success-content flex items-center text-lg font-bold capitalize">
 					{t(data.status.toLowerCase())}
 					{data.status != 'AC' && data.point != 0 && (
 						<div className="bg-secondary/20 text-secondary ml-4 rounded-full px-2 py-1 text-sm capitalize">
