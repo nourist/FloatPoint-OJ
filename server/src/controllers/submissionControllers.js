@@ -9,7 +9,7 @@ const submissionControllers = {
 	//[GET] /submission
 	async getList(req, res, next) {
 		try {
-			const { size = 20, page = 1, status, author, language, problem, contest: contestId } = req.query;
+			const { size = 20, page = 1, status, author, language, problem, contest: contestId, minimal } = req.query;
 			let data = await Submission.filter({ status, author, language, problem, contest: contestId });
 			data = data.map((d) => d.toObject());
 
@@ -72,6 +72,12 @@ const submissionControllers = {
 				statusStat[getStatusIndex(submission.status)]++;
 				languageStat[getLanguageIndex(submission.language)]++;
 			});
+
+			if (minimal) {
+				data = data.map((item) => {
+					item._id;
+				});
+			}
 
 			res.status(200).json({
 				success: true,
