@@ -6,11 +6,11 @@ import { stringToBrightColor } from '~/utils/color';
 
 const UserAvatar = ({ user, className = '' }) => {
 	return user.avatar ? (
-		<Avatar className={`size-8 ${className}`} src={`${user?.avatar}?timestamp=${new Date().getTime() + Math.round(Math.random() * 100000)}`} alt={user?.name}></Avatar>
+		<Avatar className={`${className}`} src={`${user?.avatar}?timestamp=${new Date().getTime() + Math.round(Math.random() * 100000)}`} alt={user?.name}></Avatar>
 	) : (
-		<div className={`size-8 rounded-full ${className}`} style={{ backgroundColor: stringToBrightColor }}>
+		<span className={`flex-center !inline-flex size-12 rounded-full ${className}`} style={{ backgroundColor: stringToBrightColor(user.name) }}>
 			{getShortName(user.name) || 'UR'}
-		</div>
+		</span>
 	);
 };
 

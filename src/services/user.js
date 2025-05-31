@@ -7,3 +7,11 @@ export const getUsers = (params) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const deleteUser = (name) =>
+	httpRequest
+		.delete(`/user/delete/${name}`)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});
