@@ -179,7 +179,7 @@ const contestControllers = {
 
 			contest.set({...req.body, standing: newStanding})
 
-			Promise.all(req.body?.problems?.map(async(pid) => {
+			await Promise.all(req.body?.problems?.map(async(pid) => {
 				const problem = await Problem.findOne({id:pid})
 				if (!problem.contest.includes(id)) {
 					problem.contest.push(id);

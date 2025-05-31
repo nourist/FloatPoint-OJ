@@ -12,6 +12,13 @@ const userControllers = {
 
 			let data = await User.filterAndSort({ q, permission, sortBy, order });
 
+			data = await Promise.all(
+				data.map(async (item) => {
+					const top = await getTop(item.name);
+					return { ...item._doc, top };
+				}),
+			);
+
 			if (minimal) {
 				data = data.map((user) => user.name);
 			}

@@ -142,7 +142,7 @@ const Users = () => {
 								className="h-16 border-b border-gray-200 odd:bg-slate-100 even:bg-white hover:cursor-pointer hover:bg-blue-50 dark:border-gray-700 odd:dark:bg-neutral-900 even:dark:bg-neutral-800"
 							>
 								<td className="px-6 py-4 text-center">
-									<Link to={routesConfig.user.replace(':name', item.name)}>{index + 1}</Link>
+									<Link to={routesConfig.user.replace(':name', item.name)}>{item.top}</Link>
 								</td>
 								<td className="px-6 py-4 capitalize">
 									<Link className="flex items-center gap-3" to={routesConfig.user.replace(':name', item.name)}>
