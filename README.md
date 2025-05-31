@@ -118,7 +118,7 @@ This project uses the following third-party services:
 And more...
 
 ## 🖥️ Admin dashboard
-**Coming Soon...**
+[→ View the Admin Dashboard Repository](https://github.com/nourist/Float-Point-Admin)
 
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or suggestions.
