@@ -128,6 +128,23 @@ const userControllers = {
 			console.error(`Error in change user avatar: ${err.message}`);
 		}
 	},
+
+	//[DELETE] /user/delete/:name
+	async deleteUser(req, res, next) {
+		try {
+			const { name } = req.params;
+
+			await User.findOneAndDelete({ name });
+
+			res.status(200).json({ success: true, msg: "User deleted successfully" });
+			
+			console.log(`User ${name} deleted successfully`)
+		} catch (err) {
+			res.status(400).json({ success: false, msg: err.message });
+
+			console.error(`Error in delete user: ${err.message}`);	
+		}
+	}
 };
 
 export default userControllers;
