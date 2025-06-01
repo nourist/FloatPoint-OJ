@@ -106,7 +106,7 @@ const ContestId = () => {
 				<MenuList>
 					{data.status === 'ongoing' ? (
 						<MenuItem
-							className="text-error capitalize"
+							className="!text-error capitalize"
 							onClick={() => {
 								editContest(id, { endTime: new Date() })
 									.then(toast.success)
@@ -117,12 +117,12 @@ const ContestId = () => {
 							{t('stop')}
 						</MenuItem>
 					) : data.status === 'ended' ? (
-						<MenuItem className="text-success capitalize" onClick={() => setOpenStartDialog(true)}>
+						<MenuItem className="!text-success capitalize" onClick={() => setOpenStartDialog(true)}>
 							{t('start')}
 						</MenuItem>
 					) : (
 						<MenuItem
-							className="text-warning capitalize"
+							className="!text-warning capitalize"
 							onClick={() => {
 								editContest(id, { startTime: new Date() })
 									.then(toast.success)

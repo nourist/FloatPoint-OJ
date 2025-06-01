@@ -31,3 +31,11 @@ export const deleteContest = (id) =>
 		.catch((err) => {
 			throw err.response.data.msg;
 		});
+
+export const createContest = (data) =>
+	httpRequest
+		.post('/contest/create', data)
+		.then((res) => res.data.msg)
+		.catch((err) => {
+			throw err.response.data.msg;
+		});

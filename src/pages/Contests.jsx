@@ -35,7 +35,7 @@ const formatedDate = (date) => {
 const ContestCard = memo(({ data, t, setSelectId, setOpenDeleteDialog }) => (
 	<div
 		data-loading={!data}
-		className="data-[loading=true]:skeleton bg-base-100 shadow-clg shadow-shadow-color/3 min-h-[344px] max-w-[540px] min-w-[min(400px,100%)] flex-1 space-y-6 rounded-xl p-6 data-[loading=true]:*:hidden"
+		className="data-[loading=true]:skeleton bg-base-100 shadow-clg shadow-shadow-color/3 min-h-[344px] max-w-[600px] min-w-[min(400px,100%)] flex-1 space-y-6 rounded-xl p-6 data-[loading=true]:*:hidden"
 	>
 		<div className="mb-8 flex items-center gap-3">
 			<Trophy size={24} color="#fbc02d" />
