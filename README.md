@@ -48,8 +48,9 @@ This project uses the following third-party services:
 ### Requirements
 
 - [Node.js](https://nodejs.org/) (v18 or higher)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/) (optional)
+- [Docker Compose](https://docs.docker.com/compose/) (optional)
 
 ### Setup Instructions
 
@@ -99,7 +100,37 @@ This project uses the following third-party services:
 	VITE_API_URL=     # Backend API URL for the client (default http://localhost:8080)
 	```
 
-3. **Start services with Docker Compose**
+3. **Start services with terminal**
+	### Manual start
+
+	```bash
+	# Judger Service
+
+	cd judger
+	npm start
+	# or
+	yarn dev
+	```
+
+	```bash
+	# Server Service
+
+	cd server
+	npm start
+	# or
+	yarn dev
+	```
+
+	```bash
+	# Client Service
+
+	cd client
+	npm run dev
+	# or
+	yarn dev
+	```
+
+	### Or start services with Docker Compose
 	```bash
 	docker-compose up --build
 	```
@@ -121,6 +152,7 @@ This project uses the following third-party services:
 ![problems-dark](./screenshots/8.png)
 ![submissions-dark](./screenshots/9.png)
 ![contests-dark](./screenshots/10.png)
+
 And much more for you to explore...
 
 ## 🖥️ Admin dashboard
