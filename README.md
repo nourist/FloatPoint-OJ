@@ -110,12 +110,18 @@ This project uses the following third-party services:
 
 ## 📸 Screenshots
 
-![welcome](./screenshots/1.png)
-![home](./screenshots/2.png)
-![problems](./screenshots/3.png)
-![submissions](./screenshots/4.png)
-![contests](./screenshots/5.png)
-And more...
+![welcome-light](./screenshots/6.png)
+![home-light](./screenshots/7.png)
+![problems-light](./screenshots/8.png)
+![submissions-light](./screenshots/9.png)
+![contests-light](./screenshots/10.png)
+
+![welcome-dark](./screenshots/1.png)
+![home-dark](./screenshots/2.png)
+![problems-dark](./screenshots/3.png)
+![submissions-dark](./screenshots/4.png)
+![contests-dark](./screenshots/5.png)
+And much more for you to explore...
 
 ## 🖥️ Admin dashboard
 [→ View the Admin Dashboard Repository](https://github.com/nourist/Float-Point-Admin)
