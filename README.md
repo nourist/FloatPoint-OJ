@@ -110,17 +110,17 @@ This project uses the following third-party services:
 
 ## 📸 Screenshots
 
-![welcome-light](./screenshots/6.png)
-![home-light](./screenshots/7.png)
-![problems-light](./screenshots/8.png)
-![submissions-light](./screenshots/9.png)
-![contests-light](./screenshots/10.png)
+![welcome-light](./screenshots/1.png)
+![home-light](./screenshots/2.png)
+![problems-light](./screenshots/3.png)
+![submissions-light](./screenshots/4.png)
+![contests-light](./screenshots/5.png)
 
-![welcome-dark](./screenshots/1.png)
-![home-dark](./screenshots/2.png)
-![problems-dark](./screenshots/3.png)
-![submissions-dark](./screenshots/4.png)
-![contests-dark](./screenshots/5.png)
+![welcome-dark](./screenshots/6.png)
+![home-dark](./screenshots/7.png)
+![problems-dark](./screenshots/8.png)
+![submissions-dark](./screenshots/9.png)
+![contests-dark](./screenshots/10.png)
 And much more for you to explore...
 
 ## 🖥️ Admin dashboard
