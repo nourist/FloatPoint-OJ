@@ -81,11 +81,16 @@ const ContestSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 				<h2 className="text-base-content text-sm/6 font-medium capitalize">
 					{t('contest-id')} <span className="text-error font-bold">*</span>
 				</h2>
-				<FullOutlineInput value={id} onChange={(e) => setId(e.target.value)} className="placeholder:capitalize mt-2 w-2/6 min-w-52" placeholder={t('contest-id')} />
+				<FullOutlineInput value={id} onChange={(e) => setId(e.target.value)} className="mt-2 w-2/6 min-w-52 placeholder:capitalize" placeholder={t('contest-id')} />
 				<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">
 					{t('contest-title')} <span className="text-error font-bold">*</span>
 				</h2>
-				<FullOutlineInput value={title} onChange={(e) => setTitle(e.target.value)} className="placeholder:capitalize mt-2 w-1/2 min-w-60" placeholder={t('contest-title')} />
+				<FullOutlineInput
+					value={title}
+					onChange={(e) => setTitle(e.target.value)}
+					className="mt-2 w-1/2 min-w-60 placeholder:capitalize"
+					placeholder={t('contest-title')}
+				/>
 				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('time')}</h2>
 				<Input type="datetime-local" label={t('start-time')} value={startTime} onChange={(e) => setStartTime(e.target.value)} />
 				<div className="my-5"></div>

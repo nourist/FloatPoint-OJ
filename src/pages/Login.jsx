@@ -118,7 +118,7 @@ const Login = () => {
 							<label htmlFor="remember-me" className="from-secondary to-primary mb-[1px] bg-gradient-to-r bg-clip-text text-transparent capitalize">
 								{t('remember-me')}
 							</label>
-							<a href={`${import.meta.env.VITE_CLIENT_URL}/forgot-password`} className="text-base-content/60 ml-auto capitalize">
+							<a href={`${import.meta.env.VITE_CLIENT_URL || 'http://localhost:5173'}/forgot-password`} className="text-base-content/60 ml-auto capitalize">
 								{t('forgot-password')}?
 							</a>
 						</div>
