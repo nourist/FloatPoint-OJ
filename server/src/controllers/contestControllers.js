@@ -38,7 +38,7 @@ const contestControllers = {
 
 			res.status(200).json({
 				success: true,
-				data: {...contest._doc, status: contest.get('status')},
+				data: { ...contest._doc, status: contest.get('status') },
 			});
 
 			console.log(`Get id: "${id}" contest successfull`);
@@ -159,36 +159,40 @@ const contestControllers = {
 				throw new Error('Contest not found');
 			}
 
-			const newStanding = req.body.problems ? contest.standing.map((item) => {
-				const newScore = req.body.problems.map((problemId) => {
-					const idx = contest.problems.indexOf(problemId);
-					return {
-						score: item.score[idx],
-						time: item.time[idx],
-						status: item.status[idx]
-					}; 
-				});
+			const newStanding = req.body.problems
+				? contest.standing.map((item) => {
+						const newScore = req.body.problems.map((problemId) => {
+							const idx = contest.problems.indexOf(problemId);
+							return {
+								score: item.score[idx],
+								time: item.time[idx],
+								status: item.status[idx],
+							};
+						});
 
-				return {
-					user: item.user,
-					score: newScore.map(item=>item.score),
-					time: newScore.map(item=>item.time), 
-					status: newScore.map(item=>item.status), 
-				};
-			}):contest.standing;
+						return {
+							user: item.user,
+							score: newScore.map((item) => item.score),
+							time: newScore.map((item) => item.time),
+							status: newScore.map((item) => item.status),
+						};
+					})
+				: contest.standing;
 
-			contest.set({...req.body, standing: newStanding})
+			contest.set({ ...req.body, standing: newStanding });
 
-			await Promise.all(req.body?.problems?.map(async(pid) => {
-				const problem = await Problem.findOne({id:pid})
-				if (!problem.contest.includes(id)) {
-					problem.contest.push(id);
-				}
-				await problem.save();
-			}) || [])
+			await Promise.all(
+				req.body?.problems?.map(async (pid) => {
+					const problem = await Problem.findOne({ id: pid });
+					if (!problem.contest.includes(id)) {
+						problem.contest.push(id);
+					}
+					await problem.save();
+				}) || [],
+			);
 
 			await contest.save();
-			
+
 			res.status(200).json({ success: true, msg: 'Edit contest successfull', data: contest._doc });
 
 			console.log('Edit contest successfull');

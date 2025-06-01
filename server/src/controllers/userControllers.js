@@ -136,15 +136,15 @@ const userControllers = {
 
 			await User.findOneAndDelete({ name });
 
-			res.status(200).json({ success: true, msg: "User deleted successfully" });
-			
-			console.log(`User ${name} deleted successfully`)
+			res.status(200).json({ success: true, msg: 'User deleted successfully' });
+
+			console.log(`User ${name} deleted successfully`);
 		} catch (err) {
 			res.status(400).json({ success: false, msg: err.message });
 
-			console.error(`Error in delete user: ${err.message}`);	
+			console.error(`Error in delete user: ${err.message}`);
 		}
-	}
+	},
 };
 
 export default userControllers;
