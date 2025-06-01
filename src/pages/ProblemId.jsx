@@ -9,11 +9,14 @@ import { getProblem, editProblem } from '~/services/problem';
 import { getProblemStat } from '~/services/stat';
 import Error from '~/components/Error';
 import statusColors from '~/config/statusColor';
+import useThemeStore from '~/stores/themeStore';
+import { capitalize } from '~/utils/string';
 
 const ProblemId = () => {
 	const { t } = useTranslation('problem');
 	const { id } = useParams();
 	const queryClient = useQueryClient();
+	const { theme } = useThemeStore();
 
 	const {
 		data,
@@ -83,10 +86,10 @@ const ProblemId = () => {
 					<Chart
 						width="100%"
 						type="bar"
-						series={[{ name: t('language'), data: stat?.language?.map((item) => item.count) }]}
+						series={[{ name: capitalize(t('language')), data: stat?.language?.map((item) => item.count) }]}
 						options={{
 							xaxis: {
-								categories: stat?.language?.map((item) => item._id),
+								categories: stat?.language?.map((item) => capitalize(item._id)),
 								labels: {
 									style: {
 										colors: 'var(--color-base-content)',
@@ -99,6 +102,9 @@ const ProblemId = () => {
 										colors: 'var(--color-base-content)',
 									},
 								},
+							},
+							tooltip: {
+								theme,
 							},
 							chart: {
 								toolbar: {

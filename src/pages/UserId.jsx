@@ -4,17 +4,22 @@ import { useParams } from 'react-router';
 import { LoaderCircle, Mail, Calendar, Activity, ShieldUser, User, CircleCheckBig, Code, TrendingUp, Trophy, UserRound } from 'lucide-react';
 import Markdown from 'react-markdown';
 import { Progress } from '@material-tailwind/react';
+import Chart from 'react-apexcharts';
 
+import { capitalize } from '~/utils/string';
+import useThemeStore from '~/stores/themeStore';
 import UserAvatar from '~/components/UserAvatar';
 import { getUser } from '~/services/user';
 import Error from '~/components/Error';
 import markdownComponents from '~/config/markdown';
 import { getSubmissions } from '~/services/submission';
 import { getUsers } from '~/services/user';
+import statusColors from '~/config/statusColor';
 
 const UserId = () => {
 	const { name } = useParams();
 	const { t } = useTranslation('user');
+	const { theme } = useThemeStore();
 
 	const {
 		data: user,
@@ -39,6 +44,15 @@ const UserId = () => {
 	});
 
 	const {
+		data: ACsubms,
+		isLoading: ACsubmsLoading,
+		error: ACsubmsErr,
+	} = useQuery({
+		queryKey: ['minimal-user-accepted', name],
+		queryFn: () => getSubmissions({ author: name, minimal: true, size: 1e7, status: 'AC' }),
+	});
+
+	const {
 		data: users,
 		isLoading: usersLoading,
 		error: userErr,
@@ -47,7 +61,7 @@ const UserId = () => {
 		queryFn: () => getUsers({ size: 1e9, minimal: true }).then((res) => res.data),
 	});
 
-	if (isLoading || submissionLoading || usersLoading) {
+	if (isLoading || submissionLoading || usersLoading || ACsubmsLoading) {
 		return (
 			<div className="flex-center h-[calc(100vh-100px)]">
 				<LoaderCircle className="text-base-content/15 mx-auto size-32 animate-spin" />
@@ -55,8 +69,14 @@ const UserId = () => {
 		);
 	}
 
-	if (error || submissionErr || userErr) {
-		return <Error keys={[['user', name], ['minimal-user-submissions', name], ['minimal-users']]}>{error || submissionErr || userErr}</Error>;
+	if (error || submissionErr || userErr || ACsubmsErr) {
+		return (
+			<div className="min-h-[calc(100vh-100px)]">
+				<Error keys={[['user', name], ['minimal-user-submissions', name], ['minimal-user-accepted', name], ['minimal-users']]}>
+					{error || submissionErr || userErr || ACsubmsErr}
+				</Error>
+			</div>
+		);
 	}
 
 	const betterThan = Math.round(((users.length - user.data.top) / users.length) * 100);
@@ -175,6 +195,49 @@ const UserId = () => {
 					<div className="bg-error/10 text-error-content">
 						<h3 className="text-3xl font-black">{user.problems.hard}</h3>
 						<p>{t('hard')}</p>
+					</div>
+				</div>
+			</div>
+			<div className="flex flex-wrap gap-6">
+				<div className="bg-base-100 shadow-shadow-color/3 min-w-md flex-1 rounded-xl p-6 shadow-lg">
+					<h2 className="text-base-content mb-2 text-lg font-semibold capitalize">{t('languages')}</h2>
+					<Chart
+						series={[
+							{ data: submissions.stat.language, name: capitalize(t('total')) },
+							{ data: ACsubms.stat.language, name: capitalize(t('accepted')) },
+						]}
+						type="bar"
+						options={{
+							chart: {
+								toolbar: {
+									show: false,
+								},
+								foreColor: 'var(--color-base-content)',
+							},
+							tooltip: {
+								theme,
+							},
+							xaxis: { categories: ['c', 'c11', 'c++11', 'c++14', 'c++17', 'c++20', 'python2', 'python3'].map((item) => capitalize(item)) },
+						}}
+					/>
+				</div>
+				<div className="bg-base-100 shadow-shadow-color/3 min-w-md flex-1 rounded-xl p-6 shadow-lg">
+					<h2 className="text-base-content mb-2 text-lg font-semibold capitalize">{t('status')}</h2>
+					<div className="mx-auto max-w-[420px]">
+						<Chart
+							type="pie"
+							series={submissions.stat.status}
+							options={{
+								labels: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'],
+								colors: ['AC', 'WA', 'TLE', 'MLE', 'RTE', 'CE', 'IE'].map((item) => statusColors[item.toLowerCase()]),
+								legend: {
+									position: 'bottom',
+								},
+								chart: {
+									foreColor: 'var(--color-base-content)',
+								},
+							}}
+						/>
 					</div>
 				</div>
 			</div>

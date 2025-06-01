@@ -26,5 +26,9 @@
 	"medium": "medium",
 	"hard": "hard",
 	"better-than": "better than",
-	"user": "user"
+	"user": "user",
+	"languages": "languages",
+	"status": "status",
+	"total": "total",
+	"accepted": "accepted"
 }
