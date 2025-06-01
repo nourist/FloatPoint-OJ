@@ -15,5 +15,6 @@
 	"system": "System",
 	"oops": "Oops!",
 	"no-mail": "Unfortunately, I will not reveal my information.",
-	"close": "close"
+	"close": "close",
+	"admin-dashboard": "Admin dashboard"
 }

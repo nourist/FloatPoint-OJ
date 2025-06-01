@@ -13,7 +13,7 @@ import {
 	DropdownMenuRadioItem,
 } from '~/components/ui/dropdown-menu';
 import { Link } from 'react-router';
-import { Settings, Languages, LogOut, Check } from 'lucide-react';
+import { Settings, Languages, LogOut, Check, LayoutDashboard } from 'lucide-react';
 
 import UserAvatar from '../UserAvatar';
 import useAuthStore from '~/stores/authStore';
@@ -85,6 +85,17 @@ const AvatarWithMenu = () => {
 					))}
 				</div>
 				<div className="w-full">
+					{user.permission === 'Admin' && (
+						<DropdownMenuItem
+							asChild
+							className="flex h-[42px] cursor-pointer rounded-md bg-gradient-to-r from-sky-300 to-purple-400 px-4 !text-white dark:from-sky-500 dark:to-purple-500"
+						>
+							<a href={import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174'}>
+								<LayoutDashboard></LayoutDashboard>
+								{t('admin-dashboard')}
+							</a>
+						</DropdownMenuItem>
+					)}
 					<DropdownMenuItem asChild className="flex h-[42px] cursor-pointer rounded-md px-4 text-gray-600 dark:text-gray-400 dark:hover:!bg-neutral-700">
 						<Link to={routesConfig.submit}>
 							<Terminal></Terminal>
