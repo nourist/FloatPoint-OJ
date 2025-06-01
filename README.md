@@ -22,7 +22,7 @@ Admin dashboard for the Float-Point online judge platform, built with React and 
 Float-Point-Admin/
 ├── public/             # Static assets
 ├── src/
-|	├── assets/         # Static assets
+|   ├── assets/         # Static assets
 │   ├── components/     # Reusable UI components
 │   ├── config/         # App config
 │   ├── hooks/          # Custom React hooks
