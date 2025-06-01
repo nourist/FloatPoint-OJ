@@ -108,7 +108,7 @@ const userControllers = {
 	//[POST] /user/change-avatar
 	async changeAvatar(req, res, next) {
 		try {
-			const url = cloudinary.url(req.file?.filename) || req.body.url;
+			const url = req.file?.path || req.body.url;
 			if (!url) {
 				throw new Error('No file uploaded');
 			}
