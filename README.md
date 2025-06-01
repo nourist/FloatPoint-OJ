@@ -22,11 +22,11 @@ A web application for online judge(algorithm questions), build with MERN stack(M
 
 ```
 Float-Point/
-├── client/ # Frontend (React)
-├── server/ # Backend API (Node.js + Express)
-├── judger/ # Automated judging system
-├── docker-compose.yml # Orchestrates services using Docker
-├── Dockerfile.* # Docker configuration for each service
+├── client/              # Frontend (React)
+├── server/              # Backend API (Node.js + Express)
+├── judger/              # Automated judging system
+├── docker-compose.yml   # Orchestrates services using Docker
+├── Dockerfile.*         # Docker configuration for each service
 └── README.md
 ```
 
@@ -107,7 +107,12 @@ This project uses the following third-party services:
 	# Judger Service
 
 	cd judger
-	npm start
+
+ 	npm i
+ 	# or
+ 	yarn
+ 
+	npm run dev
 	# or
 	yarn dev
 	```
@@ -116,7 +121,12 @@ This project uses the following third-party services:
 	# Server Service
 
 	cd server
-	npm start
+ 
+ 	npm i
+ 	# or
+ 	yarn
+ 
+	npm run dev
 	# or
 	yarn dev
 	```
@@ -125,6 +135,11 @@ This project uses the following third-party services:
 	# Client Service
 
 	cd client
+ 
+ 	npm i
+ 	# or
+ 	yarn
+ 
 	npm run dev
 	# or
 	yarn dev
