@@ -27,7 +27,7 @@ FloatPoint back-end was built with NodeJS, ExpressJS, MongoDB...`,
 	'color: #29c4a9;font-size: 14px;',
 );
 console.log(
-	"%cNote: I know that I'm cloning a website (LeetCode, DMOJ, Codeforces...), but I'm doing this for learning purposes.",
+	"%cNote: This project inspired by LeetCode, DMOJ, Codeforces...",
 	'color: #f4a261;font-size: 14px; font-weight: 600;',
 );
 
