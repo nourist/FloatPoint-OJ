@@ -76,7 +76,7 @@ const Sidebar = ({ classname = '' }) => {
 				}}
 				loading={loading}
 				variant="text"
-				className="hover:!bg-error/20 hover:text-error text-base-content/70 mt-auto mb-4 flex h-[52px] w-full cursor-pointer items-center gap-2 px-4 text-[15px] font-normal capitalize"
+				className="hover:!bg-error/20 hover:text-error text-base-content/70 mb-4 mt-auto flex h-[52px] w-full cursor-pointer items-center gap-2 px-4 text-[15px] font-normal capitalize"
 			>
 				<div className="flex-center size-8">
 					<LogOut strokeWidth="1.5" className="size-5" />

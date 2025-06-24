@@ -43,7 +43,7 @@ const ContestTimeWidget = ({ data }) => {
 					<div className="flex items-center gap-3">
 						<Clock className="size-5 text-blue-500 dark:text-blue-400" />
 						<div>
-							<div className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('time-remaining')}</div>
+							<div className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('time-remaining')}</div>
 							<div className="font-mono text-2xl font-bold dark:text-gray-50">{<CountDown endTime={new Date(data.endTime || null)} /> || '--:--:--'}</div>
 						</div>
 					</div>

@@ -11,7 +11,7 @@ const TagInput = ({ tags, setTags, placeholder, suggestTags, className = '' }) =
 			className={`border-blue-gray-200 dark:border-blue-gray-800 focus-within:outline-primary dark:focus-within:outline-primary flex min-h-10 gap-2 rounded-md border px-3 py-2 text-sm focus-within:outline-2 ${className} flex-wrap`}
 		>
 			{tags.map((tag, index) => (
-				<span className="flex-center text-base-content bg-base-content/10 h-6 gap-1 rounded-full py-1 pr-2.5 pl-3 text-xs" key={index}>
+				<span className="flex-center text-base-content bg-base-content/10 h-6 gap-1 rounded-full py-1 pl-3 pr-2.5 text-xs" key={index}>
 					{tag}
 					<button className="text-base-content cursor-pointer" onClick={() => setTags((prev) => prev.filter((_, i) => i !== index))}>
 						<X size="14" />

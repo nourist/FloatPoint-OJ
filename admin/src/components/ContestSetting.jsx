@@ -91,13 +91,13 @@ const ContestSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 					className="mt-2 w-1/2 min-w-60 placeholder:capitalize"
 					placeholder={t('contest-title')}
 				/>
-				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('time')}</h2>
+				<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('time')}</h2>
 				<Input type="datetime-local" label={t('start-time')} value={startTime} onChange={(e) => setStartTime(e.target.value)} />
 				<div className="my-5"></div>
 				<Input type="datetime-local" label={t('end-time')} value={endTime} onChange={(e) => setEndTime(e.target.value)} />
-				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('description')}</h2>
+				<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('description')}</h2>
 				<MdEditor markdown={description} onChange={setDescription} />
-				<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('problems')}</h2>
+				<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('problems')}</h2>
 				<div className="bg-base-300 space-y-2 rounded-lg p-2">
 					{problems.map((item, index) => (
 						<div key={index} className="bg-base-100 border-base-200 text-base-content flex items-center gap-3 rounded-md border p-4">
@@ -162,7 +162,7 @@ const ContestSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 				</div>
 				<div className="mt-6 flex justify-end gap-3">
 					<Button
-						className="bg-error cursor-pointer text-white capitalize"
+						className="bg-error cursor-pointer capitalize text-white"
 						onClick={() => {
 							setId('');
 							setTitle('');

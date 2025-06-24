@@ -48,12 +48,12 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 					<Button
 						loading={loading}
 						variant="outlined"
-						className={`!border-blue-gray-200 dark:!border-blue-gray-800 group aria-expanded:!outline-primary aria-expanded:dark:!outline-primary relative flex h-10 w-64 items-center p-3 pr-8 outline-2 outline-transparent hover:!opacity-100`}
+						className={`!border-blue-gray-200 dark:!border-blue-gray-800 aria-expanded:!outline-primary aria-expanded:dark:!outline-primary group relative flex h-10 w-64 items-center p-3 pr-8 outline-2 outline-transparent hover:!opacity-100`}
 						ripple={false}
 					>
 						<span
 							data-label={value.length === 0}
-							className="data-[label=true]:!text-blue-gray-400 dark:data-[label=true]:!text-blue-gray-200 text-blue-gray-800 dark:text-blue-gray-100 flex truncate overflow-hidden text-sm font-normal capitalize"
+							className="data-[label=true]:!text-blue-gray-400 dark:data-[label=true]:!text-blue-gray-200 text-blue-gray-800 dark:text-blue-gray-100 flex overflow-hidden truncate text-sm font-normal capitalize"
 						>
 							{value.length !== 0
 								? value.map((item, index) => {
@@ -74,7 +74,7 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 							)}
 						</span>
 						{value.length === 0 && (
-							<div className="text-blue-gray-400 absolute top-2/4 right-2 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all group-aria-expanded:rotate-180">
+							<div className="text-blue-gray-400 absolute right-2 top-2/4 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all group-aria-expanded:rotate-180">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 									<path
 										fillRule="evenodd"
@@ -107,7 +107,7 @@ const MultiSelect = ({ label, data, value, setValue, className = '', loading }) 
 					))}
 				</MenuList>
 				{value.length !== 0 && (
-					<div className="text-blue-gray-400 flex-center absolute top-2/4 right-2 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all">
+					<div className="text-blue-gray-400 flex-center absolute right-2 top-2/4 grid size-5 -translate-y-2/4 rotate-0 place-items-center pt-px transition-all">
 						<button className="cursor-pointer" onClick={() => setValue([])}>
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
 								<path

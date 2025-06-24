@@ -214,7 +214,7 @@
 }
 
 @utility card-scrollbar {
-	@apply [&::-webkit-scrollbar-thumb]:bg-base-content/20 max-h-100 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent;
+	@apply [&::-webkit-scrollbar-thumb]:bg-base-content/20 max-h-100 overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-2;
 }
 
 html {

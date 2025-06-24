@@ -74,7 +74,7 @@ This project uses the following third-party services:
 	```
 	### Server Service
 	```env
-	NODE_ENV=         # Environment for server [production | development]
+	NODE_ENV=         # Environment for server [production | development] (optional)
 
  	PORT=             # Port for the Server service (default 8080)
 
@@ -88,7 +88,7 @@ This project uses the following third-party services:
 
 	HASH_SALT=        # Salt for hashing passwords (set a custom value for security)
 
-	DATABASE_URL=     # MongoDB URL for the database (default mongodb://localhost:27017/FloatPoint)
+	DATABASE_URL=     # MongoDB URL for the database (default mongodb://localhost:27017/FloatPoint | default for docker: mongodb://mongo:27017/FloatPoint)
 
 	MAILTRAP_TOKEN=   # Mailtrap API token (for email testing)
 
@@ -104,8 +104,8 @@ This project uses the following third-party services:
 	```
 	### Admin Dashboard Service
 	```env
-	VITE_API_URL=     # Backend API URL (default: http://localhost:8080/)
-	VITE_CLIENT_URL=  # App client (not Admin Dashboard) (default: http://localhost:5173/)
+	VITE_API_URL=     # Backend API URL (default: http://localhost:8080)
+	VITE_CLIENT_URL=  # App client (not Admin Dashboard) (default: http://localhost:5173)
 	```
 
 3. **Start services**

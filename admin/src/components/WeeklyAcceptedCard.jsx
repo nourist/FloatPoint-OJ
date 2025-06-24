@@ -51,7 +51,7 @@ const WeeklyAcceptedCard = () => {
 					{weeklyAcceptedLoading || lastWeekAcceptedLoading ? (
 						<div className="skeleton h-[244px] rounded-md"></div>
 					) : (
-						<div className="from-primary to-secondary rounded-md bg-gradient-to-r pt-6 pr-4">
+						<div className="from-primary to-secondary rounded-md bg-gradient-to-r pr-4 pt-6">
 							<ResponsiveContainer width="100%" height={220} style={{ marginLeft: '-5px' }}>
 								<BarChart data={weeklyAccepted}>
 									<XAxis style={{ textTransform: 'capitalize', fontSize: '14px' }} dataKey="name" stroke="#fff" />

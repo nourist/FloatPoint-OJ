@@ -47,9 +47,9 @@ const Users = () => {
 
 	return (
 		<div className="flex-1 px-28 py-6">
-			<h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-gray-100">{t('leaderboard')}</h2>
-			<div className="bg-opacity-50 mt-4 flex h-[538px] items-center justify-around rounded-xl bg-zinc-200 p-24 dark:bg-zinc-800">
-				<div className="dark:border-opacity-40 relative size-60 rounded-2xl border border-orange-600 bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:bg-neutral-700">
+			<h2 className="text-xl font-semibold capitalize text-gray-700 dark:text-gray-100">{t('leaderboard')}</h2>
+			<div className="mt-4 flex h-[538px] items-center justify-around rounded-xl bg-zinc-200 bg-opacity-50 p-24 dark:bg-zinc-800">
+				<div className="relative size-60 rounded-2xl border border-orange-600 bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:border-opacity-40 dark:bg-neutral-700">
 					<div className="absolute -top-6 right-4 flex size-12 items-center justify-center rounded-full bg-orange-600 text-xl font-semibold text-white">2</div>
 					{standing?.[1] ? (
 						<>
@@ -58,7 +58,7 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[1].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="bg-opacity-30 mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 px-[10px] py-1 text-sm text-gray-700 capitalize dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
 									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[1].totalScore}
 								</div>
@@ -68,7 +68,7 @@ const Users = () => {
 						<div className="mx-auto my-8 flex size-40 items-center justify-center rounded-full bg-slate-300 text-8xl font-bold text-white">?</div>
 					)}
 				</div>
-				<div className="dark:border-opacity-30 relative size-[270px] rounded-2xl border-4 border-blue-300 bg-white shadow-[#93c5fd_0px_0px_12px_0px] dark:border-white dark:bg-neutral-700 dark:shadow-[rgb(155,155,155)_0px_0px_28px_0px]">
+				<div className="relative size-[270px] rounded-2xl border-4 border-blue-300 bg-white shadow-[#93c5fd_0px_0px_12px_0px] dark:border-white dark:border-opacity-30 dark:bg-neutral-700 dark:shadow-[rgb(155,155,155)_0px_0px_28px_0px]">
 					<Crown className="absolute -top-10 right-8"></Crown>
 					{standing?.[0] ? (
 						<>
@@ -77,7 +77,7 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[0].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="bg-opacity-30 mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 px-[10px] py-1 text-sm text-gray-700 capitalize dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
 									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[0].totalScore}
 								</div>
@@ -87,7 +87,7 @@ const Users = () => {
 						<div className="mx-auto my-8 flex size-48 items-center justify-center rounded-full bg-slate-300 text-9xl font-bold text-white">?</div>
 					)}
 				</div>
-				<div className="dark:border-opacity-40 relative size-60 rounded-2xl border border-[#c5b083] bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:bg-neutral-700">
+				<div className="relative size-60 rounded-2xl border border-[#c5b083] bg-white shadow-[rgba(100,100,111,0.2)_0px_0px_12px_0px] dark:border-opacity-40 dark:bg-neutral-700">
 					<div className="absolute -top-6 right-4 flex size-12 items-center justify-center rounded-full bg-[#c5b083] text-xl font-semibold text-white">3</div>
 					{standing?.[2] ? (
 						<>
@@ -96,7 +96,7 @@ const Users = () => {
 								<h2 className="font-semibold capitalize dark:text-white">{standing[2].name}</h2>
 							</Link>
 							<div className="py-8">
-								<div className="bg-opacity-30 mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 px-[10px] py-1 text-sm text-gray-700 capitalize dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+								<div className="mx-5 inline h-[30px] rounded-sm border border-blue-300 bg-blue-100 bg-opacity-30 px-[10px] py-1 text-sm capitalize text-gray-700 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
 									<FontAwesomeIcon className="mr-2 size-4 text-yellow-500" icon="fa-solid fa-star" />
 									{t('score')}: {standing[2].totalScore}
 								</div>
@@ -110,7 +110,7 @@ const Users = () => {
 			<div className="mt-12 flex gap-2">
 				<Pagination maxPage={maxPage} currentPage={page} setPage={setPage}></Pagination>
 				<Search value={search} setValue={setSearch} placeholder={t('search-placeholder')} className="ml-auto"></Search>
-				<Button onClick={query} className="!bg-sky-400 font-light !text-white capitalize hover:!bg-sky-500">
+				<Button onClick={query} className="!bg-sky-400 font-light capitalize !text-white hover:!bg-sky-500">
 					<RotateCcw></RotateCcw>
 					{t('refresh')}
 				</Button>
@@ -119,7 +119,7 @@ const Users = () => {
 				<Skeleton className={'my-3 h-[1344px]'}></Skeleton>
 			) : (
 				<table className="my-3 w-full text-left text-sm text-gray-700 rtl:text-right dark:text-gray-200">
-					<thead className="h-16 bg-white text-xs text-gray-800 uppercase dark:bg-neutral-800 dark:text-gray-400">
+					<thead className="h-16 bg-white text-xs uppercase text-gray-800 dark:bg-neutral-800 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="w-28 px-6 py-3 text-center">
 								{t('top')}

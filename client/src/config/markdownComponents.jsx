@@ -2,11 +2,11 @@ const markdownComponents = {
 	// eslint-disable-next-line no-unused-vars
 	h1: ({ node, ...props }) => <h1 className="mb-4 text-3xl font-bold text-neutral-800 dark:text-neutral-200" {...props} />,
 	// eslint-disable-next-line no-unused-vars
-	h2: ({ node, ...props }) => <h2 className="mt-5 mb-3 text-2xl font-semibold text-neutral-800 dark:text-neutral-200" {...props} />,
+	h2: ({ node, ...props }) => <h2 className="mb-3 mt-5 text-2xl font-semibold text-neutral-800 dark:text-neutral-200" {...props} />,
 	// eslint-disable-next-line no-unused-vars
-	h3: ({ node, ...props }) => <h3 className="mt-4 mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-200" {...props} />,
+	h3: ({ node, ...props }) => <h3 className="mb-2 mt-4 text-xl font-medium text-neutral-800 dark:text-neutral-200" {...props} />,
 	// eslint-disable-next-line no-unused-vars
-	h4: ({ node, ...props }) => <h4 className="mt-4 mb-2 text-lg font-medium text-neutral-800 dark:text-neutral-200" {...props} />,
+	h4: ({ node, ...props }) => <h4 className="mb-2 mt-4 text-lg font-medium text-neutral-800 dark:text-neutral-200" {...props} />,
 	// eslint-disable-next-line no-unused-vars
 	p: ({ node, ...props }) => <p className="mb-2 text-neutral-700 dark:text-neutral-300" {...props} />,
 	// eslint-disable-next-line no-unused-vars
@@ -22,7 +22,7 @@ const markdownComponents = {
 	hr: () => <hr className="my-4 border-neutral-300 dark:border-neutral-700" />,
 	// eslint-disable-next-line no-unused-vars
 	blockquote: ({ node, ...props }) => (
-		<blockquote className="mb-4 border-l-4 border-neutral-400 pl-4 text-neutral-600 italic dark:border-neutral-600 dark:text-neutral-400" {...props} />
+		<blockquote className="mb-4 border-l-4 border-neutral-400 pl-4 italic text-neutral-600 dark:border-neutral-600 dark:text-neutral-400" {...props} />
 	),
 };
 

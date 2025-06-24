@@ -7,7 +7,7 @@ const Input = ({ type = 'text', placeholder = '', icon, classname = '', value, s
 
 	return (
 		<div
-			className={`group focus-within:ring-opacity-90 dark:bg-opacity-40 relative flex h-9 w-full rounded-md border border-neutral-300 transition-all duration-200 focus-within:border-sky-400 focus-within:ring-1 focus-within:ring-sky-400 dark:border-transparent dark:bg-neutral-700 dark:hover:border-zinc-800 ${classname} ${isError ? 'input-error' : ''}`}
+			className={`group relative flex h-9 w-full rounded-md border border-neutral-300 transition-all duration-200 focus-within:border-sky-400 focus-within:ring-1 focus-within:ring-sky-400 focus-within:ring-opacity-90 dark:border-transparent dark:bg-neutral-700 dark:bg-opacity-40 dark:hover:border-zinc-800 ${classname} ${isError ? 'input-error' : ''}`}
 		>
 			{icon && (
 				<div
@@ -23,7 +23,7 @@ const Input = ({ type = 'text', placeholder = '', icon, classname = '', value, s
 				}}
 				type={type == 'password' ? (show ? 'text' : 'password') : type}
 				placeholder={placeholder}
-				className={`focus:bg-opacity-100 dark:bg-opacity-70 h-full w-full rounded-md border-none bg-transparent p-4 text-sm font-light text-gray-800 caret-sky-400 transition-all duration-200 outline-none dark:text-gray-200 ${isError ? 'input-error' : ''}`}
+				className={`h-full w-full rounded-md border-none bg-transparent p-4 text-sm font-light text-gray-800 caret-sky-400 outline-none transition-all duration-200 focus:bg-opacity-100 dark:bg-opacity-70 dark:text-gray-200 ${isError ? 'input-error' : ''}`}
 				style={{ paddingLeft: icon ? '2.2rem' : '1rem' }}
 			/>
 			{type == 'password' && (

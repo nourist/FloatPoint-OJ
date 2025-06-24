@@ -19,7 +19,7 @@ const MonthlyLanguagesCard = () => {
 	});
 
 	return (
-		<div className="bg-base-100 shadow-shadow-color/5 h-[445px] w-full rounded-xl px-8 pt-5 pb-16 shadow-lg md:flex-1 xl:max-w-80">
+		<div className="bg-base-100 shadow-shadow-color/5 h-[445px] w-full rounded-xl px-8 pb-16 pt-5 shadow-lg md:flex-1 xl:max-w-80">
 			{monthlyLanguagesErr ? (
 				<Error keys={[['monthlyLanguages']]}>{monthlyLanguagesErr}</Error>
 			) : (

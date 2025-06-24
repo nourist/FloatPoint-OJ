@@ -95,7 +95,7 @@ const Login = () => {
 						></FullOutlineInput>
 						<IconButton
 							variant="text"
-							className="text-base-content/80 hover:text-base-content !absolute top-[34px] right-[6px] !size-8 cursor-pointer !bg-transparent"
+							className="text-base-content/80 hover:text-base-content !absolute right-[6px] top-[34px] !size-8 cursor-pointer !bg-transparent"
 							ripple={false}
 							onClick={() => setShowPassword((prev) => !prev)}
 						>
@@ -115,7 +115,7 @@ const Login = () => {
 								id="remember-me"
 								color={theme === 'light' ? 'blue' : 'pink'}
 							/>
-							<label htmlFor="remember-me" className="from-secondary to-primary mb-[1px] bg-gradient-to-r bg-clip-text text-transparent capitalize">
+							<label htmlFor="remember-me" className="from-secondary to-primary mb-[1px] bg-gradient-to-r bg-clip-text capitalize text-transparent">
 								{t('remember-me')}
 							</label>
 							<a href={`${import.meta.env.VITE_CLIENT_URL || 'http://localhost:5173'}/forgot-password`} className="text-base-content/60 ml-auto capitalize">

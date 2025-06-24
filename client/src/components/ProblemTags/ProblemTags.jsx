@@ -38,12 +38,12 @@ const ProblemTags = ({ setActiveTags, className = '' }) => {
 	}, []);
 
 	return (
-		<div data-expand={expand} className={`relative h-12 w-full overflow-hidden data-[expand=false]:pr-16 data-[expand=true]:h-auto ${className}`}>
+		<div data-expand={expand} className={`relative h-12 w-full overflow-hidden data-[expand=true]:h-auto data-[expand=false]:pr-16 ${className}`}>
 			{tags.map((tag, index) => (
 				<Tooltip key={index}>
 					<TooltipTrigger
 						asChild
-						className="!bg-opacity-30 m-2 rounded-full px-3 py-2 text-sm whitespace-nowrap capitalize hover:text-blue-500 data-[active=true]:bg-blue-500 data-[active=true]:text-blue-500 dark:text-gray-100 dark:hover:text-blue-500"
+						className="m-2 whitespace-nowrap rounded-full !bg-opacity-30 px-3 py-2 text-sm capitalize hover:text-blue-500 data-[active=true]:bg-blue-500 data-[active=true]:text-blue-500 dark:text-gray-100 dark:hover:text-blue-500"
 					>
 						<button data-active={false} data-name={tag[0]} onClick={handleTagClick}>
 							{tag[0]}
@@ -56,12 +56,12 @@ const ProblemTags = ({ setActiveTags, className = '' }) => {
 				</Tooltip>
 			))}
 			{expand ? (
-				<button onClick={handleExpand} className="group float-right m-2 px-3 py-2 text-sm text-gray-600 capitalize dark:text-gray-400">
+				<button onClick={handleExpand} className="group float-right m-2 px-3 py-2 text-sm capitalize text-gray-600 dark:text-gray-400">
 					{t('collapse')}
 					<ChevronsUp className="inline h-4 w-4 transition-all duration-200 group-hover:text-orange-600 dark:group-hover:text-orange-500" />
 				</button>
 			) : (
-				<button onClick={handleExpand} className="group absolute top-0 right-1 m-2 px-3 py-2 text-sm text-gray-600 capitalize dark:text-gray-400">
+				<button onClick={handleExpand} className="group absolute right-1 top-0 m-2 px-3 py-2 text-sm capitalize text-gray-600 dark:text-gray-400">
 					{t('expand')}
 					<ChevronsDown className="inline h-4 w-4 transition-all duration-200 group-hover:text-orange-600 dark:group-hover:text-orange-500" />
 				</button>

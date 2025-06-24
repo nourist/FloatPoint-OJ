@@ -104,7 +104,7 @@ const Submissions = () => {
 						setValue={setStatus}
 						data={[
 							{
-								label: <span className={`text-gray-700 capitalize dark:text-gray-300`}>{t('status')}</span>,
+								label: <span className={`capitalize text-gray-700 dark:text-gray-300`}>{t('status')}</span>,
 							},
 							...['ac', 'tle', 'mle', 'rte', 'ce', 'wa', 'ie'].map((status) => ({
 								value: status,
@@ -120,22 +120,22 @@ const Submissions = () => {
 						setValue={setLanguage}
 						data={[
 							{
-								label: <span className="text-gray-700 capitalize dark:text-gray-300">{t('language')}</span>,
+								label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('language')}</span>,
 							},
 							...languages.map((item) => ({
-								label: <span className="text-gray-700 capitalize dark:text-gray-300">{item}</span>,
+								label: <span className="capitalize text-gray-700 dark:text-gray-300">{item}</span>,
 								value: item,
 							})),
 						]}
 					></Select>
 					<Search value={search} setValue={setSearch} className="ml-auto" placeholder={t('search-placeholder')}></Search>
-					<Button onClick={query} className="!bg-sky-400 font-light !text-white capitalize hover:!bg-sky-500">
+					<Button onClick={query} className="!bg-sky-400 font-light capitalize !text-white hover:!bg-sky-500">
 						<RotateCcw></RotateCcw>
 						{t('refresh')}
 					</Button>
 				</div>
 				<table className="my-3 w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-					<thead className="bg-white text-xs text-gray-700 uppercase dark:bg-neutral-800 dark:text-gray-400">
+					<thead className="bg-white text-xs uppercase text-gray-700 dark:bg-neutral-800 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3 text-center">
 								{t('when')}
@@ -244,7 +244,7 @@ const Submissions = () => {
 						{statistic.status?.reduce((acc, cur) => acc + cur, 0)}
 					</div>
 				</div>
-				<h2 className="mt-4 mb-1 text-xl capitalize dark:text-gray-100">{t('language')}</h2>
+				<h2 className="mb-1 mt-4 text-xl capitalize dark:text-gray-100">{t('language')}</h2>
 				<div className="rounded-lg border bg-white p-8 pb-4 shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
 					{loading ? (
 						<Skeleton className="aspect-square w-full rounded-full" />

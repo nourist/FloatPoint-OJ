@@ -44,7 +44,7 @@ const Header = () => {
 		<>
 			<div
 				data-scroll={scroll}
-				className="shadow-shadow-color/3 data-[scroll=true]:bg-base-100/60 fixed top-3 left-6 z-50 flex h-[78px] w-[calc(100%-48px)] items-center gap-1 rounded-md px-5 py-4 backdrop-blur-lg transition-all duration-200 ease-in-out data-[scroll=true]:shadow-xl lg:left-[274px] lg:w-[calc(100%-298px)]"
+				className="shadow-shadow-color/3 data-[scroll=true]:bg-base-100/60 fixed left-6 top-3 z-50 flex h-[78px] w-[calc(100%-48px)] items-center gap-1 rounded-md px-5 py-4 backdrop-blur-lg transition-all duration-200 ease-in-out data-[scroll=true]:shadow-xl lg:left-[274px] lg:w-[calc(100%-298px)]"
 			>
 				<div>
 					<Breadcrumbs className="bg-transparent p-0">
@@ -59,7 +59,7 @@ const Header = () => {
 							</Link>
 						))}
 					</Breadcrumbs>
-					<h3 className="text-base-content/90 mt-1 ml-[3px] font-semibold capitalize">{list.join(' ')}</h3>
+					<h3 className="text-base-content/90 ml-[3px] mt-1 font-semibold capitalize">{list.join(' ')}</h3>
 				</div>
 				<IconButton variant="text" className="hover:bg-base-300 ml-auto size-[38px] cursor-pointer rounded-full lg:hidden" onClick={() => setOpenDrawer(true)}>
 					<AlignJustify strokeWidth="1.5" size="20" />

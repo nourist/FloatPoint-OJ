@@ -128,7 +128,7 @@ const Users = () => {
 			<div className="min-h-[100vh]">
 				<div className="relative mb-4 max-w-sm">
 					<FullOutlineInput className="w-full pr-10 placeholder:capitalize" placeholder={t('search')} value={search} onChange={(e) => setSearch(e.target.value)} />
-					<Search className="text-base-content/70 absolute top-3 right-3" size="16" />
+					<Search className="text-base-content/70 absolute right-3 top-3" size="16" />
 				</div>
 				<div className="shadow-clg shadow-shadow-color/5 w-full overflow-auto rounded-xl">
 					<table className="w-full table-fixed">

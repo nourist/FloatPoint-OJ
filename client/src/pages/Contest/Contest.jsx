@@ -153,7 +153,7 @@ const Contest = () => {
 					{contestStatus !== 'unknown' && (
 						<Badge
 							data-status={contestStatus}
-							className={`rounded border px-3 py-1 text-sm font-medium !text-white capitalize shadow-sm transition-colors data-[status=ended]:bg-gray-500 data-[status=ended]:hover:bg-gray-600 data-[status=ongoing]:bg-green-500 data-[status=ongoing]:hover:bg-green-600 data-[status=upcoming]:bg-blue-500 data-[status=upcoming]:hover:bg-blue-600 dark:shadow-lg dark:shadow-blue-500/10 dark:data-[status=ended]:bg-neutral-600 dark:data-[status=ended]:hover:bg-neutral-500 dark:data-[status=ongoing]:bg-emerald-600/70 dark:data-[status=ongoing]:hover:bg-emerald-500/80 dark:data-[status=upcoming]:bg-blue-600/60 dark:data-[status=upcoming]:hover:bg-blue-500/80`}
+							className={`rounded border px-3 py-1 text-sm font-medium capitalize !text-white shadow-sm transition-colors data-[status=ended]:bg-gray-500 data-[status=ongoing]:bg-green-500 data-[status=upcoming]:bg-blue-500 data-[status=ended]:hover:bg-gray-600 data-[status=ongoing]:hover:bg-green-600 data-[status=upcoming]:hover:bg-blue-600 dark:shadow-lg dark:shadow-blue-500/10 dark:data-[status=ended]:bg-neutral-600 dark:data-[status=ongoing]:bg-emerald-600/70 dark:data-[status=upcoming]:bg-blue-600/60 dark:data-[status=ended]:hover:bg-neutral-500 dark:data-[status=ongoing]:hover:bg-emerald-500/80 dark:data-[status=upcoming]:hover:bg-blue-500/80`}
 						>
 							{t(contestStatus)}
 						</Badge>
@@ -162,7 +162,7 @@ const Contest = () => {
 					<Button
 						variant={user?.joiningContest === id ? 'destructive' : 'default'}
 						data-joining={user?.joiningContest === id}
-						className={`bg-green-500 px-6 font-medium text-white capitalize shadow-sm transition-all hover:bg-green-600 data-[joining=true]:bg-red-600 data-[joining=true]:hover:bg-red-700 dark:bg-emerald-600/80 dark:shadow-lg dark:shadow-emerald-500/10 dark:hover:bg-emerald-500 data-[joining=true]:dark:bg-red-600/80 data-[joining=true]:dark:hover:bg-red-500`}
+						className={`bg-green-500 px-6 font-medium capitalize text-white shadow-sm transition-all hover:bg-green-600 data-[joining=true]:bg-red-600 data-[joining=true]:hover:bg-red-700 dark:bg-emerald-600/80 dark:shadow-lg dark:shadow-emerald-500/10 dark:hover:bg-emerald-500 data-[joining=true]:dark:bg-red-600/80 data-[joining=true]:dark:hover:bg-red-500`}
 						disabled={joining || contestStatus !== 'ongoing'}
 						onClick={handleJoinLeave}
 					>
@@ -185,7 +185,7 @@ const Contest = () => {
 							<div className="flex items-center gap-3">
 								<Clock className="size-5 text-blue-500 dark:text-blue-400" />
 								<div>
-									<div className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('time_remaining')}</div>
+									<div className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('time_remaining')}</div>
 									<div className="font-mono text-2xl font-bold dark:text-gray-50">{timeLeft || '--:--:--'}</div>
 								</div>
 							</div>
@@ -285,15 +285,15 @@ const Contest = () => {
 							<table className="w-full text-sm">
 								<thead>
 									<tr className="border-b border-gray-200 bg-gray-50 dark:border-neutral-700/70 dark:bg-neutral-700/30">
-										<th scope="col" className="w-24 px-6 py-4 text-center font-medium text-gray-700 capitalize dark:text-gray-200">
+										<th scope="col" className="w-24 px-6 py-4 text-center font-medium capitalize text-gray-700 dark:text-gray-200">
 											{t('top')}
 										</th>
-										<th scope="col" className="px-6 py-4 text-left font-medium text-gray-700 capitalize dark:text-gray-200">
+										<th scope="col" className="px-6 py-4 text-left font-medium capitalize text-gray-700 dark:text-gray-200">
 											{t('name')}
 										</th>
 										<th
 											scope="col"
-											className="w-32 border-x border-gray-200 px-6 py-4 text-center font-medium text-gray-700 capitalize dark:border-neutral-700/70 dark:text-gray-200"
+											className="w-32 border-x border-gray-200 px-6 py-4 text-center font-medium capitalize text-gray-700 dark:border-neutral-700/70 dark:text-gray-200"
 										>
 											{t('total')}
 										</th>
@@ -321,7 +321,7 @@ const Contest = () => {
 													<div
 														data-top={index + 1}
 														data-top3={index < 3}
-														className={`data-[top=3]:bg-opacity-10 inline-flex size-8 items-center justify-center rounded-full bg-gray-50 font-bold text-gray-500 shadow-sm data-[top3=true]:font-semibold data-[top=1]:bg-yellow-100 data-[top=1]:text-yellow-700 data-[top=2]:bg-gray-100 data-[top=2]:text-gray-700 data-[top=3]:bg-amber-950 data-[top=3]:text-amber-700 dark:bg-neutral-800/80 dark:text-gray-300 dark:shadow-gray-900/20 data-[top=1]:dark:bg-yellow-900/40 data-[top=1]:dark:text-yellow-400 data-[top=1]:dark:shadow-yellow-900/20 data-[top=2]:dark:bg-gray-800/70 data-[top=2]:dark:text-gray-300 data-[top=2]:dark:shadow-gray-900/20 data-[top=3]:dark:bg-amber-900/40 data-[top=3]:dark:text-amber-400 data-[top=3]:dark:shadow-amber-900/20`}
+														className={`inline-flex size-8 items-center justify-center rounded-full bg-gray-50 font-bold text-gray-500 shadow-sm data-[top=1]:bg-yellow-100 data-[top=2]:bg-gray-100 data-[top=3]:bg-amber-950 data-[top=3]:bg-opacity-10 data-[top3=true]:font-semibold data-[top=1]:text-yellow-700 data-[top=2]:text-gray-700 data-[top=3]:text-amber-700 dark:bg-neutral-800/80 dark:text-gray-300 dark:shadow-gray-900/20 data-[top=1]:dark:bg-yellow-900/40 data-[top=2]:dark:bg-gray-800/70 data-[top=3]:dark:bg-amber-900/40 data-[top=1]:dark:text-yellow-400 data-[top=2]:dark:text-gray-300 data-[top=3]:dark:text-amber-400 data-[top=1]:dark:shadow-yellow-900/20 data-[top=2]:dark:shadow-gray-900/20 data-[top=3]:dark:shadow-amber-900/20`}
 													>
 														{index + 1}
 													</div>

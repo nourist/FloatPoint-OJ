@@ -69,7 +69,7 @@
 	}
 	.dot::after {
 		content: '';
-		@apply absolute top-[10%] right-[10%] block h-2 w-2 rounded-full bg-red-500;
+		@apply absolute right-[10%] top-[10%] block h-2 w-2 rounded-full bg-red-500;
 	}
 	.input-error {
 		@apply !border-red-500 !text-red-500 !caret-red-500 !ring-red-500 focus-within:!border-red-500 focus-within:!ring-red-500;

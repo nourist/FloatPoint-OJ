@@ -36,7 +36,7 @@ const ProblemPanel = ({ problems = [], loading = false }) => {
 
 	return (
 		<div className="flex h-44 gap-2">
-			<div className="dark:bg-opacity-70 flex flex-1 items-center justify-center rounded-sm bg-zinc-100 dark:bg-neutral-700 dark:text-gray-100">
+			<div className="flex flex-1 items-center justify-center rounded-sm bg-zinc-100 dark:bg-neutral-700 dark:bg-opacity-70 dark:text-gray-100">
 				<div
 					style={{ borderColor: show == 0 ? '#22c55e' : show == 1 ? '#eab308' : show == 2 ? '#ef4444' : undefined }}
 					className="flex size-36 items-center justify-center rounded-full border-[5px] border-sky-400 text-sm transition-all duration-200"
@@ -48,7 +48,7 @@ const ProblemPanel = ({ problems = [], loading = false }) => {
 				<div
 					onMouseEnter={() => setRender(0)}
 					onMouseLeave={() => setRender(3)}
-					className="dark:bg-opacity-70 flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:text-gray-200"
+					className="flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:bg-opacity-70 dark:text-gray-200"
 				>
 					<div className="text-xs font-semibold text-green-500">Easy</div>
 					{data[0]}
@@ -56,7 +56,7 @@ const ProblemPanel = ({ problems = [], loading = false }) => {
 				<div
 					onMouseEnter={() => setRender(1)}
 					onMouseLeave={() => setRender(3)}
-					className="dark:bg-opacity-70 flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:text-gray-200"
+					className="flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:bg-opacity-70 dark:text-gray-200"
 				>
 					<div className="text-xs font-semibold text-yellow-500">Med</div>
 					{data[1]}
@@ -64,7 +64,7 @@ const ProblemPanel = ({ problems = [], loading = false }) => {
 				<div
 					onMouseEnter={() => setRender(2)}
 					onMouseLeave={() => setRender(3)}
-					className="dark:bg-opacity-70 flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:text-gray-200"
+					className="flex w-[90px] flex-col items-center rounded-sm bg-zinc-100 py-2 text-sm dark:bg-neutral-700 dark:bg-opacity-70 dark:text-gray-200"
 				>
 					<div className="text-xs font-semibold text-red-500">Hard</div>
 					{data[2]}

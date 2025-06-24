@@ -106,14 +106,14 @@ const Submit = () => {
 						defaultValue={user.defaultLanguage || 'c++17'}
 						triggerClassname="w-full bg-white border border-gray-200"
 						setValue={setLanguage}
-						data={Object.keys(languageValue).map((item) => ({ value: item, label: <span className="text-gray-700 capitalize dark:text-gray-300">{item}</span> }))}
+						data={Object.keys(languageValue).map((item) => ({ value: item, label: <span className="capitalize text-gray-700 dark:text-gray-300">{item}</span> }))}
 					></Select>
 					<div className="flex w-full items-center justify-center">
 						<label
 							htmlFor="dropzone-file-13617263816"
 							className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-blue-300 bg-blue-50 transition-colors hover:bg-blue-100 dark:border-blue-700 dark:bg-[#1e293b] dark:hover:border-blue-500 dark:hover:bg-[#273449]"
 						>
-							<div className="flex flex-col items-center justify-center pt-5 pb-6">
+							<div className="flex flex-col items-center justify-center pb-6 pt-5">
 								<svg
 									className="mb-4 h-8 w-8 text-blue-500 dark:text-blue-400"
 									aria-hidden="true"
@@ -145,7 +145,7 @@ const Submit = () => {
 					></Combobox>
 					<Button
 						disabled={isLoading}
-						className="hover:ring-opacity-50 h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold !text-white capitalize transition-all duration-200 hover:ring-2 hover:ring-sky-400"
+						className="h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold capitalize !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400 hover:ring-opacity-50"
 						onClick={handleSubmit}
 					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('submit')}

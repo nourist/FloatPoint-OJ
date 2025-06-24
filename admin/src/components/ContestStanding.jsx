@@ -21,15 +21,15 @@ const ContestStanding = ({ data }) => {
 				<table className="w-full text-sm">
 					<thead>
 						<tr className="border-b border-gray-200 bg-gray-50 dark:border-neutral-700/70 dark:bg-neutral-700/30">
-							<th scope="col" className="w-24 px-6 py-4 text-center font-medium text-gray-700 capitalize dark:text-gray-200">
+							<th scope="col" className="w-24 px-6 py-4 text-center font-medium capitalize text-gray-700 dark:text-gray-200">
 								{t('top')}
 							</th>
-							<th scope="col" className="px-6 py-4 text-left font-medium text-gray-700 capitalize dark:text-gray-200">
+							<th scope="col" className="px-6 py-4 text-left font-medium capitalize text-gray-700 dark:text-gray-200">
 								{t('user')}
 							</th>
 							<th
 								scope="col"
-								className="w-32 border-x border-gray-200 px-6 py-4 text-center font-medium text-gray-700 capitalize dark:border-neutral-700/70 dark:text-gray-200"
+								className="w-32 border-x border-gray-200 px-6 py-4 text-center font-medium capitalize text-gray-700 dark:border-neutral-700/70 dark:text-gray-200"
 							>
 								{t('total')}
 							</th>

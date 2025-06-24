@@ -98,7 +98,7 @@ const ContestId = () => {
 				<MenuHandler>
 					<Chip
 						data-status={data?.status}
-						className="bg-warning data-[status=ended]:bg-error data-[status=ongoing]:bg-success absolute top-[5px] right-1 cursor-pointer text-white"
+						className="bg-warning data-[status=ended]:bg-error data-[status=ongoing]:bg-success absolute right-1 top-[5px] cursor-pointer text-white"
 						value={t(data?.status)}
 						size="lg"
 					/>

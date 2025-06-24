@@ -43,7 +43,7 @@ const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 				{t('problem-name')} <span className="text-error font-bold">*</span>
 			</h2>
 			<FullOutlineInput value={name} onChange={(e) => setName(e.target.value)} className="mt-2 w-1/2 min-w-60" placeholder={t('problem-name')} />
-			<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('difficulty')}</h2>
+			<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('difficulty')}</h2>
 			<Select
 				value={difficulty}
 				setValue={setDifficulty}
@@ -66,7 +66,7 @@ const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 				/>
 			</h2>
 			<p className="text-base-content/60 text-sm/6">{isPublic ? t('open-msg') : t('close-msg')}</p>
-			<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('edit-task')}</h2>
+			<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('edit-task')}</h2>
 			<MdEditor markdown={task} onChange={setTask} />
 			<h2 className="text-base-content mt-6 text-sm/6 font-medium capitalize">{t('setting')}</h2>
 			<div className="mt-2 flex flex-col gap-5">
@@ -74,7 +74,7 @@ const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 				<Input label={t('time-limit')} value={timeLimit} onChange={(e) => setTimeLimit(Number(e.target.value))} step="0.01" type="number" />
 				<Input label={t('memory-limit')} value={memoryLimit} onChange={(e) => setMemoryLimit(Number(e.target.value))} type="number" />
 			</div>
-			<h2 className="text-base-content mt-6 mb-2 text-sm/6 font-medium capitalize">{t('test-case')}</h2>
+			<h2 className="text-base-content mb-2 mt-6 text-sm/6 font-medium capitalize">{t('test-case')}</h2>
 			<div className="bg-base-200 rounded-md p-4">
 				{testcase.map((item, index) => (
 					<Accordion className="mb-4" open={openTestcase == index} key={index}>
@@ -87,7 +87,7 @@ const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 						>
 							{`${t('test')} ${index + 1}`}
 						</AccordionHeader>
-						<div className="absolute top-2 right-4">
+						<div className="absolute right-4 top-2">
 							<IconButton
 								variant="text"
 								className="hover:bg-error/20 hover:!text-error ml-auto cursor-pointer rounded-full focus:absolute"
@@ -132,7 +132,7 @@ const ProblemSetting = ({ handler, defaultData, finallyHandler = () => {} }) => 
 			</div>
 			<div className="mt-6 flex justify-end gap-3">
 				<Button
-					className="bg-error cursor-pointer text-white capitalize"
+					className="bg-error cursor-pointer capitalize text-white"
 					onClick={() => {
 						setId('');
 						setName('');

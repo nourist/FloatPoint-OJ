@@ -9,6 +9,15 @@ services:
         networks:
             - app-network
 
+    admin:
+        build:
+            context: .
+            dockerfile: Dockerfile.admin
+        ports:
+            - '5174:5174'
+        networks:
+            - app-network
+
     server:
         build:
             context: .
@@ -19,6 +28,9 @@ services:
             - app-network
         environment:
             - JUDGER_URL=http://judger:8090
+            - DATABASE_URL=mongodb://mongo:27017/FloatPoint
+        depends_on:
+            - mongo
     judger:
         build:
             context: .
@@ -28,6 +40,20 @@ services:
         networks:
             - app-network
 
+    mongo:
+        image: mongo:6.0
+        container_name: mongo
+        restart: always
+        networks:
+            - app-network
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongo-data:/data/db
+
 networks:
     app-network:
         driver: bridge
+
+volumes:
+    mongo-data:

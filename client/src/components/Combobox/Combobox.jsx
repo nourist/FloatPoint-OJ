@@ -18,7 +18,7 @@ const Combobox = ({ data = [], value, setValue, label = '', triggerClassname = '
 					aria-expanded={open}
 					className={`w-[200px] justify-between dark:border-none dark:!bg-[rgb(55,55,55)] dark:text-gray-200 dark:hover:!bg-neutral-800 ${triggerClassname}`}
 				>
-					<span className="truncate overflow-hidden whitespace-nowrap">{value ? data.find((framework) => framework.value === value)?.label : label}</span>
+					<span className="overflow-hidden truncate whitespace-nowrap">{value ? data.find((framework) => framework.value === value)?.label : label}</span>
 					<ChevronsUpDown className="opacity-50" />
 				</Button>
 			</PopoverTrigger>

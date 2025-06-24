@@ -87,7 +87,7 @@ const UserId = () => {
 				<div className="flex min-w-[280px] flex-1 flex-col items-center">
 					<div className="relative">
 						<UserAvatar className="!size-[120px]" user={user.data} />
-						{user.data.top <= 3 && <div className="absolute right-0 bottom-1 size-10 text-5xl">{user.data.top === 1 ? '🥇' : user.data.top === 2 ? '🥈' : '🥉'}</div>}
+						{user.data.top <= 3 && <div className="absolute bottom-1 right-0 size-10 text-5xl">{user.data.top === 1 ? '🥇' : user.data.top === 2 ? '🥈' : '🥉'}</div>}
 					</div>
 					<h2 className="text-base-content mt-4 text-lg font-semibold">{user.data.fullname}</h2>
 					<p className="text-base-content/90 text-sm font-light">@{user.data.name}</p>
@@ -141,11 +141,11 @@ const UserId = () => {
 			)}
 			<div className="from-primary to-secondary flex justify-between gap-10 rounded-xl bg-gradient-to-r px-6 py-4">
 				<div>
-					<p className="text-sm text-white/80 capitalize">{t('total-score')}</p>
+					<p className="text-sm capitalize text-white/80">{t('total-score')}</p>
 					<h2 className="text-2xl font-black text-white">{user.data.totalScore}</h2>
 				</div>
 				<div className="max-w-64 flex-1">
-					<p className="mb-2 text-right text-sm text-white/80 capitalize">
+					<p className="mb-2 text-right text-sm capitalize text-white/80">
 						{t('better-than')} <span className="font-bold text-white">{betterThan}%</span> {t('user')}
 					</p>
 					<Progress className="bg-base-content/10" barProps={{ className: 'bg-white' }} size="lg" value={betterThan} />
