@@ -80,19 +80,19 @@ const Problems = () => {
 					setValue={setDifficulty}
 					data={[
 						{
-							label: <span className="capitalize text-gray-700 dark:text-gray-300">{t('difficulty')}</span>,
+							label: <span className="text-gray-700 capitalize dark:text-gray-300">{t('difficulty')}</span>,
 						},
 						{
 							value: 'easy',
-							label: <span className="capitalize text-green-500">{t('easy')}</span>,
+							label: <span className="text-green-500 capitalize">{t('easy')}</span>,
 						},
 						{
 							value: 'medium',
-							label: <span className="capitalize text-yellow-600">{t('medium')}</span>,
+							label: <span className="text-yellow-600 capitalize">{t('medium')}</span>,
 						},
 						{
 							value: 'hard',
-							label: <span className="capitalize text-red-500">{t('hard')}</span>,
+							label: <span className="text-red-500 capitalize">{t('hard')}</span>,
 						},
 					]}
 				></Select>
@@ -103,7 +103,7 @@ const Problems = () => {
 							<RotateCcw className="size-4"></RotateCcw>
 						</Button>
 					</TooltipTrigger>
-					<TooltipContent className="bg-gray-200 capitalize text-gray-700 dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('refresh')}</TooltipContent>
+					<TooltipContent className="bg-gray-200 text-gray-700 capitalize dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('refresh')}</TooltipContent>
 				</Tooltip>
 				<Tooltip>
 					<TooltipTrigger asChild>
@@ -111,12 +111,12 @@ const Problems = () => {
 							<Shuffle className="size-4"></Shuffle>
 						</Link>
 					</TooltipTrigger>
-					<TooltipContent className="bg-gray-200 capitalize text-gray-700 dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('pick')}</TooltipContent>
+					<TooltipContent className="bg-gray-200 text-gray-700 capitalize dark:bg-[rgb(55,55,55)] dark:text-gray-200">{t('pick')}</TooltipContent>
 				</Tooltip>
 			</div>
 			<div className="relative block overflow-x-auto shadow-md sm:rounded-lg">
 				<table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-					<thead className="bg-white text-xs uppercase text-gray-700 dark:bg-neutral-800 dark:text-gray-400">
+					<thead className="bg-white text-xs text-gray-700 uppercase dark:bg-neutral-800 dark:text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3 text-center">
 								{t('status')}
@@ -174,7 +174,7 @@ const Problems = () => {
 									<td className="px-6 py-4">{problem.solve && <CircleCheck className="mx-auto size-5 text-green-500"></CircleCheck>}</td>
 									<td
 										scope="row"
-										className="truncate whitespace-nowrap px-6 py-4 font-medium text-gray-900 hover:text-blue-400 md:max-w-24 lg:max-w-48 dark:text-white dark:hover:text-blue-400"
+										className="truncate px-6 py-4 font-medium whitespace-nowrap text-gray-900 hover:text-blue-400 md:max-w-24 lg:max-w-48 dark:text-white dark:hover:text-blue-400"
 									>
 										<Link to={routesConfig.problem.replace(':id', problem.id)}>{problem.name}</Link>
 									</td>

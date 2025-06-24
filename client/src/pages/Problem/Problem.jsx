@@ -44,7 +44,7 @@ const Problem = () => {
 	);
 
 	return (
-		<div className="min-h-screen pb-12 pt-6 dark:bg-neutral-950">
+		<div className="min-h-screen pt-6 pb-12 dark:bg-neutral-950">
 			<div className="mx-auto max-w-7xl px-4 md:px-6">
 				{/* Breadcrumb */}
 				<div className="mb-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
@@ -52,7 +52,7 @@ const Problem = () => {
 						{t('problems')}
 					</Link>
 					<ChevronRight className="mx-2 h-4 w-4" />
-					<span className="flex items-center truncate font-medium capitalize text-gray-900 dark:text-white">
+					<span className="flex items-center truncate font-medium text-gray-900 capitalize dark:text-white">
 						{loading ? <Skeleton className="inline-block h-4 w-32 rounded-md dark:bg-neutral-800" /> : problem?.id}
 					</span>
 				</div>
@@ -63,11 +63,11 @@ const Problem = () => {
 						{/* Problem Title */}
 						{!loading && problem && (
 							<div className="mb-3 flex">
-								<h1 className="mb-1 mr-6 text-3xl font-bold text-gray-900 dark:text-white">{problem.name}</h1>
+								<h1 className="mr-6 mb-1 text-3xl font-bold text-gray-900 dark:text-white">{problem.name}</h1>
 								<div className="flex flex-wrap items-center gap-3">
 									<span
 										data-difficulty={problem?.difficulty}
-										className={`rounded-full border px-3 py-1 text-sm font-medium data-[difficulty='']:border-gray-200 data-[difficulty=easy]:border-green-200 data-[difficulty=hard]:border-red-200 data-[difficulty=medium]:border-yellow-200 data-[difficulty='']:bg-gray-100 data-[difficulty=easy]:bg-green-100 data-[difficulty=hard]:bg-red-100 data-[difficulty=medium]:bg-yellow-100 data-[difficulty='']:text-gray-600 data-[difficulty=easy]:text-green-600 data-[difficulty=hard]:text-red-600 data-[difficulty=medium]:text-yellow-600 dark:data-[difficulty='']:border-gray-700 dark:data-[difficulty=easy]:border-green-800 dark:data-[difficulty=hard]:border-red-800 dark:data-[difficulty=medium]:border-yellow-800 dark:data-[difficulty='']:bg-gray-800 dark:data-[difficulty=easy]:bg-green-900/30 dark:data-[difficulty=hard]:bg-red-900/30 dark:data-[difficulty=medium]:bg-yellow-900/30 dark:data-[difficulty='']:text-gray-400 dark:data-[difficulty=easy]:text-green-400 dark:data-[difficulty=hard]:text-red-400 dark:data-[difficulty=medium]:text-yellow-400`}
+										className={`rounded-full border px-3 py-1 text-sm font-medium data-[difficulty='']:border-gray-200 data-[difficulty='']:bg-gray-100 data-[difficulty='']:text-gray-600 data-[difficulty=easy]:border-green-200 data-[difficulty=easy]:bg-green-100 data-[difficulty=easy]:text-green-600 data-[difficulty=hard]:border-red-200 data-[difficulty=hard]:bg-red-100 data-[difficulty=hard]:text-red-600 data-[difficulty=medium]:border-yellow-200 data-[difficulty=medium]:bg-yellow-100 data-[difficulty=medium]:text-yellow-600 dark:data-[difficulty='']:border-gray-700 dark:data-[difficulty='']:bg-gray-800 dark:data-[difficulty='']:text-gray-400 dark:data-[difficulty=easy]:border-green-800 dark:data-[difficulty=easy]:bg-green-900/30 dark:data-[difficulty=easy]:text-green-400 dark:data-[difficulty=hard]:border-red-800 dark:data-[difficulty=hard]:bg-red-900/30 dark:data-[difficulty=hard]:text-red-400 dark:data-[difficulty=medium]:border-yellow-800 dark:data-[difficulty=medium]:bg-yellow-900/30 dark:data-[difficulty=medium]:text-yellow-400`}
 									>
 										{t(problem?.difficulty)}
 									</span>
@@ -123,7 +123,7 @@ const Problem = () => {
 									<Button asChild className="w-full" size="lg">
 										<Link
 											to={`${routesConfig.submit}?problem=${id}`}
-											className="bg-gradient-to-r from-blue-600 to-indigo-600 font-medium capitalize !text-white shadow-sm hover:from-blue-700 hover:to-indigo-700 dark:from-blue-700 dark:to-indigo-700 dark:hover:from-blue-800 dark:hover:to-indigo-800"
+											className="bg-gradient-to-r from-blue-600 to-indigo-600 font-medium !text-white capitalize shadow-sm hover:from-blue-700 hover:to-indigo-700 dark:from-blue-700 dark:to-indigo-700 dark:hover:from-blue-800 dark:hover:to-indigo-800"
 										>
 											{t('submit')}
 										</Link>
@@ -132,7 +132,7 @@ const Problem = () => {
 								</>
 							)}
 							<Button variant="outline" asChild className="w-full border-gray-300 hover:bg-gray-50 dark:border-neutral-700 dark:hover:bg-neutral-800" size="lg">
-								<Link to={`${routesConfig.submissions}?problem=${id}`} className="font-medium capitalize text-gray-900 dark:text-gray-100">
+								<Link to={`${routesConfig.submissions}?problem=${id}`} className="font-medium text-gray-900 capitalize dark:text-gray-100">
 									<AlignJustify className="mr-2 h-4 w-4" />
 									{t('submissions')}
 								</Link>
@@ -147,7 +147,7 @@ const Problem = () => {
 								) : (
 									<>
 										<span className="text-2xl font-bold text-gray-900 dark:text-white">{problem?.noOfSuccess}</span>
-										<span className="text-xs capitalize text-gray-500 dark:text-gray-400">{t('ac-count')}</span>
+										<span className="text-xs text-gray-500 capitalize dark:text-gray-400">{t('ac-count')}</span>
 									</>
 								)}
 							</div>
@@ -159,7 +159,7 @@ const Problem = () => {
 										<span className="text-2xl font-bold text-gray-900 dark:text-white">
 											{problem?.noOfSubm ? Math.round((problem?.noOfSuccess / problem?.noOfSubm) * 100) : 0}%
 										</span>
-										<span className="text-xs capitalize text-gray-500 dark:text-gray-400">{t('ac-rate')}</span>
+										<span className="text-xs text-gray-500 capitalize dark:text-gray-400">{t('ac-rate')}</span>
 									</>
 								)}
 							</div>
@@ -184,7 +184,7 @@ const Problem = () => {
 							) : (
 								<div className="space-y-5">
 									<div>
-										<h3 className="mb-3 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">{t('details')}</h3>
+										<h3 className="mb-3 text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">{t('details')}</h3>
 										<div className="space-y-3">
 											<div className="group flex items-center justify-between">
 												<div className="flex items-center text-gray-500 transition group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300">
@@ -209,7 +209,7 @@ const Problem = () => {
 												</div>
 												<span
 													data-difficulty={problem?.difficulty}
-													className={`rounded-full border px-2.5 py-1 text-xs font-medium data-[difficulty='']:border-gray-200 data-[difficulty=easy]:border-green-200 data-[difficulty=hard]:border-red-200 data-[difficulty=medium]:border-yellow-200 data-[difficulty='']:bg-gray-100 data-[difficulty=easy]:bg-green-100 data-[difficulty=hard]:bg-red-100 data-[difficulty=medium]:bg-yellow-100 data-[difficulty='']:text-gray-600 data-[difficulty=easy]:text-green-600 data-[difficulty=hard]:text-red-600 data-[difficulty=medium]:text-yellow-600 dark:data-[difficulty='']:border-gray-700 dark:data-[difficulty=easy]:border-green-800 dark:data-[difficulty=hard]:border-red-800 dark:data-[difficulty=medium]:border-yellow-800 dark:data-[difficulty='']:bg-gray-800 dark:data-[difficulty=easy]:bg-green-900/30 dark:data-[difficulty=hard]:bg-red-900/30 dark:data-[difficulty=medium]:bg-yellow-900/30 dark:data-[difficulty='']:text-gray-400 dark:data-[difficulty=easy]:text-green-400 dark:data-[difficulty=hard]:text-red-400 dark:data-[difficulty=medium]:text-yellow-400`}
+													className={`rounded-full border px-2.5 py-1 text-xs font-medium data-[difficulty='']:border-gray-200 data-[difficulty='']:bg-gray-100 data-[difficulty='']:text-gray-600 data-[difficulty=easy]:border-green-200 data-[difficulty=easy]:bg-green-100 data-[difficulty=easy]:text-green-600 data-[difficulty=hard]:border-red-200 data-[difficulty=hard]:bg-red-100 data-[difficulty=hard]:text-red-600 data-[difficulty=medium]:border-yellow-200 data-[difficulty=medium]:bg-yellow-100 data-[difficulty=medium]:text-yellow-600 dark:data-[difficulty='']:border-gray-700 dark:data-[difficulty='']:bg-gray-800 dark:data-[difficulty='']:text-gray-400 dark:data-[difficulty=easy]:border-green-800 dark:data-[difficulty=easy]:bg-green-900/30 dark:data-[difficulty=easy]:text-green-400 dark:data-[difficulty=hard]:border-red-800 dark:data-[difficulty=hard]:bg-red-900/30 dark:data-[difficulty=hard]:text-red-400 dark:data-[difficulty=medium]:border-yellow-800 dark:data-[difficulty=medium]:bg-yellow-900/30 dark:data-[difficulty=medium]:text-yellow-400`}
 												>
 													{t(problem?.difficulty)}
 												</span>
@@ -220,7 +220,7 @@ const Problem = () => {
 									<div className="h-px bg-gray-200 dark:bg-neutral-700" />
 
 									<div>
-										<h3 className="mb-3 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">{t('constraints')}</h3>
+										<h3 className="mb-3 text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">{t('constraints')}</h3>
 										<div className="space-y-3">
 											<div className="group flex items-center justify-between">
 												<div className="flex items-center text-gray-500 transition group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300">
@@ -243,7 +243,7 @@ const Problem = () => {
 									<div className="h-px bg-gray-200 dark:bg-neutral-700" />
 
 									<div className="space-y-3">
-										<h3 className="text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">{t('tags')}</h3>
+										<h3 className="text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">{t('tags')}</h3>
 										<div className="flex flex-wrap gap-2">
 											{problem?.tags?.map((item, index) => (
 												<span
@@ -253,7 +253,7 @@ const Problem = () => {
 													{item}
 												</span>
 											))}
-											{!problem?.tags?.length && <span className="text-sm italic text-gray-500 dark:text-gray-400">{t('no-tags')}</span>}
+											{!problem?.tags?.length && <span className="text-sm text-gray-500 italic dark:text-gray-400">{t('no-tags')}</span>}
 										</div>
 									</div>
 								</div>

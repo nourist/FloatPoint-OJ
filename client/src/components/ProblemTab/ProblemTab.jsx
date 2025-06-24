@@ -18,7 +18,7 @@ const ProblemTab = ({ problem, size, className = '', loading }) => {
 				<div
 					data-sz={size}
 					data-difficulty={problem?.difficulty}
-					className="flex size-16 items-center justify-center rounded-lg border-2 !bg-opacity-30 text-2xl font-bold capitalize data-[sz=small]:size-12 data-[difficulty=easy]:border-green-500 data-[difficulty=hard]:border-red-500 data-[difficulty=medium]:border-yellow-400 data-[difficulty=easy]:bg-green-500 data-[difficulty=hard]:bg-red-500 data-[difficulty=medium]:bg-yellow-400 data-[difficulty=easy]:text-green-500 data-[difficulty=hard]:text-red-500 data-[difficulty=medium]:text-yellow-400"
+					className="!bg-opacity-30 flex size-16 items-center justify-center rounded-lg border-2 text-2xl font-bold capitalize data-[difficulty=easy]:border-green-500 data-[difficulty=easy]:bg-green-500 data-[difficulty=easy]:text-green-500 data-[difficulty=hard]:border-red-500 data-[difficulty=hard]:bg-red-500 data-[difficulty=hard]:text-red-500 data-[difficulty=medium]:border-yellow-400 data-[difficulty=medium]:bg-yellow-400 data-[difficulty=medium]:text-yellow-400 data-[sz=small]:size-12"
 				>
 					{problem?.difficulty[0]}
 				</div>

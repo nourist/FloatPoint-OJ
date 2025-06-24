@@ -105,13 +105,13 @@ const Contests = () => {
 						setValue={setStatus}
 						data={[
 							{ label: <span className="capitalize">{t('status')}</span> },
-							{ value: 'ended', label: <span className="capitalize text-red-500">{t('ended')}</span> },
-							{ value: 'ongoing', label: <span className="capitalize text-green-500">{t('ongoing')}</span> },
-							{ value: 'upcoming', label: <span className="capitalize text-yellow-400">{t('upcoming')}</span> },
+							{ value: 'ended', label: <span className="text-red-500 capitalize">{t('ended')}</span> },
+							{ value: 'ongoing', label: <span className="text-green-500 capitalize">{t('ongoing')}</span> },
+							{ value: 'upcoming', label: <span className="text-yellow-400 capitalize">{t('upcoming')}</span> },
 						]}
 					></Select>
 					<Search placeholder={t('search-placeholder')} value={search} setValue={setSearch}></Search>
-					<Button onClick={query} className="!bg-sky-400 font-light capitalize !text-white hover:!bg-sky-500">
+					<Button onClick={query} className="!bg-sky-400 font-light !text-white capitalize hover:!bg-sky-500">
 						<RotateCcw></RotateCcw>
 						{t('refresh')}
 					</Button>

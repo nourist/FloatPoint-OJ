@@ -72,7 +72,7 @@ const Submission = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-50 pb-12 pt-6 dark:bg-neutral-950">
+		<div className="min-h-screen bg-gray-50 pt-6 pb-12 dark:bg-neutral-950">
 			<div className="mx-auto max-w-6xl px-4 md:px-6">
 				{/* Breadcrumb */}
 				<div className="mb-6 flex items-center text-sm text-gray-500 dark:text-gray-400">
@@ -145,7 +145,7 @@ const Submission = () => {
 							) : (
 								<>
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('status')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('status')}</div>
 										<Tooltip>
 											<TooltipTrigger asChild>
 												<Badge
@@ -161,22 +161,22 @@ const Submission = () => {
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('language')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('language')}</div>
 										<div className="font-medium text-gray-900 dark:text-white">{submission?.language?.toUpperCase()}</div>
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('time')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('time')}</div>
 										<div className="font-medium text-gray-900 dark:text-white">{submission?.time === -1 ? '-' : `${submission?.time}s`}</div>
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('memory')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('memory')}</div>
 										<div className="font-medium text-gray-900 dark:text-white">{submission?.memory === -1 ? '-' : `${submission?.memory}MB`}</div>
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('author')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('author')}</div>
 										<Link
 											to={routesConfig.user.replace(':name', submission?.author)}
 											className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
@@ -186,7 +186,7 @@ const Submission = () => {
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('problem')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('problem')}</div>
 										<Link
 											to={routesConfig.problem.replace(':id', submission?.forProblem)}
 											className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
@@ -196,12 +196,12 @@ const Submission = () => {
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('submit-at')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('submit-at')}</div>
 										<div className="font-medium text-gray-900 dark:text-white">{formatedDate(new Date(submission?.createdAt || null))}</div>
 									</div>
 
 									<div className="space-y-1">
-										<div className="text-sm capitalize text-gray-500 dark:text-gray-400">{t('point')}</div>
+										<div className="text-sm text-gray-500 capitalize dark:text-gray-400">{t('point')}</div>
 										<div className="font-medium text-gray-900 dark:text-white">{submission?.point}</div>
 									</div>
 								</>
@@ -323,7 +323,7 @@ const Submission = () => {
 							</TabsContent>
 
 							<TabsContent value="compiler">
-								<div className="whitespace-pre-line rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
+								<div className="rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm whitespace-pre-line shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
 									{loading ? (
 										<div className="space-y-2">
 											<Skeleton className="h-4 w-full rounded-md dark:bg-neutral-700" />
@@ -342,7 +342,7 @@ const Submission = () => {
 							</TabsContent>
 
 							<TabsContent value="judge">
-								<div className="whitespace-pre-line rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
+								<div className="rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm whitespace-pre-line shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
 									{loading ? (
 										<div className="space-y-2">
 											<Skeleton className="h-4 w-full rounded-md dark:bg-neutral-700" />
@@ -362,7 +362,7 @@ const Submission = () => {
 
 							{submission?.status === 'IE' && (
 								<TabsContent value="server">
-									<div className="whitespace-pre-line rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
+									<div className="rounded-xl border border-gray-200 bg-gray-50 p-5 font-mono text-sm whitespace-pre-line shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-200">
 										{loading ? (
 											<div className="space-y-2">
 												<Skeleton className="h-4 w-full rounded-md dark:bg-neutral-700" />
@@ -394,7 +394,7 @@ const Submission = () => {
 					</Button>
 
 					{!loading && submission && (
-						<Button className="bg-blue-600 capitalize !text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800" asChild>
+						<Button className="bg-blue-600 !text-white capitalize hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800" asChild>
 							<Link to={routesConfig.submit + `?problem=${submission.forProblem}`}>{t('try-again')}</Link>
 						</Button>
 					)}

@@ -67,7 +67,7 @@ const Signup = () => {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className="w-full max-w-[25rem] overflow-hidden rounded-2xl bg-white bg-opacity-50 shadow-xl backdrop-blur-xl backdrop-filter dark:bg-neutral-800"
+				className="bg-opacity-50 w-full max-w-[25rem] overflow-hidden rounded-2xl bg-white shadow-xl backdrop-blur-xl backdrop-filter dark:bg-neutral-800"
 			>
 				<div className="space-y-5 p-8">
 					<h2 className="mb-8 bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-center text-3xl font-bold text-transparent">{t('title')}</h2>
@@ -97,13 +97,13 @@ const Signup = () => {
 					<PasswordIndicator password={password} setOk={setPasswordOK}></PasswordIndicator>
 					<Button
 						disabled={isLoading}
-						className="h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400 hover:ring-opacity-50"
+						className="hover:ring-opacity-50 h-9 w-full bg-gradient-to-r from-sky-400 to-blue-500 font-bold !text-white transition-all duration-200 hover:ring-2 hover:ring-sky-400"
 						onClick={handleSignup}
 					>
 						{isLoading ? <Loader2 className="animate-spin" /> : t('signup')}
 					</Button>
 				</div>
-				<div className="flex h-12 items-center justify-center gap-1 bg-neutral-200 bg-opacity-50 text-sm text-gray-500 dark:bg-neutral-900 dark:bg-opacity-60 dark:text-gray-400">
+				<div className="bg-opacity-50 dark:bg-opacity-60 flex h-12 items-center justify-center gap-1 bg-neutral-200 text-sm text-gray-500 dark:bg-neutral-900 dark:text-gray-400">
 					{t('already-have-account')}{' '}
 					<Link to={routesConfig.login} className="text-sky-400">
 						{t('login')}

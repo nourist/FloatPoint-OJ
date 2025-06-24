@@ -43,7 +43,7 @@ const User = () => {
 		<div className="flex min-h-screen flex-col gap-6 bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-8 dark:from-neutral-900 dark:to-neutral-800">
 			{/* Header */}
 			<div className="mx-auto w-full max-w-7xl">
-				<h1 className="text-3xl font-bold capitalize text-gray-800 dark:text-white">{t('user-profile')}</h1>
+				<h1 className="text-3xl font-bold text-gray-800 capitalize dark:text-white">{t('user-profile')}</h1>
 			</div>
 
 			{/* Main Content */}
@@ -70,14 +70,14 @@ const User = () => {
 						<>
 							<div className="flex flex-col items-center text-center">
 								<UserAvatar className="size-32 border-4 border-white shadow-lg dark:border-neutral-900" user={user} />
-								<h2 className="mt-4 text-2xl font-bold capitalize text-gray-800 dark:text-white">{user.fullname}</h2>
+								<h2 className="mt-4 text-2xl font-bold text-gray-800 capitalize dark:text-white">{user.fullname}</h2>
 								<p className="text-gray-500 dark:text-gray-400">@{user.name}</p>
 							</div>
 							<div className="mt-8 space-y-3">
 								<div className="flex items-center rounded-lg bg-gray-50 p-3 dark:bg-neutral-700">
 									<span className="flex size-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-200">🏆</span>
 									<div className="ml-3">
-										<p className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('rank')}</p>
+										<p className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('rank')}</p>
 										<p className="font-semibold text-gray-800 dark:text-white">#{user.top}</p>
 									</div>
 								</div>
@@ -86,7 +86,7 @@ const User = () => {
 										🌟
 									</span>
 									<div className="ml-3">
-										<p className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('score')}</p>
+										<p className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('score')}</p>
 										<p className="font-semibold text-gray-800 dark:text-white">{user.totalScore}p</p>
 									</div>
 								</div>
@@ -95,7 +95,7 @@ const User = () => {
 										✅
 									</span>
 									<div className="ml-3">
-										<p className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('solved')}</p>
+										<p className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('solved')}</p>
 										<p className="font-semibold text-gray-800 dark:text-white">{user.totalAC}</p>
 									</div>
 								</div>
@@ -104,14 +104,14 @@ const User = () => {
 										📄
 									</span>
 									<div className="ml-3">
-										<p className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('submissions')}</p>
+										<p className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('submissions')}</p>
 										<p className="font-semibold text-gray-800 dark:text-white">{user.totalAttempt}</p>
 									</div>
 								</div>
 								<div className="flex items-center rounded-lg bg-gray-50 p-3 dark:bg-neutral-700">
 									<span className="flex size-8 items-center justify-center rounded-full bg-pink-100 text-pink-600 dark:bg-pink-900 dark:text-pink-200">📅</span>
 									<div className="ml-3">
-										<p className="text-sm capitalize text-gray-500 dark:text-gray-300">{t('join-date')}</p>
+										<p className="text-sm text-gray-500 capitalize dark:text-gray-300">{t('join-date')}</p>
 										<p className="font-semibold text-gray-800 dark:text-white">
 											{new Intl.DateTimeFormat('vi-VN', {
 												day: '2-digit',
@@ -175,7 +175,7 @@ const User = () => {
 
 						<TabsContent value="1" className="mt-0">
 							<div className="px-2">
-								<h3 className="mb-4 text-2xl font-bold capitalize text-gray-800 dark:text-white">{t('about-me')}</h3>
+								<h3 className="mb-4 text-2xl font-bold text-gray-800 capitalize dark:text-white">{t('about-me')}</h3>
 								<div className="prose dark:prose-invert max-w-none rounded-lg bg-gray-50 p-4 dark:bg-neutral-700">
 									<Markdown components={markdownComponents}>{user?.bio || t('no-bio')}</Markdown>
 								</div>
@@ -186,7 +186,7 @@ const User = () => {
 							<div className="flex flex-col gap-6 md:flex-row">
 								<div className="w-full md:w-96">
 									<div className="mb-4">
-										<h3 className="text-lg font-semibold capitalize text-green-600 dark:text-green-400">{t('accepted')}</h3>
+										<h3 className="text-lg font-semibold text-green-600 capitalize dark:text-green-400">{t('accepted')}</h3>
 										<ProblemPanel
 											loading={loading}
 											problems={Object.entries(problems)
@@ -195,7 +195,7 @@ const User = () => {
 										/>
 									</div>
 									<div className="mt-6">
-										<h3 className="text-lg font-semibold capitalize text-orange-600 dark:text-orange-400">{t('attempting')}</h3>
+										<h3 className="text-lg font-semibold text-orange-600 capitalize dark:text-orange-400">{t('attempting')}</h3>
 										<ProblemPanel
 											loading={loading}
 											problems={Object.entries(problems)
@@ -208,7 +208,7 @@ const User = () => {
 									<div className="h-full w-px bg-gray-200 dark:bg-neutral-600" />
 								</div>
 								<div className="flex-1">
-									<h2 className="mb-4 text-xl font-bold capitalize text-gray-800 dark:text-white">{t('all-problems')}</h2>
+									<h2 className="mb-4 text-xl font-bold text-gray-800 capitalize dark:text-white">{t('all-problems')}</h2>
 									<div className="space-y-3">
 										{loading
 											? [...Array(5)].map((_, i) => <Skeleton key={i} className="h-16 rounded-xl" />)
@@ -226,7 +226,7 @@ const User = () => {
 															<div className="size-8 rounded-full border-2 border-gray-300 dark:border-gray-400" />
 														)}
 														<div className="flex-1">
-															<p className="font-medium capitalize text-gray-800 dark:text-gray-100">{item.name}</p>
+															<p className="font-medium text-gray-800 capitalize dark:text-gray-100">{item.name}</p>
 														</div>
 														<span
 															className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${

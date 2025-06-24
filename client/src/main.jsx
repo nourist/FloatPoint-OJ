@@ -26,10 +26,7 @@ console.log(
 FloatPoint back-end was built with NodeJS, ExpressJS, MongoDB...`,
 	'color: #29c4a9;font-size: 14px;',
 );
-console.log(
-	"%cNote: This project inspired by LeetCode, DMOJ, Codeforces...",
-	'color: #f4a261;font-size: 14px; font-weight: 600;',
-);
+console.log('%cNote: This project inspired by LeetCode, DMOJ, Codeforces...', 'color: #f4a261;font-size: 14px; font-weight: 600;');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	// <React.StrictMode>

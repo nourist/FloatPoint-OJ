@@ -77,7 +77,7 @@ const Home = () => {
 
 	return (
 		<div className="flex-1">
-			<div className="mt-[2px] h-[100%] w-full bg-white px-20 pb-[88px] pt-12 lg:h-[90%] dark:bg-[rgb(27,27,29)]">
+			<div className="mt-[2px] h-[100%] w-full bg-white px-20 pt-12 pb-[88px] lg:h-[90%] dark:bg-[rgb(27,27,29)]">
 				<div className="grid h-full grid-cols-4 grid-rows-4 gap-4">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -101,12 +101,12 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="mt-auto flex h-28 w-full px-8">
-							<span className="flex h-full flex-1 flex-col justify-between bg-slate-200 bg-opacity-60 py-5 dark:bg-[rgb(33,33,37)]">
+							<span className="bg-opacity-60 flex h-full flex-1 flex-col justify-between bg-slate-200 py-5 dark:bg-[rgb(33,33,37)]">
 								<Trophy className="mx-auto"></Trophy>
 								<h3 className="text-center text-2xl dark:text-white">{user?.top}</h3>
 							</span>
 							<span className="mx-8 my-auto h-3/4 border dark:border-neutral-700"></span>
-							<span className="flex h-full flex-1 flex-col justify-between bg-slate-200 bg-opacity-60 py-5 dark:bg-[rgb(33,33,37)]">
+							<span className="bg-opacity-60 flex h-full flex-1 flex-col justify-between bg-slate-200 py-5 dark:bg-[rgb(33,33,37)]">
 								<div className="text-center">
 									<FontAwesomeIcon className="size-8 text-[#0066B8]" icon="fa-solid fa-star" />
 								</div>
@@ -123,7 +123,7 @@ const Home = () => {
 						<h2 className="text-xl capitalize dark:text-white">{t('statistics')}</h2>
 						<div className="my-2 flex h-[200px] w-[200px] flex-col items-center justify-center rounded-full border-8 dark:border-zinc-700">
 							<div className="text-4xl dark:text-white">{user?.totalAttempt}</div>
-							<div className="mt-2 text-sm capitalize text-gray-600 dark:text-gray-400">{t('attempted')}</div>
+							<div className="mt-2 text-sm text-gray-600 capitalize dark:text-gray-400">{t('attempted')}</div>
 						</div>
 						<div className="flex items-center gap-4 capitalize dark:text-white">
 							<div className="h-4 w-4 rounded-full bg-green-500"></div>
@@ -146,7 +146,7 @@ const Home = () => {
 					>
 						<div className="flex">
 							<h2 className="text-2xl capitalize dark:text-white">{t('newest-problem')}</h2>
-							<Link to={routesConfig.problems} className="ml-auto text-sm capitalize text-blue-600 hover:underline">
+							<Link to={routesConfig.problems} className="ml-auto text-sm text-blue-600 capitalize hover:underline">
 								{t('view-more')}
 							</Link>
 						</div>
@@ -209,7 +209,7 @@ const Home = () => {
 							}).map((item, index) => (
 								<div key={index} className="flex items-center gap-1 dark:text-gray-200">
 									<div style={{ backgroundColor: item[1] }} className="size-5"></div>
-									<span className="uppercase text-gray-600 dark:text-gray-400">{item[0]}</span>:
+									<span className="text-gray-600 uppercase dark:text-gray-400">{item[0]}</span>:
 									<span className="dark:text-white">{statistic[index] === 0 ? 0 : statistic[index] || <Skeleton className="h-6 w-4 rounded-sm"></Skeleton>}</span>
 								</div>
 							))}
@@ -217,11 +217,11 @@ const Home = () => {
 					</motion.div>
 				</div>
 			</div>
-			<div className="grid w-full grid-cols-2 grid-rows-6 gap-4 gap-x-8 px-20 pb-16 pt-16 dark:text-white">
+			<div className="grid w-full grid-cols-2 grid-rows-6 gap-4 gap-x-8 px-20 pt-16 pb-16 dark:text-white">
 				<div className="col-span-2 row-span-2 lg:col-span-2 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.problems} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
+						<Link to={routesConfig.problems} className="text-2xl text-gray-800 capitalize hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('newest-problems')}
 						</Link>
 					</div>
@@ -240,7 +240,7 @@ const Home = () => {
 				<div className="col-span-2 row-span-2 lg:col-span-1 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.users} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
+						<Link to={routesConfig.users} className="text-2xl text-gray-800 capitalize hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('top-users')}
 						</Link>
 					</div>
@@ -257,7 +257,7 @@ const Home = () => {
 								{standing?.map((item, index) => (
 									<tr
 										key={index}
-										className="h-16 border border-gray-200 !bg-opacity-5 text-sm text-gray-800 hover:bg-blue-500 dark:border-neutral-700 dark:text-gray-100"
+										className="!bg-opacity-5 h-16 border border-gray-200 text-sm text-gray-800 hover:bg-blue-500 dark:border-neutral-700 dark:text-gray-100"
 									>
 										<td className="text-center">{index + 1}</td>
 										<td>
@@ -278,7 +278,7 @@ const Home = () => {
 				<div className="col-span-2 row-span-2 lg:col-span-1 lg:row-span-3">
 					<div className="flex items-center gap-2">
 						<div className="h-8 w-1 bg-gray-300 dark:bg-zinc-800"></div>
-						<Link to={routesConfig.submissions} className="text-2xl capitalize text-gray-800 hover:text-blue-500 hover:underline dark:text-gray-200">
+						<Link to={routesConfig.submissions} className="text-2xl text-gray-800 capitalize hover:text-blue-500 hover:underline dark:text-gray-200">
 							{t('activities')}
 						</Link>
 					</div>
@@ -288,15 +288,15 @@ const Home = () => {
 								<div key={index} className="group flex h-[62px] w-full pb-5 last:h-[42px] last:!pb-0">
 									<div>
 										<div className="relative h-full w-16">
-											<div className="absolute left-1/2 h-1/2 w-[2px] -translate-x-1/2 bg-blue-200 bg-opacity-50 group-first:hidden"></div>
-											<div className="absolute left-1/2 top-1/2 h-[41px] w-[2px] -translate-x-1/2 bg-blue-200 bg-opacity-50 group-last:hidden"></div>
-											<div className="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500"></div>
+											<div className="bg-opacity-50 absolute left-1/2 h-1/2 w-[2px] -translate-x-1/2 bg-blue-200 group-first:hidden"></div>
+											<div className="bg-opacity-50 absolute top-1/2 left-1/2 h-[41px] w-[2px] -translate-x-1/2 bg-blue-200 group-last:hidden"></div>
+											<div className="absolute top-1/2 left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500"></div>
 										</div>
 										<div className="h-full flex-1"></div>
 									</div>
 									<div className="flex-1 pt-1">
 										<div className="text-sm text-gray-700 dark:text-gray-200">
-											<Link to={routesConfig.user.replace(':name', item.author)} className="font-semibold capitalize text-blue-500">
+											<Link to={routesConfig.user.replace(':name', item.author)} className="font-semibold text-blue-500 capitalize">
 												{item.author}
 											</Link>
 											{` ${t('solved-msg')} `}
