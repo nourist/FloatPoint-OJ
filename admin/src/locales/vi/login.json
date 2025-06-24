@@ -1,0 +1,10 @@
+{
+	"welcome": "Chào mừng bạn đăng nhập",
+	"email": "Email",
+	"password": "Mật khẩu",
+	"email-placeholder": "Nhập email của bạn",
+	"password-placeholder": "Nhập mật khẩu của bạn",
+	"login": "Đăng nhập",
+	"remember-me": "Ghi nhớ tôi",
+	"forgot-password": "Quên mật khẩu"
+}

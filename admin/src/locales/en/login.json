@@ -1,0 +1,10 @@
+{
+	"welcome": "Welcome to login",
+	"email": "email",
+	"password": "password",
+	"email-placeholder": "Enter your email",
+	"password-placeholder": "Enter your password",
+	"login": "login",
+	"remember-me": "remember me",
+	"forgot-password": "forgot password"
+}

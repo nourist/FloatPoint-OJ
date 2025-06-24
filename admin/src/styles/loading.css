@@ -1,0 +1,23 @@
+@keyframes loading {
+	0%,
+	100% {
+		background-color: var(--color-secondary);
+		height: 16px;
+	}
+	20% {
+		height: 80px;
+	}
+	40% {
+		height: 16px;
+	}
+	50% {
+		height: 16px;
+		background-color: var(--color-primary);
+	}
+	70% {
+		height: 80px;
+	}
+	90% {
+		height: 16px;
+	}
+}
