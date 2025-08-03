@@ -18,6 +18,6 @@ export class Subtask {
 	@Column({ type: 'varchar', length: 255, unique: true })
 	slug: string;
 
-	@OneToMany(() => TestCase, (testCase) => testCase.subtask, { onDelete: 'SET NULL' })
+	@OneToMany(() => TestCase, (testCase) => testCase.subtask)
 	testCases: TestCase[];
 }

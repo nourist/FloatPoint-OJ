@@ -70,13 +70,13 @@ export class Problem {
 	@JoinColumn()
 	creator: User;
 
-	@OneToMany(() => Subtask, (subtask) => subtask.problem, { onDelete: 'SET NULL' })
+	@OneToMany(() => Subtask, (subtask) => subtask.problem)
 	subtasks: Subtask[];
 
 	@OneToMany(() => Submission, (submission) => submission.problem)
 	submissions: Submission[];
 
-	@ManyToMany(() => Contest, (contest) => contest.problems, { onDelete: 'SET NULL' })
+	@ManyToMany(() => Contest, (contest) => contest.problems)
 	contests: Contest[];
 
 	@ManyToMany(() => ProblemTag, (problemTag) => problemTag.problems)
