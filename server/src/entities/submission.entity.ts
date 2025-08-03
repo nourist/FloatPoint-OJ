@@ -50,11 +50,11 @@ export class Submission {
 
 	@ManyToOne(() => Problem, (problem) => problem.submissions, { onDelete: 'SET NULL', nullable: true })
 	@JoinColumn()
-	problem: Problem;
+	problem: Problem | null;
 
 	@ManyToOne(() => Contest, (contest) => contest.submissions, { nullable: true, onDelete: 'SET NULL' })
 	@JoinColumn()
-	contest: Contest;
+	contest: Contest | null;
 
 	@Column({ type: 'text' })
 	sourceCode: string;

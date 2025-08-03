@@ -1,4 +1,5 @@
 import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
@@ -17,6 +18,34 @@ export class User {
 
 	@Column({ type: 'varchar', length: 255 })
 	fullname: string;
+
+	@Column({ type: 'varchar', length: 255, unique: true })
+	username: string;
+
+	@Column({ type: 'varchar', length: 255, unique: true })
+	email: string;
+
+	@Exclude()
+	@Column({ type: 'varchar', length: 255 })
+	password: string;
+
+	@Column({ default: false })
+	isVerified: boolean;
+
+	@Exclude()
+	@Column({ nullable: true, type: 'uuid' })
+	verificationToken: string | null;
+
+	@Exclude()
+	@Column({ nullable: true, type: 'uuid' })
+	resetPasswordToken: string | null;
+
+	@Exclude()
+	@Column({ nullable: true, type: 'timestamptz' })
+	resetPasswordExpiresAt: Date | null;
+
+	@Column({ type: 'varchar', length: 255, nullable: true })
+	avatarUrl: string | null;
 
 	@Column({
 		type: 'enum',

@@ -50,11 +50,11 @@ export class Problem {
 	@Column({ type: 'enum', enum: IOMode, default: IOMode.STANDARD })
 	ioMode: IOMode;
 
-	@Column({ nullable: true })
-	inputFile: string;
+	@Column({ nullable: true, type: 'varchar', length: 255 })
+	inputFile: string | null;
 
-	@Column({ nullable: true })
-	outputFile: string;
+	@Column({ nullable: true, type: 'varchar', length: 255 })
+	outputFile: string | null;
 
 	@Column({
 		type: 'enum',
