@@ -4,4 +4,6 @@ techstacks:
 - server: nestjs
 - db: postgresql
 - test case storage: minio
-- sanbox: nsjail
+- sanbox: isolate
+- judger: rust
+- job queue: rabbitmq
