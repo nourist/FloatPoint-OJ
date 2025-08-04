@@ -5,6 +5,9 @@ import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
 import { Contest } from './contest.entity';
 import { ProblemEditorial } from './problem-editorial.entity';
+import { Blog } from './blog.entity';
+import { BlogComment } from './blog-comment.entity';
+import { Notification } from './notification.entity';
 
 export enum UserRole {
 	ADMIN = 'admin',
@@ -47,6 +50,22 @@ export class User {
 	@Column({ type: 'varchar', length: 255, nullable: true })
 	avatarUrl: string | null;
 
+	@Column({ type: 'text', default: '' })
+	bio: string;
+
+	@Column({
+		type: 'jsonb',
+		default: () =>
+			`'${JSON.stringify({
+				new_blog: true,
+				new_problem: true,
+				new_contest: true,
+				update_rating: true,
+				system: true,
+			})}'`,
+	})
+	notificationSettings: Record<string, boolean>;
+
 	@Column({
 		type: 'enum',
 		enum: UserRole,
@@ -54,27 +73,36 @@ export class User {
 	})
 	role: UserRole;
 
-	@Column({ default: 0 })
-	rating: number;
+	@Column('int', { array: true, default: () => "'{}'" })
+	rating: number[];
+
+	@OneToMany(() => Problem, (problem) => problem.creator)
+	problems: Problem[];
+
+	@OneToMany(() => Submission, (submission) => submission.author)
+	submissions: Submission[];
+
+	@OneToMany(() => Contest, (contest) => contest.creator)
+	contests: Contest[];
+
+	@OneToMany(() => ProblemEditorial, (problemEditorial) => problemEditorial.creator)
+	editorials: ProblemEditorial[];
+
+	@ManyToMany(() => Contest, (contest) => contest.participants)
+	joiningContests: Contest[];
+
+	@OneToMany(() => Blog, (blog) => blog.author)
+	blogs: Blog[];
+
+	@OneToMany(() => BlogComment, (blogComment) => blogComment.user)
+	comments: BlogComment[];
+
+	@OneToMany(() => Notification, (notification) => notification.user)
+	notifications: Notification[];
 
 	@CreateDateColumn({ type: 'timestamptz' })
 	createdAt: Date;
 
 	@UpdateDateColumn({ type: 'timestamptz' })
 	updatedAt: Date;
-
-	@OneToMany(() => Problem, (problem) => problem.creator, { onDelete: 'SET NULL' })
-	problems: Problem[];
-
-	@OneToMany(() => Submission, (submission) => submission.author, { onDelete: 'SET NULL' })
-	submissions: Submission[];
-
-	@OneToMany(() => Contest, (contest) => contest.creator, { onDelete: 'SET NULL' })
-	contests: Contest[];
-
-	@OneToMany(() => ProblemEditorial, (problemEditorial) => problemEditorial.creator, { onDelete: 'SET NULL' })
-	editorials: ProblemEditorial[];
-
-	@ManyToMany(() => Contest, (contest) => contest.participants, { onDelete: 'SET NULL' })
-	joiningContests: Contest[];
 }
