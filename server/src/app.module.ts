@@ -5,7 +5,7 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { MailerModule } from '@nestjs-modules/mailer';
-import path from 'path';
+import * as path from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 import { AppController } from './app.controller';
@@ -13,6 +13,7 @@ import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './modules/mail/mail.module';
+import { GoogleModule } from './modules/google/google.module';
 
 @Module({
 	imports: [
@@ -21,6 +22,10 @@ import { MailModule } from './modules/mail/mail.module';
 			validationSchema: Joi.object({
 				PORT: Joi.number().default(4000),
 				CLIENT_URL: Joi.string().default('http://localhost:3000'), //for cors
+
+				JWT_SECRET: Joi.string().default('secretKey'),
+				JWT_EXPIRES_IN: Joi.string().default('7d'),
+				SALT_ROUNDS: Joi.number().default(10),
 
 				DB_HOST: Joi.string().default('localhost'),
 				DB_PORT: Joi.number().default(5432),
@@ -83,6 +88,7 @@ import { MailModule } from './modules/mail/mail.module';
 		UserModule,
 		AuthModule,
 		MailModule,
+		GoogleModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
