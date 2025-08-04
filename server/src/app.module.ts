@@ -14,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './modules/mail/mail.module';
 import { GoogleModule } from './modules/google/google.module';
+import { AccessControlModule } from './modules/access-control/access-control.module';
 
 @Module({
 	imports: [
@@ -89,6 +90,7 @@ import { GoogleModule } from './modules/google/google.module';
 		AuthModule,
 		MailModule,
 		GoogleModule,
+		AccessControlModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

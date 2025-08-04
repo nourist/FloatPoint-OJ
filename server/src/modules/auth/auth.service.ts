@@ -160,7 +160,7 @@ export class AuthService {
 			throw new UnauthorizedException('User is not verified');
 		}
 
-		const payload: JwtPayload = { email: user.email, sub: user.id };
+		const payload: JwtPayload = { email: user.email, sub: user.id, role: user.role };
 		this.logger.log(`User ${user.id} signed in with email ${user.email}`);
 		return {
 			access_token: this.jwtService.sign(payload),
