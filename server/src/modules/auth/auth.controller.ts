@@ -11,7 +11,7 @@ import { GetUser } from 'src/decorators/get-user.decorator';
 import { GoogleAuthGuard } from 'src/guards/google-auth.guard';
 import { User } from 'src/entities/user.entity';
 import { JwtPayload } from 'src/types/jwt-payload.type';
-import { setAuthCookie, clearAuthCookie } from 'src/utils/auth-cookie.utils';
+import { setAuthCookie, clearAuthCookie } from 'src/modules/auth/auth-cookie.utils';
 
 @Controller('auth')
 export class AuthController {

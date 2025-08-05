@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/http-exception.filter';
+import { SerializeInterceptor } from './interceptors/serialize.interceptor';
 
 async function bootstrap() {
 	initializeTransactionalContext();
@@ -50,6 +51,8 @@ async function bootstrap() {
 	);
 
 	app.useGlobalFilters(new AllExceptionsFilter());
+
+	app.useGlobalInterceptors(new SerializeInterceptor());
 
 	await app.listen(configService.get<number>('PORT')!);
 }

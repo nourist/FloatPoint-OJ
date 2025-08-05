@@ -15,12 +15,16 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './modules/mail/mail.module';
 import { GoogleModule } from './modules/google/google.module';
 import { AccessControlModule } from './modules/access-control/access-control.module';
+import { ProblemModule } from './modules/problem/problem.module';
+import { MinioModule } from './modules/minio/minio.module';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
 			validationSchema: Joi.object({
+				NODE_ENV: Joi.valid('development', 'production', 'test').default('development'),
+
 				PORT: Joi.number().default(4000),
 				CLIENT_URL: Joi.string().default('http://localhost:3000'), //for cors
 
@@ -38,6 +42,11 @@ import { AccessControlModule } from './modules/access-control/access-control.mod
 				MAIL_PORT: Joi.number().default(587),
 				MAIL_USER: Joi.string().required(),
 				MAIL_PASS: Joi.string().required(),
+
+				MINIO_ENDPOINT: Joi.string().default('localhost'),
+				MINIO_PORT: Joi.number().default(9000),
+				MINIO_ACCESS_KEY: Joi.string().required(),
+				MINIO_SECRET_KEY: Joi.string().required(),
 			}),
 		}),
 		TypeOrmModule.forRootAsync({
@@ -91,6 +100,8 @@ import { AccessControlModule } from './modules/access-control/access-control.mod
 		MailModule,
 		GoogleModule,
 		AccessControlModule,
+		ProblemModule,
+		MinioModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
