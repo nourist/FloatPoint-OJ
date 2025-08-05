@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { GetAllSubmissionsDto } from './submission.dto';
-import { Problem } from 'src/entities/problem.entity';
 import { Submission } from 'src/entities/submission.entity';
 import { User, UserRole } from 'src/entities/user.entity';
 
@@ -12,8 +11,6 @@ export class SubmissionService {
 	constructor(
 		@InjectRepository(Submission)
 		private readonly submissionRepository: Repository<Submission>,
-		@InjectRepository(Problem)
-		private readonly problemRepository: Repository<Problem>,
 	) {}
 
 	async findOne(id: string) {
