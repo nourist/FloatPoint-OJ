@@ -1,17 +1,17 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UnauthorizedException } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
-import * as bcrypt from 'bcrypt';
 import { Logger } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
-import { UserService } from 'src/modules/user/user.service';
-import { MailService } from 'src/modules/mail/mail.service';
 import { User } from 'src/entities/user.entity';
+import { MailService } from 'src/modules/mail/mail.service';
+import { UserService } from 'src/modules/user/user.service';
 import { JwtPayload } from 'src/types/jwt-payload.type';
 
 @Injectable()

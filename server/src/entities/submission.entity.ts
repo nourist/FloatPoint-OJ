@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { User } from './user.entity';
-import { Problem } from './problem.entity';
 import { Contest } from './contest.entity';
+import { Problem } from './problem.entity';
 import { SubmissionResult } from './submission-result.entity';
+import { User } from './user.entity';
 
 export enum SubmissionStatus {
 	PENDING = 'PENDING',

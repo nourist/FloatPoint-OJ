@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException, Logger, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as path from 'path';
 import slug from 'slug';
 import { Repository } from 'typeorm';
-import * as path from 'path';
 
-import { Problem } from 'src/entities/problem.entity';
 import {
 	CreateProblemDto,
 	CreateProblemEditorialDto,
@@ -15,11 +14,12 @@ import {
 	UpdateSubtaskDto,
 	UpdateTestCaseDto,
 } from './problem.dto';
-import { User } from 'src/entities/user.entity';
-import { ProblemTag } from 'src/entities/problem-tag.entity';
-import { TestCase } from 'src/entities/test-case.entity';
-import { Subtask } from 'src/entities/subtask.entity';
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
+import { ProblemTag } from 'src/entities/problem-tag.entity';
+import { Problem } from 'src/entities/problem.entity';
+import { Subtask } from 'src/entities/subtask.entity';
+import { TestCase } from 'src/entities/test-case.entity';
+import { User } from 'src/entities/user.entity';
 import { MinioService } from 'src/modules/minio/minio.service';
 import { NotificationService } from 'src/modules/notification/notification.service';
 

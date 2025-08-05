@@ -1,26 +1,26 @@
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as Joi from 'joi';
+import * as path from 'path';
 import { DataSource } from 'typeorm';
 import { addTransactionalDataSource } from 'typeorm-transactional';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from 'joi';
-import { MailerModule } from '@nestjs-modules/mailer';
-import * as path from 'path';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { MailModule } from './modules/mail/mail.module';
-import { GoogleModule } from './modules/google/google.module';
 import { AccessControlModule } from './modules/access-control/access-control.module';
-import { ProblemModule } from './modules/problem/problem.module';
-import { MinioModule } from './modules/minio/minio.module';
-import { SubmissionModule } from './modules/submission/submission.module';
-import { ContestModule } from './modules/contest/contest.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { BlogModule } from './modules/blog/blog.module';
+import { ContestModule } from './modules/contest/contest.module';
+import { GoogleModule } from './modules/google/google.module';
+import { MailModule } from './modules/mail/mail.module';
+import { MinioModule } from './modules/minio/minio.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { ProblemModule } from './modules/problem/problem.module';
+import { SubmissionModule } from './modules/submission/submission.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
 	imports: [

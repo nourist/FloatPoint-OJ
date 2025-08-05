@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany, ManyToMany, OneToOne } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { User } from './user.entity';
-import { Subtask } from './subtask.entity';
-import { Submission } from './submission.entity';
 import { Contest } from './contest.entity';
-import { ProblemTag } from './problem-tag.entity';
 import { ProblemEditorial } from './problem-editorial.entity';
+import { ProblemTag } from './problem-tag.entity';
+import { Submission } from './submission.entity';
+import { Subtask } from './subtask.entity';
+import { User } from './user.entity';
 
 export enum ProblemScoringMethod {
 	STANDARD = 'standard', // Standard scoring per test case

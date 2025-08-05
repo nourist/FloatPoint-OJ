@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 
-import { AccessControlService } from './access-control.service';
 import { AccessControlController } from './access-control.controller';
+import { AccessControlService } from './access-control.service';
 import { RoleGuard } from 'src/guards/role.guard';
 
 @Global()

@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsString, IsInt, IsArray, IsEnum, ValidateIf } from 'class-validator';
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
 
 import { DefaultEmptyArray } from 'src/decorators/default-empty-array.decorator';
-import { UndefinedToNull } from 'src/decorators/undefine-to-null.decorator';
-import { ProblemScoringMethod, IOMode, Difficulty } from 'src/entities/problem.entity';
 import { Trim } from 'src/decorators/trim.decorator';
+import { UndefinedToNull } from 'src/decorators/undefine-to-null.decorator';
+import { Difficulty, IOMode, ProblemScoringMethod } from 'src/entities/problem.entity';
 
 export class CreateProblemDto {
 	@Trim()

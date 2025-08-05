@@ -1,13 +1,13 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
+import { BlogComment } from './blog-comment.entity';
+import { Blog } from './blog.entity';
+import { Contest } from './contest.entity';
+import { Notification } from './notification.entity';
+import { ProblemEditorial } from './problem-editorial.entity';
 import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
-import { Contest } from './contest.entity';
-import { ProblemEditorial } from './problem-editorial.entity';
-import { Blog } from './blog.entity';
-import { BlogComment } from './blog-comment.entity';
-import { Notification } from './notification.entity';
 
 export enum UserRole {
 	ADMIN = 'admin',

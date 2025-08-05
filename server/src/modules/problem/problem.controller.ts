@@ -1,22 +1,22 @@
-import { Controller, Post, Body, UseGuards, Get, Param, Patch, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { RoleGuard } from 'src/guards/role.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { UserRole } from 'src/entities/user.entity';
-import { ProblemService } from './problem.service';
 import {
 	CreateProblemDto,
-	UpdateProblemDto,
 	CreateProblemEditorialDto,
-	UpdateProblemEditorialDto,
 	CreateSubtaskDto,
-	UpdateSubtaskDto,
 	CreateTestCaseDto,
+	UpdateProblemDto,
+	UpdateProblemEditorialDto,
+	UpdateSubtaskDto,
 	UpdateTestCaseDto,
 } from './problem.dto';
+import { ProblemService } from './problem.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
+import { Roles } from 'src/decorators/roles.decorator';
+import { UserRole } from 'src/entities/user.entity';
 import { User } from 'src/entities/user.entity';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('problem')
 export class ProblemController {

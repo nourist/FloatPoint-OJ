@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Notification } from 'src/entities/notification.entity';
-import { User } from 'src/entities/user.entity';
-import { Problem } from 'src/entities/problem.entity';
 import { NotificationType } from 'src/entities/notification.entity';
+import { Problem } from 'src/entities/problem.entity';
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class NotificationService {

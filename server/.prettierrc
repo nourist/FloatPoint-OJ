@@ -16,5 +16,10 @@
 	"trailingComma": "all",
 	"useTabs": true,
 	"vueIndentScriptAndStyle": false,
-	"endOfLine": "crlf"
+	"endOfLine": "crlf",
+	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"importOrder": ["^(?!src/|\\.).*", "^(src/|\\.)"],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true,
+	"importOrderParserPlugins": ["typescript", "decorators-legacy"]
 }

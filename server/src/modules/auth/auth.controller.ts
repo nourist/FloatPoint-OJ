@@ -1,23 +1,19 @@
 import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 
+import { ForgotPasswordDto, ResendVerificationEmailDto, ResetPasswordDto, SigninDto, SignupDto, VerifyEmailDto } from './auth.dto';
 import { AuthService } from './auth.service';
-import { SigninDto, SignupDto, VerifyEmailDto, ResendVerificationEmailDto, ForgotPasswordDto, ResetPasswordDto } from './auth.dto';
-import { LocalAuthGuard } from 'src/guards/local-auth.guard';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { UserService } from '../user/user.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
-import { GoogleAuthGuard } from 'src/guards/google-auth.guard';
-import { JwtPayload } from 'src/types/jwt-payload.type';
-import { setAuthCookie, clearAuthCookie } from 'src/modules/auth/auth-cookie.utils';
 import { User } from 'src/entities/user.entity';
+import { GoogleAuthGuard } from 'src/guards/google-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { LocalAuthGuard } from 'src/guards/local-auth.guard';
+import { clearAuthCookie, setAuthCookie } from 'src/modules/auth/auth.utils';
+import { JwtPayload } from 'src/types/jwt-payload.type';
 
 @Controller('auth')
 export class AuthController {
-	constructor(
-		private readonly authService: AuthService,
-		private readonly userService: UserService,
-	) {}
+	constructor(private readonly authService: AuthService) {}
 
 	@Get()
 	@UseGuards(JwtAuthGuard)

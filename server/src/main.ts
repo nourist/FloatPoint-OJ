@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { initializeTransactionalContext } from 'typeorm-transactional';
 import { ValidationPipe } from '@nestjs/common';
-import { ValidationError } from 'class-validator';
 import { UnprocessableEntityException } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { ValidationError } from 'class-validator';
+import * as cookieParser from 'cookie-parser';
+import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/http-exception.filter';

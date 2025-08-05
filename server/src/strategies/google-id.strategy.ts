@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Strategy } from 'passport-strategy';
-import { Request } from 'express';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Request } from 'express';
 import * as passport from 'passport';
+import { Strategy } from 'passport-strategy';
+import { Repository } from 'typeorm';
 
-import { UserService } from 'src/modules/user/user.service';
 import { User } from 'src/entities/user.entity';
 import { GoogleService } from 'src/modules/google/google.service';
+import { UserService } from 'src/modules/user/user.service';
 
 @Injectable()
 export class GoogleIdStrategy extends Strategy {
