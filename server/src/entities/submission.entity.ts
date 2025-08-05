@@ -48,9 +48,9 @@ export class Submission {
 	@JoinColumn()
 	author: User;
 
-	@ManyToOne(() => Problem, (problem) => problem.submissions, { onDelete: 'SET NULL', nullable: true })
+	@ManyToOne(() => Problem, (problem) => problem.submissions, { onDelete: 'CASCADE' })
 	@JoinColumn()
-	problem: Problem | null;
+	problem: Problem;
 
 	@ManyToOne(() => Contest, (contest) => contest.submissions, { nullable: true, onDelete: 'SET NULL' })
 	@JoinColumn()

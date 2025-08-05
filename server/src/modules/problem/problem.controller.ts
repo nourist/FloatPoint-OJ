@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 
 import {
 	CreateProblemDto,
 	CreateProblemEditorialDto,
 	CreateSubtaskDto,
 	CreateTestCaseDto,
+	GetAllProblemsDto,
 	UpdateProblemDto,
 	UpdateProblemEditorialDto,
 	UpdateSubtaskDto,
@@ -23,10 +24,10 @@ export class ProblemController {
 	constructor(private readonly problemService: ProblemService) {}
 
 	@Get()
-	async findAll() {
+	async findAll(@Query() query: GetAllProblemsDto) {
 		return {
 			message: 'success',
-			problems: await this.problemService.findAll(),
+			...(await this.problemService.findAll(query)),
 		};
 	}
 

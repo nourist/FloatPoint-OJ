@@ -9,6 +9,7 @@ import {
 	CreateProblemEditorialDto,
 	CreateSubtaskDto,
 	CreateTestCaseDto,
+	GetAllProblemsDto,
 	UpdateProblemDto,
 	UpdateProblemEditorialDto,
 	UpdateSubtaskDto,
@@ -17,6 +18,7 @@ import {
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
 import { ProblemTag } from 'src/entities/problem-tag.entity';
 import { Problem } from 'src/entities/problem.entity';
+import { Submission } from 'src/entities/submission.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { TestCase } from 'src/entities/test-case.entity';
 import { User } from 'src/entities/user.entity';
@@ -79,9 +81,72 @@ export class ProblemService {
 		);
 	}
 
-	async findAll() {
-		//filter and sort, pagination...
-		return this.problemRepository.find({ relations: ['tags', 'editorial'] });
+	async findAll(query: GetAllProblemsDto) {
+		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial } = query;
+
+		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
+
+		if (minPoint) {
+			qb.andWhere('problem.point >= :minPoint', { minPoint });
+		}
+
+		if (maxPoint) {
+			qb.andWhere('problem.point <= :maxPoint', { maxPoint });
+		}
+
+		if (difficulty) {
+			qb.andWhere('problem.difficulty = :difficulty', { difficulty });
+		}
+
+		if (tags && tags.length > 0) {
+			qb.andWhere('tags.name IN (:...tags)', { tags });
+		}
+
+		if (q) {
+			qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
+		}
+
+		if (hasEditorial) {
+			qb.andWhere('editorial.id IS NOT NULL');
+		}
+
+		if (sortBy) {
+			if (sortBy === 'acCount') {
+				qb.addSelect((subQuery) => {
+					return subQuery
+						.select('COUNT(submission.id)')
+						.from(Submission, 'submission')
+						.where('submission.problemId = problem.id')
+						.andWhere('submission.status = :status', { status: 'AC' });
+				}, 'acCount');
+				qb.orderBy('acCount', order || 'DESC');
+			} else if (sortBy === 'acRate') {
+				qb.addSelect((subQuery) => {
+					return subQuery
+						.select('CASE WHEN COUNT(total_submissions.id) > 0 THEN COUNT(ac_submissions.id) / COUNT(total_submissions.id) ELSE 0 END')
+						.from(Submission, 'total_submissions')
+						.leftJoin(Submission, 'ac_submissions', 'ac_submissions.problemId = total_submissions.problemId AND ac_submissions.status = :status', {
+							status: 'AC',
+						})
+						.where('total_submissions.problemId = problem.id');
+				}, 'acRate');
+				qb.orderBy('acRate', order || 'DESC');
+			} else {
+				qb.orderBy(`problem.${sortBy}`, order || 'ASC');
+			}
+		}
+
+		const [problems, total] = await qb
+			.skip((page - 1) * limit)
+			.take(limit)
+			.getManyAndCount();
+
+		return {
+			problems,
+			total,
+			page,
+			limit,
+		};
 	}
 
 	async create(data: CreateProblemDto, creator: User) {

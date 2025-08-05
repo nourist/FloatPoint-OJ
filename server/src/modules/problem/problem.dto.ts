@@ -1,6 +1,6 @@
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
 
-import { DefaultEmptyArray } from 'src/decorators/default-empty-array.decorator';
+import { Default } from 'src/decorators/default.decorator';
 import { Trim } from 'src/decorators/trim.decorator';
 import { UndefinedToNull } from 'src/decorators/undefine-to-null.decorator';
 import { Difficulty, IOMode, ProblemScoringMethod } from 'src/entities/problem.entity';
@@ -55,7 +55,7 @@ export class CreateProblemDto {
 	@IsNotEmpty()
 	@IsArray()
 	@IsString({ each: true })
-	@DefaultEmptyArray()
+	@Default([])
 	tags: string[];
 }
 
@@ -94,8 +94,44 @@ export class UpdateProblemDto {
 
 	@IsArray()
 	@IsString({ each: true })
-	@DefaultEmptyArray()
+	@Default([])
 	tags?: string[];
+}
+
+export class GetAllProblemsDto {
+	@IsInt()
+	minPoint?: number;
+
+	@IsInt()
+	maxPoint?: number;
+
+	@IsEnum(Difficulty)
+	difficulty?: Difficulty;
+
+	@IsArray()
+	@IsString({ each: true })
+	@Default([])
+	tags?: string[];
+
+	@IsString()
+	q?: string;
+
+	@IsInt()
+	@Default(1)
+	page: number;
+
+	@IsInt()
+	@Default(20)
+	limit: number;
+
+	@IsString()
+	sortBy?: 'title' | 'point' | 'difficulty' | 'acCount' | 'acRate';
+
+	@IsString()
+	order?: 'ASC' | 'DESC';
+
+	@IsBoolean()
+	hasEditorial?: boolean;
 }
 
 export class CreateProblemEditorialDto {
