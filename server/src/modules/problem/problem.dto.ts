@@ -3,12 +3,15 @@ import { IsNotEmpty, IsString, IsInt, IsArray, IsEnum, ValidateIf } from 'class-
 import { DefaultEmptyArray } from 'src/decorators/default-empty-array.decorator';
 import { UndefinedToNull } from 'src/decorators/undefine-to-null.decorator';
 import { ProblemScoringMethod, IOMode, Difficulty } from 'src/entities/problem.entity';
+import { Trim } from 'src/decorators/trim.decorator';
 
 export class CreateProblemDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	title: string;
 
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	statement: string;
@@ -57,9 +60,11 @@ export class CreateProblemDto {
 }
 
 export class UpdateProblemDto {
+	@Trim()
 	@IsString()
 	title?: string;
 
+	@Trim()
 	@IsString()
 	statement?: string;
 
@@ -94,40 +99,48 @@ export class UpdateProblemDto {
 }
 
 export class CreateProblemEditorialDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	content: string;
 }
 
 export class UpdateProblemEditorialDto {
+	@Trim()
 	@IsString()
 	content?: string;
 }
 
 export class CreateSubtaskDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	name: string;
 }
 
 export class UpdateSubtaskDto {
+	@Trim()
 	@IsString()
 	name?: string;
 }
 
 export class CreateTestCaseDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	name: string;
 
+	@IsNotEmpty()
 	@IsString()
 	input: string;
 
+	@IsNotEmpty()
 	@IsString()
 	output: string;
 }
 
 export class UpdateTestCaseDto {
+	@Trim()
 	@IsString()
 	name?: string;
 

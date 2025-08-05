@@ -17,6 +17,10 @@ import { GoogleModule } from './modules/google/google.module';
 import { AccessControlModule } from './modules/access-control/access-control.module';
 import { ProblemModule } from './modules/problem/problem.module';
 import { MinioModule } from './modules/minio/minio.module';
+import { SubmissionModule } from './modules/submission/submission.module';
+import { ContestModule } from './modules/contest/contest.module';
+import { BlogModule } from './modules/blog/blog.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
 	imports: [
@@ -102,6 +106,10 @@ import { MinioModule } from './modules/minio/minio.module';
 		AccessControlModule,
 		ProblemModule,
 		MinioModule,
+		SubmissionModule,
+		ContestModule,
+		BlogModule,
+		NotificationModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

@@ -1,6 +1,9 @@
 import { IsEmail, IsNotEmpty, IsString, IsStrongPassword, MaxLength } from 'class-validator';
 
+import { Trim } from 'src/decorators/trim.decorator';
+
 export class SignupDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	@IsEmail({}, { message: 'email is not valid' })
@@ -17,6 +20,7 @@ export class SignupDto {
 	})
 	password: string;
 
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	@MaxLength(255)
@@ -24,6 +28,7 @@ export class SignupDto {
 }
 
 export class SigninDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	@IsEmail({}, { message: 'email is not valid' })
@@ -35,6 +40,7 @@ export class SigninDto {
 }
 
 export class ResendVerificationEmailDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	@IsEmail({}, { message: 'email is not valid' })
@@ -48,6 +54,7 @@ export class VerifyEmailDto {
 }
 
 export class ForgotPasswordDto {
+	@Trim()
 	@IsNotEmpty()
 	@IsString()
 	@IsEmail({}, { message: 'email is not valid' })

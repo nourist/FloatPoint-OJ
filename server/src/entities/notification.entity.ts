@@ -5,7 +5,7 @@ import { Blog } from './blog.entity';
 import { Contest } from './contest.entity';
 import { Problem } from './problem.entity';
 
-enum NotificationType {
+export enum NotificationType {
 	NEW_BLOG = 'new_blog',
 	NEW_PROBLEM = 'new_problem',
 	NEW_CONTEST = 'new_contest',
@@ -18,25 +18,25 @@ export class Notification {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
-	@Column({ type: 'text' })
+	@Column({ type: 'text', nullable: true })
 	content: string;
 
 	@Column({ type: 'enum', enum: NotificationType })
 	type: NotificationType;
 
-	@Column({ type: 'boolean' })
+	@Column({ type: 'boolean', default: false })
 	isRead: boolean;
 
 	@ManyToOne(() => User, (user) => user.notifications)
 	user: User;
 
-	@ManyToOne(() => Blog, { onDelete: 'CASCADE' })
+	@ManyToOne(() => Blog, { onDelete: 'CASCADE', nullable: true })
 	blog: Blog;
 
-	@ManyToOne(() => Problem, { onDelete: 'CASCADE' })
+	@ManyToOne(() => Problem, { onDelete: 'CASCADE', nullable: true })
 	problem: Problem;
 
-	@ManyToOne(() => Contest, { onDelete: 'CASCADE' })
+	@ManyToOne(() => Contest, { onDelete: 'CASCADE', nullable: true })
 	contest: Contest;
 
 	@CreateDateColumn({ type: 'timestamptz' })

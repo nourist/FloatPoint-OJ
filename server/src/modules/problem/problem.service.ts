@@ -21,6 +21,7 @@ import { TestCase } from 'src/entities/test-case.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
 import { MinioService } from 'src/modules/minio/minio.service';
+import { NotificationService } from 'src/modules/notification/notification.service';
 
 @Injectable()
 export class ProblemService {
@@ -38,6 +39,7 @@ export class ProblemService {
 		@InjectRepository(ProblemEditorial)
 		private readonly problemEditorialRepository: Repository<ProblemEditorial>,
 		private readonly minioService: MinioService,
+		private readonly notificationService: NotificationService,
 	) {}
 
 	async getProblemById(id: string) {
@@ -98,6 +100,8 @@ export class ProblemService {
 		problem.tags = tagEntities;
 
 		const savedProblem = await this.problemRepository.save(problem);
+
+		await this.notificationService.createNewProblemNotification(savedProblem);
 
 		return savedProblem;
 	}
@@ -225,10 +229,15 @@ export class ProblemService {
 
 	async removeSubtask(problemId: string, subtaskSlug: string) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
-		await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
 		await this.subtaskRepository.remove(subtask);
+		// Remove files after successful database deletion
+		try {
+			await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
+		} catch (error) {
+			this.logger.error(`Failed to remove subtask files from Minio: ${error}`);
+			// Don't throw - database removal was successful
+		}
 	}
-
 	async isTestCaseSlugExists(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 		const testCase = await this.testCaseRepository.findOne({ where: { slug: testCaseSlug, subtask } });
@@ -306,8 +315,14 @@ export class ProblemService {
 
 	async removeTestCase(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
 		await this.testCaseRepository.remove(testCase);
+		// Remove files after successful database deletion
+		try {
+			await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
+			await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
+		} catch (error) {
+			this.logger.error(`Failed to remove test case files from Minio: ${error}`);
+			// Don't throw - database removal was successful
+		}
 	}
 }

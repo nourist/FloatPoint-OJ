@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { instanceToPlain } from 'class-transformer';
 
 import { AuthService } from './auth.service';
 import { SigninDto, SignupDto, VerifyEmailDto, ResendVerificationEmailDto, ForgotPasswordDto, ResetPasswordDto } from './auth.dto';
@@ -9,9 +8,9 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserService } from '../user/user.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { GoogleAuthGuard } from 'src/guards/google-auth.guard';
-import { User } from 'src/entities/user.entity';
 import { JwtPayload } from 'src/types/jwt-payload.type';
 import { setAuthCookie, clearAuthCookie } from 'src/modules/auth/auth-cookie.utils';
+import { User } from 'src/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -22,10 +21,10 @@ export class AuthController {
 
 	@Get()
 	@UseGuards(JwtAuthGuard)
-	async getProfile(@GetUser() user: JwtPayload) {
+	getProfile(@GetUser() user: User) {
 		return {
 			message: 'Get user profile successfully',
-			user: instanceToPlain(await this.userService.getUserById(user.sub)),
+			user,
 		};
 	}
 
@@ -67,17 +66,17 @@ export class AuthController {
 
 		setAuthCookie(res, access_token);
 
-		return { message: 'Signin successful', user: instanceToPlain(user) };
+		return { message: 'Signin successful', user };
 	}
 
 	@Post('google-signin')
 	@UseGuards(GoogleAuthGuard)
-	async googleSignin(@GetUser() userInfo: User, @Res({ passthrough: true }) res: Response) {
+	async googleSignin(@GetUser() userInfo: JwtPayload, @Res({ passthrough: true }) res: Response) {
 		const { access_token, user } = await this.authService.signin(userInfo);
 
 		setAuthCookie(res, access_token);
 
-		return { message: 'Signin successful', user: instanceToPlain(user) };
+		return { message: 'Signin successful', user };
 	}
 
 	@Post('signout')

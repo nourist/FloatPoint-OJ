@@ -10,11 +10,12 @@ import { UserModule } from '../user/user.module';
 import { ProblemTag } from 'src/entities/problem-tag.entity';
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
 import { MinioModule } from '../minio/minio.module';
+import { NotificationModule } from '../notification/notification.module';
 
 @Module({
 	controllers: [ProblemController],
 	providers: [ProblemService],
-	imports: [TypeOrmModule.forFeature([Problem, TestCase, Subtask, ProblemTag, ProblemEditorial]), UserModule, MinioModule],
+	imports: [TypeOrmModule.forFeature([Problem, TestCase, Subtask, ProblemTag, ProblemEditorial]), UserModule, MinioModule, NotificationModule],
 	exports: [ProblemService, TypeOrmModule],
 })
 export class ProblemModule {}
