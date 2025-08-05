@@ -2,6 +2,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import * as path from 'path';
@@ -99,6 +100,7 @@ import { UserModule } from './modules/user/user.module';
 				},
 			}),
 		}),
+		ScheduleModule.forRoot(),
 		UserModule,
 		AuthModule,
 		MailModule,

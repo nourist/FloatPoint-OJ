@@ -15,7 +15,7 @@ export class SubmissionController {
 	async findAll(@Query() query: GetAllSubmissionsDto, @GetUser() user: User) {
 		return {
 			message: 'success',
-			data: await this.submissionService.findAll(query, user),
+			...(await this.submissionService.findAll(query, user)),
 		};
 	}
 
