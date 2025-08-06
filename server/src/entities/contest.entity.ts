@@ -49,7 +49,7 @@ export class Contest {
 	@OneToMany(() => Submission, (submission) => submission.contest)
 	submissions: Submission[];
 
-	@ManyToMany(() => User, (user) => user.joiningContests)
+	@ManyToMany(() => User, (user) => user.joinedContests)
 	@JoinTable()
 	participants: User[];
 

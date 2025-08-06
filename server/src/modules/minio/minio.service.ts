@@ -49,9 +49,9 @@ export class MinioService {
 		});
 	}
 
-	async renameFile(bucketName: string, oldKey: string, newKey: string) {
-		await this.minioClient.copyObject(bucketName, newKey, `/${bucketName}/${oldKey}`);
-		await this.minioClient.removeObject(bucketName, oldKey);
+	async renameFile(bucketName: string, oldFilename: string, newFilename: string) {
+		await this.minioClient.copyObject(bucketName, newFilename, oldFilename);
+		await this.minioClient.removeObject(bucketName, oldFilename);
 	}
 
 	async saveFile(bucketName: string, filename: string, content: string) {

@@ -1,6 +1,6 @@
-import { Controller, ForbiddenException, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 
-import { GetAllSubmissionsDto } from './submission.dto';
+import { GetAllSubmissionsDto, SubmitCodeDto } from './submission.dto';
 import { SubmissionService } from './submission.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User, UserRole } from 'src/entities/user.entity';
@@ -31,6 +31,15 @@ export class SubmissionController {
 		return {
 			message: 'success',
 			submission,
+		};
+	}
+
+	@Post()
+	@UseGuards(JwtAuthGuard)
+	async submitCode(@Body() body: SubmitCodeDto, @GetUser() user: User) {
+		return {
+			message: 'success',
+			submission: await this.submissionService.submitCode(body, user),
 		};
 	}
 }

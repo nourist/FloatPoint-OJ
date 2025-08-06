@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
 import { BlogComment } from './blog-comment.entity';
 import { Blog } from './blog.entity';
@@ -89,7 +89,11 @@ export class User {
 	editorials: ProblemEditorial[];
 
 	@ManyToMany(() => Contest, (contest) => contest.participants)
-	joiningContests: Contest[];
+	joinedContests: Contest[];
+
+	@ManyToOne(() => Contest, { onDelete: 'SET NULL' })
+	@JoinColumn()
+	joiningContest: Contest | null;
 
 	@OneToMany(() => Blog, (blog) => blog.author)
 	blogs: Blog[];

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as path from 'path';
 import slug from 'slug';
 import { Repository } from 'typeorm';
+import { Transactional } from 'typeorm-transactional';
 
 import {
 	CreateProblemDto,
@@ -149,6 +150,7 @@ export class ProblemService {
 		};
 	}
 
+	@Transactional()
 	async create(data: CreateProblemDto, creator: User) {
 		const problemSlug = slug(data.title, { lower: true });
 
@@ -195,6 +197,12 @@ export class ProblemService {
 	async remove(id: string) {
 		const problem = await this.getProblemById(id);
 		await this.problemRepository.remove(problem);
+		try {
+			await this.minioService.removeDir('test-cases', id);
+		} catch (error) {
+			this.logger.error(`Failed to remove problem files from Minio: ${error}`);
+			// Don't throw - database removal was successful
+		}
 	}
 
 	async isEditorialExists(problemId: string) {
@@ -278,18 +286,25 @@ export class ProblemService {
 	async updateSubtask(problemId: string, subtaskSlug: string, data: UpdateSubtaskDto) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 
+		const oldSubtaskSlug = subtask.slug;
+
 		if (data.name) {
 			const newSubtaskSlug = slug(data.name, { lower: true });
 			if (await this.isSubtaskSlugExists(problemId, newSubtaskSlug)) {
 				this.logger.log(`Subtask ${data.name} for problem ${problemId} already exists`);
 				throw new BadRequestException(`Subtask ${data.name} for problem ${problemId} already exists`);
 			}
-			await this.minioService.renameDir('test-cases', path.join(problemId, subtask.slug), path.join(problemId, newSubtaskSlug));
 			subtask.slug = newSubtaskSlug;
 		}
 
 		Object.assign(subtask, data);
-		return this.subtaskRepository.save(subtask);
+		const savedSubtask = await this.subtaskRepository.save(subtask);
+
+		if (data.name) {
+			await this.minioService.renameDir('test-cases', path.join(problemId, oldSubtaskSlug), path.join(problemId, subtask.slug));
+		}
+
+		return savedSubtask;
 	}
 
 	async removeSubtask(problemId: string, subtaskSlug: string) {
@@ -346,22 +361,14 @@ export class ProblemService {
 	async updateTestCase(problemId: string, subtaskSlug: string, testCaseSlug: string, data: UpdateTestCaseDto) {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 
+		const oldTestCaseSlug = testCase.slug;
+
 		if (data.name) {
 			const newTestCaseSlug = slug(data.name, { lower: true });
 			if (await this.isTestCaseSlugExists(problemId, subtaskSlug, newTestCaseSlug)) {
 				this.logger.log(`Test case ${data.name} for subtask ${subtaskSlug} for problem ${problemId} already exists`);
 				throw new BadRequestException(`Test case ${data.name} for subtask ${subtaskSlug} for problem ${problemId} already exists`);
 			}
-			await this.minioService.renameFile(
-				'test-cases',
-				path.join(problemId, subtaskSlug, testCase.slug, 'input.txt'),
-				path.join(problemId, subtaskSlug, newTestCaseSlug, 'input.txt'),
-			);
-			await this.minioService.renameFile(
-				'test-cases',
-				path.join(problemId, subtaskSlug, testCase.slug, 'output.txt'),
-				path.join(problemId, subtaskSlug, newTestCaseSlug, 'output.txt'),
-			);
 			testCase.slug = newTestCaseSlug;
 		}
 
@@ -375,7 +382,22 @@ export class ProblemService {
 			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'), data.output);
 		}
 
-		return this.testCaseRepository.save(testCase);
+		const savedTestCase = await this.testCaseRepository.save(testCase);
+
+		if (data.name) {
+			await this.minioService.renameFile(
+				'test-cases',
+				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'input.txt'),
+				path.join(problemId, subtaskSlug, testCase.slug, 'input.txt'),
+			);
+			await this.minioService.renameFile(
+				'test-cases',
+				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'output.txt'),
+				path.join(problemId, subtaskSlug, testCase.slug, 'output.txt'),
+			);
+		}
+
+		return savedTestCase;
 	}
 
 	async removeTestCase(problemId: string, subtaskSlug: string, testCaseSlug: string) {
