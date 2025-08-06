@@ -10,10 +10,16 @@ export class JudgerController {
 
 	@EventPattern('judger_ack')
 	async handleJudgerAck(@Payload() data: { id: string }, @Ctx() context: RmqContext) {
-		await this.judgerService.handleJudgerAck(data);
 		const channel = context.getChannelRef() as Channel;
 		const message = context.getMessage() as Message;
-		channel.ack(message);
+
+		try {
+			await this.judgerService.handleJudgerAck(data);
+			channel.ack(message);
+		} catch (error) {
+			channel.nack(message, false, true); // Reject and requeue
+			throw error;
+		}
 	}
 
 	@EventPattern('judger_result')

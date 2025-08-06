@@ -78,7 +78,7 @@ export class SubmissionService {
 		});
 		const savedSubmission = await this.submissionRepository.save(submission);
 
-		this.judgerJobQueue.emit('judge_problem', { id: submission.id, problemId: problem.id, sourceCode: body.code, language: body.language });
+		this.judgerJobQueue.emit('judge_problem', { id: savedSubmission.id, problemId: problem.id, sourceCode: body.code, language: body.language });
 
 		return savedSubmission;
 	}

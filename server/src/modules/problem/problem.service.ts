@@ -124,12 +124,12 @@ export class ProblemService {
 			} else if (sortBy === 'acRate') {
 				qb.addSelect((subQuery) => {
 					return subQuery
-						.select('CASE WHEN COUNT(total_submissions.id) > 0 THEN COUNT(ac_submissions.id) / COUNT(total_submissions.id) ELSE 0 END')
-						.from(Submission, 'total_submissions')
-						.leftJoin(Submission, 'ac_submissions', 'ac_submissions.problemId = total_submissions.problemId AND ac_submissions.status = :status', {
-							status: 'AC',
-						})
-						.where('total_submissions.problemId = problem.id');
+						.select(
+							'CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END',
+						)
+						.from(Submission, 'submission')
+						.where('submission.problemId = problem.id')
+						.setParameter('status', 'AC');
 				}, 'acRate');
 				qb.orderBy('acRate', order || 'DESC');
 			} else {
@@ -194,15 +194,11 @@ export class ProblemService {
 		return this.problemRepository.save(problem);
 	}
 
+	@Transactional()
 	async remove(id: string) {
 		const problem = await this.getProblemById(id);
 		await this.problemRepository.remove(problem);
-		try {
-			await this.minioService.removeDir('test-cases', id);
-		} catch (error) {
-			this.logger.error(`Failed to remove problem files from Minio: ${error}`);
-			// Don't throw - database removal was successful
-		}
+		await this.minioService.removeDir('test-cases', id);
 	}
 
 	async isEditorialExists(problemId: string) {
@@ -283,6 +279,7 @@ export class ProblemService {
 		return this.subtaskRepository.save(subtask);
 	}
 
+	@Transactional()
 	async updateSubtask(problemId: string, subtaskSlug: string, data: UpdateSubtaskDto) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 
@@ -307,16 +304,12 @@ export class ProblemService {
 		return savedSubtask;
 	}
 
+	@Transactional()
 	async removeSubtask(problemId: string, subtaskSlug: string) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 		await this.subtaskRepository.remove(subtask);
 		// Remove files after successful database deletion
-		try {
-			await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
-		} catch (error) {
-			this.logger.error(`Failed to remove subtask files from Minio: ${error}`);
-			// Don't throw - database removal was successful
-		}
+		await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
 	}
 	async isTestCaseSlugExists(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
@@ -345,6 +338,7 @@ export class ProblemService {
 		};
 	}
 
+	@Transactional()
 	async createTestCase(problemId: string, subtaskSlug: string, data: CreateTestCaseDto) {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 		const testCaseSlug = slug(data.name, { lower: true });
@@ -358,6 +352,7 @@ export class ProblemService {
 		return this.testCaseRepository.save(testCase);
 	}
 
+	@Transactional()
 	async updateTestCase(problemId: string, subtaskSlug: string, testCaseSlug: string, data: UpdateTestCaseDto) {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 
@@ -400,16 +395,12 @@ export class ProblemService {
 		return savedTestCase;
 	}
 
+	@Transactional()
 	async removeTestCase(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 		await this.testCaseRepository.remove(testCase);
 		// Remove files after successful database deletion
-		try {
-			await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
-			await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
-		} catch (error) {
-			this.logger.error(`Failed to remove test case files from Minio: ${error}`);
-			// Don't throw - database removal was successful
-		}
+		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
+		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
 	}
 }
