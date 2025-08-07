@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { UnprocessableEntityException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ValidationError } from 'class-validator';
 import * as cookieParser from 'cookie-parser';
 import { initializeTransactionalContext } from 'typeorm-transactional';
@@ -53,6 +54,26 @@ async function bootstrap() {
 	app.useGlobalFilters(new AllExceptionsFilter());
 
 	app.useGlobalInterceptors(new SerializeInterceptor());
+
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
+		options: {
+			urls: [configService.get<string>('RABBITMQ_URL')!],
+			queue: 'judger.ack',
+			queueOptions: { durable: true },
+		},
+	});
+
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
+		options: {
+			urls: [configService.get<string>('RABBITMQ_URL')!],
+			queue: 'judger.result',
+			queueOptions: { durable: true },
+		},
+	});
+
+	await app.startAllMicroservices();
 
 	await app.listen(configService.get<number>('PORT')!);
 }

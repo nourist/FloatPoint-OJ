@@ -2,7 +2,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
@@ -45,7 +44,7 @@ import { UserModule } from './modules/user/user.module';
 				DB_PASS: Joi.string().default(''),
 				DB_NAME: Joi.string().default('postgres'),
 
-				RABBITMQ_URL: Joi.string().default('amqp://localhost:5672'),
+				RABBITMQ_URL: Joi.string().default('amqp://guest:guest@localhost:5672'),
 
 				MAIL_HOST: Joi.string().default('smtp.mailtrap.com'),
 				MAIL_PORT: Joi.number().default(587),
@@ -105,23 +104,6 @@ import { UserModule } from './modules/user/user.module';
 			}),
 		}),
 		ScheduleModule.forRoot(),
-		ClientsModule.registerAsync([
-			{
-				name: 'JUDGER_JOB_QUEUE',
-				imports: [ConfigModule],
-				inject: [ConfigService],
-				useFactory: (configService: ConfigService) => ({
-					transport: Transport.RMQ,
-					options: {
-						urls: [configService.get<string>('RABBITMQ_URL')!],
-						queue: 'oj_judger_jobs',
-						queueOptions: {
-							durable: true,
-						},
-					},
-				}),
-			},
-		]),
 		UserModule,
 		AuthModule,
 		MailModule,

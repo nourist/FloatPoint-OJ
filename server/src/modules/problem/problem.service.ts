@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as path from 'path';
-import slug from 'slug';
+import slug from 'slugify';
 import { Repository } from 'typeorm';
 import { Transactional } from 'typeorm-transactional';
 
@@ -329,8 +329,8 @@ export class ProblemService {
 	async getTestCaseContentBySlug(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 
-		const input = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
-		const output = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
+		const input = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
+		const output = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
 
 		return {
 			input,
@@ -347,8 +347,8 @@ export class ProblemService {
 			throw new BadRequestException(`Test case ${data.name} for subtask ${subtaskSlug} for problem ${problemId} already exists`);
 		}
 		const testCase = this.testCaseRepository.create({ ...data, subtask, slug: testCaseSlug });
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'), data.input);
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'), data.output);
+		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
+		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		return this.testCaseRepository.save(testCase);
 	}
 
@@ -370,11 +370,11 @@ export class ProblemService {
 		Object.assign(testCase, data);
 
 		if (data.input) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'), data.input);
+			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
 		}
 
 		if (data.output) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'), data.output);
+			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		}
 
 		const savedTestCase = await this.testCaseRepository.save(testCase);
@@ -382,13 +382,13 @@ export class ProblemService {
 		if (data.name) {
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'input.txt'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'input.txt'),
+				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'input'),
+				path.join(problemId, subtaskSlug, testCase.slug, 'input'),
 			);
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'output.txt'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'output.txt'),
+				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'output'),
+				path.join(problemId, subtaskSlug, testCase.slug, 'output'),
 			);
 		}
 
@@ -400,7 +400,7 @@ export class ProblemService {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 		await this.testCaseRepository.remove(testCase);
 		// Remove files after successful database deletion
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input.txt'));
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output.txt'));
+		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
+		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
 	}
 }
