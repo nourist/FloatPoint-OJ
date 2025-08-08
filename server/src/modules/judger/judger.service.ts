@@ -16,12 +16,12 @@ export class JudgerService {
 	) {}
 
 	async handleJudgerAck(data: { id: string }) {
-		this.logger.log(`📥 Received judger_ack: ${JSON.stringify(data)}`);
+		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
 		const submission = await this.submissionRepository.update(data.id, { status: SubmissionStatus.JUDGING });
 		this.judgerGateway.server.emit('submission_update', submission);
 	}
 
 	handleJudgerResult(data: Record<string, any>): void {
-		this.logger.log(`📥 Received judger_result: ${JSON.stringify(data)}`);
+		this.logger.log(`Received judger_result: ${JSON.stringify(data)}`);
 	}
 }
