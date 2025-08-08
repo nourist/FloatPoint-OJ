@@ -33,6 +33,7 @@ async function bootstrap() {
 			transform: true,
 			transformOptions: {
 				enableImplicitConversion: true,
+				exposeUnsetFields: true,
 			},
 			exceptionFactory: (validationErrors: ValidationError[] = []) => {
 				return new UnprocessableEntityException({

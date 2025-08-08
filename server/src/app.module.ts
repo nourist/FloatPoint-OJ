@@ -50,6 +50,7 @@ import { UserModule } from './modules/user/user.module';
 				MAIL_PORT: Joi.number().default(587),
 				MAIL_USER: Joi.string().required(),
 				MAIL_PASS: Joi.string().required(),
+				MAIL_FROM_EMAIL: Joi.string().required(),
 
 				MINIO_ENDPOINT: Joi.string().default('localhost'),
 				MINIO_PORT: Joi.number().default(9000),
@@ -86,13 +87,14 @@ import { UserModule } from './modules/user/user.module';
 				transport: {
 					host: configService.get<string>('MAIL_HOST'),
 					port: configService.get<number>('MAIL_PORT'),
+					secure: configService.get<string>('NODE_ENV') === 'production',
 					auth: {
 						user: configService.get<string>('MAIL_USER'),
 						pass: configService.get<string>('MAIL_PASS'),
 					},
 				},
 				defaults: {
-					from: '"FloatPoint Team" <noreply@floatpoint.com>',
+					from: `"FloatPoint Team" <${configService.get<string>('MAIL_FROM_EMAIL')}>`,
 				},
 				template: {
 					dir: path.join(__dirname, 'modules/mail/templates'),

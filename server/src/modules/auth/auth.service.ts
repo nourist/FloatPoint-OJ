@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { Transactional } from 'typeorm-transactional';
 import { v4 as uuidv4 } from 'uuid';
 
 import { User } from 'src/entities/user.entity';
@@ -49,6 +50,7 @@ export class AuthService {
 		return user;
 	}
 
+	@Transactional()
 	async signup(userData: { email: string; password: string; username: string }) {
 		const isUserExists = await this.userService.checkEmailExists(userData.email);
 		if (isUserExists) {
@@ -65,8 +67,7 @@ export class AuthService {
 		const hashedPassword = bcrypt.hashSync(userData.password, this.configService.get<number>('SALT_ROUNDS')!);
 		const verificationToken = uuidv4();
 
-		const user = this.userRepository.create({ ...userData, password: hashedPassword, verificationToken });
-		await this.userRepository.save(user);
+		const user = await this.userRepository.save(this.userRepository.create({ ...userData, password: hashedPassword, verificationToken }));
 
 		await this.mailService.sendVerifyEmail(user.email, verificationToken);
 
@@ -95,6 +96,7 @@ export class AuthService {
 		return user;
 	}
 
+	@Transactional()
 	async resendVerificationEmail(email: string) {
 		const user = await this.userService.getUserByEmail(email);
 
@@ -114,6 +116,7 @@ export class AuthService {
 		return user;
 	}
 
+	@Transactional()
 	async forgotPassword(email: string) {
 		const user = await this.userService.getUserByEmail(email);
 

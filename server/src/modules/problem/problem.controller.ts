@@ -69,11 +69,11 @@ export class ProblemController {
 		};
 	}
 
-	@Get(':id/editorial')
-	async getEditorial(@Param('id') id: string) {
+	@Get(':slug/editorial')
+	async getEditorial(@Param('slug') slug: string) {
 		return {
 			message: 'success',
-			editorial: await this.problemService.getProblemEditorialByProblemId(id),
+			editorial: await this.problemService.getProblemEditorialByProblemSlug(slug),
 		};
 	}
 

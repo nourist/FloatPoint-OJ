@@ -12,7 +12,6 @@ export class CreateProblemDto {
 	title: string;
 
 	@Trim()
-	@IsNotEmpty()
 	@IsString()
 	statement: string;
 
@@ -52,10 +51,9 @@ export class CreateProblemDto {
 	@IsEnum(Difficulty)
 	difficulty: Difficulty;
 
-	@IsNotEmpty()
+	@Default([])
 	@IsArray()
 	@IsString({ each: true })
-	@Default([])
 	tags: string[];
 }
 
@@ -92,9 +90,9 @@ export class UpdateProblemDto {
 	@IsEnum(Difficulty)
 	difficulty?: Difficulty;
 
+	@Default([])
 	@IsArray()
 	@IsString({ each: true })
-	@Default([])
 	tags?: string[];
 }
 
@@ -108,9 +106,9 @@ export class GetAllProblemsDto {
 	@IsEnum(Difficulty)
 	difficulty?: Difficulty;
 
+	@Default([])
 	@IsArray()
 	@IsString({ each: true })
-	@Default([])
 	tags?: string[];
 
 	@IsString()
@@ -166,11 +164,11 @@ export class CreateTestCaseDto {
 	@IsString()
 	name: string;
 
-	@IsNotEmpty()
+	@Default('')
 	@IsString()
 	input: string;
 
-	@IsNotEmpty()
+	@Default('')
 	@IsString()
 	output: string;
 }
