@@ -12,6 +12,13 @@ use tracing::{error, info};
 use tracing_subscriber;
 use uuid;
 
+mod db;
+mod judger;
+mod languages;
+mod metadata;
+mod minio;
+mod models;
+
 #[tokio::main]
 async fn main() {
     dotenv().ok();
@@ -76,30 +83,11 @@ async fn main() {
     }
 }
 
-#[derive(Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-struct JudgerJob {
-    id: String,
-    problem_id: String,
-    source_code: String,
-    language: String,
-}
-
-#[derive(Deserialize, Serialize)]
-struct JudgerAck {
-    id: String,
-}
-
-#[derive(Deserialize, Serialize)]
-struct JudgerResult {
-    id: String,
-}
-
-async fn send_ack_message(channel: &lapin::Channel, ack: JudgerAck) {
+async fn send_ack_message(channel: &lapin::Channel, ack: models::JudgerAck) {
     #[derive(Serialize)]
     struct AckMessage {
         pattern: String,
-        data: JudgerAck,
+        data: models::JudgerAck,
     }
 
     let ack_json = serde_json::to_string(&AckMessage {
@@ -119,11 +107,11 @@ async fn send_ack_message(channel: &lapin::Channel, ack: JudgerAck) {
         .expect("failed to publish message");
 }
 
-async fn send_result_message(channel: &lapin::Channel, result: JudgerResult) {
+async fn send_result_message(channel: &lapin::Channel, result: models::JudgerResult) {
     #[derive(Serialize)]
     struct ResultMessage {
         pattern: String,
-        data: JudgerResult,
+        data: models::JudgerResult,
     }
 
     let result_json = serde_json::to_string(&ResultMessage {
@@ -143,11 +131,11 @@ async fn send_result_message(channel: &lapin::Channel, result: JudgerResult) {
         .expect("failed to publish message");
 }
 
-fn parse_job_message(delivery: &Delivery) -> JudgerJob {
+fn parse_job_message(delivery: &Delivery) -> models::JudgerJob {
     #[derive(Deserialize)]
     struct JobMessage {
         // pattern: String,
-        data: JudgerJob,
+        data: models::JudgerJob,
     }
 
     let body = String::from_utf8_lossy(&delivery.data);
@@ -165,7 +153,7 @@ async fn handle_message(channel: &lapin::Channel, delivery: Delivery) {
 
     send_ack_message(
         channel,
-        JudgerAck {
+        models::JudgerAck {
             id: message.id.clone(),
         },
     )
@@ -173,15 +161,25 @@ async fn handle_message(channel: &lapin::Channel, delivery: Delivery) {
 
     info!("Sent ack message with id: {:?}", message.id);
 
-    tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-
-    send_result_message(
-        channel,
-        JudgerResult {
-            id: message.id.clone(),
-        },
-    )
-    .await;
+    match judger::judge(&message).await {
+        Ok(result) => {
+            info!("Judged successfully with id: {:?}", message.id);
+            send_result_message(channel, result).await;
+        }
+        Err(e) => {
+            error!("Error judging message: {:?}", e);
+            send_result_message(
+                channel,
+                models::JudgerResult {
+                    id: message.id.clone(),
+                    log: e.to_string(),
+                    status: models::ResultStatus::IE,
+                    test_results: vec![],
+                },
+            )
+            .await;
+        }
+    }
 
     delivery.ack(BasicAckOptions::default()).await.unwrap();
 
