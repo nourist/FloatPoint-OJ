@@ -1,8 +1,0 @@
-time:0.225
-time-wall:1.809
-max-rss:120576
-csw-voluntary:15567
-csw-forced:3
-exitsig:6
-status:SG
-message:Caught fatal signal 6
