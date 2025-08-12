@@ -1,9 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 import { Problem } from './problem.entity';
 import { TestCase } from './test-case.entity';
 
 @Entity('subtasks')
+@Unique(['problem', 'slug'])
 export class Subtask {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;

@@ -41,7 +41,7 @@ import { UserModule } from './modules/user/user.module';
 				DB_HOST: Joi.string().default('localhost'),
 				DB_PORT: Joi.number().default(5432),
 				DB_USER: Joi.string().default('postgres'),
-				DB_PASS: Joi.string().default(''),
+				DB_PASS: Joi.string().default('postgres'),
 				DB_NAME: Joi.string().default('postgres'),
 
 				RABBITMQ_URL: Joi.string().default('amqp://guest:guest@localhost:5672'),
@@ -54,8 +54,8 @@ import { UserModule } from './modules/user/user.module';
 
 				MINIO_ENDPOINT: Joi.string().default('localhost'),
 				MINIO_PORT: Joi.number().default(9000),
-				MINIO_ACCESS_KEY: Joi.string().required(),
-				MINIO_SECRET_KEY: Joi.string().required(),
+				MINIO_ACCESS_KEY: Joi.string().default('admin'),
+				MINIO_SECRET_KEY: Joi.string().default('admin'),
 			}),
 		}),
 		TypeOrmModule.forRootAsync({

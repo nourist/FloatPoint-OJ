@@ -311,10 +311,11 @@ export class ProblemService {
 		// Remove files after successful database deletion
 		await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
 	}
+
 	async isTestCaseSlugExists(problemId: string, subtaskSlug: string, testCaseSlug: string) {
-		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
-		const testCase = await this.testCaseRepository.findOne({ where: { slug: testCaseSlug, subtask } });
-		return !!testCase;
+		return await this.testCaseRepository.exists({
+			where: { slug: testCaseSlug, subtask: { slug: subtaskSlug, problem: { id: problemId } } },
+		});
 	}
 
 	async getTestCaseBySlug(problemId: string, subtaskSlug: string, testCaseSlug: string) {
