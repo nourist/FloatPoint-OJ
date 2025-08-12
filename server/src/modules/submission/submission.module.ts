@@ -26,7 +26,7 @@ import { Submission } from 'src/entities/submission.entity';
 					transport: Transport.RMQ,
 					options: {
 						urls: [configService.get<string>('RABBITMQ_URL')!],
-						queue: 'oj_judger_jobs',
+						queue: 'judger.job',
 						queueOptions: {
 							durable: true,
 						},

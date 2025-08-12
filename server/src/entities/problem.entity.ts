@@ -41,7 +41,7 @@ export class Problem {
 	@Column({ default: 1000 })
 	timeLimit: number; // in milliseconds
 
-	@Column({ default: 128 })
+	@Column({ default: 128 * 1024 })
 	memoryLimit: number; // in kilobytes
 
 	@Column({ default: 100 })

@@ -68,3 +68,6 @@ report.*.json
 # VSCode
 .vscode
 .VSCodeCounter
+
+# Cargo
+judger/target

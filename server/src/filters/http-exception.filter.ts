@@ -8,8 +8,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
 		const response = ctx.getResponse<Response>();
 		const request = ctx.getRequest<Request>();
 
-		// console.log(exception)
-
 		if (exception instanceof HttpException) {
 			const status = exception.getStatus();
 			const exceptionResponse = exception.getResponse();
@@ -31,6 +29,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 				});
 			}
 		} else {
+			console.log(exception);
 			response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
 				statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
 				message: 'Internal server error',

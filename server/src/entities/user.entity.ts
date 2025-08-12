@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { BlogComment } from './blog-comment.entity';
 import { Blog } from './blog.entity';
@@ -16,11 +16,11 @@ export enum UserRole {
 
 @Entity('users')
 export class User {
-	@PrimaryColumn('uuid')
+	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
-	@Column({ type: 'varchar', length: 255 })
-	fullname: string;
+	@Column({ type: 'varchar', length: 255, nullable: true })
+	fullname: string | null;
 
 	@Column({ type: 'varchar', length: 255, unique: true })
 	username: string;

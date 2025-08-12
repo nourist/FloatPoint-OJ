@@ -1,7 +1,10 @@
-import { Transform, TransformFnParams } from 'class-transformer';
+import { Expose, Transform, TransformFnParams } from 'class-transformer';
 
 export function Default<T>(defaultValue: T): PropertyDecorator {
-	return Transform(({ value }: TransformFnParams): T => {
-		return (value ?? defaultValue) as T;
-	});
+	return (target: object, propertyKey: string | symbol) => {
+		Expose()(target, propertyKey);
+		Transform(({ value }: TransformFnParams): T => {
+			return value ?? defaultValue;
+		})(target, propertyKey);
+	};
 }

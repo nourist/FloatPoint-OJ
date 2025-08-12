@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Problem } from './problem.entity';
 import { User } from './user.entity';
@@ -15,7 +15,7 @@ export class ProblemEditorial {
 	@Column({ type: 'text' })
 	content: string;
 
-	@ManyToOne(() => Problem, (problem) => problem.editorial, { onDelete: 'CASCADE' })
+	@OneToOne(() => Problem, (problem) => problem.editorial, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	problem: Problem;
 }

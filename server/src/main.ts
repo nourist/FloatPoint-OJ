@@ -2,6 +2,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { UnprocessableEntityException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import * as cookieParser from 'cookie-parser';
 import { initializeTransactionalContext } from 'typeorm-transactional';
@@ -32,6 +34,7 @@ async function bootstrap() {
 			transform: true,
 			transformOptions: {
 				enableImplicitConversion: true,
+				exposeUnsetFields: true,
 			},
 			exceptionFactory: (validationErrors: ValidationError[] = []) => {
 				return new UnprocessableEntityException({
@@ -53,6 +56,31 @@ async function bootstrap() {
 	app.useGlobalFilters(new AllExceptionsFilter());
 
 	app.useGlobalInterceptors(new SerializeInterceptor());
+
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
+		options: {
+			urls: [configService.get<string>('RABBITMQ_URL')!],
+			queue: 'judger.ack',
+			queueOptions: { durable: true },
+		},
+	});
+
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
+		options: {
+			urls: [configService.get<string>('RABBITMQ_URL')!],
+			queue: 'judger.result',
+			queueOptions: { durable: true },
+		},
+	});
+
+	const config = new DocumentBuilder().setTitle('API Docs').setDescription('API documentation for my project').setVersion('1.0').addBearerAuth().build();
+
+	const document = SwaggerModule.createDocument(app, config);
+	SwaggerModule.setup('api-docs', app, document);
+
+	await app.startAllMicroservices();
 
 	await app.listen(configService.get<number>('PORT')!);
 }
