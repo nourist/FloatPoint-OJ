@@ -1,11 +1,13 @@
 use sqlx;
 use sqlx::Row;
 use std::collections::HashMap;
+use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::io::Write;
 use std::process::Command;
 use tracing::{error, info};
+use uuid::Uuid;
 
 use crate::db::get_db_url;
 use crate::languages::get_language_config;
@@ -16,12 +18,12 @@ use crate::models::{
     TestResult,
 };
 
-async fn get_problem(problem_id: &str) -> Result<Problem, Box<dyn Error>> {
+async fn get_problem(problem_id: &Uuid) -> Result<Problem, Box<dyn Error>> {
     let pool = sqlx::PgPool::connect(&get_db_url()).await?;
 
     let row = sqlx::query(
         r#"
-        SELECT ioMode, inputFile, outputFile, timeLimit, memoryLimit, id
+        SELECT "ioMode", "inputFile", "outputFile", "timeLimit", "memoryLimit", "id"
         FROM problems
         WHERE id = $1::uuid
         "#,
@@ -34,15 +36,15 @@ async fn get_problem(problem_id: &str) -> Result<Problem, Box<dyn Error>> {
         io_mode: row.try_get::<IoMode, _>("ioMode")?,
         input_file: row.try_get::<Option<String>, _>("inputFile")?,
         output_file: row.try_get::<Option<String>, _>("outputFile")?,
-        time_limit: row.try_get::<i64, _>("timeLimit")? as u64,
-        memory_limit: row.try_get::<i64, _>("memoryLimit")? as u64,
-        id: row.try_get::<String, _>("id")?,
+        time_limit: row.try_get::<i32, _>("timeLimit")? as u64,
+        memory_limit: row.try_get::<i32, _>("memoryLimit")? as u64,
+        id: row.try_get::<Uuid, _>("id")?,
     };
 
     Ok(problem)
 }
 
-async fn get_test_cases(problem_id: &str) -> Result<Vec<String>, sqlx::Error> {
+async fn get_test_cases(problem_id: &Uuid) -> Result<Vec<String>, sqlx::Error> {
     let pool = sqlx::PgPool::connect(&get_db_url()).await?;
 
     let rows = sqlx::query(
@@ -66,7 +68,7 @@ async fn get_test_cases(problem_id: &str) -> Result<Vec<String>, sqlx::Error> {
     Ok(test_cases)
 }
 
-async fn get_test_case_content(problem_id: &str, slug: &str) -> Result<TestCase, Box<dyn Error>> {
+async fn get_test_case_content(problem_id: &Uuid, slug: &str) -> Result<TestCase, Box<dyn Error>> {
     let minio_client = make_minio_client();
 
     let input_content = minio_client
@@ -89,11 +91,7 @@ async fn get_test_case_content(problem_id: &str, slug: &str) -> Result<TestCase,
     })
 }
 
-async fn write_test_case_input(
-    job_id: &str,
-    slug: &str,
-    problem: &Problem,
-) -> Result<(), Box<dyn Error>> {
+async fn write_test_case_input(slug: &str, problem: &Problem) -> Result<(), Box<dyn Error>> {
     let input_file_name = if problem.io_mode == IoMode::Standard {
         "input.txt"
     } else {
@@ -104,7 +102,8 @@ async fn write_test_case_input(
 
     let mut input_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/{}",
-        job_id, input_file_name
+        env::var("JUDGER_ID").unwrap(),
+        input_file_name
     ))?;
 
     input_file.write_all(test_case_content.input.as_bytes())?;
@@ -112,11 +111,7 @@ async fn write_test_case_input(
     Ok(())
 }
 
-async fn write_test_case_answer(
-    job_id: &str,
-    slug: &str,
-    problem: &Problem,
-) -> Result<(), Box<dyn Error>> {
+async fn write_test_case_answer(slug: &str, problem: &Problem) -> Result<(), Box<dyn Error>> {
     let output_file_name = if problem.io_mode == IoMode::Standard {
         "output.txt"
     } else {
@@ -127,7 +122,8 @@ async fn write_test_case_answer(
 
     let mut output_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/{}.ans",
-        job_id, output_file_name
+        env::var("JUDGER_ID").unwrap(),
+        output_file_name
     ))?;
 
     output_file.write_all(test_case_content.output.as_bytes())?;
@@ -135,15 +131,18 @@ async fn write_test_case_answer(
     Ok(())
 }
 
-fn create_isolate_box(job_id: &str) -> Result<(), Box<dyn Error>> {
+fn create_isolate_box() -> Result<(), Box<dyn Error>> {
     let create_box_res = Command::new("isolate")
         .arg("--init")
-        .arg(format!("--box-id={}", job_id))
+        .arg(format!("--box-id={}", env::var("JUDGER_ID").unwrap()))
         .output()?;
 
     if !create_box_res.status.success() {
-        error!("Failed to create box");
-        return Err("Failed to create box".into());
+        error!(
+            "Failed to create isolate box: {}",
+            String::from_utf8_lossy(&create_box_res.stderr).to_string()
+        );
+        return Err("Failed to create isolate box".into());
     }
 
     info!("Isolate box created successfully");
@@ -151,26 +150,11 @@ fn create_isolate_box(job_id: &str) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn cleanup_isolate_box(job_id: &str) -> Result<(), Box<dyn Error>> {
-    let cleanup_res = Command::new("isolate")
-        .arg(format!("--box-id={}", job_id))
-        .arg("--cleanup")
-        .output()?;
-
-    if !cleanup_res.status.success() {
-        error!("Failed to cleanup box");
-        return Err("Failed to cleanup box".into());
-    }
-
-    info!("Isolate box cleaned up successfully");
-
-    Ok(())
-}
-
-fn write_source_code(job_id: &str, source_code: &str, ext: &str) -> Result<(), Box<dyn Error>> {
+fn write_source_code(source_code: &str, ext: &str) -> Result<(), Box<dyn Error>> {
     let mut source_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/main.{}",
-        job_id, ext
+        env::var("JUDGER_ID").unwrap(),
+        ext
     ))?;
 
     source_file.write_all(source_code.as_bytes())?;
@@ -180,24 +164,31 @@ fn write_source_code(job_id: &str, source_code: &str, ext: &str) -> Result<(), B
     Ok(())
 }
 
-fn compile_source_code(job_id: &str, compile_command: &str) -> Result<(), JudgerResult> {
-    let compile_res = Command::new("isolate")
-        .arg(format!("--box-id={}", job_id))
-        .arg("--run")
-        .arg(compile_command)
+fn compile_source_code(job_id: &Uuid, compile_command: &str) -> Result<(), JudgerResult> {
+    let args = compile_command.split_whitespace().collect::<Vec<&str>>();
+
+    let output = Command::new(args[0])
+        .current_dir(format!(
+            "/var/local/lib/isolate/{}/box",
+            env::var("JUDGER_ID").unwrap()
+        ))
+        .args(&args[1..])
         .output()
         .map_err(|e| JudgerResult {
-            id: job_id.to_string(),
+            id: job_id.clone(),
             log: e.to_string(),
             status: ResultStatus::CE,
             test_results: vec![],
         })?;
 
-    if !compile_res.status.success() {
-        error!("Failed to compile source code");
+    if !output.status.success() {
+        error!(
+            "Failed to compile source code: {}",
+            String::from_utf8_lossy(&output.stderr).to_string()
+        );
         return Err(JudgerResult {
-            id: job_id.to_string(),
-            log: String::from_utf8_lossy(&compile_res.stderr).to_string(),
+            id: job_id.clone(),
+            log: String::from_utf8_lossy(&output.stderr).to_string(),
             status: ResultStatus::CE,
             test_results: vec![],
         });
@@ -208,49 +199,47 @@ fn compile_source_code(job_id: &str, compile_command: &str) -> Result<(), Judger
     Ok(())
 }
 
-fn run_testcase(
-    job_id: &str,
-    language_config: &LanguageConfig,
-    problem: &Problem,
-) -> Result<(), Box<dyn Error>> {
-    let arg_box_id = format!("--box-id={}", job_id);
+fn run_testcase(language_config: &LanguageConfig, problem: &Problem) -> Result<(), Box<dyn Error>> {
+    let arg_box_id = format!("--box-id={}", env::var("JUDGER_ID").unwrap());
     let arg_time = format!("--time={}", (problem.time_limit as f64) / 1000.0);
     let arg_wall_time = format!("--wall-time={}", (problem.time_limit as f64) / 1000.0 + 1.0);
     let arg_mem = format!("--mem={}", problem.memory_limit);
     let arg_fsize = format!("--fsize={}", 131072);
-    let arg_meta = format!("--meta=/var/local/lib/isolate/{}/box/meta.txt", job_id);
+    let arg_meta = format!(
+        "--meta=/var/local/lib/isolate/{}/box/meta.txt",
+        env::var("JUDGER_ID").unwrap()
+    );
 
-    let mut run_res = Command::new("isolate");
-    run_res
+    let mut cmd = Command::new("isolate");
+    cmd.arg("--run")
         .arg(&arg_box_id)
         .arg("--run")
         .arg(&arg_time)
         .arg(&arg_wall_time)
         .arg(&arg_mem)
         .arg(&arg_fsize)
-        .arg(&arg_meta)
-        .arg(&language_config.run_command);
+        .arg(&arg_meta);
 
     if problem.io_mode == IoMode::Standard {
-        let arg_input = format!("--input=/var/local/lib/isolate/{}/box/input.txt", job_id);
-        let arg_output = format!("--output=/var/local/lib/isolate/{}/box/output.txt", job_id);
+        let arg_input = format!("--stdin=input.txt");
+        let arg_output = format!("--stdout=output.txt");
 
-        run_res.arg(&arg_input).arg(&arg_output);
+        cmd.arg(&arg_input).arg(&arg_output);
     }
 
-    let output = run_res.output()?;
+    let args = language_config
+        .run_command
+        .split_whitespace()
+        .collect::<Vec<&str>>();
 
-    if !output.status.success() {
-        error!("Failed to run testcase");
-        return Err("Failed to run testcase".into());
-    }
+    cmd.args(&args).output()?;
 
     info!("Testcase run successfully");
 
     Ok(())
 }
 
-fn check_result(job_id: &str, problem: &Problem) -> Result<TestResult, Box<dyn Error>> {
+fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, Box<dyn Error>> {
     fn is_memory_limit_exceeded(
         metadata: &HashMap<String, String>,
         memory_limit_kb: usize,
@@ -285,11 +274,14 @@ fn check_result(job_id: &str, problem: &Problem) -> Result<TestResult, Box<dyn E
         false
     }
 
-    let meta_data =
-        metadata_file_to_hashmap(format!("/var/local/lib/isolate/{}/box/meta.txt", job_id))?;
+    let meta_data = metadata_file_to_hashmap(format!(
+        "/var/local/lib/isolate/{}/box/meta.txt",
+        env::var("JUDGER_ID").unwrap()
+    ))?;
 
     if is_memory_limit_exceeded(&meta_data, problem.memory_limit as usize) {
         return Ok(TestResult {
+            slug: test_case_slug.to_string(),
             status: Status::MLE,
             time: (get_f64(&meta_data, "time") * 1000.0) as u64,
             memory: 0,
@@ -300,12 +292,14 @@ fn check_result(job_id: &str, problem: &Problem) -> Result<TestResult, Box<dyn E
         Some(status) => {
             if status == "TO" {
                 return Ok(TestResult {
+                    slug: test_case_slug.to_string(),
                     status: Status::TLE,
                     time: 0,
                     memory: get_u64(&meta_data, "max-rss"),
                 });
             } else {
                 return Ok(TestResult {
+                    slug: test_case_slug.to_string(),
                     status: Status::RTE,
                     time: (get_f64(&meta_data, "time") * 1000.0) as u64,
                     memory: get_u64(&meta_data, "max-rss"),
@@ -313,7 +307,37 @@ fn check_result(job_id: &str, problem: &Problem) -> Result<TestResult, Box<dyn E
             }
         }
         _ => {
+            let output_file_name = if problem.io_mode == IoMode::Standard {
+                "output.txt"
+            } else {
+                problem.output_file.as_ref().unwrap()
+            };
+
+            let output = Command::new("bash")
+                .arg("./scripts/compare.bash")
+                .arg(format!(
+                    "/var/local/lib/isolate/{}/box/{}",
+                    env::var("JUDGER_ID").unwrap(),
+                    output_file_name
+                ))
+                .arg(format!(
+                    "/var/local/lib/isolate/{}/box/{}.ans",
+                    env::var("JUDGER_ID").unwrap(),
+                    output_file_name
+                ))
+                .output()?;
+
+            if !output.status.success() {
+                return Ok(TestResult {
+                    slug: test_case_slug.to_string(),
+                    status: Status::WA,
+                    time: (get_f64(&meta_data, "time") * 1000.0) as u64,
+                    memory: get_u64(&meta_data, "max-rss"),
+                });
+            }
+
             return Ok(TestResult {
+                slug: test_case_slug.to_string(),
                 status: Status::AC,
                 time: (get_f64(&meta_data, "time") * 1000.0) as u64,
                 memory: get_u64(&meta_data, "max-rss"),
@@ -329,9 +353,9 @@ pub async fn judge(job: &JudgerJob) -> Result<JudgerResult, Box<dyn Error>> {
 
     let language_config = get_language_config(&job.language)?;
 
-    create_isolate_box(&job.id)?;
+    create_isolate_box()?;
 
-    write_source_code(&job.id, &job.source_code, &language_config.ext)?;
+    write_source_code(&job.source_code, &language_config.ext)?;
 
     //compile source code
     if !language_config.compile_command.is_empty() {
@@ -340,20 +364,20 @@ pub async fn judge(job: &JudgerJob) -> Result<JudgerResult, Box<dyn Error>> {
         }
     }
 
+    let mut test_results: Vec<TestResult> = vec![];
+
     //run source code
     for test_case in test_cases {
-        write_test_case_input(&job.id, &test_case, &problem).await?;
-        run_testcase(&job.id, &language_config, &problem)?;
-        write_test_case_answer(&job.id, &test_case, &problem).await?;
-        check_result(&job.id, &problem)?;
+        write_test_case_input(&test_case, &problem).await?;
+        run_testcase(&language_config, &problem)?;
+        write_test_case_answer(&test_case, &problem).await?;
+        test_results.push(check_result(&problem, &test_case)?);
     }
-
-    cleanup_isolate_box(&job.id)?;
 
     Ok(JudgerResult {
         id: job.id.clone(),
         log: "".to_string(),
         status: ResultStatus::OK,
-        test_results: vec![],
+        test_results,
     })
 }

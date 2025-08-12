@@ -1,19 +1,20 @@
 use serde::{Deserialize, Serialize};
 use sqlx;
 use strum_macros::{Display, EnumString};
+use uuid::Uuid;
 
 #[derive(Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct JudgerJob {
-    pub id: String,
-    pub problem_id: String,
+    pub id: Uuid,
+    pub problem_id: Uuid,
     pub source_code: String,
     pub language: String,
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct JudgerAck {
-    pub id: String,
+    pub id: Uuid,
 }
 
 #[derive(Deserialize, Serialize)]
@@ -28,13 +29,13 @@ pub enum Status {
     AC,
     WA,
     RTE,
-    OLE,
     TLE,
     MLE,
 }
 
 #[derive(Deserialize, Serialize)]
 pub struct TestResult {
+    pub slug: String,
     pub status: Status,
     pub time: u64,
     pub memory: u64,
@@ -42,7 +43,7 @@ pub struct TestResult {
 
 #[derive(Deserialize, Serialize)]
 pub struct JudgerResult {
-    pub id: String,
+    pub id: Uuid,
     pub log: String,
     pub status: ResultStatus,
     pub test_results: Vec<TestResult>,
@@ -54,6 +55,8 @@ pub struct TestCase {
 }
 
 #[derive(EnumString, Display, PartialEq, Eq, Deserialize, Serialize, sqlx::Type)]
+#[sqlx(type_name = "problems_iomode_enum")]
+#[sqlx(rename_all = "lowercase")]
 pub enum IoMode {
     Standard,
     File,
@@ -66,7 +69,7 @@ pub struct Problem {
     pub output_file: Option<String>,
     pub time_limit: u64,
     pub memory_limit: u64,
-    pub id: String,
+    pub id: Uuid,
 }
 
 pub struct LanguageConfig {

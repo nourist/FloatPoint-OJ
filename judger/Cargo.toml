@@ -13,10 +13,10 @@ futures-lite = "2.6.1"
 lapin = "3.1.0"
 serde = "1.0.219"
 serde_json = "1.0.142"
-sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "postgres"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls","uuid", "postgres"] }
 strum = "0.27.2"
 strum_macros = "0.27.2"
 tokio = { version = "1.47.1", features = ["full"] }
 tracing = "0.1.41"
 tracing-subscriber = "0.3.19"
-uuid = { version = "1.17.0", features = ["v4"] }
+uuid = { version = "1.17.0", features = ["v4","serde"] }

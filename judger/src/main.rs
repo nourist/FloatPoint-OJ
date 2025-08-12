@@ -10,7 +10,6 @@ use std::env;
 use tokio;
 use tracing::{error, info};
 use tracing_subscriber;
-use uuid;
 
 mod db;
 mod judger;
@@ -57,7 +56,7 @@ async fn main() {
         .await
         .expect("failed to set QoS");
 
-    let tag = format!("judger_consumer_{}", uuid::Uuid::new_v4());
+    let tag = format!("judger_consumer_{}", env::var("JUDGER_ID").unwrap());
 
     let mut consumer = channel
         .basic_consume(
