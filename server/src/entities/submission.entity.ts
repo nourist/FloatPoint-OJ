@@ -68,7 +68,16 @@ export class Submission {
 	})
 	status: SubmissionStatus;
 
-	@Column({ default: 0 })
+	@Column({
+		default: 0,
+		type: 'numeric',
+		precision: 11,
+		scale: 2,
+		transformer: {
+			to: (value: number) => value,
+			from: (value: string) => parseFloat(value),
+		},
+	})
 	totalScore: number;
 
 	@CreateDateColumn({ type: 'timestamptz' })

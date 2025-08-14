@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
+import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
 
 import { Default } from 'src/decorators/default.decorator';
 import { Trim } from 'src/decorators/trim.decorator';
@@ -58,38 +58,53 @@ export class CreateProblemDto {
 }
 
 export class UpdateProblemDto {
+	@IsOptional()
 	@Trim()
 	@IsString()
 	title?: string;
 
+	@IsOptional()
 	@Trim()
 	@IsString()
 	statement?: string;
 
+	@IsOptional()
 	@IsInt()
 	timeLimit?: number;
 
+	@IsOptional()
 	@IsInt()
 	memoryLimit?: number;
 
+	@IsOptional()
 	@IsInt()
 	point?: number;
 
+	@IsOptional()
 	@IsEnum(IOMode)
 	ioMode?: IOMode;
 
+	@IsOptional()
+	@UndefinedToNull()
+	@ValidateIf((obj: UpdateProblemDto) => obj.ioMode === IOMode.FILE)
 	@IsString()
 	inputFile?: string;
 
+	@IsOptional()
+	@UndefinedToNull()
+	@ValidateIf((obj: UpdateProblemDto) => obj.ioMode === IOMode.FILE)
 	@IsString()
 	outputFile?: string;
 
+	@IsOptional()
 	@IsEnum(ProblemScoringMethod)
 	scoringMethod?: ProblemScoringMethod;
 
+	@IsOptional()
 	@IsEnum(Difficulty)
 	difficulty?: Difficulty;
 
+	@IsOptional()
 	@Default([])
 	@IsArray()
 	@IsString({ each: true })
@@ -97,37 +112,47 @@ export class UpdateProblemDto {
 }
 
 export class GetAllProblemsDto {
+	@IsOptional()
 	@IsInt()
 	minPoint?: number;
 
+	@IsOptional()
 	@IsInt()
 	maxPoint?: number;
 
+	@IsOptional()
 	@IsEnum(Difficulty)
 	difficulty?: Difficulty;
 
+	@IsOptional()
 	@Default([])
 	@IsArray()
 	@IsString({ each: true })
 	tags?: string[];
 
+	@IsOptional()
 	@IsString()
 	q?: string;
 
+	@IsOptional()
 	@IsInt()
 	@Default(1)
 	page: number;
 
+	@IsOptional()
 	@IsInt()
 	@Default(20)
 	limit: number;
 
+	@IsOptional()
 	@IsString()
 	sortBy?: 'title' | 'point' | 'difficulty' | 'acCount' | 'acRate';
 
+	@IsOptional()
 	@IsString()
 	order?: 'ASC' | 'DESC';
 
+	@IsOptional()
 	@IsBoolean()
 	hasEditorial?: boolean;
 }
@@ -140,6 +165,7 @@ export class CreateProblemEditorialDto {
 }
 
 export class UpdateProblemEditorialDto {
+	@IsOptional()
 	@Trim()
 	@IsString()
 	content?: string;
@@ -153,6 +179,7 @@ export class CreateSubtaskDto {
 }
 
 export class UpdateSubtaskDto {
+	@IsOptional()
 	@Trim()
 	@IsString()
 	name?: string;
@@ -174,13 +201,16 @@ export class CreateTestCaseDto {
 }
 
 export class UpdateTestCaseDto {
+	@IsOptional()
 	@Trim()
 	@IsString()
 	name?: string;
 
+	@IsOptional()
 	@IsString()
 	input?: string;
 
+	@IsOptional()
 	@IsString()
 	output?: string;
 }

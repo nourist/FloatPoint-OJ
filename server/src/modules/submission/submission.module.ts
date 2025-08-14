@@ -35,6 +35,6 @@ import { Submission } from 'src/entities/submission.entity';
 			},
 		]),
 	],
-	exports: [TypeOrmModule],
+	exports: [TypeOrmModule, SubmissionService],
 })
 export class SubmissionModule {}

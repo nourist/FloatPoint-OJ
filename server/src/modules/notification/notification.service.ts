@@ -3,6 +3,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LessThan, Repository } from 'typeorm';
 
+import { Blog } from 'src/entities/blog.entity';
 import { Notification, NotificationType } from 'src/entities/notification.entity';
 import { Problem } from 'src/entities/problem.entity';
 import { User } from 'src/entities/user.entity';
@@ -33,6 +34,22 @@ export class NotificationService {
 					this.notificationRepository.create({
 						type: NotificationType.NEW_PROBLEM,
 						problem,
+					}),
+					user,
+				);
+			}),
+		);
+	}
+
+	async createNewBlogNotification(blog: Blog) {
+		const users = await this.userRepository.find();
+
+		await Promise.all(
+			users.map(async (user) => {
+				await this.sendNotification(
+					this.notificationRepository.create({
+						type: NotificationType.NEW_BLOG,
+						blog,
 					}),
 					user,
 				);
