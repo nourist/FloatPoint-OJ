@@ -2,11 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 import { Repository } from 'typeorm';
+import { Transactional } from 'typeorm-transactional';
 import { v4 as uuidv4 } from 'uuid';
 
 import { BlogComment } from '../../entities/blog-comment.entity';
 import { Blog } from '../../entities/blog.entity';
 import { MinioService } from '../minio/minio.service';
+import { NotificationService } from '../notification/notification.service';
 import { CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
 
 @Injectable()
@@ -17,6 +19,7 @@ export class BlogService {
 		@InjectRepository(BlogComment)
 		private readonly blogCommentRepository: Repository<BlogComment>,
 		private readonly minioService: MinioService,
+		private readonly notificationService: NotificationService,
 	) {}
 
 	async isSlugExists(slug: string) {
@@ -24,6 +27,7 @@ export class BlogService {
 		return !!blog;
 	}
 
+	@Transactional()
 	async create(createBlogDto: CreateBlogDto, thumbnail: Express.Multer.File) {
 		let thumbnailUrl: string | null = null;
 		const id = uuidv4();
@@ -41,7 +45,9 @@ export class BlogService {
 		}
 
 		const blog = this.blogRepository.create({ ...createBlogDto, id, slug, thumbnailUrl });
-		return this.blogRepository.save(blog);
+		const savedBlog = await this.blogRepository.save(blog);
+		await this.notificationService.createNewBlogNotification(savedBlog);
+		return savedBlog;
 	}
 
 	async findAll() {
@@ -56,6 +62,7 @@ export class BlogService {
 		return blog;
 	}
 
+	@Transactional()
 	async update(id: string, updateBlogDto: UpdateBlogDto, thumbnail: Express.Multer.File) {
 		const blog = await this.blogRepository.findOne({ where: { id } });
 		if (!blog) {
@@ -85,6 +92,7 @@ export class BlogService {
 		return this.blogRepository.save(blog);
 	}
 
+	@Transactional()
 	async delete(id: string) {
 		const blog = await this.blogRepository.findOne({ where: { id } });
 		if (!blog) {

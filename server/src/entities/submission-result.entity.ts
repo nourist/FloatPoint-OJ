@@ -19,6 +19,9 @@ export class SubmissionResult {
 	@JoinColumn()
 	submission: Submission;
 
+	@Column()
+	slug: string;
+
 	@Column({
 		type: 'enum',
 		enum: SubmissionResultStatus,

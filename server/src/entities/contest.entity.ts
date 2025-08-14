@@ -4,11 +4,6 @@ import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
 import { User } from './user.entity';
 
-export enum ContestType {
-	IOI = 'ioi',
-	ICPC = 'icpc',
-}
-
 @Entity('contests')
 export class Contest {
 	@PrimaryGeneratedColumn('uuid')
@@ -29,14 +24,14 @@ export class Contest {
 	@Column({ type: 'timestamptz' })
 	endTime: Date;
 
-	@Column({
-		type: 'enum',
-		enum: ContestType,
-	})
-	type: ContestType;
+	@Column({ type: 'boolean', default: false })
+	isRatingUpdated: boolean;
 
 	@Column({ type: 'boolean', default: false })
-	rated: boolean;
+	isRated: boolean;
+
+	@Column({ default: 0 })
+	penalty: number;
 
 	@ManyToOne(() => User, (user) => user.contests)
 	@JoinColumn()
