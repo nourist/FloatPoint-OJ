@@ -1,4 +1,4 @@
-import { IsIn, IsInt, IsOptional, IsString, Min } from 'class-validator';
+import { IsBoolean, IsIn, IsInt, IsOptional, IsString, Length, Min } from 'class-validator';
 
 import { Default } from 'src/decorators/default.decorator';
 
@@ -26,6 +26,39 @@ export class GetUsersDto {
 	@IsOptional()
 	@IsInt()
 	@Min(1)
-	@Default(20)
+	@Default(10)
 	limit: number;
+}
+
+export class UpdateUserDto {
+	@IsOptional()
+	@IsString()
+	@Length(3, 20)
+	username?: string;
+
+	@IsOptional()
+	@IsString()
+	@Length(1, 255)
+	fullname?: string;
+
+	@IsOptional()
+	@IsString()
+	bio?: string;
+}
+
+export class UpdateNotificationSettingsDto {
+	@IsBoolean()
+	new_blog: boolean;
+
+	@IsBoolean()
+	new_problem: boolean;
+
+	@IsBoolean()
+	new_contest: boolean;
+
+	@IsBoolean()
+	update_rating: boolean;
+
+	@IsBoolean()
+	system: boolean;
 }

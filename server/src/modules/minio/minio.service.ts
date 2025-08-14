@@ -22,6 +22,7 @@ export class MinioService {
 	async init() {
 		await this.ensureBucketExists('test-cases');
 		await this.ensureBucketExists('thumbnails');
+		await this.ensureBucketExists('avatars');
 
 		await this.minioClient.setBucketPolicy(
 			'thumbnails',
@@ -33,6 +34,20 @@ export class MinioService {
 						Principal: { AWS: ['*'] },
 						Action: ['s3:GetObject'],
 						Resource: [`arn:aws:s3:::thumbnails/*`],
+					},
+				],
+			}),
+		);
+		await this.minioClient.setBucketPolicy(
+			'avatars',
+			JSON.stringify({
+				Version: '2012-10-17',
+				Statement: [
+					{
+						Effect: 'Allow',
+						Principal: { AWS: ['*'] },
+						Action: ['s3:GetObject'],
+						Resource: [`arn:aws:s3:::avatars/*`],
 					},
 				],
 			}),

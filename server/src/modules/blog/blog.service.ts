@@ -152,6 +152,5 @@ export class BlogService {
 		}
 
 		await this.blogCommentRepository.remove(blogComment);
-		return { message: 'Blog comment deleted successfully' };
 	}
 }
