@@ -1,0 +1,32 @@
+# -------------------------------
+# Build stage
+# -------------------------------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY server/package*.json ./
+
+RUN npm install --frozen-lockfile
+
+COPY server/. .
+
+RUN npm run build
+
+# -------------------------------
+# Run stage
+# -------------------------------
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+COPY server/package*.json ./
+
+RUN npm install --production --frozen-lockfile
+
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 4000
+
+CMD ["node", "dist/main.js"]
+	
