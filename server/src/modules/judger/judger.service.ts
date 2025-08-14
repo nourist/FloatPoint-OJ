@@ -24,12 +24,6 @@ export class JudgerService {
 		private readonly problemService: ProblemService,
 	) {}
 
-	async handleJudgerAck(data: JudgerAck) {
-		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
-		const submission = await this.submissionRepository.update(data.id, { status: SubmissionStatus.JUDGING });
-		this.judgerGateway.server.emit('submission_update', submission);
-	}
-
 	async createTestCaseResult(submissionId: string, data: TestCaseResult) {
 		const submission = await this.submissionService.findOne(submissionId);
 
@@ -51,18 +45,30 @@ export class JudgerService {
 		await this.submissionResultRepository.save(submissionResult);
 	}
 
+	async handleJudgerAck(data: JudgerAck) {
+		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
+		const submission = await this.submissionRepository.findOneByOrFail({ id: data.id });
+		submission.status = SubmissionStatus.JUDGING;
+		const updatedSubmission = await this.submissionRepository.save(submission);
+		this.judgerGateway.server.emit('submission_update', updatedSubmission);
+	}
+
 	async handleJudgerResult(data: JudgerResult) {
 		const submission = await this.submissionService.findOne(data.id);
 		const problem = await this.problemService.getProblemById(submission.problem.id);
 
 		if (data.status == JudgerResultStatus.CE) {
-			const updatedSubmission = await this.submissionRepository.update(data.id, { status: SubmissionStatus.COMPILATION_ERROR, log: data.log });
+			submission.status = SubmissionStatus.COMPILATION_ERROR;
+			submission.log = data.log;
+			const updatedSubmission = await this.submissionRepository.save(submission);
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
 			return;
 		}
 
 		if (data.status == JudgerResultStatus.IE) {
-			const updatedSubmission = await this.submissionRepository.update(data.id, { status: SubmissionStatus.INTERNAL_ERROR, log: data.log });
+			submission.status = SubmissionStatus.INTERNAL_ERROR;
+			submission.log = data.log;
+			const updatedSubmission = await this.submissionRepository.save(submission);
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
 			return;
 		}
@@ -82,18 +88,15 @@ export class JudgerService {
 		if (problem.scoringMethod == ProblemScoringMethod.STANDARD) {
 			const status = data.test_results.reduce((acc, cur) => {
 				const index = statusPriority.indexOf(cur.status);
-				if (index > statusPriority.indexOf(acc)) {
-					return cur.status;
-				}
-				return acc;
+				return index > statusPriority.indexOf(acc) ? cur.status : acc;
 			}, TestCaseStatus.AC);
 
 			const AcCount: number = data.test_results.reduce((acc, cur) => acc + (cur.status == TestCaseStatus.AC ? 1 : 0), 0);
 
-			const updatedSubmission = await this.submissionRepository.update(data.id, {
-				status: statusMap[status],
-				totalScore: (AcCount / data.test_results.length) * problem.point,
-			});
+			submission.status = statusMap[status];
+			submission.totalScore = (AcCount / data.test_results.length) * problem.point;
+
+			const updatedSubmission = await this.submissionRepository.save(submission);
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
 		} else if (problem.scoringMethod == ProblemScoringMethod.SUBTASK) {
 			const subtaskMap: Record<string, TestCaseResult[]> = {};
@@ -107,44 +110,31 @@ export class JudgerService {
 			const status = Object.values(subtaskMap).reduce((acc, cur) => {
 				const subtaskStatus = cur.reduce((acc, cur) => {
 					const index = statusPriority.indexOf(cur.status);
-					if (index > statusPriority.indexOf(acc)) {
-						return cur.status;
-					}
-					return acc;
+					return index > statusPriority.indexOf(acc) ? cur.status : acc;
 				}, TestCaseStatus.AC);
-				const index = statusPriority.indexOf(subtaskStatus);
-				if (index > statusPriority.indexOf(acc)) {
-					return subtaskStatus;
-				}
-				return acc;
+				return statusPriority.indexOf(subtaskStatus) > statusPriority.indexOf(acc) ? subtaskStatus : acc;
 			}, TestCaseStatus.AC);
 
 			const totalScore = Object.values(subtaskMap).reduce((acc, cur) => {
 				const isSubtaskAc = cur.every((tc) => tc.status == TestCaseStatus.AC);
-				if (isSubtaskAc) {
-					return acc + (cur.length / data.test_results.length) * problem.point;
-				}
-				return acc;
+				return isSubtaskAc ? acc + (cur.length / data.test_results.length) * problem.point : acc;
 			}, 0);
 
-			const updatedSubmission = await this.submissionRepository.update(data.id, {
-				status: statusMap[status],
-				totalScore: totalScore,
-			});
+			submission.status = statusMap[status];
+			submission.totalScore = totalScore;
+
+			const updatedSubmission = await this.submissionRepository.save(submission);
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
-		} /* 1/0 */ else {
+		} else {
 			const status = data.test_results.reduce((acc, cur) => {
 				const index = statusPriority.indexOf(cur.status);
-				if (index > statusPriority.indexOf(acc)) {
-					return cur.status;
-				}
-				return acc;
+				return index > statusPriority.indexOf(acc) ? cur.status : acc;
 			}, TestCaseStatus.AC);
 
-			const updatedSubmission = await this.submissionRepository.update(data.id, {
-				status: statusMap[status],
-				totalScore: status == TestCaseStatus.AC ? problem.point : 0,
-			});
+			submission.status = statusMap[status];
+			submission.totalScore = status == TestCaseStatus.AC ? problem.point : 0;
+
+			const updatedSubmission = await this.submissionRepository.save(submission);
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
 		}
 	}
