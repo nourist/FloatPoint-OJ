@@ -16,7 +16,27 @@ export class MinioService {
 			secretKey: this.config.get<string>('MINIO_SECRET_KEY'),
 		});
 
-		void this.ensureBucketExists('test-cases');
+		void this.init();
+	}
+
+	async init() {
+		await this.ensureBucketExists('test-cases');
+		await this.ensureBucketExists('thumbnails');
+
+		await this.minioClient.setBucketPolicy(
+			'thumbnails',
+			JSON.stringify({
+				Version: '2012-10-17',
+				Statement: [
+					{
+						Effect: 'Allow',
+						Principal: { AWS: ['*'] },
+						Action: ['s3:GetObject'],
+						Resource: [`arn:aws:s3:::thumbnails/*`],
+					},
+				],
+			}),
+		);
 	}
 
 	private async ensureBucketExists(bucketName: string) {
@@ -54,7 +74,7 @@ export class MinioService {
 		await this.minioClient.removeObject(bucketName, oldFilename);
 	}
 
-	async saveFile(bucketName: string, filename: string, content: string) {
+	async saveFile(bucketName: string, filename: string, content: string | Buffer) {
 		await this.minioClient.putObject(bucketName, filename, content);
 	}
 
