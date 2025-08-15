@@ -1,16 +1,15 @@
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
-import { Poppins } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 
 import Header from './_layout/header';
 import '~/styles/index.css';
 import { Theme } from '~/types/theme.type';
 
-const poppins = Poppins({
+const inter = Inter({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +29,7 @@ const RootLayout = async ({ children }: Props) => {
 	const theme = (await cookies()).get('theme')?.value as Theme;
 
 	return (
-		<html lang={locale} className={`${poppins.className} ${theme}`}>
+		<html lang={locale} className={`${inter.className} ${theme}`}>
 			<body className="antialiased">
 				<NextIntlClientProvider>
 					<Header />

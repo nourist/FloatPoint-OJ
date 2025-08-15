@@ -9,5 +9,52 @@
 			"login": "Login",
 			"register": "Register"
 		}
+	},
+	"auth": {
+		"login": "Login",
+		"register": "Register",
+		"verify-email": "Verify Email",
+		"forgot-password": "Forgot Password",
+		"reset-password": "Reset Password",
+		"get-password": "Get Password",
+		"verify-success": "Email verified successfully",
+
+		"dont-have-account": "Don't have an account?",
+		"already-have-account": "Already have an account?",
+		"already-have-password": "Already have a password?",
+		"account-already-verified": "Account already verified?",
+
+		"continue-with-google": "Continue with Google",
+
+		"form": {
+			"email": "Email",
+			"password": "Password",
+			"username": "Username",
+			"enter-email": "Enter your email",
+			"enter-password": "Enter your password",
+			"enter-username": "Enter your username",
+			"confirm-password": "Confirm Password",
+			"enter-confirm-password": "Enter your confirm password"
+		},
+
+		"message": {
+			"email-required": "Email is required",
+			"password-required": "Password is required",
+			"username-required": "Username is required",
+			"email-invalid": "Email is invalid",
+			"password-min": "Password must be at least 8 characters long",
+			"password-uppercase": "Password must contain at least one uppercase letter",
+			"password-lowercase": "Password must contain at least one lowercase letter",
+			"password-number": "Password must contain at least one number",
+			"password-special": "Password must contain at least one special character",
+			"confirm-password-required": "Confirm Password is required",
+			"confirm-password-not-match": "Confirm Password does not match",
+			"verify-success": "Great! Your email address has been verified. Your account is now active and ready to use."
+		},
+
+		"description": {
+			"forgot-password": "Enter your email to get password reset link",
+			"verify-email": "Enter your email to get email verification link"
+		}
 	}
 }
