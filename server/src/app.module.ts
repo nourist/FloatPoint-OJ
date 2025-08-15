@@ -54,8 +54,8 @@ import { UserModule } from './modules/user/user.module';
 
 				MINIO_ENDPOINT: Joi.string().default('localhost'),
 				MINIO_PORT: Joi.number().default(9000),
-				MINIO_ACCESS_KEY: Joi.string().default('admin'),
-				MINIO_SECRET_KEY: Joi.string().default('admin'),
+				MINIO_ACCESS_KEY: Joi.string().default('minioadmin'),
+				MINIO_SECRET_KEY: Joi.string().default('minioadmin'),
 			}),
 		}),
 		TypeOrmModule.forRootAsync({
