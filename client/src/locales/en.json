@@ -1,0 +1,13 @@
+{
+	"layout": {
+		"header": {
+			"home": "Home",
+			"problems": "Problems",
+			"submissions": "Submissions",
+			"contests": "Contests",
+			"standing": "Standing",
+			"login": "Login",
+			"register": "Register"
+		}
+	}
+}
