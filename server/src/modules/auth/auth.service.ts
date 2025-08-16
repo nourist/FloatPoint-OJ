@@ -90,10 +90,10 @@ export class AuthService {
 
 		user.isVerified = true;
 		user.verificationToken = null;
-		await this.userRepository.save(user);
+		const savedUser = await this.userRepository.save(user);
 
 		this.logger.log(`User ${user.id} verified with email ${user.email}`);
-		return user;
+		return savedUser;
 	}
 
 	@Transactional()
@@ -108,12 +108,12 @@ export class AuthService {
 		const verificationToken = uuidv4();
 		user.verificationToken = verificationToken;
 
-		await this.userRepository.save(user);
+		const savedUser = await this.userRepository.save(user);
 
 		await this.mailService.sendVerifyEmail(user.email, verificationToken);
 
 		this.logger.log(`Verification email sent to ${user.email}`);
-		return user;
+		return savedUser;
 	}
 
 	@Transactional()
@@ -124,12 +124,12 @@ export class AuthService {
 
 		user.resetPasswordToken = token;
 		user.resetPasswordExpiresAt = new Date(Date.now() + 1000 * 60 * 60);
-		await this.userRepository.save(user);
+		const savedUser = await this.userRepository.save(user);
 
 		await this.mailService.sendResetPasswordEmail(user.email, token);
 
 		this.logger.log(`Reset password email sent to ${user.email}`);
-		return user;
+		return savedUser;
 	}
 
 	async resetPassword(token: string, newPassword: string) {
@@ -149,10 +149,10 @@ export class AuthService {
 		user.password = hashedPassword;
 		user.resetPasswordToken = null;
 		user.resetPasswordExpiresAt = null;
-		await this.userRepository.save(user);
+		const savedUser = await this.userRepository.save(user);
 
 		this.logger.log(`Password reset for user ${user.id}`);
-		return user;
+		return savedUser;
 	}
 
 	async signin(userData: { email: string }) {

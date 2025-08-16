@@ -20,7 +20,7 @@ export class MailService {
 			subject: 'Verify Your Email',
 			template: 'verify-email',
 			context: {
-				verifyURL: `${clientUrl}/auth/verify-email?token=${verificationToken}`,
+				verifyURL: `${clientUrl}/verify-endpoint?token=${verificationToken}`,
 			},
 		});
 
@@ -35,7 +35,7 @@ export class MailService {
 			subject: 'Reset Your Password',
 			template: 'reset-password',
 			context: {
-				resetPasswordURL: `${clientUrl}/auth/reset-password?token=${resetPasswordToken}`,
+				resetPasswordURL: `${clientUrl}/reset-password?token=${resetPasswordToken}`,
 			},
 		});
 
