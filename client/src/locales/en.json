@@ -73,5 +73,34 @@
 		"toast": {
 			"verify-email": "Please check your email for verification"
 		}
+	},
+	"tiptap": {
+		"blockquote": "Blockquote",
+		"code-block": "Code Block",
+		"toggle-highlight": "Toggle highlight ({color})",
+		"heading": "Heading {level}",
+		"insert-image": "Insert image",
+		"link": "Link",
+		"paste-a-link": "Paste a link...",
+		"apply-link": "Apply link",
+		"open-in-new-window": "Open in new window",
+		"remove-link": "Remove link",
+		"toggle-list": "Toggle {type} list",
+		"toggle-mark": "Toggle {type}",
+		"align": "Align {align}",
+		"undo": "Undo",
+		"redo": "Redo",
+		"highlight-text": "Highlight text",
+		"highlight": "Highlight",
+		"remove-highlight": "Remove highlight",
+		"highlight-color": "{color} highlight color",
+		"highlight-colors": "Highlight colors",
+		"format-text-as-heading": "Format text as heading",
+		"heading-tooltip": "Heading",
+		"list-options": "List options",
+		"list": "List",
+		"bulletlist": "Bullet List",
+		"orderedlist": "Ordered List",
+		"tasklist": "Task List"
 	}
 }
