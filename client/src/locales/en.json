@@ -49,12 +49,29 @@
 			"password-special": "Password must contain at least one special character",
 			"confirm-password-required": "Confirm Password is required",
 			"confirm-password-not-match": "Confirm Password does not match",
-			"verify-success": "Great! Your email address has been verified. Your account is now active and ready to use."
+			"token-required": "Token is required"
+		},
+
+		"success": {
+			"register": "Register successfully",
+			"login": "Login successfully",
+			"forgot-password": "Reset password email sent successfully",
+			"verify-email-send": "Verify email sent successfully",
+			"reset-password": "Password reset successfully",
+			"verify": "Great! Your email address has been verified. Your account is now active and ready to use."
+		},
+
+		"error": {
+			"login": "Login failed"
 		},
 
 		"description": {
 			"forgot-password": "Enter your email to get password reset link",
 			"verify-email": "Enter your email to get email verification link"
+		},
+
+		"toast": {
+			"verify-email": "Please check your email for verification"
 		}
 	}
 }

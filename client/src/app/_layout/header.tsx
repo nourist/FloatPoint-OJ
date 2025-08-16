@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import HeaderToolbar from './header-toolbar';
 import NavLink from '~/components/nav-link';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
@@ -73,12 +74,7 @@ const Header = async () => {
 						</NavLink>
 					</Button>
 				))}
-				<Button variant="outline" className="ml-auto" asChild>
-					<NavLink href="/login">{t('login')}</NavLink>
-				</Button>
-				<Button asChild>
-					<NavLink href="/register">{t('register')}</NavLink>
-				</Button>
+				<HeaderToolbar />
 			</div>
 		</div>
 	);

@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
@@ -5,6 +6,8 @@ import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 
 import Header from './_layout/header';
+import { ScrollArea } from '~/components/ui/scroll-area';
+import { Toaster } from '~/components/ui/sonner';
 import '~/styles/index.css';
 import { Theme } from '~/types/theme.type';
 
@@ -29,14 +32,17 @@ const RootLayout = async ({ children }: Props) => {
 	const theme = (await cookies()).get('theme')?.value as Theme;
 
 	return (
-		<html lang={locale} className={`${inter.className} ${theme}`}>
-			<body className="antialiased">
-				<NextIntlClientProvider>
-					<Header />
-					{children}
-				</NextIntlClientProvider>
-			</body>
-		</html>
+		<GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+			<html lang={locale} className={`${inter.className} ${theme}`}>
+				<body className="antialiased">
+					<NextIntlClientProvider>
+						<Header />
+						<ScrollArea className="h-[calc(100vh-56px)] px-6">{children}</ScrollArea>
+						<Toaster />
+					</NextIntlClientProvider>
+				</body>
+			</html>
+		</GoogleOAuthProvider>
 	);
 };
 

@@ -3,15 +3,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
+import { resetPassword } from '~/services/auth';
 
 const ResetPassword = () => {
 	const t = useTranslations('auth');
+
+	const router = useRouter();
+
+	const searchParams = useSearchParams();
+	const token = searchParams.get('token');
 
 	const schema = z
 		.object({
@@ -39,7 +48,18 @@ const ResetPassword = () => {
 	});
 
 	const onSubmit = async (data: z.infer<typeof schema>) => {
-		console.log(data);
+		if (!token) {
+			toast.error(t('message.token-required'));
+			return;
+		}
+		return resetPassword({ token, password: data.password })
+			.then(() => {
+				toast.success(t('success.reset-password'));
+				router.push('/login');
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 
 	return (

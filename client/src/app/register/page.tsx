@@ -3,7 +3,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import GoogleLoginButton from '~/components/google-login-button';
@@ -11,9 +13,12 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { Separator } from '~/components/ui/separator';
+import { signup } from '~/services/auth';
 
 const Register = () => {
 	const t = useTranslations('auth');
+
+	const router = useRouter();
 
 	const schema = z.object({
 		username: z.string().min(1, t('message.username-required')),
@@ -38,7 +43,14 @@ const Register = () => {
 	});
 
 	const onSubmit = async (data: z.infer<typeof schema>) => {
-		console.log(data);
+		return signup(data)
+			.then(() => {
+				toast.success(t('success.register'), { description: t('toast.verify-email') });
+				router.push('/login');
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 
 	return (
