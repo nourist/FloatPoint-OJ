@@ -139,7 +139,7 @@ export class UserService {
 			}
 		}
 
-		const filename = `${id}.${file.filename.split('.').pop()}`;
+		const filename = `${id}.${file.originalname.split('.').pop()}`;
 		await this.minioService.saveFile('avatars', filename, file.buffer);
 
 		const avatarUrl = `/avatars/${filename}`;

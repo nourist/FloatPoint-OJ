@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 import { Repository } from 'typeorm';
@@ -10,6 +10,7 @@ import { Blog } from '../../entities/blog.entity';
 import { MinioService } from '../minio/minio.service';
 import { NotificationService } from '../notification/notification.service';
 import { CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class BlogService {
@@ -28,7 +29,7 @@ export class BlogService {
 	}
 
 	@Transactional()
-	async create(createBlogDto: CreateBlogDto, thumbnail: Express.Multer.File) {
+	async create(createBlogDto: CreateBlogDto, thumbnail: Express.Multer.File, user: User) {
 		let thumbnailUrl: string | null = null;
 		const id = uuidv4();
 		const slug = slugify(createBlogDto.title, { lower: true });
@@ -39,12 +40,12 @@ export class BlogService {
 
 		if (thumbnail) {
 			const bucketName = 'thumbnails';
-			const fileName = `${id}-${thumbnail.filename.split('.').pop()}`;
+			const fileName = `${id}.${thumbnail.originalname.split('.').pop()}`;
 			await this.minioService.saveFile(bucketName, fileName, thumbnail.buffer);
 			thumbnailUrl = `/${bucketName}/${fileName}`;
 		}
 
-		const blog = this.blogRepository.create({ ...createBlogDto, id, slug, thumbnailUrl });
+		const blog = this.blogRepository.create({ ...createBlogDto, id, slug, thumbnailUrl, author: user });
 		const savedBlog = await this.blogRepository.save(blog);
 		await this.notificationService.createNewBlogNotification(savedBlog);
 		return savedBlog;
@@ -63,17 +64,21 @@ export class BlogService {
 	}
 
 	@Transactional()
-	async update(id: string, updateBlogDto: UpdateBlogDto, thumbnail: Express.Multer.File) {
+	async update(id: string, updateBlogDto: UpdateBlogDto, thumbnail: Express.Multer.File, user: User) {
 		const blog = await this.blogRepository.findOne({ where: { id } });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
+		}
+
+		if (blog.author.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
 		}
 
 		let thumbnailUrl: string | null = blog.thumbnailUrl;
 
 		if (thumbnail) {
 			const bucketName = 'thumbnails';
-			const fileName = `${blog.id}-${thumbnail.filename.split('.').pop()}`;
+			const fileName = `${blog.id}.${thumbnail.originalname.split('.').pop()}`;
 
 			if (blog.thumbnailUrl) {
 				const oldFileName = blog.thumbnailUrl.split('/').pop();
@@ -93,10 +98,14 @@ export class BlogService {
 	}
 
 	@Transactional()
-	async delete(id: string) {
+	async delete(id: string, user: User) {
 		const blog = await this.blogRepository.findOne({ where: { id } });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
+		}
+
+		if (blog.author.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
 		}
 
 		if (blog.thumbnailUrl) {
@@ -111,13 +120,13 @@ export class BlogService {
 		return { message: 'Blog deleted successfully' };
 	}
 
-	async createComment(blogId: string, createBlogCommentDto: CreateBlogCommentDto) {
+	async createComment(blogId: string, createBlogCommentDto: CreateBlogCommentDto, user: User) {
 		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
 		}
 
-		const blogComment = this.blogCommentRepository.create({ ...createBlogCommentDto, blog });
+		const blogComment = this.blogCommentRepository.create({ ...createBlogCommentDto, blog, user });
 		return this.blogCommentRepository.save(blogComment);
 	}
 
@@ -125,7 +134,7 @@ export class BlogService {
 		return this.blogCommentRepository.find({ where: { blog: { id: blogId } } });
 	}
 
-	async updateComment(blogId: string, commentId: string, updateBlogCommentDto: UpdateBlogCommentDto) {
+	async updateComment(blogId: string, commentId: string, updateBlogCommentDto: UpdateBlogCommentDto, user: User) {
 		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
@@ -134,13 +143,17 @@ export class BlogService {
 		const blogComment = await this.blogCommentRepository.findOne({ where: { id: commentId, blog: { id: blogId } } });
 		if (!blogComment) {
 			throw new NotFoundException('Blog comment not found');
+		}
+
+		if (blogComment.user.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
 		}
 
 		Object.assign(blogComment, updateBlogCommentDto);
 		return this.blogCommentRepository.save(blogComment);
 	}
 
-	async deleteComment(blogId: string, commentId: string) {
+	async deleteComment(blogId: string, commentId: string, user: User) {
 		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
@@ -149,6 +162,10 @@ export class BlogService {
 		const blogComment = await this.blogCommentRepository.findOne({ where: { id: commentId, blog: { id: blogId } } });
 		if (!blogComment) {
 			throw new NotFoundException('Blog comment not found');
+		}
+
+		if (blogComment.user.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
 		}
 
 		await this.blogCommentRepository.remove(blogComment);

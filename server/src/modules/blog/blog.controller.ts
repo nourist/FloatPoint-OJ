@@ -1,19 +1,24 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
 import { BlogService } from './blog.service';
+import { GetUser } from 'src/decorators/get-user.decorator';
+import { User } from 'src/entities/user.entity';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('blog')
 export class BlogController {
 	constructor(private readonly blogService: BlogService) {}
 
 	@Post()
+	@UseGuards(JwtAuthGuard)
 	@UseInterceptors(FileInterceptor('thumbnail'))
-	async createBlog(@UploadedFile() thumbnail: Express.Multer.File, @Body() data: CreateBlogDto) {
+	async createBlog(@UploadedFile() thumbnail: Express.Multer.File, @Body() data: CreateBlogDto, @GetUser() user: User) {
 		return {
 			message: 'Create blog',
-			blog: await this.blogService.create(data, thumbnail),
+			blog: await this.blogService.create(data, thumbnail, user),
 		};
 	}
 
@@ -34,27 +39,30 @@ export class BlogController {
 	}
 
 	@Patch(':id')
+	@UseGuards(JwtAuthGuard)
 	@UseInterceptors(FileInterceptor('thumbnail'))
-	async updateBlog(@Param('id') id: string, @UploadedFile() thumbnail: Express.Multer.File, @Body() data: UpdateBlogDto) {
+	async updateBlog(@Param('id') id: string, @UploadedFile() thumbnail: Express.Multer.File, @Body() data: UpdateBlogDto, @GetUser() user: User) {
 		return {
 			message: 'Update blog',
-			blog: await this.blogService.update(id, data, thumbnail),
+			blog: await this.blogService.update(id, data, thumbnail, user),
 		};
 	}
 
 	@Delete(':id')
-	async deleteBlog(@Param('id') id: string) {
-		await this.blogService.delete(id);
+	@UseGuards(JwtAuthGuard)
+	async deleteBlog(@Param('id') id: string, @GetUser() user: User) {
+		await this.blogService.delete(id, user);
 		return {
 			message: 'Delete blog',
 		};
 	}
 
 	@Post(':blogId/comments')
-	async createComment(@Param('blogId') blogId: string, @Body() createBlogCommentDto: CreateBlogCommentDto) {
+	@UseGuards(JwtAuthGuard)
+	async createComment(@Param('blogId') blogId: string, @Body() createBlogCommentDto: CreateBlogCommentDto, @GetUser() user: User) {
 		return {
 			message: 'Create comment',
-			comment: await this.blogService.createComment(blogId, createBlogCommentDto),
+			comment: await this.blogService.createComment(blogId, createBlogCommentDto, user),
 		};
 	}
 
@@ -67,16 +75,18 @@ export class BlogController {
 	}
 
 	@Patch(':blogId/comments/:commentId')
-	async updateComment(@Param('blogId') blogId: string, @Param('commentId') commentId: string, @Body() updateBlogCommentDto: UpdateBlogCommentDto) {
+	@UseGuards(JwtAuthGuard)
+	async updateComment(@Param('blogId') blogId: string, @Param('commentId') commentId: string, @Body() updateBlogCommentDto: UpdateBlogCommentDto, @GetUser() user: User) {
 		return {
 			message: 'Update comment',
-			comment: await this.blogService.updateComment(blogId, commentId, updateBlogCommentDto),
+			comment: await this.blogService.updateComment(blogId, commentId, updateBlogCommentDto, user),
 		};
 	}
 
 	@Delete(':blogId/comments/:commentId')
-	async deleteComment(@Param('blogId') blogId: string, @Param('commentId') commentId: string) {
-		await this.blogService.deleteComment(blogId, commentId);
+	@UseGuards(JwtAuthGuard)
+	async deleteComment(@Param('blogId') blogId: string, @Param('commentId') commentId: string, @GetUser() user: User) {
+		await this.blogService.deleteComment(blogId, commentId, user);
 		return {
 			message: 'Delete comment',
 		};
