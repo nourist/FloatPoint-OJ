@@ -5,13 +5,15 @@ import Link from 'next/link';
 import { Button } from '~/components/ui/button';
 
 type Props = {
-	searchParams: {
-		email: string;
-	};
+	searchParams: Promise<{ email: string }>;
 };
 
 const VerifySuccess = async ({ searchParams }: Props) => {
 	const t = await getTranslations('auth');
+
+	const params = await searchParams;
+	const email = params.email;
+
 	return (
 		<div className="bg-card mx-auto my-10 flex max-w-108 flex-col items-center space-y-6 rounded-2xl border px-8 py-10 shadow-xs">
 			<div className="inline-flex h-20 w-20 scale-100 items-center justify-center rounded-full bg-emerald-100 transition-all duration-500 ease-out">
@@ -21,7 +23,7 @@ const VerifySuccess = async ({ searchParams }: Props) => {
 			<p className="text-muted-foreground text-center">{t('success.verify')}</p>
 			<div className="bg-background flex w-full items-center justify-center gap-2 rounded-md py-3 text-center text-sm font-medium">
 				<Mail className="size-4" />
-				{searchParams.email}
+				{email}
 			</div>
 			<Button className="h-10 w-full" asChild>
 				<Link href="/login">{t('login')}</Link>
