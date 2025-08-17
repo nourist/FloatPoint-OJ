@@ -30,7 +30,7 @@ export interface ResetPasswordPayload {
 }
 
 export interface GoogleSigninPayload {
-	tokenId: string;
+	idToken: string;
 }
 
 export interface ProfileResponse {
@@ -53,7 +53,7 @@ export interface VerifyEmailResponse {
 }
 
 export const getProfile = () => {
-	return http.get<ProfileResponse>('/auth');
+	return http.get<ProfileResponse>('/auth').then((res) => res.user);
 };
 
 export const signup = (payload: SignupPayload) => {
@@ -77,11 +77,11 @@ export const resetPassword = (payload: ResetPasswordPayload) => {
 };
 
 export const signin = (payload: SigninPayload) => {
-	return http.post<AuthResponse>('/auth/signin', payload);
+	return http.post<AuthResponse>('/auth/signin', payload).then((res) => res.user);
 };
 
 export const googleSignin = (payload: GoogleSigninPayload) => {
-	return http.post<AuthResponse>('/auth/google-signin', payload);
+	return http.post<AuthResponse>('/auth/google-signin', payload).then((res) => res.user);
 };
 
 export const signout = () => {

@@ -7,7 +7,14 @@
 			"contests": "Contests",
 			"standing": "Standing",
 			"login": "Login",
-			"register": "Register"
+			"register": "Register",
+			"signout": "Signout",
+			"profile": "Profile",
+			"settings": "Settings",
+			"appearance": "Appearance",
+			"language": "Language",
+			"light": "Light",
+			"dark": "Dark"
 		}
 	},
 	"auth": {
