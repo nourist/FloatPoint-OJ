@@ -52,7 +52,7 @@ const ResetPassword = () => {
 			toast.error(t('message.token-required'));
 			return;
 		}
-		return resetPassword({ token, password: data.password })
+		return resetPassword({ token, newPassword: data.password })
 			.then(() => {
 				toast.success(t('success.reset-password'));
 				router.push('/login');

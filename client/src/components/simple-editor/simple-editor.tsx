@@ -2,17 +2,17 @@
 
 import { Highlight } from '@tiptap/extension-highlight';
 import { TaskItem, TaskList } from '@tiptap/extension-list';
+import Placeholder from '@tiptap/extension-placeholder';
 import { Subscript } from '@tiptap/extension-subscript';
 import { Superscript } from '@tiptap/extension-superscript';
 import { TextAlign } from '@tiptap/extension-text-align';
 import { Typography } from '@tiptap/extension-typography';
 import { Selection } from '@tiptap/extensions';
-import { EditorContent, EditorContext, useEditor } from '@tiptap/react';
+import { Editor, EditorContent, EditorContext, useEditor } from '@tiptap/react';
 // --- Tiptap Core Extensions ---
 import { StarterKit } from '@tiptap/starter-kit';
 import * as React from 'react';
 
-import content from '~/components/simple-editor/data/content.json';
 // --- Styles ---
 import '~/components/simple-editor/simple-editor.scss';
 // --- Icons ---
@@ -46,6 +46,11 @@ import { useCursorVisibility } from '~/hooks/use-cursor-visibility';
 // --- Hooks ---
 import { useIsMobile } from '~/hooks/use-mobile';
 import { useWindowSize } from '~/hooks/use-window-size';
+
+const content = {
+	type: 'doc',
+	content: [],
+};
 
 const MainToolbarContent = ({ onHighlighterClick, onLinkClick, isMobile }: { onHighlighterClick: () => void; onLinkClick: () => void; isMobile: boolean }) => {
 	return (
@@ -114,7 +119,12 @@ const MobileToolbarContent = ({ type, onBack }: { type: 'highlighter' | 'link'; 
 	</>
 );
 
-export function SimpleEditor() {
+type Props = {
+	placeholder?: string;
+	onReady: (content: Editor) => void;
+};
+
+export function SimpleEditor({ placeholder, onReady }: Props) {
 	const isMobile = useIsMobile();
 	const { height } = useWindowSize();
 	const [mobileView, setMobileView] = React.useState<'main' | 'highlighter' | 'link'>('main');
@@ -140,6 +150,9 @@ export function SimpleEditor() {
 					enableClickSelection: true,
 				},
 			}),
+			Placeholder.configure({
+				placeholder,
+			}),
 			HorizontalRule,
 			TextAlign.configure({ types: ['heading', 'paragraph'] }),
 			TaskList,
@@ -163,6 +176,10 @@ export function SimpleEditor() {
 			setMobileView('main');
 		}
 	}, [isMobile, mobileView]);
+
+	React.useEffect(() => {
+		if (editor) onReady?.(editor);
+	}, [editor, onReady]);
 
 	return (
 		<div className="simple-editor-wrapper">

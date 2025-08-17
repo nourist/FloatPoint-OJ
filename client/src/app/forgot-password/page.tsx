@@ -27,7 +27,7 @@ const ForgotPassword = () => {
 	});
 
 	const onSubmit = async (data: z.infer<typeof schema>) => {
-		return forgotPassword(data.email)
+		return forgotPassword(data)
 			.then(() => {
 				toast.success(t('success.forgot-password'));
 			})

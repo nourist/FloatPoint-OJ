@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import { verifyEmail } from '~/services/auth';
+import { resendVerificationEmail } from '~/services/auth';
 
 const Verify = () => {
 	const t = useTranslations('auth');
@@ -27,7 +27,7 @@ const Verify = () => {
 	});
 
 	const onSubmit = async (data: z.infer<typeof schema>) => {
-		return verifyEmail(data.email)
+		return resendVerificationEmail(data)
 			.then(() => {
 				toast.success(t('success.verify-email-send'), { description: t('toast.verify-email') });
 			})

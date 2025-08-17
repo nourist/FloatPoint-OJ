@@ -135,3 +135,9 @@
 		@apply cursor-pointer;
 	}
 }
+
+@layer utilities {
+	.max-w-app {
+		@apply max-w-[min(80rem,calc(100vw-3rem))];
+	}
+}

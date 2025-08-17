@@ -102,5 +102,27 @@
 		"bulletlist": "Bullet List",
 		"orderedlist": "Ordered List",
 		"tasklist": "Task List"
+	},
+	"upload": {
+		"title": "Upload Image",
+		"supported-formats": "Supported formats: JPG, PNG, GIF",
+		"click-to-select": "Click to select",
+		"or-drag-and-drop-file-here": "or drag and drop file here"
+	},
+	"create": {
+		"blog": {
+			"create-blog": "Create Blog",
+			"title": "Title",
+			"title-placeholder": "Enter title",
+			"description-placeholder": "Enter description",
+			"upload-thumbnail": "Upload thumbnail",
+			"save": "Save",
+			"message": {
+				"title-required": "Title is required",
+				"title-and-content-required": "Title and content are required."
+			},
+			"create-success": "Blog created successfully!",
+			"create-fail": "Failed to create blog."
+		}
 	}
 }

@@ -17,7 +17,7 @@ const GoogleLoginButton = () => {
 
 	const handle = useGoogleLogin({
 		onSuccess: (tokenResponse) => {
-			googleSignin(tokenResponse.access_token)
+			googleSignin({ tokenId: tokenResponse.access_token })
 				.then((res) => {
 					toast.success(t('success.login'));
 					router.push('/');

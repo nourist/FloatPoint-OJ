@@ -11,7 +11,7 @@ export const GET = async (request: Request) => {
 	}
 
 	try {
-		const email = await verifyEmail(token);
+		const email = await verifyEmail({ token });
 		return NextResponse.redirect(new URL(`/verify-success?email=${email}`, request.url));
 	} catch (error) {
 		if (error instanceof Error) {

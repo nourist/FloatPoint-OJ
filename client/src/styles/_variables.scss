@@ -62,17 +62,17 @@
 	--tt-gray-dark-900: rgba(245, 245, 245, 1);
 
 	/* Brand colors */
-	--tt-brand-color-50: rgba(239, 238, 255, 1);
-	--tt-brand-color-100: rgba(222, 219, 255, 1);
-	--tt-brand-color-200: rgba(195, 189, 255, 1);
-	--tt-brand-color-300: rgba(157, 138, 255, 1);
-	--tt-brand-color-400: rgba(122, 82, 255, 1);
-	--tt-brand-color-500: rgba(98, 41, 255, 1);
-	--tt-brand-color-600: rgba(84, 0, 229, 1);
-	--tt-brand-color-700: rgba(75, 0, 204, 1);
-	--tt-brand-color-800: rgba(56, 0, 153, 1);
-	--tt-brand-color-900: rgba(43, 25, 102, 1);
-	--tt-brand-color-950: hsla(257, 100%, 9%, 1);
+	--tt-brand-color-50: oklch(0.97 0.014 254.604);
+	--tt-brand-color-100: oklch(0.932 0.032 255.585);
+	--tt-brand-color-200: oklch(0.882 0.059 254.128);
+	--tt-brand-color-300: oklch(0.809 0.105 251.813);
+	--tt-brand-color-400: oklch(0.707 0.165 254.624);
+	--tt-brand-color-500: oklch(0.623 0.214 259.815);
+	--tt-brand-color-600: oklch(0.546 0.245 262.881);
+	--tt-brand-color-700: oklch(0.488 0.243 264.376);
+	--tt-brand-color-800: oklch(0.424 0.199 265.638);
+	--tt-brand-color-900: oklch(0.379 0.146 265.522);
+	--tt-brand-color-950: oklch(0.282 0.091 267.935);
 
 	/* Green */
 	--tt-color-green-inc-5: hsla(129, 100%, 97%, 1);

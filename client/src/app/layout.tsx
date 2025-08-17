@@ -37,7 +37,7 @@ const RootLayout = async ({ children }: Props) => {
 				<body className="antialiased">
 					<NextIntlClientProvider>
 						<Header />
-						<ScrollArea className="h-[calc(100vh-56px)] px-6">{children}</ScrollArea>
+						<ScrollArea className="h-[calc(100vh-56px)] overflow-x-auto">{children}</ScrollArea>
 						<Toaster />
 					</NextIntlClientProvider>
 				</body>

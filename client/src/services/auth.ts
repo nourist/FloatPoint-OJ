@@ -1,36 +1,89 @@
-import http from '~/lib/http';
-import { User } from '~/types/user.type';
+import http from '../lib/http';
+import { User } from '../types/user.type';
 
-type VerifyEmailResponse = {
+export interface SignupPayload {
 	email: string;
-};
+	password: string;
+	username: string;
+}
 
-type SigninResponse = {
+export interface SigninPayload {
+	email: string;
+	password: string;
+}
+
+export interface ResendVerificationEmailPayload {
+	email: string;
+}
+
+export interface VerifyEmailPayload {
+	token: string;
+}
+
+export interface ForgotPasswordPayload {
+	email: string;
+}
+
+export interface ResetPasswordPayload {
+	token: string;
+	newPassword: string;
+}
+
+export interface GoogleSigninPayload {
+	tokenId: string;
+}
+
+export interface ProfileResponse {
 	message: string;
 	user: User;
-};
+}
 
-type GetMeResponse = {
+export interface AuthResponse {
 	message: string;
 	user: User;
+}
+
+export interface SimpleMessageResponse {
+	message: string;
+}
+
+export interface VerifyEmailResponse {
+	message: string;
+	email: string;
+}
+
+export const getProfile = () => {
+	return http.get<ProfileResponse>('/auth');
 };
 
-export const getMe = () => http.get<GetMeResponse>('/auth').then((res) => res.user);
+export const signup = (payload: SignupPayload) => {
+	return http.post<SimpleMessageResponse>('/auth/signup', payload);
+};
 
-export const signup = (data: { email: string; password: string; username: string }) => http.post('/auth/signup', data);
+export const resendVerificationEmail = (payload: ResendVerificationEmailPayload) => {
+	return http.post<SimpleMessageResponse>('/auth/resend-verification-email', payload);
+};
 
-export const signin = (data: { email: string; password: string }) => http.post<SigninResponse>('/auth/signin', data).then((res) => res.user);
+export const verifyEmail = (payload: VerifyEmailPayload) => {
+	return http.post<VerifyEmailResponse>('/auth/verify-email', payload);
+};
 
-export const signout = () => http.post('/auth/signout');
+export const forgotPassword = (payload: ForgotPasswordPayload) => {
+	return http.post<SimpleMessageResponse>('/auth/forgot-password', payload);
+};
 
-export const verifyEmail = (token: string) => http.post<VerifyEmailResponse>('/auth/verify-email', { token }).then((res) => res.email);
+export const resetPassword = (payload: ResetPasswordPayload) => {
+	return http.post<SimpleMessageResponse>('/auth/reset-password', payload);
+};
 
-export const resendVerificationEmail = (email: string) => http.post('/auth/resend-verification-email', { email });
+export const signin = (payload: SigninPayload) => {
+	return http.post<AuthResponse>('/auth/signin', payload);
+};
 
-export const forgotPassword = (email: string) => http.post('/auth/forgot-password', { email });
+export const googleSignin = (payload: GoogleSigninPayload) => {
+	return http.post<AuthResponse>('/auth/google-signin', payload);
+};
 
-export const resetPassword = (data: { token: string; password: string }) => http.post('/auth/reset-password', data);
-
-export const googleSignin = (idToken: string) => http.post<SigninResponse>('/auth/google-signin', { idToken }).then((res) => res.user);
-
-export const logout = () => http.post('/auth/logout');
+export const signout = () => {
+	return http.post<SimpleMessageResponse>('/auth/signout');
+};

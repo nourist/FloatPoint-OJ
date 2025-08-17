@@ -5,12 +5,12 @@ import useSWR from 'swr';
 
 import NavLink from '~/components/nav-link';
 import { Button } from '~/components/ui/button';
-import { getMe } from '~/services/auth';
+import { getProfile } from '~/services/auth';
 
 const HeaderToolbar = () => {
 	const t = useTranslations('layout.header');
 
-	const { data: user } = useSWR('/auth/me', getMe);
+	const { data: user } = useSWR('/auth/me', getProfile);
 
 	if (!user) {
 		return (

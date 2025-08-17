@@ -1,0 +1,104 @@
+import http from '../lib/http';
+import { ProblemEditorial } from '../types/problem-editorial.type';
+import { Difficulty, IOMode, Problem, ProblemScoringMethod } from '../types/problem.type';
+import { Subtask } from '../types/subtask.type';
+import { TestCase } from '../types/test-case.type';
+
+// Payloads
+export interface CreateProblemPayload {
+	title: string;
+	statement: string;
+	timeLimit: number;
+	memoryLimit: number;
+	point: number;
+	ioMode: IOMode;
+	inputFile: string | null;
+	outputFile: string | null;
+	scoringMethod: ProblemScoringMethod;
+	difficulty: Difficulty;
+	tags: string[];
+}
+
+export type UpdateProblemPayload = Partial<CreateProblemPayload>;
+
+export interface GetAllProblemsPayload {
+	minPoint?: number;
+	maxPoint?: number;
+	difficulty?: Difficulty;
+	tags?: string[];
+	q?: string;
+	page?: number;
+	limit?: number;
+	sortBy?: 'title' | 'point' | 'difficulty' | 'acCount' | 'acRate';
+	order?: 'ASC' | 'DESC';
+	hasEditorial?: boolean;
+}
+
+export interface CreateProblemEditorialPayload {
+	content: string;
+}
+
+export type UpdateProblemEditorialPayload = Partial<CreateProblemEditorialPayload>;
+
+export interface CreateSubtaskPayload {
+	name: string;
+}
+
+export type UpdateSubtaskPayload = Partial<CreateSubtaskPayload>;
+
+export interface CreateTestCasePayload {
+	name: string;
+	input: string;
+	output: string;
+}
+
+export type UpdateTestCasePayload = Partial<CreateTestCasePayload>;
+
+// Responses
+export interface ProblemsResponse {
+	message: string;
+	problems: Problem[];
+	total: number;
+}
+
+export interface ProblemResponse {
+	message: string;
+	problem: Problem;
+}
+
+export interface EditorialResponse {
+	message: string;
+	editorial: ProblemEditorial;
+}
+
+export interface SubtasksResponse {
+	message: string;
+	subtasks: Subtask[];
+}
+
+export interface SubtaskResponse {
+	message: string;
+	subtask: Subtask;
+}
+
+export interface TestCaseResponse {
+	message: string;
+	testcase: TestCase & { input: string; output: string };
+}
+
+export interface SimpleMessageResponse {
+	message: string;
+}
+
+// Functions
+export const findAllProblems = (params: GetAllProblemsPayload) => {
+	return http.get<ProblemsResponse>('/problem', { params });
+};
+
+export const getProblemBySlug = (slug: string) => {
+	return http.get<ProblemResponse>(`/problem/${slug}`);
+};
+
+export const getEditorial = (slug: string) => {
+	return http.get<EditorialResponse>(`/problem/${slug}/editorial`);
+};
