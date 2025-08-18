@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { User } from '../types/user.type';
+import { ApiInstance } from '~/types/axios.type';
 
 export interface SignupPayload {
 	email: string;
@@ -52,38 +52,32 @@ export interface VerifyEmailResponse {
 	email: string;
 }
 
-export const getProfile = () => {
-	return http.get<ProfileResponse>('/auth').then((res) => res.user);
-};
-
-export const signup = (payload: SignupPayload) => {
-	return http.post<SimpleMessageResponse>('/auth/signup', payload);
-};
-
-export const resendVerificationEmail = (payload: ResendVerificationEmailPayload) => {
-	return http.post<SimpleMessageResponse>('/auth/resend-verification-email', payload);
-};
-
-export const verifyEmail = (payload: VerifyEmailPayload) => {
-	return http.post<VerifyEmailResponse>('/auth/verify-email', payload);
-};
-
-export const forgotPassword = (payload: ForgotPasswordPayload) => {
-	return http.post<SimpleMessageResponse>('/auth/forgot-password', payload);
-};
-
-export const resetPassword = (payload: ResetPasswordPayload) => {
-	return http.post<SimpleMessageResponse>('/auth/reset-password', payload);
-};
-
-export const signin = (payload: SigninPayload) => {
-	return http.post<AuthResponse>('/auth/signin', payload).then((res) => res.user);
-};
-
-export const googleSignin = (payload: GoogleSigninPayload) => {
-	return http.post<AuthResponse>('/auth/google-signin', payload).then((res) => res.user);
-};
-
-export const signout = () => {
-	return http.post<SimpleMessageResponse>('/auth/signout');
-};
+export const createAuthService = (http: ApiInstance) => ({
+	getProfile: () => {
+		return http.get<ProfileResponse>('/auth').then((res) => res.user);
+	},
+	signup: (payload: SignupPayload) => {
+		return http.post<SimpleMessageResponse>('/auth/signup', payload);
+	},
+	resendVerificationEmail: (payload: ResendVerificationEmailPayload) => {
+		return http.post<SimpleMessageResponse>('/auth/resend-verification-email', payload);
+	},
+	verifyEmail: (payload: VerifyEmailPayload) => {
+		return http.post<VerifyEmailResponse>('/auth/verify-email', payload);
+	},
+	forgotPassword: (payload: ForgotPasswordPayload) => {
+		return http.post<SimpleMessageResponse>('/auth/forgot-password', payload);
+	},
+	resetPassword: (payload: ResetPasswordPayload) => {
+		return http.post<SimpleMessageResponse>('/auth/reset-password', payload);
+	},
+	signin: (payload: SigninPayload) => {
+		return http.post<AuthResponse>('/auth/signin', payload).then((res) => res.user);
+	},
+	googleSignin: (payload: GoogleSigninPayload) => {
+		return http.post<AuthResponse>('/auth/google-signin', payload).then((res) => res.user);
+	},
+	signout: () => {
+		return http.post<SimpleMessageResponse>('/auth/signout');
+	},
+});

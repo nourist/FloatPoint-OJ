@@ -1,8 +1,8 @@
-import http from '../lib/http';
 import { ProblemEditorial } from '../types/problem-editorial.type';
 import { Difficulty, IOMode, Problem, ProblemScoringMethod } from '../types/problem.type';
 import { Subtask } from '../types/subtask.type';
 import { TestCase } from '../types/test-case.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export interface CreateProblemPayload {
@@ -91,14 +91,16 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const findAllProblems = (params: GetAllProblemsPayload) => {
-	return http.get<ProblemsResponse>('/problem', { params });
-};
+export const createProblemService = (http: ApiInstance) => ({
+	findAllProblems: (params: GetAllProblemsPayload) => {
+		return http.get<ProblemsResponse>('/problem', { params });
+	},
 
-export const getProblemBySlug = (slug: string) => {
-	return http.get<ProblemResponse>(`/problem/${slug}`);
-};
+	getProblemBySlug: (slug: string) => {
+		return http.get<ProblemResponse>(`/problem/${slug}`);
+	},
 
-export const getEditorial = (slug: string) => {
-	return http.get<EditorialResponse>(`/problem/${slug}/editorial`);
-};
+	getEditorial: (slug: string) => {
+		return http.get<EditorialResponse>(`/problem/${slug}/editorial`);
+	},
+});

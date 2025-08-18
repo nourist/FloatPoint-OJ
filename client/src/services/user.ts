@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { NotificationSettings, User } from '../types/user.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export interface GetUsersPayload {
@@ -31,28 +31,30 @@ export interface UsersResponse {
 }
 
 // Functions
-export const updateProfile = (payload: UpdateUserPayload) => {
-	return http.patch<UserResponse>('/users/me', payload);
-};
+export const createUserService = (http: ApiInstance) => ({
+	updateProfile: (payload: UpdateUserPayload) => {
+		return http.patch<UserResponse>('/users/me', payload);
+	},
 
-export const updateAvatar = (avatar: File) => {
-	const formData = new FormData();
-	formData.append('avatar', avatar);
-	return http.patch<UserResponse>('/users/me/avatar', formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-	});
-};
+	updateAvatar: (avatar: File) => {
+		const formData = new FormData();
+		formData.append('avatar', avatar);
+		return http.patch<UserResponse>('/users/me/avatar', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+	},
 
-export const updateNotificationSettings = (payload: UpdateNotificationSettingsPayload) => {
-	return http.patch<UserResponse>('/users/me/notification-settings', payload);
-};
+	updateNotificationSettings: (payload: UpdateNotificationSettingsPayload) => {
+		return http.patch<UserResponse>('/users/me/notification-settings', payload);
+	},
 
-export const getUserByUsername = (username: string) => {
-	return http.get<UserResponse>(`/users/${username}`);
-};
+	getUserByUsername: (username: string) => {
+		return http.get<UserResponse>(`/users/${username}`);
+	},
 
-export const getUsers = (params: GetUsersPayload) => {
-	return http.get<UsersResponse>('/users', { params });
-};
+	getUsers: (params: GetUsersPayload) => {
+		return http.get<UsersResponse>('/users', { params });
+	},
+});

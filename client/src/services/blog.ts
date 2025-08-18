@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { Blog, BlogComment } from '../types/blog.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export interface CreateBlogPayload {
@@ -48,62 +48,64 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const createBlog = (payload: CreateBlogPayload) => {
-	const formData = new FormData();
-	formData.append('title', payload.title);
-	formData.append('content', payload.content);
-	if (payload.thumbnail) {
-		formData.append('thumbnail', payload.thumbnail);
-	}
-	return http.post<BlogResponse>('/blog', formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-	});
-};
-
-export const getAllBlogs = () => {
-	return http.get<BlogsResponse>('/blog');
-};
-
-export const getBlogBySlug = (slug: string) => {
-	return http.get<BlogResponse>(`/blog/${slug}`);
-};
-
-export const updateBlog = (id: string, payload: UpdateBlogPayload) => {
-	const formData = new FormData();
-	if (payload.title) {
+export const createBlogService = (http: ApiInstance) => ({
+	createBlog: (payload: CreateBlogPayload) => {
+		const formData = new FormData();
 		formData.append('title', payload.title);
-	}
-	if (payload.content) {
 		formData.append('content', payload.content);
-	}
-	if (payload.thumbnail) {
-		formData.append('thumbnail', payload.thumbnail);
-	}
-	return http.patch<BlogResponse>(`/blog/${id}`, formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-	});
-};
+		if (payload.thumbnail) {
+			formData.append('thumbnail', payload.thumbnail);
+		}
+		return http.post<BlogResponse>('/blog', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+	},
 
-export const deleteBlog = (id: string) => {
-	return http.delete<SimpleMessageResponse>(`/blog/${id}`);
-};
+	getAllBlogs: () => {
+		return http.get<BlogsResponse>('/blog');
+	},
 
-export const createComment = (blogId: string, payload: CreateBlogCommentPayload) => {
-	return http.post<BlogCommentResponse>(`/blog/${blogId}/comments`, payload);
-};
+	getBlogBySlug: (slug: string) => {
+		return http.get<BlogResponse>(`/blog/${slug}`);
+	},
 
-export const getCommentsByBlogId = (blogId: string) => {
-	return http.get<BlogCommentsResponse>(`/blog/${blogId}/comments`);
-};
+	updateBlog: (id: string, payload: UpdateBlogPayload) => {
+		const formData = new FormData();
+		if (payload.title) {
+			formData.append('title', payload.title);
+		}
+		if (payload.content) {
+			formData.append('content', payload.content);
+		}
+		if (payload.thumbnail) {
+			formData.append('thumbnail', payload.thumbnail);
+		}
+		return http.patch<BlogResponse>(`/blog/${id}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+	},
 
-export const updateComment = (blogId: string, commentId: string, payload: UpdateBlogCommentPayload) => {
-	return http.patch<BlogCommentResponse>(`/blog/${blogId}/comments/${commentId}`, payload);
-};
+	deleteBlog: (id: string) => {
+		return http.delete<SimpleMessageResponse>(`/blog/${id}`);
+	},
 
-export const deleteComment = (blogId: string, commentId: string) => {
-	return http.delete<SimpleMessageResponse>(`/blog/${blogId}/comments/${commentId}`);
-};
+	createComment: (blogId: string, payload: CreateBlogCommentPayload) => {
+		return http.post<BlogCommentResponse>(`/blog/${blogId}/comments`, payload);
+	},
+
+	getCommentsByBlogId: (blogId: string) => {
+		return http.get<BlogCommentsResponse>(`/blog/${blogId}/comments`);
+	},
+
+	updateComment: (blogId: string, commentId: string, payload: UpdateBlogCommentPayload) => {
+		return http.patch<BlogCommentResponse>(`/blog/${blogId}/comments/${commentId}`, payload);
+	},
+
+	deleteComment: (blogId: string, commentId: string) => {
+		return http.delete<SimpleMessageResponse>(`/blog/${blogId}/comments/${commentId}`);
+	},
+});

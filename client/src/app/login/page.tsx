@@ -14,12 +14,15 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { Separator } from '~/components/ui/separator';
-import { signin } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 
 const Login = () => {
 	const t = useTranslations('auth');
 
 	const router = useRouter();
+
+	const { signin } = createClientService(createAuthService);
 
 	const schema = z.object({
 		email: z.string().min(1, t('message.email-required')).email(t('message.email-invalid')),

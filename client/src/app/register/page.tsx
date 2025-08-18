@@ -13,12 +13,15 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { Separator } from '~/components/ui/separator';
-import { signup } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 
 const Register = () => {
 	const t = useTranslations('auth');
 
 	const router = useRouter();
+
+	const { signup } = createClientService(createAuthService);
 
 	const schema = z.object({
 		username: z.string().min(1, t('message.username-required')),

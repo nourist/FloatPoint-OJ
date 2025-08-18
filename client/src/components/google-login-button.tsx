@@ -8,12 +8,15 @@ import { toast } from 'sonner';
 import { mutate } from 'swr';
 
 import { Button } from './ui/button';
-import { googleSignin } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 
 const GoogleLoginButton = () => {
 	const t = useTranslations('auth');
 
 	const router = useRouter();
+
+	const { googleSignin } = createClientService(createAuthService);
 
 	const handle = useGoogleLogin({
 		onSuccess: (tokenResponse) => {

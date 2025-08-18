@@ -131,5 +131,14 @@
 			"create-success": "Blog created successfully!",
 			"create-fail": "Failed to create blog."
 		}
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Latest articles, tutorials, and insights from the programming community",
+		"new": "New"
+	},
+	"pagination": {
+		"view": "View",
+		"sizes": "Sizes"
 	}
 }

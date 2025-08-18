@@ -10,10 +10,13 @@ import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import { forgotPassword } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 
 const ForgotPassword = () => {
 	const t = useTranslations('auth');
+
+	const { forgotPassword } = createClientService(createAuthService);
 
 	const schema = z.object({
 		email: z.string().min(1, t('message.email-required')).email(t('message.email-invalid')),

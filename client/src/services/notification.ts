@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { Notification } from '../types/notification.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export enum NotificationStatus {
@@ -23,10 +23,12 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const getNotifications = (params: GetNotificationsPayload) => {
-	return http.get<NotificationsResponse>('/notification', { params });
-};
+export const createNotificationService = (http: ApiInstance) => ({
+	getNotifications: (params: GetNotificationsPayload) => {
+		return http.get<NotificationsResponse>('/notification', { params });
+	},
 
-export const markAsRead = (id: string) => {
-	return http.patch<SimpleMessageResponse>(`/notification/${id}`);
-};
+	markAsRead: (id: string) => {
+		return http.patch<SimpleMessageResponse>(`/notification/${id}`);
+	},
+});

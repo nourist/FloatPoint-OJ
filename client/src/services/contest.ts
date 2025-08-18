@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { Contest, UserStanding } from '../types/contest.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export interface CreateContestPayload {
@@ -48,22 +48,24 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const findAllContests = (params: QueryContestPayload) => {
-	return http.get<ContestsResponse>('/contests', { params });
-};
+export const createContestService = (http: ApiInstance) => ({
+	findAllContests: (params: QueryContestPayload) => {
+		return http.get<ContestsResponse>('/contests', { params });
+	},
 
-export const findOneContest = (slug: string) => {
-	return http.get<ContestResponse>(`/contests/${slug}`);
-};
+	findOneContest: (slug: string) => {
+		return http.get<ContestResponse>(`/contests/${slug}`);
+	},
 
-export const joinContest = (id: string) => {
-	return http.post<SimpleMessageResponse>(`/contests/${id}/join`);
-};
+	joinContest: (id: string) => {
+		return http.post<SimpleMessageResponse>(`/contests/${id}/join`);
+	},
 
-export const leaveContest = (id: string) => {
-	return http.post<SimpleMessageResponse>(`/contests/${id}/leave`);
-};
+	leaveContest: (id: string) => {
+		return http.post<SimpleMessageResponse>(`/contests/${id}/leave`);
+	},
 
-export const getContestStandings = (id: string) => {
-	return http.get<StandingsResponse>(`/contests/${id}/standings`);
-};
+	getContestStandings: (id: string) => {
+		return http.get<StandingsResponse>(`/contests/${id}/standings`);
+	},
+});

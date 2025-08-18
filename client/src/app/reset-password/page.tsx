@@ -12,7 +12,8 @@ import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import { resetPassword } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 
 const ResetPassword = () => {
 	const t = useTranslations('auth');
@@ -21,6 +22,8 @@ const ResetPassword = () => {
 
 	const searchParams = useSearchParams();
 	const token = searchParams.get('token');
+
+	const { resetPassword } = createClientService(createAuthService);
 
 	const schema = z
 		.object({

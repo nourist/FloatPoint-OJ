@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
-import { verifyEmail } from '~/services/auth';
+import { createServerService } from '~/lib/service-server';
+import { createAuthService } from '~/services/auth';
 
 export const GET = async (request: Request) => {
 	const { searchParams } = new URL(request.url);
@@ -11,6 +12,7 @@ export const GET = async (request: Request) => {
 	}
 
 	try {
+		const { verifyEmail } = await createServerService(createAuthService);
 		const { email } = await verifyEmail({ token });
 		return NextResponse.redirect(new URL(`/verify-success?email=${email}`, request.url));
 	} catch (error) {

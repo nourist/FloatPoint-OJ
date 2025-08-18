@@ -1,5 +1,5 @@
-import http from '../lib/http';
 import { ProgramLanguage, Submission, SubmissionStatus } from '../types/submission.type';
+import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
 export interface GetAllSubmissionsPayload {
@@ -30,14 +30,16 @@ export interface SubmissionResponse {
 }
 
 // Functions
-export const findAllSubmissions = (params: GetAllSubmissionsPayload) => {
-	return http.get<SubmissionsResponse>('/submission', { params });
-};
+export const createSubmissionService = (http: ApiInstance) => ({
+	findAllSubmissions: (params: GetAllSubmissionsPayload) => {
+		return http.get<SubmissionsResponse>('/submission', { params });
+	},
 
-export const findOneSubmission = (id: string) => {
-	return http.get<SubmissionResponse>(`/submission/${id}`);
-};
+	findOneSubmission: (id: string) => {
+		return http.get<SubmissionResponse>(`/submission/${id}`);
+	},
 
-export const submitCode = (payload: SubmitCodePayload) => {
-	return http.post<SubmissionResponse>('/submission', payload);
-};
+	submitCode: (payload: SubmitCodePayload) => {
+		return http.post<SubmissionResponse>('/submission', payload);
+	},
+});

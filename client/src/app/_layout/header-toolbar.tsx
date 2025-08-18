@@ -23,14 +23,16 @@ import {
 } from '~/components/ui/dropdown-menu';
 import UserAvatar from '~/components/user-avatar';
 import { Locale, locales, localesCode } from '~/i18n/locales';
-import { getProfile } from '~/services/auth';
-import { signout } from '~/services/auth';
+import { createClientService } from '~/lib/service-client';
+import { createAuthService } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
 
 const HeaderToolbar = () => {
 	const t = useTranslations('layout.header');
 
 	const router = useRouter();
+
+	const { getProfile, signout } = createClientService(createAuthService);
 
 	const { data: user, isLoading } = useSWR('/auth/me', getProfile);
 

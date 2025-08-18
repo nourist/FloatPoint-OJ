@@ -11,11 +11,14 @@ import { toast } from 'sonner';
 import { ImageUpload, ImageUploadRef } from '~/components/image-upload';
 import SimpleEditor from '~/components/simple-editor';
 import { Button } from '~/components/ui/button';
-import { createBlog } from '~/services/blog';
+import { createClientService } from '~/lib/service-client';
+import { createBlogService } from '~/services/blog';
 
 const CreateBlog = () => {
 	const t = useTranslations('create.blog');
 	const router = useRouter();
+
+	const { createBlog } = createClientService(createBlogService);
 
 	const [isLoading, setIsLoading] = useState(false);
 
