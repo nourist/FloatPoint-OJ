@@ -20,12 +20,26 @@ export class ContestService {
 		private readonly submissionRepository: Repository<Submission>,
 	) {}
 
-	async isSlugExists(slug: string) {
+	private async findContestById(id: string, relations: string[] = []): Promise<Contest> {
+		const contest = await this.contestRepository.findOne({ where: { id }, relations });
+		if (!contest) {
+			throw new NotFoundException(`Contest with ID '${id}' not found`);
+		}
+		return contest;
+	}
+
+	private checkContestOwnership(contest: Contest, user: User): void {
+		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
+			throw new ForbiddenException('You are not allowed to perform this action on this contest.');
+		}
+	}
+
+	async isSlugExists(slug: string): Promise<boolean> {
 		const contest = await this.contestRepository.findOneBy({ slug });
 		return !!contest;
 	}
 
-	async create(createContestDto: CreateContestDto, creator: User) {
+	async create(createContestDto: CreateContestDto, creator: User): Promise<Contest> {
 		const slug = slugify(createContestDto.title, { lower: true });
 
 		if (await this.isSlugExists(slug)) {
@@ -84,7 +98,7 @@ export class ContestService {
 		};
 	}
 
-	async findOne(slug: string) {
+	async findOne(slug: string): Promise<Contest> {
 		const contest = await this.contestRepository.findOneBy({ slug });
 		if (!contest) {
 			throw new NotFoundException(`Contest with slug '${slug}' not found`);
@@ -92,32 +106,23 @@ export class ContestService {
 		return contest;
 	}
 
-	async update(id: string, updateContestDto: UpdateContestDto, user: User) {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['creator'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
-
-		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
-			throw new ForbiddenException('You are not allowed to update this contest.');
-		}
+	async update(id: string, updateContestDto: UpdateContestDto, user: User): Promise<Contest> {
+		const contest = await this.findContestById(id, ['creator']);
+		this.checkContestOwnership(contest, user);
 
 		await this.contestRepository.update(id, updateContestDto);
-		return this.contestRepository.findOneBy({ id });
+		return this.findContestById(id);
 	}
 
-	async remove(id: string) {
+	async remove(id: string): Promise<void> {
 		const result = await this.contestRepository.delete(id);
 		if (result.affected === 0) {
 			throw new NotFoundException(`Contest with ID '${id}' not found`);
 		}
 	}
 
-	async join(id: string, user: User) {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['participants'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
+	async join(id: string, user: User): Promise<Contest> {
+		const contest = await this.findContestById(id, ['participants']);
 
 		const isAlreadyParticipant = contest.participants.some((p) => p.id === user.id);
 		if (!isAlreadyParticipant) {
@@ -128,11 +133,8 @@ export class ContestService {
 		return contest;
 	}
 
-	async leave(id: string, user: User) {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['participants'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
+	async leave(id: string, user: User): Promise<Contest> {
+		const contest = await this.findContestById(id, ['participants']);
 
 		contest.participants = contest.participants.filter((p) => p.id !== user.id);
 		await this.contestRepository.save(contest);
@@ -140,15 +142,9 @@ export class ContestService {
 		return contest;
 	}
 
-	async addProblems(id: string, { problemIds }: AddProblemsDto, user: User) {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['problems', 'creator'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
-
-		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
-			throw new ForbiddenException('You are not allowed to add problems to this contest.');
-		}
+	async addProblems(id: string, { problemIds }: AddProblemsDto, user: User): Promise<Contest> {
+		const contest = await this.findContestById(id, ['problems', 'creator']);
+		this.checkContestOwnership(contest, user);
 
 		const problems = await this.problemRepository.findBy({ id: In(problemIds) });
 		if (problems.length !== problemIds.length) {
@@ -160,15 +156,9 @@ export class ContestService {
 		return contest;
 	}
 
-	async removeProblem(id: string, problemId: string, user: User) {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['problems', 'creator'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
-
-		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
-			throw new ForbiddenException('You are not allowed to remove problems from this contest.');
-		}
+	async removeProblem(id: string, problemId: string, user: User): Promise<Contest> {
+		const contest = await this.findContestById(id, ['problems', 'creator']);
+		this.checkContestOwnership(contest, user);
 
 		const initialProblemCount = contest.problems.length;
 		contest.problems = contest.problems.filter((p) => p.id !== problemId);
@@ -182,14 +172,8 @@ export class ContestService {
 	}
 
 	async start(id: string, user: User): Promise<Contest> {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['creator'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
-
-		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
-			throw new ForbiddenException('You are not allowed to start this contest.');
-		}
+		const contest = await this.findContestById(id, ['creator']);
+		this.checkContestOwnership(contest, user);
 
 		if (new Date() < contest.startTime) {
 			contest.startTime = new Date();
@@ -199,14 +183,8 @@ export class ContestService {
 	}
 
 	async stop(id: string, user: User): Promise<Contest> {
-		const contest = await this.contestRepository.findOne({ where: { id }, relations: ['creator'] });
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
-
-		if (user.role !== UserRole.ADMIN && contest.creator.id !== user.id) {
-			throw new ForbiddenException('You are not allowed to stop this contest.');
-		}
+		const contest = await this.findContestById(id, ['creator']);
+		this.checkContestOwnership(contest, user);
 
 		if (new Date() < contest.endTime) {
 			contest.endTime = new Date();
@@ -216,29 +194,27 @@ export class ContestService {
 	}
 
 	async getStandings(id: string): Promise<UserStandingDto[]> {
-		// 1. Fetch contest and all its submissions in two efficient queries
-		const contest = await this.contestRepository.findOne({ where: { id: id } });
-
-		if (!contest) {
-			throw new NotFoundException(`Contest with ID '${id}' not found`);
-		}
+		const contest = await this.findContestById(id);
 
 		const submissions = await this.submissionRepository.find({
 			where: { contest: { id: id } },
 			relations: ['author', 'problem', 'result'],
-			order: { submittedAt: 'ASC' }, // Process submissions chronologically
+			order: { submittedAt: 'ASC' },
 		});
 
-		// 2. Process submissions in memory to build the standings table
+		const standingsMap = this.calculateStandings(submissions, contest);
+		const sortedStandings = this.sortStandings(Array.from(standingsMap.values()));
+		return this.assignRanks(sortedStandings);
+	}
+
+	private calculateStandings(submissions: Submission[], contest: Contest): Map<string, UserStandingDto> {
 		const standingsMap = new Map<string, UserStandingDto>();
 
 		for (const sub of submissions) {
-			// Ensure submission has an author and problem
 			if (!sub.author || !sub.problem) continue;
 
 			const userId = sub.author.id;
 
-			// Initialize user in the standings if not present
 			if (!standingsMap.has(userId)) {
 				standingsMap.set(userId, {
 					rank: 0,
@@ -254,12 +230,10 @@ export class ContestService {
 			const userStanding = standingsMap.get(userId)!;
 			const problemId = sub.problem.id;
 
-			// If problem is already solved (AC), ignore subsequent submissions
 			if (userStanding.problems[problemId]?.score > 0) {
 				continue;
 			}
 
-			// Initialize problem for the user if not present
 			if (!userStanding.problems[problemId]) {
 				userStanding.problems[problemId] = {
 					problemId: problemId,
@@ -272,7 +246,7 @@ export class ContestService {
 			const problemStanding = userStanding.problems[problemId];
 
 			if (sub.status === SubmissionStatus.ACCEPTED) {
-				const timeToSolve = (sub.submittedAt.getTime() - contest.startTime.getTime()) / 1000; // in seconds
+				const timeToSolve = (sub.submittedAt.getTime() - contest.startTime.getTime()) / 1000;
 				const penaltyTime = problemStanding.wrongSubmissionsCount * (contest.penalty || 0);
 
 				problemStanding.score = sub.totalScore;
@@ -285,16 +259,20 @@ export class ContestService {
 			}
 		}
 
-		// 3. Convert map to array and sort it
-		const sortedStandings = Array.from(standingsMap.values()).sort((a, b) => {
-			if (a.totalScore !== b.totalScore) {
-				return b.totalScore - a.totalScore; // Sort by score descending
-			}
-			return a.totalTime - b.totalTime; // Then by time ascending
-		});
+		return standingsMap;
+	}
 
-		// 4. Assign ranks
-		return sortedStandings.map((standing, index) => ({
+	private sortStandings(standings: UserStandingDto[]): UserStandingDto[] {
+		return standings.sort((a, b) => {
+			if (a.totalScore !== b.totalScore) {
+				return b.totalScore - a.totalScore;
+			}
+			return a.totalTime - b.totalTime;
+		});
+	}
+
+	private assignRanks(standings: UserStandingDto[]): UserStandingDto[] {
+		return standings.map((standing, index) => ({
 			...standing,
 			rank: index + 1,
 		}));

@@ -23,6 +23,34 @@ export class BlogService {
 		private readonly notificationService: NotificationService,
 	) {}
 
+	private async findBlogById(id: string): Promise<Blog> {
+		const blog = await this.blogRepository.findOne({ where: { id } });
+		if (!blog) {
+			throw new NotFoundException('Blog not found');
+		}
+		return blog;
+	}
+
+	private async findBlogCommentById(id: string): Promise<BlogComment> {
+		const comment = await this.blogCommentRepository.findOne({ where: { id } });
+		if (!comment) {
+			throw new NotFoundException('Blog comment not found');
+		}
+		return comment;
+	}
+
+	private checkBlogOwnership(blog: Blog, user: User): void {
+		if (blog.author.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
+		}
+	}
+
+	private checkBlogCommentOwnership(comment: BlogComment, user: User): void {
+		if (comment.user.id !== user.id) {
+			throw new UnauthorizedException('Unauthorized');
+		}
+	}
+
 	async isSlugExists(slug: string) {
 		const blog = await this.blogRepository.findOne({ where: { slug } });
 		return !!blog;
@@ -73,14 +101,8 @@ export class BlogService {
 
 	@Transactional()
 	async update(id: string, updateBlogDto: UpdateBlogDto, thumbnail: Express.Multer.File, user: User) {
-		const blog = await this.blogRepository.findOne({ where: { id } });
-		if (!blog) {
-			throw new NotFoundException('Blog not found');
-		}
-
-		if (blog.author.id !== user.id) {
-			throw new UnauthorizedException('Unauthorized');
-		}
+		const blog = await this.findBlogById(id);
+		this.checkBlogOwnership(blog, user);
 
 		let thumbnailUrl: string | null = blog.thumbnailUrl;
 
@@ -107,14 +129,8 @@ export class BlogService {
 
 	@Transactional()
 	async delete(id: string, user: User) {
-		const blog = await this.blogRepository.findOne({ where: { id } });
-		if (!blog) {
-			throw new NotFoundException('Blog not found');
-		}
-
-		if (blog.author.id !== user.id) {
-			throw new UnauthorizedException('Unauthorized');
-		}
+		const blog = await this.findBlogById(id);
+		this.checkBlogOwnership(blog, user);
 
 		if (blog.thumbnailUrl) {
 			const bucketName = 'thumbnails';
@@ -129,11 +145,7 @@ export class BlogService {
 	}
 
 	async createComment(blogId: string, createBlogCommentDto: CreateBlogCommentDto, user: User) {
-		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
-		if (!blog) {
-			throw new NotFoundException('Blog not found');
-		}
-
+		const blog = await this.findBlogById(blogId);
 		const blogComment = this.blogCommentRepository.create({ ...createBlogCommentDto, blog, user });
 		return this.blogCommentRepository.save(blogComment);
 	}
@@ -143,38 +155,18 @@ export class BlogService {
 	}
 
 	async updateComment(blogId: string, commentId: string, updateBlogCommentDto: UpdateBlogCommentDto, user: User) {
-		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
-		if (!blog) {
-			throw new NotFoundException('Blog not found');
-		}
-
-		const blogComment = await this.blogCommentRepository.findOne({ where: { id: commentId, blog: { id: blogId } } });
-		if (!blogComment) {
-			throw new NotFoundException('Blog comment not found');
-		}
-
-		if (blogComment.user.id !== user.id) {
-			throw new UnauthorizedException('Unauthorized');
-		}
+		await this.findBlogById(blogId);
+		const blogComment = await this.findBlogCommentById(commentId);
+		this.checkBlogCommentOwnership(blogComment, user);
 
 		Object.assign(blogComment, updateBlogCommentDto);
 		return this.blogCommentRepository.save(blogComment);
 	}
 
 	async deleteComment(blogId: string, commentId: string, user: User) {
-		const blog = await this.blogRepository.findOne({ where: { id: blogId } });
-		if (!blog) {
-			throw new NotFoundException('Blog not found');
-		}
-
-		const blogComment = await this.blogCommentRepository.findOne({ where: { id: commentId, blog: { id: blogId } } });
-		if (!blogComment) {
-			throw new NotFoundException('Blog comment not found');
-		}
-
-		if (blogComment.user.id !== user.id) {
-			throw new UnauthorizedException('Unauthorized');
-		}
+		await this.findBlogById(blogId);
+		const blogComment = await this.findBlogCommentById(commentId);
+		this.checkBlogCommentOwnership(blogComment, user);
 
 		await this.blogCommentRepository.remove(blogComment);
 	}

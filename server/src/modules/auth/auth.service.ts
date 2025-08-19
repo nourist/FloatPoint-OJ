@@ -52,25 +52,8 @@ export class AuthService {
 
 	@Transactional()
 	async signup(userData: { email: string; password: string; username: string }) {
-		const isUserExists = await this.userService.checkEmailExists(userData.email);
-		if (isUserExists) {
-			this.logger.log(`User ${userData.email} already exists`);
-			throw new BadRequestException('User already exists');
-		}
-
-		const isUsernameExists = await this.userService.checkUsernameExists(userData.username);
-		if (isUsernameExists) {
-			this.logger.log(`Username ${userData.username} already exists`);
-			throw new BadRequestException('Username already exists');
-		}
-
-		const hashedPassword = bcrypt.hashSync(userData.password, this.configService.get<number>('SALT_ROUNDS')!);
-		const verificationToken = uuidv4();
-
-		const user = await this.userRepository.save(this.userRepository.create({ ...userData, password: hashedPassword, verificationToken }));
-
-		await this.mailService.sendVerifyEmail(user.email, verificationToken);
-
+		const user = await this.userService.createUser(userData);
+		await this.mailService.sendVerifyEmail(user.email, user.verificationToken!);
 		this.logger.log(`User created with email ${user.email}`);
 		return user;
 	}

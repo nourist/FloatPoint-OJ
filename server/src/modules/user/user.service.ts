@@ -1,6 +1,9 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 import { MinioService } from '../minio/minio.service';
 import { GetUsersDto, UpdateNotificationSettingsDto, UpdateUserDto } from './user.dto';
@@ -14,6 +17,7 @@ export class UserService {
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
 		private readonly minioService: MinioService,
+		private readonly configService: ConfigService,
 	) {}
 
 	async getUserById(id: string): Promise<User> {
@@ -109,6 +113,31 @@ export class UserService {
 		const total = await baseQuery.getCount();
 
 		return { users: usersWithScore, total };
+	}
+
+	async createUser(userData: { email: string; password: string; username: string }): Promise<User> {
+		const isUserExists = await this.checkEmailExists(userData.email);
+		if (isUserExists) {
+			this.logger.log(`User ${userData.email} already exists`);
+			throw new BadRequestException('User already exists');
+		}
+
+		const isUsernameExists = await this.checkUsernameExists(userData.username);
+		if (isUsernameExists) {
+			this.logger.log(`Username ${userData.username} already exists`);
+			throw new BadRequestException('Username already exists');
+		}
+
+		const hashedPassword = bcrypt.hashSync(userData.password, this.configService.get<number>('SALT_ROUNDS')!);
+		const verificationToken = uuidv4();
+
+		const user = this.userRepository.create({
+			...userData,
+			password: hashedPassword,
+			verificationToken,
+		});
+
+		return this.userRepository.save(user);
 	}
 
 	async updateProfile(id: string, updateUserDto: UpdateUserDto): Promise<User> {

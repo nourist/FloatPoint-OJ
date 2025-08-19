@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ProblemService } from '../problem/problem.service';
+import { UserService } from '../user/user.service';
 import { GetAllSubmissionsDto, SubmitCodeDto } from './submission.dto';
 import { Submission } from 'src/entities/submission.entity';
 import { User, UserRole } from 'src/entities/user.entity';
@@ -13,8 +14,7 @@ export class SubmissionService {
 	constructor(
 		@InjectRepository(Submission)
 		private readonly submissionRepository: Repository<Submission>,
-		@InjectRepository(User)
-		private readonly userRepository: Repository<User>,
+		private readonly userService: UserService,
 		@Inject('JUDGER_JOB_QUEUE')
 		private readonly judgerJobQueue: ClientProxy,
 		private readonly problemService: ProblemService,
@@ -37,21 +37,10 @@ export class SubmissionService {
 			qb.andWhere('author.id = :userId', { userId: user.id });
 		}
 
-		if (authorId) {
-			qb.andWhere('author.id = :authorId', { authorId });
-		}
-
-		if (problemId) {
-			qb.andWhere('problem.id = :problemId', { problemId });
-		}
-
-		if (language) {
-			qb.andWhere('submission.language = :language', { language });
-		}
-
-		if (status) {
-			qb.andWhere('submission.status = :status', { status });
-		}
+		if (authorId) qb.andWhere('author.id = :authorId', { authorId });
+		if (problemId) qb.andWhere('problem.id = :problemId', { problemId });
+		if (language) qb.andWhere('submission.language = :language', { language });
+		if (status) qb.andWhere('submission.status = :status', { status });
 
 		const [submissions, total] = await qb
 			.skip((page - 1) * limit)
@@ -68,7 +57,7 @@ export class SubmissionService {
 
 	async submitCode(body: SubmitCodeDto, user: User) {
 		const problem = await this.problemService.getProblemById(body.problemId);
-		const userWithContest = await this.userRepository.findOne({ where: { id: user.id }, relations: ['joiningContest'] });
+		const userWithContest = await this.userService.getUserById(user.id);
 		const submission = this.submissionRepository.create({
 			sourceCode: body.code,
 			language: body.language,
