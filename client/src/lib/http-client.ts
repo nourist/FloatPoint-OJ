@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 import { addAxiosDateTransformer } from 'axios-date-transformer';
 
+import { getApiUrl } from './utils';
 import { ApiInstance } from '~/types/axios.type';
 
 const http = addAxiosDateTransformer(
 	axios.create({
-		baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000',
+		baseURL: getApiUrl(),
 		withCredentials: true,
 	}),
 ) as ApiInstance;

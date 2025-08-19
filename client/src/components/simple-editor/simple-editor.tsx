@@ -124,6 +124,25 @@ type Props = {
 	onReady: (content: Editor) => void;
 };
 
+export const extensions = [
+	StarterKit.configure({
+		horizontalRule: false,
+		link: {
+			openOnClick: false,
+			enableClickSelection: true,
+		},
+	}),
+	HorizontalRule,
+	TextAlign.configure({ types: ['heading', 'paragraph'] }),
+	TaskList,
+	TaskItem.configure({ nested: true }),
+	Highlight.configure({ multicolor: true }),
+	Typography,
+	Superscript,
+	Subscript,
+	Selection,
+];
+
 export function SimpleEditor({ placeholder, onReady }: Props) {
 	const isMobile = useIsMobile();
 	const { height } = useWindowSize();
@@ -143,25 +162,10 @@ export function SimpleEditor({ placeholder, onReady }: Props) {
 			},
 		},
 		extensions: [
-			StarterKit.configure({
-				horizontalRule: false,
-				link: {
-					openOnClick: false,
-					enableClickSelection: true,
-				},
-			}),
+			...extensions,
 			Placeholder.configure({
 				placeholder,
 			}),
-			HorizontalRule,
-			TextAlign.configure({ types: ['heading', 'paragraph'] }),
-			TaskList,
-			TaskItem.configure({ nested: true }),
-			Highlight.configure({ multicolor: true }),
-			Typography,
-			Superscript,
-			Subscript,
-			Selection,
 		],
 		content,
 	});

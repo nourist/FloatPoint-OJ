@@ -75,3 +75,14 @@ export const stringToBrightColor = (str: string) => {
 
 	return hslToHex(Math.abs(hash * 141) % 360, 90, 75);
 };
+
+export const getApiUrl = () => {
+	return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+};
+
+export const joinUrl = (...parts: string[]) => {
+	return parts
+		.map((p, i) => (i === 0 ? p.replace(/\/+$/, '') : p.replace(/^\/+|\/+$/g, '')))
+		.filter(Boolean)
+		.join('/');
+};

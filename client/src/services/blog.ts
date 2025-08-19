@@ -2,6 +2,11 @@ import { Blog, BlogComment } from '../types/blog.type';
 import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
+export interface BlogsPayload {
+	page?: number;
+	size?: number;
+}
+
 export interface CreateBlogPayload {
 	title: string;
 	content: string;
@@ -31,6 +36,9 @@ export interface BlogResponse {
 export interface BlogsResponse {
 	message: string;
 	blogs: Blog[];
+	page: number;
+	size: number;
+	total: number;
 }
 
 export interface BlogCommentResponse {
@@ -63,8 +71,8 @@ export const createBlogService = (http: ApiInstance) => ({
 		});
 	},
 
-	getAllBlogs: () => {
-		return http.get<BlogsResponse>('/blog');
+	getAllBlogs: (payload: BlogsPayload) => {
+		return http.get<BlogsResponse>('/blog', { params: payload });
 	},
 
 	getBlogBySlug: (slug: string) => {
