@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Max, Min } from 'class-validator';
 
 export class CreateBlogDto {
 	@IsString()
@@ -34,4 +35,19 @@ export class UpdateBlogCommentDto {
 	@IsString()
 	@IsOptional()
 	content?: string;
+}
+
+export class BlogPaginationQueryDto {
+	@IsOptional()
+	@Type(() => Number)
+	@IsInt()
+	@Min(1)
+	page?: number = 1;
+
+	@IsOptional()
+	@Type(() => Number)
+	@IsInt()
+	@Min(1)
+	@Max(100)
+	size?: number = 10;
 }

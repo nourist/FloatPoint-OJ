@@ -1,8 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
+import { BlogPaginationQueryDto, CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
 import { BlogService } from './blog.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User } from 'src/entities/user.entity';
@@ -23,10 +23,11 @@ export class BlogController {
 	}
 
 	@Get()
-	async getAllBlogs() {
+	async getAllBlogs(@Query() query: BlogPaginationQueryDto) {
+		const result = await this.blogService.findAll(query);
 		return {
 			message: 'Get all blogs',
-			blogs: await this.blogService.findAll(),
+			...result,
 		};
 	}
 

@@ -6,6 +6,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import * as cookieParser from 'cookie-parser';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
@@ -74,6 +75,18 @@ async function bootstrap() {
 			queueOptions: { durable: true },
 		},
 	});
+
+	app.use(
+		'/storage',
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		createProxyMiddleware({
+			target: `http://${configService.get<string>('MINIO_ENDPOINT')}:${configService.get<number>('MINIO_PORT')}`,
+			changeOrigin: true,
+			pathRewrite: {
+				'^/storage': '',
+			},
+		}),
+	);
 
 	const config = new DocumentBuilder().setTitle('API Docs').setDescription('API documentation for my project').setVersion('1.0').addBearerAuth().build();
 

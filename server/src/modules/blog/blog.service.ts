@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 import { Repository } from 'typeorm';
@@ -9,7 +9,7 @@ import { BlogComment } from '../../entities/blog-comment.entity';
 import { Blog } from '../../entities/blog.entity';
 import { MinioService } from '../minio/minio.service';
 import { NotificationService } from '../notification/notification.service';
-import { CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
+import { BlogPaginationQueryDto, CreateBlogCommentDto, CreateBlogDto, UpdateBlogCommentDto, UpdateBlogDto } from './blog.dto';
 import { User } from 'src/entities/user.entity';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class BlogService {
 		const slug = slugify(createBlogDto.title, { lower: true });
 
 		if (await this.isSlugExists(slug)) {
-			throw new Error('Slug already exists');
+			throw new BadRequestException('Slug already exists');
 		}
 
 		if (thumbnail) {
@@ -51,8 +51,16 @@ export class BlogService {
 		return savedBlog;
 	}
 
-	async findAll() {
-		return this.blogRepository.find();
+	async findAll(query: BlogPaginationQueryDto) {
+		const page = query.page || 1;
+		const size = query.size || 10;
+		const [blogs, total] = await this.blogRepository.findAndCount({
+			order: { createdAt: 'DESC' },
+			take: size,
+			skip: (page - 1) * size,
+			relations: ['author'],
+		});
+		return { blogs, total, page, size };
 	}
 
 	async findBySlug(slug: string) {
