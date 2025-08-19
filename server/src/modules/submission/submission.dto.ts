@@ -1,6 +1,5 @@
 import { IsEnum, IsInt, IsString } from 'class-validator';
 
-import { Default } from 'src/decorators/default.decorator';
 import { SubmissionStatus } from 'src/entities/submission.entity';
 import { ProgramLanguage } from 'src/entities/submission.entity';
 
@@ -18,12 +17,10 @@ export class GetAllSubmissionsDto {
 	status?: SubmissionStatus;
 
 	@IsInt()
-	@Default(1)
-	page: number;
+	page = 1;
 
 	@IsInt()
-	@Default(20)
-	limit: number;
+	limit = 20;
 }
 
 export class SubmitCodeDto {

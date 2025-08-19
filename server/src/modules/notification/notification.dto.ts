@@ -1,7 +1,5 @@
 import { IsEnum, IsUUID } from 'class-validator';
 
-import { Default } from 'src/decorators/default.decorator';
-
 export enum NotificationStatus {
 	READ = 'read',
 	UNREAD = 'unread',
@@ -10,8 +8,7 @@ export enum NotificationStatus {
 
 export class GetNotificationsQueryDto {
 	@IsEnum(NotificationStatus)
-	@Default(NotificationStatus.ALL)
-	status: NotificationStatus;
+	status: NotificationStatus = NotificationStatus.ALL;
 }
 
 export class MarkAsReadDto {
