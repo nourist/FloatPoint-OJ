@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Contest } from './contest.entity';
 import { ProblemEditorial } from './problem-editorial.entity';
@@ -80,6 +80,7 @@ export class Problem {
 	contests: Contest[];
 
 	@ManyToMany(() => ProblemTag, (problemTag) => problemTag.problems)
+	@JoinTable()
 	tags: ProblemTag[];
 
 	@OneToOne(() => ProblemEditorial, (problemEditorial) => problemEditorial.problem, { onDelete: 'SET NULL', nullable: true })
@@ -90,4 +91,7 @@ export class Problem {
 
 	@UpdateDateColumn({ type: 'timestamptz' })
 	updatedAt: Date;
+
+	//non-db
+	status?: 'solved' | 'attempted' | null;
 }

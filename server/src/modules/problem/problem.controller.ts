@@ -14,9 +14,9 @@ import {
 import { ProblemService } from './problem.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { Roles } from 'src/decorators/roles.decorator';
-import { UserRole } from 'src/entities/user.entity';
-import { User } from 'src/entities/user.entity';
+import { User, UserRole } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from 'src/guards/optional-jwt-auth.guard';
 import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('problem')
@@ -24,10 +24,11 @@ export class ProblemController {
 	constructor(private readonly problemService: ProblemService) {}
 
 	@Get()
-	async findAll(@Query() query: GetAllProblemsDto) {
+	@UseGuards(OptionalJwtAuthGuard)
+	async findAll(@Query() query: GetAllProblemsDto, @GetUser() user: User) {
 		return {
 			message: 'success',
-			...(await this.problemService.findAll(query)),
+			...(await this.problemService.findAll(query, user)),
 		};
 	}
 

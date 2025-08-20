@@ -16,7 +16,7 @@ export class Subtask {
 	@Column({ type: 'varchar', length: 255 })
 	name: string;
 
-	@Column({ type: 'varchar', length: 255, unique: true })
+	@Column({ type: 'varchar', length: 255 })
 	slug: string;
 
 	@OneToMany(() => TestCase, (testCase) => testCase.subtask)

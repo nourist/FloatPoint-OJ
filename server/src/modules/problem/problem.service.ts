@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, Logger, NotFoundException } from '@nes
 import { InjectRepository } from '@nestjs/typeorm';
 import * as path from 'path';
 import slug from 'slugify';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Transactional } from 'typeorm-transactional';
 
 import {
@@ -19,7 +19,7 @@ import {
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
 import { ProblemTag } from 'src/entities/problem-tag.entity';
 import { Problem } from 'src/entities/problem.entity';
-import { Submission } from 'src/entities/submission.entity';
+import { Submission, SubmissionStatus } from 'src/entities/submission.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { TestCase } from 'src/entities/test-case.entity';
 import { User } from 'src/entities/user.entity';
@@ -82,8 +82,8 @@ export class ProblemService {
 		);
 	}
 
-	async findAll(query: GetAllProblemsDto) {
-		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial } = query;
+	async findAll(query: GetAllProblemsDto, user?: User) {
+		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status } = query;
 
 		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
@@ -137,10 +137,65 @@ export class ProblemService {
 			}
 		}
 
+		if (user && status) {
+			if (status === 'unattempted') {
+				qb.andWhere((subQuery) => {
+					const sub = subQuery.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					return `NOT EXISTS ${sub.getQuery()}`;
+				});
+			} else if (status === 'attempted') {
+				qb.andWhere((subQuery) => {
+					const sub = subQuery
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id })
+						.andWhere("s.status = 'ACCEPTED'");
+					return `NOT EXISTS ${sub.getQuery()}`;
+				}).andWhere((subQuery) => {
+					const sub = subQuery.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					return `EXISTS ${sub.getQuery()}`;
+				});
+			} else if (status === 'solved') {
+				qb.andWhere((subQuery) => {
+					const sub = subQuery
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id })
+						.andWhere("s.status = 'ACCEPTED'");
+					return `EXISTS ${sub.getQuery()}`;
+				});
+			}
+		}
+
 		const [problems, total] = await qb
 			.skip((page - 1) * limit)
 			.take(limit)
 			.getManyAndCount();
+
+		if (user) {
+			const problemIds = problems.map((p) => p.id);
+			const submissions = await this.problemRepository.manager.find(Submission, {
+				where: { author: { id: user.id }, problem: { id: In(problemIds) } },
+				relations: ['problem'],
+			});
+
+			for (const problem of problems) {
+				const problemSubmissions = submissions.filter((s) => s.problem.id === problem.id);
+				if (problemSubmissions.length > 0) {
+					if (problemSubmissions.some((s) => s.status === SubmissionStatus.ACCEPTED)) {
+						problem.status = 'solved';
+					} else {
+						problem.status = 'attempted';
+					}
+				} else {
+					problem.status = null;
+				}
+			}
+		}
 
 		return {
 			problems,

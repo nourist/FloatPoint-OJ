@@ -37,14 +37,14 @@ export class Contest {
 	@JoinColumn()
 	creator: User;
 
-	@ManyToMany(() => Problem, (problem) => problem.contests, { onDelete: 'SET NULL' })
+	@ManyToMany(() => Problem, (problem) => problem.contests, { onDelete: 'CASCADE' })
 	@JoinTable()
 	problems: Problem[];
 
 	@OneToMany(() => Submission, (submission) => submission.contest)
 	submissions: Submission[];
 
-	@ManyToMany(() => User, (user) => user.joinedContests)
+	@ManyToMany(() => User, (user) => user.joinedContests, { onDelete: 'CASCADE' })
 	@JoinTable()
 	participants: User[];
 

@@ -149,6 +149,10 @@ export class GetAllProblemsDto {
 	@IsOptional()
 	@IsBoolean()
 	hasEditorial?: boolean;
+
+	@IsOptional()
+	@IsEnum(['solved', 'attempted', 'unattempted'])
+	status?: 'solved' | 'attempted' | 'unattempted';
 }
 
 export class CreateProblemEditorialDto {
