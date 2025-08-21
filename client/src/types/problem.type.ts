@@ -43,4 +43,7 @@ export interface Problem {
 	editorial: ProblemEditorial;
 	createdAt: Date;
 	updatedAt: Date;
+	acCount?: number;
+	acRate?: number;
+	status?: 'solved' | 'attempted' | null;
 }

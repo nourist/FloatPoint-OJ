@@ -1,7 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import HeaderToolbar from './header-toolbar';
 import NavLink from '~/components/nav-link';
@@ -63,10 +62,10 @@ const Header = async () => {
 						</Button>
 					</SheetContent>
 				</Sheet>
-				<Link href="/" className="max-2md:hidden flex items-center gap-2 pr-4">
+				<NavLink href="/" className="max-2md:hidden data-[active=true]:text-primary flex items-center gap-2 pr-4">
 					<Image src="/logo.svg" alt="logo" width={32} height={32} />
 					<h1 className="text-xl font-semibold">FloatPoint</h1>
-				</Link>
+				</NavLink>
 				{tabs.map((tab) => (
 					<Button variant="ghost" asChild key={tab.href}>
 						<NavLink href={tab.href} className="data-[active=true]:text-primary max-2md:hidden text-card-foreground/80">

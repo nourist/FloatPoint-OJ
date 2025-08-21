@@ -90,6 +90,21 @@ export interface SimpleMessageResponse {
 	message: string;
 }
 
+export interface TagsResponse {
+	message: string;
+	tags: { id: string; name: string }[];
+}
+
+export interface MaxPointResponse {
+	message: string;
+	maxPoint: number;
+}
+
+export interface MinPointResponse {
+	message: string;
+	minPoint: number;
+}
+
 // Functions
 export const createProblemService = (http: ApiInstance) => ({
 	findAllProblems: (params: GetAllProblemsPayload) => {
@@ -102,5 +117,20 @@ export const createProblemService = (http: ApiInstance) => ({
 
 	getEditorial: (slug: string) => {
 		return http.get<EditorialResponse>(`/problem/${slug}/editorial`);
+	},
+
+	getMinPoint: () => {
+		return http.get<MinPointResponse>('/problem/min-point').then((res) => res.minPoint);
+	},
+
+	getMaxPoint: () => {
+		return http.get<MaxPointResponse>('/problem/max-point').then((res) => res.maxPoint);
+	},
+
+	getAllTags: () => {
+		return http
+			.get<TagsResponse>('/problem/tags')
+			.then((res) => res.tags)
+			.then((res) => res.map((item) => item.name));
 	},
 });

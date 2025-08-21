@@ -124,7 +124,7 @@ const FilterTags = ({ tags, value, setValue }: FilterTagsProps) => {
 				<button
 					key={index}
 					className={cn(
-						'text-card-foreground/80 hover:text-card-foreground rounded-full border px-2 py-1 text-xs font-medium',
+						'text-card-foreground/80 hover:text-card-foreground rounded-full border px-2 py-1 text-xs font-medium capitalize',
 						value.includes(tag) && 'bg-primary !text-primary-foreground border-primary',
 					)}
 					onClick={() => {
