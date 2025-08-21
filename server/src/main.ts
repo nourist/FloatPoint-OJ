@@ -78,7 +78,7 @@ async function bootstrap() {
 
 	app.use(
 		'/storage',
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
 		createProxyMiddleware({
 			target: `http://${configService.get<string>('MINIO_ENDPOINT')}:${configService.get<number>('MINIO_PORT')}`,
 			changeOrigin: true,

@@ -1,5 +1,7 @@
-import { IsArray, IsBoolean, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
 
+import { ToBoolean } from 'src/decorators/to-boolean.decorator';
+import { ToStringArray } from 'src/decorators/to-string-array.decorator';
 import { Trim } from 'src/decorators/trim.decorator';
 import { UndefinedToNull } from 'src/decorators/undefine-to-null.decorator';
 import { Difficulty, IOMode, ProblemScoringMethod } from 'src/entities/problem.entity';
@@ -122,9 +124,8 @@ export class GetAllProblemsDto {
 	difficulty?: Difficulty;
 
 	@IsOptional()
-	@IsArray()
-	@IsString({ each: true })
-	tags?: string[] = [];
+	@ToStringArray()
+	tags: string[] = [];
 
 	@IsOptional()
 	@IsString()
@@ -132,11 +133,11 @@ export class GetAllProblemsDto {
 
 	@IsOptional()
 	@IsInt()
-	page = 1;
+	page: number = 1;
 
 	@IsOptional()
 	@IsInt()
-	limit = 20;
+	limit: number = 20;
 
 	@IsOptional()
 	@IsString()
@@ -147,7 +148,7 @@ export class GetAllProblemsDto {
 	order?: 'ASC' | 'DESC';
 
 	@IsOptional()
-	@IsBoolean()
+	@ToBoolean()
 	hasEditorial?: boolean;
 
 	@IsOptional()

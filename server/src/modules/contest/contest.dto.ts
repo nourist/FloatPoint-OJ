@@ -1,6 +1,8 @@
 import { PartialType } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 
+import { ToBoolean } from 'src/decorators/to-boolean.decorator';
+
 export class CreateContestDto {
 	@IsString()
 	@IsNotEmpty()
@@ -47,15 +49,13 @@ export class QueryContestDto {
 	endTime?: string;
 
 	@IsOptional()
-	@IsBoolean()
+	@ToBoolean()
 	isRated?: boolean;
 
 	@IsOptional()
 	@IsEnum(['startTime', 'endTime', 'title'])
 	sortBy?: string;
 
-	@IsOptional()
-	@IsEnum(['ASC', 'DESC'])
 	@IsOptional()
 	@IsEnum(['ASC', 'DESC'])
 	sortOrder?: 'ASC' | 'DESC';

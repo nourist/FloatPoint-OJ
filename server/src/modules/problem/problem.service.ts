@@ -87,6 +87,22 @@ export class ProblemService {
 
 		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
+		qb.addSelect((subQuery) => {
+			return subQuery
+				.select('COUNT(submission.id)')
+				.from(Submission, 'submission')
+				.where('submission.problemId = problem.id')
+				.andWhere('submission.status = :status', { status: SubmissionStatus.ACCEPTED });
+		}, 'ac_count');
+
+		qb.addSelect((subQuery) => {
+			return subQuery
+				.select('CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END')
+				.from(Submission, 'submission')
+				.where('submission.problemId = problem.id')
+				.setParameter('status', SubmissionStatus.ACCEPTED);
+		}, 'ac_rate');
+
 		if (minPoint) {
 			qb.andWhere('problem.point >= :minPoint', { minPoint });
 		}
@@ -100,7 +116,19 @@ export class ProblemService {
 		}
 
 		if (tags && tags.length > 0) {
-			qb.andWhere('tags.name IN (:...tags)', { tags });
+			qb.andWhere((qb1) => {
+				const sub = qb1
+					.subQuery()
+					.select('p.id')
+					.from(Problem, 'p')
+					.leftJoin('p.tags', 'ft')
+					.where('ft.name IN (:...tags)', { tags })
+					.groupBy('p.id')
+					.having('COUNT(DISTINCT ft.id) = :tagCount', { tagCount: tags.length })
+					.getQuery();
+
+				return 'problem.id IN ' + sub;
+			});
 		}
 
 		if (q) {
@@ -113,25 +141,9 @@ export class ProblemService {
 
 		if (sortBy) {
 			if (sortBy === 'acCount') {
-				qb.addSelect((subQuery) => {
-					return subQuery
-						.select('COUNT(submission.id)')
-						.from(Submission, 'submission')
-						.where('submission.problemId = problem.id')
-						.andWhere('submission.status = :status', { status: 'AC' });
-				}, 'acCount');
-				qb.orderBy('acCount', order || 'DESC');
+				qb.orderBy('ac_count', order || 'DESC');
 			} else if (sortBy === 'acRate') {
-				qb.addSelect((subQuery) => {
-					return subQuery
-						.select(
-							'CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END',
-						)
-						.from(Submission, 'submission')
-						.where('submission.problemId = problem.id')
-						.setParameter('status', 'AC');
-				}, 'acRate');
-				qb.orderBy('acRate', order || 'DESC');
+				qb.orderBy('ac_rate', order || 'DESC');
 			} else {
 				qb.orderBy(`problem.${sortBy}`, order || 'ASC');
 			}
@@ -151,7 +163,7 @@ export class ProblemService {
 						.from(Submission, 's')
 						.where('s.problemId = problem.id')
 						.andWhere('s.authorId = :userId', { userId: user.id })
-						.andWhere("s.status = 'ACCEPTED'");
+						.andWhere('s.status = :status', { status: SubmissionStatus.ACCEPTED });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				}).andWhere((subQuery) => {
 					const sub = subQuery.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
@@ -165,16 +177,24 @@ export class ProblemService {
 						.from(Submission, 's')
 						.where('s.problemId = problem.id')
 						.andWhere('s.authorId = :userId', { userId: user.id })
-						.andWhere("s.status = 'ACCEPTED'");
+						.andWhere('s.status = :status', { status: SubmissionStatus.ACCEPTED });
 					return `EXISTS ${sub.getQuery()}`;
 				});
 			}
 		}
 
-		const [problems, total] = await qb
+		const { entities, raw } = await qb
 			.skip((page - 1) * limit)
 			.take(limit)
-			.getManyAndCount();
+			.getRawAndEntities();
+
+		const problems: Problem[] = entities.map((problem, index) => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			const acCount = Number(raw[index].acCount) || 0;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			const acRate = Number(raw[index].acRate) || 0;
+			return { ...problem, acCount, acRate };
+		});
 
 		if (user) {
 			const problemIds = problems.map((p) => p.id);
@@ -196,6 +216,8 @@ export class ProblemService {
 				}
 			}
 		}
+
+		const total = await qb.getCount();
 
 		return {
 			problems,
@@ -458,5 +480,19 @@ export class ProblemService {
 		// Remove files after successful database deletion
 		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
 		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
+	}
+
+	async getMinPoint(): Promise<number> {
+		const result = await this.problemRepository.createQueryBuilder('problem').select('MIN(problem.point)', 'min').getRawOne<{ min: number }>();
+		return result?.min || 0;
+	}
+
+	async getMaxPoint(): Promise<number> {
+		const result = await this.problemRepository.createQueryBuilder('problem').select('MAX(problem.point)', 'max').getRawOne<{ max: number }>();
+		return result?.max || 0;
+	}
+
+	async getAllTags(): Promise<ProblemTag[]> {
+		return this.problemTagRepository.find();
 	}
 }

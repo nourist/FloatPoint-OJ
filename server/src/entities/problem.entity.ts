@@ -94,4 +94,6 @@ export class Problem {
 
 	//non-db
 	status?: 'solved' | 'attempted' | null;
+	acCount?: number;
+	acRate?: number;
 }
