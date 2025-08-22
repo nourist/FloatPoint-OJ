@@ -92,7 +92,7 @@ export class BlogService {
 	}
 
 	async findBySlug(slug: string) {
-		const blog = await this.blogRepository.findOne({ where: { slug } });
+		const blog = await this.blogRepository.findOne({ where: { slug }, relations: ['author', 'comments', 'comments.user'] });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
 		}

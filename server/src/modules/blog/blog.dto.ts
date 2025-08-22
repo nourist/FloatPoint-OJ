@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Max, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class CreateBlogDto {
 	@IsString()
@@ -24,10 +24,6 @@ export class CreateBlogCommentDto {
 	@IsString()
 	@IsNotEmpty()
 	content: string;
-
-	@IsUUID()
-	@IsNotEmpty()
-	blogId: string;
 }
 
 export class UpdateBlogCommentDto {
