@@ -39,7 +39,7 @@ const RootLayout = async ({ children }: Props) => {
 					<NextIntlClientProvider>
 						<Header />
 						<ScrollArea className="h-app overflow-x-auto">
-							<div className="max-w-app mx-auto my-6">{children}</div>
+							<div className="max-w-app min-h-app mx-auto py-6">{children}</div>
 							<Footer />
 						</ScrollArea>
 						<Toaster />

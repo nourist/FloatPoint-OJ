@@ -203,6 +203,7 @@
 			"days": "{count} days ago",
 			"months": "{count} months ago",
 			"years": "{count} years ago"
-		}
+		},
+		"back": "Back to Home"
 	}
 }

@@ -15,7 +15,7 @@ const VerifySuccess = async ({ searchParams }: Props) => {
 	const email = params.email;
 
 	return (
-		<div className="bg-card mx-auto my-10 flex max-w-108 flex-col items-center space-y-6 rounded-2xl border px-8 py-10 shadow-xs">
+		<div className="bg-card mx-auto my-4 flex max-w-108 flex-col items-center space-y-6 rounded-2xl border px-8 py-10 shadow-xs">
 			<div className="inline-flex h-20 w-20 scale-100 items-center justify-center rounded-full bg-emerald-100 transition-all duration-500 ease-out">
 				<CheckCircle className="h-10 w-10 scale-100 text-emerald-600 opacity-100 transition-all delay-300 duration-700" />
 			</div>

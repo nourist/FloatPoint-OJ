@@ -104,7 +104,7 @@ export function ColorHighlightPopoverContent({
 								editor={editor}
 								highlightColor={color.value}
 								tooltip={color.label}
-								aria-label={t('tiptap.highlight-color', { color: color.label })}
+								aria-label={t('tiptap.highlight_color', { color: color.label })}
 								tabIndex={index === selectedIndex ? 0 : -1}
 								data-highlighted={selectedIndex === index}
 							/>

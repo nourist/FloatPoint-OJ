@@ -71,7 +71,7 @@ export const MarkButton = React.forwardRef<HTMLButtonElement, MarkButtonProps>(
 				tabIndex={-1}
 				aria-label={label}
 				aria-pressed={isActive}
-				tooltip={t('tiptap.toggle-mark', { type })}
+				tooltip={t('tiptap.toggle_mark', { type })}
 				onClick={handleClick}
 				{...buttonProps}
 				ref={ref}

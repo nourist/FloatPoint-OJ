@@ -56,11 +56,11 @@ const CreateBlog = () => {
 	};
 
 	return (
-		<div className="max-w-app mx-auto my-6 h-full">
-			<h1 className="mb-6 flex items-center gap-1 text-xl font-semibold">
+		<div className="max-w-app mx-auto h-full">
+			<h1 className="mb-6 flex items-center gap-1">
 				<Button variant="ghost" size="icon" className="text-muted-foreground rounded-full" asChild>
 					<Link href="/">
-						<MoveLeft className="size-5" />
+						<MoveLeft />
 					</Link>
 				</Button>
 

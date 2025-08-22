@@ -83,7 +83,7 @@ export const ColorHighlightButton = React.forwardRef<HTMLButtonElement, ColorHig
 				data-disabled={!canColorHighlight}
 				aria-label={label}
 				aria-pressed={isActive}
-				tooltip={t('tiptap.toggle-highlight', { color: highlightColor ?? '' })}
+				tooltip={t('tiptap.toggle_highlight', { color: highlightColor ?? '' })}
 				onClick={handleClick}
 				style={buttonStyle}
 				{...buttonProps}

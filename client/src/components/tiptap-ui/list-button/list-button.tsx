@@ -71,7 +71,7 @@ export const ListButton = React.forwardRef<HTMLButtonElement, ListButtonProps>(
 				data-disabled={!canToggle}
 				aria-label={label}
 				aria-pressed={isActive}
-				tooltip={t('tiptap.toggle-list', { type })}
+				tooltip={t('tiptap.toggle_list', { type })}
 				onClick={handleClick}
 				{...buttonProps}
 				ref={ref}
