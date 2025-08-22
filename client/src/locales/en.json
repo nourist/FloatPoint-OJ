@@ -1,184 +1,200 @@
 {
-  "layout": {
-    "header": {
-      "home": "Home",
-      "problems": "Problems",
-      "submissions": "Submissions",
-      "contests": "Contests",
-      "standing": "Standing",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "profile": "Profile",
-      "settings": "Settings",
-      "appearance": "Appearance",
-      "language": "Language",
-      "light": "Light",
-      "dark": "Dark"
-    }
-  },
-  "auth": {
-    "login": "Login",
-    "register": "Register",
-    "verify_email": "Verify Email",
-    "forgot_password": "Forgot Password",
-    "reset_password": "Reset Password",
-    "get_password": "Get Password",
-    "verify_success": "Email verified successfully",
-    "dont_have_account": "Don't have an account?",
-    "already_have_account": "Already have an account?",
-    "already_have_password": "Already have a password?",
-    "account_already_verified": "Account already verified?",
-    "continue_with_google": "Continue with Google",
-    "form": {
-      "email": "Email",
-      "password": "Password",
-      "username": "Username",
-      "enter_email": "Enter your email",
-      "enter_password": "Enter your password",
-      "enter_username": "Enter your username",
-      "confirm_password": "Confirm Password",
-      "enter_confirm_password": "Enter your confirm password"
-    },
-    "message": {
-      "email_required": "Email is required",
-      "password_required": "Password is required",
-      "username_required": "Username is required",
-      "email_invalid": "Email is invalid",
-      "password_min": "Password must be at least 8 characters long",
-      "password_uppercase": "Password must contain at least one uppercase letter",
-      "password_lowercase": "Password must contain at least one lowercase letter",
-      "password_number": "Password must contain at least one number",
-      "password_special": "Password must contain at least one special character",
-      "confirm_password_required": "Confirm Password is required",
-      "confirm_password_not_match": "Confirm Password does not match",
-      "token_required": "Token is required"
-    },
-    "success": {
-      "register": "Register successfully",
-      "login": "Login successfully",
-      "forgot_password": "Reset password email sent successfully",
-      "verify_email_send": "Verify email sent successfully",
-      "reset_password": "Password reset successfully",
-      "verify": "Great! Your email address has been verified. Your account is now active and ready to use."
-    },
-    "error": {
-      "login": "Login failed"
-    },
-    "description": {
-      "forgot_password": "Enter your email to get password reset link",
-      "verify_email": "Enter your email to get email verification link"
-    },
-    "toast": {
-      "verify_email": "Please check your email for verification"
-    }
-  },
-  "tiptap": {
-    "blockquote": "Blockquote",
-    "code_block": "Code Block",
-    "toggle_highlight": "Toggle highlight ({color})",
-    "heading": "Heading {level}",
-    "insert_image": "Insert image",
-    "link": "Link",
-    "paste_a_link": "Paste a link...",
-    "apply_link": "Apply link",
-    "open_in_new_window": "Open in new window",
-    "remove_link": "Remove link",
-    "toggle_list": "Toggle {type} list",
-    "toggle_mark": "Toggle {type}",
-    "align": "Align {align}",
-    "undo": "Undo",
-    "redo": "Redo",
-    "highlight_text": "Highlight text",
-    "highlight": "Highlight",
-    "remove_highlight": "Remove highlight",
-    "highlight_color": "{color} highlight color",
-    "highlight_colors": "Highlight colors",
-    "format_text_as_heading": "Format text as heading",
-    "heading_tooltip": "Heading",
-    "list_options": "List options",
-    "list": "List",
-    "bulletlist": "Bullet List",
-    "orderedlist": "Ordered List",
-    "tasklist": "Task List"
-  },
-  "upload": {
-    "title": "Upload Image",
-    "supported_formats": "Supported formats: JPG, PNG, GIF",
-    "click_to_select": "Click to select",
-    "or_drag_and_drop_file_here": "or drag and drop file here"
-  },
-  "create": {
-    "blog": {
-      "create_blog": "Create Blog",
-      "title": "Title",
-      "title_placeholder": "Enter title",
-      "description_placeholder": "Enter description",
-      "upload_thumbnail": "Upload thumbnail",
-      "save": "Save",
-      "message": {
-        "title_required": "Title is required",
-        "title_and_content_required": "Title and content are required."
-      },
-      "create_success": "Blog created successfully!",
-      "create_fail": "Failed to create blog."
-    }
-  },
-  "home": {
-    "blog": "Blog",
-    "description": "Latest articles, tutorials, and insights from the programming community",
-    "new": "New"
-  },
-  "pagination": {
-    "view": "View",
-    "sizes": "Sizes"
-  },
-  "problem": {
-    "filter": {
-      "title": "Filter",
-      "status": "Status",
-      "all": "All",
-      "solved": "Solved",
-      "attempted": "Attempt",
-      "todo": "Todo",
-      "difficulty": "Difficulty",
-      "easy": "Easy",
-      "medium": "Medium",
-      "hard": "Hard",
-      "editorial": "Editorial",
-      "has_editorial": "Has Editorial",
-      "point": "Point",
-      "tags": "Tags"
-    },
-    "search": {
-      "sort_by": "Sort by",
-      "title": "Title",
-      "point": "Point",
-      "difficulty": "Difficulty",
-      "accept": "Accept",
-      "accept_rate": "Accept Rate"
-    },
-    "table": {
-      "title": "Title",
-      "difficulty": "Difficulty",
-      "point": "Point",
-      "accepted": "Accepted",
-      "acceptance": "Acceptance",
-      "editorial": "Editorial",
-      "easy": "Easy",
-      "medium": "Medium",
-      "hard": "Hard"
-    }
-  },
-  "error": {
-    "title": "Oops! Something went wrong",
-    "message": "An unexpected error occurred. Please try again later.",
-    "try_again": "Try again",
-    "go_home": "Go to Homepage"
-  },
-  "not_found": {
-    "title": "Oops! Page not found",
-    "message": "The page you are looking for does not exist.",
-    "go_home": "Go to Homepage"
-  }
+	"layout": {
+		"header": {
+			"home": "Home",
+			"problems": "Problems",
+			"submissions": "Submissions",
+			"contests": "Contests",
+			"standing": "Standing",
+			"login": "Login",
+			"register": "Register",
+			"logout": "Logout",
+			"profile": "Profile",
+			"settings": "Settings",
+			"appearance": "Appearance",
+			"language": "Language",
+			"light": "Light",
+			"dark": "Dark"
+		}
+	},
+	"auth": {
+		"login": "Login",
+		"register": "Register",
+		"verify_email": "Verify Email",
+		"forgot_password": "Forgot Password",
+		"reset_password": "Reset Password",
+		"get_password": "Get Password",
+		"verify_success": "Email verified successfully",
+		"dont_have_account": "Don't have an account?",
+		"already_have_account": "Already have an account?",
+		"already_have_password": "Already have a password?",
+		"account_already_verified": "Account already verified?",
+		"continue_with_google": "Continue with Google",
+		"form": {
+			"email": "Email",
+			"password": "Password",
+			"username": "Username",
+			"enter_email": "Enter your email",
+			"enter_password": "Enter your password",
+			"enter_username": "Enter your username",
+			"confirm_password": "Confirm Password",
+			"enter_confirm_password": "Enter your confirm password"
+		},
+		"message": {
+			"email_required": "Email is required",
+			"password_required": "Password is required",
+			"username_required": "Username is required",
+			"email_invalid": "Email is invalid",
+			"password_min": "Password must be at least 8 characters long",
+			"password_uppercase": "Password must contain at least one uppercase letter",
+			"password_lowercase": "Password must contain at least one lowercase letter",
+			"password_number": "Password must contain at least one number",
+			"password_special": "Password must contain at least one special character",
+			"confirm_password_required": "Confirm Password is required",
+			"confirm_password_not_match": "Confirm Password does not match",
+			"token_required": "Token is required"
+		},
+		"success": {
+			"register": "Register successfully",
+			"login": "Login successfully",
+			"forgot_password": "Reset password email sent successfully",
+			"verify_email_send": "Verify email sent successfully",
+			"reset_password": "Password reset successfully",
+			"verify": "Great! Your email address has been verified. Your account is now active and ready to use."
+		},
+		"error": {
+			"login": "Login failed"
+		},
+		"description": {
+			"forgot_password": "Enter your email to get password reset link",
+			"verify_email": "Enter your email to get email verification link"
+		},
+		"toast": {
+			"verify_email": "Please check your email for verification"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Blockquote",
+		"code_block": "Code Block",
+		"toggle_highlight": "Toggle highlight ({color})",
+		"heading": "Heading {level}",
+		"insert_image": "Insert image",
+		"link": "Link",
+		"paste_a_link": "Paste a link...",
+		"apply_link": "Apply link",
+		"open_in_new_window": "Open in new window",
+		"remove_link": "Remove link",
+		"toggle_list": "Toggle {type} list",
+		"toggle_mark": "Toggle {type}",
+		"align": "Align {align}",
+		"undo": "Undo",
+		"redo": "Redo",
+		"highlight_text": "Highlight text",
+		"highlight": "Highlight",
+		"remove_highlight": "Remove highlight",
+		"highlight_color": "{color} highlight color",
+		"highlight_colors": "Highlight colors",
+		"format_text_as_heading": "Format text as heading",
+		"heading_tooltip": "Heading",
+		"list_options": "List options",
+		"list": "List",
+		"bulletlist": "Bullet List",
+		"orderedlist": "Ordered List",
+		"tasklist": "Task List"
+	},
+	"upload": {
+		"title": "Upload Image",
+		"supported_formats": "Supported formats: JPG, PNG, GIF",
+		"click_to_select": "Click to select",
+		"or_drag_and_drop_file_here": "or drag and drop file here"
+	},
+	"create": {
+		"blog": {
+			"create_blog": "Create Blog",
+			"title": "Title",
+			"title_placeholder": "Enter title",
+			"description_placeholder": "Enter description",
+			"upload_thumbnail": "Upload thumbnail",
+			"save": "Save",
+			"message": {
+				"title_required": "Title is required",
+				"title_and_content_required": "Title and content are required."
+			},
+			"create_success": "Blog created successfully!",
+			"create_fail": "Failed to create blog."
+		}
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Latest articles, tutorials, and insights from the programming community",
+		"new": "New"
+	},
+	"pagination": {
+		"view": "View",
+		"sizes": "Sizes"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filter",
+			"status": "Status",
+			"all": "All",
+			"solved": "Solved",
+			"attempted": "Attempt",
+			"todo": "Todo",
+			"difficulty": "Difficulty",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard",
+			"editorial": "Editorial",
+			"has_editorial": "Has Editorial",
+			"point": "Point",
+			"tags": "Tags"
+		},
+		"search": {
+			"sort_by": "Sort by",
+			"title": "Title",
+			"point": "Point",
+			"difficulty": "Difficulty",
+			"accept": "Accept",
+			"accept_rate": "Accept Rate"
+		},
+		"table": {
+			"title": "Title",
+			"difficulty": "Difficulty",
+			"point": "Point",
+			"accepted": "Accepted",
+			"acceptance": "Acceptance",
+			"editorial": "Editorial",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard"
+		}
+	},
+	"error": {
+		"title": "Oops! Something went wrong",
+		"message": "An unexpected error occurred. Please try again later.",
+		"try_again": "Try again",
+		"go_home": "Go to Homepage"
+	},
+	"not_found": {
+		"title": "Oops! Page not found",
+		"message": "The page you are looking for does not exist.",
+		"go_home": "Go to Homepage"
+	},
+	"blog": {
+		"create_success": "Comment created successfully!",
+		"message": {
+			"comment_required": "Comment is required"
+		},
+		"comment": "Comment",
+		"comments": "Comments",
+		"date": {
+			"seconds": "{count} seconds ago",
+			"minutes": "{count} minutes ago",
+			"hours": "{count} hours ago",
+			"days": "{count} days ago",
+			"months": "{count} months ago",
+			"years": "{count} years ago"
+		}
+	}
 }

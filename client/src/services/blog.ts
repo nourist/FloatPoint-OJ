@@ -76,7 +76,7 @@ export const createBlogService = (http: ApiInstance) => ({
 	},
 
 	getBlogBySlug: (slug: string) => {
-		return http.get<BlogResponse>(`/blog/${slug}`);
+		return http.get<BlogResponse>(`/blog/${slug}`).then((res) => res.blog);
 	},
 
 	updateBlog: (id: string, payload: UpdateBlogPayload) => {
@@ -102,7 +102,7 @@ export const createBlogService = (http: ApiInstance) => ({
 	},
 
 	createComment: (blogId: string, payload: CreateBlogCommentPayload) => {
-		return http.post<BlogCommentResponse>(`/blog/${blogId}/comments`, payload);
+		return http.post<BlogCommentResponse>(`/blog/${blogId}/comments`, payload).then((res) => res.comment);
 	},
 
 	getCommentsByBlogId: (blogId: string) => {
