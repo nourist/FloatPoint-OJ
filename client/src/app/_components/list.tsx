@@ -13,11 +13,7 @@ import http from '~/lib/http-client';
 import { joinUrl } from '~/lib/utils';
 import { createBlogService } from '~/services/blog';
 
-interface Props {
-	total: number;
-}
-
-const List = ({ total }: Props) => {
+const List = () => {
 	const { getAllBlogs } = createBlogService(http);
 
 	const [page, setPage] = useState(1);
@@ -54,7 +50,7 @@ const List = ({ total }: Props) => {
 					<RichTextRenderer className="mt-4" content={JSON.parse(item.content)} />
 				</div>
 			))}
-			<PaginationControls onPageChange={setPage} onSizeChange={setSize} initialPage={1} initialSize={20} totalItems={total} />
+			<PaginationControls onPageChange={setPage} onSizeChange={setSize} initialPage={1} initialSize={20} totalItems={data.total} />
 		</>
 	);
 };

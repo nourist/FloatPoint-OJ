@@ -1,4 +1,5 @@
 import { BookOpenCheck, Check, MinusCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { cn } from '~/lib/utils';
@@ -33,18 +34,19 @@ const getDifficultyColor = (difficulty: 'easy' | 'medium' | 'hard') => {
 };
 
 const ProblemTable = ({ problems, user, selectTags }: Props) => {
+	const t = useTranslations('problem.table');
 	return (
 		<div className="w-full overflow-hidden rounded-2xl border shadow-xs">
 			<table className="divide-border w-full divide-y">
 				<thead className="bg-accent">
 					<tr>
-						{user && <th className="px-6 py-3 text-center text-left text-xs font-medium tracking-wider uppercase"></th>}
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">Title</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">Difficulty</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">Point</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-md:hidden">Accepted</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-xl:hidden">Acceptance</th>
-						<th className="px-6 py-3 text-center text-left text-xs font-medium tracking-wider uppercase max-sm:hidden">Editorial</th>
+						{user && <th className="px-6 py-3 text-center text-xs font-medium tracking-wider uppercase"></th>}
+						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('title')}</th>
+						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('difficulty')}</th>
+						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('point')}</th>
+						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-md:hidden">{t('accepted')}</th>
+						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-xl:hidden">{t('acceptance')}</th>
+						<th className="px-6 py-3 text-center text-xs font-medium tracking-wider uppercase max-sm:hidden">{t('editorial')}</th>
 					</tr>
 				</thead>
 				<tbody className="divide-border bg-card divide-y">
@@ -75,7 +77,7 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 							</td>
 							<td className="px-6 py-4 whitespace-nowrap max-sm:px-2">
 								<span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${getDifficultyColor(problem.difficulty)}`}>
-									{problem.difficulty}
+									{t(problem.difficulty)}
 								</span>
 							</td>
 							<td className="text-muted-foreground px-6 py-4 text-sm whitespace-nowrap max-sm:px-2">{problem.point}</td>

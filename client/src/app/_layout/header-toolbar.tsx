@@ -128,7 +128,7 @@ const HeaderToolbar = () => {
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onClick={handleSignout} variant="destructive">
 						<LogOut />
-						{t('signout')}
+						{t('logout')}
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

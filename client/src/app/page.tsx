@@ -6,18 +6,14 @@ import List from './_components/list';
 import { Button } from '~/components/ui/button';
 import { createServerApiInstance } from '~/lib/http-server';
 import { createAuthService } from '~/services/auth';
-import { createBlogService } from '~/services/blog';
 
 const Home = async () => {
 	const t = await getTranslations('home');
 
 	const http = await createServerApiInstance();
 	const authService = createAuthService(http);
-	const blogService = createBlogService(http);
 
 	const user = await authService.getProfile().catch(() => null);
-
-	const { total } = await blogService.getAllBlogs({});
 
 	return (
 		<div className="max-w-app mx-auto my-6 flex gap-6">
@@ -36,7 +32,7 @@ const Home = async () => {
 						</Button>
 					)}
 				</div>
-				<List total={total} />
+				<List />
 			</div>
 			<div className="h-100 w-80 bg-red-500 max-md:hidden"></div>
 		</div>

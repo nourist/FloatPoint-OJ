@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { FilterCollapsible, FilterRadio, FilterRangeSlider, FilterSwitch, FilterTags } from '~/components/filter-panel';
 import { User } from '~/types/user.type';
 
@@ -34,37 +36,39 @@ const FilterPanel = ({
 	tagOptions,
 	user,
 }: FilterPanelProps) => {
+	const t = useTranslations('problem.filter');
+
 	const statusOptions = [
-		{ value: 'all', label: 'All' },
-		{ value: 'solved', label: <div className="text-success">Solved</div> },
-		{ value: 'attempted', label: <div className="text-warning">Attempt</div> },
-		{ value: 'unattempted', label: <div className="text-destructive">Todo</div> },
+		{ value: 'all', label: t('all') },
+		{ value: 'solved', label: <div className="text-success">{t('solved')}</div> },
+		{ value: 'attempted', label: <div className="text-warning">{t('attempted')}</div> },
+		{ value: 'unattempted', label: <div className="text-destructive">{t('todo')}</div> },
 	];
 
 	const difficultyOptions = [
-		{ value: 'all', label: 'All' },
-		{ value: 'easy', label: <div className="text-success">Easy</div> },
-		{ value: 'medium', label: <div className="text-warning">Medium</div> },
-		{ value: 'hard', label: <div className="text-destructive">Hard</div> },
+		{ value: 'all', label: t('all') },
+		{ value: 'easy', label: <div className="text-success">{t('easy')}</div> },
+		{ value: 'medium', label: <div className="text-warning">{t('medium')}</div> },
+		{ value: 'hard', label: <div className="text-destructive">{t('hard')}</div> },
 	];
 
 	return (
 		<>
 			{user && (
-				<FilterCollapsible title="Status">
+				<FilterCollapsible title={t('status')}>
 					<FilterRadio value={status} setValue={setStatus} data={statusOptions} />
 				</FilterCollapsible>
 			)}
-			<FilterCollapsible title="Difficulty">
+			<FilterCollapsible title={t('difficulty')}>
 				<FilterRadio value={difficulty} setValue={setDifficulty} data={difficultyOptions} />
 			</FilterCollapsible>
-			<FilterCollapsible title="Editorial">
-				<FilterSwitch value={hasEditorial} setValue={setHasEditorial} label="Has Editorial" />
+			<FilterCollapsible title={t('editorial')}>
+				<FilterSwitch value={hasEditorial} setValue={setHasEditorial} label={t('has_editorial')} />
 			</FilterCollapsible>
-			<FilterCollapsible title="Point">
+			<FilterCollapsible title={t('point')}>
 				<FilterRangeSlider min={minPoint} max={maxPoint} value={pointRange} setValue={setPointRange} />
 			</FilterCollapsible>
-			<FilterCollapsible title="Tags">
+			<FilterCollapsible title={t('tags')}>
 				<FilterTags tags={tagOptions} value={tags} setValue={setTags} />
 			</FilterCollapsible>
 		</>

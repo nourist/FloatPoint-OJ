@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import useSWR from 'swr';
 
 import FilterPanel from './filter-panel';
@@ -18,13 +19,12 @@ interface Props {
 	minPoint: number;
 	maxPoint: number;
 	tags: string[];
-	total: number;
 	user: User | null;
 }
 
-const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, total: initTotal, user }: Props) => {
+const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) => {
+	const t = useTranslations('problem.filter');
 	const [filterDialogOpen, setFilterDialogOpen] = useState(false);
-	const [total, setTotal] = useState(initTotal);
 
 	const [status, setStatus] = useState('all');
 	const [difficulty, setDifficulty] = useState('all');
@@ -59,35 +59,31 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, total: initTotal
 		},
 	);
 
-	useEffect(() => {
-		if (data) {
-			setTotal(data.total);
-		}
-	}, [data]);
-
 	if (!data) {
 		if (!isLoading) throw error;
 	}
 
 	return (
 		<div className="max-w-app mx-auto my-6 flex gap-6">
-			<div className="bg-card w-72 space-y-1 rounded-2xl border p-4 shadow-xs max-lg:hidden">
-				<FilterPanel
-					user={user}
-					minPoint={minPoint}
-					maxPoint={maxPoint}
-					tagOptions={tagOptions}
-					status={status}
-					setStatus={setStatus}
-					difficulty={difficulty}
-					setDifficulty={setDifficulty}
-					hasEditorial={hasEditorial}
-					setHasEditorial={setHasEditorial}
-					pointRange={pointRange}
-					setPointRange={setPointRange}
-					tags={tags}
-					setTags={setTags}
-				/>
+			<div className="w-72 max-lg:hidden">
+				<div className="bg-card w-full space-y-1 rounded-2xl border p-4 shadow-xs">
+					<FilterPanel
+						user={user}
+						minPoint={minPoint}
+						maxPoint={maxPoint}
+						tagOptions={tagOptions}
+						status={status}
+						setStatus={setStatus}
+						difficulty={difficulty}
+						setDifficulty={setDifficulty}
+						hasEditorial={hasEditorial}
+						setHasEditorial={setHasEditorial}
+						pointRange={pointRange}
+						setPointRange={setPointRange}
+						tags={tags}
+						setTags={setTags}
+					/>
+				</div>
 			</div>
 			<div className="flex-1 space-y-6">
 				<SearchBar
@@ -103,16 +99,16 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, total: initTotal
 					<Skeleton className="h-140 w-full rounded-2xl" />
 				) : (
 					<>
-						<ProblemTable selectTags={tags} user={user} problems={data?.problems ?? []} />
-						<PaginationControls onPageChange={setPage} onSizeChange={setSize} initialPage={1} initialSize={20} totalItems={total} />
+						<ProblemTable user={user} selectTags={tags} problems={data?.problems ?? []} />
+						<PaginationControls onPageChange={setPage} onSizeChange={setSize} initialPage={1} initialSize={20} totalItems={data?.total ?? 0} />
 					</>
 				)}
 			</div>
 			<Dialog open={filterDialogOpen} onOpenChange={setFilterDialogOpen}>
-				<DialogContent className="px-0">
+				<DialogContent closeButtonClassName="top-6 right-6" className="px-0">
 					<ScrollArea className="max-h-[calc(100vh-4rem)] px-6">
 						<DialogHeader className="mb-4">
-							<DialogTitle>Filter</DialogTitle>
+							<DialogTitle>{t('title')}</DialogTitle>
 						</DialogHeader>
 						<div className="space-y-1">
 							<FilterPanel

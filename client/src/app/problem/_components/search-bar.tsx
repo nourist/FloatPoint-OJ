@@ -1,4 +1,5 @@
 import { ArrowDownAZ, ArrowUpZA, Funnel, Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import DebounceInput from '~/components/debounce-input';
 import { Button } from '~/components/ui/button';
@@ -24,12 +25,14 @@ interface SearchBarProps {
 }
 
 const OrderController = ({ order, setOrder, orderBy, setOrderBy, className }: OrderControllerProps) => {
+	const t = useTranslations('problem.search');
+
 	const orderByList = [
-		{ value: 'title', label: 'Title' },
-		{ value: 'point', label: 'Point' },
-		{ value: 'difficulty', label: 'Difficulty' },
-		{ value: 'acCount', label: 'Accept' },
-		{ value: 'acRate', label: 'Accept Rate' },
+		{ value: 'title', label: t('title') },
+		{ value: 'point', label: t('point') },
+		{ value: 'difficulty', label: t('difficulty') },
+		{ value: 'acCount', label: t('accept') },
+		{ value: 'acRate', label: t('accept_rate') },
 	];
 
 	return (
@@ -40,7 +43,7 @@ const OrderController = ({ order, setOrder, orderBy, setOrderBy, className }: Or
 				</SelectTrigger>
 				<SelectContent>
 					<SelectGroup>
-						<SelectLabel>Sort by</SelectLabel>
+						<SelectLabel>{t('sort_by')}</SelectLabel>
 						{orderByList.map((item) => (
 							<SelectItem key={item.value} value={item.value}>
 								{item.label}
@@ -57,6 +60,8 @@ const OrderController = ({ order, setOrder, orderBy, setOrderBy, className }: Or
 };
 
 const SearchBar = ({ search, setSearch, orderBy, setOrderBy, order, setOrder, setFilterDialogOpen }: SearchBarProps) => {
+	const t = useTranslations('problem.filter');
+
 	return (
 		<div className="space-y-2">
 			<div className="bg-card ring-primary/50 relative flex w-full gap-1 rounded-2xl border p-2 shadow-xs focus-within:ring-1 max-lg:rounded-xl">
@@ -67,7 +72,7 @@ const SearchBar = ({ search, setSearch, orderBy, setOrderBy, order, setOrder, se
 			<div className="flex w-full justify-between lg:hidden">
 				<Button onClick={() => setFilterDialogOpen(true)} variant="outline" className="bg-card">
 					<Funnel />
-					Filter
+					{t('title')}
 				</Button>
 				<OrderController order={order} setOrder={setOrder} orderBy={orderBy} setOrderBy={setOrderBy} />
 			</div>

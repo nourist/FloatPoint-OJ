@@ -8,7 +8,7 @@
 			"standing": "Standing",
 			"login": "Login",
 			"register": "Register",
-			"signout": "Signout",
+			"logout": "Logout",
 			"profile": "Profile",
 			"settings": "Settings",
 			"appearance": "Appearance",
@@ -140,5 +140,42 @@
 	"pagination": {
 		"view": "View",
 		"sizes": "Sizes"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filter",
+			"status": "Status",
+			"all": "All",
+			"solved": "Solved",
+			"attempted": "Attempt",
+			"todo": "Todo",
+			"difficulty": "Difficulty",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard",
+			"editorial": "Editorial",
+			"has_editorial": "Has Editorial",
+			"point": "Point",
+			"tags": "Tags"
+		},
+		"search": {
+			"sort_by": "Sort by",
+			"title": "Title",
+			"point": "Point",
+			"difficulty": "Difficulty",
+			"accept": "Accept",
+			"accept_rate": "Accept Rate"
+		},
+		"table": {
+			"title": "Title",
+			"difficulty": "Difficulty",
+			"point": "Point",
+			"accepted": "Accepted",
+			"acceptance": "Acceptance",
+			"editorial": "Editorial",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard"
+		}
 	}
 }
