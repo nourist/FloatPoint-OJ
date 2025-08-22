@@ -177,5 +177,16 @@
 			"medium": "Medium",
 			"hard": "Hard"
 		}
+	},
+	"error": {
+		"title": "Oops! Something went wrong",
+		"message": "An unexpected error occurred. Please try again later.",
+		"try_again": "Try again",
+		"go_home": "Go to Homepage"
+	},
+	"not_found": {
+		"title": "Oops! Page not found",
+		"message": "The page you are looking for does not exist.",
+		"go_home": "Go to Homepage"
 	}
 }
