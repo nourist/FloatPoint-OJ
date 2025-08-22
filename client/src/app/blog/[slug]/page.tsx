@@ -16,10 +16,10 @@ const Blog = async ({ params }: Props) => {
 	const blog = await blogService.getBlogBySlug(slug);
 
 	return (
-		<div className="max-w-app mx-auto my-6">
+		<>
 			<BlogCard data={blog} />
 			<Comments blog={blog} />
-		</div>
+		</>
 	);
 };
 

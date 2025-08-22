@@ -15,6 +15,13 @@
 			"language": "Language",
 			"light": "Light",
 			"dark": "Dark"
+		},
+		"footer": {
+			"copyright": "Copyright © {year} Nourist",
+			"license": "License",
+			"github": "GitHub",
+			"author": "Author",
+			"language": "Language"
 		}
 	},
 	"auth": {
@@ -186,6 +193,7 @@
 		"message": {
 			"comment_required": "Comment is required"
 		},
+		"comment-placeholder": "Write a comment...",
 		"comment": "Comment",
 		"comments": "Comments",
 		"date": {

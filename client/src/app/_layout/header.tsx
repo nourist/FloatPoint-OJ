@@ -18,7 +18,7 @@ const Header = async () => {
 	];
 
 	return (
-		<div className="bg-card flex h-14 w-full justify-center border-b shadow-xs">
+		<div className="bg-card flex h-[var(--header-height)] w-full justify-center border-b shadow-xs">
 			<div className="max-w-app flex w-full items-center gap-2">
 				<Sheet>
 					<SheetTrigger className="2md:hidden" asChild>

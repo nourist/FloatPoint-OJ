@@ -60,7 +60,7 @@ const CommentForm = ({ user, blogId, setComments }: CommentFormProps) => {
 		<div className="flex gap-3">
 			<UserAvatar className="size-10" user={user} />
 			<div className="flex-1 space-y-3">
-				<Textarea placeholder="Write a comment..." value={comment} onChange={(e) => setComment(e.target.value)} />
+				<Textarea placeholder={t('comment-placeholder')} value={comment} onChange={(e) => setComment(e.target.value)} />
 				<div className="flex">
 					<Button className="ml-auto" disabled={isLoading} onClick={onSubmit}>
 						<Send />

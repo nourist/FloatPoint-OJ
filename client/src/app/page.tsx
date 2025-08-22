@@ -16,7 +16,7 @@ const Home = async () => {
 	const user = await authService.getProfile().catch(() => null);
 
 	return (
-		<div className="max-w-app mx-auto my-6 flex gap-6">
+		<div className="flex gap-6">
 			<div className="flex-1 space-y-6">
 				<div className="flex items-center justify-between gap-6">
 					<div className="flex-1 space-y-2">

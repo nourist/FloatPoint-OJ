@@ -64,7 +64,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 	}
 
 	return (
-		<div className="max-w-app mx-auto my-6 flex gap-6">
+		<div className="flex gap-6">
 			<div className="w-72 max-lg:hidden">
 				<div className="bg-card w-full space-y-1 rounded-2xl border p-4 shadow-xs">
 					<FilterPanel

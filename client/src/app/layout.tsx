@@ -5,6 +5,7 @@ import { getLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 
+import Footer from './_layout/footer';
 import Header from './_layout/header';
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { Toaster } from '~/components/ui/sonner';
@@ -37,7 +38,10 @@ const RootLayout = async ({ children }: Props) => {
 				<body className="antialiased">
 					<NextIntlClientProvider>
 						<Header />
-						<ScrollArea className="h-[calc(100vh-56px)] overflow-x-auto">{children}</ScrollArea>
+						<ScrollArea className="h-app overflow-x-auto">
+							<div className="max-w-app mx-auto my-6">{children}</div>
+							<Footer />
+						</ScrollArea>
 						<Toaster />
 					</NextIntlClientProvider>
 				</body>
