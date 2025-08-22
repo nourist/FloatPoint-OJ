@@ -51,7 +51,7 @@ export const ColorHighlightPopoverButton = React.forwardRef<HTMLButtonElement, B
 			data-appearance="default"
 			role="button"
 			tabIndex={-1}
-			aria-label={t('tiptap.highlight-text')}
+			aria-label={t('tiptap.highlight_text')}
 			tooltip={t('tiptap.highlight')}
 			ref={ref}
 			{...props}
@@ -78,7 +78,7 @@ export function ColorHighlightPopoverContent({
 	const containerRef = React.useRef<HTMLDivElement>(null);
 	const t = useTranslations();
 
-	const menuItems = React.useMemo(() => [...colors, { label: t('tiptap.remove-highlight'), value: 'none' }], [colors, t]);
+	const menuItems = React.useMemo(() => [...colors, { label: t('tiptap.remove_highlight'), value: 'none' }], [colors, t]);
 
 	const { selectedIndex } = useMenuNavigation({
 		containerRef,
@@ -114,8 +114,8 @@ export function ColorHighlightPopoverContent({
 					<ButtonGroup orientation="horizontal">
 						<Button
 							onClick={handleRemoveHighlight}
-							aria-label={t('tiptap.remove-highlight')}
-							tooltip={t('tiptap.remove-highlight')}
+							aria-label={t('tiptap.remove_highlight')}
+							tooltip={t('tiptap.remove_highlight')}
 							tabIndex={selectedIndex === colors.length ? 0 : -1}
 							type="button"
 							role="menuitem"
@@ -170,7 +170,7 @@ export function ColorHighlightPopover({
 					<Icon className="tiptap-button-icon" />
 				</ColorHighlightPopoverButton>
 			</PopoverTrigger>
-			<PopoverContent aria-label={t('tiptap.highlight-colors')}>
+			<PopoverContent aria-label={t('tiptap.highlight_colors')}>
 				<ColorHighlightPopoverContent editor={editor} colors={colors} />
 			</PopoverContent>
 		</Popover>

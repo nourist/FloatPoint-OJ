@@ -70,7 +70,7 @@ export const ImageUploadButton = React.forwardRef<HTMLButtonElement, ImageUpload
 				data-disabled={!canInsert}
 				aria-label={label}
 				aria-pressed={isActive}
-				tooltip={t('tiptap.insert-image')}
+				tooltip={t('tiptap.insert_image')}
 				onClick={handleClick}
 				{...buttonProps}
 				ref={ref}

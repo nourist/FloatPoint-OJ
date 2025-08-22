@@ -25,8 +25,8 @@ const Login = () => {
 	const { signin } = createClientService(createAuthService);
 
 	const schema = z.object({
-		email: z.string().min(1, t('message.email-required')).email(t('message.email-invalid')),
-		password: z.string().min(1, t('message.password-required')),
+		email: z.string().min(1, t('message.email_required')).email(t('message.email_invalid')),
+		password: z.string().min(1, t('message.password_required')),
 	});
 
 	const form = useForm({
@@ -61,7 +61,7 @@ const Login = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.email')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" placeholder={t('form.enter-email')} {...field} />
+									<Input className="h-10" placeholder={t('form.enter_email')} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -74,7 +74,7 @@ const Login = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.password')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" type="password" placeholder={t('form.enter-password')} {...field} />
+									<Input className="h-10" type="password" placeholder={t('form.enter_password')} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -82,10 +82,10 @@ const Login = () => {
 					/>
 					<div className="text-foreground/80 flex items-center justify-between text-sm font-semibold">
 						<Link className="hover:text-foreground" href="/verify">
-							{t('verify-email')}
+							{t('verify_email')}
 						</Link>
 						<Link className="hover:text-foreground" href="/forgot-password">
-							{t('forgot-password')}?
+							{t('forgot_password')}?
 						</Link>
 					</div>
 					<Button disabled={form.formState.isSubmitting} className="h-10 w-full">
@@ -96,7 +96,7 @@ const Login = () => {
 			<Separator className="opacity-70" />
 			<GoogleLoginButton />
 			<p className="text-foreground/70 text-center text-sm">
-				{t('dont-have-account')}{' '}
+				{t('dont_have_account')}{' '}
 				<Link className="text-primary hover:text-primary/80 font-semibold" href="/register">
 					{t('register')}
 				</Link>

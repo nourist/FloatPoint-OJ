@@ -105,7 +105,7 @@ const LinkMain: React.FC<LinkMainProps> = ({ url, setUrl, setLink, removeLink, o
 					<InputGroup>
 						<Input
 							type="url"
-							placeholder={t('tiptap.paste-a-link')}
+							placeholder={t('tiptap.paste_a_link')}
 							value={url}
 							onChange={(e) => setUrl(e.target.value)}
 							onKeyDown={handleKeyDown}
@@ -117,7 +117,7 @@ const LinkMain: React.FC<LinkMainProps> = ({ url, setUrl, setLink, removeLink, o
 					</InputGroup>
 
 					<ButtonGroup orientation="horizontal">
-						<Button type="button" onClick={setLink} title={t('tiptap.apply-link')} disabled={!url && !isActive} data-style="ghost">
+						<Button type="button" onClick={setLink} title={t('tiptap.apply_link')} disabled={!url && !isActive} data-style="ghost">
 							<CornerDownLeftIcon className="tiptap-button-icon" />
 						</Button>
 					</ButtonGroup>
@@ -125,11 +125,11 @@ const LinkMain: React.FC<LinkMainProps> = ({ url, setUrl, setLink, removeLink, o
 					<Separator />
 
 					<ButtonGroup orientation="horizontal">
-						<Button type="button" onClick={openLink} title={t('tiptap.open-in-new-window')} disabled={!url && !isActive} data-style="ghost">
+						<Button type="button" onClick={openLink} title={t('tiptap.open_in_new_window')} disabled={!url && !isActive} data-style="ghost">
 							<ExternalLinkIcon className="tiptap-button-icon" />
 						</Button>
 
-						<Button type="button" onClick={removeLink} title={t('tiptap.remove-link')} disabled={!url && !isActive} data-style="ghost">
+						<Button type="button" onClick={removeLink} title={t('tiptap.remove_link')} disabled={!url && !isActive} data-style="ghost">
 							<TrashIcon className="tiptap-button-icon" />
 						</Button>
 					</ButtonGroup>

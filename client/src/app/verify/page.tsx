@@ -19,7 +19,7 @@ const Verify = () => {
 	const { resendVerificationEmail } = createClientService(createAuthService);
 
 	const schema = z.object({
-		email: z.string().min(1, t('message.email-required')).email(t('message.email-invalid')),
+		email: z.string().min(1, t('message.email_required')).email(t('message.email_invalid')),
 	});
 
 	const form = useForm({
@@ -32,7 +32,7 @@ const Verify = () => {
 	const onSubmit = async (data: z.infer<typeof schema>) => {
 		return resendVerificationEmail(data)
 			.then(() => {
-				toast.success(t('success.verify-email-send'), { description: t('toast.verify-email') });
+				toast.success(t('success.verify_email_send'), { description: t('toast.verify_email') });
 			})
 			.catch((error) => {
 				toast.error(error.message);
@@ -41,7 +41,7 @@ const Verify = () => {
 
 	return (
 		<div className="bg-card mx-auto my-10 max-w-108 space-y-6 rounded-2xl border px-8 py-10 shadow-xs">
-			<h1 className="mb-10 text-center text-2xl font-semibold">{t('verify-email')}</h1>
+			<h1 className="mb-10 text-center text-2xl font-semibold">{t('verify_email')}</h1>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
 					<FormField
@@ -51,20 +51,20 @@ const Verify = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.email')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" placeholder={t('form.enter-email')} {...field} />
+									<Input className="h-10" placeholder={t('form.enter_email')} {...field} />
 								</FormControl>
 								<FormMessage />
-								<FormDescription>{t('description.verify-email')}</FormDescription>
+								<FormDescription>{t('description.verify_email')}</FormDescription>
 							</FormItem>
 						)}
 					/>
 					<Button disabled={form.formState.isSubmitting} className="h-10 w-full">
-						{t('verify-email')}
+						{t('verify_email')}
 					</Button>
 				</form>
 			</Form>
 			<p className="text-foreground/70 text-center text-sm">
-				{t('account-already-verified')}{' '}
+				{t('account_already_verified')}{' '}
 				<Link className="text-primary hover:text-primary/80 font-semibold" href="/login">
 					{t('login')}
 				</Link>

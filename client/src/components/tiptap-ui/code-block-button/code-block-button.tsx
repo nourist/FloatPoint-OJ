@@ -70,7 +70,7 @@ export const CodeBlockButton = React.forwardRef<HTMLButtonElement, CodeBlockButt
 				tabIndex={-1}
 				aria-label={label}
 				aria-pressed={isActive}
-				tooltip={t('tiptap.code-block')}
+				tooltip={t('tiptap.code_block')}
 				onClick={handleClick}
 				{...buttonProps}
 				ref={ref}

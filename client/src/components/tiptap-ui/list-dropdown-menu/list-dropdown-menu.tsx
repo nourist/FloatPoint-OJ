@@ -83,7 +83,7 @@ export function ListDropdownMenu({
 					tabIndex={-1}
 					disabled={!canToggle}
 					data-disabled={!canToggle}
-					aria-label={t('tiptap.list-options')}
+					aria-label={t('tiptap.list_options')}
 					tooltip={t('tiptap.list')}
 					{...props}
 				>

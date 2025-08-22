@@ -69,9 +69,9 @@ export const HeadingDropdownMenu = React.forwardRef<HTMLButtonElement, HeadingDr
 						tabIndex={-1}
 						disabled={!canToggle}
 						data-disabled={!canToggle}
-						aria-label={t('tiptap.format-text-as-heading')}
+						aria-label={t('tiptap.format_text_as_heading')}
 						aria-pressed={isActive}
-						tooltip={t('tiptap.heading-tooltip')}
+						tooltip={t('tiptap.heading_tooltip')}
 						{...buttonProps}
 						ref={ref}
 					>

@@ -24,16 +24,16 @@ const Register = () => {
 	const { signup } = createClientService(createAuthService);
 
 	const schema = z.object({
-		username: z.string().min(1, t('message.username-required')),
-		email: z.string().min(1, t('message.email-required')).email(t('message.email-invalid')),
+		username: z.string().min(1, t('message.username_required')),
+		email: z.string().min(1, t('message.email_required')).email(t('message.email_invalid')),
 		password: z
 			.string()
-			.min(1, t('message.password-required'))
-			.min(8, t('message.password-min'))
-			.regex(/[A-Z]/, t('message.password-uppercase'))
-			.regex(/[a-z]/, t('message.password-lowercase'))
-			.regex(/[0-9]/, t('message.password-number'))
-			.regex(/[^A-Za-z0-9]/, t('message.password-special')),
+			.min(1, t('message.password_required'))
+			.min(8, t('message.password_min'))
+			.regex(/[A-Z]/, t('message.password_uppercase'))
+			.regex(/[a-z]/, t('message.password_lowercase'))
+			.regex(/[0-9]/, t('message.password_number'))
+			.regex(/[^A-Za-z0-9]/, t('message.password_special')),
 	});
 
 	const form = useForm({
@@ -48,7 +48,7 @@ const Register = () => {
 	const onSubmit = async (data: z.infer<typeof schema>) => {
 		return signup(data)
 			.then(() => {
-				toast.success(t('success.register'), { description: t('toast.verify-email') });
+				toast.success(t('success.register'), { description: t('toast.verify_email') });
 				router.push('/login');
 			})
 			.catch((error) => {
@@ -68,7 +68,7 @@ const Register = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.email')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" placeholder={t('form.enter-email')} {...field} />
+									<Input className="h-10" placeholder={t('form.enter_email')} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -81,7 +81,7 @@ const Register = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.username')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" placeholder={t('form.enter-username')} {...field} />
+									<Input className="h-10" placeholder={t('form.enter_username')} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -94,7 +94,7 @@ const Register = () => {
 							<FormItem>
 								<FormLabel className="text-foreground/80">{t('form.password')}</FormLabel>
 								<FormControl>
-									<Input className="h-10" type="password" placeholder={t('form.enter-password')} {...field} />
+									<Input className="h-10" type="password" placeholder={t('form.enter_password')} {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -108,7 +108,7 @@ const Register = () => {
 			<Separator className="opacity-70" />
 			<GoogleLoginButton />
 			<p className="text-foreground/70 text-center text-sm">
-				{t('already-have-account')}{' '}
+				{t('already_have_account')}{' '}
 				<Link className="text-primary hover:text-primary/80 font-semibold" href="/login">
 					{t('login')}
 				</Link>

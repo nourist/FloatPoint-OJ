@@ -74,7 +74,7 @@ export const ImageUpload = forwardRef<ImageUploadRef, Props>(({ title }, ref) =>
 		<div className="bg-card w-full max-w-md space-y-6 rounded-xl border p-6 shadow-xs">
 			<div className="space-y-2">
 				<h3 className="text-lg font-medium">{title ?? t('title')}</h3>
-				<p className="text-muted-foreground text-sm">{t('supported-formats')}</p>
+				<p className="text-muted-foreground text-sm">{t('supported_formats')}</p>
 			</div>
 
 			<Input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
@@ -95,8 +95,8 @@ export const ImageUpload = forwardRef<ImageUploadRef, Props>(({ title }, ref) =>
 						<ImagePlus className="text-muted-foreground h-6 w-6" />
 					</div>
 					<div className="text-center">
-						<p className="text-sm font-medium">{t('click-to-select')}</p>
-						<p className="text-muted-foreground text-xs">{t('or-drag-and-drop-file-here')}</p>
+						<p className="text-sm font-medium">{t('click_to_select')}</p>
+						<p className="text-muted-foreground text-xs">{t('or_drag_and_drop_file_here')}</p>
 					</div>
 				</div>
 			) : (
