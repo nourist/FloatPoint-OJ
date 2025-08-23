@@ -17,7 +17,9 @@ const Blog = async ({ params }: Props) => {
 
 	const blogService = await createServerService(createBlogService);
 
-	const blog = await blogService.getBlogBySlug(slug);
+	const blog = await blogService
+		.getBlogBySlug(slug)
+		.then((res) => ({ ...res, comments: res.comments.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) }));
 
 	const t = await getTranslations('blog');
 

@@ -34,6 +34,7 @@
 		"@tiptap/extension-text-align": "^3.2.0",
 		"@tiptap/extension-typography": "^3.2.0",
 		"@tiptap/extensions": "^3.2.0",
+		"@tiptap/html": "^3.2.2",
 		"@tiptap/pm": "^3.2.0",
 		"@tiptap/react": "^3.2.0",
 		"@tiptap/starter-kit": "^3.2.0",
