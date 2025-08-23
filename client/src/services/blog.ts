@@ -17,6 +17,7 @@ export interface UpdateBlogPayload {
 	title?: string;
 	content?: string;
 	thumbnail?: File;
+	removeThumbnail?: boolean;
 }
 
 export interface CreateBlogCommentPayload {
@@ -89,6 +90,9 @@ export const createBlogService = (http: ApiInstance) => ({
 		}
 		if (payload.thumbnail) {
 			formData.append('thumbnail', payload.thumbnail);
+		}
+		if (payload.removeThumbnail) {
+			formData.append('removeThumbnail', payload.removeThumbnail.toString());
 		}
 		return http.patch<BlogResponse>(`/blog/${id}`, formData, {
 			headers: {

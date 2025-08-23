@@ -3,7 +3,7 @@
 import { ImagePlus, Trash2, Upload, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import React, { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
+import React, { Dispatch, SetStateAction, forwardRef, useCallback, useImperativeHandle, useState } from 'react';
 
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
@@ -11,8 +11,10 @@ import { useImageUpload } from '~/hooks/use-image-upload';
 import { cn } from '~/lib/utils';
 
 export type ImageUploadRef = {
+	setPreviewUrl: Dispatch<SetStateAction<string | null>>;
 	getFile: () => File | null; // cho phép parent lấy file
 	clear: () => void; // cho phép parent xoá file
+	getIsEdited: () => boolean;
 };
 
 type Props = {
@@ -22,7 +24,7 @@ type Props = {
 export const ImageUpload = forwardRef<ImageUploadRef, Props>(({ title }, ref) => {
 	const t = useTranslations('upload');
 
-	const { previewUrl, fileName, fileInputRef, handleThumbnailClick, handleFileChange, handleRemove } = useImageUpload({
+	const { previewUrl, fileName, fileInputRef, handleThumbnailClick, handleFileChange, handleRemove, setPreviewUrl, isEdited } = useImageUpload({
 		onUpload: console.log,
 	});
 
@@ -68,6 +70,8 @@ export const ImageUpload = forwardRef<ImageUploadRef, Props>(({ title }, ref) =>
 	useImperativeHandle(ref, () => ({
 		getFile: () => fileInputRef.current?.files?.[0] ?? null,
 		clear: () => handleRemove(),
+		setPreviewUrl,
+		getIsEdited: () => isEdited,
 	}));
 
 	return (

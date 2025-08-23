@@ -116,20 +116,7 @@
 		"or_drag_and_drop_file_here": "or drag and drop file here"
 	},
 	"create": {
-		"blog": {
-			"create_blog": "Create Blog",
-			"title": "Title",
-			"title_placeholder": "Enter title",
-			"description_placeholder": "Enter description",
-			"upload_thumbnail": "Upload thumbnail",
-			"save": "Save",
-			"message": {
-				"title_required": "Title is required",
-				"title_and_content_required": "Title and content are required."
-			},
-			"create_success": "Blog created successfully!",
-			"create_fail": "Failed to create blog."
-		}
+		"blog": {}
 	},
 	"home": {
 		"blog": "Blog",
@@ -189,21 +176,58 @@
 		"go_home": "Go to Homepage"
 	},
 	"blog": {
-		"create_success": "Comment created successfully!",
-		"message": {
-			"comment_required": "Comment is required"
+		"back": "Back to Home",
+		"create": {
+			"create_blog": "Create Blog",
+			"title": "Title",
+			"title_placeholder": "Enter title",
+			"description_placeholder": "Enter description",
+			"upload_thumbnail": "Upload thumbnail",
+			"save": "Save",
+			"message": {
+				"title_required": "Title is required",
+				"title_and_content_required": "Title and content are required."
+			},
+			"create_success": "Blog created successfully!",
+			"create_fail": "Failed to create blog."
 		},
-		"comment-placeholder": "Write a comment...",
-		"comment": "Comment",
-		"comments": "Comments",
-		"date": {
-			"seconds": "{count} seconds ago",
-			"minutes": "{count} minutes ago",
-			"hours": "{count} hours ago",
-			"days": "{count} days ago",
-			"months": "{count} months ago",
-			"years": "{count} years ago"
+		"edit": {
+			"edit_blog": "Edit Blog",
+			"save": "Save",
+			"message": {
+				"title_required": "Title is required",
+				"title_and_content_required": "Title and content are required."
+			},
+			"edit_success": "Blog edited successfully!",
+			"edit_fail": "Failed to edit blog."
 		},
-		"back": "Back to Home"
+		"card": {
+			"delete_success": "Blog deleted successfully!",
+			"message": {
+				"delete_confirmation": "Are you sure you want to delete this blog?"
+			},
+
+			"delete": "Delete",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		},
+		"comment": {
+			"create_success": "Comment created successfully!",
+
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"comment-placeholder": "Write a comment...",
+			"comment": "Comment",
+			"comments": "Comments",
+			"message": {
+				"comment_required": "Comment is required"
+			}
+		}
 	}
 }

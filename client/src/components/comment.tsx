@@ -11,13 +11,12 @@ interface Props {
 }
 
 const Comment = ({ comment }: Props) => {
-	console.log(comment);
-	const t = useTranslations('blog');
+	const t = useTranslations('blog.comment');
 
 	const formatDate = (dateInput: Date | string): string => {
 		const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
 		const now = new Date();
-		const diff = (now.getTime() - date.getTime()) / 1000; // giây
+		const diff = Math.max((now.getTime() - date.getTime()) / 1000, 0); // giây
 
 		if (diff < 60) {
 			return t('date.seconds', { count: Math.floor(diff) });

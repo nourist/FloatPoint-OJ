@@ -10,7 +10,7 @@ import Comment from '~/components/comment';
 import { Button } from '~/components/ui/button';
 import { Textarea } from '~/components/ui/textarea';
 import UserAvatar from '~/components/user-avatar';
-import http from '~/lib/http-client';
+import { createClientService } from '~/lib/service-client';
 import { createAuthService } from '~/services/auth';
 import { createBlogService } from '~/services/blog';
 import { Blog, BlogComment } from '~/types/blog.type';
@@ -27,12 +27,12 @@ interface CommentFormProps {
 }
 
 const CommentForm = ({ user, blogId, setComments }: CommentFormProps) => {
-	const t = useTranslations('blog');
+	const t = useTranslations('blog.comment');
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [comment, setComment] = useState('');
 
-	const { createComment } = createBlogService(http);
+	const { createComment } = createClientService(createBlogService);
 
 	const onSubmit = async () => {
 		if (comment.length == 0) {
@@ -73,8 +73,8 @@ const CommentForm = ({ user, blogId, setComments }: CommentFormProps) => {
 };
 
 const Comments = ({ blog }: Props) => {
-	const { getProfile } = createAuthService(http);
-	const t = useTranslations('blog');
+	const { getProfile } = createClientService(createAuthService);
+	const t = useTranslations('blog.comment');
 
 	const { data: user } = useSWR('/auth/me', getProfile);
 

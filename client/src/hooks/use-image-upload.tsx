@@ -9,6 +9,7 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 	const [fileName, setFileName] = useState<string | null>(null);
+	const [isEdited, setIsEdited] = useState(false);
 
 	const handleThumbnailClick = useCallback(() => {
 		fileInputRef.current?.click();
@@ -16,6 +17,7 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
 
 	const handleFileChange = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setIsEdited(true);
 			const file = event.target.files?.[0];
 			if (file) {
 				setFileName(file.name);
@@ -29,6 +31,7 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
 	);
 
 	const handleRemove = useCallback(() => {
+		setIsEdited(true);
 		if (previewUrl) {
 			URL.revokeObjectURL(previewUrl);
 		}
@@ -55,5 +58,7 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
 		handleThumbnailClick,
 		handleFileChange,
 		handleRemove,
+		setPreviewUrl,
+		isEdited,
 	};
 }

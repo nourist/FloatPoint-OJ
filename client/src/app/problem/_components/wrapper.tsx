@@ -11,7 +11,7 @@ import PaginationControls from '~/components/pagination-controls';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '~/components/ui/dialog';
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { Skeleton } from '~/components/ui/skeleton';
-import http from '~/lib/http-client';
+import { createClientService } from '~/lib/service-client';
 import { createProblemService } from '~/services/problem';
 import { User } from '~/types/user.type';
 
@@ -37,7 +37,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 	const [page, setPage] = useState(1);
 	const [size, setSize] = useState(20);
 
-	const problemService = createProblemService(http);
+	const problemService = createClientService(createProblemService);
 
 	const { data, error, isLoading } = useSWR(
 		{

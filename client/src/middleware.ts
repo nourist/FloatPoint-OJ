@@ -20,5 +20,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-	matcher: ['/create/blog/:path*'],
+	matcher: ['/create/blog', '/blog/:slug/edit'],
 };

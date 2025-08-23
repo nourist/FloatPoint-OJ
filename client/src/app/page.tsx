@@ -4,14 +4,13 @@ import Link from 'next/link';
 
 import List from './_components/list';
 import { Button } from '~/components/ui/button';
-import { createServerApiInstance } from '~/lib/http-server';
+import { createServerService } from '~/lib/service-server';
 import { createAuthService } from '~/services/auth';
 
 const Home = async () => {
 	const t = await getTranslations('home');
 
-	const http = await createServerApiInstance();
-	const authService = createAuthService(http);
+	const authService = await createServerService(createAuthService);
 
 	const user = await authService.getProfile().catch(() => null);
 
@@ -25,7 +24,7 @@ const Home = async () => {
 					</div>
 					{user && (
 						<Button className="ml-auto" asChild>
-							<Link href="/create/blog">
+							<Link href="/blog/create">
 								<Plus />
 								{t('new')}
 							</Link>
