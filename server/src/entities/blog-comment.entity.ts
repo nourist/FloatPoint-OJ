@@ -14,7 +14,7 @@ export class BlogComment {
 	@ManyToOne(() => User, (user) => user.comments)
 	user: User;
 
-	@ManyToOne(() => Blog, (blog) => blog.comments)
+	@ManyToOne(() => Blog, (blog) => blog.comments, { onDelete: 'CASCADE' })
 	blog: Blog;
 
 	@CreateDateColumn({ type: 'timestamptz' })

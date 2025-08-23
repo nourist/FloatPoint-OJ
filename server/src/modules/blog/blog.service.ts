@@ -24,7 +24,7 @@ export class BlogService {
 	) {}
 
 	private async findBlogById(id: string): Promise<Blog> {
-		const blog = await this.blogRepository.findOne({ where: { id } });
+		const blog = await this.blogRepository.findOne({ where: { id }, relations: ['author'] });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
 		}
@@ -32,7 +32,7 @@ export class BlogService {
 	}
 
 	private async findBlogCommentById(id: string): Promise<BlogComment> {
-		const comment = await this.blogCommentRepository.findOne({ where: { id } });
+		const comment = await this.blogCommentRepository.findOne({ where: { id }, relations: ['blog', 'user'] });
 		if (!comment) {
 			throw new NotFoundException('Blog comment not found');
 		}
@@ -92,7 +92,7 @@ export class BlogService {
 	}
 
 	async findBySlug(slug: string) {
-		const blog = await this.blogRepository.findOne({ where: { slug }, relations: ['author', 'comments', 'comments.user'] });
+		const blog = await this.blogRepository.findOne({ where: { slug }, relations: ['author', 'comments', 'comments.user', 'comments.blog'] });
 		if (!blog) {
 			throw new NotFoundException('Blog not found');
 		}
@@ -105,6 +105,16 @@ export class BlogService {
 		this.checkBlogOwnership(blog, user);
 
 		let thumbnailUrl: string | null = blog.thumbnailUrl;
+
+		if (updateBlogDto.removeThumbnail) {
+			if (blog.thumbnailUrl) {
+				const oldFileName = blog.thumbnailUrl.split('/').pop();
+				if (oldFileName) {
+					await this.minioService.removeFile('thumbnails', oldFileName);
+				}
+			}
+			thumbnailUrl = null;
+		}
 
 		if (thumbnail) {
 			const bucketName = 'thumbnails';

@@ -1,5 +1,7 @@
 import { IsInt, IsNotEmpty, IsOptional, IsString, Max, Min } from 'class-validator';
 
+import { ToBoolean } from 'src/decorators/to-boolean.decorator';
+
 export class CreateBlogDto {
 	@IsString()
 	@IsNotEmpty()
@@ -18,6 +20,10 @@ export class UpdateBlogDto {
 	@IsString()
 	@IsOptional()
 	content?: string;
+
+	@IsOptional()
+	@ToBoolean()
+	removeThumbnail?: boolean;
 }
 
 export class CreateBlogCommentDto {
