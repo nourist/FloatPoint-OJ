@@ -14,8 +14,8 @@ fn get_minio_endpoint_url() -> String {
 
 pub fn make_minio_client() -> Client {
     let creds = Credentials::new(
-        env::var("MINIO_ACCESS_KEY").unwrap_or("admin".into()), // access key
-        env::var("MINIO_SECRET_KEY").unwrap_or("admin".into()), // secret key
+        env::var("MINIO_ACCESS_KEY").unwrap_or("minioadmin".into()), // access key
+        env::var("MINIO_SECRET_KEY").unwrap_or("minioadmin".into()), // secret key
         None,                                                   // optional token
         None,                                                   // optional expiry
         "static",                                               // provider name

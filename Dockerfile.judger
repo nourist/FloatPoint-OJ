@@ -24,7 +24,8 @@ RUN . $HOME/.cargo/env && cargo build --release
 # Build isolate
 RUN git clone https://github.com/ioi/isolate.git /tmp/isolate \
     && cd /tmp/isolate \
-    && make isolate
+    && make isolate \
+    && make install
 
 # -------------------------------
 # Runtime stage
@@ -32,12 +33,18 @@ RUN git clone https://github.com/ioi/isolate.git /tmp/isolate \
 FROM ubuntu:22.04 AS runner
 WORKDIR /app
 
-COPY --from=builder /tmp/isolate/isolate /usr/local/bin/isolate
+COPY --from=builder /usr/local/bin/isolate /usr/local/bin/isolate
+COPY --from=builder /usr/local/etc/isolate /usr/local/etc/isolate
 COPY --from=builder /app/target/release/judger /usr/local/bin/judger
 COPY judger/scripts /app/scripts
 
+RUN mkdir -p /var/local/lib/isolate \
+    && chmod 755 /var/local/lib/isolate \
+    && chmod +s /usr/local/bin/isolate
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libcap2 libsystemd0 \
+    libcap2 libcap2-bin libsystemd0 \
+	build-essential gcc g++ \
     openjdk-8-jdk openjdk-11-jdk openjdk-17-jdk \
     python2 python3 python3-pip python3-venv \
     && rm -rf /var/lib/apt/lists/*
@@ -46,4 +53,4 @@ ADD https://github.com/jwilder/dockerize/releases/download/v0.7.0/dockerize-linu
 RUN tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64-v0.7.0.tar.gz \
 		&& rm /tmp/dockerize-linux-amd64-v0.7.0.tar.gz
 
-CMD sh -c "dockerize -wait tcp://rabbitmq:5672 -timeout 120s &&judger"
+CMD sh -c "dockerize -wait tcp://rabbitmq:5672 -timeout 120s && judger"

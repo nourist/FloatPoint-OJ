@@ -213,7 +213,6 @@ fn run_testcase(language_config: &LanguageConfig, problem: &Problem) -> Result<(
     let mut cmd = Command::new("isolate");
     cmd.arg("--run")
         .arg(&arg_box_id)
-        .arg("--run")
         .arg(&arg_time)
         .arg(&arg_wall_time)
         .arg(&arg_mem)
@@ -314,7 +313,8 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
             };
 
             let output = Command::new("bash")
-                .arg("./scripts/compare.bash")
+                .current_dir("/app")
+                .arg("/app/scripts/compare.bash")
                 .arg(format!(
                     "/var/local/lib/isolate/{}/box/{}",
                     env::var("JUDGER_ID").unwrap(),
