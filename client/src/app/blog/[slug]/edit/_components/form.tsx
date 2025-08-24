@@ -8,6 +8,7 @@ import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import BlogForm, { BlogFormRef } from '~/components/blog-form';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
 import { joinUrl } from '~/lib/utils';
@@ -57,14 +58,22 @@ const Form = ({ data }: Props) => {
 
 	return (
 		<>
-			<h1 className="mb-2 flex items-center gap-1">
-				<Button variant="ghost" size="icon" className="text-muted-foreground rounded-full" asChild>
-					<Link href="/">
-						<MoveLeft />
-					</Link>
-				</Button>
-
-				{t('edit_blog')}
+			<h1 className="mb-2 flex gap-1">
+				<Breadcrumb className="mb-4">
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<BreadcrumbLink href="/">{t('blogs')}</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbLink href={`/blog/${data.slug}`}>{data.title}</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage>{t('edit')}</BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
 
 				<Button onClick={onSave} className="ml-auto" disabled={isLoading}>
 					<Save />

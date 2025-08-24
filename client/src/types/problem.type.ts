@@ -45,5 +45,6 @@ export interface Problem {
 	updatedAt: Date;
 	acCount?: number;
 	acRate?: number;
+	submissionCount?: number;
 	status?: 'solved' | 'attempted' | null;
 }

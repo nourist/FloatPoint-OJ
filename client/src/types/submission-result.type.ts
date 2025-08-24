@@ -15,4 +15,6 @@ export interface SubmissionResult {
 	status: SubmissionResultStatus;
 	executionTime: number;
 	memoryUsed: number;
+	subtaskName?: string;
+	testCaseName?: string;
 }

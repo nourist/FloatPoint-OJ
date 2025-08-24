@@ -8,6 +8,7 @@ import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import BlogForm, { BlogFormRef } from '~/components/blog-form';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
 import { createBlogService } from '~/services/blog';
@@ -53,14 +54,19 @@ const CreateBlog = () => {
 
 	return (
 		<div className="max-w-app mx-auto h-full">
-			<h1 className="mb-2 flex items-center gap-1">
-				<Button variant="ghost" size="icon" className="text-muted-foreground rounded-full" asChild>
-					<Link href="/">
-						<MoveLeft />
-					</Link>
-				</Button>
+			<h1 className="mb-2 flex gap-1">
+				<Breadcrumb>
+					<BreadcrumbList>
+						<BreadcrumbItem>
+							<BreadcrumbLink href="/">{t('blogs')}</BreadcrumbLink>
+						</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>
+							<BreadcrumbPage>{t('create')}</BreadcrumbPage>
+						</BreadcrumbItem>
+					</BreadcrumbList>
+				</Breadcrumb>
 
-				{t('create_blog')}
 				<Button onClick={onSave} className="ml-auto" disabled={isLoading}>
 					<Save />
 					{t('save')}

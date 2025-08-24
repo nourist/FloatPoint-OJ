@@ -2,6 +2,7 @@ import { BookOpenCheck, Check, MinusCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+import { getDifficultyColor } from '~/lib/difficulty-utils';
 import { cn } from '~/lib/utils';
 import { Problem } from '~/types/problem.type';
 import { User } from '~/types/user.type';
@@ -20,17 +21,6 @@ const getStatusIcon = (status?: 'solved' | 'attempted' | null) => {
 		return <MinusCircle className="text-warning size-4" />;
 	}
 	return null;
-};
-
-const getDifficultyColor = (difficulty: 'easy' | 'medium' | 'hard') => {
-	switch (difficulty) {
-		case 'easy':
-			return 'bg-success/10 text-success';
-		case 'medium':
-			return 'bg-warning/10 text-warning';
-		case 'hard':
-			return 'bg-destructive/10 text-destructive';
-	}
 };
 
 const ProblemTable = ({ problems, user, selectTags }: Props) => {

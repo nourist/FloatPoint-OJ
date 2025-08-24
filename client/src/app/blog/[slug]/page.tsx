@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import BlogCard from '../../../components/blog-card';
 import Comments from './_components/comments';
-import { Button } from '~/components/ui/button';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { createServerService } from '~/lib/service-server';
 import { createBlogService } from '~/services/blog';
 
@@ -21,18 +21,21 @@ const Blog = async ({ params }: Props) => {
 		.getBlogBySlug(slug)
 		.then((res) => ({ ...res, comments: res.comments.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()) }));
 
-	const t = await getTranslations('blog');
+	const t = await getTranslations('blog.card');
 
 	return (
 		<>
-			<h1 className="mb-2 flex items-center gap-1">
-				<Button variant="ghost" size="icon" className="text-muted-foreground rounded-full" asChild>
-					<Link href="/">
-						<MoveLeft />
-					</Link>
-				</Button>
-				{t('back')}
-			</h1>
+			<Breadcrumb className="mb-4">
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink href="/">{t('blogs')}</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>{blog.title}</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
 			<BlogCard data={blog} />
 			<Comments blog={blog} />
 		</>
