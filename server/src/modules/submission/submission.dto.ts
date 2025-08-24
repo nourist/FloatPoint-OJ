@@ -1,26 +1,30 @@
-import { IsEnum, IsInt, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 
 import { SubmissionStatus } from 'src/entities/submission.entity';
 import { ProgramLanguage } from 'src/entities/submission.entity';
 
 export class GetAllSubmissionsDto {
+	@IsOptional()
 	@IsString()
 	authorId?: string;
 
+	@IsOptional()
 	@IsString()
 	problemId?: string;
 
+	@IsOptional()
 	@IsEnum(ProgramLanguage)
 	language?: ProgramLanguage;
 
+	@IsOptional()
 	@IsEnum(SubmissionStatus)
 	status?: SubmissionStatus;
 
 	@IsInt()
-	page = 1;
+	page: number = 1;
 
 	@IsInt()
-	limit = 20;
+	limit: number = 20;
 }
 
 export class SubmitCodeDto {

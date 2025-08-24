@@ -63,6 +63,27 @@ export class ProblemService {
 		return problem;
 	}
 
+	async getProblemStatistics(problem: Problem) {
+		// Get problem submissions count, ac count, ac rate
+		const result = await this.problemRepository.manager
+			.createQueryBuilder(Submission, 'submission')
+			.select('COUNT(submission.id)', 'submissionCount')
+			.addSelect('SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END)', 'acCount')
+			.addSelect(
+				'CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END',
+				'acRate',
+			)
+			.where('submission.problemId = :problemId', { problemId: problem.id })
+			.setParameter('status', SubmissionStatus.ACCEPTED)
+			.getRawOne();
+
+		return {
+			submissionCount: Number(result?.submissionCount) || 0,
+			acCount: Number(result?.acCount) || 0,
+			acRate: Number(result?.acRate) || 0,
+		};
+	}
+
 	async isSlugExists(slug: string) {
 		const problem = await this.problemRepository.findOne({ where: { slug } });
 		return !!problem;
@@ -87,35 +108,36 @@ export class ProblemService {
 
 		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
-		qb.addSelect((subQuery) => {
-			return subQuery
-				.select('COUNT(submission.id)')
-				.from(Submission, 'submission')
-				.where('submission.problemId = problem.id')
-				.andWhere('submission.status = :status', { status: SubmissionStatus.ACCEPTED });
-		}, 'ac_count');
+		// Subquery aggregate cho submissions (Postgres)
+		qb.leftJoin(
+			(sq) =>
+				sq
+					.select('s."problemId"', 'problemId')
+					.addSelect('COUNT(*)', 'total')
+					.addSelect(`COUNT(*) FILTER (WHERE s.status = :ac)`, 'ac')
+					.from(Submission, 's')
+					.groupBy('s."problemId"'),
+			'stats',
+			`stats."problemId" = problem.id`,
+			{ ac: SubmissionStatus.ACCEPTED },
+		);
 
-		qb.addSelect((subQuery) => {
-			return subQuery
-				.select('CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END')
-				.from(Submission, 'submission')
-				.where('submission.problemId = problem.id')
-				.setParameter('status', SubmissionStatus.ACCEPTED);
-		}, 'ac_rate');
+		// Select thống kê + ac_rate (alias rõ ràng để ORDER BY được ở lớp ngoài)
+		qb.addSelect('COALESCE(stats.ac, 0)', 'ac_count');
+		qb.addSelect('COALESCE(stats.total, 0)', 'total_submissions');
+		qb.addSelect(
+			`CASE WHEN COALESCE(stats.total, 0) > 0
+				THEN (stats.ac::float / stats.total)
+				ELSE 0 END`,
+			'ac_rate',
+		);
 
-		if (minPoint) {
-			qb.andWhere('problem.point >= :minPoint', { minPoint });
-		}
+		// Filters
+		if (minPoint !== undefined) qb.andWhere('problem.point >= :minPoint', { minPoint });
+		if (maxPoint !== undefined) qb.andWhere('problem.point <= :maxPoint', { maxPoint });
+		if (difficulty) qb.andWhere('problem.difficulty = :difficulty', { difficulty });
 
-		if (maxPoint) {
-			qb.andWhere('problem.point <= :maxPoint', { maxPoint });
-		}
-
-		if (difficulty) {
-			qb.andWhere('problem.difficulty = :difficulty', { difficulty });
-		}
-
-		if (tags && tags.length > 0) {
+		if (tags?.length) {
 			qb.andWhere((qb1) => {
 				const sub = qb1
 					.subQuery()
@@ -126,76 +148,85 @@ export class ProblemService {
 					.groupBy('p.id')
 					.having('COUNT(DISTINCT ft.id) = :tagCount', { tagCount: tags.length })
 					.getQuery();
-
-				return 'problem.id IN ' + sub;
+				return `problem.id IN ${sub}`;
 			});
 		}
 
-		if (q) {
-			qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
+		if (q) qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
+		if (hasEditorial) qb.andWhere('editorial.id IS NOT NULL');
+
+		// Sort – dùng alias để TypeORM đưa vào SELECT ngoài, đảm bảo sắp xếp đúng
+		if (sortBy === 'acCount') {
+			qb.orderBy('ac_count', (order as 'ASC' | 'DESC') || 'DESC');
+		} else if (sortBy === 'acRate') {
+			qb.orderBy('ac_rate', (order as 'ASC' | 'DESC') || 'DESC');
+		} else if (sortBy) {
+			qb.orderBy(`problem.${sortBy}`, (order as 'ASC' | 'DESC') || 'ASC');
+		} else {
+			qb.orderBy('problem.createdAt', 'DESC');
 		}
 
-		if (hasEditorial) {
-			qb.andWhere('editorial.id IS NOT NULL');
-		}
-
-		if (sortBy) {
-			if (sortBy === 'acCount') {
-				qb.orderBy('ac_count', order || 'DESC');
-			} else if (sortBy === 'acRate') {
-				qb.orderBy('ac_rate', order || 'DESC');
-			} else {
-				qb.orderBy(`problem.${sortBy}`, order || 'ASC');
-			}
-		}
-
+		// Lọc theo status của user
 		if (user && status) {
 			if (status === 'unattempted') {
-				qb.andWhere((subQuery) => {
-					const sub = subQuery.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+				qb.andWhere((sq) => {
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'attempted') {
-				qb.andWhere((subQuery) => {
-					const sub = subQuery
+				qb.andWhere((sq) => {
+					const sub = sq
 						.subQuery()
 						.select('1')
 						.from(Submission, 's')
 						.where('s.problemId = problem.id')
 						.andWhere('s.authorId = :userId', { userId: user.id })
-						.andWhere('s.status = :status', { status: SubmissionStatus.ACCEPTED });
+						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
 					return `NOT EXISTS ${sub.getQuery()}`;
-				}).andWhere((subQuery) => {
-					const sub = subQuery.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+				}).andWhere((sq) => {
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
 					return `EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'solved') {
-				qb.andWhere((subQuery) => {
-					const sub = subQuery
+				qb.andWhere((sq) => {
+					const sub = sq
 						.subQuery()
 						.select('1')
 						.from(Submission, 's')
 						.where('s.problemId = problem.id')
 						.andWhere('s.authorId = :userId', { userId: user.id })
-						.andWhere('s.status = :status', { status: SubmissionStatus.ACCEPTED });
+						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
 					return `EXISTS ${sub.getQuery()}`;
 				});
 			}
 		}
 
+		// Lấy data
 		const { entities, raw } = await qb
 			.skip((page - 1) * limit)
 			.take(limit)
 			.getRawAndEntities();
 
-		const problems: Problem[] = entities.map((problem, index) => {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			const acCount = Number(raw[index].acCount) || 0;
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			const acRate = Number(raw[index].acRate) || 0;
-			return { ...problem, acCount, acRate };
+		// Map thống kê theo id (string) – tránh lệch do join tags
+		const statById = new Map<string, { ac: number; total: number; rate: number }>();
+		for (const r of raw) {
+			const pid = String(r.problem_id); // alias mặc định
+			if (!statById.has(pid)) {
+				statById.set(pid, {
+					ac: Number(r.ac_count) || 0,
+					total: Number(r.total_submissions) || 0,
+					rate: Number(r.ac_rate) || 0,
+				});
+			}
+		}
+
+		const problems: Problem[] = entities.map((problem) => {
+			const stat = statById.get(problem.id) ?? { ac: 0, total: 0, rate: 0 };
+			// Dùng rate đã tính từ DB (ổn định với sort)
+			return { ...problem, acCount: stat.ac, acRate: stat.rate };
 		});
 
+		// Status theo user
 		if (user) {
 			const problemIds = problems.map((p) => p.id);
 			const submissions = await this.problemRepository.manager.find(Submission, {
@@ -204,27 +235,21 @@ export class ProblemService {
 			});
 
 			for (const problem of problems) {
-				const problemSubmissions = submissions.filter((s) => s.problem.id === problem.id);
-				if (problemSubmissions.length > 0) {
-					if (problemSubmissions.some((s) => s.status === SubmissionStatus.ACCEPTED)) {
-						problem.status = 'solved';
-					} else {
-						problem.status = 'attempted';
-					}
+				const subs = submissions.filter((s) => s.problem.id === problem.id);
+				if (subs.some((s) => s.status === SubmissionStatus.ACCEPTED)) {
+					problem.status = 'solved';
+				} else if (subs.length > 0) {
+					problem.status = 'attempted';
 				} else {
 					problem.status = null;
 				}
 			}
 		}
 
-		const total = await qb.getCount();
+		// Đếm distinct problems (không dính ORDER BY alias)
+		const total = await qb.clone().select('problem.id').distinct(true).getCount();
 
-		return {
-			problems,
-			total,
-			page,
-			limit,
-		};
+		return { problems, total, page, limit };
 	}
 
 	@Transactional()

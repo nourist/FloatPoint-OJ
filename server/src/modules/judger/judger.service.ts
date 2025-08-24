@@ -54,6 +54,7 @@ export class JudgerService {
 	}
 
 	async handleJudgerResult(data: JudgerResult) {
+		this.logger.log(`Received judger_result: ${JSON.stringify(data)}`);
 		const submission = await this.submissionService.findOne(data.id);
 		const problem = await this.problemService.getProblemById(submission.problem.id);
 
@@ -87,8 +88,10 @@ export class JudgerService {
 
 		if (problem.scoringMethod == ProblemScoringMethod.STANDARD) {
 			const status = data.test_results.reduce((acc, cur) => {
-				const index = statusPriority.indexOf(cur.status);
-				return index > statusPriority.indexOf(acc) ? cur.status : acc;
+				const accIndex = statusPriority.indexOf(acc);
+				const curIndex = statusPriority.indexOf(cur.status);
+				// Return the worse status (lower index in priority array)
+				return curIndex < accIndex ? cur.status : acc;
 			}, TestCaseStatus.AC);
 
 			const AcCount: number = data.test_results.reduce((acc, cur) => acc + (cur.status == TestCaseStatus.AC ? 1 : 0), 0);
@@ -109,10 +112,15 @@ export class JudgerService {
 
 			const status = Object.values(subtaskMap).reduce((acc, cur) => {
 				const subtaskStatus = cur.reduce((acc, cur) => {
-					const index = statusPriority.indexOf(cur.status);
-					return index > statusPriority.indexOf(acc) ? cur.status : acc;
+					const accIndex = statusPriority.indexOf(acc);
+					const curIndex = statusPriority.indexOf(cur.status);
+					// Return the worse status (lower index in priority array)
+					return curIndex < accIndex ? cur.status : acc;
 				}, TestCaseStatus.AC);
-				return statusPriority.indexOf(subtaskStatus) > statusPriority.indexOf(acc) ? subtaskStatus : acc;
+				const accIndex = statusPriority.indexOf(acc);
+				const subtaskIndex = statusPriority.indexOf(subtaskStatus);
+				// Return the worse status (lower index in priority array)
+				return subtaskIndex < accIndex ? subtaskStatus : acc;
 			}, TestCaseStatus.AC);
 
 			const totalScore = Object.values(subtaskMap).reduce((acc, cur) => {
@@ -127,8 +135,10 @@ export class JudgerService {
 			this.judgerGateway.server.emit('submission_update', updatedSubmission);
 		} else {
 			const status = data.test_results.reduce((acc, cur) => {
-				const index = statusPriority.indexOf(cur.status);
-				return index > statusPriority.indexOf(acc) ? cur.status : acc;
+				const accIndex = statusPriority.indexOf(acc);
+				const curIndex = statusPriority.indexOf(cur.status);
+				// Return the worse status (lower index in priority array)
+				return curIndex < accIndex ? cur.status : acc;
 			}, TestCaseStatus.AC);
 
 			submission.status = statusMap[status];

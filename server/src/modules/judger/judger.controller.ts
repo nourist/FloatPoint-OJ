@@ -8,17 +8,17 @@ export type JudgerAck = {
 };
 
 export enum JudgerResultStatus {
-	CE,
-	IE,
-	OK,
+	CE = 'CE',
+	IE = 'IE',
+	OK = 'OK',
 }
 
 export enum TestCaseStatus {
-	AC,
-	WA,
-	RTE,
-	TLE,
-	MLE,
+	AC = 'AC',
+	WA = 'WA',
+	RTE = 'RTE',
+	TLE = 'TLE',
+	MLE = 'MLE',
 }
 
 export type TestCaseResult = {

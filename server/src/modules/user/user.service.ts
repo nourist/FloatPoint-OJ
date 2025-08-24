@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { MinioService } from '../minio/minio.service';
 import { GetUsersDto, UpdateNotificationSettingsDto, UpdateUserDto } from './user.dto';
+import { Problem } from 'src/entities/problem.entity';
+import { Submission } from 'src/entities/submission.entity';
 import { User } from 'src/entities/user.entity';
 
 @Injectable()
@@ -66,25 +68,23 @@ export class UserService {
 			.leftJoin(
 				(qb) =>
 					qb
-						.select('s.authorId', 'userId')
+						.select('s."authorId"', 'userId')
 						.addSelect('SUM(s.max_score)', 'totalScore')
 						.from(
 							(subQb) =>
 								subQb
-									.select('author.id', 'authorId')
-									.addSelect('problem.id', 'problemId')
-									.addSelect('MAX(submission.totalScore)', 'max_score')
-									.from('submission', 'submission')
-									.leftJoin('submission.problem', 'problem')
-									.leftJoin('submission.author', 'author')
-									.groupBy('author.id, problem.id'),
+									.select('s."authorId"', 'authorId')
+									.addSelect('s."problemId"', 'problemId')
+									.addSelect('MAX(s."totalScore")', 'max_score')
+									.from('submissions', 's')
+									.groupBy('s."authorId", s."problemId"'),
 							's',
 						)
-						.groupBy('s.authorId'),
+						.groupBy('s."authorId"'),
 				'user_scores',
-				'user_scores.userId = user.id',
+				'user_scores."userId" = user.id',
 			)
-			.addSelect('COALESCE(user_scores.totalScore, 0)', 'score');
+			.addSelect('COALESCE(user_scores."totalScore", 0)', 'score');
 
 		if (q) {
 			baseQuery.where('user.username ILIKE :q OR user.fullname ILIKE :q', {

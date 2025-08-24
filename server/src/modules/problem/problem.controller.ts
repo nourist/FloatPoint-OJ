@@ -59,9 +59,11 @@ export class ProblemController {
 
 	@Get(':slug')
 	async getProblemBySlug(@Param('slug') slug: string) {
+		const problem = await this.problemService.getProblemBySlug(slug);
+		const statistics = await this.problemService.getProblemStatistics(problem);
 		return {
 			message: 'success',
-			problem: await this.problemService.getProblemBySlug(slug),
+			problem: { ...problem, ...statistics },
 		};
 	}
 

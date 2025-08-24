@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Blog } from './blog.entity';
 import { Contest } from './contest.entity';
@@ -28,15 +28,19 @@ export class Notification {
 	isRead: boolean;
 
 	@ManyToOne(() => User, (user) => user.notifications)
+	@JoinColumn()
 	user: User;
 
 	@ManyToOne(() => Blog, { onDelete: 'CASCADE', nullable: true })
+	@JoinColumn()
 	blog: Blog;
 
 	@ManyToOne(() => Problem, { onDelete: 'CASCADE', nullable: true })
+	@JoinColumn()
 	problem: Problem;
 
 	@ManyToOne(() => Contest, { onDelete: 'CASCADE', nullable: true })
+	@JoinColumn()
 	contest: Contest;
 
 	@CreateDateColumn({ type: 'timestamptz' })

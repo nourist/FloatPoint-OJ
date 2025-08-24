@@ -18,12 +18,12 @@ export class GetUsersDto {
 	@IsOptional()
 	@IsInt()
 	@Min(1)
-	page = 1;
+	page: number = 1;
 
 	@IsOptional()
 	@IsInt()
 	@Min(1)
-	limit = 10;
+	limit: number = 10;
 }
 
 export class UpdateUserDto {
