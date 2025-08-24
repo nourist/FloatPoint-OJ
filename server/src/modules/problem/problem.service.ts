@@ -63,8 +63,8 @@ export class ProblemService {
 		return problem;
 	}
 
+	// Calculates submission statistics for a problem
 	async getProblemStatistics(problem: Problem) {
-		// Get problem submissions count, ac count, ac rate
 		const result = await this.problemRepository.manager
 			.createQueryBuilder(Submission, 'submission')
 			.select('COUNT(submission.id)', 'submissionCount')
@@ -103,12 +103,18 @@ export class ProblemService {
 		);
 	}
 
+	/**
+	 * Retrieves all problems with filtering, sorting, and pagination
+	 */
 	async findAll(query: GetAllProblemsDto, user?: User) {
 		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status } = query;
 
-		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
+		const qb = this.problemRepository
+			.createQueryBuilder('problem')
+			.leftJoinAndSelect('problem.tags', 'tags')
+			.leftJoinAndSelect('problem.editorial', 'editorial');
 
-		// Subquery aggregate cho submissions (Postgres)
+		// Add submission statistics subquery for PostgreSQL
 		qb.leftJoin(
 			(sq) =>
 				sq
@@ -122,7 +128,7 @@ export class ProblemService {
 			{ ac: SubmissionStatus.ACCEPTED },
 		);
 
-		// Select thống kê + ac_rate (alias rõ ràng để ORDER BY được ở lớp ngoài)
+		// Add statistical fields for sorting
 		qb.addSelect('COALESCE(stats.ac, 0)', 'ac_count');
 		qb.addSelect('COALESCE(stats.total, 0)', 'total_submissions');
 		qb.addSelect(
@@ -132,11 +138,11 @@ export class ProblemService {
 			'ac_rate',
 		);
 
-		// Filters
 		if (minPoint !== undefined) qb.andWhere('problem.point >= :minPoint', { minPoint });
 		if (maxPoint !== undefined) qb.andWhere('problem.point <= :maxPoint', { maxPoint });
 		if (difficulty) qb.andWhere('problem.difficulty = :difficulty', { difficulty });
 
+		// Apply tags filter (all specified tags must match)
 		if (tags?.length) {
 			qb.andWhere((qb1) => {
 				const sub = qb1
@@ -155,7 +161,6 @@ export class ProblemService {
 		if (q) qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
 		if (hasEditorial) qb.andWhere('editorial.id IS NOT NULL');
 
-		// Sort – dùng alias để TypeORM đưa vào SELECT ngoài, đảm bảo sắp xếp đúng
 		if (sortBy === 'acCount') {
 			qb.orderBy('ac_count', (order as 'ASC' | 'DESC') || 'DESC');
 		} else if (sortBy === 'acRate') {
@@ -166,14 +171,21 @@ export class ProblemService {
 			qb.orderBy('problem.createdAt', 'DESC');
 		}
 
-		// Lọc theo status của user
+		// Apply user-specific status filters
 		if (user && status) {
 			if (status === 'unattempted') {
+				// Problems user has never submitted to
 				qb.andWhere((sq) => {
-					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					const sub = sq
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'attempted') {
+				// Problems user has submitted to but not solved
 				qb.andWhere((sq) => {
 					const sub = sq
 						.subQuery()
@@ -184,10 +196,16 @@ export class ProblemService {
 						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				}).andWhere((sq) => {
-					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					const sub = sq
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id });
 					return `EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'solved') {
+				// Problems user has solved
 				qb.andWhere((sq) => {
 					const sub = sq
 						.subQuery()
@@ -201,16 +219,15 @@ export class ProblemService {
 			}
 		}
 
-		// Lấy data
 		const { entities, raw } = await qb
 			.skip((page - 1) * limit)
 			.take(limit)
 			.getRawAndEntities();
 
-		// Map thống kê theo id (string) – tránh lệch do join tags
+		// Map statistics by problem ID to avoid duplication from joins
 		const statById = new Map<string, { ac: number; total: number; rate: number }>();
 		for (const r of raw) {
-			const pid = String(r.problem_id); // alias mặc định
+			const pid = String(r.problem_id);
 			if (!statById.has(pid)) {
 				statById.set(pid, {
 					ac: Number(r.ac_count) || 0,
@@ -222,11 +239,10 @@ export class ProblemService {
 
 		const problems: Problem[] = entities.map((problem) => {
 			const stat = statById.get(problem.id) ?? { ac: 0, total: 0, rate: 0 };
-			// Dùng rate đã tính từ DB (ổn định với sort)
 			return { ...problem, acCount: stat.ac, acRate: stat.rate };
 		});
 
-		// Status theo user
+		// Add user-specific status information
 		if (user) {
 			const problemIds = problems.map((p) => p.id);
 			const submissions = await this.problemRepository.manager.find(Submission, {
@@ -234,6 +250,7 @@ export class ProblemService {
 				relations: ['problem'],
 			});
 
+			// Determine status for each problem based on user's submissions
 			for (const problem of problems) {
 				const subs = submissions.filter((s) => s.problem.id === problem.id);
 				if (subs.some((s) => s.status === SubmissionStatus.ACCEPTED)) {
@@ -246,7 +263,6 @@ export class ProblemService {
 			}
 		}
 
-		// Đếm distinct problems (không dính ORDER BY alias)
 		const total = await qb.clone().select('problem.id').distinct(true).getCount();
 
 		return { problems, total, page, limit };
@@ -254,6 +270,7 @@ export class ProblemService {
 
 	@Transactional()
 	async create(data: CreateProblemDto, creator: User) {
+		// Generate URL-friendly slug from title
 		const problemSlug = slug(data.title, { lower: true });
 
 		if (await this.isSlugExists(problemSlug)) {
@@ -262,7 +279,6 @@ export class ProblemService {
 		}
 
 		const problem = this.problemRepository.create({ ...data, tags: undefined, slug: problemSlug });
-
 		problem.creator = creator;
 
 		const tagEntities = await this.getOrCreateTags(data.tags);
@@ -282,6 +298,7 @@ export class ProblemService {
 			const tagEntities = await this.getOrCreateTags(data.tags);
 			problem.tags = tagEntities;
 		}
+		
 		Object.assign(problem, data);
 
 		if (data.title) {
@@ -299,7 +316,9 @@ export class ProblemService {
 	@Transactional()
 	async remove(id: string) {
 		const problem = await this.getProblemById(id);
+		
 		await this.problemRepository.remove(problem);
+		// Remove associated test case files from MinIO
 		await this.minioService.removeDir('test-cases', id);
 	}
 

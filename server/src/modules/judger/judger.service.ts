@@ -27,6 +27,7 @@ export class JudgerService {
 	async createTestCaseResult(submissionId: string, data: TestCaseResult) {
 		const submission = await this.submissionService.findOne(submissionId);
 
+		// Map test case status to submission result status
 		const statusMap = {
 			[TestCaseStatus.RTE]: SubmissionResultStatus.RUNTIME_ERROR,
 			[TestCaseStatus.TLE]: SubmissionResultStatus.TIME_LIMIT_EXCEEDED,
@@ -42,13 +43,16 @@ export class JudgerService {
 			memoryUsed: data.memory,
 			slug: data.slug,
 		});
+		
 		await this.submissionResultRepository.save(submissionResult);
 	}
 
 	async handleJudgerAck(data: JudgerAck) {
 		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
+		
 		const submission = await this.submissionRepository.findOneByOrFail({ id: data.id });
 		submission.status = SubmissionStatus.JUDGING;
+		
 		const updatedSubmission = await this.submissionRepository.save(submission);
 		this.judgerGateway.server.emit('submission_update', updatedSubmission);
 	}

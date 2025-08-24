@@ -28,6 +28,9 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
+	/**
+	 * Validates user credentials during login
+	 */
 	async validateUser(email: string, password: string) {
 		const user = await this.userService.getUserByEmail(email);
 
@@ -36,6 +39,7 @@ export class AuthService {
 			throw new UnauthorizedException('User is not verified');
 		}
 
+		// Check if user has a password (for social login users)
 		if (!user.password) {
 			this.logger.error(`User ${user.id} doesn't have a password`);
 			throw new UnauthorizedException("User doesn't have a password");
@@ -50,11 +54,16 @@ export class AuthService {
 		return user;
 	}
 
+	/**
+	 * Creates a new user account and sends verification email
+	 */
 	@Transactional()
 	async signup(userData: { email: string; password: string; username: string }) {
 		const user = await this.userService.createUser(userData);
+		
 		await this.mailService.sendVerifyEmail(user.email, user.verificationToken!);
 		this.logger.log(`User created with email ${user.email}`);
+		
 		return user;
 	}
 
@@ -71,6 +80,7 @@ export class AuthService {
 			throw new BadRequestException('User is already verified');
 		}
 
+		// Mark user as verified and clear verification token
 		user.isVerified = true;
 		user.verificationToken = null;
 		const savedUser = await this.userRepository.save(user);
@@ -94,8 +104,8 @@ export class AuthService {
 		const savedUser = await this.userRepository.save(user);
 
 		await this.mailService.sendVerifyEmail(user.email, verificationToken);
-
 		this.logger.log(`Verification email sent to ${user.email}`);
+		
 		return savedUser;
 	}
 
@@ -103,15 +113,16 @@ export class AuthService {
 	async forgotPassword(email: string) {
 		const user = await this.userService.getUserByEmail(email);
 
+		// Generate reset token with 1 hour expiration
 		const token = uuidv4();
-
 		user.resetPasswordToken = token;
 		user.resetPasswordExpiresAt = new Date(Date.now() + 1000 * 60 * 60);
+		
 		const savedUser = await this.userRepository.save(user);
 
 		await this.mailService.sendResetPasswordEmail(user.email, token);
-
 		this.logger.log(`Reset password email sent to ${user.email}`);
+		
 		return savedUser;
 	}
 
@@ -123,18 +134,21 @@ export class AuthService {
 			throw new NotFoundException('User not found');
 		}
 
+		// Check token expiration
 		if (user.resetPasswordExpiresAt && user.resetPasswordExpiresAt < new Date()) {
 			this.logger.log(`Reset password token ${token} has expired`);
 			throw new BadRequestException('Reset password token has expired');
 		}
 
+		// Hash new password and clear reset token
 		const hashedPassword = bcrypt.hashSync(newPassword, this.configService.get<number>('SALT_ROUNDS')!);
 		user.password = hashedPassword;
 		user.resetPasswordToken = null;
 		user.resetPasswordExpiresAt = null;
+		
 		const savedUser = await this.userRepository.save(user);
-
 		this.logger.log(`Password reset for user ${user.id}`);
+		
 		return savedUser;
 	}
 
@@ -148,6 +162,7 @@ export class AuthService {
 
 		const payload: JwtPayload = { email: user.email, sub: user.id, role: user.role };
 		this.logger.log(`User ${user.id} signed in with email ${user.email}`);
+		
 		return {
 			access_token: this.jwtService.sign(payload),
 			user,

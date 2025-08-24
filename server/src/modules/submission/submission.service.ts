@@ -31,16 +31,16 @@ export class SubmissionService {
 			where: { id },
 			relations: ['problem', 'author', 'results'],
 		});
+		
 		if (!submission) {
 			throw new NotFoundException(`Submission with ID ${id} not found`);
 		}
 
 		// Map submission result slugs to subtask and test case names
 		if (submission.results && submission.results.length > 0) {
-			// Get all unique subtask slugs from submission results
 			const subtaskSlugs = [...new Set(submission.results.map((result) => result.slug.split('/')[0]))];
 
-			// Fetch all required subtasks with their test cases in one query
+			// Fetch all required subtasks with their test cases in one query for efficiency
 			const subtasks = await this.subtaskRepository.find({
 				where: {
 					problem: { id: submission.problem.id },
@@ -49,9 +49,9 @@ export class SubmissionService {
 				relations: ['testCases'],
 			});
 
-			// Create lookup maps for faster access
 			const subtaskMap = new Map(subtasks.map((st) => [st.slug, st]));
 
+			// Map each result to its corresponding subtask and test case names
 			for (const result of submission.results) {
 				const [subtaskSlug, testCaseSlug] = result.slug.split('/');
 
@@ -61,6 +61,7 @@ export class SubmissionService {
 					(result as any).subtaskName = subtask.name;
 					(result as any).testCaseName = testCase?.name || testCaseSlug;
 				} else {
+					// Fallback to slug names if subtask not found
 					(result as any).subtaskName = subtaskSlug;
 					(result as any).testCaseName = testCaseSlug;
 				}
@@ -73,8 +74,12 @@ export class SubmissionService {
 	async findAll(query: GetAllSubmissionsDto, user: User) {
 		const { authorId, problemId, language, status, page, limit } = query;
 
-		const qb = this.submissionRepository.createQueryBuilder('submission').leftJoinAndSelect('submission.problem', 'problem').leftJoinAndSelect('submission.author', 'author');
+		const qb = this.submissionRepository
+			.createQueryBuilder('submission')
+			.leftJoinAndSelect('submission.problem', 'problem')
+			.leftJoinAndSelect('submission.author', 'author');
 
+		// Non-admin users can only see their own submissions
 		if (user.role !== UserRole.ADMIN) {
 			qb.andWhere('author.id = :userId', { userId: user.id });
 		}
@@ -100,6 +105,7 @@ export class SubmissionService {
 	async submitCode(body: SubmitCodeDto, user: User) {
 		const problem = await this.problemService.getProblemById(body.problemId);
 		const userWithContest = await this.userService.getUserById(user.id);
+		
 		const submission = this.submissionRepository.create({
 			sourceCode: body.code,
 			language: body.language,
@@ -107,9 +113,16 @@ export class SubmissionService {
 			author: user,
 			contest: userWithContest?.joiningContest,
 		});
+		
 		const savedSubmission = await this.submissionRepository.save(submission);
 
-		this.judgerJobQueue.emit('judger.job', { id: savedSubmission.id, problemId: problem.id, sourceCode: body.code, language: body.language });
+		// Queue submission for judging
+		this.judgerJobQueue.emit('judger.job', {
+			id: savedSubmission.id,
+			problemId: problem.id,
+			sourceCode: body.code,
+			language: body.language,
+		});
 
 		return savedSubmission;
 	}

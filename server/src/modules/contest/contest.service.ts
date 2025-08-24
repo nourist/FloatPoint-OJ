@@ -51,6 +51,7 @@ export class ContestService {
 			slug,
 			creator,
 		});
+		
 		return this.contestRepository.save(contest);
 	}
 
@@ -153,6 +154,7 @@ export class ContestService {
 
 		contest.problems.push(...problems);
 		await this.contestRepository.save(contest);
+		
 		return contest;
 	}
 

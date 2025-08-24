@@ -14,6 +14,7 @@ import { AllExceptionsFilter } from './filters/http-exception.filter';
 import { SerializeInterceptor } from './interceptors/serialize.interceptor';
 
 async function bootstrap() {
+	// Initialize transactional context for database transactions
 	initializeTransactionalContext();
 
 	const app = await NestFactory.create(AppModule, {
@@ -29,6 +30,7 @@ async function bootstrap() {
 
 	app.use(cookieParser());
 
+	// Configure global validation pipe with custom error handling
 	app.useGlobalPipes(
 		new ValidationPipe({
 			whitelist: true,
@@ -37,11 +39,13 @@ async function bootstrap() {
 				enableImplicitConversion: true,
 				exposeUnsetFields: true,
 			},
+			// Custom exception factory to format validation errors
 			exceptionFactory: (validationErrors: ValidationError[] = []) => {
 				return new UnprocessableEntityException({
 					statusCode: 422,
 					error: 'Unprocessable Entity',
 					message: 'Validation failed',
+					// Transform validation errors into field-specific error messages
 					fieldErrors: validationErrors.reduce(
 						(acc, error) => ({
 							...acc,
@@ -55,9 +59,9 @@ async function bootstrap() {
 	);
 
 	app.useGlobalFilters(new AllExceptionsFilter());
-
 	app.useGlobalInterceptors(new SerializeInterceptor());
 
+	// Connect to RabbitMQ microservice for judger acknowledgments
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,
 		options: {
@@ -67,6 +71,7 @@ async function bootstrap() {
 		},
 	});
 
+	// Connect to RabbitMQ microservice for judger results
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,
 		options: {
@@ -76,9 +81,9 @@ async function bootstrap() {
 		},
 	});
 
+	// Configure proxy middleware for MinIO storage access
 	app.use(
 		'/storage',
-
 		createProxyMiddleware({
 			target: `http://${configService.get<string>('MINIO_ENDPOINT')}:${configService.get<number>('MINIO_PORT')}`,
 			changeOrigin: true,
@@ -88,13 +93,17 @@ async function bootstrap() {
 		}),
 	);
 
-	const config = new DocumentBuilder().setTitle('API Docs').setDescription('API documentation for my project').setVersion('1.0').addBearerAuth().build();
+	const config = new DocumentBuilder()
+		.setTitle('API Docs')
+		.setDescription('API documentation for my project')
+		.setVersion('1.0')
+		.addBearerAuth()
+		.build();
 
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('api-docs', app, document);
 
 	await app.startAllMicroservices();
-
 	await app.listen(configService.get<number>('PORT')!);
 }
 

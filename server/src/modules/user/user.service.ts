@@ -59,6 +59,7 @@ export class UserService {
 		return user;
 	}
 
+	// Complex query to calculate user scores from their best submissions per problem
 	async getUsers(query: GetUsersDto) {
 		const { q, sortBy, sortOrder, page = 1, limit = 10 } = query;
 		const offset = (page - 1) * limit;
@@ -66,11 +67,13 @@ export class UserService {
 		const baseQuery = this.userRepository
 			.createQueryBuilder('user')
 			.leftJoin(
+				// Subquery to calculate total scores per user
 				(qb) =>
 					qb
 						.select('s."authorId"', 'userId')
 						.addSelect('SUM(s.max_score)', 'totalScore')
 						.from(
+							// Inner subquery to get max score per problem per user
 							(subQb) =>
 								subQb
 									.select('s."authorId"', 'authorId')
@@ -104,6 +107,7 @@ export class UserService {
 
 		const { entities: users, raw } = await baseQuery.getRawAndEntities();
 
+		// Attach calculated scores to user entities
 		const usersWithScore = users.map((user, index) => ({
 			...user,
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
@@ -128,6 +132,7 @@ export class UserService {
 			throw new BadRequestException('Username already exists');
 		}
 
+		// Hash password and generate verification token
 		const hashedPassword = bcrypt.hashSync(userData.password, this.configService.get<number>('SALT_ROUNDS')!);
 		const verificationToken = uuidv4();
 
@@ -157,6 +162,7 @@ export class UserService {
 	async updateAvatar(id: string, file: Express.Multer.File): Promise<User> {
 		const user = await this.getUserById(id);
 
+		// Remove old avatar if exists
 		if (user.avatarUrl) {
 			try {
 				const oldAvatarName = user.avatarUrl.split('/').pop();
@@ -172,14 +178,16 @@ export class UserService {
 		await this.minioService.saveFile('avatars', filename, file.buffer);
 
 		const avatarUrl = `/avatars/${filename}`;
-
 		user.avatarUrl = avatarUrl;
+		
 		return await this.userRepository.save(user);
 	}
 
 	async updateNotificationSettings(id: string, settings: UpdateNotificationSettingsDto): Promise<User> {
 		const user = await this.getUserById(id);
+		
 		user.notificationSettings = { ...user.notificationSettings, ...settings };
+		
 		return this.userRepository.save(user);
 	}
 }

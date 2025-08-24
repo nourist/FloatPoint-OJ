@@ -66,6 +66,7 @@ export class BlogService {
 			throw new BadRequestException('Slug already exists');
 		}
 
+		// Handle thumbnail upload
 		if (thumbnail) {
 			const bucketName = 'thumbnails';
 			const fileName = `${id}.${thumbnail.originalname.split('.').pop()}`;
@@ -75,6 +76,7 @@ export class BlogService {
 
 		const blog = this.blogRepository.create({ ...createBlogDto, id, slug, thumbnailUrl, author: user });
 		const savedBlog = await this.blogRepository.save(blog);
+		
 		await this.notificationService.createNewBlogNotification(savedBlog);
 		return savedBlog;
 	}
@@ -82,12 +84,14 @@ export class BlogService {
 	async findAll(query: BlogPaginationQueryDto) {
 		const page = query.page || 1;
 		const size = query.size || 10;
+		
 		const [blogs, total] = await this.blogRepository.findAndCount({
 			order: { createdAt: 'DESC' },
 			take: size,
 			skip: (page - 1) * size,
 			relations: ['author'],
 		});
+		
 		return { blogs, total, page, size };
 	}
 
@@ -106,6 +110,7 @@ export class BlogService {
 
 		let thumbnailUrl: string | null = blog.thumbnailUrl;
 
+		// Remove existing thumbnail if requested
 		if (updateBlogDto.removeThumbnail) {
 			if (blog.thumbnailUrl) {
 				const oldFileName = blog.thumbnailUrl.split('/').pop();
@@ -116,10 +121,12 @@ export class BlogService {
 			thumbnailUrl = null;
 		}
 
+		// Upload new thumbnail if provided
 		if (thumbnail) {
 			const bucketName = 'thumbnails';
 			const fileName = `${blog.id}.${thumbnail.originalname.split('.').pop()}`;
 
+			// Remove old thumbnail first
 			if (blog.thumbnailUrl) {
 				const oldFileName = blog.thumbnailUrl.split('/').pop();
 				if (oldFileName) {
@@ -142,6 +149,7 @@ export class BlogService {
 		const blog = await this.findBlogById(id);
 		this.checkBlogOwnership(blog, user);
 
+		// Remove thumbnail file if exists
 		if (blog.thumbnailUrl) {
 			const bucketName = 'thumbnails';
 			const fileName = blog.thumbnailUrl.split('/').pop();
