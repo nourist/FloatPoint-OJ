@@ -13,7 +13,7 @@ import { Skeleton } from '~/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
 import { formatSubmissionStatus, getSubmissionStatusColor } from '~/lib/status-utils';
-import { createSubmissionService } from '~/services/submission';
+import { submissionServiceInstance } from '~/services/submission';
 import { SubmissionResult } from '~/types/submission-result.type';
 import { Submission, SubmissionStatus } from '~/types/submission.type';
 
@@ -33,7 +33,7 @@ const SubmissionDetailPage = () => {
 		const fetchSubmission = async () => {
 			try {
 				setLoading(true);
-				const submissionService = createClientService(createSubmissionService);
+				const submissionService = createClientService(submissionServiceInstance);
 				const result = await submissionService.findOneSubmission(submissionId);
 				setSubmission(result.submission);
 

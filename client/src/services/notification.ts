@@ -23,7 +23,7 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const createNotificationService = (http: ApiInstance) => ({
+export const notificationServiceInstance = (http: ApiInstance) => ({
 	getNotifications: (params: GetNotificationsPayload) => {
 		return http.get<NotificationsResponse>('/notification', { params });
 	},

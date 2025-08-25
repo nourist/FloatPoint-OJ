@@ -7,10 +7,10 @@ import BlogCard from '~/components/blog-card';
 import PaginationControls from '~/components/pagination-controls';
 import { Skeleton } from '~/components/ui/skeleton';
 import { createClientService } from '~/lib/service-client';
-import { createBlogService } from '~/services/blog';
+import { blogServiceInstance } from '~/services/blog';
 
 const List = () => {
-	const { getAllBlogs } = createClientService(createBlogService);
+	const { getAllBlogs } = createClientService(blogServiceInstance);
 
 	const [page, setPage] = useState(1);
 	const [size, setSize] = useState(20);

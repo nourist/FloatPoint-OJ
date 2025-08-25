@@ -14,14 +14,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '~/components/ui/input';
 import { Separator } from '~/components/ui/separator';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 
 const Register = () => {
 	const t = useTranslations('auth');
 
 	const router = useRouter();
 
-	const { signup } = createClientService(createAuthService);
+	const { signup } = createClientService(authServiceInstance);
 
 	const schema = z.object({
 		username: z.string().min(1, t('message.username_required')),

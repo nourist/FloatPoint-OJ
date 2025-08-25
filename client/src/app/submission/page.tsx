@@ -8,8 +8,8 @@ import SubmissionFilter from './_components/submission-filter';
 import SubmissionTable, { TableSkeleton } from './_components/submission-table';
 import PaginationControls from '~/components/pagination-controls';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
-import { createSubmissionService } from '~/services/submission';
+import { authServiceInstance } from '~/services/auth';
+import { submissionServiceInstance } from '~/services/submission';
 import { ProgramLanguage, SubmissionStatus } from '~/types/submission.type';
 
 const SubmissionsPage = () => {
@@ -21,8 +21,8 @@ const SubmissionsPage = () => {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(20);
 
-	const submissionService = createClientService(createSubmissionService);
-	const { getProfile } = createClientService(createAuthService);
+	const submissionService = createClientService(submissionServiceInstance);
+	const { getProfile } = createClientService(authServiceInstance);
 
 	const { data: user } = useSWR('/auth/me', getProfile);
 

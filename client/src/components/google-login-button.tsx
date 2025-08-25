@@ -9,14 +9,14 @@ import { mutate } from 'swr';
 
 import { Button } from './ui/button';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 
 const GoogleLoginButton = () => {
 	const t = useTranslations('auth');
 
 	const router = useRouter();
 
-	const { googleSignin } = createClientService(createAuthService);
+	const { googleSignin } = createClientService(authServiceInstance);
 
 	const handle = useGoogleLogin({
 		onSuccess: (tokenResponse) => {

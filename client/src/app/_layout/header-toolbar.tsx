@@ -24,7 +24,7 @@ import {
 import UserAvatar from '~/components/user-avatar';
 import { Locale, locales, localesCode } from '~/i18n/locales';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
 
 const HeaderToolbar = () => {
@@ -32,9 +32,9 @@ const HeaderToolbar = () => {
 
 	const router = useRouter();
 
-	const { signout } = createClientService(createAuthService);
+	const { signout } = createClientService(authServiceInstance);
 
-	const { getProfile } = createClientService(createAuthService);
+	const { getProfile } = createClientService(authServiceInstance);
 
 	const { data: user } = useSWR('/auth/me', getProfile);
 

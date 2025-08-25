@@ -4,8 +4,8 @@ import ProblemSidebar from './_components/problem-sidebar';
 import ProblemStatement from './_components/problem-statement';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { createServerService } from '~/lib/service-server';
-import { createAuthService } from '~/services/auth';
-import { createProblemService } from '~/services/problem';
+import { authServiceInstance } from '~/services/auth';
+import { problemServiceInstance } from '~/services/problem';
 
 interface Props {
 	params: Promise<{ slug: string }>;
@@ -15,8 +15,8 @@ const Problem = async ({ params }: Props) => {
 	const { slug } = await params;
 	const t = await getTranslations('problem.detail.header');
 
-	const problemService = await createServerService(createProblemService);
-	const authService = await createServerService(createAuthService);
+	const problemService = await createServerService(problemServiceInstance);
+	const authService = await createServerService(authServiceInstance);
 
 	const [problemResponse, user] = await Promise.all([problemService.getProblemBySlug(slug), authService.getProfile().catch(() => null)]);
 

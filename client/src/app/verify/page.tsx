@@ -11,12 +11,12 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 
 const Verify = () => {
 	const t = useTranslations('auth');
 
-	const { resendVerificationEmail } = createClientService(createAuthService);
+	const { resendVerificationEmail } = createClientService(authServiceInstance);
 
 	const schema = z.object({
 		email: z.string().min(1, t('message.email_required')).email(t('message.email_invalid')),

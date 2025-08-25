@@ -15,8 +15,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Textarea } from '~/components/ui/textarea';
 import UserAvatar from '~/components/user-avatar';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
-import { createBlogService } from '~/services/blog';
+import { authServiceInstance } from '~/services/auth';
+import { blogServiceInstance } from '~/services/blog';
 import { Blog, BlogComment } from '~/types/blog.type';
 import { User } from '~/types/user.type';
 
@@ -45,7 +45,7 @@ const Comment = ({ comment, blogId, setComments, user }: CommentProps) => {
 
 	const [content, setContent] = useState(comment.content);
 
-	const { deleteComment, updateComment } = createClientService(createBlogService);
+	const { deleteComment, updateComment } = createClientService(blogServiceInstance);
 
 	const formatDate = (dateInput: Date | string): string => {
 		const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
@@ -178,7 +178,7 @@ const CommentForm = ({ user, blogId, setComments }: CommentFormProps) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [comment, setComment] = useState('');
 
-	const { createComment } = createClientService(createBlogService);
+	const { createComment } = createClientService(blogServiceInstance);
 
 	const onSubmit = async () => {
 		if (comment.length == 0) {
@@ -219,7 +219,7 @@ const CommentForm = ({ user, blogId, setComments }: CommentFormProps) => {
 };
 
 const Comments = ({ blog }: Props) => {
-	const { getProfile } = createClientService(createAuthService);
+	const { getProfile } = createClientService(authServiceInstance);
 	const t = useTranslations('blog.comment');
 
 	const { data: user } = useSWR('/auth/me', getProfile);

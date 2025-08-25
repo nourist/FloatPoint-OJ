@@ -5,12 +5,12 @@ import Link from 'next/link';
 import List from './_components/list';
 import { Button } from '~/components/ui/button';
 import { createServerService } from '~/lib/service-server';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 
 const Home = async () => {
 	const t = await getTranslations('home');
 
-	const authService = await createServerService(createAuthService);
+	const authService = await createServerService(authServiceInstance);
 
 	const user = await authService.getProfile().catch(() => null);
 

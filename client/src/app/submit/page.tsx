@@ -5,7 +5,7 @@ import Form from './_components/form';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { getDifficultyColor } from '~/lib/difficulty-utils';
 import { createServerService } from '~/lib/service-server';
-import { createProblemService } from '~/services/problem';
+import { problemServiceInstance } from '~/services/problem';
 
 interface Props {
 	searchParams: Promise<{ problem: string | undefined }>;
@@ -20,7 +20,7 @@ const SubmitPage = async ({ searchParams }: Props) => {
 	}
 
 	// Services
-	const problemService = await createServerService(createProblemService);
+	const problemService = await createServerService(problemServiceInstance);
 
 	const problem = await problemService.getProblemBySlug(problemSlug).then((res) => res.problem);
 

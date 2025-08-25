@@ -57,7 +57,7 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const createBlogService = (http: ApiInstance) => ({
+export const blogServiceInstance = (http: ApiInstance) => ({
 	createBlog: (payload: CreateBlogPayload) => {
 		const formData = new FormData();
 		formData.append('title', payload.title);

@@ -1,4 +1,4 @@
-import { BookOpen, Clock, Database, FileInput, FileOutput, FileText, List, Play, Zap } from 'lucide-react';
+import { BookOpen, Clock, Database, FileInput, FileOutput, List, Play, Zap } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
@@ -6,8 +6,6 @@ import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
 import { getDifficultyColor } from '~/lib/difficulty-utils';
-import { createServerService } from '~/lib/service-server';
-import { createAuthService } from '~/services/auth';
 import { IOMode, Problem } from '~/types/problem.type';
 import { User } from '~/types/user.type';
 

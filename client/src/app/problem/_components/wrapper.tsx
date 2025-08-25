@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '~/components/u
 import { ScrollArea } from '~/components/ui/scroll-area';
 import { Skeleton } from '~/components/ui/skeleton';
 import { createClientService } from '~/lib/service-client';
-import { createProblemService } from '~/services/problem';
+import { problemServiceInstance } from '~/services/problem';
 import { User } from '~/types/user.type';
 
 interface Props {
@@ -37,7 +37,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 	const [page, setPage] = useState(1);
 	const [size, setSize] = useState(20);
 
-	const problemService = createClientService(createProblemService);
+	const problemService = createClientService(problemServiceInstance);
 
 	const { data, error, isLoading } = useSWR(
 		{

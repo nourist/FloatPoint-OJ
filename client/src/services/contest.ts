@@ -48,7 +48,7 @@ export interface SimpleMessageResponse {
 }
 
 // Functions
-export const createContestService = (http: ApiInstance) => ({
+export const contestServiceInstance = (http: ApiInstance) => ({
 	findAllContests: (params: QueryContestPayload) => {
 		return http.get<ContestsResponse>('/contests', { params });
 	},

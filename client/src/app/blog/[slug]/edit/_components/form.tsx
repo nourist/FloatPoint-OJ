@@ -1,8 +1,7 @@
 'use client';
 
-import { MoveLeft, Save } from 'lucide-react';
+import { Save } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -12,7 +11,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
 import { joinUrl } from '~/lib/utils';
-import { createBlogService } from '~/services/blog';
+import { blogServiceInstance } from '~/services/blog';
 import { Blog } from '~/types/blog.type';
 
 interface Props {
@@ -26,7 +25,7 @@ const Form = ({ data }: Props) => {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const { updateBlog } = createClientService(createBlogService);
+	const { updateBlog } = createClientService(blogServiceInstance);
 
 	const onSave = () => {
 		if (!formRef.current) return;

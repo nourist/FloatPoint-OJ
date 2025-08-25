@@ -1,8 +1,7 @@
 'use client';
 
-import { MoveLeft, Save } from 'lucide-react';
+import { Save } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -11,13 +10,13 @@ import BlogForm, { BlogFormRef } from '~/components/blog-form';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
-import { createBlogService } from '~/services/blog';
+import { blogServiceInstance } from '~/services/blog';
 
 const CreateBlog = () => {
 	const t = useTranslations('blog.create');
 	const router = useRouter();
 
-	const { createBlog } = createClientService(createBlogService);
+	const { createBlog } = createClientService(blogServiceInstance);
 
 	const [isLoading, setIsLoading] = useState(false);
 

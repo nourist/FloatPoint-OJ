@@ -10,8 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~
 import { languageOptions } from '~/lib/language-utils';
 import { createClientService } from '~/lib/service-client';
 import { getSubmissionStatusTextColor } from '~/lib/status-utils';
-import { createProblemService } from '~/services/problem';
-import { createUserService } from '~/services/user';
+import { problemServiceInstance } from '~/services/problem';
+import { userServiceInstance } from '~/services/user';
 import { SubmissionStatus } from '~/types/submission.type';
 
 interface SubmissionFilterProps {
@@ -78,8 +78,8 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 		},
 	];
 
-	const problemService = createClientService(createProblemService);
-	const userService = createClientService(createUserService);
+	const problemService = createClientService(problemServiceInstance);
+	const userService = createClientService(userServiceInstance);
 
 	const problemFetcher = useCallback(
 		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {

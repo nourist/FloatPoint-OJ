@@ -52,7 +52,7 @@ export interface VerifyEmailResponse {
 	email: string;
 }
 
-export const createAuthService = (http: ApiInstance) => ({
+export const authServiceInstance = (http: ApiInstance) => ({
 	getProfile: () => {
 		return http.get<ProfileResponse>('/auth').then((res) => res.user);
 	},

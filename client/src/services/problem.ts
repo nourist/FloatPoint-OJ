@@ -106,7 +106,7 @@ export interface MinPointResponse {
 }
 
 // Functions
-export const createProblemService = (http: ApiInstance) => ({
+export const problemServiceInstance = (http: ApiInstance) => ({
 	findAllProblems: (params: GetAllProblemsPayload) => {
 		return http.get<ProblemsResponse>('/problem', { params });
 	},

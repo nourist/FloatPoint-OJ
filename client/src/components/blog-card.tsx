@@ -16,8 +16,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import UserAvatar from '~/components/user-avatar';
 import { createClientService } from '~/lib/service-client';
 import { joinUrl } from '~/lib/utils';
-import { createAuthService } from '~/services/auth';
-import { createBlogService } from '~/services/blog';
+import { authServiceInstance } from '~/services/auth';
+import { blogServiceInstance } from '~/services/blog';
 import { Blog } from '~/types/blog.type';
 
 interface Props {
@@ -26,8 +26,8 @@ interface Props {
 }
 
 const BlogCard = ({ data, mutate }: Props) => {
-	const { getProfile } = createClientService(createAuthService);
-	const { deleteBlog } = createClientService(createBlogService);
+	const { getProfile } = createClientService(authServiceInstance);
+	const { deleteBlog } = createClientService(blogServiceInstance);
 
 	const { data: user } = useSWR('/auth/me', getProfile);
 	const t = useTranslations('blog.card');

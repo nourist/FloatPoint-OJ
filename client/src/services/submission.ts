@@ -43,7 +43,7 @@ export interface SubmissionResponse {
 }
 
 // Functions
-export const createSubmissionService = (http: ApiInstance) => ({
+export const submissionServiceInstance = (http: ApiInstance) => ({
 	findAllSubmissions: (params: GetAllSubmissionsPayload) => {
 		return http.get<SubmissionsResponse>('/submission', { params });
 	},

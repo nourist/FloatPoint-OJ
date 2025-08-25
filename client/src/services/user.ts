@@ -31,7 +31,7 @@ export interface UsersResponse {
 }
 
 // Functions
-export const createUserService = (http: ApiInstance) => ({
+export const userServiceInstance = (http: ApiInstance) => ({
 	updateProfile: (payload: UpdateUserPayload) => {
 		return http.patch<UserResponse>('/users/me', payload);
 	},

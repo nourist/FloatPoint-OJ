@@ -13,7 +13,7 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import { createClientService } from '~/lib/service-client';
-import { createAuthService } from '~/services/auth';
+import { authServiceInstance } from '~/services/auth';
 
 const ResetPassword = () => {
 	const t = useTranslations('auth');
@@ -23,7 +23,7 @@ const ResetPassword = () => {
 	const searchParams = useSearchParams();
 	const token = searchParams.get('token');
 
-	const { resetPassword } = createClientService(createAuthService);
+	const { resetPassword } = createClientService(authServiceInstance);
 
 	const schema = z
 		.object({

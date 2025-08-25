@@ -1,6 +1,6 @@
 import Form from './_components/form';
 import { createServerService } from '~/lib/service-server';
-import { createBlogService } from '~/services/blog';
+import { blogServiceInstance } from '~/services/blog';
 
 interface Props {
 	params: Promise<{ slug: string }>;
@@ -9,7 +9,7 @@ interface Props {
 const EditBlog = async ({ params }: Props) => {
 	const { slug } = await params;
 
-	const blogService = await createServerService(createBlogService);
+	const blogService = await createServerService(blogServiceInstance);
 
 	const blog = await blogService.getBlogBySlug(slug);
 

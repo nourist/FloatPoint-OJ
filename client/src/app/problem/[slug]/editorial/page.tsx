@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import EditorialContent from './_components/editorial-content';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { createServerService } from '~/lib/service-server';
-import { createProblemService } from '~/services/problem';
+import { problemServiceInstance } from '~/services/problem';
 
 interface Props {
 	params: Promise<{ slug: string }>;
@@ -13,7 +13,7 @@ const EditorialPage = async ({ params }: Props) => {
 	const { slug } = await params;
 	const t = await getTranslations('editorial');
 
-	const problemService = await createServerService(createProblemService);
+	const problemService = await createServerService(problemServiceInstance);
 
 	// Fetch problem with editorial relation included
 	const problemResponse = await problemService.getProblemBySlug(slug);

@@ -17,7 +17,7 @@ import { Skeleton } from '~/components/ui/skeleton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
-import { createUserService } from '~/services/user';
+import { userServiceInstance } from '~/services/user';
 import { User } from '~/types/user.type';
 
 type StandingMode = 'rating' | 'score';
@@ -51,7 +51,7 @@ const Standing = () => {
 	}, [mode, search, page, limit, router]);
 
 	// SWR data fetching for top 3 users
-	const userService = createClientService(createUserService);
+	const userService = createClientService(userServiceInstance);
 	const {
 		data: topData,
 		error: topError,
