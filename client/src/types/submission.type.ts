@@ -48,4 +48,9 @@ export interface Submission {
 	submittedAt: Date;
 	log: string;
 	results: SubmissionResult[];
+	canView?: boolean;
+	time?: number;
+	memory?: number;
+	acceptedTestCases?: number;
+	totalTestCases?: number;
 }

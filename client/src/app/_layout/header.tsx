@@ -6,6 +6,8 @@ import HeaderToolbar from './header-toolbar';
 import NavLink from '~/components/nav-link';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
+import { createServerService } from '~/lib/service-server';
+import { createAuthService } from '~/services/auth';
 
 const Header = async () => {
 	const t = await getTranslations('layout.header');
@@ -16,6 +18,10 @@ const Header = async () => {
 		{ href: '/contest', label: t('contests') },
 		{ href: '/standing', label: t('standing') },
 	];
+
+		const authService = await createServerService(createAuthService);
+	
+		const user = await authService.getProfile().catch(() => null);
 
 	return (
 		<div className="bg-card flex h-[var(--header-height)] w-full justify-center border-b shadow-xs">
@@ -73,7 +79,7 @@ const Header = async () => {
 						</NavLink>
 					</Button>
 				))}
-				<HeaderToolbar />
+				<HeaderToolbar user={ user} />
 			</div>
 		</div>
 	);

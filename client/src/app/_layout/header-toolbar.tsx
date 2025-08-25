@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import Cookies from 'js-cookie';
 import { Bell, CircleUserRound, Globe, LogOut, Moon, Settings, Sun } from 'lucide-react';
@@ -26,15 +26,18 @@ import { Locale, locales, localesCode } from '~/i18n/locales';
 import { createClientService } from '~/lib/service-client';
 import { createAuthService } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
+import { User } from '~/types/user.type';
 
-const HeaderToolbar = () => {
+interface Props{
+	user:User|null
+}
+
+const HeaderToolbar = ({user}:Props) => {
 	const t = useTranslations('layout.header');
 
 	const router = useRouter();
 
-	const { getProfile, signout } = createClientService(createAuthService);
-
-	const { data: user, isLoading } = useSWR('/auth/me', getProfile);
+	const { signout } = createClientService(createAuthService);
 
 	const theme = Cookies.get('theme') || 'light';
 	const language = Cookies.get('lang') || 'en';
@@ -54,10 +57,6 @@ const HeaderToolbar = () => {
 		mutate('/auth/me', null, false);
 		router.refresh();
 	};
-
-	if (isLoading) {
-		return <></>;
-	}
 
 	if (!user) {
 		return (

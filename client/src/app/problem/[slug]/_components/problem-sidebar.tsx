@@ -89,7 +89,7 @@ const ProblemSidebar = async ({ problem, user }: ProblemSidebarProps) => {
 									<Database className="text-muted-foreground h-4 w-4" />
 									<span>{t('constraints.memory_limit')}</span>
 								</span>
-								<span>{Math.round(problem.memoryLimit / 1024)}MB</span>
+								<span>{Number(problem.memoryLimit / 1024).toFixed(1)}MB</span>
 							</div>
 						</div>
 					</div>

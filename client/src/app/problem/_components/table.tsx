@@ -27,28 +27,28 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 	const t = useTranslations('problem.table');
 	return (
 		<div className="w-full overflow-hidden rounded-2xl border shadow-xs">
-			<table className="divide-border w-full divide-y">
-				<thead className="bg-accent">
+			<table className="table w-full">
+				<thead>
 					<tr>
-						{user && <th className="px-6 py-3 text-center text-xs font-medium tracking-wider uppercase"></th>}
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('title')}</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('difficulty')}</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-sm:px-2">{t('point')}</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-md:hidden">{t('accepted')}</th>
-						<th className="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase max-xl:hidden">{t('acceptance')}</th>
-						<th className="px-6 py-3 text-center text-xs font-medium tracking-wider uppercase max-sm:hidden">{t('editorial')}</th>
+						{user && <th></th>}
+						<th className="max-sm:px-2">{t('title')}</th>
+						<th className="max-sm:px-2">{t('difficulty')}</th>
+						<th className="max-sm:px-2">{t('point')}</th>
+						<th className="max-md:hidden">{t('accepted')}</th>
+						<th className="max-xl:hidden">{t('acceptance')}</th>
+						<th className="text-center max-sm:hidden">{t('editorial')}</th>
 					</tr>
 				</thead>
-				<tbody className="divide-border bg-card divide-y">
+				<tbody className="">
 					{problems.map((problem) => (
-						<tr key={problem.id} className="hover:bg-background">
+						<tr key={problem.id} className="">
 							{user && (
-								<td className="w-14 py-4 pl-5 whitespace-nowrap">
+								<td className="w-14 pl-5">
 									<div className="flex h-full w-full items-center justify-center">{getStatusIcon(problem.status)}</div>
 								</td>
 							)}
-							<td className="px-6 py-4 whitespace-nowrap max-sm:px-2">
-								<Link href={`/problem/${problem.slug}`} className="hover:text-primary font-medium hover:underline">
+							<td className="max-sm:px-2">
+								<Link href={`/problem/${problem.slug}`} className="hover:text-primary text-base font-medium hover:underline">
 									{problem.title}
 								</Link>
 								<div className="mt-1 flex flex-wrap gap-1">
@@ -65,15 +65,15 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 									))}
 								</div>
 							</td>
-							<td className="px-6 py-4 whitespace-nowrap max-sm:px-2">
+							<td className="max-sm:px-2">
 								<span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${getDifficultyColor(problem.difficulty)}`}>
 									{t(problem.difficulty)}
 								</span>
 							</td>
-							<td className="text-muted-foreground px-6 py-4 text-sm whitespace-nowrap max-sm:px-2">{problem.point}</td>
-							<td className="text-muted-foreground px-6 py-4 text-sm whitespace-nowrap max-md:hidden">{problem.acCount}</td>
-							<td className="text-muted-foreground px-6 py-4 text-sm whitespace-nowrap max-xl:hidden">{((problem.acRate ?? 0) * 100).toFixed(2)}%</td>
-							<td className="py-4 whitespace-nowrap max-sm:hidden">
+							<td className="text-muted-foreground max-sm:px-2">{problem.point}</td>
+							<td className="text-muted-foreground max-md:hidden">{problem.acCount}</td>
+							<td className="text-muted-foreground max-xl:hidden">{((problem.acRate ?? 0) * 100).toFixed(2)}%</td>
+							<td className="max-sm:hidden">
 								{problem.editorial && (
 									<Link href={`/problem/${problem.slug}/editorial`} className="flex h-full w-full items-center justify-center">
 										<BookOpenCheck className="text-success size-4.5" strokeWidth={2.5} />

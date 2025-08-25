@@ -239,7 +239,16 @@
 		"back_to_problem": "Back to Problem"
 	},
 	"submission": {
+		"date": {
+			"seconds": "{count} seconds ago",
+			"minutes": "{count} minutes ago",
+			"hours": "{count} hours ago",
+			"days": "{count} days ago",
+			"months": "{count} months ago",
+			"years": "{count} years ago"
+		},
 		"page": {
+			"view":"View",
 			"title": "Submissions",
 			"breadcrumb": {
 				"home": "Home",
@@ -267,7 +276,8 @@
 				"previous": "Previous",
 				"next": "Next",
 				"page_info": "Page {page} of {total}"
-			}
+			},
+			"passed": "passed"
 		},
 		"filters": {
 			"problem": "Problem",
@@ -289,6 +299,7 @@
 			"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
 			"RUNTIME_ERROR": "Runtime Error",
 			"COMPILATION_ERROR": "Compilation Error",
+			"INTERNAL_ERROR": "Internal Error",
 			"PENDING": "Pending",
 			"JUDGING": "Judging",
 			"accepted": "Accepted",
@@ -297,8 +308,23 @@
 			"memory_limit_exceeded": "Memory Limit Exceeded",
 			"runtime_error": "Runtime Error",
 			"compilation_error": "Compilation Error",
+			"internal_error": "Internal Error",
 			"pending": "Pending",
 			"judging": "Judging"
+		},
+		"table": {
+			"status": "Status",
+			"problem": "Problem",
+			"language": "Language",
+			"runtime": "Runtime",
+			"memory": "Memory",
+			"submitted": "Submitted",
+			"actions": "Actions",
+			"error_loading": "Error Loading Submissions",
+			"unknown_problem": "Unknown Problem",
+			"by": "by",
+			"solved": "solved",
+			"score": "Score"
 		},
 		"messages": {
 			"error": {

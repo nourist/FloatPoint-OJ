@@ -60,7 +60,14 @@ const EditorialContent = async ({ editorial, title }: EditorialContentProps) => 
 				<RichTextRenderer content={processedContent} className="max-w-none" />
 			</div>
 
-			{editorial.creator && <div className="text-muted-foreground border-t pt-4 text-sm">{t('createdBy', { username: editorial.creator.username })}</div>}
+			{/* Author Footer */}
+			{editorial.creator && (
+				<div className="mt-8 border-t pt-6">
+					<div className="text-muted-foreground flex items-center gap-2 text-sm">
+						<span>{t('created_by', { username: editorial.creator.username })}</span>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

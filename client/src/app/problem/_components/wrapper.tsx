@@ -59,8 +59,8 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 		},
 	);
 
-	if (!data) {
-		if (!isLoading) throw error;
+	if (!data && !isLoading) {
+		throw error;
 	}
 
 	return (

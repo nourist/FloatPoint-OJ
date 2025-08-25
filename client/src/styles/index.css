@@ -150,4 +150,22 @@
 	.h-app {
 		@apply h-[var(--app-height)];
 	}
+	.table {
+		@apply divide-border divide-y;
+		thead {
+			@apply bg-accent;
+			th {
+				@apply px-6 py-3 text-left text-xs font-medium tracking-wider uppercase;
+			}
+		}
+		tbody {
+			@apply divide-border bg-card divide-y;
+			tr {
+				@apply hover:bg-background;
+				td {
+					@apply px-6 py-4 text-sm whitespace-nowrap;
+				}
+			}
+		}
+	}
 }
