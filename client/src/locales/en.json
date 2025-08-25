@@ -380,14 +380,36 @@
 		}
 	},
 	"submit": {
+		"easy": "Easy",
+		"medium": "Medium",
+		"hard": "Hard",
 		"page": {
 			"title": "Submit Code",
-			"select_problem": "Select Problem",
-			"language": "Language",
-			"code": "Code",
-			"code_placeholder": "Write your solution here...",
+			"select_problem": {
+				"title": "No Problem Selected",
+				"description": "Please select a problem to submit your solution to.",
+				"browse": "Browse Problems"
+			},
+			"problem_not_found": {
+				"title": "Problem Not Found",
+				"description": "The problem you're trying to submit to could not be found."
+			},
+			"breadcrumb": {
+				"home": "Home",
+				"problems": "Problems"
+			},
+			"back_to_problem": "Back to Problem",
+			"language": "Programming Language",
+			"select_language": "Select language",
+			"code": "Source Code",
+			"code_placeholder": "Enter your code here...",
 			"submit": "Submit",
-			"submitting": "Submitting..."
+			"submitting": "Submitting...",
+			"login_required": {
+				"message": "Please",
+				"login": "login",
+				"to_submit": "to submit your solution"
+			}
 		},
 		"messages": {
 			"errors": {

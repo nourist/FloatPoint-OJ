@@ -1,6 +1,4 @@
-import { MoveLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import BlogCard from '../../../components/blog-card';
 import Comments from './_components/comments';

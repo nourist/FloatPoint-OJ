@@ -1,17 +1,12 @@
 'use client';
 
-import { table } from 'console';
-import { AlertCircle, Calendar, Check, Clock, Code, Eye, Loader2, X } from 'lucide-react';
+import { AlertCircle, Calendar, Check, Code, Loader2, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { tr } from 'zod/v4/locales';
 
-import { Badge } from '~/components/ui/badge';
-import { Button } from '~/components/ui/button';
-import { Card, CardContent } from '~/components/ui/card';
 import { Skeleton } from '~/components/ui/skeleton';
 import { languageOptions } from '~/lib/language-utils';
-import { formatSubmissionStatus, getSubmissionStatusColor, getSubmissionStatusTextColor } from '~/lib/status-utils';
+import { getSubmissionStatusColor, getSubmissionStatusTextColor } from '~/lib/status-utils';
 import { cn } from '~/lib/utils';
 import { Submission, SubmissionStatus } from '~/types/submission.type';
 import { User } from '~/types/user.type';

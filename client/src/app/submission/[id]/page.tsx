@@ -14,7 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
 import { formatSubmissionStatus, getSubmissionStatusColor } from '~/lib/status-utils';
 import { createSubmissionService } from '~/services/submission';
-import { SubmissionResult, SubmissionResultStatus } from '~/types/submission-result.type';
+import { SubmissionResult } from '~/types/submission-result.type';
 import { Submission, SubmissionStatus } from '~/types/submission.type';
 
 const SubmissionDetailPage = () => {

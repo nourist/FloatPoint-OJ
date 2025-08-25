@@ -1,6 +1,4 @@
-import { BookOpen } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import EditorialContent from './_components/editorial-content';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';

@@ -2,9 +2,8 @@ import { useTranslations } from 'next-intl';
 import { Pie, PieChart } from 'recharts';
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '~/components/ui/chart';
-import { LanguageOption, getLanguageColor } from '~/lib/language-utils';
+import { getLanguageColor } from '~/lib/language-utils';
 import { getSubmissionStatusVarColor } from '~/lib/status-utils';
-import { cn } from '~/lib/utils';
 import { ProgramLanguage, SubmissionStatus } from '~/types/submission.type';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 const SubmissionChart = ({ statusStatistics = [], languageStatistics = [] }: Props) => {
 	const t = useTranslations('submission');
 
-	const statusConfig = statusStatistics?.reduce((acc, cur, index) => {
+	const statusConfig = statusStatistics?.reduce((acc, cur) => {
 		acc[cur.status] = {
 			label: t(`status.${cur.status}`),
 		};

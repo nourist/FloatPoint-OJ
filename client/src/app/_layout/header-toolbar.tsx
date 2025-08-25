@@ -26,18 +26,17 @@ import { Locale, locales, localesCode } from '~/i18n/locales';
 import { createClientService } from '~/lib/service-client';
 import { createAuthService } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
-import { User } from '~/types/user.type';
 
-interface Props {
-	user: User | null;
-}
-
-const HeaderToolbar = ({ user }: Props) => {
+const HeaderToolbar = () => {
 	const t = useTranslations('layout.header');
 
 	const router = useRouter();
 
 	const { signout } = createClientService(createAuthService);
+
+	const { getProfile } = createClientService(createAuthService);
+
+	const { data: user } = useSWR('/auth/me', getProfile);
 
 	const theme = Cookies.get('theme') || 'light';
 	const language = Cookies.get('lang') || 'en';

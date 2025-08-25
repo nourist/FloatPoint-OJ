@@ -1,11 +1,8 @@
-import { ArrowLeft } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import ProblemSidebar from './_components/problem-sidebar';
 import ProblemStatement from './_components/problem-statement';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { createServerService } from '~/lib/service-server';
 import { createAuthService } from '~/services/auth';
 import { createProblemService } from '~/services/problem';

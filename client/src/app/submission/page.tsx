@@ -1,7 +1,5 @@
 'use client';
 
-import { Code } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import useSWR from 'swr';
 
@@ -15,8 +13,6 @@ import { createSubmissionService } from '~/services/submission';
 import { ProgramLanguage, SubmissionStatus } from '~/types/submission.type';
 
 const SubmissionsPage = () => {
-	const t = useTranslations('submission');
-
 	// Local filter states (no URL synchronization)
 	const [problemId, setProblemId] = useState('');
 	const [language, setLanguage] = useState('all');
