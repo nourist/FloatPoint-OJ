@@ -1,6 +1,17 @@
 import { ProgramLanguage, Submission, SubmissionStatus } from '../types/submission.type';
 import { ApiInstance } from '~/types/axios.type';
 
+// Statistics types
+export interface StatusStatistic {
+	status: SubmissionStatus;
+	count: number;
+}
+
+export interface LanguageStatistic {
+	language: ProgramLanguage;
+	count: number;
+}
+
 // Payloads
 export interface GetAllSubmissionsPayload {
 	authorId?: string;
@@ -22,6 +33,8 @@ export interface SubmissionsResponse {
 	message: string;
 	submissions: Submission[];
 	total: number;
+	statusStatistics: StatusStatistic[];
+	languageStatistics: LanguageStatistic[];
 }
 
 export interface SubmissionResponse {

@@ -10,7 +10,7 @@ import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent } from '~/components/ui/card';
 import { Skeleton } from '~/components/ui/skeleton';
-import { languageOptions } from '~/lib/language-options';
+import { languageOptions } from '~/lib/language-utils';
 import { formatSubmissionStatus, getSubmissionStatusColor, getSubmissionStatusTextColor } from '~/lib/status-utils';
 import { cn } from '~/lib/utils';
 import { Submission, SubmissionStatus } from '~/types/submission.type';
@@ -30,16 +30,16 @@ export const TableSkeleton = () => {
 						<th>
 							<Skeleton className="h-4 w-12" />
 						</th>
-						<th className='max-md:!pl-0'>
+						<th className="max-md:!pl-0">
 							<Skeleton className="h-4 w-16" />
 						</th>
-						<th className='max-md:!px-0 max-sm:hidden'>
+						<th className="max-md:!px-0 max-sm:hidden">
 							<Skeleton className="h-4 w-20" />
 						</th>
-						<th className='max-xl:hidden'>
+						<th className="max-xl:hidden">
 							<Skeleton className="h-4 w-16" />
 						</th>
-						<th className='max-xl:hidden'>
+						<th className="max-xl:hidden">
 							<Skeleton className="h-4 w-14" />
 						</th>
 						<th>
@@ -62,10 +62,10 @@ export const TableSkeleton = () => {
 									</div>
 								</div>
 							</td>
-							<td className='max-md:!pl-0'>
+							<td className="max-md:!pl-0">
 								<Skeleton className="h-4 w-32" />
 							</td>
-							<td className='max-md:!px-0 max-sm:hidden'>
+							<td className="max-md:!px-0 max-sm:hidden">
 								<div className="inline-flex items-center gap-2 rounded-full px-2.5 py-0.5">
 									<Skeleton className="size-3" />
 									<Skeleton className="h-3 w-16" />
@@ -155,69 +155,67 @@ const SubmissionTable = ({ submissions, user }: SubmissionTableProps) => {
 
 	return (
 		<div className="overflow-hidden rounded-2xl border shadow-xs">
-
-		<table className="table w-full">
-			<thead>
-				<tr>
-					<th>{t('table.status')}</th>
-					<th className='max-md:!pl-0'>{t('table.problem')}</th>
-					<th className='max-md:!px-0 max-sm:hidden'>{t('table.language')}</th>
-					<th className='max-xl:hidden'>{t('table.runtime')}</th>
-					<th className='max-xl:hidden'>{t('table.memory')}</th>
-					<th>{t('table.submitted')}</th>
-					{user && <th></th>}
-				</tr>
-			</thead>
-			<tbody>
-				{submissions.map((submission) => (
-					<tr key={submission.id}>
-						<td>
-							<div className="space-y-1">
-								<div className="flex items-center gap-1">
-									<StatusIcon className="size-4" status={submission.status} />
-									<div className={cn('rounded-full px-2.5 py-0.5 text-xs font-medium', getSubmissionStatusColor(submission.status))}>
-										{t(`status.${submission.status}`)}
+			<table className="table w-full">
+				<thead>
+					<tr>
+						<th>{t('table.status')}</th>
+						<th className="max-md:!pl-0">{t('table.problem')}</th>
+						<th className="max-md:!px-0 max-sm:hidden">{t('table.language')}</th>
+						<th className="max-xl:hidden">{t('table.runtime')}</th>
+						<th className="max-xl:hidden">{t('table.memory')}</th>
+						<th>{t('table.submitted')}</th>
+						{user && <th></th>}
+					</tr>
+				</thead>
+				<tbody>
+					{submissions.map((submission) => (
+						<tr key={submission.id}>
+							<td>
+								<div className="space-y-1">
+									<div className="flex items-center gap-1">
+										<StatusIcon className="size-4" status={submission.status} />
+										<div className={cn('rounded-full px-2.5 py-0.5 text-xs font-medium', getSubmissionStatusColor(submission.status))}>
+											{t(`status.${submission.status}`)}
+										</div>
+									</div>
+									<div className="text-muted-foreground text-xs">
+										{submission.acceptedTestCases}/{submission.totalTestCases} {t('page.passed')}
 									</div>
 								</div>
-								<div className="text-muted-foreground text-xs">
-									{submission.acceptedTestCases}/{submission.totalTestCases} {t('page.passed')}
-								</div>
-							</div>
-						</td>
-						<td className='max-md:!pl-0'>
-							<Link className="hover:text-primary font-medium hover:underline" href={`/problem/${submission.problem.slug}`}>
-								{submission.problem.title}
-							</Link>
-						</td>
-						<td className='max-md:!px-0 max-sm:hidden'>
-							<div className="bg-accent inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold">
-								<Code className="size-3" />
-								<div className="mt-[1px]">{formatLanguage(submission.language)}</div>
-							</div>
-						</td>
-						<td className="text-muted-foreground max-xl:hidden">{Number((submission.time || 0) / 1000).toFixed(2)}s</td>
-						<td className="text-muted-foreground max-xl:hidden">{Number((submission.memory || 0) / 1024).toFixed(1)}MB</td>
-						<td className="text-muted-foreground">
-							<div className="flex items-center gap-2 text-xs">
-								<Calendar className="size-3" />
-								{formatDate(submission.submittedAt)}
-							</div>
-						</td>
-						{user && (
-							<td>
-								{submission.canView &&
-									<Link href={`/submission/${submission.id}`} className='text-primary hover:underline flex items-center text-sm gap-1 font-semibold'>
-											{t('page.view')}
-								</Link>
-								}
 							</td>
-						)}
-					</tr>
-				))}
-			</tbody>
+							<td className="max-md:!pl-0">
+								<Link className="hover:text-primary font-medium hover:underline" href={`/problem/${submission.problem.slug}`}>
+									{submission.problem.title}
+								</Link>
+							</td>
+							<td className="max-md:!px-0 max-sm:hidden">
+								<div className="bg-accent inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold">
+									<Code className="size-3" />
+									<div className="mt-[1px]">{formatLanguage(submission.language)}</div>
+								</div>
+							</td>
+							<td className="text-muted-foreground max-xl:hidden">{Number((submission.time || 0) / 1000).toFixed(2)}s</td>
+							<td className="text-muted-foreground max-xl:hidden">{Number((submission.memory || 0) / 1024).toFixed(1)}MB</td>
+							<td className="text-muted-foreground">
+								<div className="flex items-center gap-2 text-xs">
+									<Calendar className="size-3" />
+									{formatDate(submission.submittedAt)}
+								</div>
+							</td>
+							{user && (
+								<td>
+									{submission.canView && (
+										<Link href={`/submission/${submission.id}`} className="text-primary flex items-center gap-1 text-sm font-semibold hover:underline">
+											{t('page.view')}
+										</Link>
+									)}
+								</td>
+							)}
+						</tr>
+					))}
+				</tbody>
 			</table>
 		</div>
-			
 	);
 };
 

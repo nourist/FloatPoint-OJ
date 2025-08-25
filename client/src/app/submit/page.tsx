@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~
 import { Skeleton } from '~/components/ui/skeleton';
 import { Textarea } from '~/components/ui/textarea';
 import { getDifficultyColor } from '~/lib/difficulty-utils';
-import { languageOptions } from '~/lib/language-options';
+import { languageOptions } from '~/lib/language-utils';
 import { createClientService } from '~/lib/service-client';
 import { cn } from '~/lib/utils';
 import { createAuthService } from '~/services/auth';

@@ -19,9 +19,9 @@ const Header = async () => {
 		{ href: '/standing', label: t('standing') },
 	];
 
-		const authService = await createServerService(createAuthService);
-	
-		const user = await authService.getProfile().catch(() => null);
+	const authService = await createServerService(createAuthService);
+
+	const user = await authService.getProfile().catch(() => null);
 
 	return (
 		<div className="bg-card flex h-[var(--header-height)] w-full justify-center border-b shadow-xs">
@@ -79,7 +79,7 @@ const Header = async () => {
 						</NavLink>
 					</Button>
 				))}
-				<HeaderToolbar user={ user} />
+				<HeaderToolbar user={user} />
 			</div>
 		</div>
 	);

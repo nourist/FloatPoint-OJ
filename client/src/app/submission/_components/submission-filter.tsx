@@ -8,7 +8,7 @@ import { AsyncCombobox, FetcherResponse } from '~/components/async-combobox';
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
 import { Label } from '~/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
-import { languageOptions } from '~/lib/language-options';
+import { languageOptions } from '~/lib/language-utils';
 import { createClientService } from '~/lib/service-client';
 import { getSubmissionStatusTextColor } from '~/lib/status-utils';
 import { createProblemService } from '~/services/problem';

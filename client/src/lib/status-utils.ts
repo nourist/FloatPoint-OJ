@@ -64,6 +64,65 @@ export const getSubmissionStatusTextColor = (status: SubmissionStatus | Submissi
 };
 
 /**
+ * Get CSS classes for background color only (no text color) for status items
+ */
+export const getSubmissionStatusBgColor = (status: SubmissionStatus | SubmissionResultStatus): string => {
+	switch (status) {
+		case SubmissionStatus.ACCEPTED:
+		case SubmissionResultStatus.ACCEPTED:
+			return 'bg-green-500';
+		case SubmissionStatus.WRONG_ANSWER:
+		case SubmissionResultStatus.WRONG_ANSWER:
+			return 'bg-red-500';
+		case SubmissionStatus.TIME_LIMIT_EXCEEDED:
+		case SubmissionResultStatus.TIME_LIMIT_EXCEEDED:
+			return 'bg-yellow-500';
+		case SubmissionStatus.MEMORY_LIMIT_EXCEEDED:
+		case SubmissionResultStatus.MEMORY_LIMIT_EXCEEDED:
+			return 'bg-orange-500';
+		case SubmissionStatus.RUNTIME_ERROR:
+		case SubmissionResultStatus.RUNTIME_ERROR:
+			return 'bg-purple-500';
+		case SubmissionStatus.COMPILATION_ERROR:
+			return 'bg-rose-500';
+		case SubmissionStatus.PENDING:
+			return 'bg-blue-500';
+		case SubmissionStatus.JUDGING:
+			return 'bg-cyan-500';
+		default:
+			return 'bg-gray-500';
+	}
+};
+
+export const getSubmissionStatusVarColor = (status: SubmissionStatus | SubmissionResultStatus): string => {
+	switch (status) {
+		case SubmissionStatus.ACCEPTED:
+		case SubmissionResultStatus.ACCEPTED:
+			return 'var(--color-green-500)';
+		case SubmissionStatus.WRONG_ANSWER:
+		case SubmissionResultStatus.WRONG_ANSWER:
+			return 'var(--color-red-500)';
+		case SubmissionStatus.TIME_LIMIT_EXCEEDED:
+		case SubmissionResultStatus.TIME_LIMIT_EXCEEDED:
+			return 'var(--color-yellow-500)';
+		case SubmissionStatus.MEMORY_LIMIT_EXCEEDED:
+		case SubmissionResultStatus.MEMORY_LIMIT_EXCEEDED:
+			return 'var(--color-orange-500)';
+		case SubmissionStatus.RUNTIME_ERROR:
+		case SubmissionResultStatus.RUNTIME_ERROR:
+			return 'var(--color-purple-500)';
+		case SubmissionStatus.COMPILATION_ERROR:
+			return 'var(--color-rose-500)';
+		case SubmissionStatus.PENDING:
+			return 'var(--color-blue-500)';
+		case SubmissionStatus.JUDGING:
+			return 'var(--color-cyan-500)';
+		default:
+			return 'var(--color-gray-500)';
+	}
+};
+
+/**
  * Format submission status enum to human-readable string
  */
 export const formatSubmissionStatus = (status: SubmissionStatus | SubmissionResultStatus): string => {

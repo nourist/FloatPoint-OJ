@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Cookies from 'js-cookie';
 import { Bell, CircleUserRound, Globe, LogOut, Moon, Settings, Sun } from 'lucide-react';
@@ -28,11 +28,11 @@ import { createAuthService } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
 import { User } from '~/types/user.type';
 
-interface Props{
-	user:User|null
+interface Props {
+	user: User | null;
 }
 
-const HeaderToolbar = ({user}:Props) => {
+const HeaderToolbar = ({ user }: Props) => {
 	const t = useTranslations('layout.header');
 
 	const router = useRouter();

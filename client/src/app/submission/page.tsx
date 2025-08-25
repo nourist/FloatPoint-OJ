@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import SubmissionFilter from './_components/submission-filter';
 import SubmissionChart from './_components/submission-chart';
+import SubmissionFilter from './_components/submission-filter';
 import SubmissionTable, { TableSkeleton } from './_components/submission-table';
 import PaginationControls from '~/components/pagination-controls';
 import { createClientService } from '~/lib/service-client';
@@ -101,21 +101,13 @@ const SubmissionsPage = () => {
 				{!data && isLoading ? (
 					<TableSkeleton />
 				) : (
-						<>
-			<SubmissionChart className="lg:hidden"/>
-							
-							<SubmissionTable submissions={submissions} user={user} />
-							<PaginationControls
-								totalItems={total}
-								initialPage={1}
-								initialSize={20}
-								onPageChange={handlePageChange}
-								onSizeChange={handleSizeChange}
-							/>
+					<>
+						<SubmissionTable submissions={submissions} user={user} />
+						<PaginationControls totalItems={total} initialPage={1} initialSize={20} onPageChange={handlePageChange} onSizeChange={handleSizeChange} />
 					</>
 				)}
 			</div>
-			<SubmissionChart className="max-lg:hidden"/>
+			<SubmissionChart statusStatistics={data?.statusStatistics} languageStatistics={data?.languageStatistics} />
 		</div>
 	);
 };

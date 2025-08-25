@@ -248,7 +248,7 @@
 			"years": "{count} years ago"
 		},
 		"page": {
-			"view":"View",
+			"view": "View",
 			"title": "Submissions",
 			"breadcrumb": {
 				"home": "Home",
@@ -373,6 +373,10 @@
 					"back_button": "Back to Submissions"
 				}
 			}
+		},
+		"chart": {
+			"status": "Status",
+			"languages": "Languages"
 		}
 	},
 	"submit": {
