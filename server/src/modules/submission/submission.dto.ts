@@ -37,3 +37,18 @@ export class SubmitCodeDto {
 	@IsString()
 	problemId: string;
 }
+
+export interface StatusStatistic {
+	status: SubmissionStatus;
+	count: number;
+}
+
+export interface LanguageStatistic {
+	language: ProgramLanguage;
+	count: number;
+}
+
+export interface SubmissionStatisticsDto {
+	statusStatistics: StatusStatistic[];
+	languageStatistics: LanguageStatistic[];
+}

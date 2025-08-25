@@ -5,11 +5,12 @@ import { In, Repository } from 'typeorm';
 
 import { ProblemService } from '../problem/problem.service';
 import { UserService } from '../user/user.service';
-import { GetAllSubmissionsDto, SubmitCodeDto } from './submission.dto';
+import { GetAllSubmissionsDto, SubmitCodeDto, StatusStatistic, LanguageStatistic } from './submission.dto';
 import { Submission } from 'src/entities/submission.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { TestCase } from 'src/entities/test-case.entity';
 import { User, UserRole } from 'src/entities/user.entity';
+import { SubmissionResultStatus } from 'src/entities/submission-result.entity';
 
 @Injectable()
 export class SubmissionService {
@@ -70,19 +71,15 @@ export class SubmissionService {
 
 		return submission;
 	}
-
-	async findAll(query: GetAllSubmissionsDto, user: User) {
+	
+	async findAll(query: GetAllSubmissionsDto, user: User|null) {
 		const { authorId, problemId, language, status, page, limit } = query;
 
 		const qb = this.submissionRepository
 			.createQueryBuilder('submission')
 			.leftJoinAndSelect('submission.problem', 'problem')
-			.leftJoinAndSelect('submission.author', 'author');
-
-		// Non-admin users can only see their own submissions
-		if (user.role !== UserRole.ADMIN) {
-			qb.andWhere('author.id = :userId', { userId: user.id });
-		}
+			.leftJoinAndSelect('submission.author', 'author')
+			.leftJoinAndSelect('submission.results', 'results');
 
 		if (authorId) qb.andWhere('author.id = :authorId', { authorId });
 		if (problemId) qb.andWhere('problem.id = :problemId', { problemId });
@@ -94,11 +91,77 @@ export class SubmissionService {
 			.take(limit)
 			.getManyAndCount();
 
+		// Calculate statistics based on the same filters (without pagination)
+		const statsQb = this.submissionRepository
+			.createQueryBuilder('submission')
+			.leftJoin('submission.author', 'author')
+			.leftJoin('submission.problem', 'problem');
+
+		if (authorId) statsQb.andWhere('author.id = :authorId', { authorId });
+		if (problemId) statsQb.andWhere('problem.id = :problemId', { problemId });
+		if (language) statsQb.andWhere('submission.language = :language', { language });
+		if (status) statsQb.andWhere('submission.status = :status', { status });
+
+		// Get status statistics
+		const statusStats = await statsQb
+			.clone()
+			.select('submission.status', 'status')
+			.addSelect('COUNT(*)', 'count')
+			.groupBy('submission.status')
+			.getRawMany();
+
+		// Get language statistics
+		const languageStats = await statsQb
+			.clone()
+			.select('submission.language', 'language')
+			.addSelect('COUNT(*)', 'count')
+			.groupBy('submission.language')
+			.getRawMany();
+
+		// Transform raw results to proper DTOs
+		const statusStatistics: StatusStatistic[] = statusStats.map(stat => ({
+			status: stat.status,
+			count: parseInt(stat.count, 10)
+		}));
+
+		const languageStatistics: LanguageStatistic[] = languageStats.map(stat => ({
+			language: stat.language,
+			count: parseInt(stat.count, 10)
+		}));
+
+		// Add canView field and calculate time/memory/accepted test cases for each submission
+		const submissionsWithCanView = submissions.map(submission => {
+			let totalTime = 0;
+			let maxMemory = 0;
+			let acceptedTestCases = 0;
+			let totalTestCases = 0;
+
+			if (submission.results && submission.results.length > 0) {
+				totalTime = submission.results.reduce((sum, result) => sum + (result.executionTime || 0), 0);
+				maxMemory = Math.max(...submission.results.map(result => result.memoryUsed || 0));
+				
+				// Count accepted test cases
+				acceptedTestCases = submission.results.filter(result => result.status === SubmissionResultStatus.ACCEPTED).length;
+				totalTestCases = submission.results.length;
+			}
+
+			return {
+				...submission,
+				canView: user ? (user.role === UserRole.ADMIN || submission.author.id === user.id) : false,
+				time: totalTime,
+				memory: maxMemory,
+				acceptedTestCases,
+				totalTestCases
+			};
+		});
+
 		return {
-			submissions,
+			submissions: submissionsWithCanView,
 			total,
 			page,
 			limit,
+			statusStatistics,
+			languageStatistics,
 		};
 	}
 

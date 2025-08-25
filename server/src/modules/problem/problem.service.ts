@@ -46,7 +46,7 @@ export class ProblemService {
 	) {}
 
 	async getProblemById(id: string) {
-		const problem = await this.problemRepository.findOne({ where: { id }, relations: ['tags', 'editorial'] });
+		const problem = await this.problemRepository.findOne({ where: { id }, relations: ['tags', 'editorial', 'editorial.creator'] });
 		if (!problem) {
 			this.logger.log(`Problem with ID ${id} not found`);
 			throw new NotFoundException(`Problem with ID ${id} not found`);
@@ -55,7 +55,7 @@ export class ProblemService {
 	}
 
 	async getProblemBySlug(slug: string) {
-		const problem = await this.problemRepository.findOne({ where: { slug }, relations: ['tags', 'editorial'] });
+		const problem = await this.problemRepository.findOne({ where: { slug }, relations: ['tags', 'editorial', 'editorial.creator'] });
 		if (!problem) {
 			this.logger.log(`Problem with slug ${slug} not found`);
 			throw new NotFoundException(`Problem with slug ${slug} not found`);

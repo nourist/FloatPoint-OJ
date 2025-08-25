@@ -5,14 +5,16 @@ import { SubmissionService } from './submission.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User, UserRole } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from 'src/guards/optional-jwt-auth.guard';
+import { GetOptionalUser } from 'src/decorators/get-optional-user.decorator';
 
 @Controller('submission')
 export class SubmissionController {
 	constructor(private readonly submissionService: SubmissionService) {}
 
 	@Get()
-	@UseGuards(JwtAuthGuard)
-	async findAll(@Query() query: GetAllSubmissionsDto, @GetUser() user: User) {
+	@UseGuards(OptionalJwtAuthGuard)
+	async findAll(@Query() query: GetAllSubmissionsDto, @GetOptionalUser() user:User | null) {
 		return {
 			message: 'success',
 			...(await this.submissionService.findAll(query, user)),
