@@ -109,10 +109,7 @@ export class ProblemService {
 	async findAll(query: GetAllProblemsDto, user?: User) {
 		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status } = query;
 
-		const qb = this.problemRepository
-			.createQueryBuilder('problem')
-			.leftJoinAndSelect('problem.tags', 'tags')
-			.leftJoinAndSelect('problem.editorial', 'editorial');
+		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
 		// Add submission statistics subquery for PostgreSQL
 		qb.leftJoin(
@@ -176,12 +173,7 @@ export class ProblemService {
 			if (status === 'unattempted') {
 				// Problems user has never submitted to
 				qb.andWhere((sq) => {
-					const sub = sq
-						.subQuery()
-						.select('1')
-						.from(Submission, 's')
-						.where('s.problemId = problem.id')
-						.andWhere('s.authorId = :userId', { userId: user.id });
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'attempted') {
@@ -196,12 +188,7 @@ export class ProblemService {
 						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
 					return `NOT EXISTS ${sub.getQuery()}`;
 				}).andWhere((sq) => {
-					const sub = sq
-						.subQuery()
-						.select('1')
-						.from(Submission, 's')
-						.where('s.problemId = problem.id')
-						.andWhere('s.authorId = :userId', { userId: user.id });
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
 					return `EXISTS ${sub.getQuery()}`;
 				});
 			} else if (status === 'solved') {
@@ -298,7 +285,7 @@ export class ProblemService {
 			const tagEntities = await this.getOrCreateTags(data.tags);
 			problem.tags = tagEntities;
 		}
-		
+
 		Object.assign(problem, data);
 
 		if (data.title) {
@@ -316,7 +303,7 @@ export class ProblemService {
 	@Transactional()
 	async remove(id: string) {
 		const problem = await this.getProblemById(id);
-		
+
 		await this.problemRepository.remove(problem);
 		// Remove associated test case files from MinIO
 		await this.minioService.removeDir('test-cases', id);
@@ -419,7 +406,7 @@ export class ProblemService {
 		const savedSubtask = await this.subtaskRepository.save(subtask);
 
 		if (data.name) {
-			await this.minioService.renameDir('test-cases', path.join(problemId, oldSubtaskSlug), path.join(problemId, subtask.slug));
+			await this.minioService.renameDir('test-cases', this.minioService.joinPath(problemId, oldSubtaskSlug), this.minioService.joinPath(problemId, subtask.slug));
 		}
 
 		return savedSubtask;
@@ -430,7 +417,7 @@ export class ProblemService {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 		await this.subtaskRepository.remove(subtask);
 		// Remove files after successful database deletion
-		await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
+		await this.minioService.removeDir('test-cases', this.minioService.joinPath(problemId, subtaskSlug));
 	}
 
 	async isTestCaseSlugExists(problemId: string, subtaskSlug: string, testCaseSlug: string) {
@@ -451,8 +438,8 @@ export class ProblemService {
 	async getTestCaseContentBySlug(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 
-		const input = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
-		const output = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
+		const input = await this.minioService.getFileContent('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'));
+		const output = await this.minioService.getFileContent('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'));
 
 		return {
 			input,
@@ -469,8 +456,8 @@ export class ProblemService {
 			throw new BadRequestException(`Test case ${data.name} for subtask ${subtaskSlug} for problem ${problemId} already exists`);
 		}
 		const testCase = this.testCaseRepository.create({ ...data, subtask, slug: testCaseSlug });
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
+		await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
+		await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		return this.testCaseRepository.save(testCase);
 	}
 
@@ -492,11 +479,11 @@ export class ProblemService {
 		Object.assign(testCase, data);
 
 		if (data.input) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
+			await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
 		}
 
 		if (data.output) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
+			await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		}
 
 		const savedTestCase = await this.testCaseRepository.save(testCase);
@@ -504,13 +491,13 @@ export class ProblemService {
 		if (data.name) {
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'input'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'input'),
+				this.minioService.joinPath(problemId, subtaskSlug, oldTestCaseSlug, 'input'),
+				this.minioService.joinPath(problemId, subtaskSlug, testCase.slug, 'input'),
 			);
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'output'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'output'),
+				this.minioService.joinPath(problemId, subtaskSlug, oldTestCaseSlug, 'output'),
+				this.minioService.joinPath(problemId, subtaskSlug, testCase.slug, 'output'),
 			);
 		}
 
@@ -522,8 +509,8 @@ export class ProblemService {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 		await this.testCaseRepository.remove(testCase);
 		// Remove files after successful database deletion
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
+		await this.minioService.removeFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'));
+		await this.minioService.removeFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'));
 	}
 
 	async getMinPoint(): Promise<number> {
