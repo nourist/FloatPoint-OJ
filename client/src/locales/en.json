@@ -147,7 +147,7 @@
 			"point": "Point",
 			"difficulty": "Difficulty",
 			"accept": "Accept",
-			"accept_rate": "Accept Rate"
+			"accept_rate": "Acceptance Rate"
 		},
 		"table": {
 			"title": "Title",
@@ -315,9 +315,8 @@
 		"table": {
 			"status": "Status",
 			"problem": "Problem",
+			"author": "Author",
 			"language": "Language",
-			"runtime": "Runtime",
-			"memory": "Memory",
 			"submitted": "Submitted",
 			"actions": "Actions",
 			"error_loading": "Error Loading Submissions",
@@ -371,7 +370,9 @@
 					"title": "Submission Not Found",
 					"message": "The submission you're looking for could not be found.",
 					"back_button": "Back to Submissions"
-				}
+				},
+				"partial": "Partial",
+				"submitted_for": "Submitted for"
 			}
 		},
 		"chart": {

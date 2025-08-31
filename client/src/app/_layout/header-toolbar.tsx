@@ -36,7 +36,7 @@ const HeaderToolbar = () => {
 
 	const { getProfile } = createClientService(authServiceInstance);
 
-	const { data: user } = useSWR('/auth/me', getProfile);
+	const { data: user, isLoading } = useSWR('/auth/me', getProfile);
 
 	const theme = Cookies.get('theme') || 'light';
 	const language = Cookies.get('lang') || 'en';
@@ -56,6 +56,10 @@ const HeaderToolbar = () => {
 		mutate('/auth/me', null, false);
 		router.refresh();
 	};
+
+	if (isLoading) {
+		return null;
+	}
 
 	if (!user) {
 		return (

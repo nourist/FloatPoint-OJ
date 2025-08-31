@@ -31,9 +31,9 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 				<thead>
 					<tr>
 						{user && <th></th>}
-						<th className="max-sm:px-2">{t('title')}</th>
-						<th className="max-sm:px-2">{t('difficulty')}</th>
-						<th className="max-sm:px-2">{t('point')}</th>
+						<th>{t('title')}</th>
+						<th>{t('difficulty')}</th>
+						<th>{t('point')}</th>
 						<th className="max-md:hidden">{t('accepted')}</th>
 						<th className="max-xl:hidden">{t('acceptance')}</th>
 						<th className="text-center max-sm:hidden">{t('editorial')}</th>
@@ -43,11 +43,11 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 					{problems.map((problem) => (
 						<tr key={problem.id} className="">
 							{user && (
-								<td className="w-14 pl-5">
+								<td className="w-14 !pl-5 lg:!pr-0">
 									<div className="flex h-full w-full items-center justify-center">{getStatusIcon(problem.status)}</div>
 								</td>
 							)}
-							<td className="max-sm:px-2">
+							<td>
 								<Link href={`/problem/${problem.slug}`} className="hover:text-primary text-base font-medium hover:underline">
 									{problem.title}
 								</Link>
@@ -65,12 +65,12 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 									))}
 								</div>
 							</td>
-							<td className="max-sm:px-2">
+							<td>
 								<span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${getDifficultyColor(problem.difficulty)}`}>
 									{t(problem.difficulty)}
 								</span>
 							</td>
-							<td className="text-muted-foreground max-sm:px-2">{problem.point}</td>
+							<td className="text-muted-foreground">{problem.point}</td>
 							<td className="text-muted-foreground max-md:hidden">{problem.acCount}</td>
 							<td className="text-muted-foreground max-xl:hidden">{((problem.acRate ?? 0) * 100).toFixed(2)}%</td>
 							<td className="max-sm:hidden">

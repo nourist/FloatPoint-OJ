@@ -9,14 +9,14 @@ import { languageOptions } from '~/lib/language-utils';
 import { getSubmissionStatusColor, getSubmissionStatusTextColor } from '~/lib/status-utils';
 import { cn } from '~/lib/utils';
 import { Submission, SubmissionStatus } from '~/types/submission.type';
-import { User } from '~/types/user.type';
+import { User as UserType } from '~/types/user.type';
 
 interface SubmissionTableProps {
 	submissions: Submission[];
-	user?: User;
+	user?: UserType;
 }
 
-export const TableSkeleton = () => {
+export const TableSkeleton = ({ user }: { user?: UserType }) => {
 	return (
 		<div className="overflow-hidden rounded-2xl border shadow-xs">
 			<table className="table w-full">
@@ -31,16 +31,13 @@ export const TableSkeleton = () => {
 						<th className="max-md:!px-0 max-sm:hidden">
 							<Skeleton className="h-4 w-20" />
 						</th>
-						<th className="max-xl:hidden">
+						<th className="max-md:!px-0 max-sm:hidden">
 							<Skeleton className="h-4 w-16" />
-						</th>
-						<th className="max-xl:hidden">
-							<Skeleton className="h-4 w-14" />
 						</th>
 						<th>
 							<Skeleton className="h-4 w-20" />
 						</th>
-						<th></th>
+						{user && <th></th>}
 					</tr>
 				</thead>
 				<tbody>
@@ -66,10 +63,7 @@ export const TableSkeleton = () => {
 									<Skeleton className="h-3 w-16" />
 								</div>
 							</td>
-							<td className="max-xl:hidden">
-								<Skeleton className="h-4 w-12" />
-							</td>
-							<td className="max-xl:hidden">
+							<td className="max-md:!px-0 max-sm:hidden">
 								<Skeleton className="h-4 w-14" />
 							</td>
 							<td>
@@ -78,9 +72,11 @@ export const TableSkeleton = () => {
 									<Skeleton className="h-3 w-16" />
 								</div>
 							</td>
-							<td>
-								<Skeleton className="h-4 w-4" />
-							</td>
+							{user && (
+								<td>
+									<Skeleton className="h-4 w-4" />
+								</td>
+							)}
 						</tr>
 					))}
 				</tbody>
@@ -154,11 +150,10 @@ const SubmissionTable = ({ submissions, user }: SubmissionTableProps) => {
 				<thead>
 					<tr>
 						<th>{t('table.status')}</th>
-						<th className="max-md:!pl-0">{t('table.problem')}</th>
-						<th className="max-md:!px-0 max-sm:hidden">{t('table.language')}</th>
-						<th className="max-xl:hidden">{t('table.runtime')}</th>
-						<th className="max-xl:hidden">{t('table.memory')}</th>
-						<th>{t('table.submitted')}</th>
+						<th>{t('table.problem')}</th>
+						<th className="max-sm:hidden">{t('table.author')}</th>
+						<th className="max-2md:hidden">{t('table.language')}</th>
+						<th className="max-md:hidden">{t('table.submitted')}</th>
 						{user && <th></th>}
 					</tr>
 				</thead>
@@ -178,20 +173,23 @@ const SubmissionTable = ({ submissions, user }: SubmissionTableProps) => {
 									</div>
 								</div>
 							</td>
-							<td className="max-md:!pl-0">
+							<td>
 								<Link className="hover:text-primary font-medium hover:underline" href={`/problem/${submission.problem.slug}`}>
 									{submission.problem.title}
 								</Link>
 							</td>
-							<td className="max-md:!px-0 max-sm:hidden">
+							<td className="max-sm:hidden">
+								<Link className="hover:text-primary font-medium hover:underline" href={`/profile/${submission.author.username}`}>
+									{submission.author.username}
+								</Link>
+							</td>
+							<td className="max-2md:hidden">
 								<div className="bg-accent inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold">
 									<Code className="size-3" />
 									<div className="mt-[1px]">{formatLanguage(submission.language)}</div>
 								</div>
 							</td>
-							<td className="text-muted-foreground max-xl:hidden">{Number((submission.time || 0) / 1000).toFixed(2)}s</td>
-							<td className="text-muted-foreground max-xl:hidden">{Number((submission.memory || 0) / 1024).toFixed(1)}MB</td>
-							<td className="text-muted-foreground">
+							<td className="text-muted-foreground max-md:hidden">
 								<div className="flex items-center gap-2 text-xs">
 									<Calendar className="size-3" />
 									{formatDate(submission.submittedAt)}
