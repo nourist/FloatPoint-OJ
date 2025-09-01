@@ -3,10 +3,11 @@ use sqlx::Row;
 use std::collections::HashMap;
 use std::env;
 use std::error::Error;
+use std::fs;
 use std::fs::File;
 use std::io::Write;
 use std::process::Command;
-use tracing::{error, info};
+use tracing::{error, info, debug};
 use uuid::Uuid;
 
 use crate::db::get_db_url;
@@ -17,8 +18,10 @@ use crate::models::{
     IoMode, JudgerJob, JudgerResult, LanguageConfig, Problem, ResultStatus, Status, TestCase,
     TestResult,
 };
+use crate::checker::check_files;
 
 async fn get_problem(problem_id: &Uuid) -> Result<Problem, Box<dyn Error>> {
+    info!("Fetching problem with id: {}", problem_id);
     let pool = sqlx::PgPool::connect(&get_db_url()).await?;
 
     let row = sqlx::query(
@@ -41,10 +44,12 @@ async fn get_problem(problem_id: &Uuid) -> Result<Problem, Box<dyn Error>> {
         id: row.try_get::<Uuid, _>("id")?,
     };
 
+    info!("Successfully fetched problem: {}", problem_id);
     Ok(problem)
 }
 
 async fn get_test_cases(problem_id: &Uuid) -> Result<Vec<String>, sqlx::Error> {
+    info!("Fetching test cases for problem: {}", problem_id);
     let pool = sqlx::PgPool::connect(&get_db_url()).await?;
 
     let rows = sqlx::query(
@@ -65,10 +70,12 @@ async fn get_test_cases(problem_id: &Uuid) -> Result<Vec<String>, sqlx::Error> {
         .map(|row| row.get::<String, _>("merge"))
         .collect();
 
+    info!("Found {} test cases for problem: {}", test_cases.len(), problem_id);
     Ok(test_cases)
 }
 
 async fn get_test_case_content(problem_id: &Uuid, slug: &str) -> Result<TestCase, Box<dyn Error>> {
+    info!("Fetching test case content for {}/{}", problem_id, slug);
     let minio_client = make_minio_client();
 
     let input_content = minio_client
@@ -85,13 +92,17 @@ async fn get_test_case_content(problem_id: &Uuid, slug: &str) -> Result<TestCase
         .send()
         .await?;
 
-    Ok(TestCase {
+    let test_case = TestCase {
         input: minio_object_to_string(input_content).await?,
         output: minio_object_to_string(output_content).await?,
-    })
+    };
+    
+    debug!("Successfully fetched test case content for {}/{}", problem_id, slug);
+    Ok(test_case)
 }
 
 async fn write_test_case_input(slug: &str, problem: &Problem) -> Result<(), Box<dyn Error>> {
+    debug!("Writing test case input for: {}", slug);
     let input_file_name = if problem.io_mode == IoMode::Standard {
         "input.txt"
     } else {
@@ -108,10 +119,12 @@ async fn write_test_case_input(slug: &str, problem: &Problem) -> Result<(), Box<
 
     input_file.write_all(test_case_content.input.as_bytes())?;
 
+    debug!("Test case input written successfully for: {}", slug);
     Ok(())
 }
 
 async fn write_test_case_answer(slug: &str, problem: &Problem) -> Result<(), Box<dyn Error>> {
+    debug!("Writing test case answer for: {}", slug);
     let output_file_name = if problem.io_mode == IoMode::Standard {
         "output.txt"
     } else {
@@ -128,10 +141,12 @@ async fn write_test_case_answer(slug: &str, problem: &Problem) -> Result<(), Box
 
     output_file.write_all(test_case_content.output.as_bytes())?;
 
+    debug!("Test case answer written successfully for: {}", slug);
     Ok(())
 }
 
 fn create_isolate_box() -> Result<(), Box<dyn Error>> {
+    info!("Creating isolate box with ID: {}", env::var("JUDGER_ID").unwrap());
     let create_box_res = Command::new("isolate")
         .arg("--init")
         .arg(format!("--box-id={}", env::var("JUDGER_ID").unwrap()))
@@ -146,11 +161,11 @@ fn create_isolate_box() -> Result<(), Box<dyn Error>> {
     }
 
     info!("Isolate box created successfully");
-
     Ok(())
 }
 
 fn write_source_code(source_code: &str, ext: &str) -> Result<(), Box<dyn Error>> {
+    info!("Writing source code with extension: {}", ext);
     let mut source_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/main.{}",
         env::var("JUDGER_ID").unwrap(),
@@ -160,11 +175,11 @@ fn write_source_code(source_code: &str, ext: &str) -> Result<(), Box<dyn Error>>
     source_file.write_all(source_code.as_bytes())?;
 
     info!("Source code written successfully");
-
     Ok(())
 }
 
 fn compile_source_code(job_id: &Uuid, compile_command: &str) -> Result<(), JudgerResult> {
+    info!("Compiling source code with command: {}", compile_command);
     let args = compile_command.split_whitespace().collect::<Vec<&str>>();
 
     let output = Command::new(args[0])
@@ -195,11 +210,13 @@ fn compile_source_code(job_id: &Uuid, compile_command: &str) -> Result<(), Judge
     }
 
     info!("Source code compiled successfully");
-
     Ok(())
 }
 
 fn run_testcase(language_config: &LanguageConfig, problem: &Problem) -> Result<(), Box<dyn Error>> {
+    info!("Running testcase with time limit: {}ms, memory limit: {}KB", 
+          problem.time_limit, problem.memory_limit);
+          
     let arg_box_id = format!("--box-id={}", env::var("JUDGER_ID").unwrap());
     let arg_time = format!("--time={}", (problem.time_limit as f64) / 1000.0);
     let arg_wall_time = format!("--wall-time={}", (problem.time_limit as f64) / 1000.0 + 1.0);
@@ -231,14 +248,15 @@ fn run_testcase(language_config: &LanguageConfig, problem: &Problem) -> Result<(
         .split_whitespace()
         .collect::<Vec<&str>>();
 
-    cmd.args(&args).output()?;
+    let _output = cmd.args(&args).output()?; // Prefix with underscore to mark as intentionally unused
 
-    info!("Testcase run successfully");
-
+    debug!("Testcase run completed");
     Ok(())
 }
 
 fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, Box<dyn Error>> {
+    info!("Checking result for test case: {}", test_case_slug);
+    
     fn is_memory_limit_exceeded(
         metadata: &HashMap<String, String>,
         memory_limit_kb: usize,
@@ -279,6 +297,7 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
     ))?;
 
     if is_memory_limit_exceeded(&meta_data, problem.memory_limit as usize) {
+        info!("Test case {} resulted in MLE", test_case_slug);
         return Ok(TestResult {
             slug: test_case_slug.to_string(),
             status: Status::MLE,
@@ -290,6 +309,7 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
     match meta_data.get("status") {
         Some(status) => {
             if status == "TO" {
+                info!("Test case {} resulted in TLE", test_case_slug);
                 return Ok(TestResult {
                     slug: test_case_slug.to_string(),
                     status: Status::TLE,
@@ -297,6 +317,7 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
                     memory: get_u64(&meta_data, "max-rss"),
                 });
             } else {
+                info!("Test case {} resulted in RTE", test_case_slug);
                 return Ok(TestResult {
                     slug: test_case_slug.to_string(),
                     status: Status::RTE,
@@ -312,41 +333,80 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
                 problem.output_file.as_ref().unwrap()
             };
 
-            let output = Command::new("bash")
-                .current_dir("/app")
-                .arg("/app/scripts/compare.bash")
-                .arg(format!(
-                    "/var/local/lib/isolate/{}/box/{}",
-                    env::var("JUDGER_ID").unwrap(),
-                    output_file_name
-                ))
-                .arg(format!(
-                    "/var/local/lib/isolate/{}/box/{}.ans",
-                    env::var("JUDGER_ID").unwrap(),
-                    output_file_name
-                ))
-                .output()?;
+            // Define file paths for actual and expected outputs
+            let actual_output_path = format!(
+                "/var/local/lib/isolate/{}/box/{}",
+                env::var("JUDGER_ID").unwrap(),
+                output_file_name
+            );
+            
+            let expected_output_path = format!(
+                "/var/local/lib/isolate/{}/box/{}.ans",
+                env::var("JUDGER_ID").unwrap(),
+                output_file_name
+            );
 
-            if !output.status.success() {
-                return Ok(TestResult {
-                    slug: test_case_slug.to_string(),
-                    status: Status::WA,
-                    time: (get_f64(&meta_data, "time") * 1000.0) as u64,
-                    memory: get_u64(&meta_data, "max-rss"),
-                });
+            // Use the Rust checker instead of the bash script
+            match check_files(&actual_output_path, &expected_output_path) {
+                Ok(true) => {
+                    info!("Test case {} resulted in AC", test_case_slug);
+                    return Ok(TestResult {
+                        slug: test_case_slug.to_string(),
+                        status: Status::AC,
+                        time: (get_f64(&meta_data, "time") * 1000.0) as u64,
+                        memory: get_u64(&meta_data, "max-rss"),
+                    });
+                }
+                Ok(false) => {
+                    // Read the actual and expected outputs for logging
+                    let actual_output = fs::read_to_string(&actual_output_path).unwrap_or_else(|_| "Failed to read actual output".to_string());
+                    let expected_output = fs::read_to_string(&expected_output_path).unwrap_or_else(|_| "Failed to read expected output".to_string());
+                    
+                    // Log detailed information about the outputs including their lengths and byte representations
+                    info!("Test case {} resulted in WA. Actual output length: {}, Expected output length: {}", 
+                          test_case_slug, 
+                          actual_output.len(),
+                          expected_output.len());
+                    
+                    // Log the outputs with special characters made visible
+                    let actual_escaped = actual_output.escape_debug().to_string();
+                    let expected_escaped = expected_output.escape_debug().to_string();
+                    
+                    info!("Actual output (escaped): '{}'", actual_escaped);
+                    info!("Expected output (escaped): '{}'", expected_escaped);
+                    
+                    // Also log raw bytes for more detailed analysis
+                    let actual_bytes: Vec<u8> = actual_output.bytes().collect();
+                    let expected_bytes: Vec<u8> = expected_output.bytes().collect();
+                    
+                    info!("Actual output bytes: {:?}", actual_bytes);
+                    info!("Expected output bytes: {:?}", expected_bytes);
+                    
+                    return Ok(TestResult {
+                        slug: test_case_slug.to_string(),
+                        status: Status::WA,
+                        time: (get_f64(&meta_data, "time") * 1000.0) as u64,
+                        memory: get_u64(&meta_data, "max-rss"),
+                    });
+                }
+                Err(e) => {
+                    error!("Error reading output files for test case {}: {}", test_case_slug, e);
+                    return Ok(TestResult {
+                        slug: test_case_slug.to_string(),
+                        status: Status::RTE,
+                        time: (get_f64(&meta_data, "time") * 1000.0) as u64,
+                        memory: get_u64(&meta_data, "max-rss"),
+                    });
+                }
             }
-
-            return Ok(TestResult {
-                slug: test_case_slug.to_string(),
-                status: Status::AC,
-                time: (get_f64(&meta_data, "time") * 1000.0) as u64,
-                memory: get_u64(&meta_data, "max-rss"),
-            });
         }
     }
 }
 
 pub async fn judge(job: &JudgerJob) -> Result<JudgerResult, Box<dyn Error>> {
+    info!("Starting judge process for job: {}, problem: {}, language: {}", 
+          job.id, job.problem_id, job.language);
+          
     let test_cases = get_test_cases(&job.problem_id).await?;
 
     let problem = get_problem(&job.problem_id).await?;
@@ -365,15 +425,22 @@ pub async fn judge(job: &JudgerJob) -> Result<JudgerResult, Box<dyn Error>> {
     }
 
     let mut test_results: Vec<TestResult> = vec![];
+    
+    info!("Running {} test cases", test_cases.len());
 
     //run source code
-    for test_case in test_cases {
-        write_test_case_input(&test_case, &problem).await?;
+    for (index, test_case) in test_cases.iter().enumerate() {
+        info!("Running test case {}/{}: {}", index + 1, test_cases.len(), test_case);
+        write_test_case_input(test_case, &problem).await?;
         run_testcase(&language_config, &problem)?;
-        write_test_case_answer(&test_case, &problem).await?;
-        test_results.push(check_result(&problem, &test_case)?);
+        write_test_case_answer(test_case, &problem).await?;
+        let result = check_result(&problem, test_case)?;
+        test_results.push(result);
+        info!("Completed test case {}/{}: {} with status {:?}", 
+              index + 1, test_cases.len(), test_case, test_results.last().unwrap().status);
     }
 
+    info!("Judge process completed successfully for job: {}", job.id);
     Ok(JudgerResult {
         id: job.id.clone(),
         log: "".to_string(),

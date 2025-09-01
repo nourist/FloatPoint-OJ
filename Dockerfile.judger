@@ -36,7 +36,6 @@ WORKDIR /app
 COPY --from=builder /usr/local/bin/isolate /usr/local/bin/isolate
 COPY --from=builder /usr/local/etc/isolate /usr/local/etc/isolate
 COPY --from=builder /app/target/release/judger /usr/local/bin/judger
-COPY judger/scripts /app/scripts
 
 RUN mkdir -p /var/local/lib/isolate \
     && chmod 755 /var/local/lib/isolate \

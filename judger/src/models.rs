@@ -24,7 +24,7 @@ pub enum ResultStatus {
     OK,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug)]
 pub enum Status {
     AC,
     WA,
