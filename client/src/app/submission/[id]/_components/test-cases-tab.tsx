@@ -28,8 +28,11 @@ const useSubtasksData = (results: SubmissionResult[] | undefined) => {
 
 		if (results) {
 			results.forEach((result) => {
-				const [subtaskSlug] = result.slug.split('/');
-				const subtaskName = result.subtaskName || subtaskSlug;
+				// Parse slug to extract subtask and test case information
+				// Slug format: "subtaskSlug/testCaseSlug" or just "testCaseSlug"
+				const slugParts = result.slug.split('/');
+				const subtaskSlug = slugParts.length > 1 ? slugParts[0] : 'default';
+				const subtaskName = slugParts.length > 1 ? slugParts[0] : 'Tests';
 
 				if (!map.has(subtaskSlug)) {
 					map.set(subtaskSlug, {

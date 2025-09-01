@@ -41,6 +41,16 @@ export const SubtaskItem = ({ subtaskSlug, subtask }: SubtaskItemProps) => {
 		setIsExpanded(!isExpanded);
 	};
 
+	// Function to extract test case name from slug
+	const getTestCaseName = (slug: string, index: number) => {
+		// Slug format: "subtaskSlug/testCaseSlug" or just "testCaseSlug"
+		const parts = slug.split('/');
+		if (parts.length > 1) {
+			return parts[1]; // Return testCaseSlug part
+		}
+		return `Test ${index + 1}`; // Default name if no subtask
+	};
+
 	return (
 		<div key={subtaskSlug} className="overflow-hidden rounded-lg border">
 			{/* Subtask Header */}
@@ -65,7 +75,7 @@ export const SubtaskItem = ({ subtaskSlug, subtask }: SubtaskItemProps) => {
 						<div key={result.id} className={`flex items-center justify-between p-4 pl-8 ${index < subtask.testCases.length - 1 ? 'border-b' : ''}`}>
 							<div className="flex items-center gap-4">
 								<div className="bg-muted flex h-6 w-6 items-center justify-center rounded-full font-mono text-xs">{index + 1}</div>
-								<span className="font-medium">{result.testCaseName || `Test ${index + 1}`}</span>
+								<span className="font-medium">{getTestCaseName(result.slug, index)}</span>
 								<Badge className={`${getSubmissionStatusColor(result.status)} hover:${getSubmissionStatusColor(result.status)}`}>
 									{formatSubmissionStatus(result.status)}
 								</Badge>
