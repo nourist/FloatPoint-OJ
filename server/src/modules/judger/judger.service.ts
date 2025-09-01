@@ -24,29 +24,6 @@ export class JudgerService {
 		private readonly problemService: ProblemService,
 	) {}
 
-	async createTestCaseResult(submissionId: string, data: TestCaseResult) {
-		const submission = await this.submissionService.findOne(submissionId);
-
-		// Map test case status to submission result status
-		const statusMap = {
-			[TestCaseStatus.RTE]: SubmissionResultStatus.RUNTIME_ERROR,
-			[TestCaseStatus.TLE]: SubmissionResultStatus.TIME_LIMIT_EXCEEDED,
-			[TestCaseStatus.MLE]: SubmissionResultStatus.MEMORY_LIMIT_EXCEEDED,
-			[TestCaseStatus.WA]: SubmissionResultStatus.WRONG_ANSWER,
-			[TestCaseStatus.AC]: SubmissionResultStatus.ACCEPTED,
-		};
-
-		const submissionResult = this.submissionResultRepository.create({
-			submission: submission,
-			status: statusMap[data.status],
-			executionTime: data.time,
-			memoryUsed: data.memory,
-			slug: data.slug,
-		});
-		
-		await this.submissionResultRepository.save(submissionResult);
-	}
-
 	async handleJudgerAck(data: JudgerAck) {
 		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
 		
@@ -80,7 +57,26 @@ export class JudgerService {
 
 		const statusPriority = [TestCaseStatus.RTE, TestCaseStatus.TLE, TestCaseStatus.MLE, TestCaseStatus.WA, TestCaseStatus.AC];
 
-		await Promise.all(data.test_results.map((result) => this.createTestCaseResult(data.id, result)));
+		
+		const statusResultMap = {
+			[TestCaseStatus.RTE]: SubmissionResultStatus.RUNTIME_ERROR,
+			[TestCaseStatus.TLE]: SubmissionResultStatus.TIME_LIMIT_EXCEEDED,
+			[TestCaseStatus.MLE]: SubmissionResultStatus.MEMORY_LIMIT_EXCEEDED,
+			[TestCaseStatus.WA]: SubmissionResultStatus.WRONG_ANSWER,
+			[TestCaseStatus.AC]: SubmissionResultStatus.ACCEPTED,
+		};
+
+		const results = data.test_results.map((r) =>
+			this.submissionResultRepository.create({
+			  slug: r.slug,
+			  status: statusResultMap[r.status],
+			  executionTime: r.time,
+			  memoryUsed: r.memory,
+			  submission, 
+			}),
+		  );
+		  
+		  submission.results = results;
 
 		const statusMap = {
 			[TestCaseStatus.RTE]: SubmissionStatus.RUNTIME_ERROR,

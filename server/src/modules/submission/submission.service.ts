@@ -37,38 +37,6 @@ export class SubmissionService {
 			throw new NotFoundException(`Submission with ID ${id} not found`);
 		}
 
-		// Map submission result slugs to subtask and test case names
-		if (submission.results && submission.results.length > 0) {
-			const subtaskSlugs = [...new Set(submission.results.map((result) => result.slug.split('/')[0]))];
-
-			// Fetch all required subtasks with their test cases in one query for efficiency
-			const subtasks = await this.subtaskRepository.find({
-				where: {
-					problem: { id: submission.problem.id },
-					slug: In(subtaskSlugs),
-				},
-				relations: ['testCases'],
-			});
-
-			const subtaskMap = new Map(subtasks.map((st) => [st.slug, st]));
-
-			// Map each result to its corresponding subtask and test case names
-			for (const result of submission.results) {
-				const [subtaskSlug, testCaseSlug] = result.slug.split('/');
-
-				const subtask = subtaskMap.get(subtaskSlug);
-				if (subtask) {
-					const testCase = subtask.testCases.find((tc) => tc.slug === testCaseSlug);
-					(result as any).subtaskName = subtask.name;
-					(result as any).testCaseName = testCase?.name || testCaseSlug;
-				} else {
-					// Fallback to slug names if subtask not found
-					(result as any).subtaskName = subtaskSlug;
-					(result as any).testCaseName = testCaseSlug;
-				}
-			}
-		}
-
 		return submission;
 	}
 	
@@ -87,6 +55,7 @@ export class SubmissionService {
 		if (status) qb.andWhere('submission.status = :status', { status });
 
 		const [submissions, total] = await qb
+		.orderBy('submission.submittedAt', 'DESC')
 			.skip((page - 1) * limit)
 			.take(limit)
 			.getManyAndCount();
