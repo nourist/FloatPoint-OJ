@@ -20,7 +20,7 @@ export class NotificationService {
 
 	async sendNotification(notification: Notification, user: User) {
 		notification.user = user;
-		
+
 		if (user.notificationSettings[notification.type]) {
 			await this.notificationRepository.save(notification);
 		}
@@ -32,7 +32,7 @@ export class NotificationService {
 		await Promise.all(
 			users.map(async (user) => {
 				if (user.id === problem.creator.id) return;
-				
+
 				await this.sendNotification(
 					this.notificationRepository.create({
 						type: NotificationType.NEW_PROBLEM,
@@ -50,7 +50,7 @@ export class NotificationService {
 		await Promise.all(
 			users.map(async (user) => {
 				if (user.id === blog.author.id) return;
-				
+
 				await this.sendNotification(
 					this.notificationRepository.create({
 						type: NotificationType.NEW_BLOG,

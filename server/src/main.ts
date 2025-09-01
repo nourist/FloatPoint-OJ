@@ -3,13 +3,13 @@ import { UnprocessableEntityException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import * as cookieParser from 'cookie-parser';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { initializeTransactionalContext } from 'typeorm-transactional';
-import { IoAdapter } from '@nestjs/platform-socket.io';
 import { ServerOptions } from 'socket.io';
+import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/http-exception.filter';
@@ -17,23 +17,26 @@ import { SerializeInterceptor } from './interceptors/serialize.interceptor';
 
 // Custom IoAdapter to configure CORS for WebSockets
 class CustomIoAdapter extends IoAdapter {
-  constructor(private app: any, private configService: ConfigService) {
-    super(app);
-  }
+	constructor(
+		private app: any,
+		private configService: ConfigService,
+	) {
+		super(app);
+	}
 
-  createIOServer(port: number, options?: ServerOptions) {
-    const clientUrl = this.configService.get<string>('CLIENT_URL');
-    
-    const server = super.createIOServer(port, {
-      ...options,
-      cors: {
-        origin: clientUrl,
-        credentials: true,
-      },
-    });
-    
-    return server;
-  }
+	createIOServer(port: number, options?: ServerOptions) {
+		const clientUrl = this.configService.get<string>('CLIENT_URL');
+
+		const server = super.createIOServer(port, {
+			...options,
+			cors: {
+				origin: clientUrl,
+				credentials: true,
+			},
+		});
+
+		return server;
+	}
 }
 
 async function bootstrap() {
@@ -119,12 +122,7 @@ async function bootstrap() {
 		}),
 	);
 
-	const config = new DocumentBuilder()
-		.setTitle('API Docs')
-		.setDescription('API documentation for my project')
-		.setVersion('1.0')
-		.addBearerAuth()
-		.build();
+	const config = new DocumentBuilder().setTitle('API Docs').setDescription('API documentation for my project').setVersion('1.0').addBearerAuth().build();
 
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('api-docs', app, document);

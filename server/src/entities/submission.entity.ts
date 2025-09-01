@@ -86,6 +86,6 @@ export class Submission {
 	@Column({ type: 'text', default: '' })
 	log: string;
 
-	@OneToMany(() => SubmissionResult, (result) => result.submission,{cascade: true} )
+	@OneToMany(() => SubmissionResult, (result) => result.submission, { cascade: true })
 	results: SubmissionResult[];
 }

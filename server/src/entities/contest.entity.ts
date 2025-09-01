@@ -4,6 +4,12 @@ import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
 import { User } from './user.entity';
 
+export enum ContestStatus {
+	PENDING = 'PENDING',
+	RUNNING = 'RUNNING',
+	ENDED = 'ENDED',
+}
+
 @Entity('contests')
 export class Contest {
 	@PrimaryGeneratedColumn('uuid')
@@ -32,6 +38,13 @@ export class Contest {
 
 	@Column({ default: 0 })
 	penalty: number;
+
+	@Column({
+		type: 'enum',
+		enum: ContestStatus,
+		default: ContestStatus.PENDING,
+	})
+	status: ContestStatus;
 
 	@ManyToOne(() => User, (user) => user.contests)
 	@JoinColumn()

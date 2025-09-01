@@ -122,7 +122,7 @@ export class ContestController {
 	async getStandings(@Param('id', ParseUUIDPipe) id: string) {
 		return {
 			message: 'success',
-			standings: await this.contestService.getStandings(id),
+			...(await this.contestService.getStandings(id)),
 		};
 	}
 }

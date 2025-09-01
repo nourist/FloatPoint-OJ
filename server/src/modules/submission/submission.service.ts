@@ -5,12 +5,12 @@ import { In, Repository } from 'typeorm';
 
 import { ProblemService } from '../problem/problem.service';
 import { UserService } from '../user/user.service';
-import { GetAllSubmissionsDto, SubmitCodeDto, StatusStatistic, LanguageStatistic } from './submission.dto';
+import { GetAllSubmissionsDto, LanguageStatistic, StatusStatistic, SubmitCodeDto } from './submission.dto';
+import { SubmissionResultStatus } from 'src/entities/submission-result.entity';
 import { Submission } from 'src/entities/submission.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { TestCase } from 'src/entities/test-case.entity';
 import { User, UserRole } from 'src/entities/user.entity';
-import { SubmissionResultStatus } from 'src/entities/submission-result.entity';
 
 @Injectable()
 export class SubmissionService {
@@ -32,15 +32,15 @@ export class SubmissionService {
 			where: { id },
 			relations: ['problem', 'author', 'results'],
 		});
-		
+
 		if (!submission) {
 			throw new NotFoundException(`Submission with ID ${id} not found`);
 		}
 
 		return submission;
 	}
-	
-	async findAll(query: GetAllSubmissionsDto, user: User|null) {
+
+	async findAll(query: GetAllSubmissionsDto, user: User | null) {
 		const { authorId, problemId, language, status, page, limit } = query;
 
 		const qb = this.submissionRepository
@@ -55,16 +55,13 @@ export class SubmissionService {
 		if (status) qb.andWhere('submission.status = :status', { status });
 
 		const [submissions, total] = await qb
-		.orderBy('submission.submittedAt', 'DESC')
+			.orderBy('submission.submittedAt', 'DESC')
 			.skip((page - 1) * limit)
 			.take(limit)
 			.getManyAndCount();
 
 		// Calculate statistics based on the same filters (without pagination)
-		const statsQb = this.submissionRepository
-			.createQueryBuilder('submission')
-			.leftJoin('submission.author', 'author')
-			.leftJoin('submission.problem', 'problem');
+		const statsQb = this.submissionRepository.createQueryBuilder('submission').leftJoin('submission.author', 'author').leftJoin('submission.problem', 'problem');
 
 		if (authorId) statsQb.andWhere('author.id = :authorId', { authorId });
 		if (problemId) statsQb.andWhere('problem.id = :problemId', { problemId });
@@ -72,34 +69,24 @@ export class SubmissionService {
 		if (status) statsQb.andWhere('submission.status = :status', { status });
 
 		// Get status statistics
-		const statusStats = await statsQb
-			.clone()
-			.select('submission.status', 'status')
-			.addSelect('COUNT(*)', 'count')
-			.groupBy('submission.status')
-			.getRawMany();
+		const statusStats = await statsQb.clone().select('submission.status', 'status').addSelect('COUNT(*)', 'count').groupBy('submission.status').getRawMany();
 
 		// Get language statistics
-		const languageStats = await statsQb
-			.clone()
-			.select('submission.language', 'language')
-			.addSelect('COUNT(*)', 'count')
-			.groupBy('submission.language')
-			.getRawMany();
+		const languageStats = await statsQb.clone().select('submission.language', 'language').addSelect('COUNT(*)', 'count').groupBy('submission.language').getRawMany();
 
 		// Transform raw results to proper DTOs
-		const statusStatistics: StatusStatistic[] = statusStats.map(stat => ({
+		const statusStatistics: StatusStatistic[] = statusStats.map((stat) => ({
 			status: stat.status,
-			count: parseInt(stat.count, 10)
+			count: parseInt(stat.count, 10),
 		}));
 
-		const languageStatistics: LanguageStatistic[] = languageStats.map(stat => ({
+		const languageStatistics: LanguageStatistic[] = languageStats.map((stat) => ({
 			language: stat.language,
-			count: parseInt(stat.count, 10)
+			count: parseInt(stat.count, 10),
 		}));
 
 		// Add canView field and calculate time/memory/accepted test cases for each submission
-		const submissionsWithCanView = submissions.map(submission => {
+		const submissionsWithCanView = submissions.map((submission) => {
 			let totalTime = 0;
 			let maxMemory = 0;
 			let acceptedTestCases = 0;
@@ -107,20 +94,20 @@ export class SubmissionService {
 
 			if (submission.results && submission.results.length > 0) {
 				totalTime = submission.results.reduce((sum, result) => sum + (result.executionTime || 0), 0);
-				maxMemory = Math.max(...submission.results.map(result => result.memoryUsed || 0));
-				
+				maxMemory = Math.max(...submission.results.map((result) => result.memoryUsed || 0));
+
 				// Count accepted test cases
-				acceptedTestCases = submission.results.filter(result => result.status === SubmissionResultStatus.ACCEPTED).length;
+				acceptedTestCases = submission.results.filter((result) => result.status === SubmissionResultStatus.ACCEPTED).length;
 				totalTestCases = submission.results.length;
 			}
 
 			return {
 				...submission,
-				canView: user ? (user.role === UserRole.ADMIN || submission.author.id === user.id) : false,
+				canView: user ? user.role === UserRole.ADMIN || submission.author.id === user.id : false,
 				time: totalTime,
 				memory: maxMemory,
 				acceptedTestCases,
-				totalTestCases
+				totalTestCases,
 			};
 		});
 
@@ -137,7 +124,7 @@ export class SubmissionService {
 	async submitCode(body: SubmitCodeDto, user: User) {
 		const problem = await this.problemService.getProblemById(body.problemId);
 		const userWithContest = await this.userService.getUserById(user.id);
-		
+
 		const submission = this.submissionRepository.create({
 			sourceCode: body.code,
 			language: body.language,
@@ -145,7 +132,7 @@ export class SubmissionService {
 			author: user,
 			contest: userWithContest?.joiningContest,
 		});
-		
+
 		const savedSubmission = await this.submissionRepository.save(submission);
 
 		// Queue submission for judging

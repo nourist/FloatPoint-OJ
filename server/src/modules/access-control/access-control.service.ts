@@ -30,7 +30,7 @@ export class AccessControlService {
 
 	isAuthorized({ currentRole, requiredRole }: IsAuthorizedParams) {
 		this.logger.log(`Checking if role ${currentRole} is authorized for ${requiredRole}`);
-		
+
 		for (const hierarchy of this.hierarchies) {
 			const priority = hierarchy.get(currentRole);
 			const requiredPriority = hierarchy.get(requiredRole);
@@ -40,7 +40,7 @@ export class AccessControlService {
 				return true;
 			}
 		}
-		
+
 		this.logger.warn(`Role ${currentRole} is NOT authorized for ${requiredRole}`);
 		return false;
 	}

@@ -2,6 +2,7 @@ import { PartialType } from '@nestjs/swagger';
 import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 
 import { ToBoolean } from 'src/decorators/to-boolean.decorator';
+import { ContestStatus } from 'src/entities/contest.entity';
 
 export class CreateContestDto {
 	@IsString()
@@ -23,7 +24,11 @@ export class CreateContestDto {
 	isRated?: boolean;
 }
 
-export class UpdateContestDto extends PartialType(CreateContestDto) {}
+export class UpdateContestDto extends PartialType(CreateContestDto) {
+	@IsEnum(ContestStatus)
+	@IsOptional()
+	status?: ContestStatus;
+}
 
 export class QueryContestDto {
 	@IsOptional()
@@ -84,4 +89,14 @@ export class UserStandingDto {
 	totalScore: number;
 	totalTime: number; // Total time in seconds, including penalties
 	problems: Record<string, ProblemStandingDto>;
+	oldRating?: number;
+	newRating?: number;
+}
+
+export class ContestStandingsDto {
+	contestId: string;
+	isRated: boolean;
+	isRatingUpdated: boolean;
+	penalty: number;
+	standings: UserStandingDto[];
 }

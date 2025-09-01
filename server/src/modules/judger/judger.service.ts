@@ -26,10 +26,10 @@ export class JudgerService {
 
 	async handleJudgerAck(data: JudgerAck) {
 		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
-		
+
 		const submission = await this.submissionRepository.findOneByOrFail({ id: data.id });
 		submission.status = SubmissionStatus.JUDGING;
-		
+
 		const updatedSubmission = await this.submissionRepository.save(submission);
 		this.judgerGateway.server.emit('submission_update', updatedSubmission);
 	}
@@ -57,7 +57,6 @@ export class JudgerService {
 
 		const statusPriority = [TestCaseStatus.RTE, TestCaseStatus.TLE, TestCaseStatus.MLE, TestCaseStatus.WA, TestCaseStatus.AC];
 
-		
 		const statusResultMap = {
 			[TestCaseStatus.RTE]: SubmissionResultStatus.RUNTIME_ERROR,
 			[TestCaseStatus.TLE]: SubmissionResultStatus.TIME_LIMIT_EXCEEDED,
@@ -68,15 +67,15 @@ export class JudgerService {
 
 		const results = data.test_results.map((r) =>
 			this.submissionResultRepository.create({
-			  slug: r.slug,
-			  status: statusResultMap[r.status],
-			  executionTime: r.time,
-			  memoryUsed: r.memory,
-			  submission, 
+				slug: r.slug,
+				status: statusResultMap[r.status],
+				executionTime: r.time,
+				memoryUsed: r.memory,
+				submission,
 			}),
-		  );
-		  
-		  submission.results = results;
+		);
+
+		submission.results = results;
 
 		const statusMap = {
 			[TestCaseStatus.RTE]: SubmissionStatus.RUNTIME_ERROR,

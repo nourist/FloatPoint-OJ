@@ -179,15 +179,15 @@ export class UserService {
 
 		const avatarUrl = `/avatars/${filename}`;
 		user.avatarUrl = avatarUrl;
-		
+
 		return await this.userRepository.save(user);
 	}
 
 	async updateNotificationSettings(id: string, settings: UpdateNotificationSettingsDto): Promise<User> {
 		const user = await this.getUserById(id);
-		
+
 		user.notificationSettings = { ...user.notificationSettings, ...settings };
-		
+
 		return this.userRepository.save(user);
 	}
 }

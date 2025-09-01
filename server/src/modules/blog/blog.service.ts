@@ -76,7 +76,7 @@ export class BlogService {
 
 		const blog = this.blogRepository.create({ ...createBlogDto, id, slug, thumbnailUrl, author: user });
 		const savedBlog = await this.blogRepository.save(blog);
-		
+
 		await this.notificationService.createNewBlogNotification(savedBlog);
 		return savedBlog;
 	}
@@ -84,14 +84,14 @@ export class BlogService {
 	async findAll(query: BlogPaginationQueryDto) {
 		const page = query.page || 1;
 		const size = query.size || 10;
-		
+
 		const [blogs, total] = await this.blogRepository.findAndCount({
 			order: { createdAt: 'DESC' },
 			take: size,
 			skip: (page - 1) * size,
 			relations: ['author'],
 		});
-		
+
 		return { blogs, total, page, size };
 	}
 

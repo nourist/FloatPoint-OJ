@@ -60,10 +60,10 @@ export class AuthService {
 	@Transactional()
 	async signup(userData: { email: string; password: string; username: string }) {
 		const user = await this.userService.createUser(userData);
-		
+
 		await this.mailService.sendVerifyEmail(user.email, user.verificationToken!);
 		this.logger.log(`User created with email ${user.email}`);
-		
+
 		return user;
 	}
 
@@ -105,7 +105,7 @@ export class AuthService {
 
 		await this.mailService.sendVerifyEmail(user.email, verificationToken);
 		this.logger.log(`Verification email sent to ${user.email}`);
-		
+
 		return savedUser;
 	}
 
@@ -117,12 +117,12 @@ export class AuthService {
 		const token = uuidv4();
 		user.resetPasswordToken = token;
 		user.resetPasswordExpiresAt = new Date(Date.now() + 1000 * 60 * 60);
-		
+
 		const savedUser = await this.userRepository.save(user);
 
 		await this.mailService.sendResetPasswordEmail(user.email, token);
 		this.logger.log(`Reset password email sent to ${user.email}`);
-		
+
 		return savedUser;
 	}
 
@@ -145,10 +145,10 @@ export class AuthService {
 		user.password = hashedPassword;
 		user.resetPasswordToken = null;
 		user.resetPasswordExpiresAt = null;
-		
+
 		const savedUser = await this.userRepository.save(user);
 		this.logger.log(`Password reset for user ${user.id}`);
-		
+
 		return savedUser;
 	}
 
@@ -162,7 +162,7 @@ export class AuthService {
 
 		const payload: JwtPayload = { email: user.email, sub: user.id, role: user.role };
 		this.logger.log(`User ${user.id} signed in with email ${user.email}`);
-		
+
 		return {
 			access_token: this.jwtService.sign(payload),
 			user,

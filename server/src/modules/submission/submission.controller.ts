@@ -2,11 +2,11 @@ import { Body, Controller, ForbiddenException, Get, Param, Post, Query, UseGuard
 
 import { GetAllSubmissionsDto, SubmitCodeDto } from './submission.dto';
 import { SubmissionService } from './submission.service';
+import { GetOptionalUser } from 'src/decorators/get-optional-user.decorator';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User, UserRole } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { OptionalJwtAuthGuard } from 'src/guards/optional-jwt-auth.guard';
-import { GetOptionalUser } from 'src/decorators/get-optional-user.decorator';
 
 @Controller('submission')
 export class SubmissionController {
@@ -14,7 +14,7 @@ export class SubmissionController {
 
 	@Get()
 	@UseGuards(OptionalJwtAuthGuard)
-	async findAll(@Query() query: GetAllSubmissionsDto, @GetOptionalUser() user:User | null) {
+	async findAll(@Query() query: GetAllSubmissionsDto, @GetOptionalUser() user: User | null) {
 		return {
 			message: 'success',
 			...(await this.submissionService.findAll(query, user)),
