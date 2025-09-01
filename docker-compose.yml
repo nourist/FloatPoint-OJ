@@ -46,6 +46,7 @@ services:
             dockerfile: Dockerfile.judger
         networks:
             - app-network
+        privileged: true
         env_file:
             - judger/.env
         environment:

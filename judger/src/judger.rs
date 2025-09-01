@@ -317,7 +317,15 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
                     memory: get_u64(&meta_data, "max-rss"),
                 });
             } else {
-                info!("Test case {} resulted in RTE", test_case_slug);
+                // Log runtime error details including stderr when status is not "TO"
+                let stderr_content = std::fs::read_to_string(format!(
+                    "/var/local/lib/isolate/{}/box/stderr.txt",
+                    env::var("JUDGER_ID").unwrap()
+                )).unwrap_or_else(|_| "Failed to read stderr".to_string());
+                
+                info!("Test case {} resulted in RTE. Status: {}, Stderr: {}", 
+                      test_case_slug, status, stderr_content);
+                
                 return Ok(TestResult {
                     slug: test_case_slug.to_string(),
                     status: Status::RTE,
