@@ -559,7 +559,7 @@ const PaginationControls = ({
 	}
 
 	return (
-		<div className="flex items-center justify-between">
+		<div className={cn('flex items-center justify-between', className)}>
 			<Select
 				value={size.toString()}
 				onValueChange={(value) => {
@@ -584,7 +584,7 @@ const PaginationControls = ({
 					</SelectGroup>
 				</SelectContent>
 			</Select>
-			<BasicPagination variant="outline" totalPages={Math.ceil(totalItems / size)} initialPage={initialPage} onPageChange={onPageChange} className={className} />
+			<BasicPagination variant="outline" totalPages={Math.ceil(totalItems / size)} initialPage={initialPage} onPageChange={onPageChange} />
 		</div>
 	);
 };

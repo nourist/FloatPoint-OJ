@@ -20,5 +20,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-	matcher: ['/create/blog', '/blog/:slug/edit', '/submission/:id', '/submit'],
+	matcher: ['/blog/create', '/blog/:slug/edit', '/submission/:id', '/submit'],
 };

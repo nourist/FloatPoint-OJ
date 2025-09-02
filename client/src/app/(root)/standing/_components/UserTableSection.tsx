@@ -1,60 +1,79 @@
+'use client';
+
 import { Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import useSWR from 'swr';
 
-import { createClientService } from '~/lib/service-client';
-import { userServiceInstance } from '~/services/user';
-import { User } from '~/types/user.type';
 import { SearchFilter } from './SearchFilter';
 import { UserTable } from './UserTable';
+import PaginationControls from '~/components/pagination-controls';
+import useDebounce from '~/hooks/use-debounce';
+import { createClientService } from '~/lib/service-client';
+import { userServiceInstance } from '~/services/user';
 
-interface UserTableSectionProps {
-	search: string;
-	onSearchChange: (search: string) => void;
-	page: number;
-	limit: number;
-	onPageChange: (page: number) => void;
-	onSizeChange: (size: number) => void;
-}
-
-export const UserTableSection = ({
-	search,
-	onSearchChange,
-	page,
-	limit,
-	onPageChange,
-	onSizeChange,
-}: UserTableSectionProps) => {
+export const UserTableSection = () => {
 	const t = useTranslations('standing');
+
+	// State management
+	const [search, setSearch] = useState('');
+	const [page, setPage] = useState(1);
+	const [limit, setLimit] = useState(20);
+
+	// Debounce search term
+	const debouncedSearch = useDebounce(search);
 
 	// SWR data fetching for paginated table (always sorted by rating for consistency)
 	const userService = createClientService(userServiceInstance);
-	const { data, error, isLoading } = useSWR(['users-table', search, page, limit], () =>
-		userService.getUsers({
-			sortBy: 'rating',
-			sortOrder: 'DESC',
-			q: search || undefined,
-			page,
-			limit,
-		}),
+	const { data, error, isLoading } = useSWR(
+		['users-table', debouncedSearch, page, limit],
+		() =>
+			userService.getUsers({
+				sortBy: 'rating',
+				sortOrder: 'DESC',
+				q: debouncedSearch || undefined,
+				page,
+				limit,
+			}),
+		{
+			keepPreviousData: true,
+		},
 	);
 
+	if (error) {
+		throw error;
+	}
+
+	const handleSearchChange = (newSearch: string) => {
+		setSearch(newSearch);
+		setPage(1);
+	};
+
+	const handlePageChange = (newPage: number) => {
+		setPage(newPage);
+	};
+
+	const handleSizeChange = (newLimit: number) => {
+		setLimit(newLimit);
+		setPage(1);
+	};
+
 	return (
-		<div className="rounded-2xl border bg-card p-6 shadow-xs">
+		<div className="bg-card rounded-2xl border p-6 shadow-xs">
 			<div className="mb-4 flex items-center gap-2">
 				<Users className="h-5 w-5" />
 				<h2 className="text-xl font-semibold">{t('all_users')}</h2>
 			</div>
-			<SearchFilter search={search} onSearchChange={onSearchChange} />
-			<UserTable
-				users={data?.users || []}
-				isLoading={isLoading}
-				error={error}
+			<SearchFilter search={search} onSearchChange={handleSearchChange} />
+			<UserTable users={data?.users || []} isLoading={isLoading && !data} page={page} limit={limit} />
+			{/* Pagination */}
+			<PaginationControls
+				className="mt-6"
 				totalItems={data?.total || 0}
-				page={page}
-				limit={limit}
-				onPageChange={onPageChange}
-				onSizeChange={onSizeChange}
+				initialPage={page}
+				initialSize={limit}
+				onPageChange={handlePageChange}
+				onSizeChange={handleSizeChange}
 			/>
 		</div>
 	);

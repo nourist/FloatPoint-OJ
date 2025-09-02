@@ -1,70 +1,52 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-
-import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import useDebounce from '~/hooks/use-debounce';
 import { PodiumSection } from './_components/PodiumSection';
 import { UserTableSection } from './_components/UserTableSection';
+import { createServerService } from '~/lib/service-server';
+import { userServiceInstance } from '~/services/user';
+import { User } from '~/types/user.type';
 
-type StandingMode = 'rating' | 'score';
+const Standing = async () => {
+	// Fetch top 3 users by rating and score in parallel
+	const [ratingData, scoreData] = await Promise.all([
+		createServerService(userServiceInstance).then((service) =>
+			service.getUsers({
+				sortBy: 'rating',
+				sortOrder: 'DESC',
+				limit: 3,
+				page: 1,
+			}),
+		),
+		createServerService(userServiceInstance).then((service) =>
+			service.getUsers({
+				sortBy: 'score',
+				sortOrder: 'DESC',
+				limit: 3,
+				page: 1,
+			}),
+		),
+	]);
 
-const Standing = () => {
-	const t = useTranslations('standing');
-
-	// State management
-	const [podiumMode, setPodiumMode] = useState<StandingMode>('rating');
-	const [search, setSearch] = useState('');
-	const [page, setPage] = useState(1);
-	const [limit, setLimit] = useState(10);
-
-	// Debounce search term
-	const debouncedSearch = useDebounce(search, 300);
-
-	const handleModeChange = (newMode: string) => {
-		setPodiumMode(newMode as StandingMode);
-		setPage(1);
+	// Transform users to include rank and values
+	const transformUsers = (users: User[], mode: 'rating' | 'score') => {
+		return users.map((user, index) => ({
+			...user,
+			rank: index + 1,
+			ratingValue: user.rating.length > 0 ? user.rating[user.rating.length - 1] : 0,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			scoreValue: (user as any).score || 0,
+			mode,
+		}));
 	};
 
-	const handleSearchChange = (newSearch: string) => {
-		setSearch(newSearch);
-		setPage(1);
-	};
+	const ratingUsers = transformUsers(ratingData.users, 'rating');
+	const scoreUsers = transformUsers(scoreData.users, 'score');
 
 	return (
-		<div className="container mx-auto space-y-6 py-6">
-			{/* Header */}
-			<div className="space-y-2 text-center">
-				<h1 className="text-3xl font-bold">{t('title')}</h1>
-				<p className="text-muted-foreground">{t('description')}</p>
-			</div>
+		<div className="space-y-6">
+			{/* Top 3 Podium with pre-fetched data */}
+			<PodiumSection ratingUsers={ratingUsers} scoreUsers={scoreUsers} />
 
-			{/* Mode Selector */}
-			<div className="flex justify-center">
-				<Tabs value={podiumMode} onValueChange={handleModeChange} className="w-[400px]">
-					<TabsList className="grid w-full grid-cols-2">
-						<TabsTrigger value="rating">{t('modes.rating')}</TabsTrigger>
-						<TabsTrigger value="score">{t('modes.score')}</TabsTrigger>
-					</TabsList>
-				</Tabs>
-			</div>
-
-			{/* Top 3 Podium */}
-			<PodiumSection mode={podiumMode} />
-
-			{/* User Table */}
-			<UserTableSection
-				search={debouncedSearch}
-				onSearchChange={handleSearchChange}
-				page={page}
-				limit={limit}
-				onPageChange={setPage}
-				onSizeChange={(newLimit: number) => {
-					setLimit(newLimit);
-					setPage(1);
-				}}
-			/>
+			{/* User Table with integrated search and pagination */}
+			<UserTableSection />
 		</div>
 	);
 };

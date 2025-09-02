@@ -1,6 +1,6 @@
-import { Award, Medal, Trophy } from 'lucide-react';
-import Link from 'next/link';
+import { Crown, Medal } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Badge } from '~/components/ui/badge';
@@ -25,11 +25,11 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 	const getPodiumIcon = () => {
 		switch (position) {
 			case 1:
-				return <Trophy className="h-8 w-8 text-yellow-500" />;
+				return <Crown className="h-8 w-8 text-yellow-500" />;
 			case 2:
 				return <Medal className="h-8 w-8 text-gray-400" />;
 			case 3:
-				return <Award className="h-8 w-8 text-amber-600" />;
+				return <Medal className="h-8 w-8 text-amber-600" />;
 			default:
 				return null;
 		}
@@ -49,7 +49,7 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 	};
 
 	return (
-		<div className={`relative rounded-2xl border bg-card p-6 shadow-xs ${getPodiumColor()}`}>
+		<div className={`bg-card relative rounded-2xl border p-6 shadow-xs ${getPodiumColor()}`}>
 			<div className="pb-2 text-center">
 				<div className="mb-2 flex justify-center">{getPodiumIcon()}</div>
 				<Badge variant="outline" className="absolute top-2 right-2">
@@ -67,9 +67,7 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 						{user.fullname && <p className="text-muted-foreground text-sm">{user.fullname}</p>}
 					</div>
 				</Link>
-				<div className="text-primary text-2xl font-bold">
-					{mode === 'score' ? Math.round(user.scoreValue) : Math.round(user.ratingValue)}
-				</div>
+				<div className="text-primary text-2xl font-bold">{mode === 'score' ? Math.round(user.scoreValue) : Math.round(user.ratingValue)}</div>
 				<p className="text-muted-foreground text-sm">{mode === 'score' ? t('score') : t('rating')}</p>
 			</div>
 		</div>
@@ -77,7 +75,7 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 };
 
 export const PodiumSkeleton = () => (
-	<div className="rounded-2xl border bg-card p-6 shadow-xs">
+	<div className="bg-card rounded-2xl border p-6 shadow-xs">
 		<div className="pb-2 text-center">
 			<Skeleton className="mx-auto mb-2 h-8 w-8" />
 		</div>
