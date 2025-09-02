@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
-import BlogCard from '../../../components/blog-card';
+import BlogCard from '../../../../components/blog-card';
 import Comments from './_components/comments';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { createServerService } from '~/lib/service-server';
