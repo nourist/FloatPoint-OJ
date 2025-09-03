@@ -1,5 +1,6 @@
 'use client';
 
+import AdminHeader from './_layout/header';
 import AdminSidebar from './_layout/sidebar';
 import { SidebarInset, SidebarProvider } from '~/components/ui/sidebar';
 
@@ -11,7 +12,10 @@ const AdminLayout = ({ children }: Props) => {
 	return (
 		<SidebarProvider>
 			<AdminSidebar />
-			<SidebarInset className="bg-card">{children}</SidebarInset>
+			<SidebarInset className="bg-card space-y-4 p-4">
+				<AdminHeader />
+				{children}
+			</SidebarInset>
 		</SidebarProvider>
 	);
 };

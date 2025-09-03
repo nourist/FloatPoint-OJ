@@ -1,11 +1,5 @@
-import { SidebarTrigger } from '~/components/ui/sidebar';
-
 const Dashboard = () => {
-	return (
-		<>
-			<SidebarTrigger />
-		</>
-	);
+	return <></>;
 };
 
 export default Dashboard;

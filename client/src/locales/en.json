@@ -533,22 +533,20 @@
 	},
 	"admin": {
 		"layout": {
-			"header": {
-				"dashboard": "Dashboard",
-				"blog": "Blog",
-				"problem": "Problem",
-				"submission": "Submission",
-				"contest": "Contest",
-				"user": "User",
-				"judger": "Judger",
-				"profile": "Profile",
-				"logout": "Logout",
-				"appearance": "Appearance",
-				"language": "Language",
-				"light": "Light",
-				"dark": "Dark",
-				"home": "Home"
-			}
+			"dashboard": "Dashboard",
+			"blog": "Blog",
+			"problem": "Problem",
+			"submission": "Submission",
+			"contest": "Contest",
+			"user": "User",
+			"judger": "Judger",
+			"profile": "Profile",
+			"logout": "Logout",
+			"appearance": "Appearance",
+			"language": "Language",
+			"light": "Light",
+			"dark": "Dark",
+			"home": "Home"
 		}
 	}
 }

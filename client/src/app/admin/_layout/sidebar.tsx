@@ -27,7 +27,7 @@ import { authServiceInstance } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
 
 const AdminSidebar = () => {
-	const t = useTranslations('admin.layout.header');
+	const t = useTranslations('admin.layout');
 	const router = useRouter();
 
 	const { getProfile, signout } = createClientService(authServiceInstance);
