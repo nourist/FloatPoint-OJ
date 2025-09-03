@@ -1,6 +1,8 @@
 import { jwtVerify } from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { UserRole } from './types/user.type';
+
 export const middleware = async (req: NextRequest) => {
 	console.log('New request to private route', req.url);
 
@@ -11,7 +13,12 @@ export const middleware = async (req: NextRequest) => {
 	}
 
 	try {
-		await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET ?? 'secretKey'));
+		const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET ?? 'secretKey'));
+
+		if (req.nextUrl.pathname.startsWith('/admin') && payload.role != UserRole.ADMIN) {
+			return NextResponse.redirect(new URL('/', req.url));
+		}
+
 		return NextResponse.next();
 	} catch (err) {
 		console.log('Invalid token provided', err);
@@ -20,5 +27,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-	matcher: ['/blog/create', '/blog/:slug/edit', '/submission/:id', '/submit'],
+	matcher: ['/blog/create', '/blog/:slug/edit', '/submission/:id', '/submit', '/admin/:path*'],
 };

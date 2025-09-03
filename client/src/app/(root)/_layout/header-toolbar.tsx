@@ -1,7 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { Bell, CircleUserRound, Globe, LogOut, Moon, Settings, Sun } from 'lucide-react';
+import { Bell, CircleUserRound, Globe, LayoutDashboard, LogOut, Moon, Settings, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -26,15 +26,14 @@ import { Locale, locales, localesCode } from '~/i18n/locales';
 import { createClientService } from '~/lib/service-client';
 import { authServiceInstance } from '~/services/auth';
 import { Theme } from '~/types/theme.type';
+import { UserRole } from '~/types/user.type';
 
 const HeaderToolbar = () => {
 	const t = useTranslations('layout.header');
 
 	const router = useRouter();
 
-	const { signout } = createClientService(authServiceInstance);
-
-	const { getProfile } = createClientService(authServiceInstance);
+	const { signout, getProfile } = createClientService(authServiceInstance);
 
 	const { data: user, isLoading } = useSWR('/auth/me', getProfile);
 
@@ -90,6 +89,17 @@ const HeaderToolbar = () => {
 							{t('profile')}
 						</Link>
 					</DropdownMenuItem>
+
+					{user.role == UserRole.ADMIN && (
+						<DropdownMenuItem asChild>
+							<Link href={`/admin`}>
+								<LayoutDashboard />
+								{t('dashboard')}
+							</Link>
+						</DropdownMenuItem>
+					)}
+					<DropdownMenuSeparator />
+
 					<DropdownMenuSub>
 						<DropdownMenuSubTrigger>
 							{theme === 'dark' ? <Moon /> : <Sun />}

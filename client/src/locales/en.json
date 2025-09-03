@@ -14,7 +14,8 @@
 			"appearance": "Appearance",
 			"language": "Language",
 			"light": "Light",
-			"dark": "Dark"
+			"dark": "Dark",
+			"dashboard": "Dashboard"
 		},
 		"footer": {
 			"copyright": "Copyright © {year} Nourist",
@@ -529,5 +530,25 @@
 		"search": "Search...",
 		"no_results": "No results found.",
 		"load_more": "Load more..."
+	},
+	"admin": {
+		"layout": {
+			"header": {
+				"dashboard": "Dashboard",
+				"blog": "Blog",
+				"problem": "Problem",
+				"submission": "Submission",
+				"contest": "Contest",
+				"user": "User",
+				"judger": "Judger",
+				"profile": "Profile",
+				"logout": "Logout",
+				"appearance": "Appearance",
+				"language": "Language",
+				"light": "Light",
+				"dark": "Dark",
+				"home": "Home"
+			}
+		}
 	}
 }
