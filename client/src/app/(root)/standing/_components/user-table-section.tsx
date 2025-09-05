@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { SearchFilter } from './SearchFilter';
-import { UserTable } from './UserTable';
+import { SearchFilter } from './search-filter';
+import { UserTable } from './user-table';
 import PaginationControls from '~/components/pagination-controls';
 import useDebounce from '~/hooks/use-debounce';
 import { createClientService } from '~/lib/service-client';

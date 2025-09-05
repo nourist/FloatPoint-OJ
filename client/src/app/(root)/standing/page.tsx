@@ -1,5 +1,5 @@
-import { PodiumSection } from './_components/PodiumSection';
-import { UserTableSection } from './_components/UserTableSection';
+import { PodiumSection } from './_components/podium-section';
+import { UserTableSection } from './_components/user-table-section';
 import { createServerService } from '~/lib/service-server';
 import { userServiceInstance } from '~/services/user';
 import { User } from '~/types/user.type';
