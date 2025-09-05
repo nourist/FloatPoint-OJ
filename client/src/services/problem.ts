@@ -133,4 +133,8 @@ export const problemServiceInstance = (http: ApiInstance) => ({
 			.then((res) => res.tags)
 			.then((res) => res.map((item) => item.name));
 	},
+
+	createProblem: (payload: CreateProblemPayload) => {
+		return http.post<ProblemResponse>('/problem', payload);
+	},
 });

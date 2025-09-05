@@ -17,8 +17,8 @@ const AdminLayout = ({ children }: Props) => {
 	return (
 		<SidebarProvider>
 			<AdminSidebar />
-			<ScrollArea className="h-[100vh] w-full md:w-[calc(100%-var(--sidebar-width))]">
-				<div className="bg-card space-y-4 p-4">
+			<ScrollArea className="bg-card h-[100vh] w-full md:w-[calc(100%-var(--sidebar-width))]">
+				<div className="space-y-4 p-4">
 					<AdminHeader />
 					{children}
 				</div>

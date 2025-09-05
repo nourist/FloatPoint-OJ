@@ -327,7 +327,7 @@
 			"score": "Score"
 		},
 		"messages": {
-			"error": {
+			"errors": {
 				"load_failed": "Failed to load submissions"
 			},
 			"empty": {
@@ -583,6 +583,45 @@
 				"easy": "Easy",
 				"medium": "Medium",
 				"hard": "Hard"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter problem title",
+				"time_limit": "Time Limit (ms)",
+				"memory_limit": "Memory Limit (KB)",
+				"point": "Point",
+				"scoring_method": "Scoring Method",
+				"scoring_method_placeholder": "Select scoring method",
+				"scoring_method_standard": "Standard",
+				"scoring_method_subtask": "Subtask",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Difficulty",
+				"difficulty_placeholder": "Select difficulty",
+				"difficulty_easy": "Easy",
+				"difficulty_medium": "Medium",
+				"difficulty_hard": "Hard",
+				"io_mode": "IO Mode",
+				"io_mode_placeholder": "Select IO mode",
+				"io_mode_standard": "Standard",
+				"io_mode_file": "File",
+				"input_file": "Input File",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Output File",
+				"output_file_placeholder": "output.txt",
+				"tags": "Tags",
+				"statement": "Statement",
+				"statement_placeholder": "Write problem statement here...",
+				"submit": "Create Problem",
+				"title_required": "Title is required",
+				"time_limit_min": "Time limit must be at least 1ms",
+				"time_limit_max": "Time limit must be at most 10000ms",
+				"memory_limit_min": "Memory limit must be at least 1KB",
+				"memory_limit_max": "Memory limit must be at most 1048576KB",
+				"point_min": "Point must be at least 0",
+				"point_max": "Point must be at most 100",
+				"tags_placeholder": "Enter tags...",
+				"create_success": "Problem created successfully!",
+				"create_error": "Failed to create problem. Please try again."
 			}
 		}
 	}

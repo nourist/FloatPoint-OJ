@@ -1,5 +1,6 @@
 import { Check, Pencil, Trash } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
@@ -31,7 +32,11 @@ const ProblemTable = ({ problems }: Props) => {
 			<TableBody>
 				{problems.map((item) => (
 					<TableRow key={item.id}>
-						<TableCell>{item.title}</TableCell>
+						<TableCell>
+							<Link className="hover:text-primary" href={`/admin/problem/${item.slug}`}>
+								{item.title}
+							</Link>
+						</TableCell>
 						<TableCell>
 							{item.tags.map((tag) => (
 								<Badge key={tag.id} className="mr-1 capitalize" variant="outline">
