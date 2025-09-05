@@ -547,6 +547,43 @@
 			"light": "Light",
 			"dark": "Dark",
 			"home": "Home"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Search...",
+				"sort_by": "Sort by",
+				"title": "Title",
+				"point": "Point",
+				"difficulty": "Difficulty",
+				"accept": "Accept",
+				"accept_rate": "Acceptance Rate"
+			},
+			"filter": {
+				"new": "New",
+				"title": "Filter",
+				"difficulty": "Difficulty",
+				"easy": "Easy",
+				"medium": "Medium",
+				"hard": "Hard",
+				"point": "Point",
+				"tags": "Tags",
+				"all": "All",
+				"editorial": "Editorial",
+				"has_editorial": "Has Editorial",
+				"point_range": "Point Range"
+			},
+			"table": {
+				"title": "Title",
+				"tags": "Tags",
+				"difficulty": "Difficulty",
+				"point": "Point",
+				"accepted": "Accepted",
+				"acceptance": "Acceptance",
+				"editorial": "Editorial",
+				"easy": "Easy",
+				"medium": "Medium",
+				"hard": "Hard"
+			}
 		}
 	}
 }

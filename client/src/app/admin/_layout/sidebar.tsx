@@ -1,5 +1,7 @@
+'use client';
+
 import Cookies from 'js-cookie';
-import { ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, SquarePen, Sun, Trophy, Users } from 'lucide-react';
+import { ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, Sun, Trophy } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,11 +49,6 @@ const AdminSidebar = () => {
 			icon: LayoutDashboard,
 		},
 		{
-			title: t('blog'),
-			url: '/blog',
-			icon: SquarePen,
-		},
-		{
 			title: t('problem'),
 			url: '/problem',
 			icon: Code,
@@ -65,11 +62,6 @@ const AdminSidebar = () => {
 			title: t('contest'),
 			url: '/contest',
 			icon: Trophy,
-		},
-		{
-			title: t('user'),
-			url: '/user',
-			icon: Users,
 		},
 		{
 			title: t('judger'),
@@ -159,7 +151,7 @@ const AdminSidebar = () => {
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end" sideOffset={12} side="right" className="w-48">
 									<DropdownMenuItem asChild>
-										<Link href={`/admin/user/${user.username}`}>
+										<Link href={`/profile/${user.username}`}>
 											<CircleUserRound />
 											{t('profile')}
 										</Link>
