@@ -137,4 +137,8 @@ export const problemServiceInstance = (http: ApiInstance) => ({
 	createProblem: (payload: CreateProblemPayload) => {
 		return http.post<ProblemResponse>('/problem', payload);
 	},
+	
+	deleteProblem: (id: string) => {
+		return http.delete<SimpleMessageResponse>(`/problem/${id}`);
+	},
 });

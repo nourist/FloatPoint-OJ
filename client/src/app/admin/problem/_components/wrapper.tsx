@@ -29,7 +29,7 @@ const Wrapper = ({ minPoint, maxPoint, tags: tagOptions }: Props) => {
 
 	const problemService = createClientService(problemServiceInstance);
 
-	const { data, error, isLoading } = useSWR(
+	const { data, error, isLoading, mutate } = useSWR(
 		{
 			q,
 			sortBy: orderBy,
@@ -72,7 +72,7 @@ const Wrapper = ({ minPoint, maxPoint, tags: tagOptions }: Props) => {
 			</div>
 			{data && (
 				<>
-					<ProblemTable problems={data.problems} />
+					<ProblemTable problems={data.problems} mutate={mutate} />
 					<PaginationControls totalItems={data.total} initialPage={1} initialSize={20} onPageChange={setPage} onSizeChange={setLimit} />
 				</>
 			)}
