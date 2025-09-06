@@ -612,6 +612,7 @@
 				"statement": "Statement",
 				"statement_placeholder": "Write problem statement here...",
 				"submit": "Create Problem",
+				"update": "Update Problem",
 				"title_required": "Title is required",
 				"time_limit_min": "Time limit must be at least 1ms",
 				"time_limit_max": "Time limit must be at most 10000ms",
@@ -621,7 +622,83 @@
 				"point_max": "Point must be at most 100",
 				"tags_placeholder": "Enter tags...",
 				"create_success": "Problem created successfully!",
-				"create_error": "Failed to create problem. Please try again."
+				"create_error": "Failed to create problem. Please try again.",
+				"update_success": "Problem updated successfully!",
+				"update_error": "Failed to update problem. Please try again."
+			},
+			"editorial": {
+				"placeholder": "Write editorial content here...",
+				"create": "Create Editorial",
+				"save": "Save Editorial",
+				"delete": "Delete Editorial",
+				"cancel": "Cancel",
+				"deleting": "Deleting...",
+				"saving": "Saving...",
+				"no_editorial": "No editorial exists for this problem yet.",
+				"create_success": "Editorial created successfully!",
+				"create_error": "Failed to create editorial. Please try again.",
+				"update_success": "Editorial updated successfully!",
+				"update_error": "Failed to update editorial. Please try again.",
+				"delete_success": "Editorial deleted successfully!",
+				"delete_error": "Failed to delete editorial. Please try again.",
+				"delete_confirmation_title": "Are you sure you want to delete this editorial?",
+				"delete_confirmation_description": "This action cannot be undone. This will permanently delete the editorial for this problem."
+			},
+			"tabs": {
+				"info": "Info",
+				"editorial": "Editorial",
+				"testcase": "Testcase"
+			},
+			"slug_page": {
+				"loading": "Loading...",
+				"problem_not_found": "Problem not found",
+				"error_loading_problem": "Error loading problem: {message}",
+				"error_loading_tags": "Error loading tags: {message}",
+				"testcase_management": "Testcase management will be implemented here."
+			},
+			"testcase": {
+				"input": "Input",
+				"output": "Output",
+				"save": "Save",
+				"saving": "Saving...",
+				"loading": "Loading...",
+				"select_to_edit": "Select a testcase input or output to edit",
+				"content_placeholder": "Testcase content will appear here...",
+				"new_testcase": "New Testcase",
+				"new_subtask": "New Subtask",
+				"name": "Name",
+				"cancel": "Cancel",
+				"create": "Create",
+				"delete": "Delete",
+				"creating": "Creating...",
+				"create_subtask_title": "Create New Subtask",
+				"create_subtask_description": "Enter a name for the new subtask.",
+				"subtask_name_placeholder": "Enter subtask name",
+				"create_testcase_title": "Create New Testcase",
+				"create_testcase_description": "Enter a name for the new testcase.",
+				"testcase_name_placeholder": "Enter testcase name",
+				"delete_subtask_title": "Delete Subtask",
+				"delete_subtask_description": "Are you sure you want to delete this subtask? This action cannot be undone.",
+				"delete_testcase_title": "Delete Testcase",
+				"delete_testcase_description": "Are you sure you want to delete this testcase? This action cannot be undone.",
+				"success": {
+					"title": "Success",
+					"saved": "Testcase content saved successfully",
+					"testcase_created": "Testcase created successfully",
+					"testcase_deleted": "Testcase deleted successfully",
+					"subtask_created": "Subtask created successfully",
+					"subtask_deleted": "Subtask deleted successfully"
+				},
+				"error": {
+					"title": "Error",
+					"load_subtasks": "Failed to load subtasks",
+					"load_content": "Failed to load testcase content",
+					"save_content": "Failed to save testcase content",
+					"create_testcase": "Failed to create testcase",
+					"delete_testcase": "Failed to delete testcase",
+					"create_subtask": "Failed to create subtask",
+					"delete_subtask": "Failed to delete subtask"
+				}
 			}
 		}
 	}

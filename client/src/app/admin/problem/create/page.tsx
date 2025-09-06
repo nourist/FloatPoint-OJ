@@ -1,13 +1,29 @@
-import ProblemForm from './_components/form';
-import { createServerService } from '~/lib/service-server';
+'use client';
+
+import { useRouter } from 'next/navigation';
+import useSWR from 'swr';
+
+import ProblemForm from '~/components/problem-form';
+import { createClientService } from '~/lib/service-client';
 import { problemServiceInstance } from '~/services/problem';
+import { Problem } from '~/types/problem.type';
 
-const CreateProblemPage = async () => {
-	const problemService = await createServerService(problemServiceInstance);
+const CreateProblemPage = () => {
+	const router = useRouter();
+	const problemService = createClientService(problemServiceInstance);
 
-	const tags = await problemService.getAllTags();
+	// Fetch tags using SWR
+	const { data: tagsData } = useSWR('getAllTags', () => problemService.getAllTags(), {
+		revalidateOnFocus: false,
+	});
 
-	return <ProblemForm tagOptions={tags} />;
+	const tagOptions = tagsData || [];
+
+	const handleSubmitSuccess = (problem: Problem) => {
+		router.push(`/admin/problem/${problem.slug}`);
+	};
+
+	return <ProblemForm tagOptions={tagOptions} onSubmitSuccess={handleSubmitSuccess} mode="create" />;
 };
 
 export default CreateProblemPage;

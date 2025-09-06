@@ -6,14 +6,7 @@ import { toast } from 'sonner';
 
 import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-} from '~/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '~/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table';
 import { getDifficultyTextColor } from '~/lib/difficulty-utils';
 import { createClientService } from '~/lib/service-client';
@@ -30,15 +23,15 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const [problemToDelete, setProblemToDelete] = useState<Problem | null>(null);
 	const problemService = createClientService(problemServiceInstance);
-	
+
 	const handleDeleteClick = (problem: Problem) => {
 		setProblemToDelete(problem);
 		setIsDialogOpen(true);
 	};
-	
+
 	const handleDeleteConfirm = async () => {
 		if (!problemToDelete) return;
-		
+
 		try {
 			await problemService.deleteProblem(problemToDelete.id);
 			toast.success('Problem deleted successfully');
@@ -51,7 +44,7 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 			setProblemToDelete(null);
 		}
 	};
-	
+
 	const handleDeleteCancel = () => {
 		setIsDialogOpen(false);
 		setProblemToDelete(null);
@@ -93,12 +86,7 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 							<TableCell>{Math.round((item.acRate ?? 0) * 100)}%</TableCell>
 							<TableCell>{item.editorial && <Check className="text-success mx-5 size-4" />}</TableCell>
 							<TableCell>
-								<Button 
-									variant="destructive" 
-									size="icon" 
-									className="size-7 rounded-full"
-									onClick={() => handleDeleteClick(item)}
-								>
+								<Button variant="destructive" size="icon" className="size-7 rounded-full" onClick={() => handleDeleteClick(item)}>
 									<Trash className="size-3.5" />
 								</Button>
 							</TableCell>
@@ -106,14 +94,12 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 					))}
 				</TableBody>
 			</Table>
-			
+
 			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Confirm Delete</DialogTitle>
-						<DialogDescription>
-							Are you sure you want to delete the problem "{problemToDelete?.title}"? This action cannot be undone.
-						</DialogDescription>
+						<DialogDescription>Are you sure you want to delete the problem &quot;{problemToDelete?.title}&quot;? This action cannot be undone.</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
 						<Button variant="outline" onClick={handleDeleteCancel}>

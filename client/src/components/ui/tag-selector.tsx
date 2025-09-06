@@ -57,18 +57,25 @@ export function TagSelector<T>({ availableTags, selectedTags, onChange, getValue
 				>
 					{selectedTags.length == 0 && <span className="text-muted-foreground">{placeholder}</span>}
 					{selectedTags.map((tag) => (
-						<span key={getValue(tag)} className="bg-secondary flex items-center gap-1 rounded px-2 py-1 text-sm break-words">
+						<span key={getValue(tag)} className="bg-secondary flex items-center gap-1 rounded-sm px-2 py-1 text-sm break-words">
 							{getLabel(tag)}
-							<button
-								type="button"
-								className="cursor-pointer rounded p-0.5 transition-colors hover:bg-red-400/40"
+							<span
+								role="button"
+								tabIndex={0}
+								className="cursor-pointer rounded-sm p-0.5 transition-colors hover:bg-red-400/40"
 								onClick={(e) => {
 									e.stopPropagation();
 									handleRemove(getValue(tag));
 								}}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										e.stopPropagation();
+										handleRemove(getValue(tag));
+									}
+								}}
 							>
 								<X size={12} />
-							</button>
+							</span>
 						</span>
 					))}
 					<span className="flex-grow" />
@@ -101,7 +108,7 @@ export function TagSelector<T>({ availableTags, selectedTags, onChange, getValue
 							<CommandGroup heading="Create Tag">
 								<CommandItem value={inputValue} onSelect={handleCreate}>
 									<Check className="mr-2 h-4 w-4 opacity-100" />
-									Create "{inputValue}"
+									Create &quot;{inputValue}&quot;
 								</CommandItem>
 							</CommandGroup>
 						)}

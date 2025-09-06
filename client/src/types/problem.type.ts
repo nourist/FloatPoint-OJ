@@ -40,7 +40,7 @@ export interface Problem {
 	submissions: Submission[];
 	contests: Contest[];
 	tags: ProblemTag[];
-	editorial: ProblemEditorial;
+	editorial?: ProblemEditorial;
 	createdAt: Date;
 	updatedAt: Date;
 	acCount?: number;

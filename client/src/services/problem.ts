@@ -137,8 +137,60 @@ export const problemServiceInstance = (http: ApiInstance) => ({
 	createProblem: (payload: CreateProblemPayload) => {
 		return http.post<ProblemResponse>('/problem', payload);
 	},
-	
+
+	updateProblem: (id: string, payload: UpdateProblemPayload) => {
+		return http.patch<ProblemResponse>(`/problem/${id}`, payload);
+	},
+
 	deleteProblem: (id: string) => {
 		return http.delete<SimpleMessageResponse>(`/problem/${id}`);
+	},
+
+	createEditorial: (problemId: string, payload: CreateProblemEditorialPayload) => {
+		return http.post<EditorialResponse>(`/problem/${problemId}/editorial`, payload);
+	},
+
+	updateEditorial: (problemId: string, payload: UpdateProblemEditorialPayload) => {
+		return http.patch<EditorialResponse>(`/problem/${problemId}/editorial`, payload);
+	},
+
+	deleteEditorial: (problemId: string) => {
+		return http.delete<SimpleMessageResponse>(`/problem/${problemId}/editorial`);
+	},
+
+	getAllSubtasks: (problemId: string) => {
+		return http.get<SubtasksResponse>(`/problem/${problemId}/subtasks`);
+	},
+
+	getSubtask: (problemId: string, subtaskSlug: string) => {
+		return http.get<SubtaskResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}`);
+	},
+
+	createSubtask: (problemId: string, payload: CreateSubtaskPayload) => {
+		return http.post<SubtaskResponse>(`/problem/${problemId}/subtasks`, payload);
+	},
+
+	updateSubtask: (problemId: string, subtaskSlug: string, payload: UpdateSubtaskPayload) => {
+		return http.patch<SubtaskResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}`, payload);
+	},
+
+	deleteSubtask: (problemId: string, subtaskSlug: string) => {
+		return http.delete<SimpleMessageResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}`);
+	},
+
+	getTestCaseContent: (problemId: string, subtaskSlug: string, testCaseSlug: string) => {
+		return http.get<TestCaseResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}/test-cases/${testCaseSlug}`);
+	},
+
+	createTestCase: (problemId: string, subtaskSlug: string, payload: CreateTestCasePayload) => {
+		return http.post<TestCaseResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}/test-cases`, payload);
+	},
+
+	updateTestCase: (problemId: string, subtaskSlug: string, testCaseSlug: string, payload: UpdateTestCasePayload) => {
+		return http.patch<TestCaseResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}/test-cases/${testCaseSlug}`, payload);
+	},
+
+	deleteTestCase: (problemId: string, subtaskSlug: string, testCaseSlug: string) => {
+		return http.delete<SimpleMessageResponse>(`/problem/${problemId}/subtasks/${subtaskSlug}/test-cases/${testCaseSlug}`);
 	},
 });
