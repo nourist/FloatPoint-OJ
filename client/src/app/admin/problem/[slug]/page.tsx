@@ -51,7 +51,7 @@ const ProblemSlugPage = () => {
 
 	if (!problemData) {
 		if (!isProblemLoading) throw problemError;
-		else return null;
+		else return <div>loading...</div>;
 	}
 
 	if (!tagsData) {

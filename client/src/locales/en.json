@@ -159,7 +159,15 @@
 			"editorial": "Editorial",
 			"easy": "Easy",
 			"medium": "Medium",
-			"hard": "Hard"
+			"hard": "Hard",
+			"delete": {
+				"title": "Confirm Delete",
+				"description": "Are you sure you want to delete the problem \"{title}\"? This action cannot be undone.",
+				"cancel": "Cancel",
+				"confirm": "Delete",
+				"success": "Problem deleted successfully",
+				"error": "Failed to delete problem"
+			}
 		},
 		"detail": {
 			"header": {
@@ -582,7 +590,15 @@
 				"editorial": "Editorial",
 				"easy": "Easy",
 				"medium": "Medium",
-				"hard": "Hard"
+				"hard": "Hard",
+				"delete": {
+					"title": "Confirm Delete",
+					"description": "Are you sure you want to delete the problem \"{title}\"? This action cannot be undone.",
+					"cancel": "Cancel",
+					"confirm": "Delete",
+					"success": "Problem deleted successfully",
+					"error": "Failed to delete problem"
+				}
 			},
 			"form": {
 				"title": "Title",
@@ -699,6 +715,41 @@
 					"create_subtask": "Failed to create subtask",
 					"delete_subtask": "Failed to delete subtask"
 				}
+			}
+		},
+		"submission": {
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
 			}
 		}
 	}

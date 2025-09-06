@@ -70,11 +70,13 @@ const Wrapper = ({ minPoint, maxPoint, tags: tagOptions }: Props) => {
 				/>
 				<Toolbar setQ={setQ} orderBy={orderBy} order={order} setOrderBy={setOrderBy} setOrder={setOrder} />
 			</div>
-			{data && (
+			{data ? (
 				<>
 					<ProblemTable problems={data.problems} mutate={mutate} />
 					<PaginationControls totalItems={data.total} initialPage={1} initialSize={20} onPageChange={setPage} onSizeChange={setLimit} />
 				</>
+			) : (
+				<div>loading...</div>
 			)}
 		</>
 	);

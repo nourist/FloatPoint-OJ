@@ -55,7 +55,7 @@ const Filter = ({ minPoint, maxPoint, tags, setTags, tagOptions, difficulty, set
 			</Select>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className={hasEditorial ? 'text-primary' : ''}>
+					<Button variant="outline" className={`bg-transparent ${hasEditorial ? 'text-primary' : ''}`}>
 						{t('editorial')}
 					</Button>
 				</PopoverTrigger>
@@ -65,7 +65,7 @@ const Filter = ({ minPoint, maxPoint, tags, setTags, tagOptions, difficulty, set
 			</Popover>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button variant="outline">
+					<Button variant="outline" className="bg-transparent">
 						{t('point_range')} {pointRange[0]} - {pointRange[1]}
 					</Button>
 				</PopoverTrigger>
@@ -75,7 +75,7 @@ const Filter = ({ minPoint, maxPoint, tags, setTags, tagOptions, difficulty, set
 			</Popover>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className={tags.length > 0 ? 'text-primary' : ''}>
+					<Button variant="outline" className={`bg-transparent ${tags.length > 0 ? 'text-primary' : ''}`}>
 						{t('tags')}
 						{tags.length > 0 && <span className="bg-primary text-primary-foreground ml-1 rounded-full px-1">{tags.length}</span>}
 					</Button>

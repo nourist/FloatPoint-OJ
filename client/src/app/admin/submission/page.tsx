@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import SubmissionChart from '../../../components/submission-chart';
 import SubmissionFilter from './_components/submission-filter';
-import SubmissionTable, { TableSkeleton } from './_components/submission-table';
+import SubmissionTable from './_components/submission-table';
 import PaginationControls from '~/components/pagination-controls';
+import SubmissionChart from '~/components/submission-chart';
 import { createClientService } from '~/lib/service-client';
 import { authServiceInstance } from '~/services/auth';
 import { submissionServiceInstance } from '~/services/submission';
@@ -79,8 +79,8 @@ const SubmissionsPage = () => {
 	}
 
 	return (
-		<div className="flex gap-6">
-			<div className="flex-1 space-y-6">
+		<div className="flex gap-4">
+			<div className="flex-1 space-y-4">
 				{/* Filters Section */}
 				<SubmissionFilter
 					problemId={problemId}
@@ -95,7 +95,7 @@ const SubmissionsPage = () => {
 
 				{/* Results Section */}
 				{!data && isLoading ? (
-					<TableSkeleton />
+					<div>loading...</div>
 				) : (
 					<>
 						<SubmissionTable submissions={submissions} user={user} />

@@ -34,10 +34,10 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 
 		try {
 			await problemService.deleteProblem(problemToDelete.id);
-			toast.success('Problem deleted successfully');
+			toast.success(t('delete.success'));
 			mutate(); // Re-fetch the data
 		} catch (error) {
-			toast.error('Failed to delete problem');
+			toast.error(t('delete.error'));
 			console.error('Delete error:', error);
 		} finally {
 			setIsDialogOpen(false);
@@ -69,7 +69,7 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 					{problems.map((item) => (
 						<TableRow key={item.id}>
 							<TableCell>
-								<Link className="hover:text-primary" href={`/admin/problem/${item.slug}`}>
+								<Link className="hover:text-primary hover:underline" href={`/admin/problem/${item.slug}`}>
 									{item.title}
 								</Link>
 							</TableCell>
@@ -98,15 +98,17 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Confirm Delete</DialogTitle>
-						<DialogDescription>Are you sure you want to delete the problem &quot;{problemToDelete?.title}&quot;? This action cannot be undone.</DialogDescription>
+						<DialogTitle>{t('delete.title')}</DialogTitle>
+						<DialogDescription>
+							{t('delete.description', { title: problemToDelete?.title })}
+						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
 						<Button variant="outline" onClick={handleDeleteCancel}>
-							Cancel
+							{t('delete.cancel')}
 						</Button>
 						<Button variant="destructive" onClick={handleDeleteConfirm}>
-							Delete
+							{t('delete.confirm')}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
