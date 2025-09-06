@@ -99,9 +99,7 @@ const ProblemTable = ({ problems, mutate }: Props) => {
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>{t('delete.title')}</DialogTitle>
-						<DialogDescription>
-							{t('delete.description', { title: problemToDelete?.title })}
-						</DialogDescription>
+						<DialogDescription>{t('delete.description', { title: problemToDelete?.title ?? '' })}</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
 						<Button variant="outline" onClick={handleDeleteCancel}>

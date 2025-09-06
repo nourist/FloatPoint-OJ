@@ -750,6 +750,29 @@
 				"internal_error": "Internal Error",
 				"pending": "Pending",
 				"judging": "Judging"
+			},
+			"detail": {
+				"breadcrumb": {
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"submission_details": "Submission Details",
+					"id": "ID",
+					"status": "Status",
+					"language": "Language",
+					"score": "Score",
+					"source_code": "Source Code"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"tests_passed": "{passed} / {total} passed"
+				}
 			}
 		}
 	}
