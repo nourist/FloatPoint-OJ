@@ -1,14 +1,62 @@
-import { Menu, X } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
+'use client';
 
-import HeaderToolbar from './header-toolbar';
+import Cookies from 'js-cookie';
+import { Bell, CircleUserRound, Globe, LayoutDashboard, LogOut, Menu, Moon, Settings, Sun, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import useSWR, { mutate } from 'swr';
+
 import NavLink from '~/components/nav-link';
 import { Button } from '~/components/ui/button';
+import {
+	DropdownMenu,
+	DropdownMenuCheckboxItem,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuPortal,
+	DropdownMenuSeparator,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
+import UserAvatar from '~/components/user-avatar';
+import { Locale, locales, localesCode } from '~/i18n/locales';
+import { createClientService } from '~/lib/service-client';
+import { authServiceInstance } from '~/services/auth';
+import { Theme } from '~/types/theme.type';
+import { UserRole } from '~/types/user.type';
 
-const Header = async () => {
-	const t = await getTranslations('layout.header');
+const Header = () => {
+	const t = useTranslations('layout.header');
+
+	const router = useRouter();
+
+	const { signout, getProfile } = createClientService(authServiceInstance);
+
+	const { data: user } = useSWR('/auth/me', getProfile);
+
+	const theme = Cookies.get('theme') || 'light';
+	const language = Cookies.get('lang') || 'en';
+
+	const setTheme = (theme: Theme) => {
+		Cookies.set('theme', theme ?? '', { expires: 365 * 10 });
+		router.refresh();
+	};
+
+	const setLanguage = (lang: Locale) => {
+		Cookies.set('lang', lang ?? '', { expires: 365 * 10 });
+		router.refresh();
+	};
+
+	const handleSignout = async () => {
+		await signout();
+		mutate('/auth/me', null, false);
+		router.refresh();
+	};
 
 	const tabs = [
 		{ href: '/problem', label: t('problems') },
@@ -50,16 +98,20 @@ const Header = async () => {
 								</NavLink>
 							</Button>
 						))}
-						<Button variant="outline" asChild>
-							<NavLink href="/login" className="data-[active=true]:text-primary text-card-foreground/80 mx-4 mt-auto">
-								{t('login')}
-							</NavLink>
-						</Button>
-						<Button asChild>
-							<NavLink href="/register" className="data-[active=true]:text-primary text-card-foreground/80 mx-4 mb-4">
-								{t('register')}
-							</NavLink>
-						</Button>
+						{!user && (
+							<>
+								<Button variant="outline" asChild>
+									<NavLink href="/login" className="data-[active=true]:text-primary text-card-foreground/80 mx-4 mt-auto">
+										{t('login')}
+									</NavLink>
+								</Button>
+								<Button asChild>
+									<NavLink href="/register" className="data-[active=true]:text-primary text-card-foreground/80 mx-4 mb-4">
+										{t('register')}
+									</NavLink>
+								</Button>
+							</>
+						)}
 					</SheetContent>
 				</Sheet>
 				<NavLink href="/" className="max-2md:hidden data-[active=true]:text-primary flex items-center gap-2 pr-4">
@@ -73,7 +125,88 @@ const Header = async () => {
 						</NavLink>
 					</Button>
 				))}
-				<HeaderToolbar />
+				{user ? (
+					<>
+						<Button variant="ghost" size="icon" className="text-card-foreground/80 ml-auto rounded-full">
+							<Bell className="size-5" />
+						</Button>
+						<DropdownMenu>
+							<DropdownMenuTrigger>
+								<UserAvatar user={user} className="size-9" />
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end" alignOffset={-8} sideOffset={10} className="w-48">
+								<DropdownMenuItem asChild>
+									<Link href={`/profile/${user.username}`}>
+										<CircleUserRound />
+										{t('profile')}
+									</Link>
+								</DropdownMenuItem>
+
+								{user.role == UserRole.ADMIN && (
+									<DropdownMenuItem asChild>
+										<Link href={`/admin`}>
+											<LayoutDashboard />
+											{t('dashboard')}
+										</Link>
+									</DropdownMenuItem>
+								)}
+								<DropdownMenuSeparator />
+
+								<DropdownMenuSub>
+									<DropdownMenuSubTrigger>
+										{theme === 'dark' ? <Moon /> : <Sun />}
+										{t('appearance')}
+									</DropdownMenuSubTrigger>
+									<DropdownMenuPortal>
+										<DropdownMenuSubContent>
+											<DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme('light')}>
+												{t('light')}
+											</DropdownMenuCheckboxItem>
+											<DropdownMenuCheckboxItem checked={theme === 'dark'} onCheckedChange={() => setTheme('dark')}>
+												{t('dark')}
+											</DropdownMenuCheckboxItem>
+										</DropdownMenuSubContent>
+									</DropdownMenuPortal>
+								</DropdownMenuSub>
+								<DropdownMenuSub>
+									<DropdownMenuSubTrigger>
+										<Globe />
+										{t('language')}
+									</DropdownMenuSubTrigger>
+									<DropdownMenuPortal>
+										<DropdownMenuSubContent>
+											{localesCode.map((item) => (
+												<DropdownMenuCheckboxItem key={item} checked={language === item} onCheckedChange={() => setLanguage(item)}>
+													{locales[item]}
+												</DropdownMenuCheckboxItem>
+											))}
+										</DropdownMenuSubContent>
+									</DropdownMenuPortal>
+								</DropdownMenuSub>
+								<DropdownMenuItem asChild>
+									<Link href="/settings">
+										<Settings />
+										{t('settings')}
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem onClick={handleSignout} variant="destructive">
+									<LogOut />
+									{t('logout')}
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					</>
+				) : (
+					<>
+						<Button variant="outline" className="ml-auto" asChild>
+							<NavLink href="/login">{t('login')}</NavLink>
+						</Button>
+						<Button asChild>
+							<NavLink href="/register">{t('register')}</NavLink>
+						</Button>
+					</>
+				)}
 			</div>
 		</div>
 	);

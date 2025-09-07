@@ -774,6 +774,18 @@
 					"tests_passed": "{passed} / {total} passed"
 				}
 			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
 		}
 	}
 }
