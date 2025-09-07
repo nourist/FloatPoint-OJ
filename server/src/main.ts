@@ -3,41 +3,16 @@ import { UnprocessableEntityException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { IoAdapter } from '@nestjs/platform-socket.io';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import * as cookieParser from 'cookie-parser';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { ServerOptions } from 'socket.io';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
+import { CustomIoAdapter } from './adapters/io.adapter';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/http-exception.filter';
 import { SerializeInterceptor } from './interceptors/serialize.interceptor';
-
-// Custom IoAdapter to configure CORS for WebSockets
-class CustomIoAdapter extends IoAdapter {
-	constructor(
-		private app: any,
-		private configService: ConfigService,
-	) {
-		super(app);
-	}
-
-	createIOServer(port: number, options?: ServerOptions) {
-		const clientUrl = this.configService.get<string>('CLIENT_URL');
-
-		const server = super.createIOServer(port, {
-			...options,
-			cors: {
-				origin: clientUrl,
-				credentials: true,
-			},
-		});
-
-		return server;
-	}
-}
 
 async function bootstrap() {
 	// Initialize transactional context for database transactions
@@ -106,6 +81,16 @@ async function bootstrap() {
 		options: {
 			urls: [configService.get<string>('RABBITMQ_URL')!],
 			queue: 'judger.result',
+			queueOptions: { durable: true },
+		},
+	});
+
+	// Connect to RabbitMQ microservice for judger heartbeats
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
+		options: {
+			urls: [configService.get<string>('RABBITMQ_URL')!],
+			queue: 'judger.heartbeat',
 			queueOptions: { durable: true },
 		},
 	});

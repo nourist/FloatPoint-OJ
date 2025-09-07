@@ -21,6 +21,7 @@ import { MailModule } from './modules/mail/mail.module';
 import { MinioModule } from './modules/minio/minio.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { ProblemModule } from './modules/problem/problem.module';
+import { RedisModule } from './modules/redis/redis.module';
 import { SubmissionModule } from './modules/submission/submission.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -64,6 +65,11 @@ import { UserModule } from './modules/user/user.module';
 				MINIO_PORT: Joi.number().default(9000),
 				MINIO_ACCESS_KEY: Joi.string().default('minioadmin'),
 				MINIO_SECRET_KEY: Joi.string().default('minioadmin'),
+
+				//redis configuration
+				REDIS_HOST: Joi.string().default('localhost'),
+				REDIS_PORT: Joi.number().default(6379),
+				REDIS_PASSWORD: Joi.string().default('redispass'),
 			}),
 		}),
 
@@ -135,6 +141,7 @@ import { UserModule } from './modules/user/user.module';
 		BlogModule,
 		NotificationModule,
 		JudgerModule,
+		RedisModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

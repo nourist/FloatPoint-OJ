@@ -213,11 +213,15 @@ export class ProblemService {
 		// Map statistics by problem ID to avoid duplication from joins
 		const statById = new Map<string, { ac: number; total: number; rate: number }>();
 		for (const r of raw) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			const pid = String(r.problem_id);
 			if (!statById.has(pid)) {
 				statById.set(pid, {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					ac: Number(r.ac_count) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					total: Number(r.total_submissions) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					rate: Number(r.ac_rate) || 0,
 				});
 			}
