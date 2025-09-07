@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { ProblemService } from '../problem/problem.service';
 import { UserService } from '../user/user.service';
@@ -76,12 +76,16 @@ export class SubmissionService {
 
 		// Transform raw results to proper DTOs
 		const statusStatistics: StatusStatistic[] = statusStats.map((stat) => ({
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 			status: stat.status,
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 			count: parseInt(stat.count, 10),
 		}));
 
 		const languageStatistics: LanguageStatistic[] = languageStats.map((stat) => ({
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 			language: stat.language,
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 			count: parseInt(stat.count, 10),
 		}));
 
