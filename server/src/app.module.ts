@@ -51,7 +51,10 @@ import { UserModule } from './modules/user/user.module';
 				DB_NAME: Joi.string().default('postgres'),
 
 				// Message queue configuration
-				RABBITMQ_URL: Joi.string().default('amqp://guest:guest@localhost:5672'),
+				RABBITMQ_HOST: Joi.string().default('localhost'),
+				RABBITMQ_PORT: Joi.number().default(5672),
+				RABBITMQ_USER: Joi.string().default('guest'),
+				RABBITMQ_PASS: Joi.string().default('guest'),
 
 				// Email service configuration
 				MAIL_HOST: Joi.string().default('smtp.mailtrap.com'),

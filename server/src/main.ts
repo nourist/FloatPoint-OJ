@@ -65,11 +65,13 @@ async function bootstrap() {
 	app.useGlobalFilters(new AllExceptionsFilter());
 	app.useGlobalInterceptors(new SerializeInterceptor());
 
+	const rabbitmqUrl = `amqp://${configService.get<string>('RABBITMQ_USER')}:${configService.get<string>('RABBITMQ_PASS')}@${configService.get<string>('RABBITMQ_HOST')}:${configService.get<number>('RABBITMQ_PORT')}`;
+
 	// Connect to RabbitMQ microservice for judger acknowledgments
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,
 		options: {
-			urls: [configService.get<string>('RABBITMQ_URL')!],
+			urls: [rabbitmqUrl],
 			queue: 'judger.ack',
 			queueOptions: { durable: true },
 		},
@@ -79,7 +81,7 @@ async function bootstrap() {
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,
 		options: {
-			urls: [configService.get<string>('RABBITMQ_URL')!],
+			urls: [rabbitmqUrl],
 			queue: 'judger.result',
 			queueOptions: { durable: true },
 		},
@@ -89,7 +91,7 @@ async function bootstrap() {
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,
 		options: {
-			urls: [configService.get<string>('RABBITMQ_URL')!],
+			urls: [rabbitmqUrl],
 			queue: 'judger.heartbeat',
 			queueOptions: { durable: true },
 		},

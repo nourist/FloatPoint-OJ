@@ -18,6 +18,7 @@ mod languages;
 mod metadata;
 mod minio;
 mod models;
+mod rabbitmq;
 
 #[tokio::main]
 async fn main() {
@@ -29,8 +30,7 @@ async fn main() {
     let judger_id = env::var("JUDGER_ID").unwrap_or("unknown".to_string());
     info!("Judger ID: {}", judger_id);
 
-    let rabbitmq_url =
-        env::var("RABBITMQ_URL").unwrap_or("amqp://guest:guest@localhost:5672".into());
+    let rabbitmq_url = rabbitmq::get_rabbitmq_url();
 
     let conn = Connection::connect(&rabbitmq_url, ConnectionProperties::default())
         .await
