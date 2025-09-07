@@ -1,3 +1,4 @@
+use chrono::Utc;
 use dotenvy::dotenv;
 use futures_lite::stream::StreamExt;
 use lapin::{
@@ -8,16 +9,15 @@ use serde::{Deserialize, Serialize};
 use serde_json;
 use std::env;
 use tokio;
-use tracing::{error, info, debug};
+use tracing::{debug, error, info};
 use tracing_subscriber;
-
+mod checker;
 mod db;
 mod judger;
 mod languages;
 mod metadata;
 mod minio;
 mod models;
-mod checker;
 
 #[tokio::main]
 async fn main() {
@@ -25,7 +25,7 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     info!("Judger is starting...");
-    
+
     let judger_id = env::var("JUDGER_ID").unwrap_or("unknown".to_string());
     info!("Judger ID: {}", judger_id);
 
@@ -43,6 +43,17 @@ async fn main() {
         .await
         .expect("failed to create channel");
 
+    // spawn heartbeat task
+    let heartbeat_channel = channel.clone();
+    tokio::spawn(async move {
+        let mut ticker = tokio::time::interval(tokio::time::Duration::from_secs(10)); // 10s một lần
+        loop {
+            ticker.tick().await;
+            send_heartbeat_message(&heartbeat_channel).await;
+        }
+    });
+
+    //judger job queue
     channel
         .queue_declare(
             "judger.job",
@@ -72,7 +83,10 @@ async fn main() {
         .await
         .expect("failed to create consumer");
 
-    info!("Judger is ready to receive messages with consumer tag: {}", tag);
+    info!(
+        "Judger is ready to receive messages with consumer tag: {}",
+        tag
+    );
 
     while let Some(delivery_result) = consumer.next().await {
         match delivery_result {
@@ -88,18 +102,30 @@ async fn main() {
 
 async fn send_ack_message(channel: &lapin::Channel, ack: models::JudgerAck) {
     #[derive(Serialize)]
-    struct AckMessage {
-        pattern: String,
-        data: models::JudgerAck,
+    struct JudgerAckWithJudgerId {
+        #[serde(flatten)]
+        ack: models::JudgerAck,
+        judger_id: String,
     }
 
-    let ack_id = ack.id; // Clone the ID before moving ack
+    let ack_id = ack.id.clone(); // Clone the ID before moving ack
+    let judger_ack = JudgerAckWithJudgerId {
+        ack: ack,
+        judger_id: env::var("JUDGER_ID").unwrap(),
+    };
+
+    #[derive(Serialize)]
+    struct AckMessage {
+        pattern: String,
+        data: JudgerAckWithJudgerId,
+    }
+
     let ack_json = serde_json::to_string(&AckMessage {
         pattern: "judger.ack".to_string(),
-        data: ack, // Now we can move ack safely
+        data: judger_ack, // Now we can move ack safely
     })
     .unwrap();
-    
+
     debug!("Sending ack message for job: {}", ack_id);
     channel
         .basic_publish(
@@ -115,18 +141,30 @@ async fn send_ack_message(channel: &lapin::Channel, ack: models::JudgerAck) {
 
 async fn send_result_message(channel: &lapin::Channel, result: models::JudgerResult) {
     #[derive(Serialize)]
-    struct ResultMessage {
-        pattern: String,
-        data: models::JudgerResult,
+    struct JudgerResultWithJudgerId {
+        #[serde(flatten)]
+        result: models::JudgerResult,
+        judger_id: String,
     }
 
-    let result_id = result.id; // Clone the ID before moving result
+    #[derive(Serialize)]
+    struct ResultMessage {
+        pattern: String,
+        data: JudgerResultWithJudgerId,
+    }
+
+    let result_id = result.id.clone(); // Clone the ID before moving result
+    let judger_result = JudgerResultWithJudgerId {
+        result: result,
+        judger_id: env::var("JUDGER_ID").unwrap(),
+    };
+
     let result_json = serde_json::to_string(&ResultMessage {
         pattern: "judger.result".to_string(),
-        data: result, // Now we can move result safely
+        data: judger_result, // Now we can move result safely
     })
     .unwrap();
-    
+
     debug!("Sending result message for job: {}", result_id);
     channel
         .basic_publish(
@@ -134,6 +172,39 @@ async fn send_result_message(channel: &lapin::Channel, result: models::JudgerRes
             "judger.result",
             BasicPublishOptions::default(),
             result_json.as_bytes(),
+            BasicProperties::default(),
+        )
+        .await
+        .expect("failed to publish message");
+}
+
+async fn send_heartbeat_message(channel: &lapin::Channel) {
+    let judger_id = env::var("JUDGER_ID").unwrap_or("unknown".to_string());
+
+    #[derive(Serialize)]
+    struct HeartbeatMessage {
+        pattern: String,
+        data: models::JudgerHeartbeat,
+    }
+
+    let heartbeat = models::JudgerHeartbeat {
+        judger_id: judger_id.clone(),
+        timestamp: Utc::now().timestamp(),
+    };
+
+    let heartbeat_json = serde_json::to_string(&HeartbeatMessage {
+        pattern: "judger.heartbeat".to_string(),
+        data: heartbeat, // Now we can move result safely
+    })
+    .unwrap();
+
+    debug!("Sending heartbeat message for judger: {}", judger_id);
+    channel
+        .basic_publish(
+            "",
+            "judger.heartbeat",
+            BasicPublishOptions::default(),
+            heartbeat_json.as_bytes(),
             BasicProperties::default(),
         )
         .await
@@ -152,8 +223,11 @@ fn parse_job_message(delivery: &Delivery) -> models::JudgerJob {
     let message: JobMessage = serde_json::from_str(&body).unwrap();
 
     let data = message.data;
-    
-    info!("Parsed job message for job: {}, problem: {}", data.id, data.problem_id);
+
+    info!(
+        "Parsed job message for job: {}, problem: {}",
+        data.id, data.problem_id
+    );
 
     return data;
 }
