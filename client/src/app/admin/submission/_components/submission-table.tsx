@@ -46,7 +46,7 @@ const StatusIcon = ({ status, className }: StatusIconProps) => {
 };
 
 const SubmissionTable = ({ submissions }: SubmissionTableProps) => {
-	const t = useTranslations('submission');
+	const t = useTranslations('admin.submission');
 
 	const formatLanguage = (language: string) => {
 		const option = languageOptions.find((opt) => opt.value === language);
@@ -86,7 +86,7 @@ const SubmissionTable = ({ submissions }: SubmissionTableProps) => {
 								<div className="flex items-center gap-1">
 									<StatusIcon className="size-4" status={submission.status} />
 									<div className={cn('my-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium', getSubmissionStatusColor(submission.status))}>
-										{t(`status.${submission.status}`)}
+										{t(`status.${submission.status.toLowerCase()}`)}
 									</div>
 								</div>
 							</TableCell>

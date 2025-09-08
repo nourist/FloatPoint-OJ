@@ -21,10 +21,18 @@ export interface QueryContestPayload {
 	isRated?: boolean;
 	sortBy?: 'startTime' | 'endTime' | 'title';
 	sortOrder?: 'ASC' | 'DESC';
+	status?: 'PENDING' | 'RUNNING' | 'ENDED';
 }
 
-export interface AddProblemsPayload {
-	problemIds: string[];
+// Response structure from the backend service
+export interface PaginatedContests {
+	data: Contest[];
+	meta: {
+		total: number;
+		page: number;
+		limit: number;
+		totalPages: number;
+	};
 }
 
 // Responses
@@ -35,7 +43,7 @@ export interface ContestResponse {
 
 export interface ContestsResponse {
 	message: string;
-	contests: Contest[];
+	contests: PaginatedContests;
 }
 
 export interface StandingsResponse {
@@ -50,22 +58,46 @@ export interface SimpleMessageResponse {
 // Functions
 export const contestServiceInstance = (http: ApiInstance) => ({
 	findAllContests: (params: QueryContestPayload) => {
-		return http.get<ContestsResponse>('/contests', { params });
+		return http.get<ContestsResponse>('/contest', { params });
 	},
 
 	findOneContest: (slug: string) => {
-		return http.get<ContestResponse>(`/contests/${slug}`);
+		return http.get<ContestResponse>(`/contest/${slug}`);
+	},
+
+	createContest: (payload: CreateContestPayload) => {
+		return http.post<ContestResponse>('/contest', payload);
+	},
+
+	updateContest: (id: string, payload: UpdateContestPayload) => {
+		return http.patch<ContestResponse>(`/contest/${id}`, payload);
+	},
+
+	deleteContest: (id: string) => {
+		return http.delete<SimpleMessageResponse>(`/contest/${id}`);
 	},
 
 	joinContest: (id: string) => {
-		return http.post<SimpleMessageResponse>(`/contests/${id}/join`);
+		return http.post<SimpleMessageResponse>(`/contest/${id}/join`);
 	},
 
 	leaveContest: (id: string) => {
-		return http.post<SimpleMessageResponse>(`/contests/${id}/leave`);
+		return http.post<SimpleMessageResponse>(`/contest/${id}/leave`);
+	},
+
+	addProblemsToContest: (id: string, payload: AddProblemsPayload) => {
+		return http.post<ContestResponse>(`/contest/${id}/problems`, payload);
+	},
+
+	removeProblemFromContest: (id: string, problemId: string) => {
+		return http.delete<ContestResponse>(`/contest/${id}/problems/${problemId}`);
 	},
 
 	getContestStandings: (id: string) => {
-		return http.get<StandingsResponse>(`/contests/${id}/standings`);
+		return http.get<StandingsResponse>(`/contest/${id}/standings`);
 	},
 });
+
+interface AddProblemsPayload {
+	problemIds: string[];
+}

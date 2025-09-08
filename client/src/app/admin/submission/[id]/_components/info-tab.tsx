@@ -15,8 +15,8 @@ interface InfoTabProps {
 }
 
 export const InfoTab = ({ submission }: InfoTabProps) => {
-	const t = useTranslations('submission.detail');
-	const statusTranslation = useTranslations('submission.status');
+	const t = useTranslations('admin.submission.detail');
+	const statusTranslation = useTranslations('admin.submission.status');
 
 	return (
 		<>

@@ -44,10 +44,7 @@ const JudgerPage = () => {
 	return (
 		<>
 			{isLoading ? (
-				<div className="flex items-center justify-center py-12">
-					<Activity className="mr-2 h-4 w-4 animate-spin" />
-					<span>{t('loading')}</span>
-				</div>
+				<div>{t('loading')}</div>
 			) : (
 				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 					{judgers.map((judger) => (
