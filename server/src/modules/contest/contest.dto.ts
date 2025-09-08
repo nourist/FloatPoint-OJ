@@ -1,8 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+import { IsArray, IsBoolean, IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 
 import { ToBoolean } from 'src/decorators/to-boolean.decorator';
-import { ContestStatus } from 'src/entities/contest.entity';
 
 export class CreateContestDto {
 	@IsString()
@@ -22,12 +21,16 @@ export class CreateContestDto {
 	@IsBoolean()
 	@IsOptional()
 	isRated?: boolean;
+
+	@IsNumber()
+	@IsOptional()
+	@Min(0)
+	penalty?: number;
 }
 
+// Removed status field from UpdateContestDto since status is now derived from startTime and endTime
 export class UpdateContestDto extends PartialType(CreateContestDto) {
-	@IsEnum(ContestStatus)
-	@IsOptional()
-	status?: ContestStatus;
+	// Status field removed as it's now derived from time fields
 }
 
 export class QueryContestDto {
@@ -64,6 +67,10 @@ export class QueryContestDto {
 	@IsOptional()
 	@IsEnum(['ASC', 'DESC'])
 	sortOrder?: 'ASC' | 'DESC';
+
+	@IsOptional()
+	@IsEnum(['PENDING', 'RUNNING', 'ENDED'])
+	status?: 'PENDING' | 'RUNNING' | 'ENDED';
 }
 
 export class AddProblemsDto {

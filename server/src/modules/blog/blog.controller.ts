@@ -24,10 +24,9 @@ export class BlogController {
 
 	@Get()
 	async getAllBlogs(@Query() query: BlogPaginationQueryDto) {
-		const result = await this.blogService.findAll(query);
 		return {
 			message: 'Get all blogs',
-			...result,
+			...(await this.blogService.findAll(query)),
 		};
 	}
 

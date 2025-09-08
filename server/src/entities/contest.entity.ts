@@ -39,12 +39,7 @@ export class Contest {
 	@Column({ default: 0 })
 	penalty: number;
 
-	@Column({
-		type: 'enum',
-		enum: ContestStatus,
-		default: ContestStatus.PENDING,
-	})
-	status: ContestStatus;
+	// Removed status field - status will be derived from startTime and endTime
 
 	@ManyToOne(() => User, (user) => user.contests)
 	@JoinColumn()
@@ -66,4 +61,16 @@ export class Contest {
 
 	@UpdateDateColumn({ type: 'timestamptz' })
 	updatedAt: Date;
+
+	// Helper method to get the current status based on time
+	getStatus(): ContestStatus {
+		const now = new Date();
+		if (now < this.startTime) {
+			return ContestStatus.PENDING;
+		} else if (now >= this.startTime && now <= this.endTime) {
+			return ContestStatus.RUNNING;
+		} else {
+			return ContestStatus.ENDED;
+		}
+	}
 }

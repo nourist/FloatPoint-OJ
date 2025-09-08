@@ -48,8 +48,7 @@ export class JudgerController {
 
 	@Get('')
 	async getAllJudger() {
-		const judgers = await this.judgerService.getAllJudger();
-		return { message: 'Judger list', judgers };
+		return { message: 'Judger list', judgers: await this.judgerService.getAllJudger() };
 	}
 
 	@EventPattern('judger.ack')

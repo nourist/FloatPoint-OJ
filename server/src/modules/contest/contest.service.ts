@@ -55,14 +55,14 @@ export class ContestService {
 			...createContestDto,
 			slug,
 			creator,
-			status: ContestStatus.PENDING, // Default status
+			// Removed status field - status will be derived from startTime and endTime
 		});
 		
 		return this.contestRepository.save(contest);
 	}
 
 	async findAll(query: QueryContestDto) {
-		const { page = 1, limit = 10, search, startTime, endTime, isRated, sortBy, sortOrder } = query;
+		const { page = 1, limit = 10, search, startTime, endTime, isRated, sortBy, sortOrder, status } = query;
 
 		const queryBuilder = this.contestRepository
 			.createQueryBuilder('contest')
@@ -85,6 +85,22 @@ export class ContestService {
 		if (endTime) {
 			queryBuilder.andWhere('contest.endTime <= :endTime', { endTime });
 		}
+		
+		// Filter by status if provided
+		if (status) {
+			const now = new Date();
+			switch (status) {
+				case 'PENDING':
+					queryBuilder.andWhere('contest.startTime > :now', { now });
+					break;
+				case 'RUNNING':
+					queryBuilder.andWhere('contest.startTime <= :now AND contest.endTime >= :now', { now });
+					break;
+				case 'ENDED':
+					queryBuilder.andWhere('contest.endTime < :now', { now });
+					break;
+			}
+		}
 
 		if (sortBy && sortOrder) {
 			queryBuilder.orderBy(`contest.${sortBy}`, sortOrder);
@@ -106,7 +122,7 @@ export class ContestService {
 	}
 
 	async findOne(slug: string): Promise<Contest> {
-		const contest = await this.contestRepository.findOneBy({ slug });
+		const contest = await this.contestRepository.findOne({ where:{slug}, relations:['creator', 'problems', 'submissions', 'submissions.author', 'submissions.problem'] });
 		if (!contest) {
 			throw new NotFoundException(`Contest with slug '${slug}' not found`);
 		}
@@ -194,9 +210,6 @@ export class ContestService {
 		const contest = await this.findContestById(id, ['creator']);
 		this.checkContestOwnership(contest, user);
 
-		// Set status to RUNNING
-		contest.status = ContestStatus.RUNNING;
-		
 		// Adjust start time if needed
 		const now = new Date();
 		if (now < contest.startTime) {
@@ -210,9 +223,6 @@ export class ContestService {
 		const contest = await this.findContestById(id, ['creator']);
 		this.checkContestOwnership(contest, user);
 
-		// Set status to ENDED
-		contest.status = ContestStatus.ENDED;
-		
 		// Adjust end time if needed
 		const now = new Date();
 		if (now < contest.endTime) {
@@ -435,20 +445,17 @@ export class ContestService {
 				totalExpectedScore += expectedScore;
 			}
 			
-			// Actual score is based on user's rank
-			const actualScore = standings.length - standing.rank; // Higher rank = higher score
-			
-			// Normalize actual score
-			const normalizedActualScore = standings.length > 1 
-				? actualScore / (standings.length - 1) 
-				: 1;
+			// Actual score based on rank (1st place = 1.0, last place = 0.0)
+			const actualScore = standings.length > 1 
+				? (standings.length - standing.rank) / (standings.length - 1)
+				: 1.0;
 			
 			// K factor decreases with more contests (user's contest participation count)
 			const contestCount = user.joinedContests ? user.joinedContests.length : 0;
 			const K = Math.max(10, 50 - contestCount); // Minimum K of 10, max of 50
 			
 			// Calculate new rating
-			const newRating = currentRating + K * (normalizedActualScore - totalExpectedScore);
+			const newRating = currentRating + K * (actualScore - totalExpectedScore);
 			
 			ratingUpdates.push({
 				userId: standing.userId,
@@ -483,23 +490,26 @@ export class ContestService {
 		
 		try {
 			// Find all contests that are ended, rated, but ratings haven't been updated yet
-			const contests = await this.contestRepository.find({
+			// Using the getStatus() method to determine if a contest has ended
+			const allContests = await this.contestRepository.find({
 				where: {
-					status: ContestStatus.ENDED,
 					isRated: true,
 					isRatingUpdated: false,
 				},
 			});
 			
-			if (contests.length === 0) {
+			// Filter contests that are actually ended based on time
+			const endedContests = allContests.filter(contest => contest.getStatus() === ContestStatus.ENDED);
+			
+			if (endedContests.length === 0) {
 				this.logger.log('No contests found that need rating updates.');
 				return;
 			}
 			
-			this.logger.log(`Found ${contests.length} contests that need rating updates.`);
+			this.logger.log(`Found ${endedContests.length} contests that need rating updates.`);
 			
 			// Update ratings for each contest
-			for (const contest of contests) {
+			for (const contest of endedContests) {
 				try {
 					await this.updateRatings(contest.id);
 					this.logger.log(`Successfully updated ratings for contest ${contest.id}`);
