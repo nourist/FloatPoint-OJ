@@ -34,8 +34,8 @@ const formatTotalTime = (ms: number) => {
 	return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 };
 
-export function StandingsTab({ standings, standingsLoading, problems }: StandingsTabProps) {
-	const t = useTranslations('admin.contest.detail');
+export function ContestStandingsTab({ standings, standingsLoading, problems }: StandingsTabProps) {
+	const t = useTranslations('contest.detail');
 
 	return standingsLoading ? (
 		<div className="p-8 text-center">{t('loading')}</div>
@@ -45,7 +45,7 @@ export function StandingsTab({ standings, standingsLoading, problems }: Standing
 				<TableRow className="!bg-muted">
 					<TableHead className="w-16 text-center font-bold">{t('rank')}</TableHead>
 					<TableHead className="min-w-[200px] font-bold">{t('user')}</TableHead>
-					<TableHead className="w-32 text-center font-bold">{t('score')}</TableHead>
+					<TableHead className="w-32 text-center font-bold">{t('points')}</TableHead>
 					{problems.map((problem, index) => (
 						<TableHead key={problem.id} className="w-20 text-center font-bold">
 							<div className="flex flex-col">

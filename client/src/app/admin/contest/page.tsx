@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -15,6 +15,7 @@ import { ContestStatus, getContestStatus } from '~/types/contest.type';
 
 const AdminContestPage = () => {
 	const t = useTranslations('admin.contest.page');
+	const locale = useLocale();
 	const contestService = createClientService(contestServiceInstance);
 
 	// State for contests and pagination
@@ -71,13 +72,13 @@ const AdminContestPage = () => {
 	const getStatusBadgeClass = (status: ContestStatus) => {
 		switch (status) {
 			case ContestStatus.RUNNING:
-				return 'bg-green-100 text-green-800';
+				return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
 			case ContestStatus.PENDING:
-				return 'bg-yellow-100 text-yellow-800';
+				return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
 			case ContestStatus.ENDED:
-				return 'bg-red-100 text-red-800';
+				return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
 			default:
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
 		}
 	};
 
@@ -94,6 +95,20 @@ const AdminContestPage = () => {
 				return status;
 		}
 	};
+
+	const formatDate = (dateString: string | Date) => {
+		return new Date(dateString).toLocaleString(locale, {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+		});
+	};
+
+	if (error) {
+		throw error;
+	}
 
 	return (
 		<>
@@ -114,37 +129,29 @@ const AdminContestPage = () => {
 
 			{isLoading ? (
 				<div className="p-8 text-center">{t('loading')}</div>
-			) : error ? (
-				<div className="p-8 text-center text-red-500">{t('error_loading')}</div>
-			) : contests.length === 0 ? (
-				// According to the specification, show nothing when there are no contests
-				<></>
 			) : (
-				<>
-					{contests.map((contest) => {
-						const status = getContestStatus(contest);
-						return (
-							<Link
-								href={`/admin/contest/${contest.slug}`}
-								key={contest.id}
-								className="hover:bg-muted/50 flex cursor-pointer items-center justify-between rounded-lg border p-4"
-							>
-								<div>
-									<h3 className="font-medium">{contest.title}</h3>
-									<p className="text-muted-foreground text-sm">
-										{new Date(contest.startTime).toLocaleString()} - {new Date(contest.endTime).toLocaleString()}
-									</p>
-								</div>
-								<div className="flex items-center gap-2">
-									<span className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClass(status)}`}>{getStatusBadgeText(status)}</span>
-									<span className="bg-muted rounded-full px-3 py-1 text-sm">{contest.isRated ? t('rated') : t('unrated')}</span>
-								</div>
-							</Link>
-						);
-					})}
-				</>
+				contests.map((contest) => {
+					const status = getContestStatus(contest);
+					return (
+						<Link
+							href={`/admin/contest/${contest.slug}`}
+							key={contest.id}
+							className="hover:bg-muted/50 flex cursor-pointer items-center justify-between rounded-lg border p-4"
+						>
+							<div>
+								<h3 className="font-medium">{contest.title}</h3>
+								<p className="text-muted-foreground text-sm">
+									{formatDate(contest.startTime)} - {formatDate(contest.endTime)}
+								</p>
+							</div>
+							<div className="flex items-center gap-2">
+								<span className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClass(status)}`}>{getStatusBadgeText(status)}</span>
+								<span className="bg-muted rounded-full px-3 py-1 text-sm">{contest.isRated ? t('rated') : t('unrated')}</span>
+							</div>
+						</Link>
+					);
+				})
 			)}
-
 			{contests.length > 0 && <PaginationControls totalItems={totalItems} onPageChange={(newPage) => setPage(newPage)} />}
 		</>
 	);

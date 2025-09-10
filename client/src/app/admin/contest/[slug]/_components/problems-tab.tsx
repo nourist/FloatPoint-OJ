@@ -106,13 +106,15 @@ export function ProblemsTab({ contest, onContestUpdate }: ProblemsTabProps) {
 				<Table>
 					<TableHeader>
 						<TableRow>
+							<TableHead></TableHead>
 							<TableHead>{t('problem_title')}</TableHead>
 							<TableHead className="w-[100px]"></TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{contest.problems.map((problem) => (
+						{contest.problems.map((problem, index) => (
 							<TableRow key={problem.id}>
+								<TableCell className="font-medium">{index + 1}</TableCell>
 								<TableCell className="font-medium">
 									<Link className="hover:text-primary hover:underline" href={`/admin/problem/${problem.slug}`}>
 										{problem.title}
@@ -130,13 +132,6 @@ export function ProblemsTab({ contest, onContestUpdate }: ProblemsTabProps) {
 								</TableCell>
 							</TableRow>
 						))}
-						{contest.problems.length === 0 && (
-							<TableRow>
-								<TableCell colSpan={2} className="h-24 text-center">
-									No problems added to this contest
-								</TableCell>
-							</TableRow>
-						)}
 					</TableBody>
 				</Table>
 			)}
@@ -152,9 +147,7 @@ export function ProblemsTab({ contest, onContestUpdate }: ProblemsTabProps) {
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>{t('remove_problem_title')}</DialogTitle>
-						<DialogDescription>
-							{t('remove_problem_description', { title: problemToRemove?.title ?? '' })}
-						</DialogDescription>
+						<DialogDescription>{t('remove_problem_description', { title: problemToRemove?.title ?? '' })}</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
 						<Button variant="outline" onClick={handleRemoveCancel}>

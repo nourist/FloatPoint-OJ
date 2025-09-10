@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { use } from 'react';
 import { toast } from 'sonner';
 import useSWR from 'swr';
@@ -46,6 +46,7 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 	});
 
 	const standings = standingsData?.standings || [];
+	const standingsProblems = standingsData?.problems || [];
 
 	// Handle contest update
 	const handleSuccess = (updatedContest: Contest) => {
@@ -54,18 +55,13 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 	};
 
 	// Handle errors
-	useEffect(() => {
-		if (contestError) {
-			console.error('Failed to fetch contest:', contestError);
-			notFound();
-		}
-	}, [contestError]);
+	if (contestError) {
+		throw contestError;
+	}
 
-	useEffect(() => {
-		if (standingsError) {
-			console.error('Failed to fetch standings:', standingsError);
-		}
-	}, [standingsError]);
+	if (standingsError) {
+		throw standingsError;
+	}
 
 	if (isContestLoading) {
 		return <div className="p-8 text-center">{t('loading')}</div>;
@@ -97,7 +93,7 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 			</TabsContent>
 
 			<TabsContent value="standings" className="space-y-4">
-				<StandingsTab standings={standings} standingsLoading={standingsLoading} />
+				<StandingsTab standings={standings} standingsLoading={standingsLoading} problems={standingsProblems} />
 			</TabsContent>
 		</Tabs>
 	);

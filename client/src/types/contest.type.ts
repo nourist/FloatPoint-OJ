@@ -31,6 +31,7 @@ export interface ProblemStanding {
 	score: number;
 	time: number; // Time in seconds from contest start to solve
 	wrongSubmissionsCount: number;
+	isAc: boolean;
 }
 
 export interface UserStanding {
@@ -43,6 +44,21 @@ export interface UserStanding {
 	problems: Record<string, ProblemStanding>;
 	oldRating?: number;
 	newRating?: number;
+}
+
+export interface ContestProblem {
+	id: string;
+	title: string;
+	maxScore: number;
+}
+
+export interface ContestStandingsResponse {
+	contestId: string;
+	isRated: boolean;
+	isRatingUpdated: boolean;
+	penalty: number;
+	problems: ContestProblem[];
+	standings: UserStanding[];
 }
 
 // Add helper method to get the current status based on time (client-side)

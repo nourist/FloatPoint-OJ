@@ -1,4 +1,4 @@
-import { Contest, UserStanding } from '../types/contest.type';
+import { Contest, UserStanding, ContestStandingsResponse, ContestProblem } from '../types/contest.type';
 import { ApiInstance } from '~/types/axios.type';
 
 // Payloads
@@ -49,6 +49,11 @@ export interface ContestsResponse {
 export interface StandingsResponse {
 	message: string;
 	standings: UserStanding[];
+	problems: ContestProblem[];
+	contestId: string;
+	isRated: boolean;
+	isRatingUpdated: boolean;
+	penalty: number;
 }
 
 export interface SimpleMessageResponse {

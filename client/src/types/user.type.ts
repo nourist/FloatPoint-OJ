@@ -1,3 +1,5 @@
+import { Contest } from './contest.type';
+
 export enum UserRole {
 	ADMIN = 'admin',
 	USER = 'user',
@@ -24,4 +26,5 @@ export type User = {
 	isVerified: boolean;
 	createdAt: Date;
 	updatedAt: Date;
+	joiningContest: Contest | null;
 };
