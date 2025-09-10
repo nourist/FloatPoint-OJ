@@ -86,6 +86,13 @@ export class ProblemStandingDto {
 	score: number;
 	time: number; // Time in seconds from contest start to solve
 	wrongSubmissionsCount: number;
+	isAc: boolean;
+}
+
+export class ContestProblemDto {
+	id: string;
+	title: string;
+	maxScore: number; // Maximum possible score for this problem
 }
 
 export class UserStandingDto {
@@ -105,5 +112,6 @@ export class ContestStandingsDto {
 	isRated: boolean;
 	isRatingUpdated: boolean;
 	penalty: number;
+	problems: ContestProblemDto[];
 	standings: UserStandingDto[];
 }

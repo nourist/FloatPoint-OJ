@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { MinioService } from '../minio/minio.service';
 import { GetUsersDto, UpdateNotificationSettingsDto, UpdateUserDto } from './user.dto';
-import { Problem } from 'src/entities/problem.entity';
-import { Submission } from 'src/entities/submission.entity';
 import { User } from 'src/entities/user.entity';
 
 @Injectable()
@@ -23,7 +21,7 @@ export class UserService {
 	) {}
 
 	async getUserById(id: string): Promise<User> {
-		const user = await this.userRepository.findOneBy({ id });
+		const user = await this.userRepository.findOne({ where: { id }, relations: ['joiningContest'] });
 		if (!user) {
 			this.logger.log(`User ${id} not found`);
 			throw new NotFoundException('User not found');
@@ -32,7 +30,7 @@ export class UserService {
 	}
 
 	async getUserByEmail(email: string): Promise<User> {
-		const user = await this.userRepository.findOneBy({ email });
+		const user = await this.userRepository.findOne({ where: { email }, relations: ['joiningContest'] });
 		if (!user) {
 			this.logger.log(`User ${email} not found`);
 			throw new NotFoundException('User not found');

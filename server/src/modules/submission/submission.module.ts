@@ -25,7 +25,7 @@ import { Submission } from 'src/entities/submission.entity';
 				useFactory: (configService: ConfigService) => ({
 					transport: Transport.RMQ,
 					options: {
-						urls: [configService.get<string>('RABBITMQ_URL')!],
+						urls: [`amqp://${configService.get<string>('RABBITMQ_USER')}:${configService.get<string>('RABBITMQ_PASS')}@${configService.get<string>('RABBITMQ_HOST')}:${configService.get<number>('RABBITMQ_PORT')}`],
 						queue: 'judger.job',
 						queueOptions: {
 							durable: true,

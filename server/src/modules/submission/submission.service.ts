@@ -8,8 +8,6 @@ import { UserService } from '../user/user.service';
 import { GetAllSubmissionsDto, LanguageStatistic, StatusStatistic, SubmitCodeDto } from './submission.dto';
 import { SubmissionResultStatus } from 'src/entities/submission-result.entity';
 import { Submission } from 'src/entities/submission.entity';
-import { Subtask } from 'src/entities/subtask.entity';
-import { TestCase } from 'src/entities/test-case.entity';
 import { User, UserRole } from 'src/entities/user.entity';
 
 @Injectable()
@@ -17,14 +15,10 @@ export class SubmissionService {
 	constructor(
 		@InjectRepository(Submission)
 		private readonly submissionRepository: Repository<Submission>,
-		@InjectRepository(Subtask)
-		private readonly subtaskRepository: Repository<Subtask>,
-		@InjectRepository(TestCase)
-		private readonly testCaseRepository: Repository<TestCase>,
 		private readonly userService: UserService,
+		private readonly problemService: ProblemService,
 		@Inject('JUDGER_JOB_QUEUE')
 		private readonly judgerJobQueue: ClientProxy,
-		private readonly problemService: ProblemService,
 	) {}
 
 	async findOne(id: string) {
@@ -128,6 +122,8 @@ export class SubmissionService {
 	async submitCode(body: SubmitCodeDto, user: User) {
 		const problem = await this.problemService.getProblemById(body.problemId);
 		const userWithContest = await this.userService.getUserById(user.id);
+
+		console.log(JSON.stringify(userWithContest));
 
 		const submission = this.submissionRepository.create({
 			sourceCode: body.code,
