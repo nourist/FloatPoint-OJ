@@ -3,19 +3,19 @@ use aws_credential_types::Credentials;
 use aws_sdk_s3::{
     Client, config::Builder as S3ConfigBuilder, operation::get_object::GetObjectOutput,
 };
-use std::env;
 use std::error::Error;
+use crate::env_tool;
 
 fn get_minio_endpoint_url() -> String {
-    let minio_endpoint = env::var("MINIO_ENDPOINT").unwrap_or("localhost".into());
-    let minio_port = env::var("MINIO_PORT").unwrap_or("9000".into());
+    let minio_endpoint = env_tool::env_or_default("MINIO_ENDPOINT", "localhost");
+    let minio_port = env_tool::env_or_default("MINIO_PORT", "9000");
     format!("http://{}:{}", minio_endpoint, minio_port)
 }
 
 pub fn make_minio_client() -> Client {
     let creds = Credentials::new(
-        env::var("MINIO_ACCESS_KEY").unwrap_or("minioadmin".into()), // access key
-        env::var("MINIO_SECRET_KEY").unwrap_or("minioadmin".into()), // secret key
+        env_tool::env_or_default("MINIO_ACCESS_KEY", "minioadmin"), // access key
+        env_tool::env_or_default("MINIO_SECRET_KEY", "minioadmin"), // secret key
         None,                                                   // optional token
         None,                                                   // optional expiry
         "static",                                               // provider name

@@ -1,9 +1,10 @@
-use std::env;
+use crate::env_tool;
+
 pub fn get_rabbitmq_url() -> String {
-    let rabbitmq_host = env::var("RABBITMQ_HOST").unwrap_or("localhost".into());
-    let rabbitmq_port = env::var("RABBITMQ_PORT").unwrap_or("5672".into());
-    let rabbitmq_user = env::var("RABBITMQ_USER").unwrap_or("guest".into());
-    let rabbitmq_pass = env::var("RABBITMQ_PASS").unwrap_or("guest".into());
+    let rabbitmq_host = env_tool::env_or_default("RABBITMQ_HOST", "localhost");
+    let rabbitmq_port = env_tool::env_or_default("RABBITMQ_PORT", "5672");
+    let rabbitmq_user = env_tool::env_or_default("RABBITMQ_USER", "guest");
+    let rabbitmq_pass = env_tool::env_or_default("RABBITMQ_PASS", "guest");
     format!(
         "amqp://{}:{}@{}:{}",
         rabbitmq_user, rabbitmq_pass, rabbitmq_host, rabbitmq_port

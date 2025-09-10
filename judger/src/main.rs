@@ -7,7 +7,6 @@ use lapin::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json;
-use std::env;
 use tokio;
 use tracing::{debug, error, info};
 use tracing_subscriber;
@@ -19,6 +18,7 @@ mod metadata;
 mod minio;
 mod models;
 mod rabbitmq;
+mod env_tool;
 
 #[tokio::main]
 async fn main() {
@@ -27,7 +27,7 @@ async fn main() {
 
     info!("Judger is starting...");
 
-    let judger_id = env::var("JUDGER_ID").unwrap_or("unknown".to_string());
+    let judger_id = env_tool::var("JUDGER_ID").unwrap();
     info!("Judger ID: {}", judger_id);
 
     let rabbitmq_url = rabbitmq::get_rabbitmq_url();
@@ -111,7 +111,7 @@ async fn send_ack_message(channel: &lapin::Channel, ack: models::JudgerAck) {
     let ack_id = ack.id.clone(); // Clone the ID before moving ack
     let judger_ack = JudgerAckWithJudgerId {
         ack: ack,
-        judger_id: env::var("JUDGER_ID").unwrap(),
+        judger_id: env_tool::env_or_default("JUDGER_ID", "unknown"),
     };
 
     #[derive(Serialize)]
@@ -156,7 +156,7 @@ async fn send_result_message(channel: &lapin::Channel, result: models::JudgerRes
     let result_id = result.id.clone(); // Clone the ID before moving result
     let judger_result = JudgerResultWithJudgerId {
         result: result,
-        judger_id: env::var("JUDGER_ID").unwrap(),
+        judger_id: env_tool::env_or_default("JUDGER_ID", "unknown"),
     };
 
     let result_json = serde_json::to_string(&ResultMessage {
@@ -179,7 +179,7 @@ async fn send_result_message(channel: &lapin::Channel, result: models::JudgerRes
 }
 
 async fn send_heartbeat_message(channel: &lapin::Channel) {
-    let judger_id = env::var("JUDGER_ID").unwrap_or("unknown".to_string());
+    let judger_id = env_tool::env_or_default("JUDGER_ID", "unknown");
 
     #[derive(Serialize)]
     struct HeartbeatMessage {

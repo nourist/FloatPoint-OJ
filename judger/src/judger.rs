@@ -1,7 +1,6 @@
 use sqlx;
 use sqlx::Row;
 use std::collections::HashMap;
-use std::env;
 use std::error::Error;
 use std::fs;
 use std::fs::File;
@@ -10,6 +9,7 @@ use std::process::Command;
 use tracing::{error, info, debug};
 use uuid::Uuid;
 
+use crate::env_tool;
 use crate::db::get_db_url;
 use crate::languages::get_language_config;
 use crate::metadata::{get_f64, get_u64, metadata_file_to_hashmap};
@@ -113,7 +113,7 @@ async fn write_test_case_input(slug: &str, problem: &Problem) -> Result<(), Box<
 
     let mut input_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/{}",
-        env::var("JUDGER_ID").unwrap(),
+        env_tool::var("JUDGER_ID").unwrap(),
         input_file_name
     ))?;
 
@@ -135,7 +135,7 @@ async fn write_test_case_answer(slug: &str, problem: &Problem) -> Result<(), Box
 
     let mut output_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/{}.ans",
-        env::var("JUDGER_ID").unwrap(),
+        env_tool::var("JUDGER_ID").unwrap(),
         output_file_name
     ))?;
 
@@ -146,10 +146,10 @@ async fn write_test_case_answer(slug: &str, problem: &Problem) -> Result<(), Box
 }
 
 fn create_isolate_box() -> Result<(), Box<dyn Error>> {
-    info!("Creating isolate box with ID: {}", env::var("JUDGER_ID").unwrap());
+    info!("Creating isolate box with ID: {}", env_tool::var("JUDGER_ID").unwrap());
     let create_box_res = Command::new("isolate")
         .arg("--init")
-        .arg(format!("--box-id={}", env::var("JUDGER_ID").unwrap()))
+        .arg(format!("--box-id={}", env_tool::var("JUDGER_ID").unwrap()))
         .output()?;
 
     if !create_box_res.status.success() {
@@ -168,7 +168,7 @@ fn write_source_code(source_code: &str, ext: &str) -> Result<(), Box<dyn Error>>
     info!("Writing source code with extension: {}", ext);
     let mut source_file = File::create(format!(
         "/var/local/lib/isolate/{}/box/main.{}",
-        env::var("JUDGER_ID").unwrap(),
+        env_tool::var("JUDGER_ID").unwrap(),
         ext
     ))?;
 
@@ -185,7 +185,7 @@ fn compile_source_code(job_id: &Uuid, compile_command: &str) -> Result<(), Judge
     let output = Command::new(args[0])
         .current_dir(format!(
             "/var/local/lib/isolate/{}/box",
-            env::var("JUDGER_ID").unwrap()
+            env_tool::var("JUDGER_ID").unwrap()
         ))
         .args(&args[1..])
         .output()
@@ -217,14 +217,14 @@ fn run_testcase(language_config: &LanguageConfig, problem: &Problem) -> Result<(
     info!("Running testcase with time limit: {}ms, memory limit: {}KB", 
           problem.time_limit, problem.memory_limit);
           
-    let arg_box_id = format!("--box-id={}", env::var("JUDGER_ID").unwrap());
+    let arg_box_id = format!("--box-id={}", env_tool::var("JUDGER_ID").unwrap());
     let arg_time = format!("--time={}", (problem.time_limit as f64) / 1000.0);
     let arg_wall_time = format!("--wall-time={}", (problem.time_limit as f64) / 1000.0 + 1.0);
     let arg_mem = format!("--mem={}", problem.memory_limit);
     let arg_fsize = format!("--fsize={}", 131072);
     let arg_meta = format!(
         "--meta=/var/local/lib/isolate/{}/box/meta.txt",
-        env::var("JUDGER_ID").unwrap()
+        env_tool::var("JUDGER_ID").unwrap()
     );
 
     let mut cmd = Command::new("isolate");
@@ -293,7 +293,7 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
 
     let meta_data = metadata_file_to_hashmap(format!(
         "/var/local/lib/isolate/{}/box/meta.txt",
-        env::var("JUDGER_ID").unwrap()
+        env_tool::var("JUDGER_ID").unwrap()
     ))?;
 
     if is_memory_limit_exceeded(&meta_data, problem.memory_limit as usize) {
@@ -320,7 +320,7 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
                 // Log runtime error details including stderr when status is not "TO"
                 let stderr_content = std::fs::read_to_string(format!(
                     "/var/local/lib/isolate/{}/box/stderr.txt",
-                    env::var("JUDGER_ID").unwrap()
+                    env_tool::var("JUDGER_ID").unwrap()
                 )).unwrap_or_else(|_| "Failed to read stderr".to_string());
                 
                 info!("Test case {} resulted in RTE. Status: {}, Stderr: {}", 
@@ -344,13 +344,13 @@ fn check_result(problem: &Problem, test_case_slug: &str) -> Result<TestResult, B
             // Define file paths for actual and expected outputs
             let actual_output_path = format!(
                 "/var/local/lib/isolate/{}/box/{}",
-                env::var("JUDGER_ID").unwrap(),
+                env_tool::var("JUDGER_ID").unwrap(),
                 output_file_name
             );
             
             let expected_output_path = format!(
                 "/var/local/lib/isolate/{}/box/{}.ans",
-                env::var("JUDGER_ID").unwrap(),
+                env_tool::var("JUDGER_ID").unwrap(),
                 output_file_name
             );
 
