@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LessThan, Repository } from 'typeorm';
+import { In, LessThan, Repository } from 'typeorm';
 
 import { Blog } from 'src/entities/blog.entity';
 import { Contest } from 'src/entities/contest.entity';
@@ -83,7 +83,7 @@ export class NotificationService {
 
 	async createUpdateRatingNotification(user: User, contest: Contest, oldRating: number, newRating: number) {
 		const content = `Your rating has been updated after contest "${contest.title}": ${oldRating} → ${newRating}`;
-		
+
 		await this.sendNotification(
 			this.notificationRepository.create({
 				type: NotificationType.UPDATE_RATING,
@@ -107,11 +107,16 @@ export class NotificationService {
 			order: {
 				createdAt: 'DESC',
 			},
+			relations: ['contest', 'problem', 'blog'],
 		});
 	}
 
 	async markAsRead(user: User, id: string) {
 		await this.notificationRepository.update({ id, user: { id: user.id } }, { isRead: true });
+	}
+
+	async markMultipleAsRead(user: User, ids: string[]) {
+		await this.notificationRepository.update({ id: In(ids), user: { id: user.id } }, { isRead: true });
 	}
 
 	@Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
