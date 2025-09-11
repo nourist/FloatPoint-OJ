@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User } from 'src/entities/user.entity';
@@ -16,6 +16,20 @@ export class NotificationController {
 		return {
 			message: 'success',
 			notifications: await this.notificationService.getNotifications(user, query.status),
+		};
+	}
+
+	@Post('system')
+	@UseGuards(JwtAuthGuard)
+	async sendSystemNotification(@Body('content') content: string, @GetUser() user: User) {
+		// Check if user is admin
+		if (user.role !== 'admin') {
+			throw new Error('Only admins can send system notifications');
+		}
+
+		await this.notificationService.sendSystemNotification(content, user.id);
+		return {
+			message: 'System notification sent successfully',
 		};
 	}
 

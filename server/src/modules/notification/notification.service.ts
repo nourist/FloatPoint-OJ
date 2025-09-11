@@ -94,6 +94,25 @@ export class NotificationService {
 		);
 	}
 
+	async sendSystemNotification(content: string, senderId: string) {
+		const users = await this.userRepository.find();
+
+		await Promise.all(
+			users.map(async (user) => {
+				// Don't send notification to the sender
+				if (user.id === senderId) return;
+
+				await this.sendNotification(
+					this.notificationRepository.create({
+						type: NotificationType.SYSTEM,
+						content,
+					}),
+					user,
+				);
+			}),
+		);
+	}
+
 	async getNotifications(user: User, status: NotificationStatus) {
 		return await this.notificationRepository.find({
 			where: {
