@@ -18,11 +18,6 @@ const JudgerPage = () => {
 	const { data: initialJudgers = [], isLoading } = useSWR('/judger', getAllJudgers);
 	const [judgers, setJudgers] = useState<Judger[]>(initialJudgers);
 
-	// Update judgers state when SWR data changes
-	useEffect(() => {
-		setJudgers(initialJudgers);
-	}, [initialJudgers]);
-
 	// Set up socket listener for real-time updates
 	useEffect(() => {
 		// Connect to socket

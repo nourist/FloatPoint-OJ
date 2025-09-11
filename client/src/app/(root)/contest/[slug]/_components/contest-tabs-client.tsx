@@ -13,7 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
 import { authServiceInstance } from '~/services/auth';
 import { contestServiceInstance } from '~/services/contest';
-import { Contest } from '~/types/contest.type';
+import { Contest, ContestStatus, getContestStatus } from '~/types/contest.type';
 import { User } from '~/types/user.type';
 
 // Client component for tabs that need client-side interaction
@@ -79,26 +79,29 @@ export const ContestTabsClient = ({
   // Handle errors
   if (standingsError) throw standingsError;
 
+  	const status = getContestStatus(contest);
+	
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <div className="flex items-center justify-between">
           <TabsList>
             <TabsTrigger value="info">{t('info_tab')}</TabsTrigger>
-            {isUserJoined && (
-              <>
-                <TabsTrigger value="problems">{t('problems_tab')}</TabsTrigger>
-                <TabsTrigger value="submissions">{t('submissions_tab')}</TabsTrigger>
-                <TabsTrigger value="standings">{t('standings_tab')}</TabsTrigger>
-              </>
-            )}
-          </TabsList>
+					  {isUserJoined && (
+						  <>
+							  <TabsTrigger value="problems">{t('problems_tab')}</TabsTrigger>
+							  <TabsTrigger value="submissions">{t('submissions_tab')}</TabsTrigger>
+							  <TabsTrigger value="standings">{t('standings_tab')}</TabsTrigger>
+						  </>)}
+				  </TabsList>
+				  {status == ContestStatus.RUNNING &&
           <JoinLeaveButton 
             contest={contest} 
             user={user ?? null} 
             onContestUpdate={handleContestUpdate}
             onUserUpdate={handleUserUpdate}
           />
+				  }
         </div>
 
         <TabsContent value="info">

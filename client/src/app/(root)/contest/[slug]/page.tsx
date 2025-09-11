@@ -65,18 +65,15 @@ function formatContestDates(contest: Contest) {
   return { startDate, startTime, endDate, endTime };
 }
 
-// Loading component for Suspense
-const Loading = () => {
-  // We need to import useTranslations here, but since this is a server component,
-  // we'll just use a simple loading message
-  return <div className="p-8 text-center">Loading...</div>;
-};
+interface Props {
+  params: Promise<{ slug: string }>;
+}
 
 // Main page component (server component)
-const ContestDetailPage = async ({ params }: { params: { slug: string } }) => {
+const ContestDetailPage = async ({ params }: Props) => {
   // Fetch contest and user data on the server in parallel
   const [contest, user] = await Promise.all([
-    getContest(params.slug),
+    getContest((await params).slug),
     getUser()
   ]);
   

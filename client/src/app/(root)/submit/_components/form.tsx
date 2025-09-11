@@ -18,6 +18,7 @@ import { createClientService } from '~/lib/service-client';
 import { submissionServiceInstance } from '~/services/submission';
 import { ProgramLanguage } from '~/types/submission.type';
 import { Theme } from '~/types/theme.type';
+import { githubDark } from '@uiw/codemirror-theme-github';
 
 interface Props {
 	problemId: string;
@@ -60,9 +61,9 @@ const Form = ({ problemId }: Props) => {
 
 	return (
 		<div className="mt-6 overflow-hidden rounded-lg">
-			<div className="bg-accent flex w-full items-center justify-between p-2">
+			<div className="bg-muted flex w-full items-center justify-between p-2">
 				<Select value={language} onValueChange={setLanguage}>
-					<SelectTrigger size="sm">
+					<SelectTrigger className="!bg-card" size="sm">
 						<SelectValue placeholder={t('page.select_language')} />
 					</SelectTrigger>
 					<SelectContent>
@@ -78,7 +79,7 @@ const Form = ({ problemId }: Props) => {
 					{submitting ? t('page.submitting') : t('page.submit')}
 				</Button>
 			</div>
-			<CodeMirror value={code} height="500px" theme={theme} extensions={[cpp(), java(), python()]} onChange={(value) => setCode(value)} />
+			<CodeMirror value={code} height="500px" theme={theme=='dark'?githubDark:theme} extensions={[cpp(), java(), python()]} onChange={(value) => setCode(value)} />
 		</div>
 	);
 };

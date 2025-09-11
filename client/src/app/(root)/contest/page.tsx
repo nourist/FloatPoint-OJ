@@ -137,10 +137,10 @@ const ContestPage = () => {
 			</div>
 
 			{/* Contest List */}
-			{isLoading ? (
-				<div className="space-y-4">
+			{!data?.contests&&isLoading ? (
+				<div className="space-y-6">
 					{Array.from({ length: 5 }).map((_, i) => (
-						<Skeleton key={i} className="h-32 w-full rounded-2xl" />
+						<Skeleton key={i} className="h-[109px] w-full rounded-2xl" />
 					))}
 				</div>
 			) : contests.length === 0 ? (

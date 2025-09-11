@@ -56,7 +56,7 @@ const ProblemTable = ({ problems, user, selectTags }: Props) => {
 										<span
 											key={tag.id}
 											className={cn(
-												'bg-accent text-card-foreground/70 inline-flex items-center rounded px-2 py-0.5 text-xs font-medium capitalize',
+												'bg-muted text-card-foreground/70 inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-medium capitalize',
 												selectTags.includes(tag.name) && 'bg-primary text-primary-foreground',
 											)}
 										>

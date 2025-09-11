@@ -184,7 +184,7 @@ const SubmissionTable = ({ submissions, user }: SubmissionTableProps) => {
 								</Link>
 							</td>
 							<td className="max-2md:hidden">
-								<div className="bg-accent inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold">
+								<div className="bg-muted inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-semibold">
 									<Code className="size-3" />
 									<div className="mt-[1px]">{formatLanguage(submission.language)}</div>
 								</div>
