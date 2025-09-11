@@ -9,6 +9,7 @@ import { Contest, ContestStatus } from 'src/entities/contest.entity';
 import { Problem } from 'src/entities/problem.entity';
 import { Submission, SubmissionStatus } from 'src/entities/submission.entity';
 import { User, UserRole } from 'src/entities/user.entity';
+import { NotificationService } from 'src/modules/notification/notification.service';
 
 @Injectable()
 export class ContestService {
@@ -23,6 +24,7 @@ export class ContestService {
 		private readonly submissionRepository: Repository<Submission>,
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
+		private readonly notificationService: NotificationService,
 	) {}
 
 	private async findContestById(id: string, relations: string[] = []): Promise<Contest> {
@@ -58,7 +60,12 @@ export class ContestService {
 			// Removed status field - status will be derived from startTime and endTime
 		});
 
-		return this.contestRepository.save(contest);
+		const savedContest = await this.contestRepository.save(contest);
+
+		// Send notification to all users about the new contest
+		await this.notificationService.createNewContestNotification(savedContest);
+
+		return savedContest;
 	}
 
 	async findAll(query: QueryContestDto) {
@@ -247,12 +254,8 @@ export class ContestService {
 
 		// Update ratings if this is a rated contest
 		if (contest.isRated && !contest.isRatingUpdated) {
-			try {
-				await this.updateRatings(id);
-				this.logger.log(`Successfully updated ratings for contest ${id}`);
-			} catch (error) {
-				this.logger.error(`Failed to update ratings for contest ${id}: ${error.message}`);
-			}
+			await this.updateRatings(id);
+			this.logger.log(`Successfully updated ratings for contest ${id}`);
 		}
 
 		return updatedContest;
@@ -488,6 +491,9 @@ export class ContestService {
 			const user = userMap.get(update.userId);
 			if (!user) continue;
 
+			// Get old rating before updating
+			const oldRating = user.rating && user.rating.length > 0 ? user.rating[user.rating.length - 1] : 1500;
+
 			// Add new rating to rating history
 			if (!user.rating) {
 				user.rating = [];
@@ -496,6 +502,9 @@ export class ContestService {
 
 			// Save updated user
 			await this.userRepository.save(user);
+
+			// Send rating update notification
+			await this.notificationService.createUpdateRatingNotification(user, contest, oldRating, update.newRating);
 		}
 
 		// Mark contest as rating updated
@@ -530,14 +539,11 @@ export class ContestService {
 
 			// Update ratings for each contest
 			for (const contest of endedContests) {
-				try {
-					await this.updateRatings(contest.id);
-					this.logger.log(`Successfully updated ratings for contest ${contest.id}`);
-				} catch (error) {
-					this.logger.error(`Failed to update ratings for contest ${contest.id}: ${error.message}`);
-				}
+				await this.updateRatings(contest.id);
+				this.logger.log(`Successfully updated ratings for contest ${contest.id}`);
 			}
 		} catch (error) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			this.logger.error(`Error checking for contests that need rating updates: ${error.message}`);
 		}
 	}

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LessThan, Repository } from 'typeorm';
 
 import { Blog } from 'src/entities/blog.entity';
+import { Contest } from 'src/entities/contest.entity';
 import { Notification, NotificationType } from 'src/entities/notification.entity';
 import { Problem } from 'src/entities/problem.entity';
 import { User } from 'src/entities/user.entity';
@@ -59,6 +60,37 @@ export class NotificationService {
 					user,
 				);
 			}),
+		);
+	}
+
+	async createNewContestNotification(contest: Contest) {
+		const users = await this.userRepository.find();
+
+		await Promise.all(
+			users.map(async (user) => {
+				if (user.id === contest.creator.id) return;
+
+				await this.sendNotification(
+					this.notificationRepository.create({
+						type: NotificationType.NEW_CONTEST,
+						contest,
+					}),
+					user,
+				);
+			}),
+		);
+	}
+
+	async createUpdateRatingNotification(user: User, contest: Contest, oldRating: number, newRating: number) {
+		const content = `Your rating has been updated after contest "${contest.title}": ${oldRating} → ${newRating}`;
+		
+		await this.sendNotification(
+			this.notificationRepository.create({
+				type: NotificationType.UPDATE_RATING,
+				content,
+				contest,
+			}),
+			user,
 		);
 	}
 
