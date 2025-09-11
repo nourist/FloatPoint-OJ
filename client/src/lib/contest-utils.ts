@@ -9,7 +9,7 @@ export function getContestStatus(contest: Contest): ContestStatus {
 	const now = new Date();
 	const startTime = new Date(contest.startTime);
 	const endTime = new Date(contest.endTime);
-	
+
 	if (now < startTime) {
 		return ContestStatus.PENDING;
 	} else if (now >= startTime && now <= endTime) {

@@ -1,8 +1,8 @@
 'use client';
 
 import { Bell, Check, CheckCheck, Code, FileText, Settings, Star, Trophy } from 'lucide-react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useState } from 'react';
 import useSWR, { mutate } from 'swr';
 
@@ -115,17 +115,11 @@ const NotificationPopover = ({ className }: NotificationPopoverProps) => {
 	const getNotificationTitle = (notification: Notification) => {
 		switch (notification.type) {
 			case NotificationType.NEW_PROBLEM:
-				return notification.problem 
-					? t('types.new_problem', { title: notification.problem.title }) 
-					: t('types.new_problem_available');
+				return notification.problem ? t('types.new_problem', { title: notification.problem.title }) : t('types.new_problem_available');
 			case NotificationType.NEW_CONTEST:
-				return notification.contest 
-					? t('types.new_contest', { title: notification.contest.title }) 
-					: t('types.new_contest_available');
+				return notification.contest ? t('types.new_contest', { title: notification.contest.title }) : t('types.new_contest_available');
 			case NotificationType.NEW_BLOG:
-				return notification.blog 
-					? t('types.new_blog', { title: notification.blog.title }) 
-					: t('types.new_blog_post');
+				return notification.blog ? t('types.new_blog', { title: notification.blog.title }) : t('types.new_blog_post');
 			case NotificationType.UPDATE_RATING:
 				return t('types.rating_updated');
 			case NotificationType.SYSTEM:

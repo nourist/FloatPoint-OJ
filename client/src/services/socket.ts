@@ -1,8 +1,8 @@
 import { Socket, io } from 'socket.io-client';
 
 import { getApiUrl } from '~/lib/utils';
-import { Submission } from '~/types/submission.type';
 import { Judger } from '~/types/judger.type';
+import { Submission } from '~/types/submission.type';
 
 class SocketService {
 	private socket: Socket | null = null;

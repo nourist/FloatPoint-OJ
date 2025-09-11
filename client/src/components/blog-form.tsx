@@ -51,7 +51,7 @@ const BlogForm = forwardRef<BlogFormRef, BlogFormProps>((props, ref) => {
 				<div className="bg-border peer-focus:bg-ring mb-6 h-0.5 transition-all"></div>
 				<ImageUpload ref={imageUploadRef} title={t('upload_thumbnail')} />
 			</div>
-			<div className="bg-card max-h-[calc(100vh-164px)] flex-1 rounded-xl border shadow-xs overflow-hidden">
+			<div className="bg-card max-h-[calc(100vh-164px)] flex-1 overflow-hidden rounded-xl border shadow-xs">
 				<SimpleEditor
 					onReady={(editor) => {
 						editorRef.current = editor;

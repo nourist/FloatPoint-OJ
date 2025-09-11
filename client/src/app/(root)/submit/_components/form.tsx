@@ -3,6 +3,7 @@
 import { cpp } from '@codemirror/lang-cpp';
 import { java } from '@codemirror/lang-java';
 import { python } from '@codemirror/lang-python';
+import { githubDark } from '@uiw/codemirror-theme-github';
 import CodeMirror from '@uiw/react-codemirror';
 import Cookies from 'js-cookie';
 import { Play } from 'lucide-react';
@@ -18,7 +19,6 @@ import { createClientService } from '~/lib/service-client';
 import { submissionServiceInstance } from '~/services/submission';
 import { ProgramLanguage } from '~/types/submission.type';
 import { Theme } from '~/types/theme.type';
-import { githubDark } from '@uiw/codemirror-theme-github';
 
 interface Props {
 	problemId: string;
@@ -79,7 +79,7 @@ const Form = ({ problemId }: Props) => {
 					{submitting ? t('page.submitting') : t('page.submit')}
 				</Button>
 			</div>
-			<CodeMirror value={code} height="500px" theme={theme=='dark'?githubDark:theme} extensions={[cpp(), java(), python()]} onChange={(value) => setCode(value)} />
+			<CodeMirror value={code} height="500px" theme={theme == 'dark' ? githubDark : theme} extensions={[cpp(), java(), python()]} onChange={(value) => setCode(value)} />
 		</div>
 	);
 };

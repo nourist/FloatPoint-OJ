@@ -8,8 +8,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import useSWR, { mutate } from 'swr';
 
-import NavLink from '~/components/nav-link';
 import NotificationPopover from './notification-popover';
+import NavLink from '~/components/nav-link';
 import { Button } from '~/components/ui/button';
 import {
 	DropdownMenu,

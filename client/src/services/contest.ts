@@ -1,4 +1,4 @@
-import { Contest, UserStanding, ContestStandingsResponse, ContestProblem } from '../types/contest.type';
+import { Contest, ContestProblem, ContestStandingsResponse, UserStanding } from '../types/contest.type';
 import { ApiInstance } from '~/types/axios.type';
 
 // Payloads

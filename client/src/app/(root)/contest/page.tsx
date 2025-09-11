@@ -127,17 +127,17 @@ const ContestPage = () => {
 				</div>
 
 				{/* Search */}
-				<ContestSearch 
-					searchQuery={searchQuery} 
+				<ContestSearch
+					searchQuery={searchQuery}
 					onSearchChange={(query) => {
 						setSearchQuery(query);
 						setPage(1);
-					}} 
+					}}
 				/>
 			</div>
 
 			{/* Contest List */}
-			{!data?.contests&&isLoading ? (
+			{!data?.contests && isLoading ? (
 				<div className="space-y-6">
 					{Array.from({ length: 5 }).map((_, i) => (
 						<Skeleton key={i} className="h-[109px] w-full rounded-2xl" />

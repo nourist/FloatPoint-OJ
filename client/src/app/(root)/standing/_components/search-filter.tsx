@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Input } from '~/components/ui/input';
 import useDebounce from '~/hooks/use-debounce';

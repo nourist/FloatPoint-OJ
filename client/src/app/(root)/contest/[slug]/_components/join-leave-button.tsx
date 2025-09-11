@@ -44,7 +44,7 @@ export function JoinLeaveButton({ contest, user, onContestUpdate, onUserUpdate }
 			// Refetch contest detail to update participants list
 			const updatedContest = await contestService.findOneContest(contest.slug);
 			onContestUpdate(updatedContest.contest);
-			
+
 			// Refetch user data to update joiningContest field
 			onUserUpdate();
 		} catch (error) {

@@ -11,7 +11,7 @@ interface RichTextRendererProps {
 
 const RichTextRenderer = ({ content, className }: RichTextRendererProps) => {
 	let html = '';
-	
+
 	if (typeof content === 'string') {
 		try {
 			// Try to parse as JSON first
@@ -24,8 +24,8 @@ const RichTextRenderer = ({ content, className }: RichTextRendererProps) => {
 	} else {
 		html = generateHTML(content, extensions);
 	}
-	
+
 	return <div className={cn('tiptap ProseMirror', className)} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
-export default RichTextRenderer;	
+export default RichTextRenderer;

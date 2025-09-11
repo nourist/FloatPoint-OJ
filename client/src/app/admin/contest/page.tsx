@@ -125,12 +125,12 @@ const AdminContestPage = () => {
 				</Button>
 			</div>
 
-			<AdminContestSearch 
-				searchQuery={searchQuery} 
+			<AdminContestSearch
+				searchQuery={searchQuery}
 				onSearchChange={(query) => {
 					setSearchQuery(query);
 					setPage(1); // Reset to first page when search changes
-				}} 
+				}}
 			/>
 
 			{isLoading ? (

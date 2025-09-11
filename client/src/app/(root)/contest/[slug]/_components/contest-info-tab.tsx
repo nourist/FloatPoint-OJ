@@ -59,7 +59,10 @@ export const ContestInfoTab = ({ contest, startDate, startTime, endDate, endTime
 						<div className="mt-1 flex items-center gap-2">
 							<Badge className={getStatusBadgeClass()}>{getStatusText()}</Badge>
 							{contest.isRated && (
-					<Badge variant="outline" className="border-yellow-600 bg-yellow-50 text-yellow-600 dark:border-yellow-500 dark:bg-yellow-900/20 dark:text-yellow-400">
+								<Badge
+									variant="outline"
+									className="border-yellow-600 bg-yellow-50 text-yellow-600 dark:border-yellow-500 dark:bg-yellow-900/20 dark:text-yellow-400"
+								>
 									<Star className="mr-1 h-3 w-3" />
 									{t('rated')}
 								</Badge>
@@ -98,7 +101,7 @@ export const ContestInfoTab = ({ contest, startDate, startTime, endDate, endTime
 						<div className="flex items-center gap-2">
 							<p className="text-sm font-semibold">{endDate}</p>
 							<p className="text-muted-foreground text-xs">{endTime}</p>
-		</div>
+						</div>
 					</div>
 				</div>
 

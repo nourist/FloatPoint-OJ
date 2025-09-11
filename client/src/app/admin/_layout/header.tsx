@@ -4,10 +4,10 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 
+import NotificationPopover from './notification-popover';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
 import { Separator } from '~/components/ui/separator';
 import { SidebarTrigger } from '~/components/ui/sidebar';
-import NotificationPopover from './notification-popover';
 
 const AdminHeader = () => {
 	const currentPath = usePathname();
