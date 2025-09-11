@@ -136,7 +136,7 @@ const ContestPage = () => {
 							setSearchQuery(e.target.value);
 							setPage(1);
 						}}
-						className="w-full pl-10"
+						className="bg-card w-full pl-10"
 					/>
 				</div>
 			</div>
@@ -168,7 +168,7 @@ const ContestPage = () => {
 									<div className="flex-1">
 										<div className="mb-3">
 											<Link href={`/contest/${contest.slug}`}>
-												<h3 className="hover:text-primary cursor-pointer text-lg font-semibold transition-colors">{contest.title}</h3>
+												<h3 className="hover:text-primary cursor-pointer text-lg font-semibold transition-colors hover:underline">{contest.title}</h3>
 											</Link>
 										</div>
 

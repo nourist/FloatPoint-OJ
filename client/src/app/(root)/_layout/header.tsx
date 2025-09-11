@@ -1,7 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { Bell, CircleUserRound, Globe, LayoutDashboard, LogOut, Menu, Moon, Settings, Sun, X } from 'lucide-react';
+import { CircleUserRound, Globe, LayoutDashboard, LogOut, Menu, Moon, Settings, Sun, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import useSWR, { mutate } from 'swr';
 
 import NavLink from '~/components/nav-link';
+import NotificationPopover from './notification-popover';
 import { Button } from '~/components/ui/button';
 import {
 	DropdownMenu,
@@ -127,9 +128,7 @@ const Header = () => {
 				))}
 				{user ? (
 					<>
-						<Button variant="ghost" size="icon" className="text-card-foreground/80 ml-auto rounded-full">
-							<Bell className="size-5" />
-						</Button>
+						<NotificationPopover />
 						<DropdownMenu>
 							<DropdownMenuTrigger>
 								<UserAvatar user={user} className="size-9" />

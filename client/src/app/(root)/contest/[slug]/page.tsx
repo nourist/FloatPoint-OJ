@@ -27,7 +27,10 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 	const [activeTab, setActiveTab] = useState('info');
 
 	// Get current user
-	const { data: user } = useSWR('/auth/me', getProfile, {
+	const {
+		data: user,
+		mutate: mutateUser,
+	} = useSWR('/auth/me', getProfile, {
 		revalidateOnFocus: false,
 		shouldRetryOnError: false,
 	});
@@ -65,6 +68,12 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 		setActiveTab('info');
 	};
 
+	// Handle user update
+	const handleUserUpdate = () => {
+		// Revalidate user data to get updated joiningContest field
+		mutateUser();
+	};
+
 	// Handle errors
 	if (contestError) throw contestError;
 	if (standingsError) throw standingsError;
@@ -91,7 +100,12 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 							</>
 						)}
 					</TabsList>
-					<JoinLeaveButton contest={contest} user={user ?? null} onContestUpdate={handleContestUpdate} />
+					<JoinLeaveButton 
+						contest={contest} 
+						user={user ?? null} 
+						onContestUpdate={handleContestUpdate}
+						onUserUpdate={handleUserUpdate}
+					/>
 				</div>
 
 				<TabsContent value="info">

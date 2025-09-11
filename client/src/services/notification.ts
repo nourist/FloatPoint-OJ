@@ -31,4 +31,8 @@ export const notificationServiceInstance = (http: ApiInstance) => ({
 	markAsRead: (id: string) => {
 		return http.patch<SimpleMessageResponse>(`/notification/${id}`);
 	},
+
+	markMultipleAsRead: (ids: string[]) => {
+		return http.patch<SimpleMessageResponse>('/notification/batch/read', { ids });
+	},
 });

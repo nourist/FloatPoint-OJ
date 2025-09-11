@@ -472,7 +472,7 @@
 			"edit_fail": "Failed to edit blog."
 		},
 		"card": {
-			"blog": "Blogs",
+			"blogs": "Blogs",
 			"delete_success": "Blog deleted successfully!",
 			"message": {
 				"delete_confirmation": "Are you sure you want to delete this blog?"
@@ -1012,6 +1012,38 @@
 			"judgerIdleDescription": "This judger is ready to process submissions",
 			"noJudgers": "No Judgers Found",
 			"noJudgersDescription": "No judgers are currently connected to the system"
+		}
+	},
+	"notifications": {
+		"title": "Notifications",
+		"mark_all_read": "Mark all read",
+		"mark_as_read": "Mark as read",
+		"view_all": "View all notifications",
+		"no_notifications": "No notifications yet",
+		"loading": "Loading notifications...",
+		"failed_to_load": "Failed to load notifications",
+		"unread_count": "{count} unread notification",
+		"unread_count_plural": "{count} unread notifications",
+		"read_count": "{count} read notification",
+		"read_count_plural": "{count} read notifications",
+		"just_now": "Just now",
+		"minutes_ago": "{count}m ago",
+		"hours_ago": "{count}h ago",
+		"days_ago": "{count}d ago",
+		"tabs": {
+			"all": "All",
+			"unread": "Unread",
+			"read": "Read"
+		},
+		"types": {
+			"new_problem": "New Problem: {title}",
+			"new_contest": "New Contest: {title}",
+			"new_blog": "New Blog: {title}",
+			"rating_updated": "Rating Updated",
+			"system": "System Notification",
+			"new_problem_available": "New Problem Available",
+			"new_contest_available": "New Contest Available",
+			"new_blog_post": "New Blog Post"
 		}
 	}
 }
