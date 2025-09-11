@@ -4,11 +4,12 @@ import { Repository } from 'typeorm';
 
 import { ProblemService } from '../problem/problem.service';
 import { SubmissionService } from '../submission/submission.service';
-import { JudgerAck, JudgerResult, JudgerResultStatus, TestCaseResult, TestCaseStatus } from './judger.controller';
+import { JudgerAck, JudgerHeartbeat, JudgerResult, JudgerResultStatus, TestCaseResult, TestCaseStatus } from './judger.controller';
 import { JudgerGateway } from './judger.gateway';
 import { ProblemScoringMethod } from 'src/entities/problem.entity';
 import { SubmissionResult, SubmissionResultStatus } from 'src/entities/submission-result.entity';
 import { Submission, SubmissionStatus } from 'src/entities/submission.entity';
+import { RedisService } from 'src/modules/redis/redis.service';
 
 @Injectable()
 export class JudgerService {
@@ -22,7 +23,53 @@ export class JudgerService {
 		private readonly judgerGateway: JudgerGateway,
 		private readonly submissionService: SubmissionService,
 		private readonly problemService: ProblemService,
+		private readonly redisService: RedisService,
 	) {}
+
+	async getAllJudger() {
+		const redis = this.redisService.getClient();
+
+		const keys = await redis.keys('judger:*');
+
+		const judgers: { id: string; busy: boolean }[] = await Promise.all(
+			keys.map(async (key) => {
+				const data = await redis.hGetAll(key);
+				const id = key.split(':')[1];
+				return { id, busy: data.busy == '1' };
+			}),
+		);
+		return judgers;
+	}
+
+	async handleJudgerAckSocket(data: JudgerAck, submissionId: string) {
+		const submission = await this.submissionService.findOne(submissionId);
+		this.judgerGateway.server.emit('submission_update', submission);
+
+		const client = this.redisService.getClient();
+		await client.hSet(`judger:${data.judger_id}`, 'busy', 1);
+
+		const judger_data = await client.hGetAll(`judger:${data.judger_id}`);
+
+		this.judgerGateway.server.emit('judger_update', { id: data.judger_id, busy: judger_data.busy == '1' });
+	}
+
+	async handleJudgerResultSocket(data: JudgerResult, submissionId: string) {
+		const submission = await this.submissionService.findOne(submissionId);
+		this.judgerGateway.server.emit('submission_update', submission);
+
+		const client = this.redisService.getClient();
+		await client.hSet(`judger:${data.judger_id}`, 'busy', 0);
+
+		const judger_data = await client.hGetAll(`judger:${data.judger_id}`);
+		this.judgerGateway.server.emit('judger_update', { id: data.judger_id, busy: judger_data.busy == '1' });
+	}
+
+	async handleJudgerHeartbeat(data: JudgerHeartbeat) {
+		this.logger.log(`Received judger_heartbeat: ${JSON.stringify(data)}`);
+
+		const client = this.redisService.getClient();
+		await client.multi().hSet(`judger:${data.judger_id}`, 'alive', 1).expire(`judger:${data.judger_id}`, 30).exec();
+	}
 
 	async handleJudgerAck(data: JudgerAck) {
 		this.logger.log(`Received judger_ack: ${JSON.stringify(data)}`);
@@ -31,7 +78,8 @@ export class JudgerService {
 		submission.status = SubmissionStatus.JUDGING;
 
 		const updatedSubmission = await this.submissionRepository.save(submission);
-		this.judgerGateway.server.emit('submission_update', updatedSubmission);
+
+		await this.handleJudgerAckSocket(data, updatedSubmission.id);
 	}
 
 	async handleJudgerResult(data: JudgerResult) {
@@ -43,7 +91,7 @@ export class JudgerService {
 			submission.status = SubmissionStatus.COMPILATION_ERROR;
 			submission.log = data.log;
 			const updatedSubmission = await this.submissionRepository.save(submission);
-			this.judgerGateway.server.emit('submission_update', updatedSubmission);
+			await this.handleJudgerResultSocket(data, updatedSubmission.id);
 			return;
 		}
 
@@ -51,7 +99,7 @@ export class JudgerService {
 			submission.status = SubmissionStatus.INTERNAL_ERROR;
 			submission.log = data.log;
 			const updatedSubmission = await this.submissionRepository.save(submission);
-			this.judgerGateway.server.emit('submission_update', updatedSubmission);
+			await this.handleJudgerResultSocket(data, updatedSubmission.id);
 			return;
 		}
 
@@ -99,7 +147,7 @@ export class JudgerService {
 			submission.totalScore = (AcCount / data.test_results.length) * problem.point;
 
 			const updatedSubmission = await this.submissionRepository.save(submission);
-			this.judgerGateway.server.emit('submission_update', updatedSubmission);
+			await this.handleJudgerResultSocket(data, updatedSubmission.id);
 		} else if (problem.scoringMethod == ProblemScoringMethod.SUBTASK) {
 			const subtaskMap: Record<string, TestCaseResult[]> = {};
 
@@ -131,7 +179,7 @@ export class JudgerService {
 			submission.totalScore = totalScore;
 
 			const updatedSubmission = await this.submissionRepository.save(submission);
-			this.judgerGateway.server.emit('submission_update', updatedSubmission);
+			await this.handleJudgerResultSocket(data, updatedSubmission.id);
 		} else {
 			const status = data.test_results.reduce((acc, cur) => {
 				const accIndex = statusPriority.indexOf(acc);
@@ -144,7 +192,7 @@ export class JudgerService {
 			submission.totalScore = status == TestCaseStatus.AC ? problem.point : 0;
 
 			const updatedSubmission = await this.submissionRepository.save(submission);
-			this.judgerGateway.server.emit('submission_update', updatedSubmission);
+			await this.handleJudgerResultSocket(data, updatedSubmission.id);
 		}
 	}
 }

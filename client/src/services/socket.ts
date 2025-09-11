@@ -2,6 +2,7 @@ import { Socket, io } from 'socket.io-client';
 
 import { getApiUrl } from '~/lib/utils';
 import { Submission } from '~/types/submission.type';
+import { Judger } from '~/types/judger.type';
 
 class SocketService {
 	private socket: Socket | null = null;
@@ -55,6 +56,20 @@ class SocketService {
 		// Return a function to unsubscribe
 		return () => {
 			this.socket?.off('submission_update', callback);
+		};
+	}
+
+	onJudgerUpdate(callback: (data: Judger) => void) {
+		if (!this.socket) {
+			console.log('Connecting socket for judger updates');
+			this.connect();
+		}
+
+		this.socket?.on('judger_update', callback);
+
+		// Return a function to unsubscribe
+		return () => {
+			this.socket?.off('judger_update', callback);
 		};
 	}
 }

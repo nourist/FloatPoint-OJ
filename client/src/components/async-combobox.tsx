@@ -39,7 +39,7 @@ export function AsyncCombobox({ value, set_value, fetcher, placeholder, page_siz
 	const { data, size, setSize, isValidating } = useSWRInfinite<FetcherResponse>(
 		(index: number) => [uniqueId, index + 1, page_size, debounced_search],
 		([, page, limit, q]) => fetcher(page as number, limit as number, q as string),
-		{ revalidateFirstPage: true },
+		{ revalidateFirstPage: true, keepPreviousData: true },
 	);
 
 	const options: Option[] = data ? data.flatMap((page) => page.items) : [];

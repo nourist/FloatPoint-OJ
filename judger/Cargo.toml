@@ -7,6 +7,7 @@ edition = "2024"
 aws-config = "1.8.4"
 aws-credential-types = "1.2.5"
 aws-sdk-s3 = { version = "1.101.0", features = ["behavior-version-latest"] }
+chrono = "0.4.41"
 dotenvy = "0.15.7"
 futures = "0.3.31"
 futures-lite = "2.6.1"

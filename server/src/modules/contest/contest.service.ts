@@ -1,14 +1,15 @@
-import { BadRequestException, ForbiddenException, Injectable, NotFoundException, Logger } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 import { In, Repository } from 'typeorm';
 
-import { AddProblemsDto, CreateContestDto, QueryContestDto, UpdateContestDto, UserStandingDto, ContestStandingsDto } from './contest.dto';
+import { AddProblemsDto, ContestStandingsDto, CreateContestDto, QueryContestDto, UpdateContestDto, UserStandingDto } from './contest.dto';
 import { Contest, ContestStatus } from 'src/entities/contest.entity';
 import { Problem } from 'src/entities/problem.entity';
 import { Submission, SubmissionStatus } from 'src/entities/submission.entity';
 import { User, UserRole } from 'src/entities/user.entity';
+import { NotificationService } from 'src/modules/notification/notification.service';
 
 @Injectable()
 export class ContestService {
@@ -23,6 +24,7 @@ export class ContestService {
 		private readonly submissionRepository: Repository<Submission>,
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
+		private readonly notificationService: NotificationService,
 	) {}
 
 	private async findContestById(id: string, relations: string[] = []): Promise<Contest> {
@@ -55,18 +57,24 @@ export class ContestService {
 			...createContestDto,
 			slug,
 			creator,
-			status: ContestStatus.PENDING, // Default status
+			// Removed status field - status will be derived from startTime and endTime
 		});
-		
-		return this.contestRepository.save(contest);
+
+		const savedContest = await this.contestRepository.save(contest);
+
+		// Send notification to all users about the new contest
+		await this.notificationService.createNewContestNotification(savedContest);
+
+		return savedContest;
 	}
 
 	async findAll(query: QueryContestDto) {
-		const { page = 1, limit = 10, search, startTime, endTime, isRated, sortBy, sortOrder } = query;
+		const { page = 1, limit = 10, search, startTime, endTime, isRated, sortBy, sortOrder, status } = query;
 
 		const queryBuilder = this.contestRepository
 			.createQueryBuilder('contest')
 			.leftJoinAndSelect('contest.creator', 'creator')
+			.leftJoinAndSelect('contest.participants', 'participants')
 			.skip((page - 1) * limit)
 			.take(limit);
 
@@ -84,6 +92,22 @@ export class ContestService {
 
 		if (endTime) {
 			queryBuilder.andWhere('contest.endTime <= :endTime', { endTime });
+		}
+
+		// Filter by status if provided
+		if (status) {
+			const now = new Date();
+			switch (status) {
+				case 'PENDING':
+					queryBuilder.andWhere('contest.startTime > :now', { now });
+					break;
+				case 'RUNNING':
+					queryBuilder.andWhere('contest.startTime <= :now AND contest.endTime >= :now', { now });
+					break;
+				case 'ENDED':
+					queryBuilder.andWhere('contest.endTime < :now', { now });
+					break;
+			}
 		}
 
 		if (sortBy && sortOrder) {
@@ -106,7 +130,10 @@ export class ContestService {
 	}
 
 	async findOne(slug: string): Promise<Contest> {
-		const contest = await this.contestRepository.findOneBy({ slug });
+		const contest = await this.contestRepository.findOne({
+			where: { slug },
+			relations: ['creator', 'problems', 'submissions', 'submissions.author', 'submissions.problem', 'participants'],
+		});
 		if (!contest) {
 			throw new NotFoundException(`Contest with slug '${slug}' not found`);
 		}
@@ -132,12 +159,19 @@ export class ContestService {
 	async join(id: string, user: User): Promise<Contest> {
 		const contest = await this.findContestById(id, ['participants']);
 
+		if (contest.getStatus() !== ContestStatus.RUNNING) {
+			throw new BadRequestException('Contest is not in RUNNING state');
+		}
+
 		// Check if user is already a participant to avoid duplicates
 		const isAlreadyParticipant = contest.participants.some((p) => p.id === user.id);
 		if (!isAlreadyParticipant) {
 			contest.participants.push(user);
 			await this.contestRepository.save(contest);
 		}
+
+		user.joiningContest = contest;
+		await this.userRepository.save(user);
 
 		return contest;
 	}
@@ -148,6 +182,9 @@ export class ContestService {
 		// Remove user from participants but keep standings for history
 		contest.participants = contest.participants.filter((p) => p.id !== user.id);
 		await this.contestRepository.save(contest);
+
+		user.joiningContest = null;
+		await this.userRepository.save(user);
 
 		return contest;
 	}
@@ -162,9 +199,9 @@ export class ContestService {
 		}
 
 		// Avoid adding duplicate problems
-		const existingProblemIds = new Set(contest.problems.map(p => p.id));
-		const newProblems = problems.filter(p => !existingProblemIds.has(p.id));
-		
+		const existingProblemIds = new Set(contest.problems.map((p) => p.id));
+		const newProblems = problems.filter((p) => !existingProblemIds.has(p.id));
+
 		if (newProblems.length > 0) {
 			contest.problems.push(...newProblems);
 			await this.contestRepository.save(contest);
@@ -194,9 +231,6 @@ export class ContestService {
 		const contest = await this.findContestById(id, ['creator']);
 		this.checkContestOwnership(contest, user);
 
-		// Set status to RUNNING
-		contest.status = ContestStatus.RUNNING;
-		
 		// Adjust start time if needed
 		const now = new Date();
 		if (now < contest.startTime) {
@@ -210,9 +244,6 @@ export class ContestService {
 		const contest = await this.findContestById(id, ['creator']);
 		this.checkContestOwnership(contest, user);
 
-		// Set status to ENDED
-		contest.status = ContestStatus.ENDED;
-		
 		// Adjust end time if needed
 		const now = new Date();
 		if (now < contest.endTime) {
@@ -220,29 +251,25 @@ export class ContestService {
 		}
 
 		const updatedContest = await this.contestRepository.save(contest);
-		
+
 		// Update ratings if this is a rated contest
 		if (contest.isRated && !contest.isRatingUpdated) {
-			try {
-				await this.updateRatings(id);
-				this.logger.log(`Successfully updated ratings for contest ${id}`);
-			} catch (error) {
-				this.logger.error(`Failed to update ratings for contest ${id}: ${error.message}`);
-			}
+			await this.updateRatings(id);
+			this.logger.log(`Successfully updated ratings for contest ${id}`);
 		}
-		
+
 		return updatedContest;
 	}
 
 	async getStandings(id: string): Promise<ContestStandingsDto> {
-		const contest = await this.findContestById(id, ['participants']);
+		const contest = await this.findContestById(id, ['participants', 'problems']);
 
 		// Get all submissions for this contest within the time range
 		const submissions = await this.submissionRepository
 			.createQueryBuilder('submission')
 			.leftJoinAndSelect('submission.author', 'author')
 			.leftJoinAndSelect('submission.problem', 'problem')
-			.leftJoinAndSelect('submission.result', 'result')
+			.leftJoinAndSelect('submission.results', 'results')
 			.where('submission.contest.id = :contestId', { contestId: id })
 			.andWhere('submission.submittedAt >= :startTime', { startTime: contest.startTime })
 			.andWhere('submission.submittedAt <= :endTime', { endTime: contest.endTime })
@@ -259,11 +286,19 @@ export class ContestService {
 			// For now, we'll leave them as undefined
 		}
 
+		// Prepare problems data
+		const problems = contest.problems.map((problem) => ({
+			id: problem.id,
+			title: problem.title,
+			maxScore: problem.point,
+		}));
+
 		return {
 			contestId: contest.id,
 			isRated: contest.isRated,
 			isRatingUpdated: contest.isRatingUpdated,
 			penalty: contest.penalty,
+			problems: problems,
 			standings: rankedStandings,
 		};
 	}
@@ -273,22 +308,22 @@ export class ContestService {
 
 		// Group submissions by user and problem
 		const userProblemSubmissions = new Map<string, Map<string, Submission[]>>();
-		
+
 		for (const sub of submissions) {
 			if (!sub.author || !sub.problem) continue;
-			
+
 			const userId = sub.author.id;
 			const problemId = sub.problem.id;
-			
+
 			if (!userProblemSubmissions.has(userId)) {
 				userProblemSubmissions.set(userId, new Map<string, Submission[]>());
 			}
-			
+
 			const userSubmissions = userProblemSubmissions.get(userId)!;
 			if (!userSubmissions.has(problemId)) {
 				userSubmissions.set(problemId, []);
 			}
-			
+
 			userSubmissions.get(problemId)!.push(sub);
 		}
 
@@ -297,7 +332,7 @@ export class ContestService {
 			// Get the first submission to extract user info
 			const firstProblemSubmissions = Array.from(problemSubmissions.values())[0];
 			const firstSubmission = firstProblemSubmissions[0];
-			
+
 			if (!standingsMap.has(userId)) {
 				standingsMap.set(userId, {
 					rank: 0,
@@ -305,7 +340,7 @@ export class ContestService {
 					username: firstSubmission.author.username,
 					fullname: firstSubmission.author.fullname,
 					totalScore: 0,
-					totalTime: 0,
+					totalTime: 0, // ms
 					problems: {},
 				});
 			}
@@ -315,12 +350,16 @@ export class ContestService {
 			// For each problem, find the maximum score and related info
 			for (const [problemId, submissions] of problemSubmissions) {
 				let maxScore = 0;
-				let timeToMaxScore = 0;
+				let timeToMaxScore = 0; // ms
 				let wrongSubmissionsCount = 0;
 				let maxScoreSubmission: Submission | null = null;
+				let isAc = false;
 
 				// Find the submission with maximum score
 				for (const sub of submissions) {
+					if (sub.status === SubmissionStatus.ACCEPTED) {
+						isAc = true;
+					}
 					if (sub.totalScore > maxScore) {
 						maxScore = sub.totalScore;
 						maxScoreSubmission = sub;
@@ -329,13 +368,12 @@ export class ContestService {
 
 				// Count wrong submissions before achieving max score
 				if (maxScoreSubmission) {
-					// Time to achieve max score
-					timeToMaxScore = (maxScoreSubmission.submittedAt.getTime() - contest.startTime.getTime()) / 1000;
-					
+					// Time to achieve max score (ms)
+					timeToMaxScore = maxScoreSubmission.submittedAt.getTime() - contest.startTime.getTime();
+
 					// Count wrong submissions before the max score submission
 					for (const sub of submissions) {
-						if (sub.submittedAt < maxScoreSubmission.submittedAt && 
-							sub.status !== SubmissionStatus.ACCEPTED) {
+						if (sub.submittedAt < maxScoreSubmission.submittedAt && sub.status !== SubmissionStatus.ACCEPTED) {
 							wrongSubmissionsCount++;
 						}
 					}
@@ -348,15 +386,16 @@ export class ContestService {
 				userStanding.problems[problemId] = {
 					problemId: problemId,
 					score: maxScore,
-					time: timeToMaxScore,
+					time: timeToMaxScore, // ms
 					wrongSubmissionsCount: wrongSubmissionsCount,
+					isAc,
 				};
 
 				// Update user totals
 				userStanding.totalScore += maxScore;
-				
-				// Calculate penalty time if applicable
-				const penaltyTime = wrongSubmissionsCount * (contest.penalty || 0);
+
+				// Calculate penalty time in ms (penalty is in seconds)
+				const penaltyTime = wrongSubmissionsCount * (contest.penalty || 0) * 1000;
 				userStanding.totalTime += timeToMaxScore + penaltyTime;
 			}
 		}
@@ -385,92 +424,89 @@ export class ContestService {
 	// Method to update ratings after contest ends
 	async updateRatings(id: string): Promise<void> {
 		const contest = await this.findContestById(id, ['participants']);
-		
+
 		// Check if rating update is applicable
 		if (!contest.isRated || contest.isRatingUpdated) {
 			return;
 		}
-		
+
 		// Get standings for rating calculation
 		const standingsDto = await this.getStandings(id);
 		const standings = standingsDto.standings;
-		
+
 		// Get users with their current ratings
-		const userIds = standings.map(s => s.userId);
+		const userIds = standings.map((s) => s.userId);
 		const users = await this.userRepository.find({
 			where: { id: In(userIds) },
-			relations: ['joinedContests']
+			relations: ['joinedContests'],
 		});
-		
+
 		const userMap = new Map<string, User>();
-		users.forEach(user => userMap.set(user.id, user));
-		
+		users.forEach((user) => userMap.set(user.id, user));
+
 		// Calculate new ratings for each user
 		const ratingUpdates: { userId: string; newRating: number }[] = [];
-		
+
 		for (const standing of standings) {
 			const user = userMap.get(standing.userId);
 			if (!user) continue;
-			
+
 			// Get user's current rating (last rating in history or default 1500)
-			const currentRating = user.rating && user.rating.length > 0 
-				? user.rating[user.rating.length - 1] 
-				: 1500;
-			
+			const currentRating = user.rating && user.rating.length > 0 ? user.rating[user.rating.length - 1] : 1500;
+
 			// Calculate expected score against all other participants
 			let totalExpectedScore = 0;
-			
+
 			for (const opponentStanding of standings) {
 				if (opponentStanding.userId === standing.userId) continue;
-				
+
 				const opponent = userMap.get(opponentStanding.userId);
 				if (!opponent) continue;
-				
-				const opponentRating = opponent.rating && opponent.rating.length > 0 
-					? opponent.rating[opponent.rating.length - 1] 
-					: 1500;
-				
+
+				const opponentRating = opponent.rating && opponent.rating.length > 0 ? opponent.rating[opponent.rating.length - 1] : 1500;
+
 				// Expected score formula
 				const expectedScore = 1 / (1 + Math.pow(10, (opponentRating - currentRating) / 400));
 				totalExpectedScore += expectedScore;
 			}
-			
-			// Actual score is based on user's rank
-			const actualScore = standings.length - standing.rank; // Higher rank = higher score
-			
-			// Normalize actual score
-			const normalizedActualScore = standings.length > 1 
-				? actualScore / (standings.length - 1) 
-				: 1;
-			
+
+			// Actual score based on rank (1st place = 1.0, last place = 0.0)
+			const actualScore = standings.length > 1 ? (standings.length - standing.rank) / (standings.length - 1) : 1.0;
+
 			// K factor decreases with more contests (user's contest participation count)
 			const contestCount = user.joinedContests ? user.joinedContests.length : 0;
 			const K = Math.max(10, 50 - contestCount); // Minimum K of 10, max of 50
-			
+
 			// Calculate new rating
-			const newRating = currentRating + K * (normalizedActualScore - totalExpectedScore);
-			
+			const newRating = currentRating + K * (actualScore - totalExpectedScore);
+
 			ratingUpdates.push({
 				userId: standing.userId,
-				newRating: Math.round(newRating)
+				newRating: Math.round(newRating),
 			});
 		}
-		
+
 		// Update user ratings
 		for (const update of ratingUpdates) {
 			const user = userMap.get(update.userId);
 			if (!user) continue;
-			
+
+			// Get old rating before updating
+			const oldRating = user.rating && user.rating.length > 0 ? user.rating[user.rating.length - 1] : 1500;
+
 			// Add new rating to rating history
 			if (!user.rating) {
 				user.rating = [];
 			}
 			user.rating.push(update.newRating);
-			
+
 			// Save updated user
 			await this.userRepository.save(user);
+
+			// Send rating update notification
+			await this.notificationService.createUpdateRatingNotification(user, contest, oldRating, update.newRating);
 		}
-		
+
 		// Mark contest as rating updated
 		contest.isRatingUpdated = true;
 		await this.contestRepository.save(contest);
@@ -480,34 +516,34 @@ export class ContestService {
 	@Cron(CronExpression.EVERY_MINUTE)
 	async updateRatingsForEndedContests(): Promise<void> {
 		this.logger.log('Checking for contests that need rating updates...');
-		
+
 		try {
 			// Find all contests that are ended, rated, but ratings haven't been updated yet
-			const contests = await this.contestRepository.find({
+			// Using the getStatus() method to determine if a contest has ended
+			const allContests = await this.contestRepository.find({
 				where: {
-					status: ContestStatus.ENDED,
 					isRated: true,
 					isRatingUpdated: false,
 				},
 			});
-			
-			if (contests.length === 0) {
+
+			// Filter contests that are actually ended based on time
+			const endedContests = allContests.filter((contest) => contest.getStatus() === ContestStatus.ENDED);
+
+			if (endedContests.length === 0) {
 				this.logger.log('No contests found that need rating updates.');
 				return;
 			}
-			
-			this.logger.log(`Found ${contests.length} contests that need rating updates.`);
-			
+
+			this.logger.log(`Found ${endedContests.length} contests that need rating updates.`);
+
 			// Update ratings for each contest
-			for (const contest of contests) {
-				try {
-					await this.updateRatings(contest.id);
-					this.logger.log(`Successfully updated ratings for contest ${contest.id}`);
-				} catch (error) {
-					this.logger.error(`Failed to update ratings for contest ${contest.id}: ${error.message}`);
-				}
+			for (const contest of endedContests) {
+				await this.updateRatings(contest.id);
+				this.logger.log(`Successfully updated ratings for contest ${contest.id}`);
 			}
 		} catch (error) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			this.logger.error(`Error checking for contests that need rating updates: ${error.message}`);
 		}
 	}

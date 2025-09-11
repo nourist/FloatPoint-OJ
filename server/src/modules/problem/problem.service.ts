@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as path from 'path';
 import slug from 'slugify';
 import { In, Repository } from 'typeorm';
 import { Transactional } from 'typeorm-transactional';
@@ -70,12 +69,12 @@ export class ProblemService {
 			.select('COUNT(submission.id)', 'submissionCount')
 			.addSelect('SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END)', 'acCount')
 			.addSelect(
-				'CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END',
+				`CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END`,
 				'acRate',
 			)
 			.where('submission.problemId = :problemId', { problemId: problem.id })
 			.setParameter('status', SubmissionStatus.ACCEPTED)
-			.getRawOne();
+			.getRawOne<{ submissionCount: string; acCount: string; acRate: string }>();
 
 		return {
 			submissionCount: Number(result?.submissionCount) || 0,
@@ -214,11 +213,15 @@ export class ProblemService {
 		// Map statistics by problem ID to avoid duplication from joins
 		const statById = new Map<string, { ac: number; total: number; rate: number }>();
 		for (const r of raw) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			const pid = String(r.problem_id);
 			if (!statById.has(pid)) {
 				statById.set(pid, {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					ac: Number(r.ac_count) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					total: Number(r.total_submissions) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					rate: Number(r.ac_rate) || 0,
 				});
 			}
@@ -280,22 +283,19 @@ export class ProblemService {
 
 	async update(id: string, data: UpdateProblemDto) {
 		const problem = await this.getProblemById(id);
+		const { tags, statement, ...rest } = data;
 
-		if (data.tags) {
-			const tagEntities = await this.getOrCreateTags(data.tags);
+		if (tags) {
+			const tagEntities = await this.getOrCreateTags(tags);
 			problem.tags = tagEntities;
 		}
 
-		Object.assign(problem, data);
-
-		if (data.title) {
-			const newProblemSlug = slug(data.title, { lower: true });
-			if (await this.isSlugExists(newProblemSlug)) {
-				this.logger.log(`Problem with slug ${newProblemSlug} already exists`);
-				throw new BadRequestException(`Problem with slug ${newProblemSlug} already exists`);
-			}
-			problem.slug = newProblemSlug;
+		// Handle statement update specifically
+		if (statement !== undefined) {
+			problem.statement = statement;
 		}
+
+		Object.assign(problem, rest);
 
 		return this.problemRepository.save(problem);
 	}

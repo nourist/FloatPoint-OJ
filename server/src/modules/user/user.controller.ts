@@ -13,29 +13,29 @@ export class UserController {
 
 	@Patch('/me')
 	@UseGuards(JwtAuthGuard)
-	updateProfile(@GetUser() user: User, @Body() body: UpdateUserDto) {
+	async updateProfile(@GetUser() user: User, @Body() body: UpdateUserDto) {
 		return {
 			message: 'Update profile',
-			user: this.userService.updateProfile(user.id, body),
+			user: await this.userService.updateProfile(user.id, body),
 		};
 	}
 
 	@Patch('/me/avatar')
 	@UseGuards(JwtAuthGuard)
 	@UseInterceptors(FileInterceptor('avatar'))
-	updateAvatar(@GetUser() user: User, @UploadedFile() file: Express.Multer.File) {
+	async updateAvatar(@GetUser() user: User, @UploadedFile() file: Express.Multer.File) {
 		return {
 			message: 'Update avatar',
-			user: this.userService.updateAvatar(user.id, file),
+			user: await this.userService.updateAvatar(user.id, file),
 		};
 	}
 
 	@Patch('/me/notification-settings')
 	@UseGuards(JwtAuthGuard)
-	updateNotificationSettings(@GetUser() user: User, @Body() body: UpdateNotificationSettingsDto) {
+	async updateNotificationSettings(@GetUser() user: User, @Body() body: UpdateNotificationSettingsDto) {
 		return {
 			message: 'Update notification settings',
-			user: this.userService.updateNotificationSettings(user.id, body),
+			user: await this.userService.updateNotificationSettings(user.id, body),
 		};
 	}
 
