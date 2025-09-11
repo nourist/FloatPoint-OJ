@@ -61,6 +61,7 @@ services:
         privileged: true
         environment:
             JUDGER_ID: ${JUDGER_ID:-1}
+
             MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
             MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in judger
             MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in judger
