@@ -25,11 +25,11 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 	const getPodiumIcon = () => {
 		switch (position) {
 			case 1:
-				return <Crown className="h-8 w-8 text-yellow-500" />;
+				return <Crown className="h-8 w-8 text-yellow-500 dark:text-yellow-400" />;
 			case 2:
-				return <Medal className="h-8 w-8 text-gray-400" />;
+				return <Medal className="h-8 w-8 text-gray-400 dark:text-gray-300" />;
 			case 3:
-				return <Medal className="h-8 w-8 text-amber-600" />;
+				return <Medal className="h-8 w-8 text-amber-600 dark:text-amber-400" />;
 			default:
 				return null;
 		}
@@ -38,13 +38,13 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 	const getPodiumColor = () => {
 		switch (position) {
 			case 1:
-				return 'border-yellow-200 bg-yellow-50';
+				return 'border-yellow-200 bg-yellow-50 dark:border-yellow-900/50 dark:bg-yellow-900/10';
 			case 2:
-				return 'border-gray-200 bg-gray-50';
+				return 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800';
 			case 3:
-				return 'border-amber-200 bg-amber-50';
+				return 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-900/10';
 			default:
-				return 'border-gray-200 bg-gray-50';
+				return 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800';
 		}
 	};
 
@@ -58,7 +58,7 @@ export const PodiumCard = ({ user, position, mode }: PodiumCardProps) => {
 			</div>
 			<div className="space-y-3 text-center">
 				<Link href={`/profile/${user.username}`} className="group">
-					<Avatar className="mx-auto h-16 w-16 border-2 border-white shadow">
+					<Avatar className="mx-auto h-16 w-16 border-2 border-white shadow dark:border-gray-700">
 						<AvatarImage src={user.avatarUrl || undefined} alt={user.username} />
 						<AvatarFallback className="text-lg font-semibold">{user.username.charAt(0).toUpperCase()}</AvatarFallback>
 					</Avatar>
