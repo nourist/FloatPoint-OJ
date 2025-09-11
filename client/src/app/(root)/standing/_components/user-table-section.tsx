@@ -8,7 +8,6 @@ import useSWR from 'swr';
 import { SearchFilter } from './search-filter';
 import { UserTable } from './user-table';
 import PaginationControls from '~/components/pagination-controls';
-import useDebounce from '~/hooks/use-debounce';
 import { createClientService } from '~/lib/service-client';
 import { userServiceInstance } from '~/services/user';
 
@@ -20,18 +19,15 @@ export const UserTableSection = () => {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(20);
 
-	// Debounce search term
-	const debouncedSearch = useDebounce(search);
-
 	// SWR data fetching for paginated table (always sorted by rating for consistency)
 	const userService = createClientService(userServiceInstance);
 	const { data, error, isLoading } = useSWR(
-		['users-table', debouncedSearch, page, limit],
+		['users-table', search, page, limit],
 		() =>
 			userService.getUsers({
 				sortBy: 'rating',
 				sortOrder: 'DESC',
-				q: debouncedSearch || undefined,
+				q: search || undefined,
 				page,
 				limit,
 			}),

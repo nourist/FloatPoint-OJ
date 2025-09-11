@@ -1,14 +1,13 @@
 'use client';
 
-import { Bell } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb';
-import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
 import { SidebarTrigger } from '~/components/ui/sidebar';
+import NotificationPopover from './notification-popover';
 
 const AdminHeader = () => {
 	const currentPath = usePathname();
@@ -42,9 +41,7 @@ const AdminHeader = () => {
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
-			<Button variant="ghost" size="icon" className="text-card-foreground/80 ml-auto size-8">
-				<Bell className="size-5" />
-			</Button>
+			<NotificationPopover />
 		</div>
 	);
 };

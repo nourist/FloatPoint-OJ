@@ -10,9 +10,13 @@ import { getContestStatus } from '~/types/contest.type';
 
 interface InfoProps {
 	contest: Contest;
+	startDate: string;
+	startTime: string;
+	endDate: string;
+	endTime: string;
 }
 
-export const ContestInfoTab = ({ contest }: InfoProps) => {
+export const ContestInfoTab = ({ contest, startDate, startTime, endDate, endTime }: InfoProps) => {
 	const t = useTranslations('contest.detail');
 	const status = getContestStatus(contest);
 
@@ -79,8 +83,8 @@ export const ContestInfoTab = ({ contest }: InfoProps) => {
 					<div>
 						<p className="text-muted-foreground text-sm">{t('start_time')}</p>
 						<div className="flex items-center gap-2">
-							<p className="text-sm font-semibold">{new Date(contest.startTime).toLocaleDateString()}</p>
-							<p className="text-muted-foreground text-xs">{new Date(contest.startTime).toLocaleTimeString()}</p>
+							<p className="text-sm font-semibold">{startDate}</p>
+							<p className="text-muted-foreground text-xs">{startTime}</p>
 						</div>
 					</div>
 				</div>
@@ -92,9 +96,9 @@ export const ContestInfoTab = ({ contest }: InfoProps) => {
 					<div>
 						<p className="text-muted-foreground text-sm">{t('end_time')}</p>
 						<div className="flex items-center gap-2">
-							<p className="text-sm font-semibold">{new Date(contest.endTime).toLocaleDateString()}</p>
-							<p className="text-muted-foreground text-xs">{new Date(contest.endTime).toLocaleTimeString()}</p>
-						</div>
+							<p className="text-sm font-semibold">{endDate}</p>
+							<p className="text-muted-foreground text-xs">{endTime}</p>
+		</div>
 					</div>
 				</div>
 

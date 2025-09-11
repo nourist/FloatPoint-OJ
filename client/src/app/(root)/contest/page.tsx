@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import useSWR from 'swr';
 
+import { ContestSearch } from './_components/contest-search';
 import PaginationControls from '~/components/pagination-controls';
 import { Badge } from '~/components/ui/badge';
-import { Input } from '~/components/ui/input';
 import { Skeleton } from '~/components/ui/skeleton';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
@@ -127,18 +127,13 @@ const ContestPage = () => {
 				</div>
 
 				{/* Search */}
-				<div className="relative flex-1">
-					<Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform" />
-					<Input
-						placeholder={t('search_placeholder')}
-						value={searchQuery}
-						onChange={(e) => {
-							setSearchQuery(e.target.value);
-							setPage(1);
-						}}
-						className="bg-card w-full pl-10"
-					/>
-				</div>
+				<ContestSearch 
+					searchQuery={searchQuery} 
+					onSearchChange={(query) => {
+						setSearchQuery(query);
+						setPage(1);
+					}} 
+				/>
 			</div>
 
 			{/* Contest List */}

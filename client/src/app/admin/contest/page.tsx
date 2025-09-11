@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import useSWR from 'swr';
 
+import { AdminContestSearch } from './_components/admin-contest-search';
 import PaginationControls from '~/components/pagination-controls';
 import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
 import { contestServiceInstance } from '~/services/contest';
@@ -125,7 +125,13 @@ const AdminContestPage = () => {
 				</Button>
 			</div>
 
-			<Input placeholder={t('search_placeholder')} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full" />
+			<AdminContestSearch 
+				searchQuery={searchQuery} 
+				onSearchChange={(query) => {
+					setSearchQuery(query);
+					setPage(1); // Reset to first page when search changes
+				}} 
+			/>
 
 			{isLoading ? (
 				<div className="p-8 text-center">{t('loading')}</div>
