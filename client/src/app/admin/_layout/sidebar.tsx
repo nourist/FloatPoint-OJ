@@ -1,7 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, Sun, Trophy } from 'lucide-react';
+import { Bell, ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, Sun, Trophy } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -67,6 +67,11 @@ const AdminSidebar = () => {
 			title: t('judger'),
 			url: '/judger',
 			icon: Server,
+		},
+		{
+			title: t('notification'),
+			url: '/notification',
+			icon: Bell,
 		},
 	];
 

@@ -12,6 +12,10 @@ export interface GetNotificationsPayload {
 	status?: NotificationStatus;
 }
 
+export interface SendSystemNotificationPayload {
+	content: string;
+}
+
 // Responses
 export interface NotificationsResponse {
 	message: string;
@@ -34,5 +38,9 @@ export const notificationServiceInstance = (http: ApiInstance) => ({
 
 	markMultipleAsRead: (ids: string[]) => {
 		return http.patch<SimpleMessageResponse>('/notification/batch/read', { ids });
+	},
+
+	sendSystemNotification: (payload: SendSystemNotificationPayload) => {
+		return http.post<SimpleMessageResponse>('/notification/system', payload);
 	},
 });

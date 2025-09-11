@@ -616,6 +616,7 @@
 			"contest": "Contest",
 			"user": "User",
 			"judger": "Judger",
+			"notification": "Notification",
 			"profile": "Profile",
 			"logout": "Logout",
 			"appearance": "Appearance",
@@ -1014,6 +1015,20 @@
 			"judgerIdleDescription": "This judger is ready to process submissions",
 			"noJudgers": "No Judgers Found",
 			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
 		}
 	},
 	"notifications": {
