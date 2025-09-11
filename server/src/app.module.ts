@@ -22,6 +22,7 @@ import { MinioModule } from './modules/minio/minio.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { ProblemModule } from './modules/problem/problem.module';
 import { RedisModule } from './modules/redis/redis.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
 import { SubmissionModule } from './modules/submission/submission.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -145,6 +146,7 @@ import { UserModule } from './modules/user/user.module';
 		NotificationModule,
 		JudgerModule,
 		RedisModule,
+		StatisticsModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
