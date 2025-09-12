@@ -1,5 +1,8 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import useSWR from 'swr';
 
 import ContestCountdown from '~/components/contest-countdown';
 import {
@@ -11,9 +14,10 @@ import {
   TableRow,
 } from '~/components/ui/table';
 import UserAvatar from '~/components/user-avatar';
-import { createServerService } from '~/lib/service-server';
+import { createClientService } from '~/lib/service-client';
 import { statisticsServiceInstance } from '~/services/statistics';
 import { userServiceInstance } from '~/services/user';
+import { authServiceInstance } from '~/services/auth';
 import { ContestStatus, getContestStatus } from '~/types/contest.type';
 import { User } from '~/types/user.type';
 import { Button } from '~/components/ui/button';
@@ -22,20 +26,47 @@ interface Props {
   user: User | null;
 }
 
-const Sidebar = async ({ user }: Props) => {
-  const t = await getTranslations('home.sidebar');
-  const statisticsService = await createServerService(statisticsServiceInstance);
-  const userService = await createServerService(userServiceInstance);
+const Sidebar = ({ user: initialUser }: Props) => {
+  const t = useTranslations('home.sidebar');
+  const userService = createClientService(userServiceInstance);
+  const authService = createClientService(authServiceInstance);
+  const statisticsService = createClientService(statisticsServiceInstance);
 
-  const [topUsers, hotProblems, score] = await Promise.all([
-    userService
-      .getUsers({ sortBy: 'rating', sortOrder: 'DESC', limit: 3 })
-      .then((res) => res.users),
-    statisticsService.getPopularProblems(3).then((res) => res.data),
-    user
-      ? userService.getUserScore(user.username).then((res) => res.score)
-      : Promise.resolve(0),
-  ]);
+  // Use SWR for user data with error handling
+  const { data: user } = useSWR(
+    '/auth/me',
+    () => authService.getProfile().catch(() => null),
+    {
+      fallbackData: initialUser,
+      revalidateOnMount: true,
+    }
+  );
+
+  // Use SWR for other data with default error handling
+  const { data: topUsersData, error: topUsersError } = useSWR(
+    '/users/top',
+    () => userService.getUsers({ sortBy: 'rating', sortOrder: 'DESC', limit: 3 }).then((res) => res.users)
+  );
+
+  const { data: hotProblemsData, error: hotProblemsError } = useSWR(
+    '/statistics/popular-problems',
+    () => statisticsService.getPopularProblems(3).then((res) => res.data)
+  );
+
+  const { data: scoreData, error: scoreError } = useSWR(
+    user ? `/user/${user.username}/score` : null,
+    () => user ? userService.getUserScore(user.username).then((res) => res.score) : Promise.resolve(0)
+  );
+
+  // Handle errors for non-user APIs
+
+	if (topUsersError) throw topUsersError;
+	if (hotProblemsError) throw hotProblemsError;
+	if (scoreError) throw scoreError;
+	
+  const topUsers = topUsersData || [];
+  const hotProblems = hotProblemsData || [];
+  const score = scoreData || 0;
 
   return (
     <div className="w-80 space-y-6 max-md:hidden">

@@ -1150,7 +1150,60 @@
 			"system": "System Notification",
 			"new_problem_available": "New Problem Available",
 			"new_contest_available": "New Contest Available",
-			"new_blog_post": "New Blog Post"
+			    "new_blog_post": "New Blog Post"
 		}
+	},
+	"settings": {
+    "title": "Settings",
+    "description": "Manage your account settings and preferences.",
+    "tabs": {
+      "basic": "Basic",
+      "profile": "Profile",
+      "notification": "Notification"
+    },
+    "basic": {
+      "theme": {
+        "title": "Theme",
+        "description": "Select a theme for the application.",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+		"auto":"Auto"
+      },
+      "language": {
+        "title": "Language",
+        "description": "Select a language for the application."
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "Update your profile information.",
+      "form": {
+        "username": "Username",
+        "fullname": "Full Name",
+        "bio": "Bio",
+        "save": "Save Changes",
+        "saving": "Saving...",
+        "change_avatar": "Change Avatar",
+        "reset_password": "Reset Password",
+        "update_success": "Profile updated successfully!",
+        "update_error": "Failed to update profile. Please try again."
+      }
+    },
+    "notification": {
+      "title": "Notifications",
+      "description": "Configure your notification preferences.",
+      "form": {
+        "new_blog": "New Blog Posts",
+        "new_problem": "New Problems",
+        "new_contest": "New Contests",
+        "update_rating": "Rating Updates",
+        "system": "System Notifications",
+        "save": "Save Changes",
+        "saving": "Saving...",
+        "update_success": "Notification settings updated successfully!",
+        "update_error": "Failed to update notification settings. Please try again."
+      }
+    }
+  }
 	}
-}

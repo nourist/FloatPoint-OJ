@@ -10,15 +10,28 @@ const nextConfig: NextConfig = {
 				source: '/storage/:path*',
 				destination: new URL('/storage/:path*', apiUrl).toString(),
 			},
+			{
+				source: '/avatars/:path*',
+				destination: new URL('/storage/avatars/:path*', apiUrl).toString(),
+			},
 		];
 	},
 	images: {
+		dangerouslyAllowSVG: true,
+		contentDispositionType: 'attachment',
+		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 		remotePatterns: [
 			{
 				protocol: apiUrl.protocol.replaceAll(':', '') as 'http' | 'https',
 				hostname: apiUrl.hostname,
 				port: apiUrl.port,
 				pathname: '/storage/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'lh3.googleusercontent.com',
+				port: '',
+				pathname: '/**',
 			},
 		],
 	},
