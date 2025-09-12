@@ -119,7 +119,18 @@
 	"home": {
 		"blog": "Blog",
 		"description": "Latest articles, tutorials, and insights from the programming community",
-		"new": "New"
+		"new": "New",
+		"sidebar": {
+			"rating": "Rating",
+			"score": "Score",
+			"current_contest": "Current Contest",
+			"ending_in": "Ending in",
+			"join": "Join",
+			"top_raters": "Top Raters",
+			"hot_problems": "Hot Problems",
+			"my_stats": "My Stats",
+			"problem": "Problem"
+		}
 	},
 	"pagination": {
 		"view": "View",

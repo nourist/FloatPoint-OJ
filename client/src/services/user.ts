@@ -30,6 +30,11 @@ export interface UsersResponse {
 	total: number;
 }
 
+export interface UserScoreResponse {
+  message: string;
+  score: number;
+}
+
 // Functions
 export const userServiceInstance = (http: ApiInstance) => ({
 	updateProfile: (payload: UpdateUserPayload) => {
@@ -54,7 +59,11 @@ export const userServiceInstance = (http: ApiInstance) => ({
 		return http.get<UserResponse>(`/users/${username}`);
 	},
 
-	getUsers: (params: GetUsersPayload) => {
+	  getUsers: (params: GetUsersPayload) => {
 		return http.get<UsersResponse>('/users', { params });
+	},
+
+	getUserScore: (username: string) => {
+		return http.get<UserScoreResponse>(`/users/${username}/score`);
 	},
 });

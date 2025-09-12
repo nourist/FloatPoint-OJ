@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
 import List from './_components/list';
+import Sidebar from './_components/sidebar';
 import { Button } from '~/components/ui/button';
 import { createServerService } from '~/lib/service-server';
 import { authServiceInstance } from '~/services/auth';
@@ -33,7 +34,7 @@ const Home = async () => {
 				</div>
 				<List />
 			</div>
-			<div className="h-100 w-80 bg-red-500 max-md:hidden"></div>
+			<Sidebar user={user} />
 		</div>
 	);
 };
