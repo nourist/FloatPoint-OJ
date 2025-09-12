@@ -49,9 +49,19 @@ export class UserController {
 
 	@Get()
 	async getUsers(@Query() getUsersDto: GetUsersDto) {
-		return {
+				return {
 			message: 'Get users',
 			...(await this.userService.getUsers(getUsersDto)),
+		};
+	}
+
+	@Get(':username/score')
+	async getUserScore(@Param('username') username: string) {
+		const user = await this.userService.getUserByUsername(username);
+		const score = await this.userService.getUserScore(user.id);
+		return {
+			message: 'Get user score',
+			score,
 		};
 	}
 }

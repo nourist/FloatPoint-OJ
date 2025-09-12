@@ -114,8 +114,41 @@ export class UserService {
 
 		const total = await baseQuery.getCount();
 
-		return { users: usersWithScore, total };
-	}
+		    return { users: usersWithScore, total };
+  }
+
+  async getUserScore(userId: string): Promise<number> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const scoreQuery = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin(
+        // Subquery to calculate total scores per user
+        (qb) =>
+          qb
+            .select('s."authorId"', 'userId')
+            .addSelect('SUM(s.max_score)', 'totalScore')
+            .from(
+              // Inner subquery to get max score per problem per user
+              (subQb) =>
+                subQb
+                  .select('s."authorId"', 'authorId')
+                  .addSelect('s."problemId"', 'problemId')
+                  .addSelect('MAX(s."totalScore")', 'max_score')
+                  .from('submissions', 's')
+                  .groupBy('s."authorId", s."problemId"'),
+              's',
+            )
+            .groupBy('s."authorId"'),
+        'user_scores',
+        'user_scores."userId" = user.id',
+      )
+      .addSelect('COALESCE(user_scores."totalScore", 0)', 'score')
+      .where('user.id = :userId', { userId })
+      .getRawOne();
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+    return scoreQuery ? parseFloat(scoreQuery.score) : 0;
+  }
 
 	async createUser(userData: { email: string; password: string; username: string }): Promise<User> {
 		const isUserExists = await this.checkEmailExists(userData.email);
