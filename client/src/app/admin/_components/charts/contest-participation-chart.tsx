@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { ChartContainer } from '~/components/ui/chart';
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { createClientService } from '~/lib/service-client';
 import { statisticsServiceInstance } from '~/services/statistics';
 
@@ -74,57 +75,62 @@ const ContestParticipationChart = () => {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<div className="overflow-x-auto">
-					<ChartContainer config={chartConfig} className="h-80 min-w-[600px]">
-						<ResponsiveContainer width="100%" height="100%">
-							<LineChart data={formattedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="monthDisplay" fontSize={12} />
-								<YAxis yAxisId="left" orientation="left" fontSize={12} />
-								<YAxis yAxisId="right" orientation="right" fontSize={12} />
-								<Tooltip
-									content={({ active, payload, label }) => {
-										if (!active || !payload?.length) return null;
+				<div className="h-80">
+					<ScrollArea className="h-full w-full overflow-y-hidden">
+						<div className="h-full min-w-[600px]">
+							<ChartContainer config={chartConfig} className="h-full w-full">
+								<ResponsiveContainer width="100%" height="100%">
+									<LineChart data={formattedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="monthDisplay" fontSize={12} />
+										<YAxis yAxisId="left" orientation="left" fontSize={12} />
+										<YAxis yAxisId="right" orientation="right" fontSize={12} />
+										<Tooltip
+											content={({ active, payload, label }) => {
+												if (!active || !payload?.length) return null;
 
-										return (
-											<div className="bg-background border-border/50 rounded-lg border p-3 shadow-xl">
-												<p className="mb-2 font-medium">{label}</p>
-												<div className="space-y-1">
-													{payload.map((item) => (
-														<div key={item.dataKey} className="flex items-center justify-between gap-4">
-															<div className="flex items-center gap-2">
-																<div className="h-2 w-2 rounded-full" style={{ backgroundColor: item.color }} />
-																<span className="text-sm">{item.name === 'contests' ? t('contests') : t('participants')}</span>
-															</div>
-															<span className="font-mono font-medium">{item.value?.toLocaleString()}</span>
+												return (
+													<div className="bg-background border-border/50 rounded-lg border p-3 shadow-xl">
+														<p className="mb-2 font-medium">{label}</p>
+														<div className="space-y-1">
+															{payload.map((item) => (
+																<div key={item.dataKey} className="flex items-center justify-between gap-4">
+																	<div className="flex items-center gap-2">
+																		<div className="h-2 w-2 rounded-full" style={{ backgroundColor: item.color }} />
+																		<span className="text-sm">{item.name === 'contests' ? t('contests') : t('participants')}</span>
+																	</div>
+																	<span className="font-mono font-medium">{item.value?.toLocaleString()}</span>
+																</div>
+															))}
 														</div>
-													))}
-												</div>
-											</div>
-										);
-									}}
-								/>
-								<Line
-									yAxisId="left"
-									type="monotone"
-									dataKey="contests"
-									stroke={chartConfig.contests.color}
-									strokeWidth={3}
-									dot={{ fill: chartConfig.contests.color, strokeWidth: 2, r: 5 }}
-									activeDot={{ r: 7, stroke: chartConfig.contests.color, strokeWidth: 2 }}
-								/>
-								<Line
-									yAxisId="right"
-									type="monotone"
-									dataKey="participants"
-									stroke={chartConfig.participants.color}
-									strokeWidth={3}
-									dot={{ fill: chartConfig.participants.color, strokeWidth: 2, r: 5 }}
-									activeDot={{ r: 7, stroke: chartConfig.participants.color, strokeWidth: 2 }}
-								/>
-							</LineChart>
-						</ResponsiveContainer>
-					</ChartContainer>
+													</div>
+												);
+											}}
+										/>
+										<Line
+											yAxisId="left"
+											type="monotone"
+											dataKey="contests"
+											stroke={chartConfig.contests.color}
+											strokeWidth={3}
+											dot={{ fill: chartConfig.contests.color, strokeWidth: 2, r: 5 }}
+											activeDot={{ r: 7, stroke: chartConfig.contests.color, strokeWidth: 2 }}
+										/>
+										<Line
+											yAxisId="right"
+											type="monotone"
+											dataKey="participants"
+											stroke={chartConfig.participants.color}
+											strokeWidth={3}
+											dot={{ fill: chartConfig.participants.color, strokeWidth: 2, r: 5 }}
+											activeDot={{ r: 7, stroke: chartConfig.participants.color, strokeWidth: 2 }}
+										/>
+									</LineChart>
+								</ResponsiveContainer>
+							</ChartContainer>
+						</div>
+						<ScrollBar orientation="horizontal" />
+					</ScrollArea>
 				</div>
 
 				{/* Legend */}

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { Badge } from '~/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table';
 import { getDifficultyColor } from '~/lib/difficulty-utils';
 import { cn } from '~/lib/utils';
@@ -55,62 +56,67 @@ const PopularProblemsTable = ({ data, isLoading }: PopularProblemsTableProps) =>
 				<CardDescription>{t('most_attempted_problems_description')}</CardDescription>
 			</CardHeader>
 			<CardContent className="px-6">
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead className="w-12">#</TableHead>
-							<TableHead>{tTable('title')}</TableHead>
-							<TableHead className="w-20">{tTable('difficulty')}</TableHead>
-							<TableHead className="text-center">{t('attempts')}</TableHead>
-							<TableHead className="text-center">{t('solved')}</TableHead>
-							<TableHead className="text-center">{t('success_rate')}</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{data.map((problem) => (
-							<TableRow key={problem.slug} className="hover:bg-muted/50">
-								<TableCell>
-									<div className="font-mono text-sm font-medium">{problem.rank}</div>
-								</TableCell>
-								<TableCell>
-									<div className="space-y-1">
-										<div className="line-clamp-1 font-medium" title={problem.title}>
-											{problem.title}
-										</div>
-										<div className="text-muted-foreground flex items-center gap-1 text-xs">
-											<Code className="h-3 w-3" />
-											{problem.slug}
-										</div>
-									</div>
-								</TableCell>
-								<TableCell>
-									<Badge variant="outline" className={cn('text-xs font-medium', getDifficultyColor(problem.difficulty as Difficulty))}>
-										{problem.difficulty}
-									</Badge>
-								</TableCell>
-								<TableCell className="text-center">
-									<div className="font-mono text-sm">{problem.attempts.toLocaleString()}</div>
-								</TableCell>
-								<TableCell className="text-center">
-									<div className="font-mono text-sm font-semibold">{problem.solved.toLocaleString()}</div>
-								</TableCell>
-								<TableCell className="text-center">
-									<div className="font-mono text-sm">
-										<span
-											className={cn('font-medium', {
-												'text-green-600': parseFloat(problem.success_rate) >= 50,
-												'text-yellow-600': parseFloat(problem.success_rate) >= 30 && parseFloat(problem.success_rate) < 50,
-												'text-red-600': parseFloat(problem.success_rate) < 30,
-											})}
-										>
-											{problem.success_rate}%
-										</span>
-									</div>
-								</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
+				<ScrollArea className="w-full overflow-y-hidden">
+					<div className="min-w-[600px]">
+						<Table>
+							<TableHeader>
+								<TableRow>
+									<TableHead className="w-12">#</TableHead>
+									<TableHead>{tTable('title')}</TableHead>
+									<TableHead className="w-20">{tTable('difficulty')}</TableHead>
+									<TableHead className="text-center">{t('attempts')}</TableHead>
+									<TableHead className="text-center">{t('solved')}</TableHead>
+									<TableHead className="text-center">{t('success_rate')}</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{data.map((problem) => (
+									<TableRow key={problem.slug} className="hover:bg-muted/50">
+										<TableCell>
+											<div className="font-mono text-sm font-medium">{problem.rank}</div>
+										</TableCell>
+										<TableCell>
+											<div className="space-y-1">
+												<div className="line-clamp-1 font-medium" title={problem.title}>
+													{problem.title}
+												</div>
+												<div className="text-muted-foreground flex items-center gap-1 text-xs">
+													<Code className="h-3 w-3" />
+													{problem.slug}
+												</div>
+											</div>
+										</TableCell>
+										<TableCell>
+											<Badge variant="outline" className={cn('text-xs font-medium', getDifficultyColor(problem.difficulty as Difficulty))}>
+												{problem.difficulty}
+											</Badge>
+										</TableCell>
+										<TableCell className="text-center">
+											<div className="font-mono text-sm">{problem.attempts.toLocaleString()}</div>
+										</TableCell>
+										<TableCell className="text-center">
+											<div className="font-mono text-sm font-semibold">{problem.solved.toLocaleString()}</div>
+										</TableCell>
+										<TableCell className="text-center">
+											<div className="font-mono text-sm">
+												<span
+													className={cn('font-medium', {
+														'text-green-600': parseFloat(problem.success_rate) >= 50,
+														'text-yellow-600': parseFloat(problem.success_rate) >= 30 && parseFloat(problem.success_rate) < 50,
+														'text-red-600': parseFloat(problem.success_rate) < 30,
+													})}
+												>
+													{problem.success_rate}%
+												</span>
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</div>
+					<ScrollBar orientation="horizontal" />
+				</ScrollArea>
 			</CardContent>
 		</Card>
 	);

@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import { Button } from '~/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { ChartContainer, ChartTooltipContent } from '~/components/ui/chart';
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { createClientService } from '~/lib/service-client';
 import { statisticsServiceInstance } from '~/services/statistics';
 
@@ -59,41 +60,46 @@ const UserActivityChart = () => {
 				</div>
 			</CardHeader>
 			<CardContent>
-				<div className="overflow-x-auto">
-					<ChartContainer config={chartConfig} className="h-80 min-w-[600px]">
-						<ResponsiveContainer width="100%" height="100%">
-							<LineChart data={data?.data}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="date" tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} />
-								<YAxis />
-								<Tooltip
-									content={({ active, payload, label }) => {
-										if (!active || !payload?.length) return null;
-										return (
-											<ChartTooltipContent
-												active={active}
-												payload={payload}
-												label={new Date(label).toLocaleDateString('en-US', {
-													weekday: 'long',
-													year: 'numeric',
-													month: 'long',
-													day: 'numeric',
-												})}
-											/>
-										);
-									}}
-								/>
-								<Line
-									type="monotone"
-									dataKey="new_registrations"
-									stroke={chartConfig.new_registrations.color}
-									strokeWidth={2}
-									dot={{ fill: chartConfig.new_registrations.color, strokeWidth: 2, r: 4 }}
-									activeDot={{ r: 6, stroke: chartConfig.new_registrations.color, strokeWidth: 2 }}
-								/>
-							</LineChart>
-						</ResponsiveContainer>
-					</ChartContainer>
+				<div className="h-80">
+					<ScrollArea className="h-full w-full overflow-y-hidden">
+						<div className="h-full min-w-[600px]">
+							<ChartContainer config={chartConfig} className="h-full w-full">
+								<ResponsiveContainer width="100%" height="100%">
+									<LineChart data={data?.data}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="date" tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} />
+										<YAxis />
+										<Tooltip
+											content={({ active, payload, label }) => {
+												if (!active || !payload?.length) return null;
+												return (
+													<ChartTooltipContent
+														active={active}
+														payload={payload}
+														label={new Date(label).toLocaleDateString('en-US', {
+															weekday: 'long',
+															year: 'numeric',
+															month: 'long',
+															day: 'numeric',
+														})}
+													/>
+												);
+											}}
+										/>
+										<Line
+											type="monotone"
+											dataKey="new_registrations"
+											stroke={chartConfig.new_registrations.color}
+											strokeWidth={2}
+											dot={{ fill: chartConfig.new_registrations.color, strokeWidth: 2, r: 4 }}
+											activeDot={{ r: 6, stroke: chartConfig.new_registrations.color, strokeWidth: 2 }}
+										/>
+									</LineChart>
+								</ResponsiveContainer>
+							</ChartContainer>
+						</div>
+						<ScrollBar orientation="horizontal" />
+					</ScrollArea>
 				</div>
 			</CardContent>
 		</Card>
