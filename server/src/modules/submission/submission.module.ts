@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -15,7 +15,7 @@ import { Submission } from 'src/entities/submission.entity';
 	providers: [SubmissionService],
 	imports: [
 		TypeOrmModule.forFeature([Submission, SubmissionResult]),
-		UserModule,
+		forwardRef(() => UserModule),
 		ProblemModule,
 		ClientsModule.registerAsync([
 			{

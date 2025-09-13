@@ -145,4 +145,65 @@ export class SubmissionService {
 
 		return savedSubmission;
 	}
+
+	async getSubmissionActivity(userId: string) {
+		// Get submissions for the past year grouped by date
+		const oneYearAgo = new Date();
+		oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+		const submissions = await this.submissionRepository
+			.createQueryBuilder('submission')
+			.select('DATE(submission.submittedAt)', 'date')
+			.addSelect('COUNT(*)', 'count')
+			.addSelect('COUNT(CASE WHEN submission.status = :acceptedStatus THEN 1 END)', 'acceptedCount')
+			.where('submission.authorId = :userId', { userId })
+			.andWhere('submission.submittedAt >= :oneYearAgo', { oneYearAgo })
+			.setParameter('acceptedStatus', 'ACCEPTED')
+			.groupBy('DATE(submission.submittedAt)')
+			.orderBy('date', 'ASC')
+			.getRawMany();
+
+		// Create a complete year calendar with zero values for days without submissions
+		const calendar: Record<string, { count: number; acceptedCount: number }> = {};
+		const startDate = new Date(oneYearAgo);
+		const endDate = new Date();
+
+		// Initialize all dates with zero
+		for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+			const dateStr = d.toISOString().split('T')[0];
+			calendar[dateStr] = { count: 0, acceptedCount: 0 };
+		}
+
+		// Fill in actual submission data
+		submissions.forEach((submission: { date: string; count: string; acceptedCount: string }) => {
+			const dateStr = submission.date;
+			calendar[dateStr] = {
+				count: parseInt(submission.count, 10),
+				acceptedCount: parseInt(submission.acceptedCount, 10),
+			};
+		});
+
+		// Convert to array format for frontend
+		const activityData = Object.entries(calendar).map(([date, data]) => ({
+			date,
+			count: data.count,
+			acceptedCount: data.acceptedCount,
+			level: this.getActivityLevel(data.count),
+		}));
+
+		return {
+			activityData,
+			totalSubmissions: activityData.reduce((sum, day) => sum + day.count, 0),
+			totalAccepted: activityData.reduce((sum, day) => sum + day.acceptedCount, 0),
+		};
+	}
+
+	private getActivityLevel(count: number): number {
+		// Define activity levels for GitHub-style coloring
+		if (count === 0) return 0;
+		if (count <= 2) return 1;
+		if (count <= 5) return 2;
+		if (count <= 10) return 3;
+		return 4;
+	}
 }

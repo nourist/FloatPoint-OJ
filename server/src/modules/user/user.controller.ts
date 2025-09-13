@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Patch, Query, UploadedFile, UseGuards, Us
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { GetUsersDto, UpdateNotificationSettingsDto, UpdateUserDto } from './user.dto';
-import { UserService } from './user.service';
+import { UserDifficultyStats, UserLanguageStats, UserRatingHistoryPoint, UserService, UserStatistics, UserSubmissionTrend } from './user.service';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { User } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
@@ -49,7 +49,7 @@ export class UserController {
 
 	@Get()
 	async getUsers(@Query() getUsersDto: GetUsersDto) {
-				return {
+		return {
 			message: 'Get users',
 			...(await this.userService.getUsers(getUsersDto)),
 		};
@@ -62,6 +62,66 @@ export class UserController {
 		return {
 			message: 'Get user score',
 			score,
+		};
+	}
+
+	@Get(':username/ranking')
+	async getUserRanking(@Param('username') username: string) {
+		const user = await this.userService.getUserByUsername(username);
+		const ranking = await this.userService.getUserRanking(user.id);
+		return {
+			message: 'success',
+			ranking,
+		};
+	}
+
+	@Get(':username/statistics')
+	async getUserStatistics(@Param('username') username: string): Promise<{ message: string; statistics: UserStatistics }> {
+		const user = await this.userService.getUserByUsername(username);
+		const statistics = await this.userService.getUserStatistics(user.id);
+		return {
+			message: 'Get user statistics',
+			statistics,
+		};
+	}
+
+	@Get(':username/ac-problems-by-difficulty')
+	async getUserAcProblemsByDifficulty(@Param('username') username: string): Promise<{ message: string; data: UserDifficultyStats[] }> {
+		const user = await this.userService.getUserByUsername(username);
+		const data = await this.userService.getUserAcProblemsByDifficulty(user.id);
+		return {
+			message: 'Get user AC problems by difficulty',
+			data,
+		};
+	}
+
+	@Get(':username/rating-history')
+	async getUserRatingHistory(@Param('username') username: string): Promise<{ message: string; data: UserRatingHistoryPoint[] }> {
+		const user = await this.userService.getUserByUsername(username);
+		const data = await this.userService.getUserRatingHistory(user.id);
+		return {
+			message: 'Get user rating history',
+			data,
+		};
+	}
+
+	@Get(':username/submission-trends')
+	async getUserSubmissionTrends(@Param('username') username: string): Promise<{ message: string; data: UserSubmissionTrend[] }> {
+		const user = await this.userService.getUserByUsername(username);
+		const data = await this.userService.getUserSubmissionTrends(user.id);
+		return {
+			message: 'Get user submission trends',
+			data,
+		};
+	}
+
+	@Get(':username/ac-submissions-by-language')
+	async getUserAcSubmissionsByLanguage(@Param('username') username: string): Promise<{ message: string; data: UserLanguageStats[] }> {
+		const user = await this.userService.getUserByUsername(username);
+		const data = await this.userService.getUserAcSubmissionsByLanguage(user.id);
+		return {
+			message: 'Get user AC submissions by language',
+			data,
 		};
 	}
 }

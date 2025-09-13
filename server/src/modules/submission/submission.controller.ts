@@ -36,6 +36,15 @@ export class SubmissionController {
 		};
 	}
 
+	@Get('activity/:userId')
+	@UseGuards(OptionalJwtAuthGuard)
+	async getSubmissionActivity(@Param('userId') userId: string) {
+		return {
+			message: 'success',
+			...(await this.submissionService.getSubmissionActivity(userId)),
+		};
+	}
+
 	@Post()
 	@UseGuards(JwtAuthGuard)
 	async submitCode(@Body() body: SubmitCodeDto, @GetUser() user: User) {

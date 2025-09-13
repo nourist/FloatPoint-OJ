@@ -103,6 +103,16 @@ export class BlogService {
 		return blog;
 	}
 
+	async findByUserId(userId: string, limit: number = 10) {
+		const blogs = await this.blogRepository.find({
+			where: { author: { id: userId } },
+			order: { createdAt: 'DESC' },
+			take: limit,
+			relations: ['author'],
+		});
+		return blogs;
+	}
+
 	@Transactional()
 	async update(id: string, updateBlogDto: UpdateBlogDto, thumbnail: Express.Multer.File, user: User) {
 		const blog = await this.findBlogById(id);

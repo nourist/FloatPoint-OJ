@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { MinioModule } from '../minio/minio.module';
@@ -15,7 +15,7 @@ import { TestCase } from 'src/entities/test-case.entity';
 @Module({
 	controllers: [ProblemController],
 	providers: [ProblemService],
-	imports: [TypeOrmModule.forFeature([Problem, TestCase, Subtask, ProblemTag, ProblemEditorial]), UserModule, MinioModule, NotificationModule],
+	imports: [TypeOrmModule.forFeature([Problem, TestCase, Subtask, ProblemTag, ProblemEditorial]), forwardRef(() => UserModule), MinioModule, NotificationModule],
 	exports: [ProblemService, TypeOrmModule],
 })
 export class ProblemModule {}

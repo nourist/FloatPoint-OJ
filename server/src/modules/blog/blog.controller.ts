@@ -38,6 +38,15 @@ export class BlogController {
 		};
 	}
 
+	@Get('user/:userId')
+	async getBlogsByUserId(@Param('userId') userId: string, @Query('limit') limit?: string) {
+		const limitNumber = limit ? parseInt(limit, 10) : 10;
+		return {
+			message: 'Get blogs by user id',
+			blogs: await this.blogService.findByUserId(userId, limitNumber),
+		};
+	}
+
 	@Patch(':id')
 	@UseGuards(JwtAuthGuard)
 	@UseInterceptors(FileInterceptor('thumbnail'))
