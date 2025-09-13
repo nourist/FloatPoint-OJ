@@ -1,7 +1,7 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { Bell, ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, Sun, Trophy } from 'lucide-react';
+import { Bell, ChevronsUpDown, CircleUserRound, Code, Globe, Home, LayoutDashboard, LogOut, Moon, Send, Server, Sun, Trophy, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -52,6 +52,11 @@ const AdminSidebar = () => {
 			title: t('problem'),
 			url: '/problem',
 			icon: Code,
+		},
+		{
+			title: t('user'),
+			url: '/user',
+			icon: Users,
 		},
 		{
 			title: t('submission'),
@@ -156,7 +161,7 @@ const AdminSidebar = () => {
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end" sideOffset={12} side="right" className="w-48">
 									<DropdownMenuItem asChild>
-										<Link href={`/profile/${user.username}`}>
+										<Link href={`/admin/user/${user.username}`}>
 											<CircleUserRound />
 											{t('profile')}
 										</Link>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Activity, CheckCircle, Code, RefreshCw, Server, TrendingUp, Users } from 'lucide-react';
+import { Activity, CheckCircle, Code, TrendingUp, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import useSWR from 'swr';
 
@@ -14,7 +14,6 @@ import { DashboardSkeleton } from './_components/loading-skeleton';
 import MetricCard from './_components/metric-card';
 import PopularProblemsTable from './_components/tables/popular-problems-table';
 import TopUsersTable from './_components/tables/top-users-table';
-import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
 import { statisticsServiceInstance } from '~/services/statistics';
 

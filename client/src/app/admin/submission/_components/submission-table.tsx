@@ -96,7 +96,7 @@ const SubmissionTable = ({ submissions }: SubmissionTableProps) => {
 								</Link>
 							</TableCell>
 							<TableCell>
-								<Link href={`/profile/${submission.author.username}`} className="hover:text-primary hover:underline">
+								<Link href={`/admin/user/${submission.author.username}`} className="hover:text-primary hover:underline">
 									{submission.author.username}
 								</Link>
 							</TableCell>

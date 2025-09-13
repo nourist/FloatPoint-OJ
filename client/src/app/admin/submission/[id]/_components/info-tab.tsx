@@ -57,7 +57,7 @@ export const InfoTab = ({ submission }: InfoTabProps) => {
 						<User className="text-muted-foreground h-4 w-4" />
 						<span className="text-muted-foreground text-sm font-medium">{t('info.author')}</span>
 					</div>
-					<Link href={`/profile/${submission.author.username}`} className="hover:text-primary font-medium hover:underline">
+					<Link href={`/admin/user/${submission.author.username}`} className="hover:text-primary font-medium hover:underline">
 						{submission.author.username}
 					</Link>
 				</div>

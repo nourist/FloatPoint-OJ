@@ -1,7 +1,8 @@
 'use client';
 
-import { Code, TrendingUp } from 'lucide-react';
+import {  TrendingUp } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { Badge } from '~/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
@@ -76,15 +77,11 @@ const PopularProblemsTable = ({ data, isLoading }: PopularProblemsTableProps) =>
 											<div className="font-mono text-sm font-medium">{problem.rank}</div>
 										</TableCell>
 										<TableCell>
-											<div className="space-y-1">
+											<Link href="/admin/problem" className="block hover:text-blue-600 hover:underline transition-all">
 												<div className="line-clamp-1 font-medium" title={problem.title}>
 													{problem.title}
 												</div>
-												<div className="text-muted-foreground flex items-center gap-1 text-xs">
-													<Code className="h-3 w-3" />
-													{problem.slug}
-												</div>
-											</div>
+											</Link>
 										</TableCell>
 										<TableCell>
 											<Badge variant="outline" className={cn('text-xs font-medium', getDifficultyColor(problem.difficulty as Difficulty))}>

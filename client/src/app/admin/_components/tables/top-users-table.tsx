@@ -2,6 +2,7 @@
 
 import { Crown, Trophy, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
@@ -105,10 +106,10 @@ const TopUsersTable = ({ data, isLoading }: TopUsersTableProps) => {
 											</div>
 										</TableCell>
 										<TableCell>
-											<div className="space-y-1">
+											<Link href={`/admin/user/${user.username}`} className="block space-y-1 hover:text-blue-600 hover:underline transition-all">
 												<div className="font-medium">{user.fullname || user.username}</div>
 												<div className="text-muted-foreground text-sm">@{user.username}</div>
-											</div>
+											</Link>
 										</TableCell>
 										<TableCell className="text-center">
 											<div className="font-mono text-sm font-semibold">{user.solved}</div>

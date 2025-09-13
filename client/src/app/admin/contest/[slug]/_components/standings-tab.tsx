@@ -62,7 +62,7 @@ export function StandingsTab({ standings, standingsLoading, problems }: Standing
 						<TableRow key={standing.userId}>
 							<TableCell className="text-center font-medium">{standing.rank}</TableCell>
 							<TableCell className="text-left font-medium">
-								<Link className="hover:text-primary hover:underline" href={`/profile/${standing.username}`}>
+								<Link className="hover:text-primary hover:underline" href={`/admin/user/${standing.username}`}>
 									{standing.username}
 								</Link>
 							</TableCell>
