@@ -42,6 +42,20 @@ export interface SubmissionResponse {
 	submission: Submission;
 }
 
+export interface SubmissionActivityData {
+	date: string;
+	count: number;
+	acceptedCount: number;
+	level: number;
+}
+
+export interface SubmissionActivityResponse {
+	message: string;
+	activityData: SubmissionActivityData[];
+	totalSubmissions: number;
+	totalAccepted: number;
+}
+
 // Functions
 export const submissionServiceInstance = (http: ApiInstance) => ({
 	findAllSubmissions: (params: GetAllSubmissionsPayload) => {
@@ -54,5 +68,9 @@ export const submissionServiceInstance = (http: ApiInstance) => ({
 
 	submitCode: (payload: SubmitCodePayload) => {
 		return http.post<SubmissionResponse>('/submission', payload);
+	},
+
+	getSubmissionActivity: (userId: string) => {
+		return http.get<SubmissionActivityResponse>(`/submission/activity/${userId}`);
 	},
 });

@@ -11,7 +11,7 @@ const UserAvatar = ({ user, className = '' }: Props) => {
 	return (
 		<Avatar className={cn('size-8', className)}>
 			<AvatarImage src={user?.avatarUrl ?? undefined} alt={user.username} />
-			<AvatarFallback style={{ background: stringToBrightColor(user.username) }} className="text-sm text-gray-800">
+			<AvatarFallback style={{ background: stringToBrightColor(user.username) }} className={cn('text-sm text-gray-800', className)}>
 				{getShortName(user.username)}
 			</AvatarFallback>
 		</Avatar>

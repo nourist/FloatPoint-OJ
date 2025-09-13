@@ -80,6 +80,11 @@ export const blogServiceInstance = (http: ApiInstance) => ({
 		return http.get<BlogResponse>(`/blog/${slug}`).then((res) => res.blog);
 	},
 
+	getBlogsByUserId: (userId: string, limit?: number) => {
+		const params = limit ? { limit: limit.toString() } : {};
+		return http.get<{ message: string; blogs: Blog[] }>(`/blog/user/${userId}`, { params });
+	},
+
 	updateBlog: (id: string, payload: UpdateBlogPayload) => {
 		const formData = new FormData();
 		if (payload.title) {

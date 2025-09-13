@@ -38,7 +38,7 @@ const Header = () => {
 
 	const { signout, getProfile } = createClientService(authServiceInstance);
 
-	const { data: user } = useSWR('/auth/me', getProfile);
+	const { data: user, isLoading } = useSWR('/auth/me', getProfile);
 
 	const theme = Cookies.get('theme') || 'light';
 	const language = Cookies.get('lang') || 'en';
@@ -126,7 +126,9 @@ const Header = () => {
 						</NavLink>
 					</Button>
 				))}
-				{user ? (
+				{isLoading ? (
+					<></>
+				) : user ? (
 					<>
 						<NotificationPopover />
 						<DropdownMenu>

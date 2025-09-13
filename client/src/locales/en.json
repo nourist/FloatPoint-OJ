@@ -551,6 +551,54 @@
 		"no_results": "No results found.",
 		"load_more": "Load more..."
 	},
+	"profile": {
+		"title": "Profile",
+		"loading": "Loading profile...",
+		"user_not_found": "User not found",
+		"sidebar": {
+			"edit_profile": "Edit Profile",
+			"rank": "Rank",
+			"stats": "Stats",
+			"score": "Score",
+			"rating": "Rating",
+			"ac_problems": "AC Problems",
+			"submissions": "Submissions",
+			"blogs": "Blogs",
+			"comments": "Comments",
+			"joined_contests": "Joined Contests",
+			"languages": "Languages",
+			"submissions_count": "submissions",
+			"no_submissions": "No submissions yet",
+			"unranked": "Unranked"
+		},
+		"content": {
+			"submission_activity": "Submission Activity",
+			"submissions_in_year": "submissions in the last year",
+			"accepted": "accepted",
+			"loading_activity": "Loading activity data...",
+			"rating_history": "Rating History",
+			"problems_by_difficulty": "AC Problems by Difficulty",
+			"submissions_by_language": "AC Submissions by Language",
+			"less": "Less",
+			"more": "More"
+		},
+		"tabs": {
+			"recent_solved_problems": "Recent Solved Problems",
+			"recent_submissions": "Recent Submissions",
+			"blogs": "Blogs",
+			"problem": "Problem",
+			"language": "Language",
+			"solved_count": "Solved Count",
+			"first_solved": "First Solved",
+			"status": "Status",
+			"date": "Date",
+			"title": "Title",
+			"publish_date": "Publish Date",
+			"no_accepted_submissions": "No accepted submissions yet.",
+			"no_recent_submissions": "No submissions yet.",
+			"no_blogs": "No blogs published yet."
+		}
+	},
 	"contest": {
 		"page": {
 			"title": "Contests",
@@ -1150,60 +1198,60 @@
 			"system": "System Notification",
 			"new_problem_available": "New Problem Available",
 			"new_contest_available": "New Contest Available",
-			    "new_blog_post": "New Blog Post"
+			"new_blog_post": "New Blog Post"
 		}
 	},
 	"settings": {
-    "title": "Settings",
-    "description": "Manage your account settings and preferences.",
-    "tabs": {
-      "basic": "Basic",
-      "profile": "Profile",
-      "notification": "Notification"
-    },
-    "basic": {
-      "theme": {
-        "title": "Theme",
-        "description": "Select a theme for the application.",
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System",
-		"auto":"Auto"
-      },
-      "language": {
-        "title": "Language",
-        "description": "Select a language for the application."
-      }
-    },
-    "profile": {
-      "title": "Profile",
-      "description": "Update your profile information.",
-      "form": {
-        "username": "Username",
-        "fullname": "Full Name",
-        "bio": "Bio",
-        "save": "Save Changes",
-        "saving": "Saving...",
-        "change_avatar": "Change Avatar",
-        "reset_password": "Reset Password",
-        "update_success": "Profile updated successfully!",
-        "update_error": "Failed to update profile. Please try again."
-      }
-    },
-    "notification": {
-      "title": "Notifications",
-      "description": "Configure your notification preferences.",
-      "form": {
-        "new_blog": "New Blog Posts",
-        "new_problem": "New Problems",
-        "new_contest": "New Contests",
-        "update_rating": "Rating Updates",
-        "system": "System Notifications",
-        "save": "Save Changes",
-        "saving": "Saving...",
-        "update_success": "Notification settings updated successfully!",
-        "update_error": "Failed to update notification settings. Please try again."
-      }
-    }
-  }
+		"title": "Settings",
+		"description": "Manage your account settings and preferences.",
+		"tabs": {
+			"basic": "Basic",
+			"profile": "Profile",
+			"notification": "Notification"
+		},
+		"basic": {
+			"theme": {
+				"title": "Theme",
+				"description": "Select a theme for the application.",
+				"light": "Light",
+				"dark": "Dark",
+				"system": "System",
+				"auto": "Auto"
+			},
+			"language": {
+				"title": "Language",
+				"description": "Select a language for the application."
+			}
+		},
+		"profile": {
+			"title": "Profile",
+			"description": "Update your profile information.",
+			"form": {
+				"username": "Username",
+				"fullname": "Full Name",
+				"bio": "Bio",
+				"save": "Save Changes",
+				"saving": "Saving...",
+				"change_avatar": "Change Avatar",
+				"reset_password": "Reset Password",
+				"update_success": "Profile updated successfully!",
+				"update_error": "Failed to update profile. Please try again."
+			}
+		},
+		"notification": {
+			"title": "Notifications",
+			"description": "Configure your notification preferences.",
+			"form": {
+				"new_blog": "New Blog Posts",
+				"new_problem": "New Problems",
+				"new_contest": "New Contests",
+				"update_rating": "Rating Updates",
+				"system": "System Notifications",
+				"save": "Save Changes",
+				"saving": "Saving...",
+				"update_success": "Notification settings updated successfully!",
+				"update_error": "Failed to update notification settings. Please try again."
+			}
+		}
 	}
+}

@@ -6,7 +6,9 @@ import { useTranslations } from 'next-intl';
 import { Badge } from '~/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table';
+import { getDifficultyColor } from '~/lib/difficulty-utils';
 import { cn } from '~/lib/utils';
+import { Difficulty } from '~/types/problem.type';
 
 interface PopularProblemData {
 	rank: number;
@@ -42,21 +44,6 @@ const PopularProblemsTable = ({ data, isLoading }: PopularProblemsTableProps) =>
 			</Card>
 		);
 	}
-
-	const getDifficultyColor = (difficulty: string) => {
-		switch (difficulty.toLowerCase()) {
-			case 'easy':
-				return 'bg-green-100 text-green-800 border-green-200';
-			case 'medium':
-				return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-			case 'hard':
-				return 'bg-red-100 text-red-800 border-red-200';
-			case 'expert':
-				return 'bg-purple-100 text-purple-800 border-purple-200';
-			default:
-				return 'bg-gray-100 text-gray-800 border-gray-200';
-		}
-	};
 
 	return (
 		<Card>
@@ -97,7 +84,7 @@ const PopularProblemsTable = ({ data, isLoading }: PopularProblemsTableProps) =>
 									</div>
 								</TableCell>
 								<TableCell>
-									<Badge variant="outline" className={cn('text-xs font-medium', getDifficultyColor(problem.difficulty))}>
+									<Badge variant="outline" className={cn('text-xs font-medium', getDifficultyColor(problem.difficulty as Difficulty))}>
 										{problem.difficulty}
 									</Badge>
 								</TableCell>
