@@ -4,6 +4,8 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const apiUrl = new URL(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000');
 
 const nextConfig: NextConfig = {
+	// Enable standalone output for Docker optimization
+	output: 'standalone',
 	async rewrites() {
 		return [
 			{

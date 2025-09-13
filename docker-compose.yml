@@ -135,6 +135,19 @@ services:
         ports:
             - "4000:4000"
 
+    client:
+        build:
+            context: .
+            dockerfile: Dockerfile.client
+        networks:
+            - app-network
+        environment:
+            JWT_SECRET: ${JWT_SECRET} #default 'secretKey' handled in client
+            API_URL: http://server:4000
+            NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        ports:
+            - "3000:3000"
+
 networks:
     app-network:
         driver: bridge

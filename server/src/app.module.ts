@@ -33,47 +33,47 @@ import { UserModule } from './modules/user/user.module';
 			isGlobal: true,
 			validationSchema: Joi.object({
 				// Application environment
-				NODE_ENV: Joi.valid('development', 'production', 'test').default('development'),
+				NODE_ENV: Joi.valid('development', 'production', 'test').empty('').default('development'),
 
 				// Server configuration
-				PORT: Joi.number().default(4000),
-				CLIENT_URL: Joi.string().default('http://localhost:3000'), // for CORS
+				PORT: Joi.number().empty('').default(4000),
+				CLIENT_URL: Joi.string().empty('').default('http://localhost:3000'), // for CORS
 
 				// JWT authentication configuration
-				JWT_SECRET: Joi.string().default('secretKey'),
-				JWT_EXPIRES_IN: Joi.string().default('7d'),
-				SALT_ROUNDS: Joi.number().default(10),
+				JWT_SECRET: Joi.string().empty('').default('secretKey'),
+				JWT_EXPIRES_IN: Joi.string().empty('').default('7d'),
+				SALT_ROUNDS: Joi.number().empty('').default(10),
 
 				// Database configuration
-				DB_HOST: Joi.string().default('localhost'),
-				DB_PORT: Joi.number().default(5432),
-				DB_USER: Joi.string().default('postgres'),
-				DB_PASS: Joi.string().default('postgres'),
-				DB_NAME: Joi.string().default('postgres'),
+				DB_HOST: Joi.string().empty('').default('localhost'),
+				DB_PORT: Joi.number().empty('').default(5432),
+				DB_USER: Joi.string().empty('').default('postgres'),
+				DB_PASS: Joi.string().empty('').default('postgres'),
+				DB_NAME: Joi.string().empty('').default('postgres'),
 
 				// Message queue configuration
-				RABBITMQ_HOST: Joi.string().default('localhost'),
-				RABBITMQ_PORT: Joi.number().default(5672),
-				RABBITMQ_USER: Joi.string().default('guest'),
-				RABBITMQ_PASS: Joi.string().default('guest'),
+				RABBITMQ_HOST: Joi.string().empty('').default('localhost'),
+				RABBITMQ_PORT: Joi.number().empty('').default(5672),
+				RABBITMQ_USER: Joi.string().empty('').default('guest'),
+				RABBITMQ_PASS: Joi.string().empty('').default('guest'),
 
 				// Email service configuration
-				MAIL_HOST: Joi.string().default('smtp.mailtrap.com'),
-				MAIL_PORT: Joi.number().default(587),
-				MAIL_USER: Joi.string().required(),
-				MAIL_PASS: Joi.string().required(),
-				MAIL_FROM_EMAIL: Joi.string().required(),
+				MAIL_HOST: Joi.string().empty('').default('smtp.mailtrap.com'),
+				MAIL_PORT: Joi.number().empty('').default(587),
+				MAIL_USER: Joi.string().empty('').required(),
+				MAIL_PASS: Joi.string().empty('').required(),
+				MAIL_FROM_EMAIL: Joi.string().empty('').required(),
 
 				// MinIO storage configuration
-				MINIO_ENDPOINT: Joi.string().default('localhost'),
-				MINIO_PORT: Joi.number().default(9000),
-				MINIO_ACCESS_KEY: Joi.string().default('minioadmin'),
-				MINIO_SECRET_KEY: Joi.string().default('minioadmin'),
+				MINIO_ENDPOINT: Joi.string().empty('').default('localhost'),
+				MINIO_PORT: Joi.number().empty('').default(9000),
+				MINIO_ACCESS_KEY: Joi.string().empty('').default('minioadmin'),
+				MINIO_SECRET_KEY: Joi.string().empty('').default('minioadmin'),
 
 				//redis configuration
-				REDIS_HOST: Joi.string().default('localhost'),
-				REDIS_PORT: Joi.number().default(6379),
-				REDIS_PASSWORD: Joi.string().default('redispass'),
+				REDIS_HOST: Joi.string().empty('').default('localhost'),
+				REDIS_PORT: Joi.number().empty('').default(6379),
+				REDIS_PASSWORD: Joi.string().empty('').default('redispass'),
 			}),
 		}),
 

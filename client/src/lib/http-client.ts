@@ -2,12 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { addAxiosDateTransformer } from 'axios-date-transformer';
 import qs from 'qs';
 
-import { getApiUrl } from './utils';
+import { getClientApiUrl } from './utils';
 import { ApiInstance } from '~/types/axios.type';
 
 const http = addAxiosDateTransformer(
 	axios.create({
-		baseURL: getApiUrl(),
+		baseURL: getClientApiUrl(),
 		withCredentials: true,
 		paramsSerializer: {
 			serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),

@@ -1,6 +1,6 @@
 import { Socket, io } from 'socket.io-client';
 
-import { getApiUrl } from '~/lib/utils';
+import { getClientApiUrl } from '~/lib/utils';
 import { Judger } from '~/types/judger.type';
 import { Submission } from '~/types/submission.type';
 
@@ -13,8 +13,8 @@ class SocketService {
 			return;
 		}
 
-		console.log('Connecting to socket at:', getApiUrl());
-		this.socket = io(getApiUrl(), {
+		console.log('Connecting to socket at:', getClientApiUrl());
+		this.socket = io(getClientApiUrl(), {
 			withCredentials: true,
 			transports: ['websocket', 'polling'],
 		});

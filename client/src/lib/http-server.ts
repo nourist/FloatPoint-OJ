@@ -3,7 +3,7 @@ import { addAxiosDateTransformer } from 'axios-date-transformer';
 import { cookies } from 'next/headers';
 import qs from 'qs';
 
-import { getApiUrl } from './utils';
+import { getServerApiUrl } from './utils';
 import { ApiInstance } from '~/types/axios.type';
 
 export const createServerApiInstance = async (): Promise<ApiInstance> => {
@@ -11,7 +11,7 @@ export const createServerApiInstance = async (): Promise<ApiInstance> => {
 
 	const instance = addAxiosDateTransformer(
 		axios.create({
-			baseURL: getApiUrl(),
+			baseURL: getServerApiUrl(),
 			headers: {
 				Cookie: cookieStore.toString(),
 			},

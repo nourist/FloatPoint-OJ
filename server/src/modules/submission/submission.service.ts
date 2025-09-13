@@ -57,7 +57,11 @@ export class SubmissionService {
 			.getManyAndCount();
 
 		// Calculate statistics based on the same filters (without pagination)
-		const statsQb = this.submissionRepository.createQueryBuilder('submission').leftJoin('submission.author', 'author').leftJoin('submission.problem', 'problem').leftJoin('submission.contest', 'contest');
+		const statsQb = this.submissionRepository
+			.createQueryBuilder('submission')
+			.leftJoin('submission.author', 'author')
+			.leftJoin('submission.problem', 'problem')
+			.leftJoin('submission.contest', 'contest');
 
 		if (authorId) statsQb.andWhere('author.id = :authorId', { authorId });
 		if (problemId) statsQb.andWhere('problem.id = :problemId', { problemId });

@@ -13,7 +13,7 @@ export const middleware = async (req: NextRequest) => {
 	}
 
 	try {
-		const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET ?? 'secretKey'));
+		const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET || 'secretKey'));
 
 		if (req.nextUrl.pathname.startsWith('/admin') && payload.role != UserRole.ADMIN) {
 			return NextResponse.redirect(new URL('/', req.url));
