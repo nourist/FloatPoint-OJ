@@ -1,6 +1,6 @@
 'use client';
 
-import {  TrendingUp } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -77,7 +77,7 @@ const PopularProblemsTable = ({ data, isLoading }: PopularProblemsTableProps) =>
 											<div className="font-mono text-sm font-medium">{problem.rank}</div>
 										</TableCell>
 										<TableCell>
-											<Link href="/admin/problem" className="block hover:text-blue-600 hover:underline transition-all">
+											<Link href="/admin/problem" className="block transition-all hover:text-blue-600 hover:underline">
 												<div className="line-clamp-1 font-medium" title={problem.title}>
 													{problem.title}
 												</div>

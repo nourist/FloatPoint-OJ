@@ -103,7 +103,7 @@ const LanguageDistributionChart = ({ data, isLoading }: LanguageDistributionChar
 
 				{/* Legend */}
 				<div className="mt-4 grid grid-cols-2 gap-4">
-					{dataWithColors.map((item, index) => (
+					{dataWithColors.map((item) => (
 						<div key={item.language} className="flex items-center gap-2">
 							<div className="h-3 w-3 rounded-full" style={{ backgroundColor: item.fill }} />
 							<div className="flex-1">

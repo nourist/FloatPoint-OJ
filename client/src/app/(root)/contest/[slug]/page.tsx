@@ -1,12 +1,10 @@
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
 
 import { ContestTabsClient } from './_components/contest-tabs-client';
 import { createServerService } from '~/lib/service-server';
 import { authServiceInstance } from '~/services/auth';
 import { contestServiceInstance } from '~/services/contest';
 import { Contest } from '~/types/contest.type';
-import { User } from '~/types/user.type';
 
 // Server-side function to fetch contest data
 async function getContest(slug: string) {
@@ -14,6 +12,7 @@ async function getContest(slug: string) {
 		const contestService = await createServerService(contestServiceInstance);
 		const response = await contestService.findOneContest(slug);
 		return response.contest;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (error) {
 		return null;
 	}
@@ -25,6 +24,7 @@ async function getUser() {
 		const authService = await createServerService(authServiceInstance);
 		const user = await authService.getProfile();
 		return user;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} catch (error) {
 		return null;
 	}

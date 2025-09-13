@@ -106,7 +106,7 @@ const TopUsersTable = ({ data, isLoading }: TopUsersTableProps) => {
 											</div>
 										</TableCell>
 										<TableCell>
-											<Link href={`/admin/user/${user.username}`} className="block space-y-1 hover:text-blue-600 hover:underline transition-all">
+											<Link href={`/admin/user/${user.username}`} className="block space-y-1 transition-all hover:text-blue-600 hover:underline">
 												<div className="font-medium">{user.fullname || user.username}</div>
 												<div className="text-muted-foreground text-sm">@{user.username}</div>
 											</Link>

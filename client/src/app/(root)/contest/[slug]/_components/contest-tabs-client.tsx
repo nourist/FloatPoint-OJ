@@ -11,11 +11,11 @@ import { JoinLeaveButton } from './join-leave-button';
 import { TimeRemaining } from './time-remaining';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createClientService } from '~/lib/service-client';
+import { cn } from '~/lib/utils';
 import { authServiceInstance } from '~/services/auth';
 import { contestServiceInstance } from '~/services/contest';
 import { Contest, ContestStatus, getContestStatus } from '~/types/contest.type';
 import { User } from '~/types/user.type';
-import { cn } from '~/lib/utils';
 
 // Client component for tabs that need client-side interaction
 export const ContestTabsClient = ({
@@ -50,7 +50,7 @@ export const ContestTabsClient = ({
 		data: standingsData,
 		error: standingsError,
 		isLoading: standingsLoading,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} = useSWR(activeTab === 'standings' ? ['standings', contest.id] : null, ([_, contestId]) => contestService.getContestStandings(contestId), {
 		revalidateOnFocus: false,
 		keepPreviousData: true,
@@ -89,20 +89,20 @@ export const ContestTabsClient = ({
 						<TabsTrigger value="info">{t('info_tab')}</TabsTrigger>
 						{isUserJoined && (
 							<>
-								<Link 
+								<Link
 									href={`/problem?contestId=${contest.id}`}
 									className={cn(
-										"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-										"hover:bg-muted/50"
+										'ring-offset-background focus-visible:ring-ring data-[state=active]:bg-background data-[state=active]:text-foreground inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm',
+										'hover:bg-muted/50',
 									)}
 								>
 									{t('problems_tab')}
 								</Link>
-								<Link 
+								<Link
 									href={`/submission?contestId=${contest.id}`}
 									className={cn(
-										"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-										"hover:bg-muted/50"
+										'ring-offset-background focus-visible:ring-ring data-[state=active]:bg-background data-[state=active]:text-foreground inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm',
+										'hover:bg-muted/50',
 									)}
 								>
 									{t('submissions_tab')}

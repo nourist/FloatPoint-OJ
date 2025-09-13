@@ -77,10 +77,10 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 			<TabsList>
 				<TabsTrigger value="info">{t('info_tab')}</TabsTrigger>
 				<TabsTrigger value="problems">{t('problems_tab')}</TabsTrigger>
-				<Link 
+				<Link
 					href={`/admin/submission?contestId=${contest.id}`}
 					className={cn(
-						'ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 hover:bg-muted/50'
+						'ring-offset-background focus-visible:ring-ring hover:bg-muted/50 inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
 					)}
 				>
 					{t('submissions_tab')}
@@ -95,8 +95,6 @@ const ContestDetailPage = ({ params }: { params: Promise<{ slug: string }> }) =>
 			<TabsContent value="problems" className="space-y-4">
 				<ProblemsTab contest={contest} onContestUpdate={mutateContest} />
 			</TabsContent>
-
-
 
 			<TabsContent value="standings" className="space-y-4">
 				<StandingsTab standings={standings} standingsLoading={standingsLoading} problems={standingsProblems} />

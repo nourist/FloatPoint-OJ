@@ -26,7 +26,18 @@ interface SubmissionFilterProps {
 	onContestChange: (value: string) => void;
 }
 
-const SubmissionFilter = ({ problemId, language, status, authorId, contestId, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange, onContestChange }: SubmissionFilterProps) => {
+const SubmissionFilter = ({
+	problemId,
+	language,
+	status,
+	authorId,
+	contestId,
+	onProblemChange,
+	onLanguageChange,
+	onStatusChange,
+	onAuthorChange,
+	onContestChange,
+}: SubmissionFilterProps) => {
 	const t = useTranslations('admin.submission');
 
 	const submissionLanguageOptions = [{ value: 'all', label: t('filters.all_languages') }, ...languageOptions];

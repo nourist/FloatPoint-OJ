@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 
 import { Button } from '~/components/ui/button';
 import { createClientService } from '~/lib/service-client';
-import { authServiceInstance } from '~/services/auth';
 import { contestServiceInstance } from '~/services/contest';
 import { Contest } from '~/types/contest.type';
 import { User } from '~/types/user.type';
@@ -21,7 +20,6 @@ interface JoinLeaveButtonProps {
 export function JoinLeaveButton({ contest, user, onContestUpdate, onUserUpdate }: JoinLeaveButtonProps) {
 	const t = useTranslations('contest.detail');
 	const contestService = createClientService(contestServiceInstance);
-	const authService = createClientService(authServiceInstance);
 	const [loading, setLoading] = useState(false);
 
 	if (!user) {

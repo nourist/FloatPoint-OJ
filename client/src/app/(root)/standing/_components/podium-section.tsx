@@ -38,31 +38,29 @@ export const PodiumSection = ({ ratingUsers, scoreUsers }: PodiumSectionProps) =
 				<Trophy className="h-5 w-5" />
 				<h2 className="text-xl font-semibold">{t('top_users')}</h2>
 			</div>
-		<div className="bg-card rounded-2xl border p-6 shadow-xs">
-
-			{/* Mode Selector */}
-			<div className="mb-6 flex justify-center">
-				<Tabs value={podiumMode} onValueChange={handleModeChange} className="w-[400px]">
-					<TabsList className="grid w-full grid-cols-2">
-						<TabsTrigger value="rating">{t('modes.rating')}</TabsTrigger>
-						<TabsTrigger value="score">{t('modes.score')}</TabsTrigger>
-					</TabsList>
-				</Tabs>
-			</div>
-
-			{currentUsers && currentUsers.length > 0 ? (
-				<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-					{currentUsers.map((user) => (
-						<PodiumCard key={user.id} user={user} position={user.rank} mode={podiumMode} />
-					))}
+			<div className="bg-card rounded-2xl border p-6 shadow-xs">
+				{/* Mode Selector */}
+				<div className="mb-6 flex justify-center">
+					<Tabs value={podiumMode} onValueChange={handleModeChange} className="w-[400px]">
+						<TabsList className="grid w-full grid-cols-2">
+							<TabsTrigger value="rating">{t('modes.rating')}</TabsTrigger>
+							<TabsTrigger value="score">{t('modes.score')}</TabsTrigger>
+						</TabsList>
+					</Tabs>
 				</div>
-			) : (
-				<div className="py-8 text-center">
-					<p className="text-muted-foreground">{t('no_data')}</p>
-				</div>
-			)}
+
+				{currentUsers && currentUsers.length > 0 ? (
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+						{currentUsers.map((user) => (
+							<PodiumCard key={user.id} user={user} position={user.rank} mode={podiumMode} />
+						))}
+					</div>
+				) : (
+					<div className="py-8 text-center">
+						<p className="text-muted-foreground">{t('no_data')}</p>
+					</div>
+				)}
 			</div>
 		</>
-			
 	);
 };

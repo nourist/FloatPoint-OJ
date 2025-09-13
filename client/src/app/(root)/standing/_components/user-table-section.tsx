@@ -61,22 +61,16 @@ export const UserTableSection = () => {
 				<Users className="h-5 w-5" />
 				<h2 className="text-xl font-semibold">{t('all_users')}</h2>
 			</div>
-			
+
 			{/* Search Bar */}
 			<SearchFilter search={search} onSearchChange={handleSearchChange} />
-			
+
 			{/* User Table */}
 			<UserTable users={data?.users || []} isLoading={isLoading && !data} page={page} limit={limit} />
-			
+
 			{/* Pagination */}
 			{data?.users && data.users.length > 0 && (
-				<PaginationControls
-					totalItems={data?.total || 0}
-					initialPage={page}
-					initialSize={limit}
-					onPageChange={handlePageChange}
-					onSizeChange={handleSizeChange}
-				/>
+				<PaginationControls totalItems={data?.total || 0} initialPage={page} initialSize={limit} onPageChange={handlePageChange} onSizeChange={handleSizeChange} />
 			)}
 		</>
 	);

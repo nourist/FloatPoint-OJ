@@ -58,10 +58,7 @@ const FilterPanel = ({
 		{ value: 'hard', label: <div className="text-destructive">{t('hard')}</div> },
 	];
 
-	const finalContestOptions = [
-		{ value: '', label: t('all') },
-		...contestOptions
-	];
+	const finalContestOptions = [{ value: '', label: t('all') }, ...contestOptions];
 
 	return (
 		<>

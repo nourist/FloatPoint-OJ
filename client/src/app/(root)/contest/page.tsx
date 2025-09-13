@@ -107,20 +107,20 @@ const ContestPage = () => {
 			{/* Search Bar with Tabs */}
 			<div className="space-y-2">
 				<div className="bg-card ring-primary/50 relative flex w-full gap-1 rounded-2xl border p-2 shadow-xs focus-within:ring-1">
-					<DebounceInput 
-						className="flex-1 pl-10 outline-0" 
-						value={searchQuery} 
+					<DebounceInput
+						className="flex-1 pl-10 outline-0"
+						value={searchQuery}
 						setValue={(query) => {
 							setSearchQuery(query);
 							setPage(1);
-						}} 
+						}}
 						placeholder={t('search_placeholder')}
 					/>
 					<Search className="absolute top-1/2 left-4 size-4.5 -translate-y-1/2" />
 					{/* Tabs replacing the sort order select */}
 					<div className="flex-shrink-0">
 						<Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as ContestStatus)}>
-							<TabsList className="grid grid-cols-3 !py-0.5 h-9">
+							<TabsList className="grid h-9 grid-cols-3 !py-0.5">
 								<TabsTrigger value={ContestStatus.RUNNING} className="flex items-center gap-1.5 px-2 text-xs">
 									<div className="h-2 w-2 rounded-full bg-green-500" />
 									{t('running')}

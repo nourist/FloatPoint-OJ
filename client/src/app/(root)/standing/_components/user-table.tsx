@@ -97,7 +97,7 @@ export const UserTable = ({ users, isLoading, page, limit }: UserTableProps) => 
 												<AvatarFallback>{user.username.charAt(0).toUpperCase()}</AvatarFallback>
 											</Avatar>
 											<div>
-												<p className="font-medium group-hover:underline hover:text-primary">
+												<p className="hover:text-primary font-medium group-hover:underline">
 													{user.username}
 													{user.fullname && <span className="text-muted-foreground font-normal"> ({user.fullname})</span>}
 												</p>
@@ -105,8 +105,8 @@ export const UserTable = ({ users, isLoading, page, limit }: UserTableProps) => 
 										</div>
 									</Link>
 								</td>
-								<td className="text-center font-mono text-muted-foreground">{Math.round(ratingValue)}</td>
-								<td className="text-center font-mono text-muted-foreground">{Math.round(scoreValue)}</td>
+								<td className="text-muted-foreground text-center font-mono">{Math.round(ratingValue)}</td>
+								<td className="text-muted-foreground text-center font-mono">{Math.round(scoreValue)}</td>
 							</tr>
 						);
 					})}

@@ -96,7 +96,7 @@ const SubmissionResultsChart = ({ data, isLoading }: SubmissionResultsChartProps
 
 				{/* Legend */}
 				<div className="mt-4 space-y-2">
-					{dataWithFill.map((item, index) => (
+					{dataWithFill.map((item) => (
 						<div key={item.status} className="flex items-center justify-between">
 							<div className="flex items-center gap-2">
 								<div className="h-3 w-3 rounded-full" style={{ backgroundColor: item.fill }} />

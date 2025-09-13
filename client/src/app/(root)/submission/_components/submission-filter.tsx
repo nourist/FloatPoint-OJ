@@ -30,7 +30,20 @@ interface SubmissionFilterProps {
 	onContestChange: (value: string) => void;
 }
 
-const SubmissionFilter = ({ problemId, language, status, authorId, contestId, user, contestOptions, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange, onContestChange }: SubmissionFilterProps) => {
+const SubmissionFilter = ({
+	problemId,
+	language,
+	status,
+	authorId,
+	contestId,
+	user,
+	contestOptions,
+	onProblemChange,
+	onLanguageChange,
+	onStatusChange,
+	onAuthorChange,
+	onContestChange,
+}: SubmissionFilterProps) => {
 	const t = useTranslations('submission');
 
 	const submissionLanguageOptions = [{ value: 'all', label: t('filters.all_languages') }, ...languageOptions];
@@ -90,15 +103,13 @@ const SubmissionFilter = ({ problemId, language, status, authorId, contestId, us
 		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {
 			try {
 				// Filter the pre-provided contest options based on query
-				const filteredOptions = contestOptions.filter(option => 
-					option.label.toLowerCase().includes(query.toLowerCase())
-				);
-				
+				const filteredOptions = contestOptions.filter((option) => option.label.toLowerCase().includes(query.toLowerCase()));
+
 				// Apply pagination
 				const startIndex = (page - 1) * limit;
 				const endIndex = startIndex + limit;
 				const paginatedOptions = filteredOptions.slice(startIndex, endIndex);
-				
+
 				return {
 					items: paginatedOptions,
 					has_more: endIndex < filteredOptions.length,
@@ -161,8 +172,6 @@ const SubmissionFilter = ({ problemId, language, status, authorId, contestId, us
 		[userService],
 	);
 
-
-
 	return (
 		<div className="bg-card flex flex-wrap gap-2 rounded-2xl border p-4 shadow-xs *:flex-1">
 			<div className="space-y-1">
@@ -179,7 +188,7 @@ const SubmissionFilter = ({ problemId, language, status, authorId, contestId, us
 					{t('filters.language')}
 				</Label>
 				<Select value={language} onValueChange={onLanguageChange}>
-					<SelectTrigger className='w-full'>
+					<SelectTrigger className="w-full">
 						<SelectValue placeholder={t('filters.select_language')} />
 					</SelectTrigger>
 					<SelectContent>
@@ -198,7 +207,7 @@ const SubmissionFilter = ({ problemId, language, status, authorId, contestId, us
 					{t('filters.status')}
 				</Label>
 				<Select value={status} onValueChange={onStatusChange}>
-					<SelectTrigger className='w-full'>
+					<SelectTrigger className="w-full">
 						<SelectValue placeholder={t('filters.select_status')} />
 					</SelectTrigger>
 					<SelectContent>

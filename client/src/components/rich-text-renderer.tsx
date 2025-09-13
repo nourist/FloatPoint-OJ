@@ -17,6 +17,7 @@ const RichTextRenderer = ({ content, className }: RichTextRendererProps) => {
 			// Try to parse as JSON first
 			const jsonContent = JSON.parse(content);
 			html = generateHTML(jsonContent, extensions);
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (e) {
 			// If parsing fails, treat as plain text
 			html = content;
