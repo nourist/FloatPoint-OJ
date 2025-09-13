@@ -154,6 +154,10 @@ export class GetAllProblemsDto {
 	@IsOptional()
 	@IsEnum(['solved', 'attempted', 'unattempted'])
 	status?: 'solved' | 'attempted' | 'unattempted';
+
+	@IsOptional()
+	@IsString()
+	contestId?: string;
 }
 
 export class CreateProblemEditorialDto {

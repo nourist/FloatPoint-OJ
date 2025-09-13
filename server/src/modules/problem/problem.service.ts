@@ -106,7 +106,7 @@ export class ProblemService {
 	 * Retrieves all problems with filtering, sorting, and pagination
 	 */
 	async findAll(query: GetAllProblemsDto, user?: User) {
-		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status } = query;
+		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status, contestId } = query;
 
 		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
@@ -156,6 +156,11 @@ export class ProblemService {
 
 		if (q) qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
 		if (hasEditorial) qb.andWhere('editorial.id IS NOT NULL');
+
+		// Contest filter - filter problems that belong to a specific contest
+		if (contestId) {
+			qb.innerJoin('problem.contests', 'contest', 'contest.id = :contestId', { contestId });
+		}
 
 		if (sortBy === 'acCount') {
 			qb.orderBy('ac_count', (order as 'ASC' | 'DESC') || 'DESC');

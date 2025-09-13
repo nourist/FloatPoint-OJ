@@ -35,18 +35,20 @@ export class SubmissionService {
 	}
 
 	async findAll(query: GetAllSubmissionsDto, user: User | null) {
-		const { authorId, problemId, language, status, page, limit } = query;
+		const { authorId, problemId, language, status, contestId, page, limit } = query;
 
 		const qb = this.submissionRepository
 			.createQueryBuilder('submission')
 			.leftJoinAndSelect('submission.problem', 'problem')
 			.leftJoinAndSelect('submission.author', 'author')
-			.leftJoinAndSelect('submission.results', 'results');
+			.leftJoinAndSelect('submission.results', 'results')
+			.leftJoinAndSelect('submission.contest', 'contest');
 
 		if (authorId) qb.andWhere('author.id = :authorId', { authorId });
 		if (problemId) qb.andWhere('problem.id = :problemId', { problemId });
 		if (language) qb.andWhere('submission.language = :language', { language });
 		if (status) qb.andWhere('submission.status = :status', { status });
+		if (contestId) qb.andWhere('contest.id = :contestId', { contestId });
 
 		const [submissions, total] = await qb
 			.orderBy('submission.submittedAt', 'DESC')
@@ -55,12 +57,13 @@ export class SubmissionService {
 			.getManyAndCount();
 
 		// Calculate statistics based on the same filters (without pagination)
-		const statsQb = this.submissionRepository.createQueryBuilder('submission').leftJoin('submission.author', 'author').leftJoin('submission.problem', 'problem');
+		const statsQb = this.submissionRepository.createQueryBuilder('submission').leftJoin('submission.author', 'author').leftJoin('submission.problem', 'problem').leftJoin('submission.contest', 'contest');
 
 		if (authorId) statsQb.andWhere('author.id = :authorId', { authorId });
 		if (problemId) statsQb.andWhere('problem.id = :problemId', { problemId });
 		if (language) statsQb.andWhere('submission.language = :language', { language });
 		if (status) statsQb.andWhere('submission.status = :status', { status });
+		if (contestId) statsQb.andWhere('contest.id = :contestId', { contestId });
 
 		// Get status statistics
 		const statusStats = await statsQb.clone().select('submission.status', 'status').addSelect('COUNT(*)', 'count').groupBy('submission.status').getRawMany();

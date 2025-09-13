@@ -20,6 +20,10 @@ export class GetAllSubmissionsDto {
 	@IsEnum(SubmissionStatus)
 	status?: SubmissionStatus;
 
+	@IsOptional()
+	@IsString()
+	contestId?: string;
+
 	@IsInt()
 	page: number = 1;
 
