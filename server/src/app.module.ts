@@ -21,43 +21,63 @@ import { MailModule } from './modules/mail/mail.module';
 import { MinioModule } from './modules/minio/minio.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { ProblemModule } from './modules/problem/problem.module';
+import { RedisModule } from './modules/redis/redis.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
 import { SubmissionModule } from './modules/submission/submission.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
 	imports: [
+		// Global configuration module with environment validation
 		ConfigModule.forRoot({
 			isGlobal: true,
 			validationSchema: Joi.object({
+				// Application environment
 				NODE_ENV: Joi.valid('development', 'production', 'test').default('development'),
 
+				// Server configuration
 				PORT: Joi.number().default(4000),
-				CLIENT_URL: Joi.string().default('http://localhost:3000'), //for cors
+				CLIENT_URL: Joi.string().default('http://localhost:3000'), // for CORS
 
+				// JWT authentication configuration
 				JWT_SECRET: Joi.string().default('secretKey'),
 				JWT_EXPIRES_IN: Joi.string().default('7d'),
 				SALT_ROUNDS: Joi.number().default(10),
 
+				// Database configuration
 				DB_HOST: Joi.string().default('localhost'),
 				DB_PORT: Joi.number().default(5432),
 				DB_USER: Joi.string().default('postgres'),
 				DB_PASS: Joi.string().default('postgres'),
 				DB_NAME: Joi.string().default('postgres'),
 
-				RABBITMQ_URL: Joi.string().default('amqp://guest:guest@localhost:5672'),
+				// Message queue configuration
+				RABBITMQ_HOST: Joi.string().default('localhost'),
+				RABBITMQ_PORT: Joi.number().default(5672),
+				RABBITMQ_USER: Joi.string().default('guest'),
+				RABBITMQ_PASS: Joi.string().default('guest'),
 
+				// Email service configuration
 				MAIL_HOST: Joi.string().default('smtp.mailtrap.com'),
 				MAIL_PORT: Joi.number().default(587),
 				MAIL_USER: Joi.string().required(),
 				MAIL_PASS: Joi.string().required(),
 				MAIL_FROM_EMAIL: Joi.string().required(),
 
+				// MinIO storage configuration
 				MINIO_ENDPOINT: Joi.string().default('localhost'),
 				MINIO_PORT: Joi.number().default(9000),
 				MINIO_ACCESS_KEY: Joi.string().default('minioadmin'),
 				MINIO_SECRET_KEY: Joi.string().default('minioadmin'),
+
+				//redis configuration
+				REDIS_HOST: Joi.string().default('localhost'),
+				REDIS_PORT: Joi.number().default(6379),
+				REDIS_PASSWORD: Joi.string().default('redispass'),
 			}),
 		}),
+
+		// PostgreSQL database configuration
 		TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -71,6 +91,7 @@ import { UserModule } from './modules/user/user.module';
 				entities: [__dirname + '/entities/*.entity{.ts,.js}'],
 				synchronize: false,
 			}),
+			// Custom data source factory with transactional support
 			dataSourceFactory: (options) => {
 				if (!options) {
 					throw new Error('Invalid options passed');
@@ -80,6 +101,8 @@ import { UserModule } from './modules/user/user.module';
 				return ds.initialize().then(addTransactionalDataSource);
 			},
 		}),
+
+		// Email service configuration
 		MailerModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -105,7 +128,11 @@ import { UserModule } from './modules/user/user.module';
 				},
 			}),
 		}),
+
+		// Task scheduling module
 		ScheduleModule.forRoot(),
+
+		// Feature modules
 		UserModule,
 		AuthModule,
 		MailModule,
@@ -118,6 +145,8 @@ import { UserModule } from './modules/user/user.module';
 		BlogModule,
 		NotificationModule,
 		JudgerModule,
+		RedisModule,
+		StatisticsModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

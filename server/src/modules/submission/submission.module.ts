@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -15,7 +15,7 @@ import { Submission } from 'src/entities/submission.entity';
 	providers: [SubmissionService],
 	imports: [
 		TypeOrmModule.forFeature([Submission, SubmissionResult]),
-		UserModule,
+		forwardRef(() => UserModule),
 		ProblemModule,
 		ClientsModule.registerAsync([
 			{
@@ -25,7 +25,9 @@ import { Submission } from 'src/entities/submission.entity';
 				useFactory: (configService: ConfigService) => ({
 					transport: Transport.RMQ,
 					options: {
-						urls: [configService.get<string>('RABBITMQ_URL')!],
+						urls: [
+							`amqp://${configService.get<string>('RABBITMQ_USER')}:${configService.get<string>('RABBITMQ_PASS')}@${configService.get<string>('RABBITMQ_HOST')}:${configService.get<number>('RABBITMQ_PORT')}`,
+						],
 						queue: 'judger.job',
 						queueOptions: {
 							durable: true,

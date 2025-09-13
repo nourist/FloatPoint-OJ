@@ -4,6 +4,12 @@ import { Problem } from './problem.entity';
 import { Submission } from './submission.entity';
 import { User } from './user.entity';
 
+export enum ContestStatus {
+	PENDING = 'PENDING',
+	RUNNING = 'RUNNING',
+	ENDED = 'ENDED',
+}
+
 @Entity('contests')
 export class Contest {
 	@PrimaryGeneratedColumn('uuid')
@@ -33,18 +39,20 @@ export class Contest {
 	@Column({ default: 0 })
 	penalty: number;
 
+	// Removed status field - status will be derived from startTime and endTime
+
 	@ManyToOne(() => User, (user) => user.contests)
 	@JoinColumn()
 	creator: User;
 
-	@ManyToMany(() => Problem, (problem) => problem.contests, { onDelete: 'SET NULL' })
+	@ManyToMany(() => Problem, (problem) => problem.contests, { onDelete: 'CASCADE' })
 	@JoinTable()
 	problems: Problem[];
 
 	@OneToMany(() => Submission, (submission) => submission.contest)
 	submissions: Submission[];
 
-	@ManyToMany(() => User, (user) => user.joinedContests)
+	@ManyToMany(() => User, (user) => user.joinedContests, { onDelete: 'CASCADE' })
 	@JoinTable()
 	participants: User[];
 
@@ -53,4 +61,16 @@ export class Contest {
 
 	@UpdateDateColumn({ type: 'timestamptz' })
 	updatedAt: Date;
+
+	// Helper method to get the current status based on time
+	getStatus(): ContestStatus {
+		const now = new Date();
+		if (now < this.startTime) {
+			return ContestStatus.PENDING;
+		} else if (now >= this.startTime && now <= this.endTime) {
+			return ContestStatus.RUNNING;
+		} else {
+			return ContestStatus.ENDED;
+		}
+	}
 }

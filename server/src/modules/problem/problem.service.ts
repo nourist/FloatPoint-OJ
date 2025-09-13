@@ -1,8 +1,7 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as path from 'path';
 import slug from 'slugify';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Transactional } from 'typeorm-transactional';
 
 import {
@@ -19,7 +18,7 @@ import {
 import { ProblemEditorial } from 'src/entities/problem-editorial.entity';
 import { ProblemTag } from 'src/entities/problem-tag.entity';
 import { Problem } from 'src/entities/problem.entity';
-import { Submission } from 'src/entities/submission.entity';
+import { Submission, SubmissionStatus } from 'src/entities/submission.entity';
 import { Subtask } from 'src/entities/subtask.entity';
 import { TestCase } from 'src/entities/test-case.entity';
 import { User } from 'src/entities/user.entity';
@@ -46,7 +45,7 @@ export class ProblemService {
 	) {}
 
 	async getProblemById(id: string) {
-		const problem = await this.problemRepository.findOne({ where: { id }, relations: ['tags', 'editorial'] });
+		const problem = await this.problemRepository.findOne({ where: { id }, relations: ['tags', 'editorial', 'editorial.creator'] });
 		if (!problem) {
 			this.logger.log(`Problem with ID ${id} not found`);
 			throw new NotFoundException(`Problem with ID ${id} not found`);
@@ -55,12 +54,33 @@ export class ProblemService {
 	}
 
 	async getProblemBySlug(slug: string) {
-		const problem = await this.problemRepository.findOne({ where: { slug }, relations: ['tags', 'editorial'] });
+		const problem = await this.problemRepository.findOne({ where: { slug }, relations: ['tags', 'editorial', 'editorial.creator'] });
 		if (!problem) {
 			this.logger.log(`Problem with slug ${slug} not found`);
 			throw new NotFoundException(`Problem with slug ${slug} not found`);
 		}
 		return problem;
+	}
+
+	// Calculates submission statistics for a problem
+	async getProblemStatistics(problem: Problem) {
+		const result = await this.problemRepository.manager
+			.createQueryBuilder(Submission, 'submission')
+			.select('COUNT(submission.id)', 'submissionCount')
+			.addSelect('SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END)', 'acCount')
+			.addSelect(
+				`CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END`,
+				'acRate',
+			)
+			.where('submission.problemId = :problemId', { problemId: problem.id })
+			.setParameter('status', SubmissionStatus.ACCEPTED)
+			.getRawOne<{ submissionCount: string; acCount: string; acRate: string }>();
+
+		return {
+			submissionCount: Number(result?.submissionCount) || 0,
+			acCount: Number(result?.acCount) || 0,
+			acRate: Number(result?.acRate) || 0,
+		};
 	}
 
 	async isSlugExists(slug: string) {
@@ -82,76 +102,170 @@ export class ProblemService {
 		);
 	}
 
-	async findAll(query: GetAllProblemsDto) {
-		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial } = query;
+	/**
+	 * Retrieves all problems with filtering, sorting, and pagination
+	 */
+	async findAll(query: GetAllProblemsDto, user?: User) {
+		const { minPoint, maxPoint, difficulty, tags, q, page, limit, sortBy, order, hasEditorial, status, contestId } = query;
 
 		const qb = this.problemRepository.createQueryBuilder('problem').leftJoinAndSelect('problem.tags', 'tags').leftJoinAndSelect('problem.editorial', 'editorial');
 
-		if (minPoint) {
-			qb.andWhere('problem.point >= :minPoint', { minPoint });
+		// Add submission statistics subquery for PostgreSQL
+		qb.leftJoin(
+			(sq) =>
+				sq
+					.select('s."problemId"', 'problemId')
+					.addSelect('COUNT(*)', 'total')
+					.addSelect(`COUNT(*) FILTER (WHERE s.status = :ac)`, 'ac')
+					.from(Submission, 's')
+					.groupBy('s."problemId"'),
+			'stats',
+			`stats."problemId" = problem.id`,
+			{ ac: SubmissionStatus.ACCEPTED },
+		);
+
+		// Add statistical fields for sorting
+		qb.addSelect('COALESCE(stats.ac, 0)', 'ac_count');
+		qb.addSelect('COALESCE(stats.total, 0)', 'total_submissions');
+		qb.addSelect(
+			`CASE WHEN COALESCE(stats.total, 0) > 0
+				THEN (stats.ac::float / stats.total)
+				ELSE 0 END`,
+			'ac_rate',
+		);
+
+		if (minPoint !== undefined) qb.andWhere('problem.point >= :minPoint', { minPoint });
+		if (maxPoint !== undefined) qb.andWhere('problem.point <= :maxPoint', { maxPoint });
+		if (difficulty) qb.andWhere('problem.difficulty = :difficulty', { difficulty });
+
+		// Apply tags filter (all specified tags must match)
+		if (tags?.length) {
+			qb.andWhere((qb1) => {
+				const sub = qb1
+					.subQuery()
+					.select('p.id')
+					.from(Problem, 'p')
+					.leftJoin('p.tags', 'ft')
+					.where('ft.name IN (:...tags)', { tags })
+					.groupBy('p.id')
+					.having('COUNT(DISTINCT ft.id) = :tagCount', { tagCount: tags.length })
+					.getQuery();
+				return `problem.id IN ${sub}`;
+			});
 		}
 
-		if (maxPoint) {
-			qb.andWhere('problem.point <= :maxPoint', { maxPoint });
+		if (q) qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
+		if (hasEditorial) qb.andWhere('editorial.id IS NOT NULL');
+
+		// Contest filter - filter problems that belong to a specific contest
+		if (contestId) {
+			qb.innerJoin('problem.contests', 'contest', 'contest.id = :contestId', { contestId });
 		}
 
-		if (difficulty) {
-			qb.andWhere('problem.difficulty = :difficulty', { difficulty });
+		if (sortBy === 'acCount') {
+			qb.orderBy('ac_count', (order as 'ASC' | 'DESC') || 'DESC');
+		} else if (sortBy === 'acRate') {
+			qb.orderBy('ac_rate', (order as 'ASC' | 'DESC') || 'DESC');
+		} else if (sortBy) {
+			qb.orderBy(`problem.${sortBy}`, (order as 'ASC' | 'DESC') || 'ASC');
+		} else {
+			qb.orderBy('problem.createdAt', 'DESC');
 		}
 
-		if (tags && tags.length > 0) {
-			qb.andWhere('tags.name IN (:...tags)', { tags });
-		}
-
-		if (q) {
-			qb.andWhere('problem.title ILIKE :q', { q: `%${q}%` });
-		}
-
-		if (hasEditorial) {
-			qb.andWhere('editorial.id IS NOT NULL');
-		}
-
-		if (sortBy) {
-			if (sortBy === 'acCount') {
-				qb.addSelect((subQuery) => {
-					return subQuery
-						.select('COUNT(submission.id)')
-						.from(Submission, 'submission')
-						.where('submission.problemId = problem.id')
-						.andWhere('submission.status = :status', { status: 'AC' });
-				}, 'acCount');
-				qb.orderBy('acCount', order || 'DESC');
-			} else if (sortBy === 'acRate') {
-				qb.addSelect((subQuery) => {
-					return subQuery
-						.select(
-							'CASE WHEN COUNT(submission.id) > 0 THEN CAST(SUM(CASE WHEN submission.status = :status THEN 1 ELSE 0 END) AS FLOAT) / COUNT(submission.id) ELSE 0 END',
-						)
-						.from(Submission, 'submission')
-						.where('submission.problemId = problem.id')
-						.setParameter('status', 'AC');
-				}, 'acRate');
-				qb.orderBy('acRate', order || 'DESC');
-			} else {
-				qb.orderBy(`problem.${sortBy}`, order || 'ASC');
+		// Apply user-specific status filters
+		if (user && status) {
+			if (status === 'unattempted') {
+				// Problems user has never submitted to
+				qb.andWhere((sq) => {
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					return `NOT EXISTS ${sub.getQuery()}`;
+				});
+			} else if (status === 'attempted') {
+				// Problems user has submitted to but not solved
+				qb.andWhere((sq) => {
+					const sub = sq
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id })
+						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
+					return `NOT EXISTS ${sub.getQuery()}`;
+				}).andWhere((sq) => {
+					const sub = sq.subQuery().select('1').from(Submission, 's').where('s.problemId = problem.id').andWhere('s.authorId = :userId', { userId: user.id });
+					return `EXISTS ${sub.getQuery()}`;
+				});
+			} else if (status === 'solved') {
+				// Problems user has solved
+				qb.andWhere((sq) => {
+					const sub = sq
+						.subQuery()
+						.select('1')
+						.from(Submission, 's')
+						.where('s.problemId = problem.id')
+						.andWhere('s.authorId = :userId', { userId: user.id })
+						.andWhere('s.status = :acc', { acc: SubmissionStatus.ACCEPTED });
+					return `EXISTS ${sub.getQuery()}`;
+				});
 			}
 		}
 
-		const [problems, total] = await qb
+		const { entities, raw } = await qb
 			.skip((page - 1) * limit)
 			.take(limit)
-			.getManyAndCount();
+			.getRawAndEntities();
 
-		return {
-			problems,
-			total,
-			page,
-			limit,
-		};
+		// Map statistics by problem ID to avoid duplication from joins
+		const statById = new Map<string, { ac: number; total: number; rate: number }>();
+		for (const r of raw) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			const pid = String(r.problem_id);
+			if (!statById.has(pid)) {
+				statById.set(pid, {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					ac: Number(r.ac_count) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					total: Number(r.total_submissions) || 0,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					rate: Number(r.ac_rate) || 0,
+				});
+			}
+		}
+
+		const problems: Problem[] = entities.map((problem) => {
+			const stat = statById.get(problem.id) ?? { ac: 0, total: 0, rate: 0 };
+			return { ...problem, acCount: stat.ac, acRate: stat.rate };
+		});
+
+		// Add user-specific status information
+		if (user) {
+			const problemIds = problems.map((p) => p.id);
+			const submissions = await this.problemRepository.manager.find(Submission, {
+				where: { author: { id: user.id }, problem: { id: In(problemIds) } },
+				relations: ['problem'],
+			});
+
+			// Determine status for each problem based on user's submissions
+			for (const problem of problems) {
+				const subs = submissions.filter((s) => s.problem.id === problem.id);
+				if (subs.some((s) => s.status === SubmissionStatus.ACCEPTED)) {
+					problem.status = 'solved';
+				} else if (subs.length > 0) {
+					problem.status = 'attempted';
+				} else {
+					problem.status = null;
+				}
+			}
+		}
+
+		const total = await qb.clone().select('problem.id').distinct(true).getCount();
+
+		return { problems, total, page, limit };
 	}
 
 	@Transactional()
 	async create(data: CreateProblemDto, creator: User) {
+		// Generate URL-friendly slug from title
 		const problemSlug = slug(data.title, { lower: true });
 
 		if (await this.isSlugExists(problemSlug)) {
@@ -160,7 +274,6 @@ export class ProblemService {
 		}
 
 		const problem = this.problemRepository.create({ ...data, tags: undefined, slug: problemSlug });
-
 		problem.creator = creator;
 
 		const tagEntities = await this.getOrCreateTags(data.tags);
@@ -175,21 +288,19 @@ export class ProblemService {
 
 	async update(id: string, data: UpdateProblemDto) {
 		const problem = await this.getProblemById(id);
+		const { tags, statement, ...rest } = data;
 
-		if (data.tags) {
-			const tagEntities = await this.getOrCreateTags(data.tags);
+		if (tags) {
+			const tagEntities = await this.getOrCreateTags(tags);
 			problem.tags = tagEntities;
 		}
-		Object.assign(problem, data);
 
-		if (data.title) {
-			const newProblemSlug = slug(data.title, { lower: true });
-			if (await this.isSlugExists(newProblemSlug)) {
-				this.logger.log(`Problem with slug ${newProblemSlug} already exists`);
-				throw new BadRequestException(`Problem with slug ${newProblemSlug} already exists`);
-			}
-			problem.slug = newProblemSlug;
+		// Handle statement update specifically
+		if (statement !== undefined) {
+			problem.statement = statement;
 		}
+
+		Object.assign(problem, rest);
 
 		return this.problemRepository.save(problem);
 	}
@@ -197,7 +308,9 @@ export class ProblemService {
 	@Transactional()
 	async remove(id: string) {
 		const problem = await this.getProblemById(id);
+
 		await this.problemRepository.remove(problem);
+		// Remove associated test case files from MinIO
 		await this.minioService.removeDir('test-cases', id);
 	}
 
@@ -298,7 +411,7 @@ export class ProblemService {
 		const savedSubtask = await this.subtaskRepository.save(subtask);
 
 		if (data.name) {
-			await this.minioService.renameDir('test-cases', path.join(problemId, oldSubtaskSlug), path.join(problemId, subtask.slug));
+			await this.minioService.renameDir('test-cases', this.minioService.joinPath(problemId, oldSubtaskSlug), this.minioService.joinPath(problemId, subtask.slug));
 		}
 
 		return savedSubtask;
@@ -309,7 +422,7 @@ export class ProblemService {
 		const subtask = await this.getSubtaskBySlug(problemId, subtaskSlug);
 		await this.subtaskRepository.remove(subtask);
 		// Remove files after successful database deletion
-		await this.minioService.removeDir('test-cases', path.join(problemId, subtaskSlug));
+		await this.minioService.removeDir('test-cases', this.minioService.joinPath(problemId, subtaskSlug));
 	}
 
 	async isTestCaseSlugExists(problemId: string, subtaskSlug: string, testCaseSlug: string) {
@@ -330,8 +443,8 @@ export class ProblemService {
 	async getTestCaseContentBySlug(problemId: string, subtaskSlug: string, testCaseSlug: string) {
 		await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 
-		const input = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
-		const output = await this.minioService.getFileContent('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
+		const input = await this.minioService.getFileContent('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'));
+		const output = await this.minioService.getFileContent('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'));
 
 		return {
 			input,
@@ -348,8 +461,8 @@ export class ProblemService {
 			throw new BadRequestException(`Test case ${data.name} for subtask ${subtaskSlug} for problem ${problemId} already exists`);
 		}
 		const testCase = this.testCaseRepository.create({ ...data, subtask, slug: testCaseSlug });
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
-		await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
+		await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
+		await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		return this.testCaseRepository.save(testCase);
 	}
 
@@ -371,11 +484,11 @@ export class ProblemService {
 		Object.assign(testCase, data);
 
 		if (data.input) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
+			await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'), data.input);
 		}
 
 		if (data.output) {
-			await this.minioService.saveFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
+			await this.minioService.saveFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'), data.output);
 		}
 
 		const savedTestCase = await this.testCaseRepository.save(testCase);
@@ -383,13 +496,13 @@ export class ProblemService {
 		if (data.name) {
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'input'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'input'),
+				this.minioService.joinPath(problemId, subtaskSlug, oldTestCaseSlug, 'input'),
+				this.minioService.joinPath(problemId, subtaskSlug, testCase.slug, 'input'),
 			);
 			await this.minioService.renameFile(
 				'test-cases',
-				path.join(problemId, subtaskSlug, oldTestCaseSlug, 'output'),
-				path.join(problemId, subtaskSlug, testCase.slug, 'output'),
+				this.minioService.joinPath(problemId, subtaskSlug, oldTestCaseSlug, 'output'),
+				this.minioService.joinPath(problemId, subtaskSlug, testCase.slug, 'output'),
 			);
 		}
 
@@ -401,7 +514,21 @@ export class ProblemService {
 		const testCase = await this.getTestCaseBySlug(problemId, subtaskSlug, testCaseSlug);
 		await this.testCaseRepository.remove(testCase);
 		// Remove files after successful database deletion
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'input'));
-		await this.minioService.removeFile('test-cases', path.join(problemId, subtaskSlug, testCaseSlug, 'output'));
+		await this.minioService.removeFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'input'));
+		await this.minioService.removeFile('test-cases', this.minioService.joinPath(problemId, subtaskSlug, testCaseSlug, 'output'));
+	}
+
+	async getMinPoint(): Promise<number> {
+		const result = await this.problemRepository.createQueryBuilder('problem').select('MIN(problem.point)', 'min').getRawOne<{ min: number }>();
+		return result?.min || 0;
+	}
+
+	async getMaxPoint(): Promise<number> {
+		const result = await this.problemRepository.createQueryBuilder('problem').select('MAX(problem.point)', 'max').getRawOne<{ max: number }>();
+		return result?.max || 0;
+	}
+
+	async getAllTags(): Promise<ProblemTag[]> {
+		return this.problemTagRepository.find();
 	}
 }

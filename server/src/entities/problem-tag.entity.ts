@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Problem } from './problem.entity';
 
@@ -11,6 +11,5 @@ export class ProblemTag {
 	name: string;
 
 	@ManyToMany(() => Problem, (problem) => problem.tags)
-	@JoinTable()
 	problems: Problem[];
 }

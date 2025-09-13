@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { BlogComment } from './blog-comment.entity';
 import { User } from './user.entity';
@@ -11,7 +11,7 @@ export class Blog {
 	@Column({ type: 'varchar', length: 255 })
 	title: string;
 
-	@Column({ type: 'varchar', length: 255 })
+	@Column({ type: 'varchar', length: 255, unique: true })
 	slug: string;
 
 	@Column({ type: 'text' })
@@ -21,6 +21,7 @@ export class Blog {
 	thumbnailUrl: string | null;
 
 	@ManyToOne(() => User, (user) => user.blogs)
+	@JoinColumn()
 	author: User;
 
 	@OneToMany(() => BlogComment, (blogComment) => blogComment.blog)

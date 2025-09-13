@@ -1,7 +1,5 @@
 import { IsBoolean, IsIn, IsInt, IsOptional, IsString, Length, Min } from 'class-validator';
 
-import { Default } from 'src/decorators/default.decorator';
-
 export class GetUsersDto {
 	@IsOptional()
 	@IsString()
@@ -20,14 +18,12 @@ export class GetUsersDto {
 	@IsOptional()
 	@IsInt()
 	@Min(1)
-	@Default(1)
-	page: number;
+	page: number = 1;
 
 	@IsOptional()
 	@IsInt()
 	@Min(1)
-	@Default(10)
-	limit: number;
+	limit: number = 10;
 }
 
 export class UpdateUserDto {

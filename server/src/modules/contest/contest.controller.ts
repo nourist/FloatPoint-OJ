@@ -9,7 +9,7 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { OptionalJwtAuthGuard } from 'src/guards/optional-jwt-auth.guard';
 import { RoleGuard } from 'src/guards/role.guard';
 
-@Controller('contests')
+@Controller('contest')
 export class ContestController {
 	constructor(private readonly contestService: ContestService) {}
 
@@ -33,10 +33,10 @@ export class ContestController {
 
 	@Get(':slug')
 	@UseGuards(OptionalJwtAuthGuard)
-	findOne(@Param('slug') slug: string) {
+	async findOne(@Param('slug') slug: string) {
 		return {
 			message: 'success',
-			contest: this.contestService.findOne(slug),
+			contest: await this.contestService.findOne(slug),
 		};
 	}
 
@@ -122,7 +122,7 @@ export class ContestController {
 	async getStandings(@Param('id', ParseUUIDPipe) id: string) {
 		return {
 			message: 'success',
-			standings: await this.contestService.getStandings(id),
+			...(await this.contestService.getStandings(id)),
 		};
 	}
 }

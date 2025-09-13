@@ -12,11 +12,12 @@ import {
 	UpdateTestCaseDto,
 } from './problem.dto';
 import { ProblemService } from './problem.service';
+import { GetOptionalUser } from 'src/decorators/get-optional-user.decorator';
 import { GetUser } from 'src/decorators/get-user.decorator';
 import { Roles } from 'src/decorators/roles.decorator';
-import { UserRole } from 'src/entities/user.entity';
-import { User } from 'src/entities/user.entity';
+import { User, UserRole } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from 'src/guards/optional-jwt-auth.guard';
 import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('problem')
@@ -24,18 +25,45 @@ export class ProblemController {
 	constructor(private readonly problemService: ProblemService) {}
 
 	@Get()
-	async findAll(@Query() query: GetAllProblemsDto) {
+	@UseGuards(OptionalJwtAuthGuard)
+	async findAll(@Query() query: GetAllProblemsDto, @GetOptionalUser() user: User) {
 		return {
 			message: 'success',
-			...(await this.problemService.findAll(query)),
+			...(await this.problemService.findAll(query, user)),
+		};
+	}
+
+	@Get('min-point')
+	async getMinPoint() {
+		return {
+			message: 'success',
+			minPoint: await this.problemService.getMinPoint(),
+		};
+	}
+
+	@Get('max-point')
+	async getMaxPoint() {
+		return {
+			message: 'success',
+			maxPoint: await this.problemService.getMaxPoint(),
+		};
+	}
+
+	@Get('tags')
+	async getAllTags() {
+		return {
+			message: 'success',
+			tags: await this.problemService.getAllTags(),
 		};
 	}
 
 	@Get(':slug')
 	async getProblemBySlug(@Param('slug') slug: string) {
+		const problem = await this.problemService.getProblemBySlug(slug);
+		const statistics = await this.problemService.getProblemStatistics(problem);
 		return {
 			message: 'success',
-			problem: await this.problemService.getProblemBySlug(slug),
+			problem: { ...problem, ...statistics },
 		};
 	}
 

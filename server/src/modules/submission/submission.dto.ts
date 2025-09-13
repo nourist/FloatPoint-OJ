@@ -1,29 +1,34 @@
-import { IsEnum, IsInt, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 
-import { Default } from 'src/decorators/default.decorator';
 import { SubmissionStatus } from 'src/entities/submission.entity';
 import { ProgramLanguage } from 'src/entities/submission.entity';
 
 export class GetAllSubmissionsDto {
+	@IsOptional()
 	@IsString()
 	authorId?: string;
 
+	@IsOptional()
 	@IsString()
 	problemId?: string;
 
+	@IsOptional()
 	@IsEnum(ProgramLanguage)
 	language?: ProgramLanguage;
 
+	@IsOptional()
 	@IsEnum(SubmissionStatus)
 	status?: SubmissionStatus;
 
-	@IsInt()
-	@Default(1)
-	page: number;
+	@IsOptional()
+	@IsString()
+	contestId?: string;
 
 	@IsInt()
-	@Default(20)
-	limit: number;
+	page: number = 1;
+
+	@IsInt()
+	limit: number = 20;
 }
 
 export class SubmitCodeDto {
@@ -35,4 +40,19 @@ export class SubmitCodeDto {
 
 	@IsString()
 	problemId: string;
+}
+
+export interface StatusStatistic {
+	status: SubmissionStatus;
+	count: number;
+}
+
+export interface LanguageStatistic {
+	language: ProgramLanguage;
+	count: number;
+}
+
+export interface SubmissionStatisticsDto {
+	statusStatistics: StatusStatistic[];
+	languageStatistics: LanguageStatistic[];
 }

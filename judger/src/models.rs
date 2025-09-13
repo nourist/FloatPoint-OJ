@@ -12,19 +12,19 @@ pub struct JudgerJob {
     pub language: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct JudgerAck {
     pub id: Uuid,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub enum ResultStatus {
     CE,
     IE,
     OK,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub enum Status {
     AC,
     WA,
@@ -33,7 +33,7 @@ pub enum Status {
     MLE,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct TestResult {
     pub slug: String,
     pub status: Status,
@@ -41,7 +41,7 @@ pub struct TestResult {
     pub memory: u64,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct JudgerResult {
     pub id: Uuid,
     pub log: String,
@@ -77,4 +77,10 @@ pub struct LanguageConfig {
     pub ext: &'static str,
     pub compile_command: &'static str,
     pub run_command: &'static str,
+}
+
+#[derive(Serialize)]
+pub struct JudgerHeartbeat {
+    pub judger_id: String,
+    pub timestamp: i64,
 }

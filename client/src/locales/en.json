@@ -1,0 +1,1310 @@
+{
+	"layout": {
+		"header": {
+			"home": "Home",
+			"problems": "Problems",
+			"submissions": "Submissions",
+			"contests": "Contests",
+			"standing": "Standing",
+			"login": "Login",
+			"register": "Register",
+			"logout": "Logout",
+			"profile": "Profile",
+			"settings": "Settings",
+			"appearance": "Appearance",
+			"language": "Language",
+			"light": "Light",
+			"dark": "Dark",
+			"dashboard": "Dashboard"
+		},
+		"footer": {
+			"copyright": "Copyright © {year} Nourist",
+			"license": "License",
+			"github": "GitHub",
+			"author": "Author",
+			"language": "Language"
+		}
+	},
+	"auth": {
+		"login": "Login",
+		"register": "Register",
+		"verify_email": "Verify Email",
+		"forgot_password": "Forgot Password",
+		"reset_password": "Reset Password",
+		"get_password": "Get Password",
+		"verify_success": "Email verified successfully",
+		"dont_have_account": "Don't have an account?",
+		"already_have_account": "Already have an account?",
+		"already_have_password": "Already have a password?",
+		"account_already_verified": "Account already verified?",
+		"continue_with_google": "Continue with Google",
+		"form": {
+			"email": "Email",
+			"password": "Password",
+			"username": "Username",
+			"enter_email": "Enter your email",
+			"enter_password": "Enter your password",
+			"enter_username": "Enter your username",
+			"confirm_password": "Confirm Password",
+			"enter_confirm_password": "Enter your confirm password"
+		},
+		"message": {
+			"email_required": "Email is required",
+			"password_required": "Password is required",
+			"username_required": "Username is required",
+			"email_invalid": "Email is invalid",
+			"password_min": "Password must be at least 8 characters long",
+			"password_uppercase": "Password must contain at least one uppercase letter",
+			"password_lowercase": "Password must contain at least one lowercase letter",
+			"password_number": "Password must contain at least one number",
+			"password_special": "Password must contain at least one special character",
+			"confirm_password_required": "Confirm Password is required",
+			"confirm_password_not_match": "Confirm Password does not match",
+			"token_required": "Token is required"
+		},
+		"success": {
+			"register": "Register successfully",
+			"login": "Login successfully",
+			"forgot_password": "Reset password email sent successfully",
+			"verify_email_send": "Verify email sent successfully",
+			"reset_password": "Password reset successfully",
+			"verify": "Great! Your email address has been verified. Your account is now active and ready to use."
+		},
+		"error": {
+			"login": "Login failed"
+		},
+		"description": {
+			"forgot_password": "Enter your email to get password reset link",
+			"verify_email": "Enter your email to get email verification link"
+		},
+		"toast": {
+			"verify_email": "Please check your email for verification"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Blockquote",
+		"code_block": "Code Block",
+		"toggle_highlight": "Toggle highlight ({color})",
+		"heading": "Heading {level}",
+		"insert_image": "Insert image",
+		"link": "Link",
+		"paste_a_link": "Paste a link...",
+		"apply_link": "Apply link",
+		"open_in_new_window": "Open in new window",
+		"remove_link": "Remove link",
+		"toggle_list": "Toggle {type} list",
+		"toggle_mark": "Toggle {type}",
+		"align": "Align {align}",
+		"undo": "Undo",
+		"redo": "Redo",
+		"highlight_text": "Highlight text",
+		"highlight": "Highlight",
+		"remove_highlight": "Remove highlight",
+		"highlight_color": "{color} highlight color",
+		"highlight_colors": "Highlight colors",
+		"format_text_as_heading": "Format text as heading",
+		"heading_tooltip": "Heading",
+		"list_options": "List options",
+		"list": "List",
+		"bulletlist": "Bullet List",
+		"orderedlist": "Ordered List",
+		"tasklist": "Task List"
+	},
+	"upload": {
+		"title": "Upload Image",
+		"supported_formats": "Supported formats: JPG, PNG, GIF",
+		"click_to_select": "Click to select",
+		"or_drag_and_drop_file_here": "or drag and drop file here"
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Latest articles, tutorials, and insights from the programming community",
+		"new": "New",
+		"sidebar": {
+			"rating": "Rating",
+			"score": "Score",
+			"current_contest": "Current Contest",
+			"ending_in": "Ending in",
+			"join": "Join",
+			"top_raters": "Top Raters",
+			"hot_problems": "Hot Problems",
+			"my_stats": "My Stats",
+			"problem": "Problem"
+		}
+	},
+	"pagination": {
+		"view": "View",
+		"sizes": "Sizes"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filter",
+			"status": "Status",
+			"all": "All",
+			"solved": "Solved",
+			"attempted": "Attempt",
+			"todo": "Todo",
+			"difficulty": "Difficulty",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard",
+			"editorial": "Editorial",
+			"has_editorial": "Has Editorial",
+			"point": "Point",
+			"tags": "Tags",
+			"contest": "Contest",
+			"contest_placeholder": "Select a contest"
+		},
+		"search": {
+			"sort_by": "Sort by",
+			"title": "Title",
+			"point": "Point",
+			"difficulty": "Difficulty",
+			"accept": "Accept",
+			"accept_rate": "Acceptance Rate"
+		},
+		"table": {
+			"title": "Title",
+			"difficulty": "Difficulty",
+			"point": "Point",
+			"accepted": "Accepted",
+			"acceptance": "Acceptance",
+			"editorial": "Editorial",
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard",
+			"delete": {
+				"title": "Confirm Delete",
+				"description": "Are you sure you want to delete the problem \"{title}\"? This action cannot be undone.",
+				"cancel": "Cancel",
+				"confirm": "Delete",
+				"success": "Problem deleted successfully",
+				"error": "Failed to delete problem"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Problem #{number}",
+				"breadcrumb": {
+					"problems": "Problems"
+				}
+			},
+			"sidebar": {
+				"info": "Information",
+				"difficulty": {
+					"label": "Difficulty",
+					"easy": "Easy",
+					"medium": "Medium",
+					"hard": "Hard"
+				},
+				"points": "Points",
+				"constraints": {
+					"title": "Constraints",
+					"time_limit": "Time Limit",
+					"memory_limit": "Memory Limit"
+				},
+				"io_format": {
+					"title": "I/O Format",
+					"input": "Input",
+					"output": "Output",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "Statistics",
+					"accepted": "Accepted",
+					"submissions": "Submissions",
+					"acceptance_rate": "Acceptance Rate"
+				},
+				"status": {
+					"label": "Status",
+					"solved": "Solved",
+					"attempted": "Attempted"
+				},
+				"tags": "Tags",
+				"actions": {
+					"title": "Actions",
+					"submit": "Submit",
+					"editorial": "Editorial",
+					"view_submissions": "View Submissions"
+				}
+			},
+			"statement": {
+				"statement": "Problem Statement",
+				"constraints": "Constraints",
+				"time_limit": "Time Limit",
+				"memory_limit": "Memory Limit",
+				"io_format": "I/O Format",
+				"input_file": "Input File",
+				"output_file": "Output File",
+				"subtasks": "Subtasks",
+				"subtask_number": "Subtask {number}: {name}",
+				"test_cases_count": "{count} test cases"
+			},
+			"error": {
+				"not_found": "Problem not found",
+				"load_failed": "Failed to load problem"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Editorial",
+		"not_available": "Editorial Not Available",
+		"not_available_description": "The editorial for this problem is not yet available or requires solving the problem first.",
+		"check_again": "Check Again",
+		"warning": "This editorial contains the solution and explanation for the problem. Make sure you've attempted the problem first!",
+		"created_by": "Editorial by: {username}",
+		"breadcrumb": {
+			"problems": "Problems",
+			"editorial": "Editorial"
+		},
+		"back_to_problem": "Back to Problem"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} seconds ago",
+			"minutes": "{count} minutes ago",
+			"hours": "{count} hours ago",
+			"days": "{count} days ago",
+			"months": "{count} months ago",
+			"years": "{count} years ago"
+		},
+		"page": {
+			"view": "View",
+			"title": "Submissions",
+			"breadcrumb": {
+				"home": "Home",
+				"submissions": "Submissions"
+			},
+			"actions": {
+				"submit_solution": "Submit Solution",
+				"view_all": "View All",
+				"view_details": "View Details",
+				"submit_code": "Submit Code"
+			},
+			"recent_submissions": "Recent Submissions",
+			"score": "Score",
+			"list_title": "Found {count} submissions",
+			"submissions_title": "Recent Submissions",
+			"no_submissions": {
+				"title": "No Submissions Found",
+				"empty": "Be the first to submit a solution!",
+				"filtered": "No submissions match your current filters."
+			},
+			"common": {
+				"score": "Score"
+			},
+			"pagination": {
+				"previous": "Previous",
+				"next": "Next",
+				"page_info": "Page {page} of {total}"
+			},
+			"passed": "passed"
+		},
+		"filters": {
+			"problem": "Problem",
+			"problem_placeholder": "Select a problem",
+			"language": "Language",
+			"select_language": "Select language",
+			"all_languages": "All Languages",
+			"status": "Status",
+			"select_status": "Select status",
+			"all_status": "All Status",
+			"all_contests": "All Contests",
+			"author": "Author",
+			"author_placeholder": "Select an author",
+			"contest": "Contest",
+			"contest_placeholder": "Select a contest",
+			"reset": "Reset Filters"
+		},
+		"status": {
+			"ACCEPTED": "Accepted",
+			"WRONG_ANSWER": "Wrong Answer",
+			"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+			"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+			"RUNTIME_ERROR": "Runtime Error",
+			"COMPILATION_ERROR": "Compilation Error",
+			"INTERNAL_ERROR": "Internal Error",
+			"PENDING": "Pending",
+			"JUDGING": "Judging",
+			"accepted": "Accepted",
+			"wrong_answer": "Wrong Answer",
+			"time_limit_exceeded": "Time Limit Exceeded",
+			"memory_limit_exceeded": "Memory Limit Exceeded",
+			"runtime_error": "Runtime Error",
+			"compilation_error": "Compilation Error",
+			"internal_error": "Internal Error",
+			"pending": "Pending",
+			"judging": "Judging"
+		},
+		"table": {
+			"status": "Status",
+			"problem": "Problem",
+			"author": "Author",
+			"language": "Language",
+			"submitted": "Submitted",
+			"actions": "Actions",
+			"error_loading": "Error Loading Submissions",
+			"unknown_problem": "Unknown Problem",
+			"by": "by",
+			"solved": "solved",
+			"score": "Score"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Failed to load submissions"
+			},
+			"empty": {
+				"title": "No Submissions Yet",
+				"description": "Be the first to submit a solution!"
+			}
+		},
+		"detail": {
+			"title": "Submission Details",
+			"breadcrumb": {
+				"home": "Home",
+				"submissions": "Submissions"
+			},
+			"tabs": {
+				"info": "Info",
+				"source_code": "Source Code",
+				"test_cases": "Test Cases",
+				"log": "Log"
+			},
+			"info": {
+				"author": "Author",
+				"problem": "Problem",
+				"language": "Language",
+				"score": "Score",
+				"submitted": "Submitted",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Back",
+				"submit_again": "Submit Again",
+				"view_all_submissions": "View All Submissions"
+			},
+			"content": {
+				"no_log_available": "No log information available",
+				"no_test_cases_available": "No test case results available",
+				"subtask_count": "{count} subtask",
+				"subtask_count_other": "{count} subtasks",
+				"expand_all": "Expand All",
+				"collapse_all": "Collapse All",
+				"tests_passed": "{passed} / {total} passed",
+				"not_found": {
+					"title": "Submission Not Found",
+					"message": "The submission you're looking for could not be found.",
+					"back_button": "Back to Submissions"
+				},
+				"partial": "Partial",
+				"submitted_for": "Submitted for"
+			}
+		},
+		"chart": {
+			"status": "Status",
+			"languages": "Languages"
+		}
+	},
+	"submit": {
+		"easy": "Easy",
+		"medium": "Medium",
+		"hard": "Hard",
+		"page": {
+			"title": "Submit Code",
+			"select_problem": {
+				"title": "No Problem Selected",
+				"description": "Please select a problem to submit your solution to.",
+				"browse": "Browse Problems"
+			},
+			"problem_not_found": {
+				"title": "Problem Not Found",
+				"description": "The problem you're trying to submit to could not be found."
+			},
+			"breadcrumb": {
+				"home": "Home",
+				"problems": "Problems"
+			},
+			"back_to_problem": "Back to Problem",
+			"language": "Programming Language",
+			"select_language": "Select language",
+			"code": "Source Code",
+			"code_placeholder": "Enter your code here...",
+			"submit": "Submit",
+			"submitting": "Submitting...",
+			"login_required": {
+				"message": "Please",
+				"login": "login",
+				"to_submit": "to submit your solution"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "You must be logged in to submit code",
+				"select_problem": "Please select a problem to submit to",
+				"enter_code": "Please enter your code",
+				"submit_failed": "Failed to submit code. Please try again."
+			},
+			"success": {
+				"submitted": "Code submitted successfully!"
+			}
+		}
+	},
+	"error": {
+		"title": "Oops! Something went wrong",
+		"message": "An unexpected error occurred. Please try again later.",
+		"try_again": "Try again",
+		"go_home": "Go to Homepage"
+	},
+	"not_found": {
+		"title": "Oops! Page not found",
+		"message": "The page you are looking for does not exist.",
+		"go_home": "Go to Homepage"
+	},
+	"blog": {
+		"create": {
+			"create": "Create",
+			"blogs": "Blogs",
+			"title": "Title",
+			"title_placeholder": "Enter title",
+			"description_placeholder": "Enter description",
+			"upload_thumbnail": "Upload thumbnail",
+			"save": "Save",
+			"message": {
+				"title_required": "Title is required",
+				"title_and_content_required": "Title and content are required."
+			},
+			"create_success": "Blog created successfully!",
+			"create_fail": "Failed to create blog."
+		},
+		"edit": {
+			"blogs": "Blogs",
+			"edit": "Edit",
+			"save": "Save",
+			"message": {
+				"title_required": "Title is required",
+				"title_and_content_required": "Title and content are required."
+			},
+			"edit_success": "Blog edited successfully!",
+			"edit_fail": "Failed to edit blog."
+		},
+		"card": {
+			"blogs": "Blogs",
+			"delete_success": "Blog deleted successfully!",
+			"message": {
+				"delete_confirmation": "Are you sure you want to delete this blog?"
+			},
+
+			"delete": "Delete",
+			"edit": "Edit",
+			"cancel": "Cancel"
+		},
+		"comment": {
+			"create_success": "Comment created successfully!",
+
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"comment-placeholder": "Write a comment...",
+			"comment": "Comment",
+			"comments": "Comments",
+			"message": {
+				"comment_required": "Comment is required",
+				"delete_confirmation": "Are you sure you want to delete this comment?"
+			},
+			"delete": "Delete",
+			"edit": "Edit",
+			"cancel": "Cancel",
+			"delete_success": "Comment deleted successfully!",
+			"edit_success": "Comment edited successfully!"
+		}
+	},
+	"standing": {
+		"title": "Global Standing",
+		"description": "Rankings of users based on rating and total score",
+		"rating": "Rating",
+		"score": "Score",
+		"top_users": "Top Users",
+		"all_users": "All Users",
+		"no_data": "No data available",
+		"modes": {
+			"rating": "Rating",
+			"score": "Score"
+		},
+		"table": {
+			"rank": "Rank",
+			"user": "User",
+			"rating": "Rating",
+			"score": "Score"
+		},
+		"filters": {
+			"search_placeholder": "Search users...",
+			"reset": "Reset"
+		},
+		"errors": {
+			"load_failed": "Failed to load standing data"
+		}
+	},
+	"async_combobox": {
+		"select": "Select...",
+		"search": "Search...",
+		"no_results": "No results found.",
+		"load_more": "Load more..."
+	},
+	"profile": {
+		"title": "Profile",
+		"loading": "Loading profile...",
+		"user_not_found": "User not found",
+		"sidebar": {
+			"edit_profile": "Edit Profile",
+			"rank": "Rank",
+			"stats": "Stats",
+			"score": "Score",
+			"rating": "Rating",
+			"ac_problems": "AC Problems",
+			"submissions": "Submissions",
+			"blogs": "Blogs",
+			"comments": "Comments",
+			"joined_contests": "Joined Contests",
+			"languages": "Languages",
+			"submissions_count": "submissions",
+			"no_submissions": "No submissions yet",
+			"unranked": "Unranked"
+		},
+		"content": {
+			"submission_activity": "Submission Activity",
+			"submissions_in_year": "submissions in the last year",
+			"accepted": "accepted",
+			"loading_activity": "Loading activity data...",
+			"rating_history": "Rating History",
+			"problems_by_difficulty": "AC Problems by Difficulty",
+			"submissions_by_language": "AC Submissions by Language",
+			"less": "Less",
+			"more": "More"
+		},
+		"tabs": {
+			"recent_solved_problems": "Recent Solved Problems",
+			"recent_submissions": "Recent Submissions",
+			"blogs": "Blogs",
+			"problem": "Problem",
+			"language": "Language",
+			"solved_count": "Solved Count",
+			"first_solved": "First Solved",
+			"status": "Status",
+			"date": "Date",
+			"title": "Title",
+			"publish_date": "Publish Date",
+			"no_accepted_submissions": "No accepted submissions yet.",
+			"no_recent_submissions": "No submissions yet.",
+			"no_blogs": "No blogs published yet."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Contests",
+			"running": "Running",
+			"upcoming": "Upcoming",
+			"ended": "Ended",
+			"create_button": "Create Contest",
+			"search_placeholder": "Search contests...",
+			"loading": "Loading contests...",
+			"no_contests": "No contests found",
+			"no_contests_description": "Check back later for upcoming competitions and challenges",
+			"error_loading": "Error loading contests",
+			"rated": "Rated",
+			"unrated": "Unrated",
+			"participants": "{count, plural, =0 {No participants} =1 {# participant} other {# participants}}",
+			"joining": "Joined"
+		},
+		"detail": {
+			"info_tab": "Info",
+			"problems_tab": "Problems",
+			"submissions_tab": "Submissions",
+			"standings_tab": "Standings",
+			"time_remaining": "Time Remaining",
+			"search_problems": "Search problems...",
+			"add_problem": "Add Problem",
+			"problem_title": "Title",
+			"problem_slug": "Slug",
+			"problem_point": "Point",
+			"actions": "Actions",
+			"add": "Add",
+			"adding": "Adding...",
+			"remove": "Remove",
+			"contest_problems": "Contest Problems",
+			"rank": "Rank",
+			"user": "User",
+			"score": "Score",
+			"time": "Time",
+			"points": "Points",
+			"no_standings": "No standings available",
+			"loading": "Loading...",
+			"contest_updated": "Contest updated successfully!",
+			"problem_added": "Problem added to contest successfully!",
+			"failed_to_add_problem": "Failed to add problem to contest",
+			"problem_removed": "Problem removed from contest successfully!",
+			"failed_to_remove_problem": "Failed to remove problem from contest",
+			"remove_problem_title": "Confirm Remove",
+			"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+			"remove_problem_cancel": "Cancel",
+			"remove_problem_confirm": "Remove",
+			"running": "Running",
+			"upcoming": "Upcoming",
+			"ended": "Ended",
+			"rated": "Rated",
+			"start_time": "Start Time",
+			"end_time": "End Time",
+			"participants": "Participants",
+			"problems": "Problems",
+			"no_problems": "No problems available",
+			"join": "Join Contest",
+			"leave": "Leave Contest",
+			"joining": "Joining...",
+			"leaving": "Leaving...",
+			"join_success": "Successfully joined the contest!",
+			"leave_success": "Successfully left the contest!",
+			"join_fail": "Failed to join the contest. Please try again.",
+			"leave_fail": "Failed to leave the contest. Please try again."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Dashboard",
+			"blog": "Blog",
+			"problem": "Problem",
+			"submission": "Submission",
+			"contest": "Contest",
+			"user": "User",
+			"judger": "Judger",
+			"notification": "Notification",
+			"profile": "Profile",
+			"logout": "Logout",
+			"appearance": "Appearance",
+			"language": "Language",
+			"light": "Light",
+			"dark": "Dark",
+			"home": "Home"
+		},
+		"dashboard": {
+			"unable_to_load": "Unable to load dashboard",
+			"error_loading": "There was an error loading the dashboard data. Please try refreshing the page.",
+			"refresh": "Refresh Dashboard",
+			"total_users": "Total Users",
+			"active_today": "Active Today",
+			"total_submissions": "Total Submissions",
+			"success_rate": "Success Rate",
+			"active_problems": "Active Problems",
+			"user_activity": "User Activity",
+			"submission_volume": "Submission Volume",
+			"language_distribution": "Language Distribution",
+			"submission_results": "Submission Results",
+			"problem_difficulty": "Problem Difficulty",
+			"contest_participation": "Contest Participation",
+			"top_users": "Top Users",
+			"popular_problems": "Popular Problems"
+		},
+		"chart": {
+			"loading": "Loading...",
+			"contests": "Contests",
+			"participants": "Participants",
+			"contest_participation_trends": "Contest Participation Trends",
+			"contest_participation_description": "Monthly contest count and participant numbers",
+			"number_of_contests": "Number of Contests (Left Y-axis)",
+			"total_participants": "Total Participants (Right Y-axis)",
+			"judger_queue_performance": "Judger Queue Performance",
+			"judger_queue_description": "Real-time queue size and processing time monitoring",
+			"queue_size": "Queue Size",
+			"processing_time": "Processing Time",
+			"queue_size_threshold_warning": "Queue size above threshold!",
+			"queue_size_left": "Queue Size (Left Y-axis)",
+			"processing_time_right": "Processing Time (Right Y-axis)",
+			"threshold": "Threshold",
+			"language_usage": "Programming Language Usage",
+			"language_usage_description": "Distribution of submissions by programming language",
+			"submissions": "Submissions",
+			"percentage": "Percentage",
+			"total_submissions": "Total Submissions",
+			"problem_difficulty_distribution": "Problem Difficulty Distribution",
+			"problem_difficulty_description": "Number of problems by difficulty level and solve rates",
+			"total_problems": "Total Problems",
+			"solved_by_users": "Solved by Users",
+			"solve_rate": "Solve Rate",
+			"submission_results_distribution": "Submission Results Distribution",
+			"submission_results_description": "Breakdown of submission verdicts",
+			"count": "Count",
+			"submission_volume": "Submission Volume",
+			"submission_volume_description": "Daily submission count and acceptance rate",
+			"accepted": "Accepted",
+			"success_rate": "Success Rate",
+			"system_resource_usage": "System Resource Usage",
+			"system_resource_description": "Real-time CPU, Memory, and Disk usage monitoring",
+			"cpu_usage": "CPU Usage",
+			"memory_usage": "Memory Usage",
+			"disk_usage": "Disk Usage",
+			"high_resource_usage": "High resource usage detected!",
+			"cpu": "CPU",
+			"memory": "Memory",
+			"disk": "Disk",
+			"user_registrations": "User Registrations",
+			"user_registrations_description": "Daily new registrations"
+		},
+		"table": {
+			"loading": "Loading...",
+			"most_attempted_problems": "Most Attempted Problems",
+			"most_attempted_problems_description": "Popular problems based on submission count",
+			"problem": "Problem",
+			"difficulty": "Difficulty",
+			"attempts": "Attempts",
+			"solved": "Solved",
+			"success_rate": "Success Rate",
+			"top_users_this_week": "Top Users This Week",
+			"top_users_this_week_description": "Most active users based on solved problems",
+			"rank": "Rank",
+			"user": "User",
+			"submissions": "Submissions"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Search...",
+				"sort_by": "Sort by",
+				"title": "Title",
+				"point": "Point",
+				"difficulty": "Difficulty",
+				"accept": "Accept",
+				"accept_rate": "Acceptance Rate"
+			},
+			"filter": {
+				"new": "New",
+				"title": "Filter",
+				"difficulty": "Difficulty",
+				"easy": "Easy",
+				"medium": "Medium",
+				"hard": "Hard",
+				"point": "Point",
+				"tags": "Tags",
+				"all": "All",
+				"editorial": "Editorial",
+				"has_editorial": "Has Editorial",
+				"point_range": "Point Range",
+				"contest": "Contest"
+			},
+			"table": {
+				"title": "Title",
+				"tags": "Tags",
+				"difficulty": "Difficulty",
+				"point": "Point",
+				"accepted": "Accepted",
+				"acceptance": "Acceptance",
+				"editorial": "Editorial",
+				"easy": "Easy",
+				"medium": "Medium",
+				"hard": "Hard",
+				"delete": {
+					"title": "Confirm Delete",
+					"description": "Are you sure you want to delete the problem \"{title}\"? This action cannot be undone.",
+					"cancel": "Cancel",
+					"confirm": "Delete",
+					"success": "Problem deleted successfully",
+					"error": "Failed to delete problem"
+				}
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter problem title",
+				"time_limit": "Time Limit (ms)",
+				"memory_limit": "Memory Limit (KB)",
+				"point": "Point",
+				"scoring_method": "Scoring Method",
+				"scoring_method_placeholder": "Select scoring method",
+				"scoring_method_standard": "Standard",
+				"scoring_method_subtask": "Subtask",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Difficulty",
+				"difficulty_placeholder": "Select difficulty",
+				"difficulty_easy": "Easy",
+				"difficulty_medium": "Medium",
+				"difficulty_hard": "Hard",
+				"io_mode": "IO Mode",
+				"io_mode_placeholder": "Select IO mode",
+				"io_mode_standard": "Standard",
+				"io_mode_file": "File",
+				"input_file": "Input File",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Output File",
+				"output_file_placeholder": "output.txt",
+				"tags": "Tags",
+				"statement": "Statement",
+				"statement_placeholder": "Write problem statement here...",
+				"submit": "Create Problem",
+				"update": "Update Problem",
+				"title_required": "Title is required",
+				"time_limit_min": "Time limit must be at least 1ms",
+				"time_limit_max": "Time limit must be at most 10000ms",
+				"memory_limit_min": "Memory limit must be at least 1KB",
+				"memory_limit_max": "Memory limit must be at most 1048576KB",
+				"point_min": "Point must be at least 0",
+				"point_max": "Point must be at most 100",
+				"tags_placeholder": "Enter tags...",
+				"create_success": "Problem created successfully!",
+				"create_error": "Failed to create problem. Please try again.",
+				"update_success": "Problem updated successfully!",
+				"update_error": "Failed to update problem. Please try again."
+			},
+			"editorial": {
+				"placeholder": "Write editorial content here...",
+				"create": "Create Editorial",
+				"save": "Save Editorial",
+				"delete": "Delete Editorial",
+				"cancel": "Cancel",
+				"deleting": "Deleting...",
+				"saving": "Saving...",
+				"no_editorial": "No editorial exists for this problem yet.",
+				"create_success": "Editorial created successfully!",
+				"create_error": "Failed to create editorial. Please try again.",
+				"update_success": "Editorial updated successfully!",
+				"update_error": "Failed to update editorial. Please try again.",
+				"delete_success": "Editorial deleted successfully!",
+				"delete_error": "Failed to delete editorial. Please try again.",
+				"delete_confirmation_title": "Are you sure you want to delete this editorial?",
+				"delete_confirmation_description": "This action cannot be undone. This will permanently delete the editorial for this problem."
+			},
+			"tabs": {
+				"info": "Info",
+				"editorial": "Editorial",
+				"testcase": "Testcase"
+			},
+			"slug_page": {
+				"loading": "Loading...",
+				"problem_not_found": "Problem not found",
+				"error_loading_problem": "Error loading problem: {message}",
+				"error_loading_tags": "Error loading tags: {message}",
+				"testcase_management": "Testcase management will be implemented here."
+			},
+			"testcase": {
+				"input": "Input",
+				"output": "Output",
+				"save": "Save",
+				"saving": "Saving...",
+				"loading": "Loading...",
+				"select_to_edit": "Select a testcase input or output to edit",
+				"content_placeholder": "Testcase content will appear here...",
+				"new_testcase": "New Testcase",
+				"new_subtask": "New Subtask",
+				"name": "Name",
+				"cancel": "Cancel",
+				"create": "Create",
+				"delete": "Delete",
+				"creating": "Creating...",
+				"create_subtask_title": "Create New Subtask",
+				"create_subtask_description": "Enter a name for the new subtask.",
+				"subtask_name_placeholder": "Enter subtask name",
+				"create_testcase_title": "Create New Testcase",
+				"create_testcase_description": "Enter a name for the new testcase.",
+				"testcase_name_placeholder": "Enter testcase name",
+				"delete_subtask_title": "Delete Subtask",
+				"delete_subtask_description": "Are you sure you want to delete this subtask? This action cannot be undone.",
+				"delete_testcase_title": "Delete Testcase",
+				"delete_testcase_description": "Are you sure you want to delete this testcase? This action cannot be undone.",
+				"success": {
+					"title": "Success",
+					"saved": "Testcase content saved successfully",
+					"testcase_created": "Testcase created successfully",
+					"testcase_deleted": "Testcase deleted successfully",
+					"subtask_created": "Subtask created successfully",
+					"subtask_deleted": "Subtask deleted successfully"
+				},
+				"error": {
+					"title": "Error",
+					"load_subtasks": "Failed to load subtasks",
+					"load_content": "Failed to load testcase content",
+					"save_content": "Failed to save testcase content",
+					"create_testcase": "Failed to create testcase",
+					"delete_testcase": "Failed to delete testcase",
+					"create_subtask": "Failed to create subtask",
+					"delete_subtask": "Failed to delete subtask"
+				}
+			}
+		},
+		"user": {
+			"title": "User Management",
+			"search_placeholder": "Search users...",
+			"sort_by": "Sort by",
+			"sort_username": "Username",
+			"sort_fullname": "Full Name",
+			"sort_rating": "Rating",
+			"sort_score": "Score",
+			"sort_asc": "Ascending",
+			"sort_desc": "Descending",
+			"no_users_found": "No users found",
+			"showing_results": "Showing {start}-{end} of {total} results",
+			"previous": "Previous",
+			"next": "Next",
+			"page_of": "Page {current} of {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Username",
+				"fullname": "Full Name",
+				"email": "Email",
+				"role": "Role",
+				"rating": "Rating",
+				"score": "Score",
+				"verified": "Verified",
+				"verified_yes": "Yes",
+				"verified_no": "No"
+			},
+			"detail": {
+				"title": "User Details",
+				"back_to_users": "Back to Users",
+				"verified": "Verified",
+				"unverified": "Unverified",
+				"email": "Email",
+				"joined": "Joined",
+				"last_updated": "Last Updated",
+				"bio": "Biography",
+				"statistics": "Statistics",
+				"score": "Score",
+				"rating": "Rating",
+				"problems_solved": "Problems Solved",
+				"submissions": "Submissions",
+				"blogs": "Blogs",
+				"comments": "Comments",
+				"contests": "Contests"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "View",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "View Details",
+					"submit_code": "Submit Code"
+				},
+				"recent_submissions": "Recent Submissions",
+				"score": "Score",
+				"list_title": "Found {count} submissions",
+				"submissions_title": "Recent Submissions",
+				"no_submissions": {
+					"title": "No Submissions Found",
+					"empty": "Be the first to submit a solution!",
+					"filtered": "No submissions match your current filters."
+				},
+				"common": {
+					"score": "Score"
+				},
+				"pagination": {
+					"previous": "Previous",
+					"next": "Next",
+					"page_info": "Page {page} of {total}"
+				},
+				"passed": "passed"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Author",
+				"language": "Language",
+				"submitted": "Submitted",
+				"actions": "Actions",
+				"error_loading": "Error Loading Submissions",
+				"unknown_problem": "Unknown Problem",
+				"by": "by",
+				"solved": "solved",
+				"score": "Score"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Failed to load submissions"
+				},
+				"empty": {
+					"title": "No Submissions Yet",
+					"description": "Be the first to submit a solution!"
+				}
+			},
+			"detail": {
+				"title": "Submission Details",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Source Code",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"author": "Author",
+					"problem": "Problem",
+					"language": "Language",
+					"score": "Score",
+					"submitted": "Submitted",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Back",
+					"submit_again": "Submit Again",
+					"view_all_submissions": "View All Submissions"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"subtask_count": "{count} subtask",
+					"subtask_count_other": "{count} subtasks",
+					"expand_all": "Expand All",
+					"collapse_all": "Collapse All",
+					"tests_passed": "{passed} / {total} passed",
+					"not_found": {
+						"title": "Submission Not Found",
+						"message": "The submission you're looking for could not be found.",
+						"back_button": "Back to Submissions"
+					},
+					"partial": "Partial",
+					"submitted_for": "Submitted for"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Languages"
+			}
+		},
+
+		"contest": {
+			"page": {
+				"running": "Running",
+				"upcoming": "Upcoming",
+				"ended": "Ended",
+				"create_button": "Create Contest",
+				"search_placeholder": "Search contests...",
+				"loading": "Loading...",
+				"rated": "Rated",
+				"unrated": "Unrated"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Problems",
+				"submissions_tab": "Submissions",
+				"standings_tab": "Standings",
+				"search_problems": "Search problems...",
+				"add_problem": "Add Problem",
+				"problem_title": "Title",
+				"actions": "Actions",
+				"add": "Add",
+				"adding": "Adding...",
+				"remove": "Remove",
+				"rank": "Rank",
+				"user": "User",
+				"score": "Score",
+				"no_standings": "No standings available",
+				"loading": "Loading...",
+				"contest_updated": "Contest updated successfully!",
+				"problem_added": "Problem added to contest successfully!",
+				"failed_to_add_problem": "Failed to add problem to contest",
+				"problem_removed": "Problem removed from contest successfully!",
+				"failed_to_remove_problem": "Failed to remove problem from contest",
+				"remove_problem_title": "Confirm Remove",
+				"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+				"remove_problem_cancel": "Cancel",
+				"remove_problem_confirm": "Remove"
+			},
+			"create": {
+				"title": "Create Contest"
+			},
+			"edit": {
+				"title": "Edit Contest",
+				"loading": "Loading contest...",
+				"cancel": "Cancel"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter contest title",
+				"start_time": "Start Time",
+				"end_time": "End Time",
+				"time": "Time",
+				"select_start_date": "Select start date",
+				"select_end_date": "Select end date",
+				"is_rated": "Is Rated",
+				"is_rated_placeholder": "Select if contest is rated",
+				"yes": "Yes",
+				"no": "No",
+				"penalty": "Penalty (minutes)",
+				"penalty_placeholder": "Enter penalty in minutes",
+				"penalty_min": "Penalty must be at least 0 minutes",
+				"description": "Description",
+				"description_placeholder": "Enter contest description",
+				"submit": "Create Contest",
+				"update": "Update Contest",
+				"title_required": "Title is required",
+				"start_time_required": "Start time is required",
+				"end_time_required": "End time is required",
+				"create_success": "Contest created successfully!",
+				"create_error": "Failed to create contest. Please try again.",
+				"update_success": "Contest updated successfully!",
+				"update_error": "Failed to update contest. Please try again."
+			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Notifications",
+		"mark_all_read": "Mark all read",
+		"mark_as_read": "Mark as read",
+		"view_all": "View all notifications",
+		"no_notifications": "No notifications yet",
+		"loading": "Loading notifications...",
+		"failed_to_load": "Failed to load notifications",
+		"unread_count": "{count} unread notification",
+		"unread_count_plural": "{count} unread notifications",
+		"read_count": "{count} read notification",
+		"read_count_plural": "{count} read notifications",
+		"just_now": "Just now",
+		"minutes_ago": "{count}m ago",
+		"hours_ago": "{count}h ago",
+		"days_ago": "{count}d ago",
+		"tabs": {
+			"all": "All",
+			"unread": "Unread",
+			"read": "Read"
+		},
+		"types": {
+			"new_problem": "New Problem: {title}",
+			"new_contest": "New Contest: {title}",
+			"new_blog": "New Blog: {title}",
+			"rating_updated": "Rating Updated",
+			"system": "System Notification",
+			"new_problem_available": "New Problem Available",
+			"new_contest_available": "New Contest Available",
+			"new_blog_post": "New Blog Post"
+		}
+	},
+	"settings": {
+		"title": "Settings",
+		"description": "Manage your account settings and preferences.",
+		"tabs": {
+			"basic": "Basic",
+			"profile": "Profile",
+			"notification": "Notification"
+		},
+		"basic": {
+			"theme": {
+				"title": "Theme",
+				"description": "Select a theme for the application.",
+				"light": "Light",
+				"dark": "Dark",
+				"system": "System",
+				"auto": "Auto"
+			},
+			"language": {
+				"title": "Language",
+				"description": "Select a language for the application."
+			}
+		},
+		"profile": {
+			"title": "Profile",
+			"description": "Update your profile information.",
+			"form": {
+				"username": "Username",
+				"fullname": "Full Name",
+				"bio": "Bio",
+				"save": "Save Changes",
+				"saving": "Saving...",
+				"change_avatar": "Change Avatar",
+				"reset_password": "Reset Password",
+				"update_success": "Profile updated successfully!",
+				"update_error": "Failed to update profile. Please try again."
+			}
+		},
+		"notification": {
+			"title": "Notifications",
+			"description": "Configure your notification preferences.",
+			"form": {
+				"new_blog": "New Blog Posts",
+				"new_problem": "New Problems",
+				"new_contest": "New Contests",
+				"update_rating": "Rating Updates",
+				"system": "System Notifications",
+				"save": "Save Changes",
+				"saving": "Saving...",
+				"update_success": "Notification settings updated successfully!",
+				"update_error": "Failed to update notification settings. Please try again."
+			}
+		}
+	}
+}

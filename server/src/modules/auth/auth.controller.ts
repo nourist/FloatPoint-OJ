@@ -39,8 +39,7 @@ export class AuthController {
 
 	@Post('verify-email')
 	async verifyEmail(@Body() { token }: VerifyEmailDto) {
-		await this.authService.verifyEmail(token);
-		return { message: 'Email verified successfully' };
+		return { message: 'Email verified successfully', email: (await this.authService.verifyEmail(token)).email };
 	}
 
 	@Post('forgot-password')

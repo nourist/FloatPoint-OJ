@@ -1,24 +1,25 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 
 import { JudgerService } from './judger.service';
 
 export type JudgerAck = {
 	id: string;
+	judger_id: string;
 };
 
 export enum JudgerResultStatus {
-	CE,
-	IE,
-	OK,
+	CE = 'CE',
+	IE = 'IE',
+	OK = 'OK',
 }
 
 export enum TestCaseStatus {
-	AC,
-	WA,
-	RTE,
-	TLE,
-	MLE,
+	AC = 'AC',
+	WA = 'WA',
+	RTE = 'RTE',
+	TLE = 'TLE',
+	MLE = 'MLE',
 }
 
 export type TestCaseResult = {
@@ -30,14 +31,25 @@ export type TestCaseResult = {
 
 export type JudgerResult = {
 	id: string;
+	judger_id: string;
 	log: string;
 	status: JudgerResultStatus;
 	test_results: TestCaseResult[];
 };
 
-@Controller()
+export type JudgerHeartbeat = {
+	judger_id: string;
+	timestamp: number;
+};
+
+@Controller('judger')
 export class JudgerController {
 	constructor(private readonly judgerService: JudgerService) {}
+
+	@Get('')
+	async getAllJudger() {
+		return { message: 'Judger list', judgers: await this.judgerService.getAllJudger() };
+	}
 
 	@EventPattern('judger.ack')
 	async handleJudgerAck(@Payload() data: JudgerAck) {
@@ -47,5 +59,10 @@ export class JudgerController {
 	@EventPattern('judger.result')
 	async handleJudgerResult(@Payload() data: JudgerResult) {
 		await this.judgerService.handleJudgerResult(data);
+	}
+
+	@EventPattern('judger.heartbeat')
+	async handleJudgerHeartbeat(@Payload() data: JudgerHeartbeat) {
+		await this.judgerService.handleJudgerHeartbeat(data);
 	}
 }

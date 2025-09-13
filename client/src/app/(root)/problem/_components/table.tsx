@@ -1,0 +1,91 @@
+import { BookOpenCheck, Check, MinusCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+
+import { getDifficultyColor } from '~/lib/difficulty-utils';
+import { cn } from '~/lib/utils';
+import { Problem } from '~/types/problem.type';
+import { User } from '~/types/user.type';
+
+interface Props {
+	problems: Problem[];
+	user: User | null;
+	selectTags: string[];
+}
+
+const getStatusIcon = (status?: 'solved' | 'attempted' | null) => {
+	if (status === 'solved') {
+		return <Check className="text-success size-4" />;
+	}
+	if (status === 'attempted') {
+		return <MinusCircle className="text-warning size-4" />;
+	}
+	return null;
+};
+
+const ProblemTable = ({ problems, user, selectTags }: Props) => {
+	const t = useTranslations('problem.table');
+	return (
+		<div className="w-full overflow-hidden rounded-2xl border shadow-xs">
+			<table className="table w-full">
+				<thead>
+					<tr>
+						{user && <th></th>}
+						<th>{t('title')}</th>
+						<th>{t('difficulty')}</th>
+						<th>{t('point')}</th>
+						<th className="max-md:hidden">{t('accepted')}</th>
+						<th className="max-xl:hidden">{t('acceptance')}</th>
+						<th className="text-center max-sm:hidden">{t('editorial')}</th>
+					</tr>
+				</thead>
+				<tbody className="">
+					{problems.map((problem) => (
+						<tr key={problem.id} className="">
+							{user && (
+								<td className="w-14 !pl-5 lg:!pr-0">
+									<div className="flex h-full w-full items-center justify-center">{getStatusIcon(problem.status)}</div>
+								</td>
+							)}
+							<td>
+								<Link href={`/problem/${problem.slug}`} className="hover:text-primary text-base font-medium hover:underline">
+									{problem.title}
+								</Link>
+								<div className="mt-1 flex flex-wrap gap-1">
+									{problem.tags.map((tag) => (
+										<span
+											key={tag.id}
+											className={cn(
+												'bg-muted text-card-foreground/70 inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-medium capitalize',
+												selectTags.includes(tag.name) && 'bg-primary text-primary-foreground',
+											)}
+										>
+											{tag.name}
+										</span>
+									))}
+								</div>
+							</td>
+							<td>
+								<span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${getDifficultyColor(problem.difficulty)}`}>
+									{t(problem.difficulty)}
+								</span>
+							</td>
+							<td className="text-muted-foreground">{problem.point}</td>
+							<td className="text-muted-foreground max-md:hidden">{problem.acCount}</td>
+							<td className="text-muted-foreground max-xl:hidden">{((problem.acRate ?? 0) * 100).toFixed(2)}%</td>
+							<td className="max-sm:hidden">
+								{problem.editorial && (
+									<Link href={`/problem/${problem.slug}/editorial`} className="flex h-full w-full items-center justify-center">
+										<BookOpenCheck className="text-success size-4.5" strokeWidth={2.5} />
+									</Link>
+								)}
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	);
+};
+
+export default ProblemTable;

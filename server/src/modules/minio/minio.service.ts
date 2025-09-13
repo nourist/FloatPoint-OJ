@@ -24,6 +24,7 @@ export class MinioService {
 		await this.ensureBucketExists('thumbnails');
 		await this.ensureBucketExists('avatars');
 
+		// Set bucket policies for public read access
 		await this.minioClient.setBucketPolicy(
 			'thumbnails',
 			JSON.stringify({
@@ -38,6 +39,7 @@ export class MinioService {
 				],
 			}),
 		);
+
 		await this.minioClient.setBucketPolicy(
 			'avatars',
 			JSON.stringify({
@@ -123,5 +125,9 @@ export class MinioService {
 		if (objectsList.length > 0) {
 			await this.minioClient.removeObjects(bucketName, objectsList);
 		}
+	}
+
+	joinPath(...paths: string[]) {
+		return paths.join('/');
 	}
 }

@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString, Max, Min } from 'class-validator';
+
+import { ToBoolean } from 'src/decorators/to-boolean.decorator';
 
 export class CreateBlogDto {
 	@IsString()
@@ -18,20 +20,33 @@ export class UpdateBlogDto {
 	@IsString()
 	@IsOptional()
 	content?: string;
+
+	@IsOptional()
+	@ToBoolean()
+	removeThumbnail?: boolean;
 }
 
 export class CreateBlogCommentDto {
 	@IsString()
 	@IsNotEmpty()
 	content: string;
-
-	@IsUUID()
-	@IsNotEmpty()
-	blogId: string;
 }
 
 export class UpdateBlogCommentDto {
 	@IsString()
 	@IsOptional()
 	content?: string;
+}
+
+export class BlogPaginationQueryDto {
+	@IsOptional()
+	@IsInt()
+	@Min(1)
+	page?: number = 1;
+
+	@IsOptional()
+	@IsInt()
+	@Min(1)
+	@Max(100)
+	size?: number = 10;
 }

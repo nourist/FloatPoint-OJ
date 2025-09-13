@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Blog } from './blog.entity';
 import { User } from './user.entity';
@@ -12,9 +12,11 @@ export class BlogComment {
 	content: string;
 
 	@ManyToOne(() => User, (user) => user.comments)
+	@JoinColumn()
 	user: User;
 
-	@ManyToOne(() => Blog, (blog) => blog.comments)
+	@ManyToOne(() => Blog, (blog) => blog.comments, { onDelete: 'CASCADE' })
+	@JoinColumn()
 	blog: Blog;
 
 	@CreateDateColumn({ type: 'timestamptz' })

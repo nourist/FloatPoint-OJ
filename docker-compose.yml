@@ -15,8 +15,8 @@ services:
     minio:
         image: minio/minio:latest
         environment:
-            MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+            MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+            MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
         ports:
             - "9000:9000"
             - "9001:9001"
@@ -30,8 +30,8 @@ services:
     rabbitmq:
         image: rabbitmq:3-management
         environment:
-            RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
-            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
         ports:
             - "5672:5672"
             - "15672:15672"
@@ -40,19 +40,63 @@ services:
         networks:
             - app-network
 
-    judger:
+    redis:
+        image: redis:alpine
+        environment:
+            - REDIS_PASSWORD=${REDIS_PASSWORD:-redispass}
+        command: redis-server --requirepass ${REDIS_PASSWORD:-redispass}
+        ports:
+            - "6379:6379"
+        volumes:
+            - redisdata:/data
+        networks:
+            - app-network
+
+    judger1:
         build:
             context: .
             dockerfile: Dockerfile.judger
         networks:
             - app-network
-        env_file:
-            - judger/.env
+        privileged: true
         environment:
             JUDGER_ID: ${JUDGER_ID:-1}
+
             MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in judger
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in judger
+
             DB_HOST: ${DB_HOST:-postgres}
-            RABBITMQ_URL: ${RABBITMQ_URL:-amqp://guest:guest@rabbitmq:5672}
+            DB_USER: ${DB_USER} #default 'postgres' handled in judger
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in judger
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in judger
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in judger
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in judger
+
+    judger2:
+        build:
+            context: .
+            dockerfile: Dockerfile.judger
+        networks:
+            - app-network
+        privileged: true
+        environment:
+            JUDGER_ID: ${JUDGER_ID:-2}
+
+            MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in judger
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in judger
+
+            DB_HOST: ${DB_HOST:-postgres}
+            DB_USER: ${DB_USER} #default 'postgres' handled in judger
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in judger
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in judger
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in judger
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in judger
 
     server:
         build:
@@ -62,10 +106,32 @@ services:
             - app-network
         environment:
             MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in server
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in server
+
             DB_HOST: ${DB_HOST:-postgres}
-            RABBITMQ_URL: ${RABBITMQ_URL:-amqp://guest:guest@rabbitmq:5672}
-        env_file:
-            - server/.env
+            DB_USER: ${DB_USER} #default 'postgres' handled in server
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in server
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in server
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in server
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in server
+
+            REDIS_HOST: ${REDIS_HOST:-redis}
+            REDIS_PASSWORD: ${REDIS_PASSWORD} #default 'redispass' handled in server
+
+            NODE_ENV: ${NODE_ENV} #default 'development' handled in server
+
+            JWT_SECRET: ${JWT_SECRET} #default 'secretKey' handled in server
+            JWT_EXPIRES_IN: ${JWT_EXPIRES_IN} #default '7d' handled in server
+            SALT_ROUNDS: ${SALT_ROUNDS} #default 10 handled in server
+
+            MAIL_HOST: ${MAIL_HOST} #default 'smtp.mailtrap.com' handled in server
+            MAIL_PORT: ${MAIL_PORT} #default 587 handled in server
+            MAIL_USER: ${MAIL_USER} #required
+            MAIL_PASS: ${MAIL_PASS} #required
+            MAIL_FROM_EMAIL: ${MAIL_FROM_EMAIL} #required
         ports:
             - "4000:4000"
 
@@ -77,3 +143,4 @@ volumes:
     pgdata:
     miniodata:
     rabbitmqdata:
+    redisdata:

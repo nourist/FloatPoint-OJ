@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Problem } from './problem.entity';
 import { User } from './user.entity';
@@ -18,4 +18,10 @@ export class ProblemEditorial {
 	@OneToOne(() => Problem, (problem) => problem.editorial, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	problem: Problem;
+
+	@CreateDateColumn({ type: 'timestamptz' })
+	createdAt: Date;
+
+	@UpdateDateColumn({ type: 'timestamptz' })
+	updatedAt: Date;
 }
