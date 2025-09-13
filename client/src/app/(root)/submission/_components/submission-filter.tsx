@@ -1,6 +1,6 @@
 'use client';
 
-import { Code, Search, User } from 'lucide-react';
+import { Code, Search, Trophy, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 
@@ -13,19 +13,24 @@ import { getSubmissionStatusTextColor } from '~/lib/status-utils';
 import { problemServiceInstance } from '~/services/problem';
 import { userServiceInstance } from '~/services/user';
 import { SubmissionStatus } from '~/types/submission.type';
+import { User as UserType } from '~/types/user.type';
 
 interface SubmissionFilterProps {
 	problemId: string;
 	language: string;
 	status: string;
 	authorId: string;
+	contestId: string;
+	user: UserType | null;
+	contestOptions: { value: string; label: string }[];
 	onProblemChange: (value: string) => void;
 	onLanguageChange: (value: string) => void;
 	onStatusChange: (value: string) => void;
 	onAuthorChange: (value: string) => void;
+	onContestChange: (value: string) => void;
 }
 
-const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange }: SubmissionFilterProps) => {
+const SubmissionFilter = ({ problemId, language, status, authorId, contestId, user, contestOptions, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange, onContestChange }: SubmissionFilterProps) => {
 	const t = useTranslations('submission');
 
 	const submissionLanguageOptions = [{ value: 'all', label: t('filters.all_languages') }, ...languageOptions];
@@ -81,6 +86,31 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 	const problemService = createClientService(problemServiceInstance);
 	const userService = createClientService(userServiceInstance);
 
+	const contestFetcher = useCallback(
+		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {
+			try {
+				// Filter the pre-provided contest options based on query
+				const filteredOptions = contestOptions.filter(option => 
+					option.label.toLowerCase().includes(query.toLowerCase())
+				);
+				
+				// Apply pagination
+				const startIndex = (page - 1) * limit;
+				const endIndex = startIndex + limit;
+				const paginatedOptions = filteredOptions.slice(startIndex, endIndex);
+				
+				return {
+					items: paginatedOptions,
+					has_more: endIndex < filteredOptions.length,
+				};
+			} catch (error) {
+				console.error('Contest fetcher error:', error);
+				return { items: [], has_more: false };
+			}
+		},
+		[contestOptions],
+	);
+
 	const problemFetcher = useCallback(
 		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {
 			try {
@@ -131,9 +161,11 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 		[userService],
 	);
 
+
+
 	return (
-		<div className="bg-card flex flex-wrap gap-4 rounded-2xl border p-6 shadow-xs *:flex-1">
-			<div className="space-y-2">
+		<div className="bg-card flex flex-wrap gap-2 rounded-2xl border p-4 shadow-xs *:flex-1">
+			<div className="space-y-1">
 				<Label className="flex items-center gap-1.5 text-sm font-medium">
 					<Search className="h-3.5 w-3.5" />
 					{t('filters.problem')}
@@ -141,13 +173,13 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 				<AsyncCombobox value={problemId} set_value={onProblemChange} fetcher={problemFetcher} placeholder={t('filters.problem_placeholder')} page_size={20} />
 			</div>
 
-			<div className="space-y-2">
+			<div className="space-y-1">
 				<Label className="flex items-center gap-1.5 text-sm font-medium">
 					<Code className="h-3.5 w-3.5" />
 					{t('filters.language')}
 				</Label>
 				<Select value={language} onValueChange={onLanguageChange}>
-					<SelectTrigger>
+					<SelectTrigger className='w-full'>
 						<SelectValue placeholder={t('filters.select_language')} />
 					</SelectTrigger>
 					<SelectContent>
@@ -160,13 +192,13 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 				</Select>
 			</div>
 
-			<div className="space-y-2">
+			<div className="space-y-1">
 				<Label className="flex items-center gap-1.5 text-sm font-medium">
 					<div className="bg-muted h-3.5 w-3.5 rounded-sm border" />
 					{t('filters.status')}
 				</Label>
 				<Select value={status} onValueChange={onStatusChange}>
-					<SelectTrigger>
+					<SelectTrigger className='w-full'>
 						<SelectValue placeholder={t('filters.select_status')} />
 					</SelectTrigger>
 					<SelectContent>
@@ -179,13 +211,23 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 				</Select>
 			</div>
 
-			<div className="space-y-2">
+			<div className="space-y-1">
 				<Label className="flex items-center gap-1.5 text-sm font-medium">
 					<User className="h-3.5 w-3.5" />
 					{t('filters.author')}
 				</Label>
 				<AsyncCombobox value={authorId} set_value={onAuthorChange} fetcher={authorFetcher} placeholder={t('filters.author_placeholder')} page_size={20} />
 			</div>
+
+			{user && contestOptions.length > 0 && (
+				<div className="space-y-1">
+					<Label className="flex items-center gap-1.5 text-sm font-medium">
+						<Trophy className="h-3.5 w-3.5" />
+						{t('filters.contest')}
+					</Label>
+					<AsyncCombobox value={contestId} set_value={onContestChange} fetcher={contestFetcher} placeholder={t('filters.contest_placeholder')} page_size={20} />
+				</div>
+			)}
 		</div>
 	);
 };

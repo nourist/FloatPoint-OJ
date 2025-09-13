@@ -1,111 +1,51 @@
-'use client';
-
-import { useState } from 'react';
-import useSWR from 'swr';
-
-import SubmissionChart from '../../../components/submission-chart';
-import SubmissionFilter from './_components/submission-filter';
-import SubmissionTable, { TableSkeleton } from './_components/submission-table';
-import PaginationControls from '~/components/pagination-controls';
-import { createClientService } from '~/lib/service-client';
+import SubmissionWrapper from './_components/submission-wrapper';
+import { createServerService } from '~/lib/service-server';
 import { authServiceInstance } from '~/services/auth';
-import { submissionServiceInstance } from '~/services/submission';
-import { ProgramLanguage, SubmissionStatus } from '~/types/submission.type';
+import { contestServiceInstance } from '~/services/contest';
+import { Contest, ContestStatus, getContestStatus } from '~/types/contest.type';
 
-const SubmissionsPage = () => {
-	// Local filter states (no URL synchronization)
-	const [problemId, setProblemId] = useState('');
-	const [language, setLanguage] = useState('all');
-	const [status, setStatus] = useState('all');
-	const [authorId, setAuthorId] = useState('');
-	const [page, setPage] = useState(1);
-	const [limit, setLimit] = useState(20);
+const SubmissionsPage = async () => {
+	const contestService = await createServerService(contestServiceInstance);
+	const authService = await createServerService(authServiceInstance);
 
-	const submissionService = createClientService(submissionServiceInstance);
-	const { getProfile } = createClientService(authServiceInstance);
+	const [user, contests] = await Promise.all([
+		authService.getProfile().catch(() => null),
+		// Fetch all contests for server-side filtering
+		contestService.findAllContests({
+			page: 1,
+			limit: 100,
+			sortBy: 'title',
+			sortOrder: 'ASC',
+		}).then(response => response.contests.data).catch(() => []),
+	]);
 
-	const { data: user } = useSWR('/auth/me', getProfile);
-
-	// SWR with local state as keys - only send non-empty values
-	const swrKey = {
-		...(problemId && problemId.trim() && { problemId: problemId.trim() }),
-		...(language && language.trim() && language !== 'all' && { language: language as ProgramLanguage }),
-		...(status && status.trim() && status !== 'all' && { status: status as SubmissionStatus }),
-		...(authorId && authorId.trim() && { authorId: authorId.trim() }),
-		page,
-		limit,
+	// Apply contest filtering logic on server side
+	const getContestOptions = () => {
+		if (!user) return [];
+		
+		// Condition 1: If user is admin, always show all contests (highest priority)
+		if (user.role === 'admin') {
+			return contests.map((contest: Contest) => ({
+				value: contest.id,
+				label: contest.title
+			}));
+		}
+		
+		// Condition 2: If user is joining a contest and it's currently running, show only that contest
+		if (user.joiningContest) {
+			const contestStatus = getContestStatus(user.joiningContest);
+			if (contestStatus === ContestStatus.RUNNING) {
+				return [{ value: user.joiningContest.id, label: user.joiningContest.title }];
+			}
+		}
+		
+		// If neither condition is met, return empty array (no contest filter shown)
+		return [];
 	};
 
-	const { data, error, isLoading } = useSWR(swrKey, submissionService.findAllSubmissions, {
-		keepPreviousData: true,
-	});
+	const contestOptions = getContestOptions();
 
-	// Extract data for components
-	const submissions = data?.submissions || [];
-	const total = data?.total || 0;
-
-	// Handler functions for filter changes
-	const handleProblemChange = (value: string) => {
-		setProblemId(value);
-		setPage(1);
-	};
-
-	const handleLanguageChange = (value: string) => {
-		setLanguage(value);
-		setPage(1);
-	};
-
-	const handleStatusChange = (value: string) => {
-		setStatus(value);
-		setPage(1);
-	};
-
-	const handleAuthorChange = (value: string) => {
-		setAuthorId(value);
-		setPage(1);
-	};
-
-	const handlePageChange = (newPage: number) => {
-		setPage(newPage);
-	};
-
-	const handleSizeChange = (newSize: number) => {
-		setLimit(newSize);
-		setPage(1);
-	};
-
-	if (!data && !isLoading) {
-		throw error;
-	}
-
-	return (
-		<div className="flex gap-6">
-			<div className="flex-1 space-y-6">
-				{/* Filters Section */}
-				<SubmissionFilter
-					problemId={problemId}
-					language={language}
-					status={status}
-					authorId={authorId}
-					onProblemChange={handleProblemChange}
-					onLanguageChange={handleLanguageChange}
-					onStatusChange={handleStatusChange}
-					onAuthorChange={handleAuthorChange}
-				/>
-
-				{/* Results Section */}
-				{!data && isLoading ? (
-					<TableSkeleton />
-				) : (
-					<>
-						<SubmissionTable submissions={submissions} user={user} />
-						<PaginationControls totalItems={total} initialPage={1} initialSize={20} onPageChange={handlePageChange} onSizeChange={handleSizeChange} />
-					</>
-				)}
-			</div>
-			<SubmissionChart statusStatistics={data?.statusStatistics} languageStatistics={data?.languageStatistics} />
-		</div>
-	);
+	return <SubmissionWrapper user={user} contestOptions={contestOptions} />;
 };
 
 export default SubmissionsPage;

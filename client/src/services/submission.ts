@@ -18,6 +18,7 @@ export interface GetAllSubmissionsPayload {
 	problemId?: string;
 	language?: ProgramLanguage;
 	status?: SubmissionStatus;
+	contestId?: string;
 	page?: number;
 	limit?: number;
 }

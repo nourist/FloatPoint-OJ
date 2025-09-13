@@ -1,13 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useState } from 'react';
 import useSWR from 'swr';
 
 import { ContestInfoTab } from './contest-info-tab';
-import { ContestProblemsTab } from './contest-problems-tab';
 import { ContestStandingsTab } from './contest-standings-tab';
-import ContestSubmissionTable from './contest-submission-table';
 import { JoinLeaveButton } from './join-leave-button';
 import { TimeRemaining } from './time-remaining';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
@@ -16,6 +15,7 @@ import { authServiceInstance } from '~/services/auth';
 import { contestServiceInstance } from '~/services/contest';
 import { Contest, ContestStatus, getContestStatus } from '~/types/contest.type';
 import { User } from '~/types/user.type';
+import { cn } from '~/lib/utils';
 
 // Client component for tabs that need client-side interaction
 export const ContestTabsClient = ({
@@ -50,6 +50,7 @@ export const ContestTabsClient = ({
 		data: standingsData,
 		error: standingsError,
 		isLoading: standingsLoading,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	} = useSWR(activeTab === 'standings' ? ['standings', contest.id] : null, ([_, contestId]) => contestService.getContestStandings(contestId), {
 		revalidateOnFocus: false,
 		keepPreviousData: true,
@@ -62,6 +63,7 @@ export const ContestTabsClient = ({
 	const isUserJoined = !!user && user.joiningContest?.id === contest?.id;
 
 	// Handle contest update and reset tab to info
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const handleContestUpdate = (updatedContest: Contest) => {
 		// Reset to info tab when user joins/leaves
 		setActiveTab('info');
@@ -87,8 +89,24 @@ export const ContestTabsClient = ({
 						<TabsTrigger value="info">{t('info_tab')}</TabsTrigger>
 						{isUserJoined && (
 							<>
-								<TabsTrigger value="problems">{t('problems_tab')}</TabsTrigger>
-								<TabsTrigger value="submissions">{t('submissions_tab')}</TabsTrigger>
+								<Link 
+									href={`/problem?contestId=${contest.id}`}
+									className={cn(
+										"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+										"hover:bg-muted/50"
+									)}
+								>
+									{t('problems_tab')}
+								</Link>
+								<Link 
+									href={`/submission?contestId=${contest.id}`}
+									className={cn(
+										"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+										"hover:bg-muted/50"
+									)}
+								>
+									{t('submissions_tab')}
+								</Link>
 								<TabsTrigger value="standings">{t('standings_tab')}</TabsTrigger>
 							</>
 						)}
@@ -103,19 +121,9 @@ export const ContestTabsClient = ({
 				</TabsContent>
 
 				{isUserJoined && (
-					<>
-						<TabsContent value="problems" className="space-y-4">
-							<ContestProblemsTab contest={contest} />
-						</TabsContent>
-
-						<TabsContent value="submissions" className="space-y-4">
-							<ContestSubmissionTable submissions={contest.submissions || []} user={user} />
-						</TabsContent>
-
-						<TabsContent value="standings" className="space-y-4">
-							<ContestStandingsTab standings={standings} standingsLoading={standingsLoading} problems={standingsProblems} />
-						</TabsContent>
-					</>
+					<TabsContent value="standings" className="space-y-4">
+						<ContestStandingsTab standings={standings} standingsLoading={standingsLoading} problems={standingsProblems} />
+					</TabsContent>
 				)}
 			</Tabs>
 		</div>

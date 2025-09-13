@@ -32,6 +32,7 @@ export interface GetAllProblemsPayload {
 	sortBy?: 'title' | 'point' | 'difficulty' | 'acCount' | 'acRate';
 	order?: 'ASC' | 'DESC';
 	hasEditorial?: boolean;
+	contestId?: string;
 }
 
 export interface CreateProblemEditorialPayload {

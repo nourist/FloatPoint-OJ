@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import useSWR from 'swr';
 
@@ -20,10 +21,13 @@ interface Props {
 	maxPoint: number;
 	tags: string[];
 	user: User | null;
+	contestOptions: { value: string; label: string }[];
 }
 
-const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) => {
+const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user, contestOptions }: Props) => {
 	const t = useTranslations('problem.filter');
+	const searchParams = useSearchParams();
+	const initialContestId = searchParams.get('contestId') || '';
 	const [filterDialogOpen, setFilterDialogOpen] = useState(false);
 
 	const [status, setStatus] = useState('all');
@@ -31,6 +35,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 	const [hasEditorial, setHasEditorial] = useState(false);
 	const [pointRange, setPointRange] = useState<[number, number]>([minPoint, maxPoint]);
 	const [tags, setTags] = useState<string[]>([]);
+	const [contestId, setContestId] = useState(initialContestId);
 	const [search, setSearch] = useState('');
 	const [orderBy, setOrderBy] = useState('title');
 	const [order, setOrder] = useState<'asc' | 'desc'>('asc');
@@ -50,6 +55,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 			minPoint: pointRange[0],
 			maxPoint: pointRange[1],
 			tags,
+			contestId: contestId ? contestId : undefined,
 			page,
 			limit: size,
 		},
@@ -72,6 +78,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 						minPoint={minPoint}
 						maxPoint={maxPoint}
 						tagOptions={tagOptions}
+						contestOptions={contestOptions}
 						status={status}
 						setStatus={setStatus}
 						difficulty={difficulty}
@@ -82,6 +89,8 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 						setPointRange={setPointRange}
 						tags={tags}
 						setTags={setTags}
+						contestId={contestId}
+						setContestId={setContestId}
 					/>
 				</div>
 			</div>
@@ -116,6 +125,7 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 								minPoint={minPoint}
 								maxPoint={maxPoint}
 								tagOptions={tagOptions}
+								contestOptions={contestOptions}
 								status={status}
 								setStatus={setStatus}
 								difficulty={difficulty}
@@ -126,6 +136,8 @@ const ProblemWrapper = ({ minPoint, maxPoint, tags: tagOptions, user }: Props) =
 								setPointRange={setPointRange}
 								tags={tags}
 								setTags={setTags}
+								contestId={contestId}
+								setContestId={setContestId}
 							/>
 						</div>
 					</ScrollArea>

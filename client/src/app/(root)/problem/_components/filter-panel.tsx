@@ -14,10 +14,13 @@ interface FilterPanelProps {
 	setPointRange: (pointRange: [number, number]) => void;
 	tags: string[];
 	setTags: (tags: string[]) => void;
+	contestId: string;
+	setContestId: (contestId: string) => void;
 	minPoint: number;
 	maxPoint: number;
 	tagOptions: string[];
 	user: User | null;
+	contestOptions: { value: string; label: string }[];
 }
 
 const FilterPanel = ({
@@ -31,10 +34,13 @@ const FilterPanel = ({
 	setPointRange,
 	tags,
 	setTags,
+	contestId,
+	setContestId,
 	minPoint,
 	maxPoint,
 	tagOptions,
 	user,
+	contestOptions,
 }: FilterPanelProps) => {
 	const t = useTranslations('problem.filter');
 
@@ -52,11 +58,21 @@ const FilterPanel = ({
 		{ value: 'hard', label: <div className="text-destructive">{t('hard')}</div> },
 	];
 
+	const finalContestOptions = [
+		{ value: '', label: t('all') },
+		...contestOptions
+	];
+
 	return (
 		<>
 			{user && (
 				<FilterCollapsible title={t('status')}>
 					<FilterRadio value={status} setValue={setStatus} data={statusOptions} />
+				</FilterCollapsible>
+			)}
+			{user && contestOptions.length > 0 && (
+				<FilterCollapsible title={t('contest')}>
+					<FilterRadio value={contestId} setValue={setContestId} data={finalContestOptions} />
 				</FilterCollapsible>
 			)}
 			<FilterCollapsible title={t('difficulty')}>

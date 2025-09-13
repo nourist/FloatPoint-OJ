@@ -151,7 +151,9 @@
 			"editorial": "Editorial",
 			"has_editorial": "Has Editorial",
 			"point": "Point",
-			"tags": "Tags"
+			"tags": "Tags",
+			"contest": "Contest",
+			"contest_placeholder": "Select a contest"
 		},
 		"search": {
 			"sort_by": "Sort by",
@@ -308,8 +310,11 @@
 			"status": "Status",
 			"select_status": "Select status",
 			"all_status": "All Status",
+			"all_contests": "All Contests",
 			"author": "Author",
 			"author_placeholder": "Select an author",
+			"contest": "Contest",
+			"contest_placeholder": "Select a contest",
 			"reset": "Reset Filters"
 		},
 		"status": {
@@ -785,7 +790,8 @@
 				"all": "All",
 				"editorial": "Editorial",
 				"has_editorial": "Has Editorial",
-				"point_range": "Point Range"
+				"point_range": "Point Range",
+				"contest": "Contest"
 			},
 			"table": {
 				"title": "Title",
@@ -976,6 +982,7 @@
 				"all_status": "All Status",
 				"author": "Author",
 				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
 				"reset": "Reset Filters"
 			},
 			"status": {

@@ -55,22 +55,29 @@ export const UserTableSection = () => {
 	};
 
 	return (
-		<div className="bg-card rounded-2xl border p-6 shadow-xs">
-			<div className="mb-4 flex items-center gap-2">
+		<>
+			{/* Header */}
+			<div className="flex items-center gap-2">
 				<Users className="h-5 w-5" />
 				<h2 className="text-xl font-semibold">{t('all_users')}</h2>
 			</div>
+			
+			{/* Search Bar */}
 			<SearchFilter search={search} onSearchChange={handleSearchChange} />
+			
+			{/* User Table */}
 			<UserTable users={data?.users || []} isLoading={isLoading && !data} page={page} limit={limit} />
+			
 			{/* Pagination */}
-			<PaginationControls
-				className="mt-6"
-				totalItems={data?.total || 0}
-				initialPage={page}
-				initialSize={limit}
-				onPageChange={handlePageChange}
-				onSizeChange={handleSizeChange}
-			/>
-		</div>
+			{data?.users && data.users.length > 0 && (
+				<PaginationControls
+					totalItems={data?.total || 0}
+					initialPage={page}
+					initialSize={limit}
+					onPageChange={handlePageChange}
+					onSizeChange={handleSizeChange}
+				/>
+			)}
+		</>
 	);
 };

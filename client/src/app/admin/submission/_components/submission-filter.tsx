@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~
 import { languageOptions } from '~/lib/language-utils';
 import { createClientService } from '~/lib/service-client';
 import { getSubmissionStatusTextColor } from '~/lib/status-utils';
+import { contestServiceInstance } from '~/services/contest';
 import { problemServiceInstance } from '~/services/problem';
 import { userServiceInstance } from '~/services/user';
 import { SubmissionStatus } from '~/types/submission.type';
@@ -17,13 +18,15 @@ interface SubmissionFilterProps {
 	language: string;
 	status: string;
 	authorId: string;
+	contestId: string;
 	onProblemChange: (value: string) => void;
 	onLanguageChange: (value: string) => void;
 	onStatusChange: (value: string) => void;
 	onAuthorChange: (value: string) => void;
+	onContestChange: (value: string) => void;
 }
 
-const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange }: SubmissionFilterProps) => {
+const SubmissionFilter = ({ problemId, language, status, authorId, contestId, onProblemChange, onLanguageChange, onStatusChange, onAuthorChange, onContestChange }: SubmissionFilterProps) => {
 	const t = useTranslations('admin.submission');
 
 	const submissionLanguageOptions = [{ value: 'all', label: t('filters.all_languages') }, ...languageOptions];
@@ -78,6 +81,7 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 
 	const problemService = createClientService(problemServiceInstance);
 	const userService = createClientService(userServiceInstance);
+	const contestService = createClientService(contestServiceInstance);
 
 	const problemFetcher = useCallback(
 		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {
@@ -129,6 +133,31 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 		[userService],
 	);
 
+	const contestFetcher = useCallback(
+		async (page: number, limit: number, query: string): Promise<FetcherResponse> => {
+			try {
+				const response = await contestService.findAllContests({
+					page,
+					limit,
+					search: query || undefined,
+					sortBy: 'title',
+					sortOrder: 'ASC',
+				});
+				return {
+					items: response.contests.data.map((contest) => ({
+						value: contest.id,
+						label: contest.title,
+					})),
+					has_more: response.contests.data.length === limit,
+				};
+			} catch (error) {
+				console.error('Contest fetcher error:', error);
+				return { items: [], has_more: false };
+			}
+		},
+		[contestService],
+	);
+
 	return (
 		<div className="flex flex-wrap gap-2">
 			<div>
@@ -160,6 +189,9 @@ const SubmissionFilter = ({ problemId, language, status, authorId, onProblemChan
 			</Select>
 			<div>
 				<AsyncCombobox value={authorId} set_value={onAuthorChange} fetcher={authorFetcher} placeholder={t('filters.author_placeholder')} page_size={20} />
+			</div>
+			<div>
+				<AsyncCombobox value={contestId} set_value={onContestChange} fetcher={contestFetcher} placeholder={t('filters.contest_placeholder')} page_size={20} />
 			</div>
 		</div>
 	);

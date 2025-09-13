@@ -4,16 +4,21 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import SubmissionFilter from './_components/submission-filter';
-import SubmissionTable from './_components/submission-table';
+import SubmissionChart from '../../../../components/submission-chart';
+import SubmissionFilter from './submission-filter';
+import SubmissionTable, { TableSkeleton } from './submission-table';
 import PaginationControls from '~/components/pagination-controls';
-import SubmissionChart from '~/components/submission-chart';
 import { createClientService } from '~/lib/service-client';
-import { authServiceInstance } from '~/services/auth';
 import { submissionServiceInstance } from '~/services/submission';
 import { ProgramLanguage, SubmissionStatus } from '~/types/submission.type';
+import { User } from '~/types/user.type';
 
-const SubmissionsPage = () => {
+interface Props {
+	user: User | null;
+	contestOptions: { value: string; label: string }[];
+}
+
+const SubmissionWrapper = ({ user, contestOptions }: Props) => {
 	const searchParams = useSearchParams();
 	const initialContestId = searchParams.get('contestId') || '';
 
@@ -27,9 +32,6 @@ const SubmissionsPage = () => {
 	const [limit, setLimit] = useState(20);
 
 	const submissionService = createClientService(submissionServiceInstance);
-	const { getProfile } = createClientService(authServiceInstance);
-
-	const { data: user } = useSWR('/auth/me', getProfile);
 
 	// SWR with local state as keys - only send non-empty values
 	const swrKey = {
@@ -90,8 +92,8 @@ const SubmissionsPage = () => {
 	}
 
 	return (
-		<div className="flex gap-4">
-			<div className="flex-1 space-y-4">
+		<div className="flex gap-6">
+			<div className="flex-1 space-y-6">
 				{/* Filters Section */}
 				<SubmissionFilter
 					problemId={problemId}
@@ -99,6 +101,8 @@ const SubmissionsPage = () => {
 					status={status}
 					authorId={authorId}
 					contestId={contestId}
+					user={user}
+					contestOptions={contestOptions}
 					onProblemChange={handleProblemChange}
 					onLanguageChange={handleLanguageChange}
 					onStatusChange={handleStatusChange}
@@ -108,10 +112,10 @@ const SubmissionsPage = () => {
 
 				{/* Results Section */}
 				{!data && isLoading ? (
-					<div>loading...</div>
+					<TableSkeleton />
 				) : (
 					<>
-						<SubmissionTable submissions={submissions} user={user} />
+						<SubmissionTable submissions={submissions} user={user || undefined} />
 						<PaginationControls totalItems={total} initialPage={1} initialSize={20} onPageChange={handlePageChange} onSizeChange={handleSizeChange} />
 					</>
 				)}
@@ -121,4 +125,4 @@ const SubmissionsPage = () => {
 	);
 };
 
-export default SubmissionsPage;
+export default SubmissionWrapper;

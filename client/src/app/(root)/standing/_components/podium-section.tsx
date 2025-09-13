@@ -33,11 +33,12 @@ export const PodiumSection = ({ ratingUsers, scoreUsers }: PodiumSectionProps) =
 	const currentUsers = podiumMode === 'rating' ? ratingUsers : scoreUsers;
 
 	return (
-		<div className="bg-card rounded-2xl border p-6 shadow-xs">
+		<>
 			<div className="mb-4 flex items-center gap-2">
 				<Trophy className="h-5 w-5" />
 				<h2 className="text-xl font-semibold">{t('top_users')}</h2>
 			</div>
+		<div className="bg-card rounded-2xl border p-6 shadow-xs">
 
 			{/* Mode Selector */}
 			<div className="mb-6 flex justify-center">
@@ -60,6 +61,8 @@ export const PodiumSection = ({ ratingUsers, scoreUsers }: PodiumSectionProps) =
 					<p className="text-muted-foreground">{t('no_data')}</p>
 				</div>
 			)}
-		</div>
+			</div>
+		</>
+			
 	);
 };
