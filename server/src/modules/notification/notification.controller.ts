@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 
 import { GetUser } from 'src/decorators/get-user.decorator';
-import { User } from 'src/entities/user.entity';
+import { User, UserRole } from 'src/entities/user.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { GetNotificationsQueryDto, MarkAsReadDto } from 'src/modules/notification/notification.dto';
 import { NotificationService } from 'src/modules/notification/notification.service';
@@ -23,7 +23,7 @@ export class NotificationController {
 	@UseGuards(JwtAuthGuard)
 	async sendSystemNotification(@Body('content') content: string, @GetUser() user: User) {
 		// Check if user is admin
-		if (user.role !== 'admin') {
+		if (user.role !== UserRole.ADMIN) {
 			throw new Error('Only admins can send system notifications');
 		}
 

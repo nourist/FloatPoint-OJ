@@ -40,7 +40,7 @@ export class StatisticsService {
 			total_submissions,
 			success_rate: parseFloat(success_rate.toFixed(2)),
 			active_problems,
-			system_status: 'online',
+			system_status: 'online' as const,
 		};
 	}
 
@@ -49,7 +49,7 @@ export class StatisticsService {
 		const fromDate = new Date();
 		fromDate.setDate(fromDate.getDate() - days);
 
-		const result = await this.userRepository
+		const result: Array<{ date: string | Date; new_registrations: string; active_users: string }> = await this.userRepository
 			.createQueryBuilder('user')
 			.select('DATE(user.createdAt)', 'date')
 			.addSelect('COUNT(DISTINCT user.id)', 'new_registrations')
@@ -64,12 +64,15 @@ export class StatisticsService {
 
 		const totalUsers = await this.userRepository.count();
 
-		const data = result.map((item) => ({
-			date: item.date.toISOString().split('T')[0],
-			total_users: totalUsers,
-			active_users: parseInt(item.active_users, 10),
-			new_registrations: parseInt(item.new_registrations, 10),
-		}));
+		const data = result.map((item) => {
+			const date = new Date(item.date);
+			return {
+				date: date.toISOString().split('T')[0],
+				total_users: totalUsers,
+				active_users: parseInt(item.active_users, 10),
+				new_registrations: parseInt(item.new_registrations, 10),
+			};
+		});
 
 		return { period, data };
 	}
@@ -79,7 +82,7 @@ export class StatisticsService {
 		const fromDate = new Date();
 		fromDate.setDate(fromDate.getDate() - days);
 
-		const result = await this.submissionRepository
+		const result: Array<{ date: string | Date; submissions: string; accepted: string }> = await this.submissionRepository
 			.createQueryBuilder('submission')
 			.select('DATE(submission.submittedAt)', 'date')
 			.addSelect('COUNT(*)', 'submissions')
@@ -89,11 +92,14 @@ export class StatisticsService {
 			.orderBy('date', 'ASC')
 			.getRawMany();
 
-		const data = result.map((item) => ({
-			date: item.date.toISOString().split('T')[0],
-			submissions: parseInt(item.submissions, 10),
-			accepted: parseInt(item.accepted, 10),
-		}));
+		const data = result.map((item) => {
+			const date = new Date(item.date);
+			return {
+				date: date.toISOString().split('T')[0],
+				submissions: parseInt(item.submissions, 10),
+				accepted: parseInt(item.accepted, 10),
+			};
+		});
 
 		return { period, data };
 	}
@@ -108,7 +114,11 @@ export class StatisticsService {
 			qb.where('submission.submittedAt >= :date', { date });
 		}
 
-		const result = await qb.select('submission.language', 'language').addSelect('COUNT(*)', 'count').groupBy('submission.language').getRawMany();
+		const result: Array<{ language: string; count: string }> = await qb
+			.select('submission.language', 'language')
+			.addSelect('COUNT(*)', 'count')
+			.groupBy('submission.language')
+			.getRawMany();
 
 		const total = result.reduce((acc, item) => acc + parseInt(item.count, 10), 0);
 
@@ -131,7 +141,11 @@ export class StatisticsService {
 			qb.where('submission.submittedAt >= :date', { date });
 		}
 
-		const result = await qb.select('submission.status', 'status').addSelect('COUNT(*)', 'count').groupBy('submission.status').getRawMany();
+		const result: Array<{ status: string; count: string }> = await qb
+			.select('submission.status', 'status')
+			.addSelect('COUNT(*)', 'count')
+			.groupBy('submission.status')
+			.getRawMany();
 
 		const data = result.map((item) => ({
 			status: item.status,
@@ -143,7 +157,7 @@ export class StatisticsService {
 	}
 
 	private getStatusColor(status: string): string {
-		switch (status) {
+		switch (status as SubmissionStatus) {
 			case SubmissionStatus.ACCEPTED:
 				return '#4CAF50';
 			case SubmissionStatus.WRONG_ANSWER:
@@ -162,7 +176,7 @@ export class StatisticsService {
 	}
 
 	async getProblemDifficulty() {
-		const result = await this.problemRepository
+		const result: Array<{ difficulty: string; count: string; solved_users: string }> = await this.problemRepository
 			.createQueryBuilder('problem')
 			.select('problem.difficulty', 'difficulty')
 			.addSelect('COUNT(*)', 'count')
@@ -191,15 +205,18 @@ export class StatisticsService {
 	async getContestParticipation(period: '3m' | '6m' | '1y') {
 		const months = period === '3m' ? 3 : period === '6m' ? 6 : 12;
 		const data: { month: string; contests: number; participants: number }[] = [];
+
 		for (let i = 0; i < months; i++) {
 			const date = new Date();
 			date.setMonth(date.getMonth() - i);
+
 			const contests = await this.contestRepository.count({
 				where: {
 					startTime: Between(new Date(date.getFullYear(), date.getMonth(), 1), new Date(date.getFullYear(), date.getMonth() + 1, 0)),
 				},
 			});
-			const participants = await this.contestRepository
+
+			const participants: { count: string } | undefined = await this.contestRepository
 				.createQueryBuilder('contest')
 				.leftJoin('contest.participants', 'user')
 				.where('contest.startTime BETWEEN :start AND :end', {
@@ -212,7 +229,7 @@ export class StatisticsService {
 			data.push({
 				month: date.toLocaleString('default', { month: 'short' }),
 				contests,
-				participants: parseInt(participants.count, 10) || 0,
+				participants: parseInt(participants?.count ?? '0', 10),
 			});
 		}
 		return { period, data: data.reverse() };
@@ -223,7 +240,12 @@ export class StatisticsService {
 		const fromDate = new Date();
 		fromDate.setDate(fromDate.getDate() - days);
 
-		const users = await this.userRepository
+		const users: Array<{
+			user_username: string;
+			user_fullname: string;
+			solved: string;
+			submissions: string;
+		}> = await this.userRepository
 			.createQueryBuilder('user')
 			.addSelect(
 				`(SELECT COUNT(DISTINCT submission."problemId") FROM submissions submission WHERE submission."authorId" = user.id AND submission.status = '${SubmissionStatus.ACCEPTED}' AND submission."submittedAt" >= '${fromDate.toISOString()}')`,
@@ -237,14 +259,18 @@ export class StatisticsService {
 			.take(limit)
 			.getRawMany();
 
-		const data = users.map((user, index) => ({
-			rank: index + 1,
-			username: user.user_username,
-			fullname: user.user_fullname,
-			solved: parseInt(user.solved, 10),
-			submissions: parseInt(user.submissions, 10),
-			success_rate: user.submissions > 0 ? `${((user.solved / user.submissions) * 100).toFixed(2)}%` : '0%',
-		}));
+		const data = users.map((user, index) => {
+			const solved = parseInt(user.solved, 10);
+			const submissions = parseInt(user.submissions, 10);
+			return {
+				rank: index + 1,
+				username: user.user_username,
+				fullname: user.user_fullname,
+				solved,
+				submissions,
+				success_rate: submissions > 0 ? `${((solved / submissions) * 100).toFixed(2)}%` : '0%',
+			};
+		});
 
 		return { limit, period, data };
 	}
@@ -254,7 +280,13 @@ export class StatisticsService {
 		const fromDate = new Date();
 		fromDate.setDate(fromDate.getDate() - days);
 
-		const problems = await this.problemRepository
+		const problems: Array<{
+			problem_slug: string;
+			problem_title: string;
+			problem_difficulty: string;
+			attempts: string;
+			solved: string;
+		}> = await this.problemRepository
 			.createQueryBuilder('problem')
 			.addSelect(
 				`(SELECT COUNT(*) FROM submissions submission WHERE submission."problemId" = problem.id AND submission."submittedAt" >= '${fromDate.toISOString()}')`,
@@ -268,15 +300,19 @@ export class StatisticsService {
 			.take(limit)
 			.getRawMany();
 
-		const data = problems.map((problem, index) => ({
-			rank: index + 1,
-			slug: problem.problem_slug,
-			title: problem.problem_title,
-			difficulty: problem.problem_difficulty,
-			attempts: parseInt(problem.attempts, 10),
-			solved: parseInt(problem.solved, 10),
-			success_rate: problem.attempts > 0 ? `${((problem.solved / problem.attempts) * 100).toFixed(2)}%` : '0%',
-		}));
+		const data = problems.map((problem, index) => {
+			const attempts = parseInt(problem.attempts, 10);
+			const solved = parseInt(problem.solved, 10);
+			return {
+				rank: index + 1,
+				slug: problem.problem_slug,
+				title: problem.problem_title,
+				difficulty: problem.problem_difficulty,
+				attempts,
+				solved,
+				success_rate: attempts > 0 ? `${((solved / attempts) * 100).toFixed(2)}%` : '0%',
+			};
+		});
 
 		return { limit, period, data };
 	}
