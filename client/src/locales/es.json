@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "Inicio",
+			"problems": "Problemas",
+			"submissions": "Envíos",
+			"contests": "Concursos",
+			"standing": "Clasificación",
+			"login": "Iniciar sesión",
+			"register": "Registrarse",
+			"logout": "Cerrar sesión",
+			"profile": "Perfil",
+			"settings": "Configuración",
+			"appearance": "Apariencia",
+			"language": "Idioma",
+			"light": "Claro",
+			"dark": "Oscuro",
+			"dashboard": "Panel de control"
+		},
+		"footer": {
+			"copyright": "Copyright © {year} Nourist",
+			"license": "Licencia",
+			"github": "GitHub",
+			"author": "Autor",
+			"language": "Idioma"
+		}
+	},
+	"auth": {
+		"login": "Iniciar sesión",
+		"register": "Registrarse",
+		"verify_email": "Verificar correo electrónico",
+		"forgot_password": "¿Olvidaste tu contraseña?",
+		"reset_password": "Restablecer contraseña",
+		"get_password": "Obtener contraseña",
+		"verify_success": "Correo electrónico verificado con éxito",
+		"dont_have_account": "¿No tienes una cuenta?",
+		"already_have_account": "¿Ya tienes una cuenta?",
+		"already_have_password": "¿Ya tienes una contraseña?",
+		"account_already_verified": "¿Cuenta ya verificada?",
+		"continue_with_google": "Continuar con Google",
+		"form": {
+			"email": "Correo electrónico",
+			"password": "Contraseña",
+			"username": "Nombre de usuario",
+			"enter_email": "Introduce tu correo electrónico",
+			"enter_password": "Introduce tu contraseña",
+			"enter_username": "Introduce tu nombre de usuario",
+			"confirm_password": "Confirmar contraseña",
+			"enter_confirm_password": "Introduce de nuevo tu contraseña"
+		},
+		"message": {
+			"email_required": "El correo electrónico es obligatorio",
+			"password_required": "La contraseña es obligatoria",
+			"username_required": "El nombre de usuario es obligatorio",
+			"email_invalid": "El correo electrónico no es válido",
+			"password_min": "La contraseña debe tener al menos 8 caracteres",
+			"password_uppercase": "La contraseña debe contener al menos una letra mayúscula",
+			"password_lowercase": "La contraseña debe contener al menos una letra minúscula",
+			"password_number": "La contraseña debe contener al menos un número",
+			"password_special": "La contraseña debe contener al menos un carácter especial",
+			"confirm_password_required": "La confirmación de la contraseña es obligatoria",
+			"confirm_password_not_match": "La confirmación de la contraseña no coincide",
+			"token_required": "El token es obligatorio"
+		},
+		"success": {
+			"register": "Registro exitoso",
+			"login": "Inicio de sesión exitoso",
+			"forgot_password": "Correo electrónico para restablecer la contraseña enviado con éxito",
+			"verify_email_send": "Correo electrónico de verificación enviado con éxito",
+			"reset_password": "Contraseña restablecida con éxito",
+			"verify": "¡Genial! Tu dirección de correo electrónico ha sido verificada. Tu cuenta ya está activa y lista para usar."
+		},
+		"error": {
+			"login": "Error al iniciar sesión"
+		},
+		"description": {
+			"forgot_password": "Introduce tu correo electrónico para obtener el enlace para restablecer la contraseña",
+			"verify_email": "Introduce tu correo electrónico para obtener el enlace de verificación de correo electrónico"
+		},
+		"toast": {
+			"verify_email": "Por favor, revisa tu correo electrónico para la verificación"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Cita en bloque",
+		"code_block": "Bloque de código",
+		"toggle_highlight": "Alternar resaltado ({color})",
+		"heading": "Encabezado {level}",
+		"insert_image": "Insertar imagen",
+		"link": "Enlace",
+		"paste_a_link": "Pega un enlace...",
+		"apply_link": "Aplicar enlace",
+		"open_in_new_window": "Abrir en una nueva ventana",
+		"remove_link": "Eliminar enlace",
+		"toggle_list": "Alternar lista {type}",
+		"toggle_mark": "Alternar {type}",
+		"align": "Alinear {align}",
+		"undo": "Deshacer",
+		"redo": "Rehacer",
+		"highlight_text": "Resaltar texto",
+		"highlight": "Resaltar",
+		"remove_highlight": "Eliminar resaltado",
+		"highlight_color": "Color de resaltado {color}",
+		"highlight_colors": "Colores de resaltado",
+		"format_text_as_heading": "Formatear texto como encabezado",
+		"heading_tooltip": "Encabezado",
+		"list_options": "Opciones de lista",
+		"list": "Lista",
+		"bulletlist": "Lista de viñetas",
+		"orderedlist": "Lista ordenada",
+		"tasklist": "Lista de tareas"
+	},
+	"upload": {
+		"title": "Subir imagen",
+		"supported_formats": "Formatos compatibles: JPG, PNG, GIF",
+		"click_to_select": "Haz clic para seleccionar",
+		"or_drag_and_drop_file_here": "o arrastra y suelta el archivo aquí"
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Últimos artículos, tutoriales y conocimientos de la comunidad de programación",
+		"new": "Nuevo",
+		"sidebar": {
+			"rating": "Clasificación",
+			"score": "Puntuación",
+			"current_contest": "Concurso actual",
+			"ending_in": "Termina en",
+			"join": "Unirse",
+			"top_raters": "Mejores clasificadores",
+			"hot_problems": "Problemas populares",
+			"my_stats": "Mis estadísticas",
+			"problem": "Problema"
+		}
+	},
+	"pagination": {
+		"view": "Ver",
+		"sizes": "Tamaños"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filtro",
+			"status": "Estado",
+			"all": "Todos",
+			"solved": "Resuelto",
+			"attempted": "Intentado",
+			"todo": "Por hacer",
+			"difficulty": "Dificultad",
+			"easy": "Fácil",
+			"medium": "Medio",
+			"hard": "Difícil",
+			"editorial": "Editorial",
+			"has_editorial": "Tiene editorial",
+			"point": "Punto",
+			"tags": "Etiquetas",
+			"contest": "Concurso",
+			"contest_placeholder": "Selecciona un concurso"
+		},
+		"search": {
+			"sort_by": "Ordenar por",
+			"title": "Título",
+			"point": "Punto",
+			"difficulty": "Dificultad",
+			"accept": "Aceptar",
+			"accept_rate": "Tasa de aceptación"
+		},
+		"table": {
+			"title": "Título",
+			"difficulty": "Dificultad",
+			"point": "Punto",
+			"accepted": "Aceptado",
+			"acceptance": "Aceptación",
+			"editorial": "Editorial",
+			"easy": "Fácil",
+			"medium": "Medio",
+			"hard": "Difícil",
+			"delete": {
+				"title": "Confirmar eliminación",
+				"description": "¿Estás seguro de que quieres eliminar el problema \"{title}\"? Esta acción no se puede deshacer.",
+				"cancel": "Cancelar",
+				"confirm": "Eliminar",
+				"success": "Problema eliminado con éxito",
+				"error": "Error al eliminar el problema"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Problema #{number}",
+				"breadcrumb": {
+					"problems": "Problemas"
+				}
+			},
+			"sidebar": {
+				"info": "Información",
+				"difficulty": {
+					"label": "Dificultad",
+					"easy": "Fácil",
+					"medium": "Medio",
+					"hard": "Difícil"
+				},
+				"points": "Puntos",
+				"constraints": {
+					"title": "Restricciones",
+					"time_limit": "Límite de tiempo",
+					"memory_limit": "Límite de memoria"
+				},
+				"io_format": {
+					"title": "Formato de E/S",
+					"input": "Entrada",
+					"output": "Salida",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "Estadísticas",
+					"accepted": "Aceptado",
+					"submissions": "Envíos",
+					"acceptance_rate": "Tasa de aceptación"
+				},
+				"status": {
+					"label": "Estado",
+					"solved": "Resuelto",
+					"attempted": "Intentado"
+				},
+				"tags": "Etiquetas",
+				"actions": {
+					"title": "Acciones",
+					"submit": "Enviar",
+					"editorial": "Editorial",
+					"view_submissions": "Ver envíos"
+				}
+			},
+			"statement": {
+				"statement": "Enunciado del problema",
+				"constraints": "Restricciones",
+				"time_limit": "Límite de tiempo",
+				"memory_limit": "Límite de memoria",
+				"io_format": "Formato de E/S",
+				"input_file": "Archivo de entrada",
+				"output_file": "Archivo de salida",
+				"subtasks": "Subtareas",
+				"subtask_number": "Subtarea {number}: {name}",
+				"test_cases_count": "{count} casos de prueba"
+			},
+			"error": {
+				"not_found": "Problema no encontrado",
+				"load_failed": "Error al cargar el problema"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Editorial",
+		"not_available": "Editorial no disponible",
+		"not_available_description": "La editorial de este problema aún no está disponible o requiere resolver el problema primero.",
+		"check_again": "Comprobar de nuevo",
+		"warning": "Esta editorial contiene la solución y la explicación del problema. ¡Asegúrate de haber intentado el problema primero!",
+		"created_by": "Editorial de: {username}",
+		"breadcrumb": {
+			"problems": "Problemas",
+			"editorial": "Editorial"
+		},
+		"back_to_problem": "Volver al problema"
+	},
+	"submission": {
+		"date": {
+			"seconds": "hace {count} segundos",
+			"minutes": "hace {count} minutos",
+			"hours": "hace {count} horas",
+			"days": "hace {count} días",
+			"months": "hace {count} meses",
+			"years": "hace {count} años"
+		},
+		"page": {
+			"view": "Ver",
+			"title": "Envíos",
+			"breadcrumb": {
+				"home": "Inicio",
+				"submissions": "Envíos"
+			},
+			"actions": {
+				"submit_solution": "Enviar solución",
+				"view_all": "Ver todo",
+				"view_details": "Ver detalles",
+				"submit_code": "Enviar código"
+			},
+			"recent_submissions": "Envíos recientes",
+			"score": "Puntuación",
+			"list_title": "Se encontraron {count} envíos",
+			"submissions_title": "Envíos recientes",
+			"no_submissions": {
+				"title": "No se encontraron envíos",
+				"empty": "¡Sé el primero en enviar una solución!",
+				"filtered": "Ningún envío coincide con tus filtros actuales."
+			},
+			"common": {
+				"score": "Puntuación"
+			},
+			"pagination": {
+				"previous": "Anterior",
+				"next": "Siguiente",
+				"page_info": "Página {page} de {total}"
+			},
+			"passed": "aprobado"
+		},
+		"filters": {
+			"problem": "Problema",
+			"problem_placeholder": "Selecciona un problema",
+			"language": "Idioma",
+			"select_language": "Selecciona un idioma",
+			"all_languages": "Todos los idiomas",
+			"status": "Estado",
+			"select_status": "Selecciona un estado",
+			"all_status": "Todos los estados",
+			"all_contests": "Todos los concursos",
+			"author": "Autor",
+			"author_placeholder": "Selecciona un autor",
+			"contest": "Concurso",
+			"contest_placeholder": "Selecciona un concurso",
+			"reset": "Restablecer filtros"
+		},
+		"status": {
+			"ACCEPTED": "Aceptado",
+			"WRONG_ANSWER": "Respuesta incorrecta",
+			"TIME_LIMIT_EXCEEDED": "Límite de tiempo excedido",
+			"MEMORY_LIMIT_EXCEEDED": "Límite de memoria excedido",
+			"RUNTIME_ERROR": "Error de ejecución",
+			"COMPILATION_ERROR": "Error de compilación",
+			"INTERNAL_ERROR": "Error interno",
+			"PENDING": "Pendiente",
+			"JUDGING": "Juzgando",
+			"accepted": "Aceptado",
+			"wrong_answer": "Respuesta incorrecta",
+			"time_limit_exceeded": "Límite de tiempo excedido",
+			"memory_limit_exceeded": "Límite de memoria excedido",
+			"runtime_error": "Error de ejecución",
+			"compilation_error": "Error de compilación",
+			"internal_error": "Error interno",
+			"pending": "Pendiente",
+			"judging": "Juzgando"
+		},
+		"table": {
+			"status": "Estado",
+			"problem": "Problema",
+			"author": "Autor",
+			"language": "Idioma",
+			"submitted": "Enviado",
+			"actions": "Acciones",
+			"error_loading": "Error al cargar los envíos",
+			"unknown_problem": "Problema desconocido",
+			"by": "por",
+			"solved": "resuelto",
+			"score": "Puntuación"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Error al cargar los envíos"
+			},
+			"empty": {
+				"title": "Aún no hay envíos",
+				"description": "¡Sé el primero en enviar una solución!"
+			}
+		},
+		"detail": {
+			"title": "Detalles del envío",
+			"breadcrumb": {
+				"home": "Inicio",
+				"submissions": "Envíos"
+			},
+			"tabs": {
+				"info": "Información",
+				"source_code": "Código fuente",
+				"test_cases": "Casos de prueba",
+				"log": "Registro"
+			},
+			"info": {
+				"author": "Autor",
+				"problem": "Problema",
+				"language": "Idioma",
+				"score": "Puntuación",
+				"submitted": "Enviado",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Volver",
+				"submit_again": "Enviar de nuevo",
+				"view_all_submissions": "Ver todos los envíos"
+			},
+			"content": {
+				"no_log_available": "No hay información de registro disponible",
+				"no_test_cases_available": "No hay resultados de casos de prueba disponibles",
+				"subtask_count": "{count} subtarea",
+				"subtask_count_other": "{count} subtareas",
+				"expand_all": "Expandir todo",
+				"collapse_all": "Contraer todo",
+				"tests_passed": "{passed} / {total} aprobados",
+				"not_found": {
+					"title": "Envío no encontrado",
+					"message": "No se pudo encontrar el envío que estás buscando.",
+					"back_button": "Volver a los envíos"
+				},
+				"partial": "Parcial",
+				"submitted_for": "Enviado para"
+			}
+		},
+		"chart": {
+			"status": "Estado",
+			"languages": "Idiomas"
+		}
+	},
+	"submit": {
+		"easy": "Fácil",
+		"medium": "Medio",
+		"hard": "Difícil",
+		"page": {
+			"title": "Enviar código",
+			"select_problem": {
+				"title": "Ningún problema seleccionado",
+				"description": "Por favor, selecciona un problema para enviar tu solución.",
+				"browse": "Explorar problemas"
+			},
+			"problem_not_found": {
+				"title": "Problema no encontrado",
+				"description": "No se pudo encontrar el problema al que intentas enviar."
+			},
+			"breadcrumb": {
+				"home": "Inicio",
+				"problems": "Problemas"
+			},
+			"back_to_problem": "Volver al problema",
+			"language": "Lenguaje de programación",
+			"select_language": "Selecciona un idioma",
+			"code": "Código fuente",
+			"code_placeholder": "Introduce tu código aquí...",
+			"submit": "Enviar",
+			"submitting": "Enviando...",
+			"login_required": {
+				"message": "Por favor",
+				"login": "inicia sesión",
+				"to_submit": "para enviar tu solución"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "Debes iniciar sesión para enviar código",
+				"select_problem": "Por favor, selecciona un problema para enviar",
+				"enter_code": "Por favor, introduce tu código",
+				"submit_failed": "Error al enviar el código. Por favor, inténtalo de nuevo."
+			},
+			"success": {
+				"submitted": "¡Código enviado con éxito!"
+			}
+		}
+	},
+	"error": {
+		"title": "¡Vaya! Algo salió mal",
+		"message": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+		"try_again": "Intentar de nuevo",
+		"go_home": "Ir a la página de inicio"
+	},
+	"not_found": {
+		"title": "¡Vaya! Página no encontrada",
+		"message": "La página que estás buscando no existe.",
+		"go_home": "Ir a la página de inicio"
+	},
+	"blog": {
+		"create": {
+			"create": "Crear",
+			"blogs": "Blogs",
+			"title": "Título",
+			"title_placeholder": "Introduce el título",
+			"description_placeholder": "Introduce la descripción",
+			"upload_thumbnail": "Subir miniatura",
+			"save": "Guardar",
+			"message": {
+				"title_required": "El título es obligatorio",
+				"title_and_content_required": "El título y el contenido son obligatorios."
+			},
+			"create_success": "¡Blog creado con éxito!",
+			"create_fail": "Error al crear el blog."
+		},
+		"edit": {
+			"blogs": "Blogs",
+			"edit": "Editar",
+			"save": "Guardar",
+			"message": {
+				"title_required": "El título es obligatorio",
+				"title_and_content_required": "El título y el contenido son obligatorios."
+			},
+			"edit_success": "¡Blog editado con éxito!",
+			"edit_fail": "Error al editar el blog."
+		},
+		"card": {
+			"blogs": "Blogs",
+			"delete_success": "¡Blog eliminado con éxito!",
+			"message": {
+				"delete_confirmation": "¿Estás seguro de que quieres eliminar este blog?"
+			},
+			"delete": "Eliminar",
+			"edit": "Editar",
+			"cancel": "Cancelar"
+		},
+		"comment": {
+			"create_success": "¡Comentario creado con éxito!",
+			"date": {
+				"seconds": "hace {count} segundos",
+				"minutes": "hace {count} minutos",
+				"hours": "hace {count} horas",
+				"days": "hace {count} días",
+				"months": "hace {count} meses",
+				"years": "hace {count} años"
+			},
+			"comment-placeholder": "Escribe un comentario...",
+			"comment": "Comentario",
+			"comments": "Comentarios",
+			"message": {
+				"comment_required": "El comentario es obligatorio",
+				"delete_confirmation": "¿Estás seguro de que quieres eliminar este comentario?"
+			},
+			"delete": "Eliminar",
+			"edit": "Editar",
+			"cancel": "Cancelar",
+			"delete_success": "¡Comentario eliminado con éxito!",
+			"edit_success": "¡Comentario editado con éxito!"
+		}
+	},
+	"standing": {
+		"title": "Clasificación global",
+		"description": "Clasificación de usuarios basada en la calificación y la puntuación total",
+		"rating": "Clasificación",
+		"score": "Puntuación",
+		"top_users": "Mejores usuarios",
+		"all_users": "Todos los usuarios",
+		"no_data": "No hay datos disponibles",
+		"modes": {
+			"rating": "Clasificación",
+			"score": "Puntuación"
+		},
+		"table": {
+			"rank": "Rango",
+			"user": "Usuario",
+			"rating": "Clasificación",
+			"score": "Puntuación"
+		},
+		"filters": {
+			"search_placeholder": "Buscar usuarios...",
+			"reset": "Restablecer"
+		},
+		"errors": {
+			"load_failed": "Error al cargar los datos de clasificación"
+		}
+	},
+	"async_combobox": {
+		"select": "Seleccionar...",
+		"search": "Buscar...",
+		"no_results": "No se encontraron resultados.",
+		"load_more": "Cargar más..."
+	},
+	"profile": {
+		"title": "Perfil",
+		"loading": "Cargando perfil...",
+		"user_not_found": "Usuario no encontrado",
+		"sidebar": {
+			"edit_profile": "Editar perfil",
+			"rank": "Rango",
+			"stats": "Estadísticas",
+			"score": "Puntuación",
+			"rating": "Clasificación",
+			"ac_problems": "Problemas de CA",
+			"submissions": "Envíos",
+			"blogs": "Blogs",
+			"comments": "Comentarios",
+			"joined_contests": "Concursos unidos",
+			"languages": "Idiomas",
+			"submissions_count": "envíos",
+			"no_submissions": "Aún no hay envíos",
+			"unranked": "Sin clasificar"
+		},
+		"content": {
+			"submission_activity": "Actividad de envío",
+			"submissions_in_year": "envíos en el último año",
+			"accepted": "aceptado",
+			"loading_activity": "Cargando datos de actividad...",
+			"rating_history": "Historial de clasificación",
+			"problems_by_difficulty": "Problemas de CA por dificultad",
+			"submissions_by_language": "Envíos de CA por idioma",
+			"less": "Menos",
+			"more": "Más"
+		},
+		"tabs": {
+			"recent_solved_problems": "Problemas resueltos recientemente",
+			"recent_submissions": "Envíos recientes",
+			"blogs": "Blogs",
+			"problem": "Problema",
+			"language": "Idioma",
+			"solved_count": "Recuento de resueltos",
+			"first_solved": "Resuelto por primera vez",
+			"status": "Estado",
+			"date": "Fecha",
+			"title": "Título",
+			"publish_date": "Fecha de publicación",
+			"no_accepted_submissions": "Aún no hay envíos aceptados.",
+			"no_recent_submissions": "Aún no hay envíos.",
+			"no_blogs": "Aún no se han publicado blogs."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Concursos",
+			"running": "En curso",
+			"upcoming": "Próximos",
+			"ended": "Finalizados",
+			"create_button": "Crear concurso",
+			"search_placeholder": "Buscar concursos...",
+			"loading": "Cargando concursos...",
+			"no_contests": "No se encontraron concursos",
+			"no_contests_description": "Vuelve más tarde para ver las próximas competiciones y desafíos",
+			"error_loading": "Error al cargar los concursos",
+			"rated": "Clasificado",
+			"unrated": "No clasificado",
+			"participants": "{count, plural, =0 {No hay participantes} =1 {# participante} other {# participantes}}",
+			"joining": "Unido"
+		},
+		"detail": {
+			"info_tab": "Información",
+			"problems_tab": "Problemas",
+			"submissions_tab": "Envíos",
+			"standings_tab": "Clasificación",
+			"time_remaining": "Tiempo restante",
+			"search_problems": "Buscar problemas...",
+			"add_problem": "Añadir problema",
+			"problem_title": "Título",
+			"problem_slug": "Slug",
+			"problem_point": "Punto",
+			"actions": "Acciones",
+			"add": "Añadir",
+			"adding": "Añadiendo...",
+			"remove": "Eliminar",
+			"contest_problems": "Problemas del concurso",
+			"rank": "Rango",
+			"user": "Usuario",
+			"score": "Puntuación",
+			"time": "Tiempo",
+			"points": "Puntos",
+			"no_standings": "No hay clasificación disponible",
+			"loading": "Cargando...",
+			"contest_updated": "¡Concurso actualizado con éxito!",
+			"problem_added": "¡Problema añadido al concurso con éxito!",
+			"failed_to_add_problem": "Error al añadir el problema al concurso",
+			"problem_removed": "¡Problema eliminado del concurso con éxito!",
+			"failed_to_remove_problem": "Error al eliminar el problema del concurso",
+			"remove_problem_title": "Confirmar eliminación",
+			"remove_problem_description": "¿Estás seguro de que quieres eliminar \"{title}\" de este concurso? Esta acción no se puede deshacer.",
+			"remove_problem_cancel": "Cancelar",
+			"remove_problem_confirm": "Eliminar",
+			"running": "En curso",
+			"upcoming": "Próximos",
+			"ended": "Finalizados",
+			"rated": "Clasificado",
+			"start_time": "Hora de inicio",
+			"end_time": "Hora de finalización",
+			"participants": "Participantes",
+			"problems": "Problemas",
+			"no_problems": "No hay problemas disponibles",
+			"join": "Unirse al concurso",
+			"leave": "Abandonar el concurso",
+			"joining": "Uniéndose...",
+			"leaving": "Abandonando...",
+			"join_success": "¡Te has unido al concurso con éxito!",
+			"leave_success": "¡Has abandonado el concurso con éxito!",
+			"join_fail": "Error al unirse al concurso. Por favor, inténtalo de nuevo.",
+			"leave_fail": "Error al abandonar el concurso. Por favor, inténtalo de nuevo."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Panel de control",
+			"blog": "Blog",
+			"problem": "Problema",
+			"submission": "Envío",
+			"contest": "Concurso",
+			"user": "Usuario",
+			"judger": "Juez",
+			"notification": "Notificación",
+			"profile": "Perfil",
+			"logout": "Cerrar sesión",
+			"appearance": "Apariencia",
+			"language": "Idioma",
+			"light": "Claro",
+			"dark": "Oscuro",
+			"home": "Inicio"
+		},
+		"dashboard": {
+			"unable_to_load": "No se puede cargar el panel de control",
+			"error_loading": "Hubo un error al cargar los datos del panel de control. Por favor, actualiza la página.",
+			"refresh": "Actualizar panel de control",
+			"total_users": "Total de usuarios",
+			"active_today": "Activos hoy",
+			"total_submissions": "Total de envíos",
+			"success_rate": "Tasa de éxito",
+			"active_problems": "Problemas activos",
+			"user_activity": "Actividad del usuario",
+			"submission_volume": "Volumen de envíos",
+			"language_distribution": "Distribución de idiomas",
+			"submission_results": "Resultados de los envíos",
+			"problem_difficulty": "Dificultad del problema",
+			"contest_participation": "Participación en concursos",
+			"top_users": "Mejores usuarios",
+			"popular_problems": "Problemas populares"
+		},
+		"chart": {
+			"loading": "Cargando...",
+			"contests": "Concursos",
+			"participants": "Participantes",
+			"contest_participation_trends": "Tendencias de participación en concursos",
+			"contest_participation_description": "Recuento mensual de concursos y número de participantes",
+			"number_of_contests": "Número de concursos (eje Y izquierdo)",
+			"total_participants": "Total de participantes (eje Y derecho)",
+			"judger_queue_performance": "Rendimiento de la cola del juez",
+			"judger_queue_description": "Supervisión en tiempo real del tamaño de la cola y el tiempo de procesamiento",
+			"queue_size": "Tamaño de la cola",
+			"processing_time": "Tiempo de procesamiento",
+			"queue_size_threshold_warning": "¡El tamaño de la cola supera el umbral!",
+			"queue_size_left": "Tamaño de la cola (eje Y izquierdo)",
+			"processing_time_right": "Tiempo de procesamiento (eje Y derecho)",
+			"threshold": "Umbral",
+			"language_usage": "Uso del lenguaje de programación",
+			"language_usage_description": "Distribución de envíos por lenguaje de programación",
+			"submissions": "Envíos",
+			"percentage": "Porcentaje",
+			"total_submissions": "Total de envíos",
+			"problem_difficulty_distribution": "Distribución de la dificultad de los problemas",
+			"problem_difficulty_description": "Número de problemas por nivel de dificultad y tasas de resolución",
+			"total_problems": "Total de problemas",
+			"solved_by_users": "Resueltos por usuarios",
+			"solve_rate": "Tasa de resolución",
+			"submission_results_distribution": "Distribución de los resultados de los envíos",
+			"submission_results_description": "Desglose de los veredictos de los envíos",
+			"count": "Recuento",
+			"submission_volume": "Volumen de envíos",
+			"submission_volume_description": "Recuento diario de envíos y tasa de aceptación",
+			"accepted": "Aceptado",
+			"success_rate": "Tasa de éxito",
+			"system_resource_usage": "Uso de recursos del sistema",
+			"system_resource_description": "Supervisión en tiempo real del uso de CPU, memoria y disco",
+			"cpu_usage": "Uso de CPU",
+			"memory_usage": "Uso de memoria",
+			"disk_usage": "Uso de disco",
+			"high_resource_usage": "¡Se detectó un alto uso de recursos!",
+			"cpu": "CPU",
+			"memory": "Memoria",
+			"disk": "Disco",
+			"user_registrations": "Registros de usuarios",
+			"user_registrations_description": "Nuevos registros diarios"
+		},
+		"table": {
+			"loading": "Cargando...",
+			"most_attempted_problems": "Problemas más intentados",
+			"most_attempted_problems_description": "Problemas populares basados en el recuento de envíos",
+			"problem": "Problema",
+			"difficulty": "Dificultad",
+			"attempts": "Intentos",
+			"solved": "Resuelto",
+			"success_rate": "Tasa de éxito",
+			"top_users_this_week": "Mejores usuarios de esta semana",
+			"top_users_this_week_description": "Usuarios más activos basados en problemas resueltos",
+			"rank": "Rango",
+			"user": "Usuario",
+			"submissions": "Envíos"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Buscar...",
+				"sort_by": "Ordenar por",
+				"title": "Título",
+				"point": "Punto",
+				"difficulty": "Dificultad",
+				"accept": "Aceptar",
+				"accept_rate": "Tasa de aceptación"
+			},
+			"filter": {
+				"new": "Nuevo",
+				"title": "Filtro",
+				"difficulty": "Dificultad",
+				"easy": "Fácil",
+				"medium": "Medio",
+				"hard": "Difícil",
+				"point": "Punto",
+				"tags": "Etiquetas",
+				"all": "Todos",
+				"editorial": "Editorial",
+				"has_editorial": "Tiene editorial",
+				"point_range": "Rango de puntos",
+				"contest": "Concurso"
+			},
+			"table": {
+				"title": "Título",
+				"tags": "Etiquetas",
+				"difficulty": "Dificultad",
+				"point": "Punto",
+				"accepted": "Aceptado",
+				"acceptance": "Aceptación",
+				"editorial": "Editorial",
+				"easy": "Fácil",
+				"medium": "Medio",
+				"hard": "Difícil",
+				"delete": {
+					"title": "Confirmar eliminación",
+					"description": "¿Estás seguro de que quieres eliminar el problema \"{title}\"? Esta acción no se puede deshacer.",
+					"cancel": "Cancelar",
+					"confirm": "Eliminar",
+					"success": "Problema eliminado con éxito",
+					"error": "Error al eliminar el problema"
+				}
+			},
+			"form": {
+				"title": "Título",
+				"title_placeholder": "Introduce el título del problema",
+				"time_limit": "Límite de tiempo (ms)",
+				"memory_limit": "Límite de memoria (KB)",
+				"point": "Punto",
+				"scoring_method": "Método de puntuación",
+				"scoring_method_placeholder": "Selecciona el método de puntuación",
+				"scoring_method_standard": "Estándar",
+				"scoring_method_subtask": "Subtarea",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Dificultad",
+				"difficulty_placeholder": "Selecciona la dificultad",
+				"difficulty_easy": "Fácil",
+				"difficulty_medium": "Medio",
+				"difficulty_hard": "Difícil",
+				"io_mode": "Modo de E/S",
+				"io_mode_placeholder": "Selecciona el modo de E/S",
+				"io_mode_standard": "Estándar",
+				"io_mode_file": "Archivo",
+				"input_file": "Archivo de entrada",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Archivo de salida",
+				"output_file_placeholder": "output.txt",
+				"tags": "Etiquetas",
+				"statement": "Enunciado",
+				"statement_placeholder": "Escribe el enunciado del problema aquí...",
+				"submit": "Crear problema",
+				"update": "Actualizar problema",
+				"title_required": "El título es obligatorio",
+				"time_limit_min": "El límite de tiempo debe ser de al menos 1 ms",
+				"time_limit_max": "El límite de tiempo debe ser de como máximo 10000 ms",
+				"memory_limit_min": "El límite de memoria debe ser de al menos 1 KB",
+				"memory_limit_max": "El límite de memoria debe ser de como máximo 1048576 KB",
+				"point_min": "El punto debe ser de al menos 0",
+				"point_max": "El punto debe ser de como máximo 100",
+				"tags_placeholder": "Introduce las etiquetas...",
+				"create_success": "¡Problema creado con éxito!",
+				"create_error": "Error al crear el problema. Por favor, inténtalo de nuevo.",
+				"update_success": "¡Problema actualizado con éxito!",
+				"update_error": "Error al actualizar el problema. Por favor, inténtalo de nuevo."
+			},
+			"editorial": {
+				"placeholder": "Escribe el contenido de la editorial aquí...",
+				"create": "Crear editorial",
+				"save": "Guardar editorial",
+				"delete": "Eliminar editorial",
+				"cancel": "Cancelar",
+				"deleting": "Eliminando...",
+				"saving": "Guardando...",
+				"no_editorial": "Aún no existe una editorial para este problema.",
+				"create_success": "¡Editorial creada con éxito!",
+				"create_error": "Error al crear la editorial. Por favor, inténtalo de nuevo.",
+				"update_success": "¡Editorial actualizada con éxito!",
+				"update_error": "Error al actualizar la editorial. Por favor, inténtalo de nuevo.",
+				"delete_success": "¡Editorial eliminada con éxito!",
+				"delete_error": "Error al eliminar la editorial. Por favor, inténtalo de nuevo.",
+				"delete_confirmation_title": "¿Estás seguro de que quieres eliminar esta editorial?",
+				"delete_confirmation_description": "Esta acción no se puede deshacer. Esto eliminará permanentemente la editorial de este problema."
+			},
+			"tabs": {
+				"info": "Información",
+				"editorial": "Editorial",
+				"testcase": "Caso de prueba"
+			},
+			"slug_page": {
+				"loading": "Cargando...",
+				"problem_not_found": "Problema no encontrado",
+				"error_loading_problem": "Error al cargar el problema: {message}",
+				"error_loading_tags": "Error al cargar las etiquetas: {message}",
+				"testcase_management": "La gestión de casos de prueba se implementará aquí."
+			},
+			"testcase": {
+				"input": "Entrada",
+				"output": "Salida",
+				"save": "Guardar",
+				"saving": "Guardando...",
+				"loading": "Cargando...",
+				"select_to_edit": "Selecciona una entrada o salida de un caso de prueba para editar",
+				"content_placeholder": "El contenido del caso de prueba aparecerá aquí...",
+				"new_testcase": "Nuevo caso de prueba",
+				"new_subtask": "Nueva subtarea",
+				"name": "Nombre",
+				"cancel": "Cancelar",
+				"create": "Crear",
+				"delete": "Eliminar",
+				"creating": "Creando...",
+				"create_subtask_title": "Crear nueva subtarea",
+				"create_subtask_description": "Introduce un nombre para la nueva subtarea.",
+				"subtask_name_placeholder": "Introduce el nombre de la subtarea",
+				"create_testcase_title": "Crear nuevo caso de prueba",
+				"create_testcase_description": "Introduce un nombre para el nuevo caso de prueba.",
+				"testcase_name_placeholder": "Introduce el nombre del caso de prueba",
+				"delete_subtask_title": "Eliminar subtarea",
+				"delete_subtask_description": "¿Estás seguro de que quieres eliminar esta subtarea? Esta acción no se puede deshacer.",
+				"delete_testcase_title": "Eliminar caso de prueba",
+				"delete_testcase_description": "¿Estás seguro de que quieres eliminar este caso de prueba? Esta acción no se puede deshacer.",
+				"success": {
+					"title": "Éxito",
+					"saved": "Contenido del caso de prueba guardado con éxito",
+					"testcase_created": "Caso de prueba creado con éxito",
+					"testcase_deleted": "Caso de prueba eliminado con éxito",
+					"subtask_created": "Subtarea creada con éxito",
+					"subtask_deleted": "Subtarea eliminada con éxito"
+				},
+				"error": {
+					"title": "Error",
+					"load_subtasks": "Error al cargar las subtareas",
+					"load_content": "Error al cargar el contenido del caso de prueba",
+					"save_content": "Error al guardar el contenido del caso de prueba",
+					"create_testcase": "Error al crear el caso de prueba",
+					"delete_testcase": "Error al eliminar el caso de prueba",
+					"create_subtask": "Error al crear la subtarea",
+					"delete_subtask": "Error al eliminar la subtarea"
+				}
+			}
+		},
+		"user": {
+			"title": "User Management",
+			"search_placeholder": "Search users...",
+			"sort_by": "Sort by",
+			"sort_username": "Username",
+			"sort_fullname": "Full Name",
+			"sort_rating": "Rating",
+			"sort_score": "Score",
+			"sort_asc": "Ascending",
+			"sort_desc": "Descending",
+			"no_users_found": "No users found",
+			"showing_results": "Showing {start}-{end} of {total} results",
+			"previous": "Previous",
+			"next": "Next",
+			"page_of": "Page {current} of {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Username",
+				"fullname": "Full Name",
+				"email": "Email",
+				"role": "Role",
+				"rating": "Rating",
+				"score": "Score",
+				"verified": "Verified",
+				"verified_yes": "Yes",
+				"verified_no": "No"
+			},
+			"detail": {
+				"title": "User Details",
+				"back_to_users": "Back to Users",
+				"verified": "Verified",
+				"unverified": "Unverified",
+				"email": "Email",
+				"joined": "Joined",
+				"last_updated": "Last Updated",
+				"bio": "Biography",
+				"statistics": "Statistics",
+				"score": "Score",
+				"rating": "Rating",
+				"problems_solved": "Problems Solved",
+				"submissions": "Submissions",
+				"blogs": "Blogs",
+				"comments": "Comments",
+				"contests": "Contests"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "View",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "View Details",
+					"submit_code": "Submit Code"
+				},
+				"recent_submissions": "Recent Submissions",
+				"score": "Score",
+				"list_title": "Found {count} submissions",
+				"submissions_title": "Recent Submissions",
+				"no_submissions": {
+					"title": "No Submissions Found",
+					"empty": "Be the first to submit a solution!",
+					"filtered": "No submissions match your current filters."
+				},
+				"common": {
+					"score": "Score"
+				},
+				"pagination": {
+					"previous": "Previous",
+					"next": "Next",
+					"page_info": "Page {page} of {total}"
+				},
+				"passed": "passed"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Author",
+				"language": "Language",
+				"submitted": "Submitted",
+				"actions": "Actions",
+				"error_loading": "Error Loading Submissions",
+				"unknown_problem": "Unknown Problem",
+				"by": "by",
+				"solved": "solved",
+				"score": "Score"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Failed to load submissions"
+				},
+				"empty": {
+					"title": "No Submissions Yet",
+					"description": "Be the first to submit a solution!"
+				}
+			},
+			"detail": {
+				"title": "Submission Details",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Source Code",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"author": "Author",
+					"problem": "Problem",
+					"language": "Language",
+					"score": "Score",
+					"submitted": "Submitted",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Back",
+					"submit_again": "Submit Again",
+					"view_all_submissions": "View All Submissions"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"subtask_count": "{count} subtask",
+					"subtask_count_other": "{count} subtasks",
+					"expand_all": "Expand All",
+					"collapse_all": "Collapse All",
+					"tests_passed": "{passed} / {total} passed",
+					"not_found": {
+						"title": "Submission Not Found",
+						"message": "The submission you're looking for could not be found.",
+						"back_button": "Back to Submissions"
+					},
+					"partial": "Partial",
+					"submitted_for": "Submitted for"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Languages"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Running",
+				"upcoming": "Upcoming",
+				"ended": "Ended",
+				"create_button": "Create Contest",
+				"search_placeholder": "Search contests...",
+				"loading": "Loading...",
+				"rated": "Rated",
+				"unrated": "Unrated"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Problems",
+				"submissions_tab": "Submissions",
+				"standings_tab": "Standings",
+				"search_problems": "Search problems...",
+				"add_problem": "Add Problem",
+				"problem_title": "Title",
+				"actions": "Actions",
+				"add": "Add",
+				"adding": "Adding...",
+				"remove": "Remove",
+				"rank": "Rank",
+				"user": "User",
+				"score": "Score",
+				"no_standings": "No standings available",
+				"loading": "Loading...",
+				"contest_updated": "Contest updated successfully!",
+				"problem_added": "Problem added to contest successfully!",
+				"failed_to_add_problem": "Failed to add problem to contest",
+				"problem_removed": "Problem removed from contest successfully!",
+				"failed_to_remove_problem": "Failed to remove problem from contest",
+				"remove_problem_title": "Confirm Remove",
+				"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+				"remove_problem_cancel": "Cancel",
+				"remove_problem_confirm": "Remove"
+			},
+			"create": {
+				"title": "Create Contest"
+			},
+			"edit": {
+				"title": "Edit Contest",
+				"loading": "Loading contest...",
+				"cancel": "Cancel"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter contest title",
+				"start_time": "Start Time",
+				"end_time": "End Time",
+				"time": "Time",
+				"select_start_date": "Select start date",
+				"select_end_date": "Select end date",
+				"is_rated": "Is Rated",
+				"is_rated_placeholder": "Select if contest is rated",
+				"yes": "Yes",
+				"no": "No",
+				"penalty": "Penalty (minutes)",
+				"penalty_placeholder": "Enter penalty in minutes",
+				"penalty_min": "Penalty must be at least 0 minutes",
+				"description": "Description",
+				"description_placeholder": "Enter contest description",
+				"submit": "Create Contest",
+				"update": "Update Contest",
+				"title_required": "Title is required",
+				"start_time_required": "Start time is required",
+				"end_time_required": "End time is required",
+				"create_success": "Contest created successfully!",
+				"create_error": "Failed to create contest. Please try again.",
+				"update_success": "Contest updated successfully!",
+				"update_error": "Failed to update contest. Please try again."
+			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Notificaciones",
+		"mark_all_read": "Marcar todo como leído",
+		"mark_as_read": "Marcar como leído",
+		"view_all": "Ver todas las notificaciones",
+		"no_notifications": "Aún no hay notificaciones",
+		"loading": "Cargando notificaciones...",
+		"failed_to_load": "Error al cargar las notificaciones",
+		"unread_count": "{count} notificación sin leer",
+		"unread_count_plural": "{count} notificaciones sin leer",
+		"read_count": "{count} notificación leída",
+		"read_count_plural": "{count} notificaciones leídas",
+		"just_now": "Justo ahora",
+		"minutes_ago": "hace {count}m",
+		"hours_ago": "hace {count}h",
+		"days_ago": "hace {count}d",
+		"tabs": {
+			"all": "Todas",
+			"unread": "No leídas",
+			"read": "Leídas"
+		},
+		"types": {
+			"new_problem": "Nuevo problema: {title}",
+			"new_contest": "Nuevo concurso: {title}",
+			"new_blog": "Nuevo blog: {title}",
+			"rating_updated": "Clasificación actualizada",
+			"system": "Notificación del sistema",
+			"new_problem_available": "Nuevo problema disponible",
+			"new_contest_available": "Nuevo concurso disponible",
+			"new_blog_post": "Nueva publicación de blog"
+		}
+	},
+	"settings": {
+		"title": "Configuración",
+		"description": "Gestiona la configuración y las preferencias de tu cuenta.",
+		"tabs": {
+			"basic": "Básico",
+			"profile": "Perfil",
+			"notification": "Notificación"
+		},
+		"basic": {
+			"theme": {
+				"title": "Tema",
+				"description": "Selecciona un tema para la aplicación.",
+				"light": "Claro",
+				"dark": "Oscuro",
+				"system": "Sistema",
+				"auto": "Automático"
+			},
+			"language": {
+				"title": "Idioma",
+				"description": "Selecciona un idioma para la aplicación."
+			}
+		},
+		"profile": {
+			"title": "Perfil",
+			"description": "Actualiza la información de tu perfil.",
+			"form": {
+				"username": "Nombre de usuario",
+				"fullname": "Nombre completo",
+				"bio": "Biografía",
+				"save": "Guardar cambios",
+				"saving": "Guardando...",
+				"change_avatar": "Cambiar avatar",
+				"reset_password": "Restablecer contraseña",
+				"update_success": "¡Perfil actualizado con éxito!",
+				"update_error": "Error al actualizar el perfil. Por favor, inténtalo de nuevo."
+			}
+		},
+		"notification": {
+			"title": "Notificaciones",
+			"description": "Configura tus preferencias de notificación.",
+			"form": {
+				"new_blog": "Nuevas publicaciones de blog",
+				"new_problem": "Nuevos problemas",
+				"new_contest": "Nuevos concursos",
+				"update_rating": "Actualizaciones de clasificación",
+				"system": "Notificaciones del sistema",
+				"save": "Guardar cambios",
+				"saving": "Guardando...",
+				"update_success": "¡Configuración de notificaciones actualizada con éxito!",
+				"update_error": "Error al actualizar la configuración de notificaciones. Por favor, inténtalo de nuevo."
+			}
+		}
+	}
+}

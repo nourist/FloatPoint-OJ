@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "Trang chủ",
+			"problems": "Bài toán",
+			"submissions": "Bài nộp",
+			"contests": "Kỳ thi",
+			"standing": "Bảng xếp hạng",
+			"login": "Đăng nhập",
+			"register": "Đăng ký",
+			"logout": "Đăng xuất",
+			"profile": "Hồ sơ",
+			"settings": "Cài đặt",
+			"appearance": "Giao diện",
+			"language": "Ngôn ngữ",
+			"light": "Sáng",
+			"dark": "Tối",
+			"dashboard": "Bảng điều khiển"
+		},
+		"footer": {
+			"copyright": "Bản quyền © {year} Nourist",
+			"license": "Giấy phép",
+			"github": "GitHub",
+			"author": "Tác giả",
+			"language": "Ngôn ngữ"
+		}
+	},
+	"auth": {
+		"login": "Đăng nhập",
+		"register": "Đăng ký",
+		"verify_email": "Xác thực Email",
+		"forgot_password": "Quên mật khẩu",
+		"reset_password": "Đặt lại mật khẩu",
+		"get_password": "Lấy lại mật khẩu",
+		"verify_success": "Xác thực email thành công",
+		"dont_have_account": "Chưa có tài khoản?",
+		"already_have_account": "Đã có tài khoản?",
+		"already_have_password": "Đã có mật khẩu?",
+		"account_already_verified": "Tài khoản đã được xác thực?",
+		"continue_with_google": "Tiếp tục với Google",
+		"form": {
+			"email": "Email",
+			"password": "Mật khẩu",
+			"username": "Tên người dùng",
+			"enter_email": "Nhập email của bạn",
+			"enter_password": "Nhập mật khẩu của bạn",
+			"enter_username": "Nhập tên người dùng của bạn",
+			"confirm_password": "Xác nhận mật khẩu",
+			"enter_confirm_password": "Nhập lại mật khẩu của bạn"
+		},
+		"message": {
+			"email_required": "Email là bắt buộc",
+			"password_required": "Mật khẩu là bắt buộc",
+			"username_required": "Tên người dùng là bắt buộc",
+			"email_invalid": "Email không hợp lệ",
+			"password_min": "Mật khẩu phải có ít nhất 8 ký tự",
+			"password_uppercase": "Mật khẩu phải chứa ít nhất một chữ hoa",
+			"password_lowercase": "Mật khẩu phải chứa ít nhất một chữ thường",
+			"password_number": "Mật khẩu phải chứa ít nhất một số",
+			"password_special": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt",
+			"confirm_password_required": "Xác nhận mật khẩu là bắt buộc",
+			"confirm_password_not_match": "Xác nhận mật khẩu không khớp",
+			"token_required": "Mã thông báo là bắt buộc"
+		},
+		"success": {
+			"register": "Đăng ký thành công",
+			"login": "Đăng nhập thành công",
+			"forgot_password": "Email đặt lại mật khẩu đã được gửi thành công",
+			"verify_email_send": "Email xác thực đã được gửi thành công",
+			"reset_password": "Đặt lại mật khẩu thành công",
+			"verify": "Tuyệt vời! Địa chỉ email của bạn đã được xác minh. Tài khoản của bạn hiện đang hoạt động và sẵn sàng để sử dụng."
+		},
+		"error": {
+			"login": "Đăng nhập thất bại"
+		},
+		"description": {
+			"forgot_password": "Nhập email của bạn để nhận liên kết đặt lại mật khẩu",
+			"verify_email": "Nhập email của bạn để nhận liên kết xác thực email"
+		},
+		"toast": {
+			"verify_email": "Vui lòng kiểm tra email của bạn để xác thực"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Trích dẫn",
+		"code_block": "Khối mã",
+		"toggle_highlight": "Chuyển đổi tô sáng ({color})",
+		"heading": "Tiêu đề {level}",
+		"insert_image": "Chèn ảnh",
+		"link": "Liên kết",
+		"paste_a_link": "Dán một liên kết...",
+		"apply_link": "Áp dụng liên kết",
+		"open_in_new_window": "Mở trong cửa sổ mới",
+		"remove_link": "Xóa liên kết",
+		"toggle_list": "Chuyển đổi danh sách {type}",
+		"toggle_mark": "Chuyển đổi {type}",
+		"align": "Căn chỉnh {align}",
+		"undo": "Hoàn tác",
+		"redo": "Làm lại",
+		"highlight_text": "Tô sáng văn bản",
+		"highlight": "Tô sáng",
+		"remove_highlight": "Xóa tô sáng",
+		"highlight_color": "{color} màu tô sáng",
+		"highlight_colors": "Màu tô sáng",
+		"format_text_as_heading": "Định dạng văn bản thành tiêu đề",
+		"heading_tooltip": "Tiêu đề",
+		"list_options": "Tùy chọn danh sách",
+		"list": "Danh sách",
+		"bulletlist": "Danh sách gạch đầu dòng",
+		"orderedlist": "Danh sách có thứ tự",
+		"tasklist": "Danh sách công việc"
+	},
+	"upload": {
+		"title": "Tải ảnh lên",
+		"supported_formats": "Các định dạng được hỗ trợ: JPG, PNG, GIF",
+		"click_to_select": "Nhấp để chọn",
+		"or_drag_and_drop_file_here": "hoặc kéo và thả tệp vào đây"
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Các bài viết, hướng dẫn và thông tin chi tiết mới nhất từ cộng đồng lập trình",
+		"new": "Mới",
+		"sidebar": {
+			"rating": "Xếp hạng",
+			"score": "Điểm",
+			"current_contest": "Kỳ thi hiện tại",
+			"ending_in": "Kết thúc trong",
+			"join": "Tham gia",
+			"top_raters": "Người xếp hạng cao nhất",
+			"hot_problems": "Bài toán hấp dẫn",
+			"my_stats": "Thống kê của tôi",
+			"problem": "Bài toán"
+		}
+	},
+	"pagination": {
+		"view": "Xem",
+		"sizes": "Kích thước"
+	},
+	"problem": {
+		"filter": {
+			"title": "Bộ lọc",
+			"status": "Trạng thái",
+			"all": "Tất cả",
+			"solved": "Đã giải",
+			"attempted": "Đã thử",
+			"todo": "Cần làm",
+			"difficulty": "Độ khó",
+			"easy": "Dễ",
+			"medium": "Trung bình",
+			"hard": "Khó",
+			"editorial": "Bài giải",
+			"has_editorial": "Có bài giải",
+			"point": "Điểm",
+			"tags": "Thẻ",
+			"contest": "Kỳ thi",
+			"contest_placeholder": "Chọn một kỳ thi"
+		},
+		"search": {
+			"sort_by": "Sắp xếp theo",
+			"title": "Tiêu đề",
+			"point": "Điểm",
+			"difficulty": "Độ khó",
+			"accept": "Chấp nhận",
+			"accept_rate": "Tỷ lệ chấp nhận"
+		},
+		"table": {
+			"title": "Tiêu đề",
+			"difficulty": "Độ khó",
+			"point": "Điểm",
+			"accepted": "Đã chấp nhận",
+			"acceptance": "Tỷ lệ chấp nhận",
+			"editorial": "Bài giải",
+			"easy": "Dễ",
+			"medium": "Trung bình",
+			"hard": "Khó",
+			"delete": {
+				"title": "Xác nhận xóa",
+				"description": "Bạn có chắc chắn muốn xóa bài toán \"{title}\" không? Hành động này không thể hoàn tác.",
+				"cancel": "Hủy",
+				"confirm": "Xóa",
+				"success": "Xóa bài toán thành công",
+				"error": "Xóa bài toán thất bại"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Bài toán #{number}",
+				"breadcrumb": {
+					"problems": "Bài toán"
+				}
+			},
+			"sidebar": {
+				"info": "Thông tin",
+				"difficulty": {
+					"label": "Độ khó",
+					"easy": "Dễ",
+					"medium": "Trung bình",
+					"hard": "Khó"
+				},
+				"points": "Điểm",
+				"constraints": {
+					"title": "Ràng buộc",
+					"time_limit": "Giới hạn thời gian",
+					"memory_limit": "Giới hạn bộ nhớ"
+				},
+				"io_format": {
+					"title": "Định dạng I/O",
+					"input": "Đầu vào",
+					"output": "Đầu ra",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "Thống kê",
+					"accepted": "Đã chấp nhận",
+					"submissions": "Bài nộp",
+					"acceptance_rate": "Tỷ lệ chấp nhận"
+				},
+				"status": {
+					"label": "Trạng thái",
+					"solved": "Đã giải",
+					"attempted": "Đã thử"
+				},
+				"tags": "Thẻ",
+				"actions": {
+					"title": "Hành động",
+					"submit": "Nộp bài",
+					"editorial": "Bài giải",
+					"view_submissions": "Xem bài nộp"
+				}
+			},
+			"statement": {
+				"statement": "Đề bài",
+				"constraints": "Ràng buộc",
+				"time_limit": "Giới hạn thời gian",
+				"memory_limit": "Giới hạn bộ nhớ",
+				"io_format": "Định dạng I/O",
+				"input_file": "Tệp đầu vào",
+				"output_file": "Tệp đầu ra",
+				"subtasks": "Bài toán con",
+				"subtask_number": "Bài toán con {number}: {name}",
+				"test_cases_count": "{count} trường hợp thử"
+			},
+			"error": {
+				"not_found": "Không tìm thấy bài toán",
+				"load_failed": "Tải bài toán thất bại"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Bài giải",
+		"not_available": "Bài giải không có sẵn",
+		"not_available_description": "Bài giải cho bài toán này chưa có sẵn hoặc yêu cầu giải bài toán trước.",
+		"check_again": "Kiểm tra lại",
+		"warning": "Bài giải này chứa lời giải và giải thích cho bài toán. Hãy chắc chắn rằng bạn đã thử giải bài toán trước!",
+		"created_by": "Bài giải của: {username}",
+		"breadcrumb": {
+			"problems": "Bài toán",
+			"editorial": "Bài giải"
+		},
+		"back_to_problem": "Quay lại bài toán"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} giây trước",
+			"minutes": "{count} phút trước",
+			"hours": "{count} giờ trước",
+			"days": "{count} ngày trước",
+			"months": "{count} tháng trước",
+			"years": "{count} năm trước"
+		},
+		"page": {
+			"view": "Xem",
+			"title": "Bài nộp",
+			"breadcrumb": {
+				"home": "Trang chủ",
+				"submissions": "Bài nộp"
+			},
+			"actions": {
+				"submit_solution": "Nộp lời giải",
+				"view_all": "Xem tất cả",
+				"view_details": "Xem chi tiết",
+				"submit_code": "Nộp mã"
+			},
+			"recent_submissions": "Bài nộp gần đây",
+			"score": "Điểm",
+			"list_title": "Tìm thấy {count} bài nộp",
+			"submissions_title": "Bài nộp gần đây",
+			"no_submissions": {
+				"title": "Không tìm thấy bài nộp nào",
+				"empty": "Hãy là người đầu tiên nộp lời giải!",
+				"filtered": "Không có bài nộp nào phù hợp với bộ lọc hiện tại của bạn."
+			},
+			"common": {
+				"score": "Điểm"
+			},
+			"pagination": {
+				"previous": "Trước",
+				"next": "Tiếp theo",
+				"page_info": "Trang {page} của {total}"
+			},
+			"passed": "đã qua"
+		},
+		"filters": {
+			"problem": "Bài toán",
+			"problem_placeholder": "Chọn một bài toán",
+			"language": "Ngôn ngữ",
+			"select_language": "Chọn ngôn ngữ",
+			"all_languages": "Tất cả ngôn ngữ",
+			"status": "Trạng thái",
+			"select_status": "Chọn trạng thái",
+			"all_status": "Tất cả trạng thái",
+			"all_contests": "Tất cả kỳ thi",
+			"author": "Tác giả",
+			"author_placeholder": "Chọn một tác giả",
+			"contest": "Kỳ thi",
+			"contest_placeholder": "Chọn một kỳ thi",
+			"reset": "Đặt lại bộ lọc"
+		},
+		"status": {
+			"ACCEPTED": "Được chấp nhận",
+			"WRONG_ANSWER": "Sai câu trả lời",
+			"TIME_LIMIT_EXCEEDED": "Vượt quá giới hạn thời gian",
+			"MEMORY_LIMIT_EXCEEDED": "Vượt quá giới hạn bộ nhớ",
+			"RUNTIME_ERROR": "Lỗi thực thi",
+			"COMPILATION_ERROR": "Lỗi biên dịch",
+			"INTERNAL_ERROR": "Lỗi nội bộ",
+			"PENDING": "Đang chờ",
+			"JUDGING": "Đang chấm",
+			"accepted": "Được chấp nhận",
+			"wrong_answer": "Sai câu trả lời",
+			"time_limit_exceeded": "Vượt quá giới hạn thời gian",
+			"memory_limit_exceeded": "Vượt quá giới hạn bộ nhớ",
+			"runtime_error": "Lỗi thực thi",
+			"compilation_error": "Lỗi biên dịch",
+			"internal_error": "Lỗi nội bộ",
+			"pending": "Đang chờ",
+			"judging": "Đang chấm"
+		},
+		"table": {
+			"status": "Trạng thái",
+			"problem": "Bài toán",
+			"author": "Tác giả",
+			"language": "Ngôn ngữ",
+			"submitted": "Đã nộp",
+			"actions": "Hành động",
+			"error_loading": "Lỗi tải bài nộp",
+			"unknown_problem": "Bài toán không xác định",
+			"by": "bởi",
+			"solved": "đã giải",
+			"score": "Điểm"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Tải bài nộp thất bại"
+			},
+			"empty": {
+				"title": "Chưa có bài nộp nào",
+				"description": "Hãy là người đầu tiên nộp lời giải!"
+			}
+		},
+		"detail": {
+			"title": "Chi tiết bài nộp",
+			"breadcrumb": {
+				"home": "Trang chủ",
+				"submissions": "Bài nộp"
+			},
+			"tabs": {
+				"info": "Thông tin",
+				"source_code": "Mã nguồn",
+				"test_cases": "Các trường hợp thử",
+				"log": "Nhật ký"
+			},
+			"info": {
+				"author": "Tác giả",
+				"problem": "Bài toán",
+				"language": "Ngôn ngữ",
+				"score": "Điểm",
+				"submitted": "Đã nộp",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Quay lại",
+				"submit_again": "Nộp lại",
+				"view_all_submissions": "Xem tất cả bài nộp"
+			},
+			"content": {
+				"no_log_available": "Không có thông tin nhật ký",
+				"no_test_cases_available": "Không có kết quả trường hợp thử",
+				"subtask_count": "{count} bài toán con",
+				"subtask_count_other": "{count} bài toán con",
+				"expand_all": "Mở rộng tất cả",
+				"collapse_all": "Thu gọn tất cả",
+				"tests_passed": "{passed} / {total} đã qua",
+				"not_found": {
+					"title": "Không tìm thấy bài nộp",
+					"message": "Không thể tìm thấy bài nộp bạn đang tìm kiếm.",
+					"back_button": "Quay lại bài nộp"
+				},
+				"partial": "Một phần",
+				"submitted_for": "Đã nộp cho"
+			}
+		},
+		"chart": {
+			"status": "Trạng thái",
+			"languages": "Ngôn ngữ"
+		}
+	},
+	"submit": {
+		"easy": "Dễ",
+		"medium": "Trung bình",
+		"hard": "Khó",
+		"page": {
+			"title": "Nộp mã",
+			"select_problem": {
+				"title": "Chưa chọn bài toán",
+				"description": "Vui lòng chọn một bài toán để nộp lời giải của bạn.",
+				"browse": "Duyệt bài toán"
+			},
+			"problem_not_found": {
+				"title": "Không tìm thấy bài toán",
+				"description": "Không thể tìm thấy bài toán bạn đang cố gắng nộp."
+			},
+			"breadcrumb": {
+				"home": "Trang chủ",
+				"problems": "Bài toán"
+			},
+			"back_to_problem": "Quay lại bài toán",
+			"language": "Ngôn ngữ lập trình",
+			"select_language": "Chọn ngôn ngữ",
+			"code": "Mã nguồn",
+			"code_placeholder": "Nhập mã của bạn vào đây...",
+			"submit": "Nộp bài",
+			"submitting": "Đang nộp...",
+			"login_required": {
+				"message": "Vui lòng",
+				"login": "đăng nhập",
+				"to_submit": "để nộp lời giải của bạn"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "Bạn phải đăng nhập để nộp mã",
+				"select_problem": "Vui lòng chọn một bài toán để nộp",
+				"enter_code": "Vui lòng nhập mã của bạn",
+				"submit_failed": "Nộp mã thất bại. Vui lòng thử lại."
+			},
+			"success": {
+				"submitted": "Nộp mã thành công!"
+			}
+		}
+	},
+	"error": {
+		"title": "Ôi! Đã xảy ra lỗi",
+		"message": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau.",
+		"try_again": "Thử lại",
+		"go_home": "Về trang chủ"
+	},
+	"not_found": {
+		"title": "Ôi! Không tìm thấy trang",
+		"message": "Trang bạn đang tìm kiếm không tồn tại.",
+		"go_home": "Về trang chủ"
+	},
+	"blog": {
+		"create": {
+			"create": "Tạo",
+			"blogs": "Blog",
+			"title": "Tiêu đề",
+			"title_placeholder": "Nhập tiêu đề",
+			"description_placeholder": "Nhập mô tả",
+			"upload_thumbnail": "Tải lên ảnh thu nhỏ",
+			"save": "Lưu",
+			"message": {
+				"title_required": "Tiêu đề là bắt buộc",
+				"title_and_content_required": "Tiêu đề và nội dung là bắt buộc."
+			},
+			"create_success": "Tạo blog thành công!",
+			"create_fail": "Tạo blog thất bại."
+		},
+		"edit": {
+			"blogs": "Blog",
+			"edit": "Chỉnh sửa",
+			"save": "Lưu",
+			"message": {
+				"title_required": "Tiêu đề là bắt buộc",
+				"title_and_content_required": "Tiêu đề và nội dung là bắt buộc."
+			},
+			"edit_success": "Chỉnh sửa blog thành công!",
+			"edit_fail": "Chỉnh sửa blog thất bại."
+		},
+		"card": {
+			"blogs": "Blog",
+			"delete_success": "Xóa blog thành công!",
+			"message": {
+				"delete_confirmation": "Bạn có chắc chắn muốn xóa blog này không?"
+			},
+			"delete": "Xóa",
+			"edit": "Chỉnh sửa",
+			"cancel": "Hủy"
+		},
+		"comment": {
+			"create_success": "Tạo bình luận thành công!",
+			"date": {
+				"seconds": "{count} giây trước",
+				"minutes": "{count} phút trước",
+				"hours": "{count} giờ trước",
+				"days": "{count} ngày trước",
+				"months": "{count} tháng trước",
+				"years": "{count} năm trước"
+			},
+			"comment-placeholder": "Viết một bình luận...",
+			"comment": "Bình luận",
+			"comments": "Bình luận",
+			"message": {
+				"comment_required": "Bình luận là bắt buộc",
+				"delete_confirmation": "Bạn có chắc chắn muốn xóa bình luận này không?"
+			},
+			"delete": "Xóa",
+			"edit": "Chỉnh sửa",
+			"cancel": "Hủy",
+			"delete_success": "Xóa bình luận thành công!",
+			"edit_success": "Chỉnh sửa bình luận thành công!"
+		}
+	},
+	"standing": {
+		"title": "Bảng xếp hạng toàn cầu",
+		"description": "Bảng xếp hạng người dùng dựa trên xếp hạng và tổng điểm",
+		"rating": "Xếp hạng",
+		"score": "Điểm",
+		"top_users": "Người dùng hàng đầu",
+		"all_users": "Tất cả người dùng",
+		"no_data": "Không có dữ liệu",
+		"modes": {
+			"rating": "Xếp hạng",
+			"score": "Điểm"
+		},
+		"table": {
+			"rank": "Hạng",
+			"user": "Người dùng",
+			"rating": "Xếp hạng",
+			"score": "Điểm"
+		},
+		"filters": {
+			"search_placeholder": "Tìm kiếm người dùng...",
+			"reset": "Đặt lại"
+		},
+		"errors": {
+			"load_failed": "Tải dữ liệu bảng xếp hạng thất bại"
+		}
+	},
+	"async_combobox": {
+		"select": "Chọn...",
+		"search": "Tìm kiếm...",
+		"no_results": "Không tìm thấy kết quả.",
+		"load_more": "Tải thêm..."
+	},
+	"profile": {
+		"title": "Hồ sơ",
+		"loading": "Đang tải hồ sơ...",
+		"user_not_found": "Không tìm thấy người dùng",
+		"sidebar": {
+			"edit_profile": "Chỉnh sửa hồ sơ",
+			"rank": "Hạng",
+			"stats": "Thống kê",
+			"score": "Điểm",
+			"rating": "Xếp hạng",
+			"ac_problems": "Bài toán AC",
+			"submissions": "Bài nộp",
+			"blogs": "Blog",
+			"comments": "Bình luận",
+			"joined_contests": "Kỳ thi đã tham gia",
+			"languages": "Ngôn ngữ",
+			"submissions_count": "bài nộp",
+			"no_submissions": "Chưa có bài nộp nào",
+			"unranked": "Chưa xếp hạng"
+		},
+		"content": {
+			"submission_activity": "Hoạt động nộp bài",
+			"submissions_in_year": "bài nộp trong năm qua",
+			"accepted": "được chấp nhận",
+			"loading_activity": "Đang tải dữ liệu hoạt động...",
+			"rating_history": "Lịch sử xếp hạng",
+			"problems_by_difficulty": "Bài toán AC theo độ khó",
+			"submissions_by_language": "Bài nộp AC theo ngôn ngữ",
+			"less": "Ít hơn",
+			"more": "Nhiều hơn"
+		},
+		"tabs": {
+			"recent_solved_problems": "Bài toán đã giải gần đây",
+			"recent_submissions": "Bài nộp gần đây",
+			"blogs": "Blog",
+			"problem": "Bài toán",
+			"language": "Ngôn ngữ",
+			"solved_count": "Số lần giải",
+			"first_solved": "Giải lần đầu",
+			"status": "Trạng thái",
+			"date": "Ngày",
+			"title": "Tiêu đề",
+			"publish_date": "Ngày xuất bản",
+			"no_accepted_submissions": "Chưa có bài nộp nào được chấp nhận.",
+			"no_recent_submissions": "Chưa có bài nộp nào.",
+			"no_blogs": "Chưa có blog nào được xuất bản."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Kỳ thi",
+			"running": "Đang diễn ra",
+			"upcoming": "Sắp diễn ra",
+			"ended": "Đã kết thúc",
+			"create_button": "Tạo kỳ thi",
+			"search_placeholder": "Tìm kiếm kỳ thi...",
+			"loading": "Đang tải kỳ thi...",
+			"no_contests": "Không tìm thấy kỳ thi nào",
+			"no_contests_description": "Kiểm tra lại sau để biết các cuộc thi và thử thách sắp tới",
+			"error_loading": "Lỗi tải kỳ thi",
+			"rated": "Được xếp hạng",
+			"unrated": "Không được xếp hạng",
+			"participants": "{count, plural, =0 {Không có người tham gia} =1 {# người tham gia} other {# người tham gia}}",
+			"joining": "Đã tham gia"
+		},
+		"detail": {
+			"info_tab": "Thông tin",
+			"problems_tab": "Bài toán",
+			"submissions_tab": "Bài nộp",
+			"standings_tab": "Bảng xếp hạng",
+			"time_remaining": "Thời gian còn lại",
+			"search_problems": "Tìm kiếm bài toán...",
+			"add_problem": "Thêm bài toán",
+			"problem_title": "Tiêu đề",
+			"problem_slug": "Slug",
+			"problem_point": "Điểm",
+			"actions": "Hành động",
+			"add": "Thêm",
+			"adding": "Đang thêm...",
+			"remove": "Xóa",
+			"contest_problems": "Bài toán kỳ thi",
+			"rank": "Hạng",
+			"user": "Người dùng",
+			"score": "Điểm",
+			"time": "Thời gian",
+			"points": "Điểm",
+			"no_standings": "Không có bảng xếp hạng",
+			"loading": "Đang tải...",
+			"contest_updated": "Cập nhật kỳ thi thành công!",
+			"problem_added": "Thêm bài toán vào kỳ thi thành công!",
+			"failed_to_add_problem": "Thêm bài toán vào kỳ thi thất bại",
+			"problem_removed": "Xóa bài toán khỏi kỳ thi thành công!",
+			"failed_to_remove_problem": "Xóa bài toán khỏi kỳ thi thất bại",
+			"remove_problem_title": "Xác nhận xóa",
+			"remove_problem_description": "Bạn có chắc chắn muốn xóa \"{title}\" khỏi kỳ thi này không? Hành động này không thể hoàn tác.",
+			"remove_problem_cancel": "Hủy",
+			"remove_problem_confirm": "Xóa",
+			"running": "Đang diễn ra",
+			"upcoming": "Sắp diễn ra",
+			"ended": "Đã kết thúc",
+			"rated": "Được xếp hạng",
+			"start_time": "Thời gian bắt đầu",
+			"end_time": "Thời gian kết thúc",
+			"participants": "Người tham gia",
+			"problems": "Bài toán",
+			"no_problems": "Không có bài toán nào",
+			"join": "Tham gia kỳ thi",
+			"leave": "Rời khỏi kỳ thi",
+			"joining": "Đang tham gia...",
+			"leaving": "Đang rời khỏi...",
+			"join_success": "Tham gia kỳ thi thành công!",
+			"leave_success": "Rời khỏi kỳ thi thành công!",
+			"join_fail": "Tham gia kỳ thi thất bại. Vui lòng thử lại.",
+			"leave_fail": "Rời khỏi kỳ thi thất bại. Vui lòng thử lại."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Bảng điều khiển",
+			"blog": "Blog",
+			"problem": "Bài toán",
+			"submission": "Bài nộp",
+			"contest": "Kỳ thi",
+			"user": "Người dùng",
+			"judger": "Máy chấm",
+			"notification": "Thông báo",
+			"profile": "Hồ sơ",
+			"logout": "Đăng xuất",
+			"appearance": "Giao diện",
+			"language": "Ngôn ngữ",
+			"light": "Sáng",
+			"dark": "Tối",
+			"home": "Trang chủ"
+		},
+		"dashboard": {
+			"unable_to_load": "Không thể tải bảng điều khiển",
+			"error_loading": "Đã xảy ra lỗi khi tải dữ liệu bảng điều khiển. Vui lòng làm mới trang.",
+			"refresh": "Làm mới bảng điều khiển",
+			"total_users": "Tổng số người dùng",
+			"active_today": "Hoạt động hôm nay",
+			"total_submissions": "Tổng số bài nộp",
+			"success_rate": "Tỷ lệ thành công",
+			"active_problems": "Bài toán đang hoạt động",
+			"user_activity": "Hoạt động người dùng",
+			"submission_volume": "Lượng bài nộp",
+			"language_distribution": "Phân phối ngôn ngữ",
+			"submission_results": "Kết quả bài nộp",
+			"problem_difficulty": "Độ khó bài toán",
+			"contest_participation": "Tham gia kỳ thi",
+			"top_users": "Người dùng hàng đầu",
+			"popular_problems": "Bài toán phổ biến"
+		},
+		"chart": {
+			"loading": "Đang tải...",
+			"contests": "Kỳ thi",
+			"participants": "Người tham gia",
+			"contest_participation_trends": "Xu hướng tham gia kỳ thi",
+			"contest_participation_description": "Số lượng kỳ thi hàng tháng và số lượng người tham gia",
+			"number_of_contests": "Số lượng kỳ thi (trục Y bên trái)",
+			"total_participants": "Tổng số người tham gia (trục Y bên phải)",
+			"judger_queue_performance": "Hiệu suất hàng đợi máy chấm",
+			"judger_queue_description": "Giám sát kích thước hàng đợi và thời gian xử lý theo thời gian thực",
+			"queue_size": "Kích thước hàng đợi",
+			"processing_time": "Thời gian xử lý",
+			"queue_size_threshold_warning": "Kích thước hàng đợi vượt quá ngưỡng!",
+			"queue_size_left": "Kích thước hàng đợi (trục Y bên trái)",
+			"processing_time_right": "Thời gian xử lý (trục Y bên phải)",
+			"threshold": "Ngưỡng",
+			"language_usage": "Sử dụng ngôn ngữ lập trình",
+			"language_usage_description": "Phân phối bài nộp theo ngôn ngữ lập trình",
+			"submissions": "Bài nộp",
+			"percentage": "Tỷ lệ phần trăm",
+			"total_submissions": "Tổng số bài nộp",
+			"problem_difficulty_distribution": "Phân phối độ khó bài toán",
+			"problem_difficulty_description": "Số lượng bài toán theo mức độ khó và tỷ lệ giải",
+			"total_problems": "Tổng số bài toán",
+			"solved_by_users": "Được giải bởi người dùng",
+			"solve_rate": "Tỷ lệ giải",
+			"submission_results_distribution": "Phân phối kết quả bài nộp",
+			"submission_results_description": "Phân tích các phán quyết bài nộp",
+			"count": "Số lượng",
+			"submission_volume": "Lượng bài nộp",
+			"submission_volume_description": "Số lượng bài nộp hàng ngày và tỷ lệ chấp nhận",
+			"accepted": "Được chấp nhận",
+			"success_rate": "Tỷ lệ thành công",
+			"system_resource_usage": "Sử dụng tài nguyên hệ thống",
+			"system_resource_description": "Giám sát việc sử dụng CPU, bộ nhớ và đĩa theo thời gian thực",
+			"cpu_usage": "Sử dụng CPU",
+			"memory_usage": "Sử dụng bộ nhớ",
+			"disk_usage": "Sử dụng đĩa",
+			"high_resource_usage": "Phát hiện sử dụng tài nguyên cao!",
+			"cpu": "CPU",
+			"memory": "Bộ nhớ",
+			"disk": "Đĩa",
+			"user_registrations": "Đăng ký người dùng",
+			"user_registrations_description": "Đăng ký mới hàng ngày"
+		},
+		"table": {
+			"loading": "Đang tải...",
+			"most_attempted_problems": "Bài toán được thử nhiều nhất",
+			"most_attempted_problems_description": "Các bài toán phổ biến dựa trên số lượng bài nộp",
+			"problem": "Bài toán",
+			"difficulty": "Độ khó",
+			"attempts": "Số lần thử",
+			"solved": "Đã giải",
+			"success_rate": "Tỷ lệ thành công",
+			"top_users_this_week": "Người dùng hàng đầu tuần này",
+			"top_users_this_week_description": "Người dùng hoạt động tích cực nhất dựa trên các bài toán đã giải",
+			"rank": "Hạng",
+			"user": "Người dùng",
+			"submissions": "Bài nộp"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Tìm kiếm...",
+				"sort_by": "Sắp xếp theo",
+				"title": "Tiêu đề",
+				"point": "Điểm",
+				"difficulty": "Độ khó",
+				"accept": "Chấp nhận",
+				"accept_rate": "Tỷ lệ chấp nhận"
+			},
+			"filter": {
+				"new": "Mới",
+				"title": "Bộ lọc",
+				"difficulty": "Độ khó",
+				"easy": "Dễ",
+				"medium": "Trung bình",
+				"hard": "Khó",
+				"point": "Điểm",
+				"tags": "Thẻ",
+				"all": "Tất cả",
+				"editorial": "Bài giải",
+				"has_editorial": "Có bài giải",
+				"point_range": "Phạm vi điểm",
+				"contest": "Kỳ thi"
+			},
+			"table": {
+				"title": "Tiêu đề",
+				"tags": "Thẻ",
+				"difficulty": "Độ khó",
+				"point": "Điểm",
+				"accepted": "Đã chấp nhận",
+				"acceptance": "Tỷ lệ chấp nhận",
+				"editorial": "Bài giải",
+				"easy": "Dễ",
+				"medium": "Trung bình",
+				"hard": "Khó",
+				"delete": {
+					"title": "Xác nhận xóa",
+					"description": "Bạn có chắc chắn muốn xóa bài toán \"{title}\" không? Hành động này không thể hoàn tác.",
+					"cancel": "Hủy",
+					"confirm": "Xóa",
+					"success": "Xóa bài toán thành công",
+					"error": "Xóa bài toán thất bại"
+				}
+			},
+			"form": {
+				"title": "Tiêu đề",
+				"title_placeholder": "Nhập tiêu đề bài toán",
+				"time_limit": "Giới hạn thời gian (ms)",
+				"memory_limit": "Giới hạn bộ nhớ (KB)",
+				"point": "Điểm",
+				"scoring_method": "Phương pháp tính điểm",
+				"scoring_method_placeholder": "Chọn phương pháp tính điểm",
+				"scoring_method_standard": "Tiêu chuẩn",
+				"scoring_method_subtask": "Bài toán con",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Độ khó",
+				"difficulty_placeholder": "Chọn độ khó",
+				"difficulty_easy": "Dễ",
+				"difficulty_medium": "Trung bình",
+				"difficulty_hard": "Khó",
+				"io_mode": "Chế độ I/O",
+				"io_mode_placeholder": "Chọn chế độ I/O",
+				"io_mode_standard": "Tiêu chuẩn",
+				"io_mode_file": "Tệp",
+				"input_file": "Tệp đầu vào",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Tệp đầu ra",
+				"output_file_placeholder": "output.txt",
+				"tags": "Thẻ",
+				"statement": "Đề bài",
+				"statement_placeholder": "Viết đề bài ở đây...",
+				"submit": "Tạo bài toán",
+				"update": "Cập nhật bài toán",
+				"title_required": "Tiêu đề là bắt buộc",
+				"time_limit_min": "Giới hạn thời gian phải ít nhất 1ms",
+				"time_limit_max": "Giới hạn thời gian phải nhiều nhất 10000ms",
+				"memory_limit_min": "Giới hạn bộ nhớ phải ít nhất 1KB",
+				"memory_limit_max": "Giới hạn bộ nhớ phải nhiều nhất 1048576KB",
+				"point_min": "Điểm phải ít nhất 0",
+				"point_max": "Điểm phải nhiều nhất 100",
+				"tags_placeholder": "Nhập thẻ...",
+				"create_success": "Tạo bài toán thành công!",
+				"create_error": "Tạo bài toán thất bại. Vui lòng thử lại.",
+				"update_success": "Cập nhật bài toán thành công!",
+				"update_error": "Cập nhật bài toán thất bại. Vui lòng thử lại."
+			},
+			"editorial": {
+				"placeholder": "Viết nội dung bài giải ở đây...",
+				"create": "Tạo bài giải",
+				"save": "Lưu bài giải",
+				"delete": "Xóa bài giải",
+				"cancel": "Hủy",
+				"deleting": "Đang xóa...",
+				"saving": "Đang lưu...",
+				"no_editorial": "Chưa có bài giải cho bài toán này.",
+				"create_success": "Tạo bài giải thành công!",
+				"create_error": "Tạo bài giải thất bại. Vui lòng thử lại.",
+				"update_success": "Cập nhật bài giải thành công!",
+				"update_error": "Cập nhật bài giải thất bại. Vui lòng thử lại.",
+				"delete_success": "Xóa bài giải thành công!",
+				"delete_error": "Xóa bài giải thất bại. Vui lòng thử lại.",
+				"delete_confirmation_title": "Bạn có chắc chắn muốn xóa bài giải này không?",
+				"delete_confirmation_description": "Hành động này không thể hoàn tác. Thao tác này sẽ xóa vĩnh viễn bài giải cho bài toán này."
+			},
+			"tabs": {
+				"info": "Thông tin",
+				"editorial": "Bài giải",
+				"testcase": "Trường hợp thử"
+			},
+			"slug_page": {
+				"loading": "Đang tải...",
+				"problem_not_found": "Không tìm thấy bài toán",
+				"error_loading_problem": "Lỗi tải bài toán: {message}",
+				"error_loading_tags": "Lỗi tải thẻ: {message}",
+				"testcase_management": "Quản lý trường hợp thử sẽ được triển khai ở đây."
+			},
+			"testcase": {
+				"input": "Đầu vào",
+				"output": "Đầu ra",
+				"save": "Lưu",
+				"saving": "Đang lưu...",
+				"loading": "Đang tải...",
+				"select_to_edit": "Chọn một đầu vào hoặc đầu ra của trường hợp thử để chỉnh sửa",
+				"content_placeholder": "Nội dung trường hợp thử sẽ xuất hiện ở đây...",
+				"new_testcase": "Trường hợp thử mới",
+				"new_subtask": "Bài toán con mới",
+				"name": "Tên",
+				"cancel": "Hủy",
+				"create": "Tạo",
+				"delete": "Xóa",
+				"creating": "Đang tạo...",
+				"create_subtask_title": "Tạo bài toán con mới",
+				"create_subtask_description": "Nhập tên cho bài toán con mới.",
+				"subtask_name_placeholder": "Nhập tên bài toán con",
+				"create_testcase_title": "Tạo trường hợp thử mới",
+				"create_testcase_description": "Nhập tên cho trường hợp thử mới.",
+				"testcase_name_placeholder": "Nhập tên trường hợp thử",
+				"delete_subtask_title": "Xóa bài toán con",
+				"delete_subtask_description": "Bạn có chắc chắn muốn xóa bài toán con này không? Hành động này không thể hoàn tác.",
+				"delete_testcase_title": "Xóa trường hợp thử",
+				"delete_testcase_description": "Bạn có chắc chắn muốn xóa trường hợp thử này không? Hành động này không thể hoàn tác.",
+				"success": {
+					"title": "Thành công",
+					"saved": "Lưu nội dung trường hợp thử thành công",
+					"testcase_created": "Tạo trường hợp thử thành công",
+					"testcase_deleted": "Xóa trường hợp thử thành công",
+					"subtask_created": "Tạo bài toán con thành công",
+					"subtask_deleted": "Xóa bài toán con thành công"
+				},
+				"error": {
+					"title": "Lỗi",
+					"load_subtasks": "Tải bài toán con thất bại",
+					"load_content": "Tải nội dung trường hợp thử thất bại",
+					"save_content": "Lưu nội dung trường hợp thử thất bại",
+					"create_testcase": "Tạo trường hợp thử thất bại",
+					"delete_testcase": "Xóa trường hợp thử thất bại",
+					"create_subtask": "Tạo bài toán con thất bại",
+					"delete_subtask": "Xóa bài toán con thất bại"
+				}
+			}
+		},
+		"user": {
+			"title": "Quản lý người dùng",
+			"search_placeholder": "Tìm kiếm người dùng...",
+			"sort_by": "Sắp xếp theo",
+			"sort_username": "Tên người dùng",
+			"sort_fullname": "Họ và tên",
+			"sort_rating": "Xếp hạng",
+			"sort_score": "Điểm",
+			"sort_asc": "Tăng dần",
+			"sort_desc": "Giảm dần",
+			"no_users_found": "Không tìm thấy người dùng nào",
+			"showing_results": "Hiển thị {start}-{end} của {total} kết quả",
+			"previous": "Trước",
+			"next": "Tiếp theo",
+			"page_of": "Trang {current} của {total}",
+			"table": {
+				"avatar": "Ảnh đại diện",
+				"username": "Tên người dùng",
+				"fullname": "Họ và tên",
+				"email": "Email",
+				"role": "Vai trò",
+				"rating": "Xếp hạng",
+				"score": "Điểm",
+				"verified": "Đã xác minh",
+				"verified_yes": "Có",
+				"verified_no": "Không"
+			},
+			"detail": {
+				"title": "Chi tiết người dùng",
+				"back_to_users": "Quay lại người dùng",
+				"verified": "Đã xác minh",
+				"unverified": "Chưa xác minh",
+				"email": "Email",
+				"joined": "Đã tham gia",
+				"last_updated": "Cập nhật lần cuối",
+				"bio": "Tiểu sử",
+				"statistics": "Thống kê",
+				"score": "Điểm",
+				"rating": "Xếp hạng",
+				"problems_solved": "Bài toán đã giải",
+				"submissions": "Bài nộp",
+				"blogs": "Blog",
+				"comments": "Bình luận",
+				"contests": "Kỳ thi"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} giây trước",
+				"minutes": "{count} phút trước",
+				"hours": "{count} giờ trước",
+				"days": "{count} ngày trước",
+				"months": "{count} tháng trước",
+				"years": "{count} năm trước"
+			},
+			"page": {
+				"view": "Xem",
+				"title": "Bài nộp",
+				"breadcrumb": {
+					"home": "Trang chủ",
+					"submissions": "Bài nộp"
+				},
+				"actions": {
+					"submit_solution": "Nộp lời giải",
+					"view_all": "Xem tất cả",
+					"view_details": "Xem chi tiết",
+					"submit_code": "Nộp mã"
+				},
+				"recent_submissions": "Bài nộp gần đây",
+				"score": "Điểm",
+				"list_title": "Tìm thấy {count} bài nộp",
+				"submissions_title": "Bài nộp gần đây",
+				"no_submissions": {
+					"title": "Không tìm thấy bài nộp nào",
+					"empty": "Hãy là người đầu tiên nộp lời giải!",
+					"filtered": "Không có bài nộp nào phù hợp với bộ lọc hiện tại của bạn."
+				},
+				"common": {
+					"score": "Điểm"
+				},
+				"pagination": {
+					"previous": "Trước",
+					"next": "Tiếp theo",
+					"page_info": "Trang {page} của {total}"
+				},
+				"passed": "đã qua"
+			},
+			"filters": {
+				"problem": "Bài toán",
+				"problem_placeholder": "Chọn một bài toán",
+				"language": "Ngôn ngữ",
+				"select_language": "Chọn ngôn ngữ",
+				"all_languages": "Tất cả ngôn ngữ",
+				"status": "Trạng thái",
+				"select_status": "Chọn trạng thái",
+				"all_status": "Tất cả trạng thái",
+				"author": "Tác giả",
+				"author_placeholder": "Chọn một tác giả",
+				"contest_placeholder": "Chọn một kỳ thi",
+				"reset": "Đặt lại bộ lọc"
+			},
+			"status": {
+				"ACCEPTED": "Được chấp nhận",
+				"WRONG_ANSWER": "Sai câu trả lời",
+				"TIME_LIMIT_EXCEEDED": "Vượt quá giới hạn thời gian",
+				"MEMORY_LIMIT_EXCEEDED": "Vượt quá giới hạn bộ nhớ",
+				"RUNTIME_ERROR": "Lỗi thực thi",
+				"COMPILATION_ERROR": "Lỗi biên dịch",
+				"INTERNAL_ERROR": "Lỗi nội bộ",
+				"PENDING": "Đang chờ",
+				"JUDGING": "Đang chấm",
+				"accepted": "Được chấp nhận",
+				"wrong_answer": "Sai câu trả lời",
+				"time_limit_exceeded": "Vượt quá giới hạn thời gian",
+				"memory_limit_exceeded": "Vượt quá giới hạn bộ nhớ",
+				"runtime_error": "Lỗi thực thi",
+				"compilation_error": "Lỗi biên dịch",
+				"internal_error": "Lỗi nội bộ",
+				"pending": "Đang chờ",
+				"judging": "Đang chấm"
+			},
+			"table": {
+				"status": "Trạng thái",
+				"problem": "Bài toán",
+				"author": "Tác giả",
+				"language": "Ngôn ngữ",
+				"submitted": "Đã nộp",
+				"actions": "Hành động",
+				"error_loading": "Lỗi tải bài nộp",
+				"unknown_problem": "Bài toán không xác định",
+				"by": "bởi",
+				"solved": "đã giải",
+				"score": "Điểm"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Tải bài nộp thất bại"
+				},
+				"empty": {
+					"title": "Chưa có bài nộp nào",
+					"description": "Hãy là người đầu tiên nộp lời giải!"
+				}
+			},
+			"detail": {
+				"title": "Chi tiết bài nộp",
+				"breadcrumb": {
+					"home": "Trang chủ",
+					"submissions": "Bài nộp"
+				},
+				"tabs": {
+					"info": "Thông tin",
+					"source_code": "Mã nguồn",
+					"test_cases": "Các trường hợp thử",
+					"log": "Nhật ký"
+				},
+				"info": {
+					"author": "Tác giả",
+					"problem": "Bài toán",
+					"language": "Ngôn ngữ",
+					"score": "Điểm",
+					"submitted": "Đã nộp",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Quay lại",
+					"submit_again": "Nộp lại",
+					"view_all_submissions": "Xem tất cả bài nộp"
+				},
+				"content": {
+					"no_log_available": "Không có thông tin nhật ký",
+					"no_test_cases_available": "Không có kết quả trường hợp thử",
+					"subtask_count": "{count} bài toán con",
+					"subtask_count_other": "{count} bài toán con",
+					"expand_all": "Mở rộng tất cả",
+					"collapse_all": "Thu gọn tất cả",
+					"tests_passed": "{passed} / {total} đã qua",
+					"not_found": {
+						"title": "Không tìm thấy bài nộp",
+						"message": "Không thể tìm thấy bài nộp bạn đang tìm kiếm.",
+						"back_button": "Quay lại bài nộp"
+					},
+					"partial": "Một phần",
+					"submitted_for": "Đã nộp cho"
+				}
+			},
+			"chart": {
+				"status": "Trạng thái",
+				"languages": "Ngôn ngữ"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Đang diễn ra",
+				"upcoming": "Sắp diễn ra",
+				"ended": "Đã kết thúc",
+				"create_button": "Tạo kỳ thi",
+				"search_placeholder": "Tìm kiếm kỳ thi...",
+				"loading": "Đang tải...",
+				"rated": "Được xếp hạng",
+				"unrated": "Không được xếp hạng"
+			},
+			"detail": {
+				"info_tab": "Thông tin",
+				"problems_tab": "Bài toán",
+				"submissions_tab": "Bài nộp",
+				"standings_tab": "Bảng xếp hạng",
+				"search_problems": "Tìm kiếm bài toán...",
+				"add_problem": "Thêm bài toán",
+				"problem_title": "Tiêu đề",
+				"actions": "Hành động",
+				"add": "Thêm",
+				"adding": "Đang thêm...",
+				"remove": "Xóa",
+				"rank": "Hạng",
+				"user": "Người dùng",
+				"score": "Điểm",
+				"no_standings": "Không có bảng xếp hạng",
+				"loading": "Đang tải...",
+				"contest_updated": "Cập nhật kỳ thi thành công!",
+				"problem_added": "Thêm bài toán vào kỳ thi thành công!",
+				"failed_to_add_problem": "Thêm bài toán vào kỳ thi thất bại",
+				"problem_removed": "Xóa bài toán khỏi kỳ thi thành công!",
+				"failed_to_remove_problem": "Xóa bài toán khỏi kỳ thi thất bại",
+				"remove_problem_title": "Xác nhận xóa",
+				"remove_problem_description": "Bạn có chắc chắn muốn xóa \"{title}\" khỏi kỳ thi này không? Hành động này không thể hoàn tác.",
+				"remove_problem_cancel": "Hủy",
+				"remove_problem_confirm": "Xóa"
+			},
+			"create": {
+				"title": "Tạo kỳ thi"
+			},
+			"edit": {
+				"title": "Chỉnh sửa kỳ thi",
+				"loading": "Đang tải kỳ thi...",
+				"cancel": "Hủy"
+			},
+			"form": {
+				"title": "Tiêu đề",
+				"title_placeholder": "Nhập tiêu đề kỳ thi",
+				"start_time": "Thời gian bắt đầu",
+				"end_time": "Thời gian kết thúc",
+				"time": "Thời gian",
+				"select_start_date": "Chọn ngày bắt đầu",
+				"select_end_date": "Chọn ngày kết thúc",
+				"is_rated": "Được xếp hạng",
+				"is_rated_placeholder": "Chọn nếu kỳ thi được xếp hạng",
+				"yes": "Có",
+				"no": "Không",
+				"penalty": "Phạt (phút)",
+				"penalty_placeholder": "Nhập phạt theo phút",
+				"penalty_min": "Phạt phải ít nhất 0 phút",
+				"description": "Mô tả",
+				"description_placeholder": "Nhập mô tả kỳ thi",
+				"submit": "Tạo kỳ thi",
+				"update": "Cập nhật kỳ thi",
+				"title_required": "Tiêu đề là bắt buộc",
+				"start_time_required": "Thời gian bắt đầu là bắt buộc",
+				"end_time_required": "Thời gian kết thúc là bắt buộc",
+				"create_success": "Tạo kỳ thi thành công!",
+				"create_error": "Tạo kỳ thi thất bại. Vui lòng thử lại.",
+				"update_success": "Cập nhật kỳ thi thành công!",
+				"update_error": "Cập nhật kỳ thi thất bại. Vui lòng thử lại."
+			}
+		},
+		"judger": {
+			"title": "Quản lý máy chấm",
+			"description": "Giám sát và quản lý tất cả các máy chấm trong hệ thống",
+			"loading": "Đang tải máy chấm...",
+			"judger": "Máy chấm",
+			"busy": "Bận",
+			"idle": "Rảnh",
+			"judgerBusyDescription": "Máy chấm này hiện đang xử lý các bài nộp",
+			"judgerIdleDescription": "Máy chấm này sẵn sàng xử lý các bài nộp",
+			"noJudgers": "Không tìm thấy máy chấm nào",
+			"noJudgersDescription": "Hiện không có máy chấm nào được kết nối với hệ thống"
+		},
+		"notification": {
+			"send_system_notification": "Gửi thông báo hệ thống",
+			"send_system_notification_description": "Gửi thông báo cho tất cả người dùng",
+			"content_placeholder": "Nhập nội dung thông báo...",
+			"send": "Gửi",
+			"sending": "Đang gửi...",
+			"success": {
+				"sent": "Gửi thông báo hệ thống thành công!"
+			},
+			"errors": {
+				"content_required": "Nội dung thông báo là bắt buộc",
+				"send_failed": "Gửi thông báo hệ thống thất bại"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Thông báo",
+		"mark_all_read": "Đánh dấu tất cả đã đọc",
+		"mark_as_read": "Đánh dấu đã đọc",
+		"view_all": "Xem tất cả thông báo",
+		"no_notifications": "Chưa có thông báo nào",
+		"loading": "Đang tải thông báo...",
+		"failed_to_load": "Tải thông báo thất bại",
+		"unread_count": "{count} thông báo chưa đọc",
+		"unread_count_plural": "{count} thông báo chưa đọc",
+		"read_count": "{count} thông báo đã đọc",
+		"read_count_plural": "{count} thông báo đã đọc",
+		"just_now": "Vừa xong",
+		"minutes_ago": "{count} phút trước",
+		"hours_ago": "{count} giờ trước",
+		"days_ago": "{count} ngày trước",
+		"tabs": {
+			"all": "Tất cả",
+			"unread": "Chưa đọc",
+			"read": "Đã đọc"
+		},
+		"types": {
+			"new_problem": "Bài toán mới: {title}",
+			"new_contest": "Kỳ thi mới: {title}",
+			"new_blog": "Blog mới: {title}",
+			"rating_updated": "Xếp hạng đã được cập nhật",
+			"system": "Thông báo hệ thống",
+			"new_problem_available": "Có bài toán mới",
+			"new_contest_available": "Có kỳ thi mới",
+			"new_blog_post": "Có bài đăng blog mới"
+		}
+	},
+	"settings": {
+		"title": "Cài đặt",
+		"description": "Quản lý cài đặt tài khoản và tùy chọn của bạn.",
+		"tabs": {
+			"basic": "Cơ bản",
+			"profile": "Hồ sơ",
+			"notification": "Thông báo"
+		},
+		"basic": {
+			"theme": {
+				"title": "Chủ đề",
+				"description": "Chọn một chủ đề cho ứng dụng.",
+				"light": "Sáng",
+				"dark": "Tối",
+				"system": "Hệ thống",
+				"auto": "Tự động"
+			},
+			"language": {
+				"title": "Ngôn ngữ",
+				"description": "Chọn một ngôn ngữ cho ứng dụng."
+			}
+		},
+		"profile": {
+			"title": "Hồ sơ",
+			"description": "Cập nhật thông tin hồ sơ của bạn.",
+			"form": {
+				"username": "Tên người dùng",
+				"fullname": "Họ và tên",
+				"bio": "Tiểu sử",
+				"save": "Lưu thay đổi",
+				"saving": "Đang lưu...",
+				"change_avatar": "Thay đổi ảnh đại diện",
+				"reset_password": "Đặt lại mật khẩu",
+				"update_success": "Cập nhật hồ sơ thành công!",
+				"update_error": "Cập nhật hồ sơ thất bại. Vui lòng thử lại."
+			}
+		},
+		"notification": {
+			"title": "Thông báo",
+			"description": "Định cấu hình tùy chọn thông báo của bạn.",
+			"form": {
+				"new_blog": "Bài đăng blog mới",
+				"new_problem": "Bài toán mới",
+				"new_contest": "Kỳ thi mới",
+				"update_rating": "Cập nhật xếp hạng",
+				"system": "Thông báo hệ thống",
+				"save": "Lưu thay đổi",
+				"saving": "Đang lưu...",
+				"update_success": "Cập nhật cài đặt thông báo thành công!",
+				"update_error": "Cập nhật cài đặt thông báo thất bại. Vui lòng thử lại."
+			}
+		}
+	}
+}

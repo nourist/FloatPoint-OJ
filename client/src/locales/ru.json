@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "Главная",
+			"problems": "Задачи",
+			"submissions": "Посылки",
+			"contests": "Соревнования",
+			"standing": "Таблица результатов",
+			"login": "Войти",
+			"register": "Зарегистрироваться",
+			"logout": "Выйти",
+			"profile": "Профиль",
+			"settings": "Настройки",
+			"appearance": "Внешний вид",
+			"language": "Язык",
+			"light": "Светлая",
+			"dark": "Темная",
+			"dashboard": "Панель управления"
+		},
+		"footer": {
+			"copyright": "© {year} Nourist",
+			"license": "Лицензия",
+			"github": "GitHub",
+			"author": "Автор",
+			"language": "Язык"
+		}
+	},
+	"auth": {
+		"login": "Войти",
+		"register": "Зарегистрироваться",
+		"verify_email": "Подтвердить E-mail",
+		"forgot_password": "Забыли пароль",
+		"reset_password": "Сбросить пароль",
+		"get_password": "Получить пароль",
+		"verify_success": "E-mail успешно подтвержден",
+		"dont_have_account": "Нет аккаунта?",
+		"already_have_account": "Уже есть аккаунт?",
+		"already_have_password": "Уже есть пароль?",
+		"account_already_verified": "Аккаунт уже подтвержден?",
+		"continue_with_google": "Продолжить с Google",
+		"form": {
+			"email": "E-mail",
+			"password": "Пароль",
+			"username": "Имя пользователя",
+			"enter_email": "Введите ваш e-mail",
+			"enter_password": "Введите ваш пароль",
+			"enter_username": "Введите ваше имя пользователя",
+			"confirm_password": "Подтвердите пароль",
+			"enter_confirm_password": "Введите ваш пароль еще раз"
+		},
+		"message": {
+			"email_required": "E-mail обязателен",
+			"password_required": "Пароль обязателен",
+			"username_required": "Имя пользователя обязательно",
+			"email_invalid": "Неверный e-mail",
+			"password_min": "Пароль должен содержать не менее 8 символов",
+			"password_uppercase": "Пароль должен содержать хотя бы одну заглавную букву",
+			"password_lowercase": "Пароль должен содержать хотя бы одну строчную букву",
+			"password_number": "Пароль должен содержать хотя бы одну цифру",
+			"password_special": "Пароль должен содержать хотя бы один специальный символ",
+			"confirm_password_required": "Подтверждение пароля обязательно",
+			"confirm_password_not_match": "Подтверждение пароля не совпадает",
+			"token_required": "Токен обязателен"
+		},
+		"success": {
+			"register": "Регистрация прошла успешно",
+			"login": "Вход выполнен успешно",
+			"forgot_password": "Письмо для сброса пароля успешно отправлено",
+			"verify_email_send": "Письмо с подтверждением успешно отправлено",
+			"reset_password": "Пароль успешно сброшен",
+			"verify": "Отлично! Ваш адрес электронной почты подтвержден. Ваша учетная запись теперь активна и готова к использованию."
+		},
+		"error": {
+			"login": "Ошибка входа"
+		},
+		"description": {
+			"forgot_password": "Введите свой e-mail, чтобы получить ссылку для сброса пароля",
+			"verify_email": "Введите свой e-mail, чтобы получить ссылку для подтверждения e-mail"
+		},
+		"toast": {
+			"verify_email": "Пожалуйста, проверьте свою электронную почту для подтверждения"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Цитата",
+		"code_block": "Блок кода",
+		"toggle_highlight": "Переключить выделение ({color})",
+		"heading": "Заголовок {level}",
+		"insert_image": "Вставить изображение",
+		"link": "Ссылка",
+		"paste_a_link": "Вставьте ссылку...",
+		"apply_link": "Применить ссылку",
+		"open_in_new_window": "Открыть в новом окне",
+		"remove_link": "Удалить ссылку",
+		"toggle_list": "Переключить список {type}",
+		"toggle_mark": "Переключить {type}",
+		"align": "Выровнять {align}",
+		"undo": "Отменить",
+		"redo": "Повторить",
+		"highlight_text": "Выделить текст",
+		"highlight": "Выделить",
+		"remove_highlight": "Убрать выделение",
+		"highlight_color": "Цвет выделения {color}",
+		"highlight_colors": "Цвета выделения",
+		"format_text_as_heading": "Отформатировать текст как заголовок",
+		"heading_tooltip": "Заголовок",
+		"list_options": "Параметры списка",
+		"list": "Список",
+		"bulletlist": "Маркированный список",
+		"orderedlist": "Нумерованный список",
+		"tasklist": "Список задач"
+	},
+	"upload": {
+		"title": "Загрузить изображение",
+		"supported_formats": "Поддерживаемые форматы: JPG, PNG, GIF",
+		"click_to_select": "Нажмите, чтобы выбрать",
+		"or_drag_and_drop_file_here": "или перетащите файл сюда"
+	},
+	"home": {
+		"blog": "Блог",
+		"description": "Последние статьи, руководства и идеи от сообщества программистов",
+		"new": "Новое",
+		"sidebar": {
+			"rating": "Рейтинг",
+			"score": "Счет",
+			"current_contest": "Текущее соревнование",
+			"ending_in": "Заканчивается через",
+			"join": "Присоединиться",
+			"top_raters": "Лучшие по рейтингу",
+			"hot_problems": "Популярные задачи",
+			"my_stats": "Моя статистика",
+			"problem": "Задача"
+		}
+	},
+	"pagination": {
+		"view": "Просмотр",
+		"sizes": "Размеры"
+	},
+	"problem": {
+		"filter": {
+			"title": "Фильтр",
+			"status": "Статус",
+			"all": "Все",
+			"solved": "Решено",
+			"attempted": "Попытка",
+			"todo": "Нужно решить",
+			"difficulty": "Сложность",
+			"easy": "Легкая",
+			"medium": "Средняя",
+			"hard": "Сложная",
+			"editorial": "Разбор",
+			"has_editorial": "Есть разбор",
+			"point": "Балл",
+			"tags": "Теги",
+			"contest": "Соревнование",
+			"contest_placeholder": "Выберите соревнование"
+		},
+		"search": {
+			"sort_by": "Сортировать по",
+			"title": "Название",
+			"point": "Балл",
+			"difficulty": "Сложность",
+			"accept": "Принять",
+			"accept_rate": "Процент принятия"
+		},
+		"table": {
+			"title": "Название",
+			"difficulty": "Сложность",
+			"point": "Балл",
+			"accepted": "Принято",
+			"acceptance": "Принятие",
+			"editorial": "Разбор",
+			"easy": "Легкая",
+			"medium": "Средняя",
+			"hard": "Сложная",
+			"delete": {
+				"title": "Подтвердить удаление",
+				"description": "Вы уверены, что хотите удалить задачу \"{title}\"? Это действие нельзя отменить.",
+				"cancel": "Отмена",
+				"confirm": "Удалить",
+				"success": "Задача успешно удалена",
+				"error": "Не удалось удалить задачу"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Задача #{number}",
+				"breadcrumb": {
+					"problems": "Задачи"
+				}
+			},
+			"sidebar": {
+				"info": "Информация",
+				"difficulty": {
+					"label": "Сложность",
+					"easy": "Легкая",
+					"medium": "Средняя",
+					"hard": "Сложная"
+				},
+				"points": "Баллы",
+				"constraints": {
+					"title": "Ограничения",
+					"time_limit": "Ограничение по времени",
+					"memory_limit": "Ограничение по памяти"
+				},
+				"io_format": {
+					"title": "Формат ввода-вывода",
+					"input": "Ввод",
+					"output": "Вывод",
+					"stdin": "стандартный ввод",
+					"stdout": "стандартный вывод"
+				},
+				"statistics": {
+					"title": "Статистика",
+					"accepted": "Принято",
+					"submissions": "Посылки",
+					"acceptance_rate": "Процент принятия"
+				},
+				"status": {
+					"label": "Статус",
+					"solved": "Решено",
+					"attempted": "Попытка"
+				},
+				"tags": "Теги",
+				"actions": {
+					"title": "Действия",
+					"submit": "Отправить",
+					"editorial": "Разбор",
+					"view_submissions": "Посмотреть посылки"
+				}
+			},
+			"statement": {
+				"statement": "Условие задачи",
+				"constraints": "Ограничения",
+				"time_limit": "Ограничение по времени",
+				"memory_limit": "Ограничение по памяти",
+				"io_format": "Формат ввода-вывода",
+				"input_file": "Входной файл",
+				"output_file": "Выходной файл",
+				"subtasks": "Подзадачи",
+				"subtask_number": "Подзадача {number}: {name}",
+				"test_cases_count": "{count} тестовых случаев"
+			},
+			"error": {
+				"not_found": "Задача не найдена",
+				"load_failed": "Не удалось загрузить задачу"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Разбор",
+		"not_available": "Разбор недоступен",
+		"not_available_description": "Разбор этой задачи еще не доступен или требует предварительного решения задачи.",
+		"check_again": "Проверить еще раз",
+		"warning": "Этот разбор содержит решение и объяснение задачи. Убедитесь, что вы сначала попытались решить задачу!",
+		"created_by": "Разбор от: {username}",
+		"breadcrumb": {
+			"problems": "Задачи",
+			"editorial": "Разбор"
+		},
+		"back_to_problem": "Вернуться к задаче"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} секунд назад",
+			"minutes": "{count} минут назад",
+			"hours": "{count} часов назад",
+			"days": "{count} дней назад",
+			"months": "{count} месяцев назад",
+			"years": "{count} лет назад"
+		},
+		"page": {
+			"view": "Просмотр",
+			"title": "Посылки",
+			"breadcrumb": {
+				"home": "Главная",
+				"submissions": "Посылки"
+			},
+			"actions": {
+				"submit_solution": "Отправить решение",
+				"view_all": "Посмотреть все",
+				"view_details": "Посмотреть детали",
+				"submit_code": "Отправить код"
+			},
+			"recent_submissions": "Последние посылки",
+			"score": "Счет",
+			"list_title": "Найдено {count} посылок",
+			"submissions_title": "Последние посылки",
+			"no_submissions": {
+				"title": "Посылок не найдено",
+				"empty": "Будьте первым, кто отправит решение!",
+				"filtered": "Нет посылок, соответствующих вашим текущим фильтрам."
+			},
+			"common": {
+				"score": "Счет"
+			},
+			"pagination": {
+				"previous": "Предыдущая",
+				"next": "Следующая",
+				"page_info": "Страница {page} из {total}"
+			},
+			"passed": "пройдено"
+		},
+		"filters": {
+			"problem": "Задача",
+			"problem_placeholder": "Выберите задачу",
+			"language": "Язык",
+			"select_language": "Выберите язык",
+			"all_languages": "Все языки",
+			"status": "Статус",
+			"select_status": "Выберите статус",
+			"all_status": "Все статусы",
+			"all_contests": "Все соревнования",
+			"author": "Автор",
+			"author_placeholder": "Выберите автора",
+			"contest": "Соревнование",
+			"contest_placeholder": "Выберите соревнование",
+			"reset": "Сбросить фильтры"
+		},
+		"status": {
+			"ACCEPTED": "Принято",
+			"WRONG_ANSWER": "Неверный ответ",
+			"TIME_LIMIT_EXCEEDED": "Превышено ограничение по времени",
+			"MEMORY_LIMIT_EXCEEDED": "Превышено ограничение по памяти",
+			"RUNTIME_ERROR": "Ошибка выполнения",
+			"COMPILATION_ERROR": "Ошибка компиляции",
+			"INTERNAL_ERROR": "Внутренняя ошибка",
+			"PENDING": "В ожидании",
+			"JUDGING": "Проверяется",
+			"accepted": "Принято",
+			"wrong_answer": "Неверный ответ",
+			"time_limit_exceeded": "Превышено ограничение по времени",
+			"memory_limit_exceeded": "Превышено ограничение по памяти",
+			"runtime_error": "Ошибка выполнения",
+			"compilation_error": "Ошибка компиляции",
+			"internal_error": "Внутренняя ошибка",
+			"pending": "В ожидании",
+			"judging": "Проверяется"
+		},
+		"table": {
+			"status": "Статус",
+			"problem": "Задача",
+			"author": "Автор",
+			"language": "Язык",
+			"submitted": "Отправлено",
+			"actions": "Действия",
+			"error_loading": "Ошибка загрузки посылок",
+			"unknown_problem": "Неизвестная задача",
+			"by": "от",
+			"solved": "решено",
+			"score": "Счет"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Не удалось загрузить посылки"
+			},
+			"empty": {
+				"title": "Пока нет посылок",
+				"description": "Будьте первым, кто отправит решение!"
+			}
+		},
+		"detail": {
+			"title": "Детали посылки",
+			"breadcrumb": {
+				"home": "Главная",
+				"submissions": "Посылки"
+			},
+			"tabs": {
+				"info": "Информация",
+				"source_code": "Исходный код",
+				"test_cases": "Тестовые случаи",
+				"log": "Журнал"
+			},
+			"info": {
+				"author": "Автор",
+				"problem": "Задача",
+				"language": "Язык",
+				"score": "Счет",
+				"submitted": "Отправлено",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Назад",
+				"submit_again": "Отправить снова",
+				"view_all_submissions": "Посмотреть все посылки"
+			},
+			"content": {
+				"no_log_available": "Нет информации в журнале",
+				"no_test_cases_available": "Нет результатов тестовых случаев",
+				"subtask_count": "{count} подзадача",
+				"subtask_count_other": "{count} подзадач",
+				"expand_all": "Развернуть все",
+				"collapse_all": "Свернуть все",
+				"tests_passed": "{passed} / {total} пройдено",
+				"not_found": {
+					"title": "Посылка не найдена",
+					"message": "Посылка, которую вы ищете, не найдена.",
+					"back_button": "Назад к посылкам"
+				},
+				"partial": "Частично",
+				"submitted_for": "Отправлено для"
+			}
+		},
+		"chart": {
+			"status": "Статус",
+			"languages": "Языки"
+		}
+	},
+	"submit": {
+		"easy": "Легкая",
+		"medium": "Средняя",
+		"hard": "Сложная",
+		"page": {
+			"title": "Отправить код",
+			"select_problem": {
+				"title": "Задача не выбрана",
+				"description": "Пожалуйста, выберите задачу, чтобы отправить свое решение.",
+				"browse": "Просмотреть задачи"
+			},
+			"problem_not_found": {
+				"title": "Задача не найдена",
+				"description": "Задача, которую вы пытаетесь отправить, не найдена."
+			},
+			"breadcrumb": {
+				"home": "Главная",
+				"problems": "Задачи"
+			},
+			"back_to_problem": "Вернуться к задаче",
+			"language": "Язык программирования",
+			"select_language": "Выберите язык",
+			"code": "Исходный код",
+			"code_placeholder": "Введите свой код здесь...",
+			"submit": "Отправить",
+			"submitting": "Отправка...",
+			"login_required": {
+				"message": "Пожалуйста,",
+				"login": "войдите",
+				"to_submit": "чтобы отправить свое решение"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "Вы должны войти в систему, чтобы отправить код",
+				"select_problem": "Пожалуйста, выберите задачу для отправки",
+				"enter_code": "Пожалуйста, введите свой код",
+				"submit_failed": "Не удалось отправить код. Пожалуйста, попробуйте еще раз."
+			},
+			"success": {
+				"submitted": "Код успешно отправлен!"
+			}
+		}
+	},
+	"error": {
+		"title": "Ой! Что-то пошло не так",
+		"message": "Произошла непредвиденная ошибка. Пожалуйста, повторите попытку позже.",
+		"try_again": "Попробовать снова",
+		"go_home": "Перейти на главную страницу"
+	},
+	"not_found": {
+		"title": "Ой! Страница не найдена",
+		"message": "Страница, которую вы ищете, не существует.",
+		"go_home": "Перейти на главную страницу"
+	},
+	"blog": {
+		"create": {
+			"create": "Создать",
+			"blogs": "Блоги",
+			"title": "Заголовок",
+			"title_placeholder": "Введите заголовок",
+			"description_placeholder": "Введите описание",
+			"upload_thumbnail": "Загрузить миниатюру",
+			"save": "Сохранить",
+			"message": {
+				"title_required": "Заголовок обязателен",
+				"title_and_content_required": "Заголовок и содержание обязательны."
+			},
+			"create_success": "Блог успешно создан!",
+			"create_fail": "Не удалось создать блог."
+		},
+		"edit": {
+			"blogs": "Блоги",
+			"edit": "Редактировать",
+			"save": "Сохранить",
+			"message": {
+				"title_required": "Заголовок обязателен",
+				"title_and_content_required": "Заголовок и содержание обязательны."
+			},
+			"edit_success": "Блог успешно отредактирован!",
+			"edit_fail": "Не удалось отредактировать блог."
+		},
+		"card": {
+			"blogs": "Блоги",
+			"delete_success": "Блог успешно удален!",
+			"message": {
+				"delete_confirmation": "Вы уверены, что хотите удалить этот блог?"
+			},
+			"delete": "Удалить",
+			"edit": "Редактировать",
+			"cancel": "Отмена"
+		},
+		"comment": {
+			"create_success": "Комментарий успешно создан!",
+			"date": {
+				"seconds": "{count} секунд назад",
+				"minutes": "{count} минут назад",
+				"hours": "{count} часов назад",
+				"days": "{count} дней назад",
+				"months": "{count} месяцев назад",
+				"years": "{count} лет назад"
+			},
+			"comment-placeholder": "Напишите комментарий...",
+			"comment": "Комментарий",
+			"comments": "Комментарии",
+			"message": {
+				"comment_required": "Комментарий обязателен",
+				"delete_confirmation": "Вы уверены, что хотите удалить этот комментарий?"
+			},
+			"delete": "Удалить",
+			"edit": "Редактировать",
+			"cancel": "Отмена",
+			"delete_success": "Комментарий успешно удален!",
+			"edit_success": "Комментарий успешно отредактирован!"
+		}
+	},
+	"standing": {
+		"title": "Глобальная таблица результатов",
+		"description": "Рейтинги пользователей на основе рейтинга и общего счета",
+		"rating": "Рейтинг",
+		"score": "Счет",
+		"top_users": "Лучшие пользователи",
+		"all_users": "Все пользователи",
+		"no_data": "Нет данных",
+		"modes": {
+			"rating": "Рейтинг",
+			"score": "Счет"
+		},
+		"table": {
+			"rank": "Ранг",
+			"user": "Пользователь",
+			"rating": "Рейтинг",
+			"score": "Счет"
+		},
+		"filters": {
+			"search_placeholder": "Поиск пользователей...",
+			"reset": "Сбросить"
+		},
+		"errors": {
+			"load_failed": "Не удалось загрузить данные таблицы результатов"
+		}
+	},
+	"async_combobox": {
+		"select": "Выбрать...",
+		"search": "Поиск...",
+		"no_results": "Результатов не найдено.",
+		"load_more": "Загрузить еще..."
+	},
+	"profile": {
+		"title": "Профиль",
+		"loading": "Загрузка профиля...",
+		"user_not_found": "Пользователь не найден",
+		"sidebar": {
+			"edit_profile": "Редактировать профиль",
+			"rank": "Ранг",
+			"stats": "Статистика",
+			"score": "Счет",
+			"rating": "Рейтинг",
+			"ac_problems": "Задачи AC",
+			"submissions": "Посылки",
+			"blogs": "Блоги",
+			"comments": "Комментарии",
+			"joined_contests": "Принятые соревнования",
+			"languages": "Языки",
+			"submissions_count": "посылок",
+			"no_submissions": "Пока нет посылок",
+			"unranked": "Без рейтинга"
+		},
+		"content": {
+			"submission_activity": "Активность посылок",
+			"submissions_in_year": "посылок за последний год",
+			"accepted": "принято",
+			"loading_activity": "Загрузка данных об активности...",
+			"rating_history": "История рейтинга",
+			"problems_by_difficulty": "Задачи AC по сложности",
+			"submissions_by_language": "Посылки AC по языкам",
+			"less": "Меньше",
+			"more": "Больше"
+		},
+		"tabs": {
+			"recent_solved_problems": "Недавно решенные задачи",
+			"recent_submissions": "Последние посылки",
+			"blogs": "Блоги",
+			"problem": "Задача",
+			"language": "Язык",
+			"solved_count": "Количество решенных",
+			"first_solved": "Первое решение",
+			"status": "Статус",
+			"date": "Дата",
+			"title": "Название",
+			"publish_date": "Дата публикации",
+			"no_accepted_submissions": "Пока нет принятых посылок.",
+			"no_recent_submissions": "Пока нет посылок.",
+			"no_blogs": "Пока нет опубликованных блогов."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Соревнования",
+			"running": "Идет",
+			"upcoming": "Предстоящие",
+			"ended": "Завершенные",
+			"create_button": "Создать соревнование",
+			"search_placeholder": "Поиск соревнований...",
+			"loading": "Загрузка соревнований...",
+			"no_contests": "Соревнований не найдено",
+			"no_contests_description": "Загляните позже, чтобы узнать о предстоящих соревнованиях и испытаниях",
+			"error_loading": "Ошибка загрузки соревнований",
+			"rated": "Рейтинговый",
+			"unrated": "Нерейтинговый",
+			"participants": "{count, plural, =0 {Нет участников} =1 {# участник} other {# участников}}",
+			"joining": "Присоединился"
+		},
+		"detail": {
+			"info_tab": "Информация",
+			"problems_tab": "Задачи",
+			"submissions_tab": "Посылки",
+			"standings_tab": "Таблица результатов",
+			"time_remaining": "Оставшееся время",
+			"search_problems": "Поиск задач...",
+			"add_problem": "Добавить задачу",
+			"problem_title": "Название",
+			"problem_slug": "Идентификатор",
+			"problem_point": "Балл",
+			"actions": "Действия",
+			"add": "Добавить",
+			"adding": "Добавление...",
+			"remove": "Удалить",
+			"contest_problems": "Задачи соревнования",
+			"rank": "Ранг",
+			"user": "Пользователь",
+			"score": "Счет",
+			"time": "Время",
+			"points": "Баллы",
+			"no_standings": "Нет таблицы результатов",
+			"loading": "Загрузка...",
+			"contest_updated": "Соревнование успешно обновлено!",
+			"problem_added": "Задача успешно добавлена в соревнование!",
+			"failed_to_add_problem": "Не удалось добавить задачу в соревнование",
+			"problem_removed": "Задача успешно удалена из соревнования!",
+			"failed_to_remove_problem": "Не удалось удалить задачу из соревнования",
+			"remove_problem_title": "Подтвердить удаление",
+			"remove_problem_description": "Вы уверены, что хотите удалить \"{title}\" из этого соревнования? Это действие нельзя отменить.",
+			"remove_problem_cancel": "Отмена",
+			"remove_problem_confirm": "Удалить",
+			"running": "Идет",
+			"upcoming": "Предстоящие",
+			"ended": "Завершенные",
+			"rated": "Рейтинговый",
+			"start_time": "Время начала",
+			"end_time": "Время окончания",
+			"participants": "Участники",
+			"problems": "Задачи",
+			"no_problems": "Нет доступных задач",
+			"join": "Присоединиться к соревнованию",
+			"leave": "Покинуть соревнование",
+			"joining": "Присоединение...",
+			"leaving": "Выход...",
+			"join_success": "Вы успешно присоединились к соревнованию!",
+			"leave_success": "Вы успешно покинули соревнование!",
+			"join_fail": "Не удалось присоединиться к соревнованию. Пожалуйста, попробуйте еще раз.",
+			"leave_fail": "Не удалось покинуть соревнование. Пожалуйста, попробуйте еще раз."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Панель управления",
+			"blog": "Блог",
+			"problem": "Задача",
+			"submission": "Посылка",
+			"contest": "Соревнование",
+			"user": "Пользователь",
+			"judger": "Судья",
+			"notification": "Уведомление",
+			"profile": "Профиль",
+			"logout": "Выйти",
+			"appearance": "Внешний вид",
+			"language": "Язык",
+			"light": "Светлая",
+			"dark": "Темная",
+			"home": "Главная"
+		},
+		"dashboard": {
+			"unable_to_load": "Не удалось загрузить панель управления",
+			"error_loading": "При загрузке данных панели управления произошла ошибка. Пожалуйста, обновите страницу.",
+			"refresh": "Обновить панель управления",
+			"total_users": "Всего пользователей",
+			"active_today": "Активны сегодня",
+			"total_submissions": "Всего посылок",
+			"success_rate": "Процент успеха",
+			"active_problems": "Активные задачи",
+			"user_activity": "Активность пользователей",
+			"submission_volume": "Объем посылок",
+			"language_distribution": "Распределение языков",
+			"submission_results": "Результаты посылок",
+			"problem_difficulty": "Сложность задач",
+			"contest_participation": "Участие в соревнованиях",
+			"top_users": "Лучшие пользователи",
+			"popular_problems": "Популярные задачи"
+		},
+		"chart": {
+			"loading": "Загрузка...",
+			"contests": "Соревнования",
+			"participants": "Участники",
+			"contest_participation_trends": "Тенденции участия в соревнованиях",
+			"contest_participation_description": "Ежемесячное количество соревнований и количество участников",
+			"number_of_contests": "Количество соревнований (левая ось Y)",
+			"total_participants": "Всего участников (правая ось Y)",
+			"judger_queue_performance": "Производительность очереди судьи",
+			"judger_queue_description": "Мониторинг размера очереди и времени обработки в реальном времени",
+			"queue_size": "Размер очереди",
+			"processing_time": "Время обработки",
+			"queue_size_threshold_warning": "Размер очереди превышает пороговое значение!",
+			"queue_size_left": "Размер очереди (левая ось Y)",
+			"processing_time_right": "Время обработки (правая ось Y)",
+			"threshold": "Пороговое значение",
+			"language_usage": "Использование языков программирования",
+			"language_usage_description": "Распределение посылок по языкам программирования",
+			"submissions": "Посылки",
+			"percentage": "Процент",
+			"total_submissions": "Всего посылок",
+			"problem_difficulty_distribution": "Распределение сложности задач",
+			"problem_difficulty_description": "Количество задач по уровню сложности и проценту решений",
+			"total_problems": "Всего задач",
+			"solved_by_users": "Решено пользователями",
+			"solve_rate": "Процент решений",
+			"submission_results_distribution": "Распределение результатов посылок",
+			"submission_results_description": "Разбивка вердиктов по посылкам",
+			"count": "Количество",
+			"submission_volume": "Объем посылок",
+			"submission_volume_description": "Ежедневное количество посылок и процент принятия",
+			"accepted": "Принято",
+			"success_rate": "Процент успеха",
+			"system_resource_usage": "Использование системных ресурсов",
+			"system_resource_description": "Мониторинг использования ЦП, памяти и диска в реальном времени",
+			"cpu_usage": "Использование ЦП",
+			"memory_usage": "Использование памяти",
+			"disk_usage": "Использование диска",
+			"high_resource_usage": "Обнаружено высокое использование ресурсов!",
+			"cpu": "ЦП",
+			"memory": "Память",
+			"disk": "Диск",
+			"user_registrations": "Регистрации пользователей",
+			"user_registrations_description": "Ежедневные новые регистрации"
+		},
+		"table": {
+			"loading": "Загрузка...",
+			"most_attempted_problems": "Самые популярные задачи",
+			"most_attempted_problems_description": "Популярные задачи на основе количества посылок",
+			"problem": "Задача",
+			"difficulty": "Сложность",
+			"attempts": "Попытки",
+			"solved": "Решено",
+			"success_rate": "Процент успеха",
+			"top_users_this_week": "Лучшие пользователи этой недели",
+			"top_users_this_week_description": "Самые активные пользователи на основе решенных задач",
+			"rank": "Ранг",
+			"user": "Пользователь",
+			"submissions": "Посылки"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Поиск...",
+				"sort_by": "Сортировать по",
+				"title": "Название",
+				"point": "Балл",
+				"difficulty": "Сложность",
+				"accept": "Принять",
+				"accept_rate": "Процент принятия"
+			},
+			"filter": {
+				"new": "Новая",
+				"title": "Фильтр",
+				"difficulty": "Сложность",
+				"easy": "Легкая",
+				"medium": "Средняя",
+				"hard": "Сложная",
+				"point": "Балл",
+				"tags": "Теги",
+				"all": "Все",
+				"editorial": "Разбор",
+				"has_editorial": "Есть разбор",
+				"point_range": "Диапазон баллов",
+				"contest": "Соревнование"
+			},
+			"table": {
+				"title": "Название",
+				"tags": "Теги",
+				"difficulty": "Сложность",
+				"point": "Балл",
+				"accepted": "Принято",
+				"acceptance": "Принятие",
+				"editorial": "Разбор",
+				"easy": "Легкая",
+				"medium": "Средняя",
+				"hard": "Сложная",
+				"delete": {
+					"title": "Подтвердить удаление",
+					"description": "Вы уверены, что хотите удалить задачу \"{title}\"? Это действие нельзя отменить.",
+					"cancel": "Отмена",
+					"confirm": "Удалить",
+					"success": "Задача успешно удалена",
+					"error": "Не удалось удалить задачу"
+				}
+			},
+			"form": {
+				"title": "Название",
+				"title_placeholder": "Введите название задачи",
+				"time_limit": "Ограничение по времени (мс)",
+				"memory_limit": "Ограничение по памяти (КБ)",
+				"point": "Балл",
+				"scoring_method": "Метод оценки",
+				"scoring_method_placeholder": "Выберите метод оценки",
+				"scoring_method_standard": "Стандартный",
+				"scoring_method_subtask": "Подзадача",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Сложность",
+				"difficulty_placeholder": "Выберите сложность",
+				"difficulty_easy": "Легкая",
+				"difficulty_medium": "Средняя",
+				"difficulty_hard": "Сложная",
+				"io_mode": "Режим ввода-вывода",
+				"io_mode_placeholder": "Выберите режим ввода-вывода",
+				"io_mode_standard": "Стандартный",
+				"io_mode_file": "Файл",
+				"input_file": "Входной файл",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Выходной файл",
+				"output_file_placeholder": "output.txt",
+				"tags": "Теги",
+				"statement": "Условие",
+				"statement_placeholder": "Напишите условие задачи здесь...",
+				"submit": "Создать задачу",
+				"update": "Обновить задачу",
+				"title_required": "Название обязательно",
+				"time_limit_min": "Ограничение по времени должно быть не менее 1 мс",
+				"time_limit_max": "Ограничение по времени должно быть не более 10000 мс",
+				"memory_limit_min": "Ограничение по памяти должно быть не менее 1 КБ",
+				"memory_limit_max": "Ограничение по памяти должно быть не более 1048576 КБ",
+				"point_min": "Балл должен быть не менее 0",
+				"point_max": "Балл должен быть не более 100",
+				"tags_placeholder": "Введите теги...",
+				"create_success": "Задача успешно создана!",
+				"create_error": "Не удалось создать задачу. Пожалуйста, попробуйте еще раз.",
+				"update_success": "Задача успешно обновлена!",
+				"update_error": "Не удалось обновить задачу. Пожалуйста, попробуйте еще раз."
+			},
+			"editorial": {
+				"placeholder": "Напишите содержание разбора здесь...",
+				"create": "Создать разбор",
+				"save": "Сохранить разбор",
+				"delete": "Удалить разбор",
+				"cancel": "Отмена",
+				"deleting": "Удаление...",
+				"saving": "Сохранение...",
+				"no_editorial": "Для этой задачи еще нет разбора.",
+				"create_success": "Разбор успешно создан!",
+				"create_error": "Не удалось создать разбор. Пожалуйста, попробуйте еще раз.",
+				"update_success": "Разбор успешно обновлен!",
+				"update_error": "Не удалось обновить разбор. Пожалуйста, попробуйте еще раз.",
+				"delete_success": "Разбор успешно удален!",
+				"delete_error": "Не удалось удалить разбор. Пожалуйста, попробуйте еще раз.",
+				"delete_confirmation_title": "Вы уверены, что хотите удалить этот разбор?",
+				"delete_confirmation_description": "Это действие нельзя отменить. Это приведет к необратимому удалению разбора для этой задачи."
+			},
+			"tabs": {
+				"info": "Информация",
+				"editorial": "Разбор",
+				"testcase": "Тестовый случай"
+			},
+			"slug_page": {
+				"loading": "Загрузка...",
+				"problem_not_found": "Задача не найдена",
+				"error_loading_problem": "Ошибка загрузки задачи: {message}",
+				"error_loading_tags": "Ошибка загрузки тегов: {message}",
+				"testcase_management": "Управление тестовыми случаями будет реализовано здесь."
+			},
+			"testcase": {
+				"input": "Ввод",
+				"output": "Вывод",
+				"save": "Сохранить",
+				"saving": "Сохранение...",
+				"loading": "Загрузка...",
+				"select_to_edit": "Выберите ввод или вывод тестового случая для редактирования",
+				"content_placeholder": "Содержимое тестового случая появится здесь...",
+				"new_testcase": "Новый тестовый случай",
+				"new_subtask": "Новая подзадача",
+				"name": "Имя",
+				"cancel": "Отмена",
+				"create": "Создать",
+				"delete": "Удалить",
+				"creating": "Создание...",
+				"create_subtask_title": "Создать новую подзадачу",
+				"create_subtask_description": "Введите имя для новой подзадачи.",
+				"subtask_name_placeholder": "Введите имя подзадачи",
+				"create_testcase_title": "Создать новый тестовый случай",
+				"create_testcase_description": "Введите имя для нового тестового случая.",
+				"testcase_name_placeholder": "Введите имя тестового случая",
+				"delete_subtask_title": "Удалить подзадачу",
+				"delete_subtask_description": "Вы уверены, что хотите удалить эту подзадачу? Это действие нельзя отменить.",
+				"delete_testcase_title": "Удалить тестовый случай",
+				"delete_testcase_description": "Вы уверены, что хотите удалить этот тестовый случай? Это действие нельзя отменить.",
+				"success": {
+					"title": "Успех",
+					"saved": "Содержимое тестового случая успешно сохранено",
+					"testcase_created": "Тестовый случай успешно создан",
+					"testcase_deleted": "Тестовый случай успешно удален",
+					"subtask_created": "Подзадача успешно создана",
+					"subtask_deleted": "Подзадача успешно удалена"
+				},
+				"error": {
+					"title": "Ошибка",
+					"load_subtasks": "Не удалось загрузить подзадачи",
+					"load_content": "Не удалось загрузить содержимое тестового случая",
+					"save_content": "Не удалось сохранить содержимое тестового случая",
+					"create_testcase": "Не удалось создать тестовый случай",
+					"delete_testcase": "Не удалось удалить тестовый случай",
+					"create_subtask": "Не удалось создать подзадачу",
+					"delete_subtask": "Не удалось удалить подзадачу"
+				}
+			}
+		},
+		"user": {
+			"title": "User Management",
+			"search_placeholder": "Search users...",
+			"sort_by": "Sort by",
+			"sort_username": "Username",
+			"sort_fullname": "Full Name",
+			"sort_rating": "Rating",
+			"sort_score": "Score",
+			"sort_asc": "Ascending",
+			"sort_desc": "Descending",
+			"no_users_found": "No users found",
+			"showing_results": "Showing {start}-{end} of {total} results",
+			"previous": "Previous",
+			"next": "Next",
+			"page_of": "Page {current} of {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Username",
+				"fullname": "Full Name",
+				"email": "Email",
+				"role": "Role",
+				"rating": "Rating",
+				"score": "Score",
+				"verified": "Verified",
+				"verified_yes": "Yes",
+				"verified_no": "No"
+			},
+			"detail": {
+				"title": "User Details",
+				"back_to_users": "Back to Users",
+				"verified": "Verified",
+				"unverified": "Unverified",
+				"email": "Email",
+				"joined": "Joined",
+				"last_updated": "Last Updated",
+				"bio": "Biography",
+				"statistics": "Statistics",
+				"score": "Score",
+				"rating": "Rating",
+				"problems_solved": "Problems Solved",
+				"submissions": "Submissions",
+				"blogs": "Blogs",
+				"comments": "Comments",
+				"contests": "Contests"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "View",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "View Details",
+					"submit_code": "Submit Code"
+				},
+				"recent_submissions": "Recent Submissions",
+				"score": "Score",
+				"list_title": "Found {count} submissions",
+				"submissions_title": "Recent Submissions",
+				"no_submissions": {
+					"title": "No Submissions Found",
+					"empty": "Be the first to submit a solution!",
+					"filtered": "No submissions match your current filters."
+				},
+				"common": {
+					"score": "Score"
+				},
+				"pagination": {
+					"previous": "Previous",
+					"next": "Next",
+					"page_info": "Page {page} of {total}"
+				},
+				"passed": "passed"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Author",
+				"language": "Language",
+				"submitted": "Submitted",
+				"actions": "Actions",
+				"error_loading": "Error Loading Submissions",
+				"unknown_problem": "Unknown Problem",
+				"by": "by",
+				"solved": "solved",
+				"score": "Score"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Failed to load submissions"
+				},
+				"empty": {
+					"title": "No Submissions Yet",
+					"description": "Be the first to submit a solution!"
+				}
+			},
+			"detail": {
+				"title": "Submission Details",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Source Code",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"author": "Author",
+					"problem": "Problem",
+					"language": "Language",
+					"score": "Score",
+					"submitted": "Submitted",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Back",
+					"submit_again": "Submit Again",
+					"view_all_submissions": "View All Submissions"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"subtask_count": "{count} subtask",
+					"subtask_count_other": "{count} subtasks",
+					"expand_all": "Expand All",
+					"collapse_all": "Collapse All",
+					"tests_passed": "{passed} / {total} passed",
+					"not_found": {
+						"title": "Submission Not Found",
+						"message": "The submission you're looking for could not be found.",
+						"back_button": "Back to Submissions"
+					},
+					"partial": "Partial",
+					"submitted_for": "Submitted for"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Languages"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Running",
+				"upcoming": "Upcoming",
+				"ended": "Ended",
+				"create_button": "Create Contest",
+				"search_placeholder": "Search contests...",
+				"loading": "Loading...",
+				"rated": "Rated",
+				"unrated": "Unrated"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Problems",
+				"submissions_tab": "Submissions",
+				"standings_tab": "Standings",
+				"search_problems": "Search problems...",
+				"add_problem": "Add Problem",
+				"problem_title": "Title",
+				"actions": "Actions",
+				"add": "Add",
+				"adding": "Adding...",
+				"remove": "Remove",
+				"rank": "Rank",
+				"user": "User",
+				"score": "Score",
+				"no_standings": "No standings available",
+				"loading": "Loading...",
+				"contest_updated": "Contest updated successfully!",
+				"problem_added": "Problem added to contest successfully!",
+				"failed_to_add_problem": "Failed to add problem to contest",
+				"problem_removed": "Problem removed from contest successfully!",
+				"failed_to_remove_problem": "Failed to remove problem from contest",
+				"remove_problem_title": "Confirm Remove",
+				"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+				"remove_problem_cancel": "Cancel",
+				"remove_problem_confirm": "Remove"
+			},
+			"create": {
+				"title": "Create Contest"
+			},
+			"edit": {
+				"title": "Edit Contest",
+				"loading": "Loading contest...",
+				"cancel": "Cancel"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter contest title",
+				"start_time": "Start Time",
+				"end_time": "End Time",
+				"time": "Time",
+				"select_start_date": "Select start date",
+				"select_end_date": "Select end date",
+				"is_rated": "Is Rated",
+				"is_rated_placeholder": "Select if contest is rated",
+				"yes": "Yes",
+				"no": "No",
+				"penalty": "Penalty (minutes)",
+				"penalty_placeholder": "Enter penalty in minutes",
+				"penalty_min": "Penalty must be at least 0 minutes",
+				"description": "Description",
+				"description_placeholder": "Enter contest description",
+				"submit": "Create Contest",
+				"update": "Update Contest",
+				"title_required": "Title is required",
+				"start_time_required": "Start time is required",
+				"end_time_required": "End time is required",
+				"create_success": "Contest created successfully!",
+				"create_error": "Failed to create contest. Please try again.",
+				"update_success": "Contest updated successfully!",
+				"update_error": "Failed to update contest. Please try again."
+			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Уведомления",
+		"mark_all_read": "Отметить все как прочитанные",
+		"mark_as_read": "Отметить как прочитанное",
+		"view_all": "Посмотреть все уведомления",
+		"no_notifications": "Пока нет уведомлений",
+		"loading": "Загрузка уведомлений...",
+		"failed_to_load": "Не удалось загрузить уведомления",
+		"unread_count": "{count} непрочитанное уведомление",
+		"unread_count_plural": "{count} непрочитанных уведомлений",
+		"read_count": "{count} прочитанное уведомление",
+		"read_count_plural": "{count} прочитанных уведомлений",
+		"just_now": "Только что",
+		"minutes_ago": "{count} мин. назад",
+		"hours_ago": "{count} ч. назад",
+		"days_ago": "{count} д. назад",
+		"tabs": {
+			"all": "Все",
+			"unread": "Непрочитанные",
+			"read": "Прочитанные"
+		},
+		"types": {
+			"new_problem": "Новая задача: {title}",
+			"new_contest": "Новое соревнование: {title}",
+			"new_blog": "Новый блог: {title}",
+			"rating_updated": "Рейтинг обновлен",
+			"system": "Системное уведомление",
+			"new_problem_available": "Доступна новая задача",
+			"new_contest_available": "Доступно новое соревнование",
+			"new_blog_post": "Новая запись в блоге"
+		}
+	},
+	"settings": {
+		"title": "Настройки",
+		"description": "Управляйте настройками и предпочтениями своей учетной записи.",
+		"tabs": {
+			"basic": "Основные",
+			"profile": "Профиль",
+			"notification": "Уведомление"
+		},
+		"basic": {
+			"theme": {
+				"title": "Тема",
+				"description": "Выберите тему для приложения.",
+				"light": "Светлая",
+				"dark": "Темная",
+				"system": "Системная",
+				"auto": "Автоматически"
+			},
+			"language": {
+				"title": "Язык",
+				"description": "Выберите язык для приложения."
+			}
+		},
+		"profile": {
+			"title": "Профиль",
+			"description": "Обновите информацию своего профиля.",
+			"form": {
+				"username": "Имя пользователя",
+				"fullname": "Полное имя",
+				"bio": "Биография",
+				"save": "Сохранить изменения",
+				"saving": "Сохранение...",
+				"change_avatar": "Изменить аватар",
+				"reset_password": "Сбросить пароль",
+				"update_success": "Профиль успешно обновлен!",
+				"update_error": "Не удалось обновить профиль. Пожалуйста, попробуйте еще раз."
+			}
+		},
+		"notification": {
+			"title": "Уведомления",
+			"description": "Настройте параметры уведомлений.",
+			"form": {
+				"new_blog": "Новые записи в блоге",
+				"new_problem": "Новые задачи",
+				"new_contest": "Новые соревнования",
+				"update_rating": "Обновления рейтинга",
+				"system": "Системные уведомления",
+				"save": "Сохранить изменения",
+				"saving": "Сохранение...",
+				"update_success": "Настройки уведомлений успешно обновлены!",
+				"update_error": "Не удалось обновить настройки уведомлений. Пожалуйста, попробуйте еще раз."
+			}
+		}
+	}
+}

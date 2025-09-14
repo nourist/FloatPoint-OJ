@@ -1,0 +1,1305 @@
+{
+	"layout": {
+		"header": {
+			"home": "الرئيسية",
+			"problems": "المسائل",
+			"submissions": "الإرسالات",
+			"contests": "المسابقات",
+			"standing": "الترتيب",
+			"login": "تسجيل الدخول",
+			"register": "التسجيل",
+			"logout": "تسجيل الخروج",
+			"profile": "الملف الشخصي",
+			"settings": "الإعدادات",
+			"appearance": "المظهر",
+			"language": "اللغة",
+			"light": "فاتح",
+			"dark": "داكن",
+			"dashboard": "لوحة التحكم"
+		},
+		"footer": {
+			"copyright": "حقوق النشر © {year} Nourist",
+			"license": "الرخصة",
+			"github": "GitHub",
+			"author": "المؤلف",
+			"language": "اللغة"
+		}
+	},
+	"auth": {
+		"login": "تسجيل الدخول",
+		"register": "التسجيل",
+		"verify_email": "التحقق من البريد الإلكتروني",
+		"forgot_password": "هل نسيت كلمة المرور",
+		"reset_password": "إعادة تعيين كلمة المرور",
+		"get_password": "الحصول على كلمة المرور",
+		"verify_success": "تم التحقق من البريد الإلكتروني بنجاح",
+		"dont_have_account": "ليس لديك حساب؟",
+		"already_have_account": "هل لديك حساب بالفعل؟",
+		"already_have_password": "هل لديك كلمة مرور بالفعل؟",
+		"account_already_verified": "الحساب تم التحقق منه بالفعل؟",
+		"continue_with_google": "متابعة باستخدام جوجل",
+		"form": {
+			"email": "البريد الإلكتروني",
+			"password": "كلمة المرور",
+			"username": "اسم المستخدم",
+			"enter_email": "أدخل بريدك الإلكتروني",
+			"enter_password": "أدخل كلمة المرور الخاصة بك",
+			"enter_username": "أدخل اسم المستخدم الخاص بك",
+			"confirm_password": "تأكيد كلمة المرور",
+			"enter_confirm_password": "أدخل كلمة المرور الخاصة بك مرة أخرى"
+		},
+		"message": {
+			"email_required": "البريد الإلكتروني مطلوب",
+			"password_required": "كلمة المرور مطلوبة",
+			"username_required": "اسم المستخدم مطلوب",
+			"email_invalid": "البريد الإلكتروني غير صالح",
+			"password_min": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+			"password_uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+			"password_lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+			"password_number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+			"password_special": "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل",
+			"confirm_password_required": "تأكيد كلمة المرور مطلوب",
+			"confirm_password_not_match": "تأكيد كلمة المرور غير متطابق",
+			"token_required": "الرمز مطلوب"
+		},
+		"success": {
+			"register": "تم التسجيل بنجاح",
+			"login": "تم تسجيل الدخول بنجاح",
+			"forgot_password": "تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور بنجاح",
+			"verify_email_send": "تم إرسال بريد إلكتروني للتحقق بنجاح",
+			"reset_password": "تمت إعادة تعيين كلمة المرور بنجاح",
+			"verify": "عظيم! تم التحقق من عنوان بريدك الإلكتروني. حسابك الآن نشط وجاهز للاستخدام."
+		},
+		"error": {
+			"login": "فشل تسجيل الدخول"
+		},
+		"description": {
+			"forgot_password": "أدخل بريدك الإلكتروني للحصول على رابط إعادة تعيين كلمة المرور",
+			"verify_email": "أدخل بريدك الإلكتروني للحصول على رابط التحقق من البريد الإلكتروني"
+		},
+		"toast": {
+			"verify_email": "يرجى التحقق من بريدك الإلكتروني للتحقق"
+		}
+	},
+	"tiptap": {
+		"blockquote": "اقتباس",
+		"code_block": "كتلة الرمز",
+		"toggle_highlight": "تبديل التمييز ({color})",
+		"heading": "عنوان {level}",
+		"insert_image": "إدراج صورة",
+		"link": "رابط",
+		"paste_a_link": "الصق رابطًا...",
+		"apply_link": "تطبيق الرابط",
+		"open_in_new_window": "فتح في نافذة جديدة",
+		"remove_link": "إزالة الرابط",
+		"toggle_list": "تبديل القائمة {type}",
+		"toggle_mark": "تبديل {type}",
+		"align": "محاذاة {align}",
+		"undo": "تراجع",
+		"redo": "إعادة",
+		"highlight_text": "تمييز النص",
+		"highlight": "تمييز",
+		"remove_highlight": "إزالة التمييز",
+		"highlight_color": "لون التمييز {color}",
+		"highlight_colors": "ألوان التمييز",
+		"format_text_as_heading": "تنسيق النص كعنوان",
+		"heading_tooltip": "عنوان",
+		"list_options": "خيارات القائمة",
+		"list": "قائمة",
+		"bulletlist": "قائمة نقطية",
+		"orderedlist": "قائمة مرقمة",
+		"tasklist": "قائمة المهام"
+	},
+	"upload": {
+		"title": "تحميل صورة",
+		"supported_formats": "التنسيقات المدعومة: JPG, PNG, GIF",
+		"click_to_select": "انقر للتحديد",
+		"or_drag_and_drop_file_here": "أو اسحب وأفلت الملف هنا"
+	},
+	"home": {
+		"blog": "المدونة",
+		"description": "أحدث المقالات والبرامج التعليمية والأفكار من مجتمع البرمجة",
+		"new": "جديد",
+		"sidebar": {
+			"rating": "التقييم",
+			"score": "النتيجة",
+			"current_contest": "المسابقة الحالية",
+			"ending_in": "تنتهي في",
+			"join": "انضم",
+			"top_raters": "أفضل المقيمين",
+			"hot_problems": "المسائل الشائعة",
+			"my_stats": "إحصائياتي",
+			"problem": "المسألة"
+		}
+	},
+	"pagination": {
+		"view": "عرض",
+		"sizes": "الأحجام"
+	},
+	"problem": {
+		"filter": {
+			"title": "مرشح",
+			"status": "الحالة",
+			"all": "الكل",
+			"solved": "تم حلها",
+			"attempted": "تمت المحاولة",
+			"todo": "للقيام به",
+			"difficulty": "الصعوبة",
+			"easy": "سهل",
+			"medium": "متوسط",
+			"hard": "صعب",
+			"editorial": "افتتاحية",
+			"has_editorial": "يحتوي على افتتاحية",
+			"point": "نقطة",
+			"tags": "العلامات",
+			"contest": "المسابقة",
+			"contest_placeholder": "حدد مسابقة"
+		},
+		"search": {
+			"sort_by": "فرز حسب",
+			"title": "العنوان",
+			"point": "نقطة",
+			"difficulty": "الصعوبة",
+			"accept": "قبول",
+			"accept_rate": "معدل القبول"
+		},
+		"table": {
+			"title": "العنوان",
+			"difficulty": "الصعوبة",
+			"point": "نقطة",
+			"accepted": "مقبول",
+			"acceptance": "القبول",
+			"editorial": "افتتاحية",
+			"easy": "سهل",
+			"medium": "متوسط",
+			"hard": "صعب",
+			"delete": {
+				"title": "تأكيد الحذف",
+				"description": "هل أنت متأكد أنك تريد حذف المسألة \"{title}\"? لا يمكن التراجع عن هذا الإجراء.",
+				"cancel": "إلغاء",
+				"confirm": "حذف",
+				"success": "تم حذف المسألة بنجاح",
+				"error": "فشل حذف المسألة"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "المسألة #{number}",
+				"breadcrumb": {
+					"problems": "المسائل"
+				}
+			},
+			"sidebar": {
+				"info": "معلومات",
+				"difficulty": {
+					"label": "الصعوبة",
+					"easy": "سهل",
+					"medium": "متوسط",
+					"hard": "صعب"
+				},
+				"points": "النقاط",
+				"constraints": {
+					"title": "القيود",
+					"time_limit": "حد الوقت",
+					"memory_limit": "حد الذاكرة"
+				},
+				"io_format": {
+					"title": "تنسيق الإدخال/الإخراج",
+					"input": "الإدخال",
+					"output": "الإخراج",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "الإحصائيات",
+					"accepted": "مقبول",
+					"submissions": "الإرسالات",
+					"acceptance_rate": "معدل القبول"
+				},
+				"status": {
+					"label": "الحالة",
+					"solved": "تم حلها",
+					"attempted": "تمت المحاولة"
+				},
+				"tags": "العلامات",
+				"actions": {
+					"title": "الإجراءات",
+					"submit": "إرسال",
+					"editorial": "افتتاحية",
+					"view_submissions": "عرض الإرسالات"
+				}
+			},
+			"statement": {
+				"statement": "نص المسألة",
+				"constraints": "القيود",
+				"time_limit": "حد الوقت",
+				"memory_limit": "حد الذاكرة",
+				"io_format": "تنسيق الإدخال/الإخراج",
+				"input_file": "ملف الإدخال",
+				"output_file": "ملف الإخراج",
+				"subtasks": "المهام الفرعية",
+				"subtask_number": "المهمة الفرعية {number}: {name}",
+				"test_cases_count": "{count} حالات اختبار"
+			},
+			"error": {
+				"not_found": "المسألة غير موجودة",
+				"load_failed": "فشل تحميل المسألة"
+			}
+		}
+	},
+	"editorial": {
+		"title": "افتتاحية",
+		"not_available": "الافتتاحية غير متوفرة",
+		"not_available_description": "الافتتاحية لهذه المسألة غير متوفرة بعد أو تتطلب حل المسألة أولاً.",
+		"check_again": "تحقق مرة أخرى",
+		"warning": "تحتوي هذه الافتتاحية على الحل والشرح للمسألة. تأكد من أنك حاولت حل المسألة أولاً!",
+		"created_by": "افتتاحية بواسطة: {username}",
+		"breadcrumb": {
+			"problems": "المسائل",
+			"editorial": "افتتاحية"
+		},
+		"back_to_problem": "العودة إلى المسألة"
+	},
+	"submission": {
+		"date": {
+			"seconds": "منذ {count} ثوانٍ",
+			"minutes": "منذ {count} دقائق",
+			"hours": "منذ {count} ساعات",
+			"days": "منذ {count} أيام",
+			"months": "منذ {count} أشهر",
+			"years": "منذ {count} سنوات"
+		},
+		"page": {
+			"view": "عرض",
+			"title": "الإرسالات",
+			"breadcrumb": {
+				"home": "الرئيسية",
+				"submissions": "الإرسالات"
+			},
+			"actions": {
+				"submit_solution": "إرسال الحل",
+				"view_all": "عرض الكل",
+				"view_details": "عرض التفاصيل",
+				"submit_code": "إرسال الرمز"
+			},
+			"recent_submissions": "الإرسالات الأخيرة",
+			"score": "النتيجة",
+			"list_title": "تم العثور على {count} إرسالات",
+			"submissions_title": "الإرسالات الأخيرة",
+			"no_submissions": {
+				"title": "لم يتم العثور على إرسالات",
+				"empty": "كن أول من يرسل حلاً!",
+				"filtered": "لا توجد إرسالات تطابق المرشحات الحالية."
+			},
+			"common": {
+				"score": "النتيجة"
+			},
+			"pagination": {
+				"previous": "السابق",
+				"next": "التالي",
+				"page_info": "صفحة {page} من {total}"
+			},
+			"passed": "تم اجتيازه"
+		},
+		"filters": {
+			"problem": "المسألة",
+			"problem_placeholder": "حدد مسألة",
+			"language": "اللغة",
+			"select_language": "حدد اللغة",
+			"all_languages": "كل اللغات",
+			"status": "الحالة",
+			"select_status": "حدد الحالة",
+			"all_status": "كل الحالات",
+			"author": "المؤلف",
+			"author_placeholder": "حدد مؤلفًا",
+			"contest_placeholder": "حدد مسابقة",
+			"reset": "إعادة تعيين المرشحات"
+		},
+		"status": {
+			"ACCEPTED": "مقبول",
+			"WRONG_ANSWER": "إجابة خاطئة",
+			"TIME_LIMIT_EXCEEDED": "تجاوز حد الوقت",
+			"MEMORY_LIMIT_EXCEEDED": "تجاوز حد الذاكرة",
+			"RUNTIME_ERROR": "خطأ في وقت التشغيل",
+			"COMPILATION_ERROR": "خطأ في الترجمة",
+			"INTERNAL_ERROR": "خطأ داخلي",
+			"PENDING": "قيد الانتظار",
+			"JUDGING": "قيد التحكيم",
+			"accepted": "مقبول",
+			"wrong_answer": "إجابة خاطئة",
+			"time_limit_exceeded": "تجاوز حد الوقت",
+			"memory_limit_exceeded": "تجاوز حد الذاكرة",
+			"runtime_error": "خطأ في وقت التشغيل",
+			"compilation_error": "خطأ في الترجمة",
+			"internal_error": "خطأ داخلي",
+			"pending": "قيد الانتظار",
+			"judging": "قيد التحكيم"
+		},
+		"table": {
+			"status": "الحالة",
+			"problem": "المسألة",
+			"author": "المؤلف",
+			"language": "اللغة",
+			"submitted": "تم الإرسال",
+			"actions": "الإجراءات",
+			"error_loading": "خطأ في تحميل الإرسالات",
+			"unknown_problem": "مسألة غير معروفة",
+			"by": "بواسطة",
+			"solved": "تم حلها",
+			"score": "النتيجة"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "فشل تحميل الإرسالات"
+			},
+			"empty": {
+				"title": "لا توجد إرسالات بعد",
+				"description": "كن أول من يرسل حلاً!"
+			}
+		},
+		"detail": {
+			"title": "تفاصيل الإرسال",
+			"breadcrumb": {
+				"home": "الرئيسية",
+				"submissions": "الإرسالات"
+			},
+			"tabs": {
+				"info": "معلومات",
+				"source_code": "الكود المصدري",
+				"test_cases": "حالات الاختبار",
+				"log": "السجل"
+			},
+			"info": {
+				"author": "المؤلف",
+				"problem": "المسألة",
+				"language": "اللغة",
+				"score": "النتيجة",
+				"submitted": "تم الإرسال",
+				"id": "المعرف"
+			},
+			"actions": {
+				"back": "العودة",
+				"submit_again": "إرسال مرة أخرى",
+				"view_all_submissions": "عرض كل الإرسالات"
+			},
+			"content": {
+				"no_log_available": "لا توجد معلومات سجل متاحة",
+				"no_test_cases_available": "لا توجد نتائج حالات اختبار متاحة",
+				"subtask_count": "{count} مهمة فرعية",
+				"subtask_count_other": "{count} مهام فرعية",
+				"expand_all": "توسيع الكل",
+				"collapse_all": "طي الكل",
+				"tests_passed": "{passed} / {total} تم اجتيازه",
+				"not_found": {
+					"title": "لم يتم العثور على الإرسال",
+					"message": "لم يتم العثور على الإرسال الذي تبحث عنه.",
+					"back_button": "العودة إلى الإرسالات"
+				},
+				"partial": "جزئي",
+				"submitted_for": "تم الإرسال لـ"
+			}
+		},
+		"chart": {
+			"status": "الحالة",
+			"languages": "اللغات"
+		}
+	},
+	"submit": {
+		"easy": "سهل",
+		"medium": "متوسط",
+		"hard": "صعب",
+		"page": {
+			"title": "إرسال الرمز",
+			"select_problem": {
+				"title": "لم يتم تحديد مسألة",
+				"description": "يرجى تحديد مسألة لإرسال حلك إليها.",
+				"browse": "تصفح المسائل"
+			},
+			"problem_not_found": {
+				"title": "المسألة غير موجودة",
+				"description": "لم يتم العثور على المسألة التي تحاول إرسالها."
+			},
+			"breadcrumb": {
+				"home": "الرئيسية",
+				"problems": "المسائل"
+			},
+			"back_to_problem": "العودة إلى المسألة",
+			"language": "لغة البرمجة",
+			"select_language": "حدد اللغة",
+			"code": "الكود المصدري",
+			"code_placeholder": "أدخل الكود الخاص بك هنا...",
+			"submit": "إرسال",
+			"submitting": "جارٍ الإرسال...",
+			"login_required": {
+				"message": "يرجى",
+				"login": "تسجيل الدخول",
+				"to_submit": "لإرسال حلك"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "يجب عليك تسجيل الدخول لإرسال الرمز",
+				"select_problem": "يرجى تحديد مسألة لإرسالها",
+				"enter_code": "يرجى إدخال الكود الخاص بك",
+				"submit_failed": "فشل إرسال الرمز. يرجى المحاولة مرة أخرى."
+			},
+			"success": {
+				"submitted": "تم إرسال الرمز بنجاح!"
+			}
+		}
+	},
+	"error": {
+		"title": "عفوًا! حدث خطأ ما",
+		"message": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا.",
+		"try_again": "حاول مرة أخرى",
+		"go_home": "اذهب إلى الصفحة الرئيسية"
+	},
+	"not_found": {
+		"title": "عفوًا! الصفحة غير موجودة",
+		"message": "الصفحة التي تبحث عنها غير موجودة.",
+		"go_home": "اذهب إلى الصفحة الرئيسية"
+	},
+	"blog": {
+		"create": {
+			"create": "إنشاء",
+			"blogs": "المدونات",
+			"title": "العنوان",
+			"title_placeholder": "أدخل العنوان",
+			"description_placeholder": "أدخل الوصف",
+			"upload_thumbnail": "تحميل الصورة المصغرة",
+			"save": "حفظ",
+			"message": {
+				"title_required": "العنوان مطلوب",
+				"title_and_content_required": "العنوان والمحتوى مطلوبان."
+			},
+			"create_success": "تم إنشاء المدونة بنجاح!",
+			"create_fail": "فشل إنشاء المدونة."
+		},
+		"edit": {
+			"blogs": "المدونات",
+			"edit": "تعديل",
+			"save": "حفظ",
+			"message": {
+				"title_required": "العنوان مطلوب",
+				"title_and_content_required": "العنوان والمحتوى مطلوبان."
+			},
+			"edit_success": "تم تعديل المدونة بنجاح!",
+			"edit_fail": "فشل تعديل المدونة."
+		},
+		"card": {
+			"blogs": "المدونات",
+			"delete_success": "تم حذف المدونة بنجاح!",
+			"message": {
+				"delete_confirmation": "هل أنت متأكد أنك تريد حذف هذه المدونة؟"
+			},
+			"delete": "حذف",
+			"edit": "تعديل",
+			"cancel": "إلغاء"
+		},
+		"comment": {
+			"create_success": "تم إنشاء التعليق بنجاح!",
+			"date": {
+				"seconds": "منذ {count} ثوانٍ",
+				"minutes": "منذ {count} دقائق",
+				"hours": "منذ {count} ساعات",
+				"days": "منذ {count} أيام",
+				"months": "منذ {count} أشهر",
+				"years": "منذ {count} سنوات"
+			},
+			"comment-placeholder": "اكتب تعليقًا...",
+			"comment": "تعليق",
+			"comments": "التعليقات",
+			"message": {
+				"comment_required": "التعليق مطلوب",
+				"delete_confirmation": "هل أنت متأكد أنك تريد حذف هذا التعليق؟"
+			},
+			"delete": "حذف",
+			"edit": "تعديل",
+			"cancel": "إلغاء",
+			"delete_success": "تم حذف التعليق بنجاح!",
+			"edit_success": "تم تعديل التعليق بنجاح!"
+		}
+	},
+	"standing": {
+		"title": "الترتيب العالمي",
+		"description": "ترتيب المستخدمين بناءً على التقييم والنتيجة الإجمالية",
+		"rating": "التقييم",
+		"score": "النتيجة",
+		"top_users": "أفضل المستخدمين",
+		"all_users": "كل المستخدمين",
+		"no_data": "لا توجد بيانات متاحة",
+		"modes": {
+			"rating": "التقييم",
+			"score": "النتيجة"
+		},
+		"table": {
+			"rank": "الترتيب",
+			"user": "المستخدم",
+			"rating": "التقييم",
+			"score": "النتيجة"
+		},
+		"filters": {
+			"search_placeholder": "البحث عن المستخدمين...",
+			"reset": "إعادة تعيين"
+		},
+		"errors": {
+			"load_failed": "فشل تحميل بيانات الترتيب"
+		}
+	},
+	"async_combobox": {
+		"select": "تحديد...",
+		"search": "بحث...",
+		"no_results": "لم يتم العثور على نتائج.",
+		"load_more": "تحميل المزيد..."
+	},
+	"profile": {
+		"title": "الملف الشخصي",
+		"loading": "جارٍ تحميل الملف الشخصي...",
+		"user_not_found": "المستخدم غير موجود",
+		"sidebar": {
+			"edit_profile": "تعديل الملف الشخصي",
+			"rank": "الترتيب",
+			"stats": "الإحصائيات",
+			"score": "النتيجة",
+			"rating": "التقييم",
+			"ac_problems": "المسائل المقبولة",
+			"submissions": "الإرسالات",
+			"blogs": "المدونات",
+			"comments": "التعليقات",
+			"joined_contests": "المسابقات التي تم الانضمام إليها",
+			"languages": "اللغات",
+			"submissions_count": "الإرسالات",
+			"no_submissions": "لا توجد إرسالات بعد",
+			"unranked": "غير مصنف"
+		},
+		"content": {
+			"submission_activity": "نشاط الإرسال",
+			"submissions_in_year": "الإرسالات في العام الماضي",
+			"accepted": "مقبول",
+			"loading_activity": "جارٍ تحميل بيانات النشاط...",
+			"rating_history": "سجل التقييم",
+			"problems_by_difficulty": "المسائل المقبولة حسب الصعوبة",
+			"submissions_by_language": "الإرسالات المقبولة حسب اللغة",
+			"less": "أقل",
+			"more": "أكثر"
+		},
+		"tabs": {
+			"recent_solved_problems": "المسائل التي تم حلها مؤخرًا",
+			"recent_submissions": "الإرسالات الأخيرة",
+			"blogs": "المدونات",
+			"problem": "المسألة",
+			"language": "اللغة",
+			"solved_count": "عدد الحلول",
+			"first_solved": "تم الحل لأول مرة",
+			"status": "الحالة",
+			"date": "التاريخ",
+			"title": "العنوان",
+			"publish_date": "تاريخ النشر",
+			"no_accepted_submissions": "لا توجد إرسالات مقبولة بعد.",
+			"no_recent_submissions": "لا توجد إرسالات بعد.",
+			"no_blogs": "لم يتم نشر أي مدونات بعد."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "المسابقات",
+			"running": "جارية",
+			"upcoming": "قادمة",
+			"ended": "منتهية",
+			"create_button": "إنشاء مسابقة",
+			"search_placeholder": "البحث عن المسابقات...",
+			"loading": "جارٍ تحميل المسابقات...",
+			"no_contests": "لم يتم العثور على مسابقات",
+			"no_contests_description": "تحقق مرة أخرى لاحقًا من المسابقات والتحديات القادمة",
+			"error_loading": "خطأ في تحميل المسابقات",
+			"rated": "مُقيَّم",
+			"unrated": "غير مُقيَّم",
+			"participants": "{count, plural, =0 {لا يوجد مشاركون} =1 {# مشارك} other {# مشاركون}}",
+			"joining": "تم الانضمام"
+		},
+		"detail": {
+			"info_tab": "معلومات",
+			"problems_tab": "المسائل",
+			"submissions_tab": "الإرسالات",
+			"standings_tab": "الترتيب",
+			"time_remaining": "الوقت المتبقي",
+			"search_problems": "البحث عن المسائل...",
+			"add_problem": "إضافة مسألة",
+			"problem_title": "العنوان",
+			"problem_slug": "المعرف",
+			"problem_point": "نقطة",
+			"actions": "الإجراءات",
+			"add": "إضافة",
+			"adding": "جارٍ الإضافة...",
+			"remove": "إزالة",
+			"contest_problems": "مسائل المسابقة",
+			"rank": "الترتيب",
+			"user": "المستخدم",
+			"score": "النتيجة",
+			"time": "الوقت",
+			"points": "النقاط",
+			"no_standings": "لا يوجد ترتيب متاح",
+			"loading": "جارٍ التحميل...",
+			"contest_updated": "تم تحديث المسابقة بنجاح!",
+			"problem_added": "تمت إضافة المسألة إلى المسابقة بنجاح!",
+			"failed_to_add_problem": "فشل إضافة المسألة إلى المسابقة",
+			"problem_removed": "تمت إزالة المسألة من المسابقة بنجاح!",
+			"failed_to_remove_problem": "فشل إزالة المسألة من المسابقة",
+			"remove_problem_title": "تأكيد الإزالة",
+			"remove_problem_description": "هل أنت متأكد أنك تريد إزالة \"{title}\" من هذه المسابقة؟ لا يمكن التراجع عن هذا الإجراء.",
+			"remove_problem_cancel": "إلغاء",
+			"remove_problem_confirm": "إزالة",
+			"running": "جارية",
+			"upcoming": "قادمة",
+			"ended": "منتهية",
+			"rated": "مُقيَّم",
+			"start_time": "وقت البدء",
+			"end_time": "وقت الانتهاء",
+			"participants": "المشاركون",
+			"problems": "المسائل",
+			"no_problems": "لا توجد مسائل متاحة",
+			"join": "الانضمام إلى المسابقة",
+			"leave": "مغادرة المسابقة",
+			"joining": "جارٍ الانضمام...",
+			"leaving": "جارٍ المغادرة...",
+			"join_success": "تم الانضمام إلى المسابقة بنجاح!",
+			"leave_success": "تمت مغادرة المسابقة بنجاح!",
+			"join_fail": "فشل الانضمام إلى المسابقة. يرجى المحاولة مرة أخرى.",
+			"leave_fail": "فشل مغادرة المسابقة. يرجى المحاولة مرة أخرى."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "لوحة التحكم",
+			"blog": "المدونة",
+			"problem": "المسألة",
+			"submission": "الإرسال",
+			"contest": "المسابقة",
+			"user": "المستخدم",
+			"judger": "المحكم",
+			"notification": "الإشعار",
+			"profile": "الملف الشخصي",
+			"logout": "تسجيل الخروج",
+			"appearance": "المظهر",
+			"language": "اللغة",
+			"light": "فاتح",
+			"dark": "داكن",
+			"home": "الرئيسية"
+		},
+		"dashboard": {
+			"unable_to_load": "تعذر تحميل لوحة التحكم",
+			"error_loading": "حدث خطأ أثناء تحميل بيانات لوحة التحكم. يرجى تحديث الصفحة.",
+			"refresh": "تحديث لوحة التحكم",
+			"total_users": "إجمالي المستخدمين",
+			"active_today": "نشط اليوم",
+			"total_submissions": "إجمالي الإرسالات",
+			"success_rate": "معدل النجاح",
+			"active_problems": "المسائل النشطة",
+			"user_activity": "نشاط المستخدم",
+			"submission_volume": "حجم الإرسال",
+			"language_distribution": "توزيع اللغات",
+			"submission_results": "نتائج الإرسال",
+			"problem_difficulty": "صعوبة المسألة",
+			"contest_participation": "المشاركة في المسابقة",
+			"top_users": "أفضل المستخدمين",
+			"popular_problems": "المسائل الشائعة"
+		},
+		"chart": {
+			"loading": "جارٍ التحميل...",
+			"contests": "المسابقات",
+			"participants": "المشاركون",
+			"contest_participation_trends": "اتجاهات المشاركة في المسابقات",
+			"contest_participation_description": "عدد المسابقات الشهرية وأعداد المشاركين",
+			"number_of_contests": "عدد المسابقات (المحور الصادي الأيسر)",
+			"total_participants": "إجمالي المشاركين (المحور الصادي الأيمن)",
+			"judger_queue_performance": "أداء قائمة انتظار المحكم",
+			"judger_queue_description": "مراقبة حجم قائمة الانتظار ووقت المعالجة في الوقت الفعلي",
+			"queue_size": "حجم قائمة الانتظار",
+			"processing_time": "وقت المعالجة",
+			"queue_size_threshold_warning": "حجم قائمة الانتظار فوق الحد المسموح به!",
+			"queue_size_left": "حجم قائمة الانتظار (المحور الصادي الأيسر)",
+			"processing_time_right": "وقت المعالجة (المحور الصادي الأيمن)",
+			"threshold": "الحد",
+			"language_usage": "استخدام لغة البرمجة",
+			"language_usage_description": "توزيع الإرسالات حسب لغة البرمجة",
+			"submissions": "الإرسالات",
+			"percentage": "النسبة المئوية",
+			"total_submissions": "إجمالي الإرسالات",
+			"problem_difficulty_distribution": "توزيع صعوبة المسائل",
+			"problem_difficulty_description": "عدد المسائل حسب مستوى الصعوبة ومعدلات الحل",
+			"total_problems": "إجمالي المسائل",
+			"solved_by_users": "تم حلها بواسطة المستخدمين",
+			"solve_rate": "معدل الحل",
+			"submission_results_distribution": "توزيع نتائج الإرسال",
+			"submission_results_description": "تفصيل أحكام الإرسال",
+			"count": "العدد",
+			"submission_volume": "حجم الإرسال",
+			"submission_volume_description": "عدد الإرسالات اليومية ومعدل القبول",
+			"accepted": "مقبول",
+			"success_rate": "معدل النجاح",
+			"system_resource_usage": "استخدام موارد النظام",
+			"system_resource_description": "مراقبة استخدام وحدة المعالجة المركزية والذاكرة والقرص في الوقت الفعلي",
+			"cpu_usage": "استخدام وحدة المعالجة المركزية",
+			"memory_usage": "استخدام الذاكرة",
+			"disk_usage": "استخدام القرص",
+			"high_resource_usage": "تم الكشف عن استخدام مرتفع للموارد!",
+			"cpu": "وحدة المعالجة المركزية",
+			"memory": "الذاكرة",
+			"disk": "القرص",
+			"user_registrations": "تسجيلات المستخدمين",
+			"user_registrations_description": "التسجيلات الجديدة اليومية"
+		},
+		"table": {
+			"loading": "جارٍ التحميل...",
+			"most_attempted_problems": "المسائل الأكثر محاولة",
+			"most_attempted_problems_description": "المسائل الشائعة بناءً على عدد الإرسالات",
+			"problem": "المسألة",
+			"difficulty": "الصعوبة",
+			"attempts": "المحاولات",
+			"solved": "تم حلها",
+			"success_rate": "معدل النجاح",
+			"top_users_this_week": "أفضل المستخدمين هذا الأسبوع",
+			"top_users_this_week_description": "المستخدمون الأكثر نشاطًا بناءً على المسائل التي تم حلها",
+			"rank": "الترتيب",
+			"user": "المستخدم",
+			"submissions": "الإرسالات"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "بحث...",
+				"sort_by": "فرز حسب",
+				"title": "العنوان",
+				"point": "نقطة",
+				"difficulty": "الصعوبة",
+				"accept": "قبول",
+				"accept_rate": "معدل القبول"
+			},
+			"filter": {
+				"new": "جديد",
+				"title": "مرشح",
+				"difficulty": "الصعوبة",
+				"easy": "سهل",
+				"medium": "متوسط",
+				"hard": "صعب",
+				"point": "نقطة",
+				"tags": "العلامات",
+				"all": "الكل",
+				"editorial": "افتتاحية",
+				"has_editorial": "يحتوي على افتتاحية",
+				"point_range": "نطاق النقاط",
+				"contest": "المسابقة"
+			},
+			"table": {
+				"title": "العنوان",
+				"tags": "العلامات",
+				"difficulty": "الصعوبة",
+				"point": "نقطة",
+				"accepted": "مقبول",
+				"acceptance": "القبول",
+				"editorial": "افتتاحية",
+				"easy": "سهل",
+				"medium": "متوسط",
+				"hard": "صعب",
+				"delete": {
+					"title": "تأكيد الحذف",
+					"description": "هل أنت متأكد أنك تريد حذف المسألة \"{title}\"? لا يمكن التراجع عن هذا الإجراء.",
+					"cancel": "إلغاء",
+					"confirm": "حذف",
+					"success": "تم حذف المسألة بنجاح",
+					"error": "فشل حذف المسألة"
+				}
+			},
+			"form": {
+				"title": "العنوان",
+				"title_placeholder": "أدخل عنوان المسألة",
+				"time_limit": "حد الوقت (مللي ثانية)",
+				"memory_limit": "حد الذاكرة (كيلوبايت)",
+				"point": "نقطة",
+				"scoring_method": "طريقة التسجيل",
+				"scoring_method_placeholder": "حدد طريقة التسجيل",
+				"scoring_method_standard": "قياسي",
+				"scoring_method_subtask": "مهمة فرعية",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "الصعوبة",
+				"difficulty_placeholder": "حدد الصعوبة",
+				"difficulty_easy": "سهل",
+				"difficulty_medium": "متوسط",
+				"difficulty_hard": "صعب",
+				"io_mode": "وضع الإدخال/الإخراج",
+				"io_mode_placeholder": "حدد وضع الإدخال/الإخراج",
+				"io_mode_standard": "قياسي",
+				"io_mode_file": "ملف",
+				"input_file": "ملف الإدخال",
+				"input_file_placeholder": "input.txt",
+				"output_file": "ملف الإخراج",
+				"output_file_placeholder": "output.txt",
+				"tags": "العلامات",
+				"statement": "البيان",
+				"statement_placeholder": "اكتب بيان المسألة هنا...",
+				"submit": "إنشاء مسألة",
+				"update": "تحديث المسألة",
+				"title_required": "العنوان مطلوب",
+				"time_limit_min": "يجب أن يكون حد الوقت 1 مللي ثانية على الأقل",
+				"time_limit_max": "يجب أن يكون حد الوقت 10000 مللي ثانية على الأكثر",
+				"memory_limit_min": "يجب أن يكون حد الذاكرة 1 كيلوبايت على الأقل",
+				"memory_limit_max": "يجب أن يكون حد الذاكرة 1048576 كيلوبايت على الأكثر",
+				"point_min": "يجب أن تكون النقطة 0 على الأقل",
+				"point_max": "يجب أن تكون النقطة 100 على الأكثر",
+				"tags_placeholder": "أدخل العلامات...",
+				"create_success": "تم إنشاء المسألة بنجاح!",
+				"create_error": "فشل إنشاء المسألة. يرجى المحاولة مرة أخرى.",
+				"update_success": "تم تحديث المسألة بنجاح!",
+				"update_error": "فشل تحديث المسألة. يرجى المحاولة مرة أخرى."
+			},
+			"editorial": {
+				"placeholder": "اكتب محتوى الافتتاحية هنا...",
+				"create": "إنشاء افتتاحية",
+				"save": "حفظ الافتتاحية",
+				"delete": "حذف الافتتاحية",
+				"cancel": "إلغاء",
+				"deleting": "جارٍ الحذف...",
+				"saving": "جارٍ الحفظ...",
+				"no_editorial": "لا توجد افتتاحية لهذه المسألة بعد.",
+				"create_success": "تم إنشاء الافتتاحية بنجاح!",
+				"create_error": "فشل إنشاء الافتتاحية. يرجى المحاولة مرة أخرى.",
+				"update_success": "تم تحديث الافتتاحية بنجاح!",
+				"update_error": "فشل تحديث الافتتاحية. يرجى المحاولة مرة أخرى.",
+				"delete_success": "تم حذف الافتتاحية بنجاح!",
+				"delete_error": "فشل حذف الافتتاحية. يرجى المحاولة مرة أخرى.",
+				"delete_confirmation_title": "هل أنت متأكد أنك تريد حذف هذه الافتتاحية؟",
+				"delete_confirmation_description": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف الافتتاحية لهذه المسألة بشكل دائم."
+			},
+			"tabs": {
+				"info": "معلومات",
+				"editorial": "افتتاحية",
+				"testcase": "حالة اختبار"
+			},
+			"slug_page": {
+				"loading": "جارٍ التحميل...",
+				"problem_not_found": "المسألة غير موجودة",
+				"error_loading_problem": "خطأ في تحميل المسألة: {message}",
+				"error_loading_tags": "خطأ في تحميل العلامات: {message}",
+				"testcase_management": "سيتم تنفيذ إدارة حالات الاختبار هنا."
+			},
+			"testcase": {
+				"input": "الإدخال",
+				"output": "الإخراج",
+				"save": "حفظ",
+				"saving": "جارٍ الحفظ...",
+				"loading": "جارٍ التحميل...",
+				"select_to_edit": "حدد إدخال أو إخراج حالة اختبار لتعديله",
+				"content_placeholder": "سيظهر محتوى حالة الاختبار هنا...",
+				"new_testcase": "حالة اختبار جديدة",
+				"new_subtask": "مهمة فرعية جديدة",
+				"name": "الاسم",
+				"cancel": "إلغاء",
+				"create": "إنشاء",
+				"delete": "حذف",
+				"creating": "جارٍ الإنشاء...",
+				"create_subtask_title": "إنشاء مهمة فرعية جديدة",
+				"create_subtask_description": "أدخل اسمًا للمهمة الفرعية الجديدة.",
+				"subtask_name_placeholder": "أدخل اسم المهمة الفرعية",
+				"create_testcase_title": "إنشاء حالة اختبار جديدة",
+				"create_testcase_description": "أدخل اسمًا لحالة الاختبار الجديدة.",
+				"testcase_name_placeholder": "أدخل اسم حالة الاختبار",
+				"delete_subtask_title": "حذف المهمة الفرعية",
+				"delete_subtask_description": "هل أنت متأكد أنك تريد حذف هذه المهمة الفرعية؟ لا يمكن التراجع عن هذا الإجراء.",
+				"delete_testcase_title": "حذف حالة الاختبار",
+				"delete_testcase_description": "هل أنت متأكد أنك تريد حذف حالة الاختبار هذه؟ لا يمكن التراجع عن هذا الإجراء.",
+				"success": {
+					"title": "نجاح",
+					"saved": "تم حفظ محتوى حالة الاختبار بنجاح",
+					"testcase_created": "تم إنشاء حالة الاختبار بنجاح",
+					"testcase_deleted": "تم حذف حالة الاختبار بنجاح",
+					"subtask_created": "تم إنشاء المهمة الفرعية بنجاح",
+					"subtask_deleted": "تم حذف المهمة الفرعية بنجاح"
+				},
+				"error": {
+					"title": "خطأ",
+					"load_subtasks": "فشل تحميل المهام الفرعية",
+					"load_content": "فشل تحميل محتوى حالة الاختبار",
+					"save_content": "فشل حفظ محتوى حالة الاختبار",
+					"create_testcase": "فشل إنشاء حالة الاختبار",
+					"delete_testcase": "فشل حذف حالة الاختبار",
+					"create_subtask": "فشل إنشاء المهمة الفرعية",
+					"delete_subtask": "فشل حذف المهمة الفرعية"
+				}
+			}
+		},
+		"user": {
+			"title": "إدارة المستخدمين",
+			"search_placeholder": "البحث عن المستخدمين...",
+			"sort_by": "فرز حسب",
+			"sort_username": "اسم المستخدم",
+			"sort_fullname": "الاسم الكامل",
+			"sort_rating": "التقييم",
+			"sort_score": "النتيجة",
+			"sort_asc": "تصاعدي",
+			"sort_desc": "تنازلي",
+			"no_users_found": "لم يتم العثور على مستخدمين",
+			"showing_results": "عرض {start}-{end} من {total} نتائج",
+			"previous": "السابق",
+			"next": "التالي",
+			"page_of": "صفحة {current} من {total}",
+			"table": {
+				"avatar": "الصورة الرمزية",
+				"username": "اسم المستخدم",
+				"fullname": "الاسم الكامل",
+				"email": "البريد الإلكتروني",
+				"role": "الدور",
+				"rating": "التقييم",
+				"score": "النتيجة",
+				"verified": "تم التحقق منه",
+				"verified_yes": "نعم",
+				"verified_no": "لا"
+			},
+			"detail": {
+				"title": "تفاصيل المستخدم",
+				"back_to_users": "العودة إلى المستخدمين",
+				"verified": "تم التحقق منه",
+				"unverified": "لم يتم التحقق منه",
+				"email": "البريد الإلكتروني",
+				"joined": "انضم",
+				"last_updated": "آخر تحديث",
+				"bio": "السيرة الذاتية",
+				"statistics": "الإحصائيات",
+				"score": "النتيجة",
+				"rating": "التقييم",
+				"problems_solved": "المسائل التي تم حلها",
+				"submissions": "الإرسالات",
+				"blogs": "المدونات",
+				"comments": "التعليقات",
+				"contests": "المسابقات"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "منذ {count} ثوانٍ",
+				"minutes": "منذ {count} دقائق",
+				"hours": "منذ {count} ساعات",
+				"days": "منذ {count} أيام",
+				"months": "منذ {count} أشهر",
+				"years": "منذ {count} سنوات"
+			},
+			"page": {
+				"view": "عرض",
+				"title": "الإرسالات",
+				"breadcrumb": {
+					"home": "الرئيسية",
+					"submissions": "الإرسالات"
+				},
+				"actions": {
+					"submit_solution": "إرسال الحل",
+					"view_all": "عرض الكل",
+					"view_details": "عرض التفاصيل",
+					"submit_code": "إرسال الرمز"
+				},
+				"recent_submissions": "الإرسالات الأخيرة",
+				"score": "النتيجة",
+				"list_title": "تم العثور على {count} إرسالات",
+				"submissions_title": "الإرسالات الأخيرة",
+				"no_submissions": {
+					"title": "لم يتم العثور على إرسالات",
+					"empty": "كن أول من يرسل حلاً!",
+					"filtered": "لا توجد إرسالات تطابق المرشحات الحالية."
+				},
+				"common": {
+					"score": "النتيجة"
+				},
+				"pagination": {
+					"previous": "السابق",
+					"next": "التالي",
+					"page_info": "صفحة {page} من {total}"
+				},
+				"passed": "تم اجتيازه"
+			},
+			"filters": {
+				"problem": "المسألة",
+				"problem_placeholder": "حدد مسألة",
+				"language": "اللغة",
+				"select_language": "حدد اللغة",
+				"all_languages": "كل اللغات",
+				"status": "الحالة",
+				"select_status": "حدد الحالة",
+				"all_status": "كل الحالات",
+				"author": "المؤلف",
+				"author_placeholder": "حدد مؤلفًا",
+				"contest_placeholder": "حدد مسابقة",
+				"reset": "إعادة تعيين المرشحات"
+			},
+			"status": {
+				"ACCEPTED": "مقبول",
+				"WRONG_ANSWER": "إجابة خاطئة",
+				"TIME_LIMIT_EXCEEDED": "تجاوز حد الوقت",
+				"MEMORY_LIMIT_EXCEEDED": "تجاوز حد الذاكرة",
+				"RUNTIME_ERROR": "خطأ في وقت التشغيل",
+				"COMPILATION_ERROR": "خطأ في الترجمة",
+				"INTERNAL_ERROR": "خطأ داخلي",
+				"PENDING": "قيد الانتظار",
+				"JUDGING": "قيد التحكيم",
+				"accepted": "مقبول",
+				"wrong_answer": "إجابة خاطئة",
+				"time_limit_exceeded": "تجاوز حد الوقت",
+				"memory_limit_exceeded": "تجاوز حد الذاكرة",
+				"runtime_error": "خطأ في وقت التشغيل",
+				"compilation_error": "خطأ في الترجمة",
+				"internal_error": "خطأ داخلي",
+				"pending": "قيد الانتظار",
+				"judging": "قيد التحكيم"
+			},
+			"table": {
+				"status": "الحالة",
+				"problem": "المسألة",
+				"author": "المؤلف",
+				"language": "اللغة",
+				"submitted": "تم الإرسال",
+				"actions": "الإجراءات",
+				"error_loading": "خطأ في تحميل الإرسالات",
+				"unknown_problem": "مسألة غير معروفة",
+				"by": "بواسطة",
+				"solved": "تم حلها",
+				"score": "النتيجة"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "فشل تحميل الإرسالات"
+				},
+				"empty": {
+					"title": "لا توجد إرسالات بعد",
+					"description": "كن أول من يرسل حلاً!"
+				}
+			},
+			"detail": {
+				"title": "تفاصيل الإرسال",
+				"breadcrumb": {
+					"home": "الرئيسية",
+					"submissions": "الإرسالات"
+				},
+				"tabs": {
+					"info": "معلومات",
+					"source_code": "الكود المصدري",
+					"test_cases": "حالات الاختبار",
+					"log": "السجل"
+				},
+				"info": {
+					"author": "المؤلف",
+					"problem": "المسألة",
+					"language": "اللغة",
+					"score": "النتيجة",
+					"submitted": "تم الإرسال",
+					"id": "المعرف"
+				},
+				"actions": {
+					"back": "العودة",
+					"submit_again": "إرسال مرة أخرى",
+					"view_all_submissions": "عرض كل الإرسالات"
+				},
+				"content": {
+					"no_log_available": "لا توجد معلومات سجل متاحة",
+					"no_test_cases_available": "لا توجد نتائج حالات اختبار متاحة",
+					"subtask_count": "{count} مهمة فرعية",
+					"subtask_count_other": "{count} مهام فرعية",
+					"expand_all": "توسيع الكل",
+					"collapse_all": "طي الكل",
+					"tests_passed": "{passed} / {total} تم اجتيازه",
+					"not_found": {
+						"title": "لم يتم العثور على الإرسال",
+						"message": "لم يتم العثور على الإرسال الذي تبحث عنه.",
+						"back_button": "العودة إلى الإرسالات"
+					},
+					"partial": "جزئي",
+					"submitted_for": "تم الإرسال لـ"
+				}
+			},
+			"chart": {
+				"status": "الحالة",
+				"languages": "اللغات"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "جارية",
+				"upcoming": "قادمة",
+				"ended": "منتهية",
+				"create_button": "إنشاء مسابقة",
+				"search_placeholder": "البحث عن المسابقات...",
+				"loading": "جارٍ تحميل المسابقات...",
+				"rated": "مُقيَّم",
+				"unrated": "غير مُقيَّم"
+			},
+			"detail": {
+				"info_tab": "معلومات",
+				"problems_tab": "المسائل",
+				"submissions_tab": "الإرسالات",
+				"standings_tab": "الترتيب",
+				"search_problems": "البحث عن المسائل...",
+				"add_problem": "إضافة مسألة",
+				"problem_title": "العنوان",
+				"actions": "الإجراءات",
+				"add": "إضافة",
+				"adding": "جارٍ الإضافة...",
+				"remove": "إزالة",
+				"rank": "الترتيب",
+				"user": "المستخدم",
+				"score": "النتيجة",
+				"no_standings": "لا يوجد ترتيب متاح",
+				"loading": "جارٍ التحميل...",
+				"contest_updated": "تم تحديث المسابقة بنجاح!",
+				"problem_added": "تمت إضافة المسألة إلى المسابقة بنجاح!",
+				"failed_to_add_problem": "فشل إضافة المسألة إلى المسابقة",
+				"problem_removed": "تمت إزالة المسألة من المسابقة بنجاح!",
+				"failed_to_remove_problem": "فشل إزالة المسألة من المسابقة",
+				"remove_problem_title": "تأكيد الإزالة",
+				"remove_problem_description": "هل أنت متأكد أنك تريد إزالة \"{title}\" من هذه المسابقة؟ لا يمكن التراجع عن هذا الإجراء.",
+				"remove_problem_cancel": "إلغاء",
+				"remove_problem_confirm": "إزالة"
+			},
+			"create": {
+				"title": "إنشاء مسابقة"
+			},
+			"edit": {
+				"title": "تعديل المسابقة",
+				"loading": "جارٍ تحميل المسابقة...",
+				"cancel": "إلغاء"
+			},
+			"form": {
+				"title": "العنوان",
+				"title_placeholder": "أدخل عنوان المسابقة",
+				"start_time": "وقت البدء",
+				"end_time": "وقت الانتهاء",
+				"time": "الوقت",
+				"select_start_date": "حدد تاريخ البدء",
+				"select_end_date": "حدد تاريخ الانتهاء",
+				"is_rated": "هل هو مُقيَّم",
+				"is_rated_placeholder": "حدد ما إذا كانت المسابقة مُقيَّمة",
+				"yes": "نعم",
+				"no": "لا",
+				"penalty": "العقوبة (بالدقائق)",
+				"penalty_placeholder": "أدخل العقوبة بالدقائق",
+				"penalty_min": "يجب أن تكون العقوبة 0 دقيقة على الأقل",
+				"description": "الوصف",
+				"description_placeholder": "أدخل وصف المسابقة",
+				"submit": "إنشاء مسابقة",
+				"update": "تحديث المسابقة",
+				"title_required": "العنوان مطلوب",
+				"start_time_required": "وقت البدء مطلوب",
+				"end_time_required": "وقت الانتهاء مطلوب",
+				"create_success": "تم إنشاء المسابقة بنجاح!",
+				"create_error": "فشل إنشاء المسابقة. يرجى المحاولة مرة أخرى.",
+				"update_success": "تم تحديث المسابقة بنجاح!",
+				"update_error": "فشل تحديث المسابقة. يرجى المحاولة مرة أخرى."
+			}
+		},
+		"judger": {
+			"title": "إدارة المحكمين",
+			"description": "مراقبة وإدارة جميع المحكمين في النظام",
+			"loading": "جارٍ تحميل المحكمين...",
+			"judger": "المحكم",
+			"busy": "مشغول",
+			"idle": "خامل",
+			"judgerBusyDescription": "يقوم هذا المحكم حاليًا بمعالجة الإرسالات",
+			"judgerIdleDescription": "هذا المحكم جاهز لمعالجة الإرسالات",
+			"noJudgers": "لم يتم العثور على محكمين",
+			"noJudgersDescription": "لا يوجد محكمون متصلون بالنظام حاليًا"
+		},
+		"notification": {
+			"send_system_notification": "إرسال إشعار النظام",
+			"send_system_notification_description": "إرسال إشعار لجميع المستخدمين",
+			"content_placeholder": "أدخل محتوى الإشعار...",
+			"send": "إرسال",
+			"sending": "جارٍ الإرسال...",
+			"success": {
+				"sent": "تم إرسال إشعار النظام بنجاح!"
+			},
+			"errors": {
+				"content_required": "محتوى الإشعار مطلوب",
+				"send_failed": "فشل إرسال إشعار النظام"
+			}
+		}
+	},
+	"notifications": {
+		"title": "الإشعارات",
+		"mark_all_read": "وضع علامة على الكل كمقروء",
+		"mark_as_read": "وضع علامة كمقروء",
+		"view_all": "عرض كل الإشعارات",
+		"no_notifications": "لا توجد إشعارات بعد",
+		"loading": "جارٍ تحميل الإشعارات...",
+		"failed_to_load": "فشل تحميل الإشعارات",
+		"unread_count": "{count} إشعار غير مقروء",
+		"unread_count_plural": "{count} إشعارات غير مقروءة",
+		"read_count": "{count} إشعار مقروء",
+		"read_count_plural": "{count} إشعارات مقروءة",
+		"just_now": "الآن",
+		"minutes_ago": "منذ {count} دقيقة",
+		"hours_ago": "منذ {count} ساعة",
+		"days_ago": "منذ {count} يوم",
+		"tabs": {
+			"all": "الكل",
+			"unread": "غير مقروء",
+			"read": "مقروء"
+		},
+		"types": {
+			"new_problem": "مسألة جديدة: {title}",
+			"new_contest": "مسابقة جديدة: {title}",
+			"new_blog": "مدونة جديدة: {title}",
+			"rating_updated": "تم تحديث التقييم",
+			"system": "إشعار النظام",
+			"new_problem_available": "تتوفر مسألة جديدة",
+			"new_contest_available": "تتوفر مسابقة جديدة",
+			"new_blog_post": "منشور مدونة جديد"
+		}
+	},
+	"settings": {
+		"title": "الإعدادات",
+		"description": "إدارة إعدادات حسابك وتفضيلاتك.",
+		"tabs": {
+			"basic": "أساسي",
+			"profile": "الملف الشخصي",
+			"notification": "الإشعار"
+		},
+		"basic": {
+			"theme": {
+				"title": "المظهر",
+				"description": "حدد مظهرًا للتطبيق.",
+				"light": "فاتح",
+				"dark": "داكن",
+				"system": "النظام",
+				"auto": "تلقائي"
+			},
+			"language": {
+				"title": "اللغة",
+				"description": "حدد لغة للتطبيق."
+			}
+		},
+		"profile": {
+			"title": "الملف الشخصي",
+			"description": "تحديث معلومات ملفك الشخصي.",
+			"form": {
+				"username": "اسم المستخدم",
+				"fullname": "الاسم الكامل",
+				"bio": "السيرة الذاتية",
+				"save": "حفظ التغييرات",
+				"saving": "جارٍ الحفظ...",
+				"change_avatar": "تغيير الصورة الرمزية",
+				"reset_password": "إعادة تعيين كلمة المرور",
+				"update_success": "تم تحديث الملف الشخصي بنجاح!",
+				"update_error": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى."
+			}
+		},
+		"notification": {
+			"title": "الإشعارات",
+			"description": "تكوين تفضيلات الإشعارات الخاصة بك.",
+			"form": {
+				"new_blog": "منشورات المدونة الجديدة",
+				"new_problem": "المسائل الجديدة",
+				"new_contest": "المسابقات الجديدة",
+				"update_rating": "تحديثات التقييم",
+				"system": "إشعارات النظام",
+				"save": "حفظ التغييرات",
+				"saving": "جارٍ الحفظ...",
+				"update_success": "تم تحديث إعدادات الإشعارات بنجاح!",
+				"update_error": "فشل تحديث إعدادات الإشعارات. يرجى المحاولة مرة أخرى."
+			}
+		}
+	}
+}

@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "Anasayfa",
+			"problems": "Sorular",
+			"submissions": "Gönderimler",
+			"contests": "Yarışmalar",
+			"standing": "Sıralama",
+			"login": "Giriş Yap",
+			"register": "Kayıt Ol",
+			"logout": "Çıkış Yap",
+			"profile": "Profil",
+			"settings": "Ayarlar",
+			"appearance": "Görünüm",
+			"language": "Dil",
+			"light": "Açık",
+			"dark": "Koyu",
+			"dashboard": "Kontrol Paneli"
+		},
+		"footer": {
+			"copyright": "Telif Hakkı © {year} Nourist",
+			"license": "Lisans",
+			"github": "GitHub",
+			"author": "Yazar",
+			"language": "Dil"
+		}
+	},
+	"auth": {
+		"login": "Giriş Yap",
+		"register": "Kayıt Ol",
+		"verify_email": "E-postayı Doğrula",
+		"forgot_password": "Şifremi Unuttum",
+		"reset_password": "Şifreyi Sıfırla",
+		"get_password": "Şifre Al",
+		"verify_success": "E-posta başarıyla doğrulandı",
+		"dont_have_account": "Hesabınız yok mu?",
+		"already_have_account": "Zaten bir hesabınız var mı?",
+		"already_have_password": "Zaten bir şifreniz var mı?",
+		"account_already_verified": "Hesap zaten doğrulandı mı?",
+		"continue_with_google": "Google ile Devam Et",
+		"form": {
+			"email": "E-posta",
+			"password": "Şifre",
+			"username": "Kullanıcı Adı",
+			"enter_email": "E-postanızı girin",
+			"enter_password": "Şifrenizi girin",
+			"enter_username": "Kullanıcı adınızı girin",
+			"confirm_password": "Şifreyi Onayla",
+			"enter_confirm_password": "Şifrenizi tekrar girin"
+		},
+		"message": {
+			"email_required": "E-posta gereklidir",
+			"password_required": "Şifre gereklidir",
+			"username_required": "Kullanıcı adı gereklidir",
+			"email_invalid": "E-posta geçersiz",
+			"password_min": "Şifre en az 8 karakter olmalıdır",
+			"password_uppercase": "Şifre en az bir büyük harf içermelidir",
+			"password_lowercase": "Şifre en az bir küçük harf içermelidir",
+			"password_number": "Şifre en az bir rakam içermelidir",
+			"password_special": "Şifre en az bir özel karakter içermelidir",
+			"confirm_password_required": "Şifre onayı gereklidir",
+			"confirm_password_not_match": "Şifre onayı eşleşmiyor",
+			"token_required": "Jeton gereklidir"
+		},
+		"success": {
+			"register": "Kayıt başarılı",
+			"login": "Giriş başarılı",
+			"forgot_password": "Şifre sıfırlama e-postası başarıyla gönderildi",
+			"verify_email_send": "Doğrulama e-postası başarıyla gönderildi",
+			"reset_password": "Şifre başarıyla sıfırlandı",
+			"verify": "Harika! E-posta adresiniz doğrulandı. Hesabınız artık aktif ve kullanıma hazır."
+		},
+		"error": {
+			"login": "Giriş başarısız"
+		},
+		"description": {
+			"forgot_password": "Şifre sıfırlama bağlantısı almak için e-postanızı girin",
+			"verify_email": "E-posta doğrulama bağlantısı almak için e-postanızı girin"
+		},
+		"toast": {
+			"verify_email": "Doğrulama için lütfen e-postanızı kontrol edin"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Alıntı",
+		"code_block": "Kod Bloğu",
+		"toggle_highlight": "Vurguyu Değiştir ({color})",
+		"heading": "Başlık {level}",
+		"insert_image": "Resim Ekle",
+		"link": "Bağlantı",
+		"paste_a_link": "Bir bağlantı yapıştırın...",
+		"apply_link": "Bağlantıyı Uygula",
+		"open_in_new_window": "Yeni Pencerede Aç",
+		"remove_link": "Bağlantıyı Kaldır",
+		"toggle_list": "{type} Listesini Değiştir",
+		"toggle_mark": "{type} Değiştir",
+		"align": "Hizala {align}",
+		"undo": "Geri Al",
+		"redo": "Yinele",
+		"highlight_text": "Metni Vurgula",
+		"highlight": "Vurgu",
+		"remove_highlight": "Vurguyu Kaldır",
+		"highlight_color": "{color} Vurgu Rengi",
+		"highlight_colors": "Vurgu Renkleri",
+		"format_text_as_heading": "Metni Başlık Olarak Biçimlendir",
+		"heading_tooltip": "Başlık",
+		"list_options": "Liste Seçenekleri",
+		"list": "Liste",
+		"bulletlist": "Madde İşaretli Liste",
+		"orderedlist": "Sıralı Liste",
+		"tasklist": "Görev Listesi"
+	},
+	"upload": {
+		"title": "Resim Yükle",
+		"supported_formats": "Desteklenen formatlar: JPG, PNG, GIF",
+		"click_to_select": "Seçmek için tıklayın",
+		"or_drag_and_drop_file_here": "veya dosyayı buraya sürükleyip bırakın"
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Programlama topluluğundan en son makaleler, eğitimler ve içgörüler",
+		"new": "Yeni",
+		"sidebar": {
+			"rating": "Değerlendirme",
+			"score": "Puan",
+			"current_contest": "Mevcut Yarışma",
+			"ending_in": "Bitiş tarihi",
+			"join": "Katıl",
+			"top_raters": "En İyi Değerlendirenler",
+			"hot_problems": "Popüler Sorular",
+			"my_stats": "İstatistiklerim",
+			"problem": "Soru"
+		}
+	},
+	"pagination": {
+		"view": "Görünüm",
+		"sizes": "Boyutlar"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filtrele",
+			"status": "Durum",
+			"all": "Tümü",
+			"solved": "Çözüldü",
+			"attempted": "Denendi",
+			"todo": "Yapılacak",
+			"difficulty": "Zorluk",
+			"easy": "Kolay",
+			"medium": "Orta",
+			"hard": "Zor",
+			"editorial": "Editöryal",
+			"has_editorial": "Editöryal Var",
+			"point": "Puan",
+			"tags": "Etiketler",
+			"contest": "Yarışma",
+			"contest_placeholder": "Bir yarışma seçin"
+		},
+		"search": {
+			"sort_by": "Sırala",
+			"title": "Başlık",
+			"point": "Puan",
+			"difficulty": "Zorluk",
+			"accept": "Kabul Et",
+			"accept_rate": "Kabul Oranı"
+		},
+		"table": {
+			"title": "Başlık",
+			"difficulty": "Zorluk",
+			"point": "Puan",
+			"accepted": "Kabul Edildi",
+			"acceptance": "Kabul",
+			"editorial": "Editöryal",
+			"easy": "Kolay",
+			"medium": "Orta",
+			"hard": "Zor",
+			"delete": {
+				"title": "Silmeyi Onayla",
+				"description": "\"{title}\" sorununu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+				"cancel": "İptal",
+				"confirm": "Sil",
+				"success": "Sorun başarıyla silindi",
+				"error": "Sorun silinemedi"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Soru #{number}",
+				"breadcrumb": {
+					"problems": "Sorular"
+				}
+			},
+			"sidebar": {
+				"info": "Bilgi",
+				"difficulty": {
+					"label": "Zorluk",
+					"easy": "Kolay",
+					"medium": "Orta",
+					"hard": "Zor"
+				},
+				"points": "Puanlar",
+				"constraints": {
+					"title": "Kısıtlamalar",
+					"time_limit": "Zaman Sınırı",
+					"memory_limit": "Bellek Sınırı"
+				},
+				"io_format": {
+					"title": "G/Ç Formatı",
+					"input": "Giriş",
+					"output": "Çıkış",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "İstatistikler",
+					"accepted": "Kabul Edildi",
+					"submissions": "Gönderimler",
+					"acceptance_rate": "Kabul Oranı"
+				},
+				"status": {
+					"label": "Durum",
+					"solved": "Çözüldü",
+					"attempted": "Denendi"
+				},
+				"tags": "Etiketler",
+				"actions": {
+					"title": "Eylemler",
+					"submit": "Gönder",
+					"editorial": "Editöryal",
+					"view_submissions": "Gönderimleri Görüntüle"
+				}
+			},
+			"statement": {
+				"statement": "Sorun Bildirimi",
+				"constraints": "Kısıtlamalar",
+				"time_limit": "Zaman Sınırı",
+				"memory_limit": "Bellek Sınırı",
+				"io_format": "G/Ç Formatı",
+				"input_file": "Giriş Dosyası",
+				"output_file": "Çıkış Dosyası",
+				"subtasks": "Alt Görevler",
+				"subtask_number": "Alt Görev {number}: {name}",
+				"test_cases_count": "{count} test durumu"
+			},
+			"error": {
+				"not_found": "Sorun bulunamadı",
+				"load_failed": "Sorun yüklenemedi"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Editöryal",
+		"not_available": "Editöryal Mevcut Değil",
+		"not_available_description": "Bu sorunun editöryali henüz mevcut değil veya önce sorunu çözmeniz gerekiyor.",
+		"check_again": "Tekrar Kontrol Et",
+		"warning": "Bu editöryal, sorunun çözümünü ve açıklamasını içermektedir. Önce sorunu denediğinizden emin olun!",
+		"created_by": "Editöryal: {username}",
+		"breadcrumb": {
+			"problems": "Sorular",
+			"editorial": "Editöryal"
+		},
+		"back_to_problem": "Soruya Geri Dön"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} saniye önce",
+			"minutes": "{count} dakika önce",
+			"hours": "{count} saat önce",
+			"days": "{count} gün önce",
+			"months": "{count} ay önce",
+			"years": "{count} yıl önce"
+		},
+		"page": {
+			"view": "Görünüm",
+			"title": "Gönderimler",
+			"breadcrumb": {
+				"home": "Anasayfa",
+				"submissions": "Gönderimler"
+			},
+			"actions": {
+				"submit_solution": "Çözüm Gönder",
+				"view_all": "Tümünü Görüntüle",
+				"view_details": "Ayrıntıları Görüntüle",
+				"submit_code": "Kod Gönder"
+			},
+			"recent_submissions": "Son Gönderimler",
+			"score": "Puan",
+			"list_title": "{count} gönderim bulundu",
+			"submissions_title": "Son Gönderimler",
+			"no_submissions": {
+				"title": "Gönderim Bulunamadı",
+				"empty": "İlk çözümü gönderen siz olun!",
+				"filtered": "Mevcut filtrelerinizle eşleşen gönderim yok."
+			},
+			"common": {
+				"score": "Puan"
+			},
+			"pagination": {
+				"previous": "Önceki",
+				"next": "Sonraki",
+				"page_info": "Sayfa {page} / {total}"
+			},
+			"passed": "geçti"
+		},
+		"filters": {
+			"problem": "Soru",
+			"problem_placeholder": "Bir soru seçin",
+			"language": "Dil",
+			"select_language": "Dil seçin",
+			"all_languages": "Tüm Diller",
+			"status": "Durum",
+			"select_status": "Durum seçin",
+			"all_status": "Tüm Durumlar",
+			"all_contests": "All Contests",
+			"author": "Yazar",
+			"author_placeholder": "Bir yazar seçin",
+			"contest": "Contest",
+			"contest_placeholder": "Bir yarışma seçin",
+			"reset": "Filtreleri Sıfırla"
+		},
+		"status": {
+			"ACCEPTED": "Kabul Edildi",
+			"WRONG_ANSWER": "Yanlış Cevap",
+			"TIME_LIMIT_EXCEEDED": "Zaman Sınırı Aşıldı",
+			"MEMORY_LIMIT_EXCEEDED": "Bellek Sınırı Aşıldı",
+			"RUNTIME_ERROR": "Çalışma Zamanı Hatası",
+			"COMPILATION_ERROR": "Derleme Hatası",
+			"INTERNAL_ERROR": "İç Hata",
+			"PENDING": "Beklemede",
+			"JUDGING": "Değerlendiriliyor",
+			"accepted": "Kabul Edildi",
+			"wrong_answer": "Yanlış Cevap",
+			"time_limit_exceeded": "Zaman Sınırı Aşıldı",
+			"memory_limit_exceeded": "Bellek Sınırı Aşıldı",
+			"runtime_error": "Çalışma Zamanı Hatası",
+			"compilation_error": "Derleme Hatası",
+			"internal_error": "İç Hata",
+			"pending": "Beklemede",
+			"judging": "Değerlendiriliyor"
+		},
+		"table": {
+			"status": "Durum",
+			"problem": "Soru",
+			"author": "Yazar",
+			"language": "Dil",
+			"submitted": "Gönderildi",
+			"actions": "Eylemler",
+			"error_loading": "Gönderimler Yüklenirken Hata Oluştu",
+			"unknown_problem": "Bilinmeyen Sorun",
+			"by": "tarafından",
+			"solved": "çözüldü",
+			"score": "Puan"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Gönderimler yüklenemedi"
+			},
+			"empty": {
+				"title": "Henüz Gönderim Yok",
+				"description": "İlk çözümü gönderen siz olun!"
+			}
+		},
+		"detail": {
+			"title": "Gönderim Ayrıntıları",
+			"breadcrumb": {
+				"home": "Anasayfa",
+				"submissions": "Gönderimler"
+			},
+			"tabs": {
+				"info": "Bilgi",
+				"source_code": "Kaynak Kodu",
+				"test_cases": "Test Durumları",
+				"log": "Günlük"
+			},
+			"info": {
+				"author": "Yazar",
+				"problem": "Soru",
+				"language": "Dil",
+				"score": "Puan",
+				"submitted": "Gönderildi",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Geri",
+				"submit_again": "Tekrar Gönder",
+				"view_all_submissions": "Tüm Gönderimleri Görüntüle"
+			},
+			"content": {
+				"no_log_available": "Günlük bilgisi yok",
+				"no_test_cases_available": "Test durumu sonucu yok",
+				"subtask_count": "{count} alt görev",
+				"subtask_count_other": "{count} alt görev",
+				"expand_all": "Tümünü Genişlet",
+				"collapse_all": "Tümünü Daralt",
+				"tests_passed": "{passed} / {total} geçti",
+				"not_found": {
+					"title": "Gönderim Bulunamadı",
+					"message": "Aradığınız gönderim bulunamadı.",
+					"back_button": "Gönderimlere Geri Dön"
+				},
+				"partial": "Kısmi",
+				"submitted_for": "İçin gönderildi"
+			}
+		},
+		"chart": {
+			"status": "Durum",
+			"languages": "Diller"
+		}
+	},
+	"submit": {
+		"easy": "Kolay",
+		"medium": "Orta",
+		"hard": "Zor",
+		"page": {
+			"title": "Kod Gönder",
+			"select_problem": {
+				"title": "Soru Seçilmedi",
+				"description": "Lütfen çözümünüzü göndermek için bir soru seçin.",
+				"browse": "Sorulara Göz At"
+			},
+			"problem_not_found": {
+				"title": "Sorun Bulunamadı",
+				"description": "Göndermeye çalıştığınız sorun bulunamadı."
+			},
+			"breadcrumb": {
+				"home": "Anasayfa",
+				"problems": "Sorular"
+			},
+			"back_to_problem": "Soruya Geri Dön",
+			"language": "Programlama Dili",
+			"select_language": "Dil seçin",
+			"code": "Kaynak Kodu",
+			"code_placeholder": "Kodunuzu buraya girin...",
+			"submit": "Gönder",
+			"submitting": "Gönderiliyor...",
+			"login_required": {
+				"message": "Lütfen",
+				"login": "giriş yapın",
+				"to_submit": "çözümünüzü göndermek için"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "Kod göndermek için giriş yapmalısınız",
+				"select_problem": "Lütfen göndermek için bir soru seçin",
+				"enter_code": "Lütfen kodunuzu girin",
+				"submit_failed": "Kod gönderilemedi. Lütfen tekrar deneyin."
+			},
+			"success": {
+				"submitted": "Kod başarıyla gönderildi!"
+			}
+		}
+	},
+	"error": {
+		"title": "Hay aksi! Bir şeyler ters gitti",
+		"message": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+		"try_again": "Tekrar Dene",
+		"go_home": "Anasayfaya Git"
+	},
+	"not_found": {
+		"title": "Hay aksi! Sayfa bulunamadı",
+		"message": "Aradığınız sayfa mevcut değil.",
+		"go_home": "Anasayfaya Git"
+	},
+	"blog": {
+		"create": {
+			"create": "Oluştur",
+			"blogs": "Bloglar",
+			"title": "Başlık",
+			"title_placeholder": "Başlık girin",
+			"description_placeholder": "Açıklama girin",
+			"upload_thumbnail": "Küçük resim yükle",
+			"save": "Kaydet",
+			"message": {
+				"title_required": "Başlık gereklidir",
+				"title_and_content_required": "Başlık ve içerik gereklidir."
+			},
+			"create_success": "Blog başarıyla oluşturuldu!",
+			"create_fail": "Blog oluşturulamadı."
+		},
+		"edit": {
+			"blogs": "Bloglar",
+			"edit": "Düzenle",
+			"save": "Kaydet",
+			"message": {
+				"title_required": "Başlık gereklidir",
+				"title_and_content_required": "Başlık ve içerik gereklidir."
+			},
+			"edit_success": "Blog başarıyla düzenlendi!",
+			"edit_fail": "Blog düzenlenemedi."
+		},
+		"card": {
+			"blogs": "Bloglar",
+			"delete_success": "Blog başarıyla silindi!",
+			"message": {
+				"delete_confirmation": "Bu blogu silmek istediğinizden emin misiniz?"
+			},
+			"delete": "Sil",
+			"edit": "Düzenle",
+			"cancel": "İptal"
+		},
+		"comment": {
+			"create_success": "Yorum başarıyla oluşturuldu!",
+			"date": {
+				"seconds": "{count} saniye önce",
+				"minutes": "{count} dakika önce",
+				"hours": "{count} saat önce",
+				"days": "{count} gün önce",
+				"months": "{count} ay önce",
+				"years": "{count} yıl önce"
+			},
+			"comment-placeholder": "Bir yorum yazın...",
+			"comment": "Yorum",
+			"comments": "Yorumlar",
+			"message": {
+				"comment_required": "Yorum gereklidir",
+				"delete_confirmation": "Bu yorumu silmek istediğinizden emin misiniz?"
+			},
+			"delete": "Sil",
+			"edit": "Düzenle",
+			"cancel": "İptal",
+			"delete_success": "Yorum başarıyla silindi!",
+			"edit_success": "Yorum başarıyla düzenlendi!"
+		}
+	},
+	"standing": {
+		"title": "Küresel Sıralama",
+		"description": "Derecelendirme ve toplam puana göre kullanıcıların sıralaması",
+		"rating": "Değerlendirme",
+		"score": "Puan",
+		"top_users": "En İyi Kullanıcılar",
+		"all_users": "Tüm Kullanıcılar",
+		"no_data": "Veri yok",
+		"modes": {
+			"rating": "Değerlendirme",
+			"score": "Puan"
+		},
+		"table": {
+			"rank": "Sıra",
+			"user": "Kullanıcı",
+			"rating": "Değerlendirme",
+			"score": "Puan"
+		},
+		"filters": {
+			"search_placeholder": "Kullanıcıları ara...",
+			"reset": "Sıfırla"
+		},
+		"errors": {
+			"load_failed": "Sıralama verileri yüklenemedi"
+		}
+	},
+	"async_combobox": {
+		"select": "Seç...",
+		"search": "Ara...",
+		"no_results": "Sonuç bulunamadı.",
+		"load_more": "Daha fazla yükle..."
+	},
+	"profile": {
+		"title": "Profil",
+		"loading": "Profil yükleniyor...",
+		"user_not_found": "Kullanıcı bulunamadı",
+		"sidebar": {
+			"edit_profile": "Profili Düzenle",
+			"rank": "Sıra",
+			"stats": "İstatistikler",
+			"score": "Puan",
+			"rating": "Değerlendirme",
+			"ac_problems": "AC Soruları",
+			"submissions": "Gönderimler",
+			"blogs": "Bloglar",
+			"comments": "Yorumlar",
+			"joined_contests": "Katılınan Yarışmalar",
+			"languages": "Diller",
+			"submissions_count": "gönderim",
+			"no_submissions": "Henüz gönderim yok",
+			"unranked": "Sıralanmamış"
+		},
+		"content": {
+			"submission_activity": "Gönderim Etkinliği",
+			"submissions_in_year": "son bir yıldaki gönderimler",
+			"accepted": "kabul edildi",
+			"loading_activity": "Etkinlik verileri yükleniyor...",
+			"rating_history": "Değerlendirme Geçmişi",
+			"problems_by_difficulty": "Zorluğa Göre AC Soruları",
+			"submissions_by_language": "Dile Göre AC Gönderimleri",
+			"less": "Daha Az",
+			"more": "Daha Fazla"
+		},
+		"tabs": {
+			"recent_solved_problems": "Son Çözülen Sorular",
+			"recent_submissions": "Son Gönderimler",
+			"blogs": "Bloglar",
+			"problem": "Soru",
+			"language": "Dil",
+			"solved_count": "Çözülen Sayısı",
+			"first_solved": "İlk Çözülen",
+			"status": "Durum",
+			"date": "Tarih",
+			"title": "Başlık",
+			"publish_date": "Yayın Tarihi",
+			"no_accepted_submissions": "Henüz kabul edilmiş gönderim yok.",
+			"no_recent_submissions": "Henüz gönderim yok.",
+			"no_blogs": "Henüz yayınlanmış blog yok."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Yarışmalar",
+			"running": "Devam Ediyor",
+			"upcoming": "Yaklaşan",
+			"ended": "Bitti",
+			"create_button": "Yarışma Oluştur",
+			"search_placeholder": "Yarışmaları ara...",
+			"loading": "Yarışmalar yükleniyor...",
+			"no_contests": "Yarışma bulunamadı",
+			"no_contests_description": "Yaklaşan yarışmalar ve zorluklar için daha sonra tekrar kontrol edin",
+			"error_loading": "Yarışmalar yüklenirken hata oluştu",
+			"rated": "Dereceli",
+			"unrated": "Derecesiz",
+			"participants": "{count, plural, =0 {Katılımcı yok} =1 {# katılımcı} other {# katılımcı}}",
+			"joining": "Katıldı"
+		},
+		"detail": {
+			"info_tab": "Bilgi",
+			"problems_tab": "Sorular",
+			"submissions_tab": "Gönderimler",
+			"standings_tab": "Sıralama",
+			"time_remaining": "Kalan Süre",
+			"search_problems": "Soruları ara...",
+			"add_problem": "Soru Ekle",
+			"problem_title": "Başlık",
+			"problem_slug": "Kısa Ad",
+			"problem_point": "Puan",
+			"actions": "Eylemler",
+			"add": "Ekle",
+			"adding": "Ekleniyor...",
+			"remove": "Kaldır",
+			"contest_problems": "Yarışma Soruları",
+			"rank": "Sıra",
+			"user": "Kullanıcı",
+			"score": "Puan",
+			"time": "Zaman",
+			"points": "Puanlar",
+			"no_standings": "Sıralama yok",
+			"loading": "Yükleniyor...",
+			"contest_updated": "Yarışma başarıyla güncellendi!",
+			"problem_added": "Soru yarışmaya başarıyla eklendi!",
+			"failed_to_add_problem": "Soru yarışmaya eklenemedi",
+			"problem_removed": "Soru yarışmadan başarıyla kaldırıldı!",
+			"failed_to_remove_problem": "Soru yarışmadan kaldırılamadı",
+			"remove_problem_title": "Kaldırmayı Onayla",
+			"remove_problem_description": "Bu yarışmadan \"{title}\" öğesini kaldırmak istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+			"remove_problem_cancel": "İptal",
+			"remove_problem_confirm": "Kaldır",
+			"running": "Devam Ediyor",
+			"upcoming": "Yaklaşan",
+			"ended": "Bitti",
+			"rated": "Dereceli",
+			"start_time": "Başlangıç Zamanı",
+			"end_time": "Bitiş Zamanı",
+			"participants": "Katılımcılar",
+			"problems": "Sorular",
+			"no_problems": "Soru yok",
+			"join": "Yarışmaya Katıl",
+			"leave": "Yarışmadan Ayrıl",
+			"joining": "Katılıyor...",
+			"leaving": "Ayrılıyor...",
+			"join_success": "Yarışmaya başarıyla katıldınız!",
+			"leave_success": "Yarışmadan başarıyla ayrıldınız!",
+			"join_fail": "Yarışmaya katılamadınız. Lütfen tekrar deneyin.",
+			"leave_fail": "Yarışmadan ayrılamadınız. Lütfen tekrar deneyin."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Kontrol Paneli",
+			"blog": "Blog",
+			"problem": "Soru",
+			"submission": "Gönderim",
+			"contest": "Yarışma",
+			"user": "Kullanıcı",
+			"judger": "Değerlendirici",
+			"notification": "Bildirim",
+			"profile": "Profil",
+			"logout": "Çıkış Yap",
+			"appearance": "Görünüm",
+			"language": "Dil",
+			"light": "Açık",
+			"dark": "Koyu",
+			"home": "Anasayfa"
+		},
+		"dashboard": {
+			"unable_to_load": "Kontrol paneli yüklenemiyor",
+			"error_loading": "Kontrol paneli verileri yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.",
+			"refresh": "Kontrol Panelini Yenile",
+			"total_users": "Toplam Kullanıcı",
+			"active_today": "Bugün Aktif",
+			"total_submissions": "Toplam Gönderim",
+			"success_rate": "Başarı Oranı",
+			"active_problems": "Aktif Sorular",
+			"user_activity": "Kullanıcı Etkinliği",
+			"submission_volume": "Gönderim Hacmi",
+			"language_distribution": "Dil Dağılımı",
+			"submission_results": "Gönderim Sonuçları",
+			"problem_difficulty": "Soru Zorluğu",
+			"contest_participation": "Yarışma Katılımı",
+			"top_users": "En İyi Kullanıcılar",
+			"popular_problems": "Popüler Sorular"
+		},
+		"chart": {
+			"loading": "Yükleniyor...",
+			"contests": "Yarışmalar",
+			"participants": "Katılımcılar",
+			"contest_participation_trends": "Yarışma Katılım Trendleri",
+			"contest_participation_description": "Aylık yarışma sayısı ve katılımcı sayıları",
+			"number_of_contests": "Yarışma Sayısı (Sol Y Ekseni)",
+			"total_participants": "Toplam Katılımcı (Sağ Y Ekseni)",
+			"judger_queue_performance": "Değerlendirici Kuyruk Performansı",
+			"judger_queue_description": "Gerçek zamanlı kuyruk boyutu ve işlem süresi izleme",
+			"queue_size": "Kuyruk Boyutu",
+			"processing_time": "İşlem Süresi",
+			"queue_size_threshold_warning": "Kuyruk boyutu eşiğin üzerinde!",
+			"queue_size_left": "Kuyruk Boyutu (Sol Y Ekseni)",
+			"processing_time_right": "İşlem Süresi (Sağ Y Ekseni)",
+			"threshold": "Eşik",
+			"language_usage": "Programlama Dili Kullanımı",
+			"language_usage_description": "Programlama diline göre gönderimlerin dağılımı",
+			"submissions": "Gönderimler",
+			"percentage": "Yüzde",
+			"total_submissions": "Toplam Gönderim",
+			"problem_difficulty_distribution": "Soru Zorluk Dağılımı",
+			"problem_difficulty_description": "Zorluk seviyesine ve çözüm oranlarına göre soru sayısı",
+			"total_problems": "Toplam Soru",
+			"solved_by_users": "Kullanıcılar Tarafından Çözüldü",
+			"solve_rate": "Çözüm Oranı",
+			"submission_results_distribution": "Gönderim Sonuçları Dağılımı",
+			"submission_results_description": "Gönderim kararlarının dökümü",
+			"count": "Sayı",
+			"submission_volume": "Gönderim Hacmi",
+			"submission_volume_description": "Günlük gönderim sayısı ve kabul oranı",
+			"accepted": "Kabul Edildi",
+			"success_rate": "Başarı Oranı",
+			"system_resource_usage": "Sistem Kaynak Kullanımı",
+			"system_resource_description": "Gerçek zamanlı CPU, Bellek ve Disk kullanımı izleme",
+			"cpu_usage": "CPU Kullanımı",
+			"memory_usage": "Bellek Kullanımı",
+			"disk_usage": "Disk Kullanımı",
+			"high_resource_usage": "Yüksek kaynak kullanımı algılandı!",
+			"cpu": "CPU",
+			"memory": "Bellek",
+			"disk": "Disk",
+			"user_registrations": "Kullanıcı Kayıtları",
+			"user_registrations_description": "Günlük yeni kayıtlar"
+		},
+		"table": {
+			"loading": "Yükleniyor...",
+			"most_attempted_problems": "En Çok Denenen Sorular",
+			"most_attempted_problems_description": "Gönderim sayısına göre popüler sorular",
+			"problem": "Soru",
+			"difficulty": "Zorluk",
+			"attempts": "Denemeler",
+			"solved": "Çözüldü",
+			"success_rate": "Başarı Oranı",
+			"top_users_this_week": "Bu Haftanın En İyi Kullanıcıları",
+			"top_users_this_week_description": "Çözülen sorulara göre en aktif kullanıcılar",
+			"rank": "Sıra",
+			"user": "Kullanıcı",
+			"submissions": "Gönderimler"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Ara...",
+				"sort_by": "Sırala",
+				"title": "Başlık",
+				"point": "Puan",
+				"difficulty": "Zorluk",
+				"accept": "Kabul Et",
+				"accept_rate": "Kabul Oranı"
+			},
+			"filter": {
+				"new": "Yeni",
+				"title": "Filtrele",
+				"difficulty": "Zorluk",
+				"easy": "Kolay",
+				"medium": "Orta",
+				"hard": "Zor",
+				"point": "Puan",
+				"tags": "Etiketler",
+				"all": "Tümü",
+				"editorial": "Editöryal",
+				"has_editorial": "Editöryal Var",
+				"point_range": "Puan Aralığı",
+				"contest": "Yarışma"
+			},
+			"table": {
+				"title": "Başlık",
+				"tags": "Etiketler",
+				"difficulty": "Zorluk",
+				"point": "Puan",
+				"accepted": "Kabul Edildi",
+				"acceptance": "Kabul",
+				"editorial": "Editöryal",
+				"easy": "Kolay",
+				"medium": "Orta",
+				"hard": "Zor",
+				"delete": {
+					"title": "Silmeyi Onayla",
+					"description": "\"{title}\" sorununu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+					"cancel": "İptal",
+					"confirm": "Sil",
+					"success": "Sorun başarıyla silindi",
+					"error": "Sorun silinemedi"
+				}
+			},
+			"form": {
+				"title": "Başlık",
+				"title_placeholder": "Sorun başlığını girin",
+				"time_limit": "Zaman Sınırı (ms)",
+				"memory_limit": "Bellek Sınırı (KB)",
+				"point": "Puan",
+				"scoring_method": "Puanlama Yöntemi",
+				"scoring_method_placeholder": "Puanlama yöntemini seçin",
+				"scoring_method_standard": "Standart",
+				"scoring_method_subtask": "Alt Görev",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Zorluk",
+				"difficulty_placeholder": "Zorluk seçin",
+				"difficulty_easy": "Kolay",
+				"difficulty_medium": "Orta",
+				"difficulty_hard": "Zor",
+				"io_mode": "G/Ç Modu",
+				"io_mode_placeholder": "G/Ç modunu seçin",
+				"io_mode_standard": "Standart",
+				"io_mode_file": "Dosya",
+				"input_file": "Giriş Dosyası",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Çıkış Dosyası",
+				"output_file_placeholder": "output.txt",
+				"tags": "Etiketler",
+				"statement": "Açıklama",
+				"statement_placeholder": "Sorun açıklamasını buraya yazın...",
+				"submit": "Sorun Oluştur",
+				"update": "Sorunu Güncelle",
+				"title_required": "Başlık gereklidir",
+				"time_limit_min": "Zaman sınırı en az 1ms olmalıdır",
+				"time_limit_max": "Zaman sınırı en fazla 10000ms olmalıdır",
+				"memory_limit_min": "Bellek sınırı en az 1KB olmalıdır",
+				"memory_limit_max": "Bellek sınırı en fazla 1048576KB olmalıdır",
+				"point_min": "Puan en az 0 olmalıdır",
+				"point_max": "Puan en fazla 100 olmalıdır",
+				"tags_placeholder": "Etiketleri girin...",
+				"create_success": "Sorun başarıyla oluşturuldu!",
+				"create_error": "Sorun oluşturulamadı. Lütfen tekrar deneyin.",
+				"update_success": "Sorun başarıyla güncellendi!",
+				"update_error": "Sorun güncellenemedi. Lütfen tekrar deneyin."
+			},
+			"editorial": {
+				"placeholder": "Editöryal içeriğini buraya yazın...",
+				"create": "Editöryal Oluştur",
+				"save": "Editöryali Kaydet",
+				"delete": "Editöryali Sil",
+				"cancel": "İptal",
+				"deleting": "Siliniyor...",
+				"saving": "Kaydediliyor...",
+				"no_editorial": "Bu sorun için henüz bir editöryal mevcut değil.",
+				"create_success": "Editöryal başarıyla oluşturuldu!",
+				"create_error": "Editöryal oluşturulamadı. Lütfen tekrar deneyin.",
+				"update_success": "Editöryal başarıyla güncellendi!",
+				"update_error": "Editöryal güncellenemedi. Lütfen tekrar deneyin.",
+				"delete_success": "Editöryal başarıyla silindi!",
+				"delete_error": "Editöryal silinemedi. Lütfen tekrar deneyin.",
+				"delete_confirmation_title": "Bu editöryali silmek istediğinizden emin misiniz?",
+				"delete_confirmation_description": "Bu işlem geri alınamaz. Bu, bu sorunun editöryalini kalıcı olarak silecektir."
+			},
+			"tabs": {
+				"info": "Bilgi",
+				"editorial": "Editöryal",
+				"testcase": "Test Durumu"
+			},
+			"slug_page": {
+				"loading": "Yükleniyor...",
+				"problem_not_found": "Sorun bulunamadı",
+				"error_loading_problem": "Sorun yüklenirken hata oluştu: {message}",
+				"error_loading_tags": "Etiketler yüklenirken hata oluştu: {message}",
+				"testcase_management": "Test durumu yönetimi burada uygulanacaktır."
+			},
+			"testcase": {
+				"input": "Giriş",
+				"output": "Çıkış",
+				"save": "Kaydet",
+				"saving": "Kaydediliyor...",
+				"loading": "Yükleniyor...",
+				"select_to_edit": "Düzenlemek için bir test durumu girişi veya çıkışı seçin",
+				"content_placeholder": "Test durumu içeriği burada görünecektir...",
+				"new_testcase": "Yeni Test Durumu",
+				"new_subtask": "Yeni Alt Görev",
+				"name": "Ad",
+				"cancel": "İptal",
+				"create": "Oluştur",
+				"delete": "Sil",
+				"creating": "Oluşturuluyor...",
+				"create_subtask_title": "Yeni Alt Görev Oluştur",
+				"create_subtask_description": "Yeni alt görev için bir ad girin.",
+				"subtask_name_placeholder": "Alt görev adını girin",
+				"create_testcase_title": "Yeni Test Durumu Oluştur",
+				"create_testcase_description": "Yeni test durumu için bir ad girin.",
+				"testcase_name_placeholder": "Test durumu adını girin",
+				"delete_subtask_title": "Alt Görevi Sil",
+				"delete_subtask_description": "Bu alt görevi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+				"delete_testcase_title": "Test Durumunu Sil",
+				"delete_testcase_description": "Bu test durumunu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+				"success": {
+					"title": "Başarılı",
+					"saved": "Test durumu içeriği başarıyla kaydedildi",
+					"testcase_created": "Test durumu başarıyla oluşturuldu",
+					"testcase_deleted": "Test durumu başarıyla silindi",
+					"subtask_created": "Alt görev başarıyla oluşturuldu",
+					"subtask_deleted": "Alt görev başarıyla silindi"
+				},
+				"error": {
+					"title": "Hata",
+					"load_subtasks": "Alt görevler yüklenemedi",
+					"load_content": "Test durumu içeriği yüklenemedi",
+					"save_content": "Test durumu içeriği kaydedilemedi",
+					"create_testcase": "Test durumu oluşturulamadı",
+					"delete_testcase": "Test durumu silinemedi",
+					"create_subtask": "Alt görev oluşturulamadı",
+					"delete_subtask": "Alt görev silinemedi"
+				}
+			}
+		},
+		"user": {
+			"title": "User Management",
+			"search_placeholder": "Search users...",
+			"sort_by": "Sort by",
+			"sort_username": "Username",
+			"sort_fullname": "Full Name",
+			"sort_rating": "Rating",
+			"sort_score": "Score",
+			"sort_asc": "Ascending",
+			"sort_desc": "Descending",
+			"no_users_found": "No users found",
+			"showing_results": "Showing {start}-{end} of {total} results",
+			"previous": "Previous",
+			"next": "Next",
+			"page_of": "Page {current} of {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Username",
+				"fullname": "Full Name",
+				"email": "Email",
+				"role": "Role",
+				"rating": "Rating",
+				"score": "Score",
+				"verified": "Verified",
+				"verified_yes": "Yes",
+				"verified_no": "No"
+			},
+			"detail": {
+				"title": "User Details",
+				"back_to_users": "Back to Users",
+				"verified": "Verified",
+				"unverified": "Unverified",
+				"email": "Email",
+				"joined": "Joined",
+				"last_updated": "Last Updated",
+				"bio": "Biography",
+				"statistics": "Statistics",
+				"score": "Score",
+				"rating": "Rating",
+				"problems_solved": "Problems Solved",
+				"submissions": "Submissions",
+				"blogs": "Blogs",
+				"comments": "Comments",
+				"contests": "Contests"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "View",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "View Details",
+					"submit_code": "Submit Code"
+				},
+				"recent_submissions": "Recent Submissions",
+				"score": "Score",
+				"list_title": "Found {count} submissions",
+				"submissions_title": "Recent Submissions",
+				"no_submissions": {
+					"title": "No Submissions Found",
+					"empty": "Be the first to submit a solution!",
+					"filtered": "No submissions match your current filters."
+				},
+				"common": {
+					"score": "Score"
+				},
+				"pagination": {
+					"previous": "Previous",
+					"next": "Next",
+					"page_info": "Page {page} of {total}"
+				},
+				"passed": "passed"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Author",
+				"language": "Language",
+				"submitted": "Submitted",
+				"actions": "Actions",
+				"error_loading": "Error Loading Submissions",
+				"unknown_problem": "Unknown Problem",
+				"by": "by",
+				"solved": "solved",
+				"score": "Score"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Failed to load submissions"
+				},
+				"empty": {
+					"title": "No Submissions Yet",
+					"description": "Be the first to submit a solution!"
+				}
+			},
+			"detail": {
+				"title": "Submission Details",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Source Code",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"author": "Author",
+					"problem": "Problem",
+					"language": "Language",
+					"score": "Score",
+					"submitted": "Submitted",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Back",
+					"submit_again": "Submit Again",
+					"view_all_submissions": "View All Submissions"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"subtask_count": "{count} subtask",
+					"subtask_count_other": "{count} subtasks",
+					"expand_all": "Expand All",
+					"collapse_all": "Collapse All",
+					"tests_passed": "{passed} / {total} passed",
+					"not_found": {
+						"title": "Submission Not Found",
+						"message": "The submission you're looking for could not be found.",
+						"back_button": "Back to Submissions"
+					},
+					"partial": "Partial",
+					"submitted_for": "Submitted for"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Languages"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Running",
+				"upcoming": "Upcoming",
+				"ended": "Ended",
+				"create_button": "Create Contest",
+				"search_placeholder": "Search contests...",
+				"loading": "Loading...",
+				"rated": "Rated",
+				"unrated": "Unrated"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Problems",
+				"submissions_tab": "Submissions",
+				"standings_tab": "Standings",
+				"search_problems": "Search problems...",
+				"add_problem": "Add Problem",
+				"problem_title": "Title",
+				"actions": "Actions",
+				"add": "Add",
+				"adding": "Adding...",
+				"remove": "Remove",
+				"rank": "Rank",
+				"user": "User",
+				"score": "Score",
+				"no_standings": "No standings available",
+				"loading": "Loading...",
+				"contest_updated": "Contest updated successfully!",
+				"problem_added": "Problem added to contest successfully!",
+				"failed_to_add_problem": "Failed to add problem to contest",
+				"problem_removed": "Problem removed from contest successfully!",
+				"failed_to_remove_problem": "Failed to remove problem from contest",
+				"remove_problem_title": "Confirm Remove",
+				"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+				"remove_problem_cancel": "Cancel",
+				"remove_problem_confirm": "Remove"
+			},
+			"create": {
+				"title": "Create Contest"
+			},
+			"edit": {
+				"title": "Edit Contest",
+				"loading": "Loading contest...",
+				"cancel": "Cancel"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter contest title",
+				"start_time": "Start Time",
+				"end_time": "End Time",
+				"time": "Time",
+				"select_start_date": "Select start date",
+				"select_end_date": "Select end date",
+				"is_rated": "Is Rated",
+				"is_rated_placeholder": "Select if contest is rated",
+				"yes": "Yes",
+				"no": "No",
+				"penalty": "Penalty (minutes)",
+				"penalty_placeholder": "Enter penalty in minutes",
+				"penalty_min": "Penalty must be at least 0 minutes",
+				"description": "Description",
+				"description_placeholder": "Enter contest description",
+				"submit": "Create Contest",
+				"update": "Update Contest",
+				"title_required": "Title is required",
+				"start_time_required": "Start time is required",
+				"end_time_required": "End time is required",
+				"create_success": "Contest created successfully!",
+				"create_error": "Failed to create contest. Please try again.",
+				"update_success": "Contest updated successfully!",
+				"update_error": "Failed to update contest. Please try again."
+			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Bildirimler",
+		"mark_all_read": "Tümünü okundu olarak işaretle",
+		"mark_as_read": "Okundu olarak işaretle",
+		"view_all": "Tüm bildirimleri görüntüle",
+		"no_notifications": "Henüz bildirim yok",
+		"loading": "Bildirimler yükleniyor...",
+		"failed_to_load": "Bildirimler yüklenemedi",
+		"unread_count": "{count} okunmamış bildirim",
+		"unread_count_plural": "{count} okunmamış bildirim",
+		"read_count": "{count} okunmuş bildirim",
+		"read_count_plural": "{count} okunmuş bildirim",
+		"just_now": "Az önce",
+		"minutes_ago": "{count}d önce",
+		"hours_ago": "{count}s önce",
+		"days_ago": "{count}g önce",
+		"tabs": {
+			"all": "Tümü",
+			"unread": "Okunmamış",
+			"read": "Okunmuş"
+		},
+		"types": {
+			"new_problem": "Yeni Soru: {title}",
+			"new_contest": "Yeni Yarışma: {title}",
+			"new_blog": "Yeni Blog: {title}",
+			"rating_updated": "Değerlendirme Güncellendi",
+			"system": "Sistem Bildirimi",
+			"new_problem_available": "Yeni Soru Mevcut",
+			"new_contest_available": "Yeni Yarışma Mevcut",
+			"new_blog_post": "Yeni Blog Gönderisi"
+		}
+	},
+	"settings": {
+		"title": "Ayarlar",
+		"description": "Hesap ayarlarınızı ve tercihlerinizi yönetin.",
+		"tabs": {
+			"basic": "Temel",
+			"profile": "Profil",
+			"notification": "Bildirim"
+		},
+		"basic": {
+			"theme": {
+				"title": "Tema",
+				"description": "Uygulama için bir tema seçin.",
+				"light": "Açık",
+				"dark": "Koyu",
+				"system": "Sistem",
+				"auto": "Otomatik"
+			},
+			"language": {
+				"title": "Dil",
+				"description": "Uygulama için bir dil seçin."
+			}
+		},
+		"profile": {
+			"title": "Profil",
+			"description": "Profil bilgilerinizi güncelleyin.",
+			"form": {
+				"username": "Kullanıcı Adı",
+				"fullname": "Tam Ad",
+				"bio": "Biyografi",
+				"save": "Değişiklikleri Kaydet",
+				"saving": "Kaydediliyor...",
+				"change_avatar": "Avatarı Değiştir",
+				"reset_password": "Şifreyi Sıfırla",
+				"update_success": "Profil başarıyla güncellendi!",
+				"update_error": "Profil güncellenemedi. Lütfen tekrar deneyin."
+			}
+		},
+		"notification": {
+			"title": "Bildirimler",
+			"description": "Bildirim tercihlerinizi yapılandırın.",
+			"form": {
+				"new_blog": "Yeni Blog Gönderileri",
+				"new_problem": "Yeni Sorular",
+				"new_contest": "Yeni Yarışmalar",
+				"update_rating": "Değerlendirme Güncellemeleri",
+				"system": "Sistem Bildirimleri",
+				"save": "Değişiklikleri Kaydet",
+				"saving": "Kaydediliyor...",
+				"update_success": "Bildirim ayarları başarıyla güncellendi!",
+				"update_error": "Bildirim ayarları güncellenemedi. Lütfen tekrar deneyin."
+			}
+		}
+	}
+}

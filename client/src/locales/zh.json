@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "首页",
+			"problems": "题目",
+			"submissions": "提交",
+			"contests": "比赛",
+			"standing": "排名",
+			"login": "登录",
+			"register": "注册",
+			"logout": "退出登录",
+			"profile": "个人资料",
+			"settings": "设置",
+			"appearance": "外观",
+			"language": "语言",
+			"light": "浅色",
+			"dark": "深色",
+			"dashboard": "仪表盘"
+		},
+		"footer": {
+			"copyright": "版权所有 © {year} Nourist",
+			"license": "许可证",
+			"github": "GitHub",
+			"author": "作者",
+			"language": "语言"
+		}
+	},
+	"auth": {
+		"login": "登录",
+		"register": "注册",
+		"verify_email": "验证电子邮件",
+		"forgot_password": "忘记密码",
+		"reset_password": "重置密码",
+		"get_password": "获取密码",
+		"verify_success": "电子邮件验证成功",
+		"dont_have_account": "没有帐户？",
+		"already_have_account": "已有帐户？",
+		"already_have_password": "已有密码？",
+		"account_already_verified": "帐户已验证？",
+		"continue_with_google": "使用 Google 继续",
+		"form": {
+			"email": "电子邮件",
+			"password": "密码",
+			"username": "用户名",
+			"enter_email": "输入您的电子邮件",
+			"enter_password": "输入您的密码",
+			"enter_username": "输入您的用户名",
+			"confirm_password": "确认密码",
+			"enter_confirm_password": "再次输入您的密码"
+		},
+		"message": {
+			"email_required": "电子邮件是必需的",
+			"password_required": "密码是必需的",
+			"username_required": "用户名是必需的",
+			"email_invalid": "电子邮件无效",
+			"password_min": "密码必须至少为 8 个字符",
+			"password_uppercase": "密码必须包含至少一个大写字母",
+			"password_lowercase": "密码必须包含至少一个小写字母",
+			"password_number": "密码必须包含至少一个数字",
+			"password_special": "密码必须包含至少一个特殊字符",
+			"confirm_password_required": "确认密码是必需的",
+			"confirm_password_not_match": "确认密码不匹配",
+			"token_required": "令牌是必需的"
+		},
+		"success": {
+			"register": "注册成功",
+			"login": "登录成功",
+			"forgot_password": "重置密码电子邮件已成功发送",
+			"verify_email_send": "验证电子邮件已成功发送",
+			"reset_password": "密码重置成功",
+			"verify": "太好了！您的电子邮件地址已通过验证。您的帐户现已激活并可以使用。"
+		},
+		"error": {
+			"login": "登录失败"
+		},
+		"description": {
+			"forgot_password": "输入您的电子邮件以获取密码重置链接",
+			"verify_email": "输入您的电子邮件以获取电子邮件验证链接"
+		},
+		"toast": {
+			"verify_email": "请检查您的电子邮件以进行验证"
+		}
+	},
+	"tiptap": {
+		"blockquote": "块引用",
+		"code_block": "代码块",
+		"toggle_highlight": "切换突出显示 ({color})",
+		"heading": "标题 {level}",
+		"insert_image": "插入图像",
+		"link": "链接",
+		"paste_a_link": "粘贴链接...",
+		"apply_link": "应用链接",
+		"open_in_new_window": "在新窗口中打开",
+		"remove_link": "删除链接",
+		"toggle_list": "切换列表 {type}",
+		"toggle_mark": "切换 {type}",
+		"align": "对齐 {align}",
+		"undo": "撤消",
+		"redo": "重做",
+		"highlight_text": "突出显示文本",
+		"highlight": "突出显示",
+		"remove_highlight": "删除突出显示",
+		"highlight_color": "{color} 突出显示颜色",
+		"highlight_colors": "突出显示颜色",
+		"format_text_as_heading": "将文本格式化为标题",
+		"heading_tooltip": "标题",
+		"list_options": "列表选项",
+		"list": "列表",
+		"bulletlist": "项目符号列表",
+		"orderedlist": "有序列表",
+		"tasklist": "任务列表"
+	},
+	"upload": {
+		"title": "上传图片",
+		"supported_formats": "支持的格式：JPG、PNG、GIF",
+		"click_to_select": "点击选择",
+		"or_drag_and_drop_file_here": "或将文件拖放到此处"
+	},
+	"home": {
+		"blog": "博客",
+		"description": "来自编程社区的最新文章、教程和见解",
+		"new": "新的",
+		"sidebar": {
+			"rating": "评分",
+			"score": "分数",
+			"current_contest": "当前比赛",
+			"ending_in": "结束于",
+			"join": "加入",
+			"top_raters": "评分最高者",
+			"hot_problems": "热门题目",
+			"my_stats": "我的统计",
+			"problem": "题目"
+		}
+	},
+	"pagination": {
+		"view": "查看",
+		"sizes": "大小"
+	},
+	"problem": {
+		"filter": {
+			"title": "筛选",
+			"status": "状态",
+			"all": "全部",
+			"solved": "已解决",
+			"attempted": "已尝试",
+			"todo": "待办",
+			"difficulty": "难度",
+			"easy": "简单",
+			"medium": "中等",
+			"hard": "困难",
+			"editorial": "题解",
+			"has_editorial": "有题解",
+			"point": "分数",
+			"tags": "标签",
+			"contest": "比赛",
+			"contest_placeholder": "选择比赛"
+		},
+		"search": {
+			"sort_by": "排序方式",
+			"title": "标题",
+			"point": "分数",
+			"difficulty": "难度",
+			"accept": "接受",
+			"accept_rate": "接受率"
+		},
+		"table": {
+			"title": "标题",
+			"difficulty": "难度",
+			"point": "分数",
+			"accepted": "已接受",
+			"acceptance": "接受率",
+			"editorial": "题解",
+			"easy": "简单",
+			"medium": "中等",
+			"hard": "困难",
+			"delete": {
+				"title": "确认删除",
+				"description": "您确定要删除题目 \"{title}\" 吗？此操作无法撤消。",
+				"cancel": "取消",
+				"confirm": "删除",
+				"success": "题目删除成功",
+				"error": "删除题目失败"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "题目 #{number}",
+				"breadcrumb": {
+					"problems": "题目"
+				}
+			},
+			"sidebar": {
+				"info": "信息",
+				"difficulty": {
+					"label": "难度",
+					"easy": "简单",
+					"medium": "中等",
+					"hard": "困难"
+				},
+				"points": "分数",
+				"constraints": {
+					"title": "约束",
+					"time_limit": "时间限制",
+					"memory_limit": "内存限制"
+				},
+				"io_format": {
+					"title": "输入/输出格式",
+					"input": "输入",
+					"output": "输出",
+					"stdin": "标准输入",
+					"stdout": "标准输出"
+				},
+				"statistics": {
+					"title": "统计",
+					"accepted": "已接受",
+					"submissions": "提交",
+					"acceptance_rate": "接受率"
+				},
+				"status": {
+					"label": "状态",
+					"solved": "已解决",
+					"attempted": "已尝试"
+				},
+				"tags": "标签",
+				"actions": {
+					"title": "操作",
+					"submit": "提交",
+					"editorial": "题解",
+					"view_submissions": "查看提交"
+				}
+			},
+			"statement": {
+				"statement": "题目描述",
+				"constraints": "约束",
+				"time_limit": "时间限制",
+				"memory_limit": "内存限制",
+				"io_format": "输入/输出格式",
+				"input_file": "输入文件",
+				"output_file": "输出文件",
+				"subtasks": "子任务",
+				"subtask_number": "子任务 {number}: {name}",
+				"test_cases_count": "{count} 个测试用例"
+			},
+			"error": {
+				"not_found": "未找到题目",
+				"load_failed": "加载题目失败"
+			}
+		}
+	},
+	"editorial": {
+		"title": "题解",
+		"not_available": "题解不可用",
+		"not_available_description": "此题的题解尚不可用，或需要先解决该题。",
+		"check_again": "再次检查",
+		"warning": "本题解包含该题的解答和说明。请确保您已先尝试过该题！",
+		"created_by": "题解作者：{username}",
+		"breadcrumb": {
+			"problems": "题目",
+			"editorial": "题解"
+		},
+		"back_to_problem": "返回题目"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} 秒前",
+			"minutes": "{count} 分钟前",
+			"hours": "{count} 小时前",
+			"days": "{count} 天前",
+			"months": "{count} 个月前",
+			"years": "{count} 年前"
+		},
+		"page": {
+			"view": "查看",
+			"title": "提交",
+			"breadcrumb": {
+				"home": "首页",
+				"submissions": "提交"
+			},
+			"actions": {
+				"submit_solution": "提交解答",
+				"view_all": "查看全部",
+				"view_details": "查看详情",
+				"submit_code": "提交代码"
+			},
+			"recent_submissions": "最近提交",
+			"score": "分数",
+			"list_title": "找到 {count} 个提交",
+			"submissions_title": "最近提交",
+			"no_submissions": {
+				"title": "未找到提交",
+				"empty": "成为第一个提交解答的人！",
+				"filtered": "没有提交符合您当前的筛选条件。"
+			},
+			"common": {
+				"score": "分数"
+			},
+			"pagination": {
+				"previous": "上一页",
+				"next": "下一页",
+				"page_info": "第 {page} 页，共 {total} 页"
+			},
+			"passed": "已通过"
+		},
+		"filters": {
+			"problem": "题目",
+			"problem_placeholder": "选择题目",
+			"language": "语言",
+			"select_language": "选择语言",
+			"all_languages": "所有语言",
+			"status": "状态",
+			"select_status": "选择状态",
+			"all_status": "所有状态",
+			"all_contests": "所有比赛",
+			"author": "作者",
+			"author_placeholder": "选择作者",
+			"contest": "比赛",
+			"contest_placeholder": "选择比赛",
+			"reset": "重置筛选"
+		},
+		"status": {
+			"ACCEPTED": "已接受",
+			"WRONG_ANSWER": "答案错误",
+			"TIME_LIMIT_EXCEEDED": "超出时间限制",
+			"MEMORY_LIMIT_EXCEEDED": "超出内存限制",
+			"RUNTIME_ERROR": "运行时错误",
+			"COMPILATION_ERROR": "编译错误",
+			"INTERNAL_ERROR": "内部错误",
+			"PENDING": "待定",
+			"JUDGING": "评判中",
+			"accepted": "已接受",
+			"wrong_answer": "答案错误",
+			"time_limit_exceeded": "超出时间限制",
+			"memory_limit_exceeded": "超出内存限制",
+			"runtime_error": "运行时错误",
+			"compilation_error": "编译错误",
+			"internal_error": "内部错误",
+			"pending": "待定",
+			"judging": "评判中"
+		},
+		"table": {
+			"status": "状态",
+			"problem": "题目",
+			"author": "作者",
+			"language": "语言",
+			"submitted": "已提交",
+			"actions": "操作",
+			"error_loading": "加载提交失败",
+			"unknown_problem": "未知题目",
+			"by": "由",
+			"solved": "已解决",
+			"score": "分数"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "加载提交失败"
+			},
+			"empty": {
+				"title": "尚无提交",
+				"description": "成为第一个提交解答的人！"
+			}
+		},
+		"detail": {
+			"title": "提交详情",
+			"breadcrumb": {
+				"home": "首页",
+				"submissions": "提交"
+			},
+			"tabs": {
+				"info": "信息",
+				"source_code": "源代码",
+				"test_cases": "测试用例",
+				"log": "日志"
+			},
+			"info": {
+				"author": "作者",
+				"problem": "题目",
+				"language": "语言",
+				"score": "分数",
+				"submitted": "已提交",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "返回",
+				"submit_again": "再次提交",
+				"view_all_submissions": "查看所有提交"
+			},
+			"content": {
+				"no_log_available": "无日志信息",
+				"no_test_cases_available": "无测试用例结果",
+				"subtask_count": "{count} 个子任务",
+				"subtask_count_other": "{count} 个子任务",
+				"expand_all": "全部展开",
+				"collapse_all": "全部折叠",
+				"tests_passed": "{passed} / {total} 已通过",
+				"not_found": {
+					"title": "未找到提交",
+					"message": "找不到您要查找的提交。",
+					"back_button": "返回提交"
+				},
+				"partial": "部分",
+				"submitted_for": "提交至"
+			}
+		},
+		"chart": {
+			"status": "状态",
+			"languages": "语言"
+		}
+	},
+	"submit": {
+		"easy": "简单",
+		"medium": "中等",
+		"hard": "困难",
+		"page": {
+			"title": "提交代码",
+			"select_problem": {
+				"title": "未选择题目",
+				"description": "请选择要提交解答的题目。",
+				"browse": "浏览题目"
+			},
+			"problem_not_found": {
+				"title": "未找到题目",
+				"description": "找不到您要提交的题目。"
+			},
+			"breadcrumb": {
+				"home": "首页",
+				"problems": "题目"
+			},
+			"back_to_problem": "返回题目",
+			"language": "编程语言",
+			"select_language": "选择语言",
+			"code": "源代码",
+			"code_placeholder": "在此处输入您的代码...",
+			"submit": "提交",
+			"submitting": "提交中...",
+			"login_required": {
+				"message": "请",
+				"login": "登录",
+				"to_submit": "以提交您的解答"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "您必须登录才能提交代码",
+				"select_problem": "请选择要提交的题目",
+				"enter_code": "请输入您的代码",
+				"submit_failed": "提交代码失败。请重试。"
+			},
+			"success": {
+				"submitted": "代码提交成功！"
+			}
+		}
+	},
+	"error": {
+		"title": "糟糕！出错了",
+		"message": "发生意外错误。请稍后重试。",
+		"try_again": "重试",
+		"go_home": "转到主页"
+	},
+	"not_found": {
+		"title": "糟糕！找不到页面",
+		"message": "您要查找的页面不存在。",
+		"go_home": "转到主页"
+	},
+	"blog": {
+		"create": {
+			"create": "创建",
+			"blogs": "博客",
+			"title": "标题",
+			"title_placeholder": "输入标题",
+			"description_placeholder": "输入描述",
+			"upload_thumbnail": "上传缩略图",
+			"save": "保存",
+			"message": {
+				"title_required": "标题是必需的",
+				"title_and_content_required": "标题和内容是必需的。"
+			},
+			"create_success": "博客创建成功！",
+			"create_fail": "创建博客失败。"
+		},
+		"edit": {
+			"blogs": "博客",
+			"edit": "编辑",
+			"save": "保存",
+			"message": {
+				"title_required": "标题是必需的",
+				"title_and_content_required": "标题和内容是必需的。"
+			},
+			"edit_success": "博客编辑成功！",
+			"edit_fail": "编辑博客失败。"
+		},
+		"card": {
+			"blogs": "博客",
+			"delete_success": "博客删除成功！",
+			"message": {
+				"delete_confirmation": "您确定要删除此博客吗？"
+			},
+			"delete": "删除",
+			"edit": "编辑",
+			"cancel": "取消"
+		},
+		"comment": {
+			"create_success": "评论创建成功！",
+			"date": {
+				"seconds": "{count} 秒前",
+				"minutes": "{count} 分钟前",
+				"hours": "{count} 小时前",
+				"days": "{count} 天前",
+				"months": "{count} 个月前",
+				"years": "{count} 年前"
+			},
+			"comment-placeholder": "写评论...",
+			"comment": "评论",
+			"comments": "评论",
+			"message": {
+				"comment_required": "评论是必需的",
+				"delete_confirmation": "您确定要删除此评论吗？"
+			},
+			"delete": "删除",
+			"edit": "编辑",
+			"cancel": "取消",
+			"delete_success": "评论删除成功！",
+			"edit_success": "评论编辑成功！"
+		}
+	},
+	"standing": {
+		"title": "全球排名",
+		"description": "根据评分和总分对用户进行排名",
+		"rating": "评分",
+		"score": "分数",
+		"top_users": "顶级用户",
+		"all_users": "所有用户",
+		"no_data": "无可用数据",
+		"modes": {
+			"rating": "评分",
+			"score": "分数"
+		},
+		"table": {
+			"rank": "排名",
+			"user": "用户",
+			"rating": "评分",
+			"score": "分数"
+		},
+		"filters": {
+			"search_placeholder": "搜索用户...",
+			"reset": "重置"
+		},
+		"errors": {
+			"load_failed": "加载排名数据失败"
+		}
+	},
+	"async_combobox": {
+		"select": "选择...",
+		"search": "搜索...",
+		"no_results": "未找到结果。",
+		"load_more": "加载更多..."
+	},
+	"profile": {
+		"title": "个人资料",
+		"loading": "正在加载个人资料...",
+		"user_not_found": "未找到用户",
+		"sidebar": {
+			"edit_profile": "编辑个人资料",
+			"rank": "排名",
+			"stats": "统计",
+			"score": "分数",
+			"rating": "评分",
+			"ac_problems": "已接受的题目",
+			"submissions": "提交",
+			"blogs": "博客",
+			"comments": "评论",
+			"joined_contests": "已加入的比赛",
+			"languages": "语言",
+			"submissions_count": "提交",
+			"no_submissions": "尚无提交",
+			"unranked": "未排名"
+		},
+		"content": {
+			"submission_activity": "提交活动",
+			"submissions_in_year": "过去一年的提交",
+			"accepted": "已接受",
+			"loading_activity": "正在加载活动数据...",
+			"rating_history": "评分历史",
+			"problems_by_difficulty": "按难度划分的已接受题目",
+			"submissions_by_language": "按语言划分的已接受提交",
+			"less": "更少",
+			"more": "更多"
+		},
+		"tabs": {
+			"recent_solved_problems": "最近解决的题目",
+			"recent_submissions": "最近提交",
+			"blogs": "博客",
+			"problem": "题目",
+			"language": "语言",
+			"solved_count": "已解决计数",
+			"first_solved": "首次解决",
+			"status": "状态",
+			"date": "日期",
+			"title": "标题",
+			"publish_date": "发布日期",
+			"no_accepted_submissions": "尚无已接受的提交。",
+			"no_recent_submissions": "尚无提交。",
+			"no_blogs": "尚无已发布的博客。"
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "比赛",
+			"running": "进行中",
+			"upcoming": "即将开始",
+			"ended": "已结束",
+			"create_button": "创建比赛",
+			"search_placeholder": "搜索比赛...",
+			"loading": "正在加载比赛...",
+			"no_contests": "未找到比赛",
+			"no_contests_description": "稍后回来查看即将举行的比赛和挑战",
+			"error_loading": "加载比赛失败",
+			"rated": "已评分",
+			"unrated": "未评分",
+			"participants": "{count, plural, =0 {无参与者} =1 {# 参与者} other {# 参与者}}",
+			"joining": "已加入"
+		},
+		"detail": {
+			"info_tab": "信息",
+			"problems_tab": "题目",
+			"submissions_tab": "提交",
+			"standings_tab": "排名",
+			"time_remaining": "剩余时间",
+			"search_problems": "搜索题目...",
+			"add_problem": "添加题目",
+			"problem_title": "标题",
+			"problem_slug": "标识",
+			"problem_point": "分数",
+			"actions": "操作",
+			"add": "添加",
+			"adding": "添加中...",
+			"remove": "删除",
+			"contest_problems": "比赛题目",
+			"rank": "排名",
+			"user": "用户",
+			"score": "分数",
+			"time": "时间",
+			"points": "分数",
+			"no_standings": "无可用排名",
+			"loading": "加载中...",
+			"contest_updated": "比赛更新成功！",
+			"problem_added": "题目已成功添加到比赛中！",
+			"failed_to_add_problem": "将题目添加到比赛失败",
+			"problem_removed": "题目已成功从比赛中删除！",
+			"failed_to_remove_problem": "从比赛中删除题目失败",
+			"remove_problem_title": "确认删除",
+			"remove_problem_description": "您确定要从此比赛中删除 \"{title}\" 吗？此操作无法撤消。",
+			"remove_problem_cancel": "取消",
+			"remove_problem_confirm": "删除",
+			"running": "进行中",
+			"upcoming": "即将开始",
+			"ended": "已结束",
+			"rated": "已评分",
+			"start_time": "开始时间",
+			"end_time": "结束时间",
+			"participants": "参与者",
+			"problems": "题目",
+			"no_problems": "无可用题目",
+			"join": "加入比赛",
+			"leave": "离开比赛",
+			"joining": "加入中...",
+			"leaving": "离开中...",
+			"join_success": "成功加入比赛！",
+			"leave_success": "成功离开比赛！",
+			"join_fail": "加入比赛失败。请重试。",
+			"leave_fail": "离开比赛失败。请重试。"
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "仪表盘",
+			"blog": "博客",
+			"problem": "题目",
+			"submission": "提交",
+			"contest": "比赛",
+			"user": "用户",
+			"judger": "评判机",
+			"notification": "通知",
+			"profile": "个人资料",
+			"logout": "退出登录",
+			"appearance": "外观",
+			"language": "语言",
+			"light": "浅色",
+			"dark": "深色",
+			"home": "首页"
+		},
+		"dashboard": {
+			"unable_to_load": "无法加载仪表盘",
+			"error_loading": "加载仪表盘数据时出错。请刷新页面。",
+			"refresh": "刷新仪表盘",
+			"total_users": "总用户数",
+			"active_today": "今日活跃",
+			"total_submissions": "总提交数",
+			"success_rate": "成功率",
+			"active_problems": "活跃题目",
+			"user_activity": "用户活动",
+			"submission_volume": "提交量",
+			"language_distribution": "语言分布",
+			"submission_results": "提交结果",
+			"problem_difficulty": "题目难度",
+			"contest_participation": "比赛参与情况",
+			"top_users": "顶级用户",
+			"popular_problems": "热门题目"
+		},
+		"chart": {
+			"loading": "加载中...",
+			"contests": "比赛",
+			"participants": "参与者",
+			"contest_participation_trends": "比赛参与趋势",
+			"contest_participation_description": "每月比赛计数和参与者人数",
+			"number_of_contests": "比赛数量（左 Y 轴）",
+			"total_participants": "总参与者（右 Y 轴）",
+			"judger_queue_performance": "评判机队列性能",
+			"judger_queue_description": "实时队列大小和处理时间监控",
+			"queue_size": "队列大小",
+			"processing_time": "处理时间",
+			"queue_size_threshold_warning": "队列大小超出阈值！",
+			"queue_size_left": "队列大小（左 Y 轴）",
+			"processing_time_right": "处理时间（右 Y 轴）",
+			"threshold": "阈值",
+			"language_usage": "编程语言使用情况",
+			"language_usage_description": "按编程语言划分的提交分布",
+			"submissions": "提交",
+			"percentage": "百分比",
+			"total_submissions": "总提交数",
+			"problem_difficulty_distribution": "题目难度分布",
+			"problem_difficulty_description": "按难度级别和解决率划分的题目数量",
+			"total_problems": "总题目数",
+			"solved_by_users": "由用户解决",
+			"solve_rate": "解决率",
+			"submission_results_distribution": "提交结果分布",
+			"submission_results_description": "提交判决的细分",
+			"count": "计数",
+			"submission_volume": "提交量",
+			"submission_volume_description": "每日提交计数和接受率",
+			"accepted": "已接受",
+			"success_rate": "成功率",
+			"system_resource_usage": "系统资源使用情况",
+			"system_resource_description": "实时 CPU、内存和磁盘使用情况监控",
+			"cpu_usage": "CPU 使用率",
+			"memory_usage": "内存使用率",
+			"disk_usage": "磁盘使用率",
+			"high_resource_usage": "检测到高资源使用率！",
+			"cpu": "CPU",
+			"memory": "内存",
+			"disk": "磁盘",
+			"user_registrations": "用户注册",
+			"user_registrations_description": "每日新注册"
+		},
+		"table": {
+			"loading": "加载中...",
+			"most_attempted_problems": "尝试次数最多的题目",
+			"most_attempted_problems_description": "基于提交计数的流行题目",
+			"problem": "题目",
+			"difficulty": "难度",
+			"attempts": "尝试次数",
+			"solved": "已解决",
+			"success_rate": "成功率",
+			"top_users_this_week": "本周顶级用户",
+			"top_users_this_week_description": "基于已解决题目的最活跃用户",
+			"rank": "排名",
+			"user": "用户",
+			"submissions": "提交"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "搜索...",
+				"sort_by": "排序方式",
+				"title": "标题",
+				"point": "分数",
+				"difficulty": "难度",
+				"accept": "接受",
+				"accept_rate": "接受率"
+			},
+			"filter": {
+				"new": "新的",
+				"title": "筛选",
+				"difficulty": "难度",
+				"easy": "简单",
+				"medium": "中等",
+				"hard": "困难",
+				"point": "分数",
+				"tags": "标签",
+				"all": "全部",
+				"editorial": "题解",
+				"has_editorial": "有题解",
+				"point_range": "分数范围",
+				"contest": "比赛"
+			},
+			"table": {
+				"title": "标题",
+				"tags": "标签",
+				"difficulty": "难度",
+				"point": "分数",
+				"accepted": "已接受",
+				"acceptance": "接受率",
+				"editorial": "题解",
+				"easy": "简单",
+				"medium": "中等",
+				"hard": "困难",
+				"delete": {
+					"title": "确认删除",
+					"description": "您确定要删除题目 \"{title}\" 吗？此操作无法撤消。",
+					"cancel": "取消",
+					"confirm": "删除",
+					"success": "题目删除成功",
+					"error": "删除题目失败"
+				}
+			},
+			"form": {
+				"title": "标题",
+				"title_placeholder": "输入题目",
+				"time_limit": "时间限制 (ms)",
+				"memory_limit": "内存限制 (KB)",
+				"point": "分数",
+				"scoring_method": "评分方法",
+				"scoring_method_placeholder": "选择评分方法",
+				"scoring_method_standard": "标准",
+				"scoring_method_subtask": "子任务",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "难度",
+				"difficulty_placeholder": "选择难度",
+				"difficulty_easy": "简单",
+				"difficulty_medium": "中等",
+				"difficulty_hard": "困难",
+				"io_mode": "输入/输出模式",
+				"io_mode_placeholder": "选择输入/输出模式",
+				"io_mode_standard": "标准",
+				"io_mode_file": "文件",
+				"input_file": "输入文件",
+				"input_file_placeholder": "input.txt",
+				"output_file": "输出文件",
+				"output_file_placeholder": "output.txt",
+				"tags": "标签",
+				"statement": "描述",
+				"statement_placeholder": "在此处编写题目描述...",
+				"submit": "创建题目",
+				"update": "更新题目",
+				"title_required": "标题是必需的",
+				"time_limit_min": "时间限制必须至少为 1 毫秒",
+				"time_limit_max": "时间限制最多为 10000 毫秒",
+				"memory_limit_min": "内存限制必须至少为 1 KB",
+				"memory_limit_max": "内存限制最多为 1048576 KB",
+				"point_min": "分数必须至少为 0",
+				"point_max": "分数最多为 100",
+				"tags_placeholder": "输入标签...",
+				"create_success": "题目创建成功！",
+				"create_error": "创建题目失败。请重试。",
+				"update_success": "题目更新成功！",
+				"update_error": "更新题目失败。请重试。"
+			},
+			"editorial": {
+				"placeholder": "在此处编写题解内容...",
+				"create": "创建题解",
+				"save": "保存题解",
+				"delete": "删除题解",
+				"cancel": "取消",
+				"deleting": "删除中...",
+				"saving": "保存中...",
+				"no_editorial": "此题尚无题解。",
+				"create_success": "题解创建成功！",
+				"create_error": "创建题解失败。请重试。",
+				"update_success": "题解更新成功！",
+				"update_error": "更新题解失败。请重试。",
+				"delete_success": "题解删除成功！",
+				"delete_error": "删除题解失败。请重试。",
+				"delete_confirmation_title": "您确定要删除此题解吗？",
+				"delete_confirmation_description": "此操作无法撤消。这将永久删除此题的题解。"
+			},
+			"tabs": {
+				"info": "信息",
+				"editorial": "题解",
+				"testcase": "测试用例"
+			},
+			"slug_page": {
+				"loading": "加载中...",
+				"problem_not_found": "未找到题目",
+				"error_loading_problem": "加载题目时出错：{message}",
+				"error_loading_tags": "加载标签时出错：{message}",
+				"testcase_management": "测试用例管理将在此处实现。"
+			},
+			"testcase": {
+				"input": "输入",
+				"output": "输出",
+				"save": "保存",
+				"saving": "保存中...",
+				"loading": "加载中...",
+				"select_to_edit": "选择要编辑的测试用例输入或输出",
+				"content_placeholder": "测试用例内容将显示在此处...",
+				"new_testcase": "新测试用例",
+				"new_subtask": "新子任务",
+				"name": "名称",
+				"cancel": "取消",
+				"create": "创建",
+				"delete": "删除",
+				"creating": "创建中...",
+				"create_subtask_title": "创建新子任务",
+				"create_subtask_description": "为新子任务输入名称。",
+				"subtask_name_placeholder": "输入子任务名称",
+				"create_testcase_title": "创建新测试用例",
+				"create_testcase_description": "为新测试用例输入名称。",
+				"testcase_name_placeholder": "输入测试用例名称",
+				"delete_subtask_title": "删除子任务",
+				"delete_subtask_description": "您确定要删除此子任务吗？此操作无法撤消。",
+				"delete_testcase_title": "删除测试用例",
+				"delete_testcase_description": "您确定要删除此测试用例吗？此操作无法撤消。",
+				"success": {
+					"title": "成功",
+					"saved": "测试用例内容保存成功",
+					"testcase_created": "测试用例创建成功",
+					"testcase_deleted": "测试用例删除成功",
+					"subtask_created": "子任务创建成功",
+					"subtask_deleted": "子任务删除成功"
+				},
+				"error": {
+					"title": "错误",
+					"load_subtasks": "加载子任务失败",
+					"load_content": "加载测试用例内容失败",
+					"save_content": "保存测试用例内容失败",
+					"create_testcase": "创建测试用例失败",
+					"delete_testcase": "删除测试用例失败",
+					"create_subtask": "创建子任务失败",
+					"delete_subtask": "删除子任务失败"
+				}
+			}
+		},
+		"user": {
+			"title": "用户管理",
+			"search_placeholder": "搜索用户...",
+			"sort_by": "排序方式",
+			"sort_username": "用户名",
+			"sort_fullname": "全名",
+			"sort_rating": "评分",
+			"sort_score": "分数",
+			"sort_asc": "升序",
+			"sort_desc": "降序",
+			"no_users_found": "未找到用户",
+			"showing_results": "显示 {start}-{end} 条，共 {total} 条结果",
+			"previous": "上一页",
+			"next": "下一页",
+			"page_of": "第 {current} 页，共 {total} 页",
+			"table": {
+				"avatar": "头像",
+				"username": "用户名",
+				"fullname": "全名",
+				"email": "电子邮件",
+				"role": "角色",
+				"rating": "评分",
+				"score": "分数",
+				"verified": "已验证",
+				"verified_yes": "是",
+				"verified_no": "否"
+			},
+			"detail": {
+				"title": "用户详情",
+				"back_to_users": "返回用户",
+				"verified": "已验证",
+				"unverified": "未验证",
+				"email": "电子邮件",
+				"joined": "已加入",
+				"last_updated": "上次更新",
+				"bio": "个人简介",
+				"statistics": "统计",
+				"score": "分数",
+				"rating": "评分",
+				"problems_solved": "已解决的题目",
+				"submissions": "提交",
+				"blogs": "博客",
+				"comments": "评论",
+				"contests": "比赛"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} 秒前",
+				"minutes": "{count} 分钟前",
+				"hours": "{count} 小时前",
+				"days": "{count} 天前",
+				"months": "{count} 个月前",
+				"years": "{count} 年前"
+			},
+			"page": {
+				"view": "查看",
+				"title": "提交",
+				"breadcrumb": {
+					"home": "首页",
+					"submissions": "提交"
+				},
+				"actions": {
+					"submit_solution": "提交解答",
+					"view_all": "查看全部",
+					"view_details": "查看详情",
+					"submit_code": "提交代码"
+				},
+				"recent_submissions": "最近提交",
+				"score": "分数",
+				"list_title": "找到 {count} 个提交",
+				"submissions_title": "最近提交",
+				"no_submissions": {
+					"title": "未找到提交",
+					"empty": "成为第一个提交解答的人！",
+					"filtered": "没有提交符合您当前的筛选条件。"
+				},
+				"common": {
+					"score": "分数"
+				},
+				"pagination": {
+					"previous": "上一页",
+					"next": "下一页",
+					"page_info": "第 {page} 页，共 {total} 页"
+				},
+				"passed": "已通过"
+			},
+			"filters": {
+				"problem": "题目",
+				"problem_placeholder": "选择题目",
+				"language": "语言",
+				"select_language": "选择语言",
+				"all_languages": "所有语言",
+				"status": "状态",
+				"select_status": "选择状态",
+				"all_status": "所有状态",
+				"author": "作者",
+				"author_placeholder": "选择作者",
+				"contest_placeholder": "选择比赛",
+				"reset": "重置筛选"
+			},
+			"status": {
+				"ACCEPTED": "已接受",
+				"WRONG_ANSWER": "答案错误",
+				"TIME_LIMIT_EXCEEDED": "超出时间限制",
+				"MEMORY_LIMIT_EXCEEDED": "超出内存限制",
+				"RUNTIME_ERROR": "运行时错误",
+				"COMPILATION_ERROR": "编译错误",
+				"INTERNAL_ERROR": "内部错误",
+				"PENDING": "待定",
+				"JUDGING": "评判中",
+				"accepted": "已接受",
+				"wrong_answer": "答案错误",
+				"time_limit_exceeded": "超出时间限制",
+				"memory_limit_exceeded": "超出内存限制",
+				"runtime_error": "运行时错误",
+				"compilation_error": "编译错误",
+				"internal_error": "内部错误",
+				"pending": "待定",
+				"judging": "评判中"
+			},
+			"table": {
+				"status": "状态",
+				"problem": "题目",
+				"author": "作者",
+				"language": "语言",
+				"submitted": "已提交",
+				"actions": "操作",
+				"error_loading": "加载提交失败",
+				"unknown_problem": "未知题目",
+				"by": "由",
+				"solved": "已解决",
+				"score": "分数"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "加载提交失败"
+				},
+				"empty": {
+					"title": "尚无提交",
+					"description": "成为第一个提交解答的人！"
+				}
+			},
+			"detail": {
+				"title": "提交详情",
+				"breadcrumb": {
+					"home": "首页",
+					"submissions": "提交"
+				},
+				"tabs": {
+					"info": "信息",
+					"source_code": "源代码",
+					"test_cases": "测试用例",
+					"log": "日志"
+				},
+				"info": {
+					"author": "作者",
+					"problem": "题目",
+					"language": "语言",
+					"score": "分数",
+					"submitted": "已提交",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "返回",
+					"submit_again": "再次提交",
+					"view_all_submissions": "查看所有提交"
+				},
+				"content": {
+					"no_log_available": "无日志信息",
+					"no_test_cases_available": "无测试用例结果",
+					"subtask_count": "{count} 个子任务",
+					"subtask_count_other": "{count} 个子任务",
+					"expand_all": "全部展开",
+					"collapse_all": "全部折叠",
+					"tests_passed": "{passed} / {total} 已通过",
+					"not_found": {
+						"title": "未找到提交",
+						"message": "找不到您要查找的提交。",
+						"back_button": "返回提交"
+					},
+					"partial": "部分",
+					"submitted_for": "提交至"
+				}
+			},
+			"chart": {
+				"status": "状态",
+				"languages": "语言"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "进行中",
+				"upcoming": "即将开始",
+				"ended": "已结束",
+				"create_button": "创建比赛",
+				"search_placeholder": "搜索比赛...",
+				"loading": "加载中...",
+				"rated": "已评分",
+				"unrated": "未评分"
+			},
+			"detail": {
+				"info_tab": "信息",
+				"problems_tab": "题目",
+				"submissions_tab": "提交",
+				"standings_tab": "排名",
+				"search_problems": "搜索题目...",
+				"add_problem": "添加题目",
+				"problem_title": "标题",
+				"actions": "操作",
+				"add": "添加",
+				"adding": "添加中...",
+				"remove": "删除",
+				"rank": "排名",
+				"user": "用户",
+				"score": "分数",
+				"no_standings": "无可用排名",
+				"loading": "加载中...",
+				"contest_updated": "比赛更新成功！",
+				"problem_added": "题目已成功添加到比赛中！",
+				"failed_to_add_problem": "将题目添加到比赛失败",
+				"problem_removed": "题目已成功从比赛中删除！",
+				"failed_to_remove_problem": "从比赛中删除题目失败",
+				"remove_problem_title": "确认删除",
+				"remove_problem_description": "您确定要从此比赛中删除 \"{title}\" 吗？此操作无法撤消。",
+				"remove_problem_cancel": "取消",
+				"remove_problem_confirm": "删除"
+			},
+			"create": {
+				"title": "创建比赛"
+			},
+			"edit": {
+				"title": "编辑比赛",
+				"loading": "正在加载比赛...",
+				"cancel": "取消"
+			},
+			"form": {
+				"title": "标题",
+				"title_placeholder": "输入比赛标题",
+				"start_time": "开始时间",
+				"end_time": "结束时间",
+				"time": "时间",
+				"select_start_date": "选择开始日期",
+				"select_end_date": "选择结束日期",
+				"is_rated": "是否评分",
+				"is_rated_placeholder": "选择比赛是否评分",
+				"yes": "是",
+				"no": "否",
+				"penalty": "罚时（分钟）",
+				"penalty_placeholder": "输入罚时（分钟）",
+				"penalty_min": "罚时必须至少为 0 分钟",
+				"description": "描述",
+				"description_placeholder": "输入比赛描述",
+				"submit": "创建比赛",
+				"update": "更新比赛",
+				"title_required": "标题是必需的",
+				"start_time_required": "开始时间是必需的",
+				"end_time_required": "结束时间是必需的",
+				"create_success": "比赛创建成功！",
+				"create_error": "创建比赛失败。请重试。",
+				"update_success": "比赛更新成功！",
+				"update_error": "更新比赛失败。请重试。"
+			}
+		},
+		"judger": {
+			"title": "评判机管理",
+			"description": "监控和管理系统中的所有评判机",
+			"loading": "正在加载评判机...",
+			"judger": "评判机",
+			"busy": "繁忙",
+			"idle": "空闲",
+			"judgerBusyDescription": "此评判机当前正在处理提交",
+			"judgerIdleDescription": "此评判机已准备好处理提交",
+			"noJudgers": "未找到评判机",
+			"noJudgersDescription": "当前没有评判机连接到系统"
+		},
+		"notification": {
+			"send_system_notification": "发送系统通知",
+			"send_system_notification_description": "向所有用户发送通知",
+			"content_placeholder": "输入通知内容...",
+			"send": "发送",
+			"sending": "发送中...",
+			"success": {
+				"sent": "系统通知发送成功！"
+			},
+			"errors": {
+				"content_required": "通知内容是必需的",
+				"send_failed": "发送系统通知失败"
+			}
+		}
+	},
+	"notifications": {
+		"title": "通知",
+		"mark_all_read": "全部标记为已读",
+		"mark_as_read": "标记为已读",
+		"view_all": "查看所有通知",
+		"no_notifications": "尚无通知",
+		"loading": "正在加载通知...",
+		"failed_to_load": "加载通知失败",
+		"unread_count": "{count} 条未读通知",
+		"unread_count_plural": "{count} 条未读通知",
+		"read_count": "{count} 条已读通知",
+		"read_count_plural": "{count} 条已读通知",
+		"just_now": "刚才",
+		"minutes_ago": "{count} 分钟前",
+		"hours_ago": "{count} 小时前",
+		"days_ago": "{count} 天前",
+		"tabs": {
+			"all": "全部",
+			"unread": "未读",
+			"read": "已读"
+		},
+		"types": {
+			"new_problem": "新题目：{title}",
+			"new_contest": "新比赛：{title}",
+			"new_blog": "新博客：{title}",
+			"rating_updated": "评分已更新",
+			"system": "系统通知",
+			"new_problem_available": "有新题目可用",
+			"new_contest_available": "有新比赛可用",
+			"new_blog_post": "有新博客文章"
+		}
+	},
+	"settings": {
+		"title": "设置",
+		"description": "管理您的帐户设置和首选项。",
+		"tabs": {
+			"basic": "基本",
+			"profile": "个人资料",
+			"notification": "通知"
+		},
+		"basic": {
+			"theme": {
+				"title": "主题",
+				"description": "为应用程序选择一个主题。",
+				"light": "浅色",
+				"dark": "深色",
+				"system": "系统",
+				"auto": "自动"
+			},
+			"language": {
+				"title": "语言",
+				"description": "为应用程序选择一种语言。"
+			}
+		},
+		"profile": {
+			"title": "个人资料",
+			"description": "更新您的个人资料信息。",
+			"form": {
+				"username": "用户名",
+				"fullname": "全名",
+				"bio": "个人简介",
+				"save": "保存更改",
+				"saving": "保存中...",
+				"change_avatar": "更改头像",
+				"reset_password": "重置密码",
+				"update_success": "个人资料更新成功！",
+				"update_error": "更新个人资料失败。请重试。"
+			}
+		},
+		"notification": {
+			"title": "通知",
+			"description": "配置您的通知首选项。",
+			"form": {
+				"new_blog": "新博客文章",
+				"new_problem": "新题目",
+				"new_contest": "新比赛",
+				"update_rating": "评分更新",
+				"system": "系统通知",
+				"save": "保存更改",
+				"saving": "保存中...",
+				"update_success": "通知设置更新成功！",
+				"update_error": "更新通知设置失败。请重试。"
+			}
+		}
+	}
+}

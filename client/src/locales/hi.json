@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "होम",
+			"problems": "समस्याएं",
+			"submissions": "सबमिशन",
+			"contests": "प्रतियोगिताएं",
+			"standing": "स्टैंडिंग",
+			"login": "लॉगिन",
+			"register": "रजिस्टर",
+			"logout": "लॉगआउट",
+			"profile": "प्रोफ़ाइल",
+			"settings": "सेटिंग्स",
+			"appearance": "दिखावट",
+			"language": "भाषा",
+			"light": "लाइट",
+			"dark": "डार्क",
+			"dashboard": "डैशबोर्ड"
+		},
+		"footer": {
+			"copyright": "कॉपीराइट © {year} Nourist",
+			"license": "लाइसेंस",
+			"github": "GitHub",
+			"author": "लेखक",
+			"language": "भाषा"
+		}
+	},
+	"auth": {
+		"login": "लॉगिन",
+		"register": "रजिस्टर",
+		"verify_email": "ईमेल सत्यापित करें",
+		"forgot_password": "पासवर्ड भूल गए",
+		"reset_password": "पासवर्ड रीसेट करें",
+		"get_password": "पासवर्ड प्राप्त करें",
+		"verify_success": "ईमेल सफलतापूर्वक सत्यापित हो गया",
+		"dont_have_account": "खाता नहीं है?",
+		"already_have_account": "पहले से ही एक खाता है?",
+		"already_have_password": "पहले से ही एक पासवर्ड है?",
+		"account_already_verified": "खाता पहले ही सत्यापित हो चुका है?",
+		"continue_with_google": "Google के साथ जारी रखें",
+		"form": {
+			"email": "ईमेल",
+			"password": "पासवर्ड",
+			"username": "उपयोगकर्ता नाम",
+			"enter_email": "अपना ईमेल दर्ज करें",
+			"enter_password": "अपना पासवर्ड दर्ज करें",
+			"enter_username": "अपना उपयोगकर्ता नाम दर्ज करें",
+			"confirm_password": "पासवर्ड की पुष्टि करें",
+			"enter_confirm_password": "अपना पासवर्ड फिर से दर्ज करें"
+		},
+		"message": {
+			"email_required": "ईमेल आवश्यक है",
+			"password_required": "पासवर्ड आवश्यक है",
+			"username_required": "उपयोगकर्ता नाम आवश्यक है",
+			"email_invalid": "ईमेल अमान्य है",
+			"password_min": "पासवर्ड कम से कम 8 वर्णों का होना चाहिए",
+			"password_uppercase": "पासवर्ड में कम से कम एक बड़ा अक्षर होना चाहिए",
+			"password_lowercase": "पासवर्ड में कम से कम एक छोटा अक्षर होना चाहिए",
+			"password_number": "पासवर्ड में कम से कम एक संख्या होनी चाहिए",
+			"password_special": "पासवर्ड में कम से कम एक विशेष वर्ण होना चाहिए",
+			"confirm_password_required": "पासवर्ड की पुष्टि आवश्यक है",
+			"confirm_password_not_match": "पासवर्ड की पुष्टि मेल नहीं खाती",
+			"token_required": "टोकन आवश्यक है"
+		},
+		"success": {
+			"register": "पंजीकरण सफलतापूर्वक हुआ",
+			"login": "लॉगिन सफलतापूर्वक हुआ",
+			"forgot_password": "पासवर्ड रीसेट ईमेल सफलतापूर्वक भेजा गया",
+			"verify_email_send": "सत्यापन ईमेल सफलतापूर्वक भेजा गया",
+			"reset_password": "पासवर्ड सफलतापूर्वक रीसेट हो गया",
+			"verify": "बहुत बढ़िया! आपका ईमेल पता सत्यापित हो गया है। आपका खाता अब सक्रिय है और उपयोग के लिए तैयार है।"
+		},
+		"error": {
+			"login": "लॉगिन विफल"
+		},
+		"description": {
+			"forgot_password": "पासवर्ड रीसेट लिंक प्राप्त करने के लिए अपना ईमेल दर्ज करें",
+			"verify_email": "ईमेल सत्यापन लिंक प्राप्त करने के लिए अपना ईमेल दर्ज करें"
+		},
+		"toast": {
+			"verify_email": "सत्यापन के लिए कृपया अपना ईमेल जांचें"
+		}
+	},
+	"tiptap": {
+		"blockquote": "ब्लॉककोट",
+		"code_block": "कोड ब्लॉक",
+		"toggle_highlight": "हाइलाइट टॉगल करें ({color})",
+		"heading": "शीर्षक {level}",
+		"insert_image": "छवि डालें",
+		"link": "लिंक",
+		"paste_a_link": "एक लिंक पेस्ट करें...",
+		"apply_link": "लिंक लागू करें",
+		"open_in_new_window": "नई विंडो में खोलें",
+		"remove_link": "लिंक हटाएं",
+		"toggle_list": "सूची टॉगल करें {type}",
+		"toggle_mark": "टॉगल करें {type}",
+		"align": "संरेखित करें {align}",
+		"undo": "पूर्ववत करें",
+		"redo": "फिर से करें",
+		"highlight_text": "टेक्स्ट हाइलाइट करें",
+		"highlight": "हाइलाइट",
+		"remove_highlight": "हाइलाइट हटाएं",
+		"highlight_color": "{color} हाइलाइट रंग",
+		"highlight_colors": "हाइलाइट रंग",
+		"format_text_as_heading": "टेक्स्ट को शीर्षक के रूप में प्रारूपित करें",
+		"heading_tooltip": "शीर्षक",
+		"list_options": "सूची विकल्प",
+		"list": "सूची",
+		"bulletlist": "बुलेट सूची",
+		"orderedlist": "क्रमबद्ध सूची",
+		"tasklist": "कार्य सूची"
+	},
+	"upload": {
+		"title": "छवि अपलोड करें",
+		"supported_formats": "समर्थित प्रारूप: JPG, PNG, GIF",
+		"click_to_select": "चुनने के लिए क्लिक करें",
+		"or_drag_and_drop_file_here": "या फ़ाइल को यहाँ खींचें और छोड़ें"
+	},
+	"home": {
+		"blog": "ब्लॉग",
+		"description": "प्रोग्रामिंग समुदाय से नवीनतम लेख, ट्यूटोरियल और अंतर्दृष्टि",
+		"new": "नया",
+		"sidebar": {
+			"rating": "रेटिंग",
+			"score": "स्कोर",
+			"current_contest": "वर्तमान प्रतियोगिता",
+			"ending_in": "में समाप्त हो रहा है",
+			"join": "शामिल हों",
+			"top_raters": "शीर्ष रेटर",
+			"hot_problems": "हॉट समस्याएं",
+			"my_stats": "मेरे आँकड़े",
+			"problem": "समस्या"
+		}
+	},
+	"pagination": {
+		"view": "देखें",
+		"sizes": "आकार"
+	},
+	"problem": {
+		"filter": {
+			"title": "फ़िल्टर",
+			"status": "स्थिति",
+			"all": "सभी",
+			"solved": "हल किया गया",
+			"attempted": "प्रयास किया गया",
+			"todo": "करने के लिए",
+			"difficulty": "कठिनाई",
+			"easy": "आसान",
+			"medium": "मध्यम",
+			"hard": "कठिन",
+			"editorial": "संपादकीय",
+			"has_editorial": "संपादकीय है",
+			"point": "बिंदु",
+			"tags": "टैग",
+			"contest": "प्रतियोगिता",
+			"contest_placeholder": "एक प्रतियोगिता चुनें"
+		},
+		"search": {
+			"sort_by": "इसके अनुसार क्रमबद्ध करें",
+			"title": "शीर्षक",
+			"point": "बिंदु",
+			"difficulty": "कठिनाई",
+			"accept": "स्वीकार करें",
+			"accept_rate": "स्वीकृति दर"
+		},
+		"table": {
+			"title": "शीर्षक",
+			"difficulty": "कठिनाई",
+			"point": "बिंदु",
+			"accepted": "स्वीकृत",
+			"acceptance": "स्वीकृति",
+			"editorial": "संपादकीय",
+			"easy": "आसान",
+			"medium": "मध्यम",
+			"hard": "कठिन",
+			"delete": {
+				"title": "हटाने की पुष्टि करें",
+				"description": "क्या आप वाकई समस्या \"{title}\" को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है।",
+				"cancel": "रद्द करें",
+				"confirm": "हटाएं",
+				"success": "समस्या सफलतापूर्वक हटा दी गई",
+				"error": "समस्या हटाने में विफल"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "समस्या #{number}",
+				"breadcrumb": {
+					"problems": "समस्याएं"
+				}
+			},
+			"sidebar": {
+				"info": "जानकारी",
+				"difficulty": {
+					"label": "कठिनाई",
+					"easy": "आसान",
+					"medium": "मध्यम",
+					"hard": "कठिन"
+				},
+				"points": "अंक",
+				"constraints": {
+					"title": "बाधाएं",
+					"time_limit": "समय सीमा",
+					"memory_limit": "मेमोरी सीमा"
+				},
+				"io_format": {
+					"title": "I/O प्रारूप",
+					"input": "इनपुट",
+					"output": "आउटपुट",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "आँकड़े",
+					"accepted": "स्वीकृत",
+					"submissions": "सबमिशन",
+					"acceptance_rate": "स्वीकृति दर"
+				},
+				"status": {
+					"label": "स्थिति",
+					"solved": "हल किया गया",
+					"attempted": "प्रयास किया गया"
+				},
+				"tags": "टैग",
+				"actions": {
+					"title": "क्रियाएँ",
+					"submit": "सबमिट करें",
+					"editorial": "संपादकीय",
+					"view_submissions": "सबमिशन देखें"
+				}
+			},
+			"statement": {
+				"statement": "समस्या कथन",
+				"constraints": "बाधाएं",
+				"time_limit": "समय सीमा",
+				"memory_limit": "मेमोरी सीमा",
+				"io_format": "I/O प्रारूप",
+				"input_file": "इनपुट फ़ाइल",
+				"output_file": "आउटपुट फ़ाइल",
+				"subtasks": "उप-कार्य",
+				"subtask_number": "उप-कार्य {number}: {name}",
+				"test_cases_count": "{count} परीक्षण मामले"
+			},
+			"error": {
+				"not_found": "समस्या नहीं मिली",
+				"load_failed": "समस्या लोड करने में विफल"
+			}
+		}
+	},
+	"editorial": {
+		"title": "संपादकीय",
+		"not_available": "संपादकीय उपलब्ध नहीं है",
+		"not_available_description": "इस समस्या के लिए संपादकीय अभी उपलब्ध नहीं है या पहले समस्या को हल करने की आवश्यकता है।",
+		"check_again": "फिर से जांचें",
+		"warning": "इस संपादकीय में समस्या का समाधान और स्पष्टीकरण है। सुनिश्चित करें कि आपने पहले समस्या का प्रयास किया है!",
+		"created_by": "संपादकीय द्वारा: {username}",
+		"breadcrumb": {
+			"problems": "समस्याएं",
+			"editorial": "संपादकीय"
+		},
+		"back_to_problem": "समस्या पर वापस जाएं"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count} सेकंड पहले",
+			"minutes": "{count} मिनट पहले",
+			"hours": "{count} घंटे पहले",
+			"days": "{count} दिन पहले",
+			"months": "{count} महीने पहले",
+			"years": "{count} साल पहले"
+		},
+		"page": {
+			"view": "देखें",
+			"title": "सबमिशन",
+			"breadcrumb": {
+				"home": "होम",
+				"submissions": "सबमिशन"
+			},
+			"actions": {
+				"submit_solution": "समाधान सबमिट करें",
+				"view_all": "सभी देखें",
+				"view_details": "विवरण देखें",
+				"submit_code": "कोड सबमिट करें"
+			},
+			"recent_submissions": "हाल के सबमिशन",
+			"score": "स्कोर",
+			"list_title": "{count} सबमिशन मिले",
+			"submissions_title": "हाल के सबमिशन",
+			"no_submissions": {
+				"title": "कोई सबमिशन नहीं मिला",
+				"empty": "समाधान सबमिट करने वाले पहले व्यक्ति बनें!",
+				"filtered": "कोई भी सबमिशन आपके वर्तमान फ़िल्टर से मेल नहीं खाता है।"
+			},
+			"common": {
+				"score": "स्कोर"
+			},
+			"pagination": {
+				"previous": "पिछला",
+				"next": "अगला",
+				"page_info": "पेज {page} का {total}"
+			},
+			"passed": "उत्तीर्ण"
+		},
+		"filters": {
+			"problem": "समस्या",
+			"problem_placeholder": "एक समस्या चुनें",
+			"language": "भाषा",
+			"select_language": "भाषा चुनें",
+			"all_languages": "सभी भाषाएँ",
+			"status": "स्थिति",
+			"select_status": "स्थिति चुनें",
+			"all_status": "सभी स्थितियाँ",
+			"all_contests": "All Contests",
+			"author": "लेखक",
+			"author_placeholder": "एक लेखक चुनें",
+			"contest": "प्रतियोगिता",
+			"contest_placeholder": "एक प्रतियोगिता चुनें",
+			"reset": "फ़िल्टर रीसेट करें"
+		},
+		"status": {
+			"ACCEPTED": "स्वीकृत",
+			"WRONG_ANSWER": "गलत जवाब",
+			"TIME_LIMIT_EXCEEDED": "समय सीमा पार हो गई",
+			"MEMORY_LIMIT_EXCEEDED": "मेमोरी सीमा पार हो गई",
+			"RUNTIME_ERROR": "रनटाइम त्रुटि",
+			"COMPILATION_ERROR": "संकलन त्रुटि",
+			"INTERNAL_ERROR": "आंतरिक त्रुटि",
+			"PENDING": "लंबित",
+			"JUDGING": "न्याय किया जा रहा है",
+			"accepted": "स्वीकृत",
+			"wrong_answer": "गलत जवाब",
+			"time_limit_exceeded": "समय सीमा पार हो गई",
+			"memory_limit_exceeded": "मेमोरी सीमा पार हो गई",
+			"runtime_error": "रनटाइम त्रुटि",
+			"compilation_error": "संकलन त्रुटि",
+			"internal_error": "आंतरिक त्रुटि",
+			"pending": "लंबित",
+			"judging": "न्याय किया जा रहा है"
+		},
+		"table": {
+			"status": "स्थिति",
+			"problem": "समस्या",
+			"author": "लेखक",
+			"language": "भाषा",
+			"submitted": "सबमिट किया गया",
+			"actions": "क्रियाएँ",
+			"error_loading": "सबमिशन लोड करने में त्रुटि",
+			"unknown_problem": "अज्ञात समस्या",
+			"by": "द्वारा",
+			"solved": "हल किया गया",
+			"score": "स्कोर"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "सबमिशन लोड करने में विफल"
+			},
+			"empty": {
+				"title": "अभी तक कोई सबमिशन नहीं",
+				"description": "समाधान सबमिट करने वाले पहले व्यक्ति बनें!"
+			}
+		},
+		"detail": {
+			"title": "सबमिशन विवरण",
+			"breadcrumb": {
+				"home": "होम",
+				"submissions": "सबमिशन"
+			},
+			"tabs": {
+				"info": "जानकारी",
+				"source_code": "सोर्स कोड",
+				"test_cases": "परीक्षण मामले",
+				"log": "लॉग"
+			},
+			"info": {
+				"author": "लेखक",
+				"problem": "समस्या",
+				"language": "भाषा",
+				"score": "स्कोर",
+				"submitted": "सबमिट किया गया",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "वापस",
+				"submit_again": "फिर से सबमिट करें",
+				"view_all_submissions": "सभी सबमिशन देखें"
+			},
+			"content": {
+				"no_log_available": "कोई लॉग जानकारी उपलब्ध नहीं है",
+				"no_test_cases_available": "कोई परीक्षण मामले के परिणाम उपलब्ध नहीं हैं",
+				"subtask_count": "{count} उप-कार्य",
+				"subtask_count_other": "{count} उप-कार्य",
+				"expand_all": "सभी का विस्तार करें",
+				"collapse_all": "सभी को संक्षिप्त करें",
+				"tests_passed": "{passed} / {total} उत्तीर्ण",
+				"not_found": {
+					"title": "सबमिशन नहीं मिला",
+					"message": "आप जिस सबमिशन की तलाश कर रहे हैं वह नहीं मिला।",
+					"back_button": "सबमिशन पर वापस जाएं"
+				},
+				"partial": "आंशिक",
+				"submitted_for": "के लिए सबमिट किया गया"
+			}
+		},
+		"chart": {
+			"status": "स्थिति",
+			"languages": "भाषाएँ"
+		}
+	},
+	"submit": {
+		"easy": "आसान",
+		"medium": "मध्यम",
+		"hard": "कठिन",
+		"page": {
+			"title": "कोड सबमिट करें",
+			"select_problem": {
+				"title": "कोई समस्या नहीं चुनी गई",
+				"description": "कृपया अपना समाधान सबमिट करने के लिए एक समस्या चुनें।",
+				"browse": "समस्याएं ब्राउज़ करें"
+			},
+			"problem_not_found": {
+				"title": "समस्या नहीं मिली",
+				"description": "आप जिस समस्या को सबमिट करने का प्रयास कर रहे हैं वह नहीं मिली।"
+			},
+			"breadcrumb": {
+				"home": "होम",
+				"problems": "समस्याएं"
+			},
+			"back_to_problem": "समस्या पर वापस जाएं",
+			"language": "प्रोग्रामिंग भाषा",
+			"select_language": "भाषा चुनें",
+			"code": "सोर्स कोड",
+			"code_placeholder": "अपना कोड यहाँ दर्ज करें...",
+			"submit": "सबमिट करें",
+			"submitting": "सबमिट किया जा रहा है...",
+			"login_required": {
+				"message": "कृपया",
+				"login": "लॉगिन करें",
+				"to_submit": "अपना समाधान सबमिट करने के लिए"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "कोड सबमिट करने के लिए आपको लॉगिन करना होगा",
+				"select_problem": "कृपया सबमिट करने के लिए एक समस्या चुनें",
+				"enter_code": "कृपया अपना कोड दर्ज करें",
+				"submit_failed": "कोड सबमिट करने में विफल। कृपया पुनः प्रयास करें।"
+			},
+			"success": {
+				"submitted": "कोड सफलतापूर्वक सबमिट हो गया!"
+			}
+		}
+	},
+	"error": {
+		"title": "ओह! कुछ गलत हो गया",
+		"message": "एक अप्रत्याशित त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।",
+		"try_again": "पुनः प्रयास करें",
+		"go_home": "होमपेज पर जाएं"
+	},
+	"not_found": {
+		"title": "ओह! पेज नहीं मिला",
+		"message": "आप जिस पेज की तलाश कर रहे हैं वह मौजूद नहीं है।",
+		"go_home": "होमपेज पर जाएं"
+	},
+	"blog": {
+		"create": {
+			"create": "बनाएं",
+			"blogs": "ब्लॉग",
+			"title": "शीर्षक",
+			"title_placeholder": "शीर्षक दर्ज करें",
+			"description_placeholder": "विवरण दर्ज करें",
+			"upload_thumbnail": "थंबनेल अपलोड करें",
+			"save": "सहेजें",
+			"message": {
+				"title_required": "शीर्षक आवश्यक है",
+				"title_and_content_required": "शीर्षक और सामग्री आवश्यक हैं।"
+			},
+			"create_success": "ब्लॉग सफलतापूर्वक बनाया गया!",
+			"create_fail": "ब्लॉग बनाने में विफल।"
+		},
+		"edit": {
+			"blogs": "ब्लॉग",
+			"edit": "संपादित करें",
+			"save": "सहेजें",
+			"message": {
+				"title_required": "शीर्षक आवश्यक है",
+				"title_and_content_required": "शीर्षक और सामग्री आवश्यक हैं।"
+			},
+			"edit_success": "ब्लॉग सफलतापूर्वक संपादित किया गया!",
+			"edit_fail": "ब्लॉग संपादित करने में विफल।"
+		},
+		"card": {
+			"blogs": "ब्लॉग",
+			"delete_success": "ब्लॉग सफलतापूर्वक हटा दिया गया!",
+			"message": {
+				"delete_confirmation": "क्या आप वाकई इस ब्लॉग को हटाना चाहते हैं?"
+			},
+			"delete": "हटाएं",
+			"edit": "संपादित करें",
+			"cancel": "रद्द करें"
+		},
+		"comment": {
+			"create_success": "टिप्पणी सफलतापूर्वक बनाई गई!",
+			"date": {
+				"seconds": "{count} सेकंड पहले",
+				"minutes": "{count} मिनट पहले",
+				"hours": "{count} घंटे पहले",
+				"days": "{count} दिन पहले",
+				"months": "{count} महीने पहले",
+				"years": "{count} साल पहले"
+			},
+			"comment-placeholder": "एक टिप्पणी लिखें...",
+			"comment": "टिप्पणी",
+			"comments": "टिप्पणियाँ",
+			"message": {
+				"comment_required": "टिप्पणी आवश्यक है",
+				"delete_confirmation": "क्या आप वाकई इस टिप्पणी को हटाना चाहते हैं?"
+			},
+			"delete": "हटाएं",
+			"edit": "संपादित करें",
+			"cancel": "रद्द करें",
+			"delete_success": "टिप्पणी सफलतापूर्वक हटा दी गई!",
+			"edit_success": "टिप्पणी सफलतापूर्वक संपादित की गई!"
+		}
+	},
+	"standing": {
+		"title": "वैश्विक स्टैंडिंग",
+		"description": "रेटिंग और कुल स्कोर के आधार पर उपयोगकर्ताओं की रैंकिंग",
+		"rating": "रेटिंग",
+		"score": "स्कोर",
+		"top_users": "शीर्ष उपयोगकर्ता",
+		"all_users": "सभी उपयोगकर्ता",
+		"no_data": "कोई डेटा उपलब्ध नहीं है",
+		"modes": {
+			"rating": "रेटिंग",
+			"score": "स्कोर"
+		},
+		"table": {
+			"rank": "रैंक",
+			"user": "उपयोगकर्ता",
+			"rating": "रेटिंग",
+			"score": "स्कोर"
+		},
+		"filters": {
+			"search_placeholder": "उपयोगकर्ताओं को खोजें...",
+			"reset": "रीसेट करें"
+		},
+		"errors": {
+			"load_failed": "स्टैंडिंग डेटा लोड करने में विफल"
+		}
+	},
+	"async_combobox": {
+		"select": "चुनें...",
+		"search": "खोजें...",
+		"no_results": "कोई परिणाम नहीं मिला।",
+		"load_more": "और लोड करें..."
+	},
+	"profile": {
+		"title": "प्रोफ़ाइल",
+		"loading": "प्रोफ़ाइल लोड हो रही है...",
+		"user_not_found": "उपयोगकर्ता नहीं मिला",
+		"sidebar": {
+			"edit_profile": "प्रोफ़ाइल संपादित करें",
+			"rank": "रैंक",
+			"stats": "आँकड़े",
+			"score": "स्कोर",
+			"rating": "रेटिंग",
+			"ac_problems": "AC समस्याएं",
+			"submissions": "सबमिशन",
+			"blogs": "ब्लॉग",
+			"comments": "टिप्पणियाँ",
+			"joined_contests": "शामिल हुई प्रतियोगिताएं",
+			"languages": "भाषाएँ",
+			"submissions_count": "सबमिशन",
+			"no_submissions": "अभी तक कोई सबमिशन नहीं",
+			"unranked": "अश्रेणीबद्ध"
+		},
+		"content": {
+			"submission_activity": "सबमिशन गतिविधि",
+			"submissions_in_year": "पिछले वर्ष में सबमिशन",
+			"accepted": "स्वीकृत",
+			"loading_activity": "गतिविधि डेटा लोड हो रहा है...",
+			"rating_history": "रेटिंग इतिहास",
+			"problems_by_difficulty": "कठिनाई के अनुसार AC समस्याएं",
+			"submissions_by_language": "भाषा के अनुसार AC सबमिशन",
+			"less": "कम",
+			"more": "अधिक"
+		},
+		"tabs": {
+			"recent_solved_problems": "हाल ही में हल की गई समस्याएं",
+			"recent_submissions": "हाल के सबमिशन",
+			"blogs": "ब्लॉग",
+			"problem": "समस्या",
+			"language": "भाषा",
+			"solved_count": "हल की गई संख्या",
+			"first_solved": "पहली बार हल किया गया",
+			"status": "स्थिति",
+			"date": "दिनांक",
+			"title": "शीर्षक",
+			"publish_date": "प्रकाशन दिनांक",
+			"no_accepted_submissions": "अभी तक कोई स्वीकृत सबमिशन नहीं है।",
+			"no_recent_submissions": "अभी तक कोई सबमिशन नहीं है।",
+			"no_blogs": "अभी तक कोई ब्लॉग प्रकाशित नहीं हुआ है।"
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "प्रतियोगिताएं",
+			"running": "चल रही है",
+			"upcoming": "आगामी",
+			"ended": "समाप्त",
+			"create_button": "प्रतियोगिता बनाएं",
+			"search_placeholder": "प्रतियोगिताएं खोजें...",
+			"loading": "प्रतियोगिताएं लोड हो रही है...",
+			"no_contests": "कोई प्रतियोगिता नहीं मिली",
+			"no_contests_description": "आगामी प्रतियोगिताओं और चुनौतियों के लिए बाद में देखें",
+			"error_loading": "प्रतियोगिताएं लोड करने में त्रुटि",
+			"rated": "रेटेड",
+			"unrated": "अनरेटेड",
+			"participants": "{count, plural, =0 {कोई प्रतिभागी नहीं} =1 {# प्रतिभागी} other {# प्रतिभागी}}",
+			"joining": "शामिल हुए"
+		},
+		"detail": {
+			"info_tab": "जानकारी",
+			"problems_tab": "समस्याएं",
+			"submissions_tab": "सबमिशन",
+			"standings_tab": "स्टैंडिंग",
+			"time_remaining": "शेष समय",
+			"search_problems": "समस्याएं खोजें...",
+			"add_problem": "समस्या जोड़ें",
+			"problem_title": "शीर्षक",
+			"problem_slug": "स्लग",
+			"problem_point": "बिंदु",
+			"actions": "क्रियाएँ",
+			"add": "जोड़ें",
+			"adding": "जोड़ा जा रहा है...",
+			"remove": "हटाएं",
+			"contest_problems": "प्रतियोगिता की समस्याएं",
+			"rank": "रैंक",
+			"user": "उपयोगकर्ता",
+			"score": "स्कोर",
+			"time": "समय",
+			"points": "अंक",
+			"no_standings": "कोई स्टैंडिंग उपलब्ध नहीं है",
+			"loading": "लोड हो रहा है...",
+			"contest_updated": "प्रतियोगिता सफलतापूर्वक अपडेट हो गई!",
+			"problem_added": "समस्या सफलतापूर्वक प्रतियोगिता में जोड़ दी गई!",
+			"failed_to_add_problem": "समस्या को प्रतियोगिता में जोड़ने में विफल",
+			"problem_removed": "समस्या सफलतापूर्वक प्रतियोगिता से हटा दी गई!",
+			"failed_to_remove_problem": "समस्या को प्रतियोगिता से हटाने में विफल",
+			"remove_problem_title": "हटाने की पुष्टि करें",
+			"remove_problem_description": "क्या आप वाकई इस प्रतियोगिता से \"{title}\" को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है।",
+			"remove_problem_cancel": "रद्द करें",
+			"remove_problem_confirm": "हटाएं",
+			"running": "चल रही है",
+			"upcoming": "आगामी",
+			"ended": "समाप्त",
+			"rated": "रेटेड",
+			"start_time": "प्रारंभ समय",
+			"end_time": "अंतिम समय",
+			"participants": "प्रतिभागी",
+			"problems": "समस्याएं",
+			"no_problems": "कोई समस्या उपलब्ध नहीं है",
+			"join": "प्रतियोगिता में शामिल हों",
+			"leave": "प्रतियोगिता छोड़ें",
+			"joining": "शामिल हो रहे हैं...",
+			"leaving": "छोड़ रहे हैं...",
+			"join_success": "प्रतियोगिता में सफलतापूर्वक शामिल हो गए!",
+			"leave_success": "प्रतियोगिता सफलतापूर्वक छोड़ दी!",
+			"join_fail": "प्रतियोगिता में शामिल होने में विफल। कृपया पुनः प्रयास करें।",
+			"leave_fail": "प्रतियोगिता छोड़ने में विफल। कृपया पुनः प्रयास करें।"
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "डैशबोर्ड",
+			"blog": "ब्लॉग",
+			"problem": "समस्या",
+			"submission": "सबमिशन",
+			"contest": "प्रतियोगिता",
+			"user": "उपयोगकर्ता",
+			"judger": "जज",
+			"notification": "अधिसूचना",
+			"profile": "प्रोफ़ाइल",
+			"logout": "लॉगआउट",
+			"appearance": "दिखावट",
+			"language": "भाषा",
+			"light": "लाइट",
+			"dark": "डार्क",
+			"home": "होम"
+		},
+		"dashboard": {
+			"unable_to_load": "डैशबोर्ड लोड करने में असमर्थ",
+			"error_loading": "डैशबोर्ड डेटा लोड करते समय एक त्रुटि हुई। कृपया पृष्ठ को रीफ्रेश करें।",
+			"refresh": "डैशबोर्ड रीफ्रेश करें",
+			"total_users": "कुल उपयोगकर्ता",
+			"active_today": "आज सक्रिय",
+			"total_submissions": "कुल सबमिशन",
+			"success_rate": "सफलता दर",
+			"active_problems": "सक्रिय समस्याएं",
+			"user_activity": "उपयोगकर्ता गतिविधि",
+			"submission_volume": "सबमिशन वॉल्यूम",
+			"language_distribution": "भाषा वितरण",
+			"submission_results": "सबमिशन परिणाम",
+			"problem_difficulty": "समस्या की कठिनाई",
+			"contest_participation": "प्रतियोगिता में भागीदारी",
+			"top_users": "शीर्ष उपयोगकर्ता",
+			"popular_problems": "लोकप्रिय समस्याएं"
+		},
+		"chart": {
+			"loading": "लोड हो रहा है...",
+			"contests": "प्रतियोगिताएं",
+			"participants": "प्रतिभागी",
+			"contest_participation_trends": "प्रतियोगिता भागीदारी के रुझान",
+			"contest_participation_description": "मासिक प्रतियोगिता गणना और प्रतिभागी संख्या",
+			"number_of_contests": "प्रतियोगिताओं की संख्या (बायां Y-अक्ष)",
+			"total_participants": "कुल प्रतिभागी (दायां Y-अक्ष)",
+			"judger_queue_performance": "जज कतार प्रदर्शन",
+			"judger_queue_description": "वास्तविक समय कतार आकार और प्रसंस्करण समय की निगरानी",
+			"queue_size": "कतार का आकार",
+			"processing_time": "प्रसंस्करण समय",
+			"queue_size_threshold_warning": "कतार का आकार सीमा से ऊपर है!",
+			"queue_size_left": "कतार का आकार (बायां Y-अक्ष)",
+			"processing_time_right": "प्रसंस्करण समय (दायां Y-अक्ष)",
+			"threshold": "सीमा",
+			"language_usage": "प्रोग्रामिंग भाषा का उपयोग",
+			"language_usage_description": "प्रोग्रामिंग भाषा द्वारा सबमिशन का वितरण",
+			"submissions": "सबमिशन",
+			"percentage": "प्रतिशत",
+			"total_submissions": "कुल सबमिशन",
+			"problem_difficulty_distribution": "समस्या कठिनाई वितरण",
+			"problem_difficulty_description": "कठिनाई स्तर और समाधान दरों द्वारा समस्याओं की संख्या",
+			"total_problems": "कुल समस्याएं",
+			"solved_by_users": "उपयोगकर्ताओं द्वारा हल किया गया",
+			"solve_rate": "समाधान दर",
+			"submission_results_distribution": "सबमिशन परिणाम वितरण",
+			"submission_results_description": "सबमिशन निर्णयों का टूटना",
+			"count": "गिनती",
+			"submission_volume": "सबमिशन वॉल्यूम",
+			"submission_volume_description": "दैनिक सबमिशन गणना और स्वीकृति दर",
+			"accepted": "स्वीकृत",
+			"success_rate": "सफलता दर",
+			"system_resource_usage": "सिस्टम संसाधन उपयोग",
+			"system_resource_description": "वास्तविक समय CPU, मेमोरी और डिस्क उपयोग की निगरानी",
+			"cpu_usage": "CPU उपयोग",
+			"memory_usage": "मेमोरी उपयोग",
+			"disk_usage": "डिस्क उपयोग",
+			"high_resource_usage": "उच्च संसाधन उपयोग का पता चला!",
+			"cpu": "CPU",
+			"memory": "मेमोरी",
+			"disk": "डिस्क",
+			"user_registrations": "उपयोगकर्ता पंजीकरण",
+			"user_registrations_description": "दैनिक नए पंजीकरण"
+		},
+		"table": {
+			"loading": "लोड हो रहा है...",
+			"most_attempted_problems": "सबसे अधिक प्रयास की गई समस्याएं",
+			"most_attempted_problems_description": "सबमिशन गणना के आधार पर लोकप्रिय समस्याएं",
+			"problem": "समस्या",
+			"difficulty": "कठिनाई",
+			"attempts": "प्रयास",
+			"solved": "हल किया गया",
+			"success_rate": "सफलता दर",
+			"top_users_this_week": "इस सप्ताह के शीर्ष उपयोगकर्ता",
+			"top_users_this_week_description": "हल की गई समस्याओं के आधार पर सबसे सक्रिय उपयोगकर्ता",
+			"rank": "रैंक",
+			"user": "उपयोगकर्ता",
+			"submissions": "सबमिशन"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "खोजें...",
+				"sort_by": "इसके अनुसार क्रमबद्ध करें",
+				"title": "शीर्षक",
+				"point": "बिंदु",
+				"difficulty": "कठिनाई",
+				"accept": "स्वीकार करें",
+				"accept_rate": "स्वीकृति दर"
+			},
+			"filter": {
+				"new": "नया",
+				"title": "फ़िल्टर",
+				"difficulty": "कठिनाई",
+				"easy": "आसान",
+				"medium": "मध्यम",
+				"hard": "कठिन",
+				"point": "बिंदु",
+				"tags": "टैग",
+				"all": "सभी",
+				"editorial": "संपादकीय",
+				"has_editorial": "संपादकीय है",
+				"point_range": "बिंदु सीमा",
+				"contest": "प्रतियोगिता"
+			},
+			"table": {
+				"title": "शीर्षक",
+				"tags": "टैग",
+				"difficulty": "कठिनाई",
+				"point": "बिंदु",
+				"accepted": "स्वीकृत",
+				"acceptance": "स्वीकृति",
+				"editorial": "संपादकीय",
+				"easy": "आसान",
+				"medium": "मध्यम",
+				"hard": "कठिन",
+				"delete": {
+					"title": "हटाने की पुष्टि करें",
+					"description": "क्या आप वाकई समस्या \"{title}\" को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है।",
+					"cancel": "रद्द करें",
+					"confirm": "हटाएं",
+					"success": "समस्या सफलतापूर्वक हटा दी गई",
+					"error": "समस्या हटाने में विफल"
+				}
+			},
+			"form": {
+				"title": "शीर्षक",
+				"title_placeholder": "समस्या का शीर्षक दर्ज करें",
+				"time_limit": "समय सीमा (ms)",
+				"memory_limit": "मेमोरी सीमा (KB)",
+				"point": "बिंदु",
+				"scoring_method": "स्कोरिंग विधि",
+				"scoring_method_placeholder": "स्कोरिंग विधि चुनें",
+				"scoring_method_standard": "मानक",
+				"scoring_method_subtask": "उप-कार्य",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "कठिनाई",
+				"difficulty_placeholder": "कठिनाई चुनें",
+				"difficulty_easy": "आसान",
+				"difficulty_medium": "मध्यम",
+				"difficulty_hard": "कठिन",
+				"io_mode": "I/O मोड",
+				"io_mode_placeholder": "I/O मोड चुनें",
+				"io_mode_standard": "मानक",
+				"io_mode_file": "फ़ाइल",
+				"input_file": "इनपुट फ़ाइल",
+				"input_file_placeholder": "input.txt",
+				"output_file": "आउटपुट फ़ाइल",
+				"output_file_placeholder": "output.txt",
+				"tags": "टैग",
+				"statement": "कथन",
+				"statement_placeholder": "समस्या कथन यहाँ लिखें...",
+				"submit": "समस्या बनाएं",
+				"update": "समस्या अपडेट करें",
+				"title_required": "शीर्षक आवश्यक है",
+				"time_limit_min": "समय सीमा कम से कम 1ms होनी चाहिए",
+				"time_limit_max": "समय सीमा अधिकतम 10000ms होनी चाहिए",
+				"memory_limit_min": "मेमोरी सीमा कम से कम 1KB होनी चाहिए",
+				"memory_limit_max": "मेमोरी सीमा अधिकतम 1048576KB होनी चाहिए",
+				"point_min": "बिंदु कम से कम 0 होना चाहिए",
+				"point_max": "बिंदु अधिकतम 100 होना चाहिए",
+				"tags_placeholder": "टैग दर्ज करें...",
+				"create_success": "समस्या सफलतापूर्वक बनाई गई!",
+				"create_error": "समस्या बनाने में विफल। कृपया पुनः प्रयास करें।",
+				"update_success": "समस्या सफलतापूर्वक अपडेट हो गई!",
+				"update_error": "समस्या अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
+			},
+			"editorial": {
+				"placeholder": "संपादकीय सामग्री यहाँ लिखें...",
+				"create": "संपादकीय बनाएं",
+				"save": "संपादकीय सहेजें",
+				"delete": "संपादकीय हटाएं",
+				"cancel": "रद्द करें",
+				"deleting": "हटाया जा रहा है...",
+				"saving": "सहेजा जा रहा है...",
+				"no_editorial": "इस समस्या के लिए अभी तक कोई संपादकीय मौजूद नहीं है।",
+				"create_success": "संपादकीय सफलतापूर्वक बनाया गया!",
+				"create_error": "संपादकीय बनाने में विफल। कृपया पुनः प्रयास करें।",
+				"update_success": "संपादकीय सफलतापूर्वक अपडेट हो गया!",
+				"update_error": "संपादकीय अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+				"delete_success": "संपादकीय सफलतापूर्वक हटा दिया गया!",
+				"delete_error": "संपादकीय हटाने में विफल। कृपया पुनः प्रयास करें।",
+				"delete_confirmation_title": "क्या आप वाकई इस संपादकीय को हटाना चाहते हैं?",
+				"delete_confirmation_description": "यह क्रिया पूर्ववत नहीं की जा सकती है। यह इस समस्या के लिए संपादकीय को स्थायी रूप से हटा देगा।"
+			},
+			"tabs": {
+				"info": "जानकारी",
+				"editorial": "संपादकीय",
+				"testcase": "टेस्टकेस"
+			},
+			"slug_page": {
+				"loading": "लोड हो रहा है...",
+				"problem_not_found": "समस्या नहीं मिली",
+				"error_loading_problem": "समस्या लोड करने में त्रुटि: {message}",
+				"error_loading_tags": "टैग लोड करने में त्रुटि: {message}",
+				"testcase_management": "टेस्टकेस प्रबंधन यहाँ लागू किया जाएगा।"
+			},
+			"testcase": {
+				"input": "इनपुट",
+				"output": "आउटपुट",
+				"save": "सहेजें",
+				"saving": "सहेजा जा रहा है...",
+				"loading": "लोड हो रहा है...",
+				"select_to_edit": "संपादित करने के लिए एक टेस्टकेस इनपुट या आउटपुट चुनें",
+				"content_placeholder": "टेस्टकेस सामग्री यहाँ दिखाई देगी...",
+				"new_testcase": "नया टेस्टकेस",
+				"new_subtask": "नया उप-कार्य",
+				"name": "नाम",
+				"cancel": "रद्द करें",
+				"create": "बनाएं",
+				"delete": "हटाएं",
+				"creating": "बनाया जा रहा है...",
+				"create_subtask_title": "नया उप-कार्य बनाएं",
+				"create_subtask_description": "नए उप-कार्य के लिए एक नाम दर्ज करें।",
+				"subtask_name_placeholder": "उप-कार्य का नाम दर्ज करें",
+				"create_testcase_title": "नया टेस्टकेस बनाएं",
+				"create_testcase_description": "नए टेस्टकेस के लिए एक नाम दर्ज करें।",
+				"testcase_name_placeholder": "टेस्टकेस का नाम दर्ज करें",
+				"delete_subtask_title": "उप-कार्य हटाएं",
+				"delete_subtask_description": "क्या आप वाकई इस उप-कार्य को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है।",
+				"delete_testcase_title": "टेस्टकेस हटाएं",
+				"delete_testcase_description": "क्या आप वाकई इस टेस्टकेस को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती है।",
+				"success": {
+					"title": "सफलता",
+					"saved": "टेस्टकेस सामग्री सफलतापूर्वक सहेजी गई",
+					"testcase_created": "टेस्टकेस सफलतापूर्वक बनाया गया",
+					"testcase_deleted": "टेस्टकेस सफलतापूर्वक हटा दिया गया",
+					"subtask_created": "उप-कार्य सफलतापूर्वक बनाया गया",
+					"subtask_deleted": "उप-कार्य सफलतापूर्वक हटा दिया गया"
+				},
+				"error": {
+					"title": "त्रुटि",
+					"load_subtasks": "उप-कार्य लोड करने में विफल",
+					"load_content": "टेस्टकेस सामग्री लोड करने में विफल",
+					"save_content": "टेस्टकेस सामग्री सहेजने में विफल",
+					"create_testcase": "टेस्टकेस बनाने में विफल",
+					"delete_testcase": "टेस्टकेस हटाने में विफल",
+					"create_subtask": "उप-कार्य बनाने में विफल",
+					"delete_subtask": "उप-कार्य हटाने में विफल"
+				}
+			}
+		},
+		"user": {
+			"title": "User Management",
+			"search_placeholder": "Search users...",
+			"sort_by": "Sort by",
+			"sort_username": "Username",
+			"sort_fullname": "Full Name",
+			"sort_rating": "Rating",
+			"sort_score": "Score",
+			"sort_asc": "Ascending",
+			"sort_desc": "Descending",
+			"no_users_found": "No users found",
+			"showing_results": "Showing {start}-{end} of {total} results",
+			"previous": "Previous",
+			"next": "Next",
+			"page_of": "Page {current} of {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Username",
+				"fullname": "Full Name",
+				"email": "Email",
+				"role": "Role",
+				"rating": "Rating",
+				"score": "Score",
+				"verified": "Verified",
+				"verified_yes": "Yes",
+				"verified_no": "No"
+			},
+			"detail": {
+				"title": "User Details",
+				"back_to_users": "Back to Users",
+				"verified": "Verified",
+				"unverified": "Unverified",
+				"email": "Email",
+				"joined": "Joined",
+				"last_updated": "Last Updated",
+				"bio": "Biography",
+				"statistics": "Statistics",
+				"score": "Score",
+				"rating": "Rating",
+				"problems_solved": "Problems Solved",
+				"submissions": "Submissions",
+				"blogs": "Blogs",
+				"comments": "Comments",
+				"contests": "Contests"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "View",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "View Details",
+					"submit_code": "Submit Code"
+				},
+				"recent_submissions": "Recent Submissions",
+				"score": "Score",
+				"list_title": "Found {count} submissions",
+				"submissions_title": "Recent Submissions",
+				"no_submissions": {
+					"title": "No Submissions Found",
+					"empty": "Be the first to submit a solution!",
+					"filtered": "No submissions match your current filters."
+				},
+				"common": {
+					"score": "Score"
+				},
+				"pagination": {
+					"previous": "Previous",
+					"next": "Next",
+					"page_info": "Page {page} of {total}"
+				},
+				"passed": "passed"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Select a problem",
+				"language": "Language",
+				"select_language": "Select language",
+				"all_languages": "All Languages",
+				"status": "Status",
+				"select_status": "Select status",
+				"all_status": "All Status",
+				"author": "Author",
+				"author_placeholder": "Select an author",
+				"contest_placeholder": "Select a contest",
+				"reset": "Reset Filters"
+			},
+			"status": {
+				"ACCEPTED": "Accepted",
+				"WRONG_ANSWER": "Wrong Answer",
+				"TIME_LIMIT_EXCEEDED": "Time Limit Exceeded",
+				"MEMORY_LIMIT_EXCEEDED": "Memory Limit Exceeded",
+				"RUNTIME_ERROR": "Runtime Error",
+				"COMPILATION_ERROR": "Compilation Error",
+				"INTERNAL_ERROR": "Internal Error",
+				"PENDING": "Pending",
+				"JUDGING": "Judging",
+				"accepted": "Accepted",
+				"wrong_answer": "Wrong Answer",
+				"time_limit_exceeded": "Time Limit Exceeded",
+				"memory_limit_exceeded": "Memory Limit Exceeded",
+				"runtime_error": "Runtime Error",
+				"compilation_error": "Compilation Error",
+				"internal_error": "Internal Error",
+				"pending": "Pending",
+				"judging": "Judging"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Author",
+				"language": "Language",
+				"submitted": "Submitted",
+				"actions": "Actions",
+				"error_loading": "Error Loading Submissions",
+				"unknown_problem": "Unknown Problem",
+				"by": "by",
+				"solved": "solved",
+				"score": "Score"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Failed to load submissions"
+				},
+				"empty": {
+					"title": "No Submissions Yet",
+					"description": "Be the first to submit a solution!"
+				}
+			},
+			"detail": {
+				"title": "Submission Details",
+				"breadcrumb": {
+					"home": "Home",
+					"submissions": "Submissions"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Source Code",
+					"test_cases": "Test Cases",
+					"log": "Log"
+				},
+				"info": {
+					"author": "Author",
+					"problem": "Problem",
+					"language": "Language",
+					"score": "Score",
+					"submitted": "Submitted",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Back",
+					"submit_again": "Submit Again",
+					"view_all_submissions": "View All Submissions"
+				},
+				"content": {
+					"no_log_available": "No log information available",
+					"no_test_cases_available": "No test case results available",
+					"subtask_count": "{count} subtask",
+					"subtask_count_other": "{count} subtasks",
+					"expand_all": "Expand All",
+					"collapse_all": "Collapse All",
+					"tests_passed": "{passed} / {total} passed",
+					"not_found": {
+						"title": "Submission Not Found",
+						"message": "The submission you're looking for could not be found.",
+						"back_button": "Back to Submissions"
+					},
+					"partial": "Partial",
+					"submitted_for": "Submitted for"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Languages"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Running",
+				"upcoming": "Upcoming",
+				"ended": "Ended",
+				"create_button": "Create Contest",
+				"search_placeholder": "Search contests...",
+				"loading": "Loading...",
+				"rated": "Rated",
+				"unrated": "Unrated"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Problems",
+				"submissions_tab": "Submissions",
+				"standings_tab": "Standings",
+				"search_problems": "Search problems...",
+				"add_problem": "Add Problem",
+				"problem_title": "Title",
+				"actions": "Actions",
+				"add": "Add",
+				"adding": "Adding...",
+				"remove": "Remove",
+				"rank": "Rank",
+				"user": "User",
+				"score": "Score",
+				"no_standings": "No standings available",
+				"loading": "Loading...",
+				"contest_updated": "Contest updated successfully!",
+				"problem_added": "Problem added to contest successfully!",
+				"failed_to_add_problem": "Failed to add problem to contest",
+				"problem_removed": "Problem removed from contest successfully!",
+				"failed_to_remove_problem": "Failed to remove problem from contest",
+				"remove_problem_title": "Confirm Remove",
+				"remove_problem_description": "Are you sure you want to remove \"{title}\" from this contest? This action cannot be undone.",
+				"remove_problem_cancel": "Cancel",
+				"remove_problem_confirm": "Remove"
+			},
+			"create": {
+				"title": "Create Contest"
+			},
+			"edit": {
+				"title": "Edit Contest",
+				"loading": "Loading contest...",
+				"cancel": "Cancel"
+			},
+			"form": {
+				"title": "Title",
+				"title_placeholder": "Enter contest title",
+				"start_time": "Start Time",
+				"end_time": "End Time",
+				"time": "Time",
+				"select_start_date": "Select start date",
+				"select_end_date": "Select end date",
+				"is_rated": "Is Rated",
+				"is_rated_placeholder": "Select if contest is rated",
+				"yes": "Yes",
+				"no": "No",
+				"penalty": "Penalty (minutes)",
+				"penalty_placeholder": "Enter penalty in minutes",
+				"penalty_min": "Penalty must be at least 0 minutes",
+				"description": "Description",
+				"description_placeholder": "Enter contest description",
+				"submit": "Create Contest",
+				"update": "Update Contest",
+				"title_required": "Title is required",
+				"start_time_required": "Start time is required",
+				"end_time_required": "End time is required",
+				"create_success": "Contest created successfully!",
+				"create_error": "Failed to create contest. Please try again.",
+				"update_success": "Contest updated successfully!",
+				"update_error": "Failed to update contest. Please try again."
+			}
+		},
+		"judger": {
+			"title": "Judger Management",
+			"description": "Monitor and manage all judgers in the system",
+			"loading": "Loading judgers...",
+			"judger": "Judger",
+			"busy": "Busy",
+			"idle": "Idle",
+			"judgerBusyDescription": "This judger is currently processing submissions",
+			"judgerIdleDescription": "This judger is ready to process submissions",
+			"noJudgers": "No Judgers Found",
+			"noJudgersDescription": "No judgers are currently connected to the system"
+		},
+		"notification": {
+			"send_system_notification": "Send System Notification",
+			"send_system_notification_description": "Send a notification to all users",
+			"content_placeholder": "Enter notification content...",
+			"send": "Send",
+			"sending": "Sending...",
+			"success": {
+				"sent": "System notification sent successfully!"
+			},
+			"errors": {
+				"content_required": "Notification content is required",
+				"send_failed": "Failed to send system notification"
+			}
+		}
+	},
+	"notifications": {
+		"title": "अधिसूचनाएं",
+		"mark_all_read": "सभी को पढ़ा हुआ चिह्नित करें",
+		"mark_as_read": "पढ़ा हुआ चिह्नित करें",
+		"view_all": "सभी सूचनाएं देखें",
+		"no_notifications": "अभी तक कोई सूचनाएं नहीं हैं",
+		"loading": "सूचनाएं लोड हो रही है...",
+		"failed_to_load": "सूचनाएं लोड करने में विफल",
+		"unread_count": "{count} अपठित अधिसूचना",
+		"unread_count_plural": "{count} अपठित सूचनाएं",
+		"read_count": "{count} पढ़ी गई अधिसूचना",
+		"read_count_plural": "{count} पढ़ी गई सूचनाएं",
+		"just_now": "अभी-अभी",
+		"minutes_ago": "{count} मिनट पहले",
+		"hours_ago": "{count} घंटे पहले",
+		"days_ago": "{count} दिन पहले",
+		"tabs": {
+			"all": "सभी",
+			"unread": "अपठित",
+			"read": "पढ़ी गई"
+		},
+		"types": {
+			"new_problem": "नई समस्या: {title}",
+			"new_contest": "नई प्रतियोगिता: {title}",
+			"new_blog": "नया ब्लॉग: {title}",
+			"rating_updated": "रेटिंग अपडेट की गई",
+			"system": "सिस्टम अधिसूचना",
+			"new_problem_available": "नई समस्या उपलब्ध है",
+			"new_contest_available": "नई प्रतियोगिता उपलब्ध है",
+			"new_blog_post": "नई ब्लॉग पोस्ट"
+		}
+	},
+	"settings": {
+		"title": "सेटिंग्स",
+		"description": "अपने खाते की सेटिंग्स और वरीयताओं का प्रबंधन करें।",
+		"tabs": {
+			"basic": "बुनियादी",
+			"profile": "प्रोफ़ाइल",
+			"notification": "अधिसूचना"
+		},
+		"basic": {
+			"theme": {
+				"title": "थीम",
+				"description": "एप्लिकेशन के लिए एक थीम चुनें।",
+				"light": "लाइट",
+				"dark": "डार्क",
+				"system": "सिस्टम",
+				"auto": "ऑटो"
+			},
+			"language": {
+				"title": "भाषा",
+				"description": "एप्लिकेशन के लिए एक भाषा चुनें।"
+			}
+		},
+		"profile": {
+			"title": "प्रोफ़ाइल",
+			"description": "अपनी प्रोफ़ाइल जानकारी अपडेट करें।",
+			"form": {
+				"username": "उपयोगकर्ता नाम",
+				"fullname": "पूरा नाम",
+				"bio": "बायो",
+				"save": "बदलाव सहेजें",
+				"saving": "सहेजा जा रहा है...",
+				"change_avatar": "अवतार बदलें",
+				"reset_password": "पासवर्ड रीसेट करें",
+				"update_success": "प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई!",
+				"update_error": "प्रोफ़ाइल अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
+			}
+		},
+		"notification": {
+			"title": "अधिसूचनाएं",
+			"description": "अपनी अधिसूचना वरीयताओं को कॉन्फ़िगर करें।",
+			"form": {
+				"new_blog": "नई ब्लॉग पोस्ट",
+				"new_problem": "नई समस्याएं",
+				"new_contest": "नई प्रतियोगिताएं",
+				"update_rating": "रेटिंग अपडेट",
+				"system": "सिस्टम सूचनाएं",
+				"save": "बदलाव सहेजें",
+				"saving": "सहेजा जा रहा है...",
+				"update_success": "अधिसूचना सेटिंग्स सफलतापूर्वक अपडेट हो गईं!",
+				"update_error": "अधिसूचना सेटिंग्स अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
+			}
+		}
+	}
+}

@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "ホーム",
+			"problems": "問題",
+			"submissions": "提出",
+			"contests": "コンテスト",
+			"standing": "順位表",
+			"login": "ログイン",
+			"register": "登録",
+			"logout": "ログアウト",
+			"profile": "プロフィール",
+			"settings": "設定",
+			"appearance": "外観",
+			"language": "言語",
+			"light": "ライト",
+			"dark": "ダーク",
+			"dashboard": "ダッシュボード"
+		},
+		"footer": {
+			"copyright": "著作権 © {year} Nourist",
+			"license": "ライセンス",
+			"github": "GitHub",
+			"author": "著者",
+			"language": "言語"
+		}
+	},
+	"auth": {
+		"login": "ログイン",
+		"register": "登録",
+		"verify_email": "メールアドレスの確認",
+		"forgot_password": "パスワードを忘れましたか",
+		"reset_password": "パスワードをリセット",
+		"get_password": "パスワードを取得",
+		"verify_success": "メールアドレスが正常に確認されました",
+		"dont_have_account": "アカウントをお持ちではありませんか？",
+		"already_have_account": "すでにアカウントをお持ちですか？",
+		"already_have_password": "すでにパスワードをお持ちですか？",
+		"account_already_verified": "アカウントはすでに確認済みですか？",
+		"continue_with_google": "Googleで続行",
+		"form": {
+			"email": "メールアドレス",
+			"password": "パスワード",
+			"username": "ユーザー名",
+			"enter_email": "メールアドレスを入力してください",
+			"enter_password": "パスワードを入力してください",
+			"enter_username": "ユーザー名を入力してください",
+			"confirm_password": "パスワードの確認",
+			"enter_confirm_password": "パスワードを再入力してください"
+		},
+		"message": {
+			"email_required": "メールアドレスは必須です",
+			"password_required": "パスワードは必須です",
+			"username_required": "ユーザー名は必須です",
+			"email_invalid": "メールアドレスが無効です",
+			"password_min": "パスワードは8文字以上である必要があります",
+			"password_uppercase": "パスワードには少なくとも1つの大文字を含める必要があります",
+			"password_lowercase": "パスワードには少なくとも1つの小文字を含める必要があります",
+			"password_number": "パスワードには少なくとも1つの数字を含める必要があります",
+			"password_special": "パスワードには少なくとも1つの特殊文字を含める必要があります",
+			"confirm_password_required": "パスワードの確認は必須です",
+			"confirm_password_not_match": "パスワードの確認が一致しません",
+			"token_required": "トークンは必須です"
+		},
+		"success": {
+			"register": "登録に成功しました",
+			"login": "ログインに成功しました",
+			"forgot_password": "パスワードのリセットメールが正常に送信されました",
+			"verify_email_send": "確認メールが正常に送信されました",
+			"reset_password": "パスワードが正常にリセットされました",
+			"verify": "素晴らしい！メールアドレスが確認されました。アカウントがアクティブになり、使用できるようになりました。"
+		},
+		"error": {
+			"login": "ログインに失敗しました"
+		},
+		"description": {
+			"forgot_password": "パスワードのリセットリンクを取得するには、メールアドレスを入力してください",
+			"verify_email": "メールアドレスの確認リンクを取得するには、メールアドレスを入力してください"
+		},
+		"toast": {
+			"verify_email": "確認のためにメールを確認してください"
+		}
+	},
+	"tiptap": {
+		"blockquote": "ブロッククオート",
+		"code_block": "コードブロック",
+		"toggle_highlight": "ハイライトの切り替え（{color}）",
+		"heading": "見出し{level}",
+		"insert_image": "画像を挿入",
+		"link": "リンク",
+		"paste_a_link": "リンクを貼り付け...",
+		"apply_link": "リンクを適用",
+		"open_in_new_window": "新しいウィンドウで開く",
+		"remove_link": "リンクを削除",
+		"toggle_list": "{type}リストの切り替え",
+		"toggle_mark": "{type}の切り替え",
+		"align": "{align}に揃える",
+		"undo": "元に戻す",
+		"redo": "やり直す",
+		"highlight_text": "テキストをハイライト",
+		"highlight": "ハイライト",
+		"remove_highlight": "ハイライトを削除",
+		"highlight_color": "{color}のハイライト色",
+		"highlight_colors": "ハイライトの色",
+		"format_text_as_heading": "テキストを見出しとしてフォーマット",
+		"heading_tooltip": "見出し",
+		"list_options": "リストオプション",
+		"list": "リスト",
+		"bulletlist": "箇条書きリスト",
+		"orderedlist": "番号付きリスト",
+		"tasklist": "タスクリスト"
+	},
+	"upload": {
+		"title": "画像をアップロード",
+		"supported_formats": "サポートされている形式：JPG、PNG、GIF",
+		"click_to_select": "クリックして選択",
+		"or_drag_and_drop_file_here": "またはここにファイルをドラッグアンドドロップ"
+	},
+	"home": {
+		"blog": "ブログ",
+		"description": "プログラミングコミュニティからの最新の記事、チュートリアル、洞察",
+		"new": "新規",
+		"sidebar": {
+			"rating": "評価",
+			"score": "スコア",
+			"current_contest": "現在のコンテスト",
+			"ending_in": "終了まで",
+			"join": "参加",
+			"top_raters": "トップ評価者",
+			"hot_problems": "人気の問題",
+			"my_stats": "私の統計",
+			"problem": "問題"
+		}
+	},
+	"pagination": {
+		"view": "表示",
+		"sizes": "サイズ"
+	},
+	"problem": {
+		"filter": {
+			"title": "フィルター",
+			"status": "ステータス",
+			"all": "すべて",
+			"solved": "解決済み",
+			"attempted": "試行済み",
+			"todo": "未解決",
+			"difficulty": "難易度",
+			"easy": "簡単",
+			"medium": "普通",
+			"hard": "難しい",
+			"editorial": "解説",
+			"has_editorial": "解説あり",
+			"point": "ポイント",
+			"tags": "タグ",
+			"contest": "コンテスト",
+			"contest_placeholder": "コンテストを選択"
+		},
+		"search": {
+			"sort_by": "並べ替え",
+			"title": "タイトル",
+			"point": "ポイント",
+			"difficulty": "難易度",
+			"accept": "承認",
+			"accept_rate": "正答率"
+		},
+		"table": {
+			"title": "タイトル",
+			"difficulty": "難易度",
+			"point": "ポイント",
+			"accepted": "正解",
+			"acceptance": "正答率",
+			"editorial": "解説",
+			"easy": "簡単",
+			"medium": "普通",
+			"hard": "難しい",
+			"delete": {
+				"title": "削除の確認",
+				"description": "問題「{title}」を削除してもよろしいですか？この操作は元に戻せません。",
+				"cancel": "キャンセル",
+				"confirm": "削除",
+				"success": "問題が正常に削除されました",
+				"error": "問題の削除に失敗しました"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "問題#{number}",
+				"breadcrumb": {
+					"problems": "問題"
+				}
+			},
+			"sidebar": {
+				"info": "情報",
+				"difficulty": {
+					"label": "難易度",
+					"easy": "簡単",
+					"medium": "普通",
+					"hard": "難しい"
+				},
+				"points": "ポイント",
+				"constraints": {
+					"title": "制約",
+					"time_limit": "時間制限",
+					"memory_limit": "メモリ制限"
+				},
+				"io_format": {
+					"title": "入出力形式",
+					"input": "入力",
+					"output": "出力",
+					"stdin": "標準入力",
+					"stdout": "標準出力"
+				},
+				"statistics": {
+					"title": "統計",
+					"accepted": "正解",
+					"submissions": "提出",
+					"acceptance_rate": "正答率"
+				},
+				"status": {
+					"label": "ステータス",
+					"solved": "解決済み",
+					"attempted": "試行済み"
+				},
+				"tags": "タグ",
+				"actions": {
+					"title": "アクション",
+					"submit": "提出",
+					"editorial": "解説",
+					"view_submissions": "提出を表示"
+				}
+			},
+			"statement": {
+				"statement": "問題文",
+				"constraints": "制約",
+				"time_limit": "時間制限",
+				"memory_limit": "メモリ制限",
+				"io_format": "入出力形式",
+				"input_file": "入力ファイル",
+				"output_file": "出力ファイル",
+				"subtasks": "サブタスク",
+				"subtask_number": "サブタスク{number}: {name}",
+				"test_cases_count": "{count}個のテストケース"
+			},
+			"error": {
+				"not_found": "問題が見つかりません",
+				"load_failed": "問題の読み込みに失敗しました"
+			}
+		}
+	},
+	"editorial": {
+		"title": "解説",
+		"not_available": "解説は利用できません",
+		"not_available_description": "この問題の解説はまだ利用できないか、問題を先に解く必要があります。",
+		"check_again": "再確認",
+		"warning": "この解説には問題の解答と説明が含まれています。最初に問題を試したことを確認してください！",
+		"created_by": "解説作成者：{username}",
+		"breadcrumb": {
+			"problems": "問題",
+			"editorial": "解説"
+		},
+		"back_to_problem": "問題に戻る"
+	},
+	"submission": {
+		"date": {
+			"seconds": "{count}秒前",
+			"minutes": "{count}分前",
+			"hours": "{count}時間前",
+			"days": "{count}日前",
+			"months": "{count}ヶ月前",
+			"years": "{count}年前"
+		},
+		"page": {
+			"view": "表示",
+			"title": "提出",
+			"breadcrumb": {
+				"home": "ホーム",
+				"submissions": "提出"
+			},
+			"actions": {
+				"submit_solution": "解答を提出",
+				"view_all": "すべて表示",
+				"view_details": "詳細を表示",
+				"submit_code": "コードを提出"
+			},
+			"recent_submissions": "最近の提出",
+			"score": "スコア",
+			"list_title": "{count}件の提出が見つかりました",
+			"submissions_title": "最近の提出",
+			"no_submissions": {
+				"title": "提出が見つかりません",
+				"empty": "最初に解答を提出してください！",
+				"filtered": "現在のフィルターに一致する提出はありません。"
+			},
+			"common": {
+				"score": "スコア"
+			},
+			"pagination": {
+				"previous": "前へ",
+				"next": "次へ",
+				"page_info": "{total}ページ中{page}ページ"
+			},
+			"passed": "合格"
+		},
+		"filters": {
+			"problem": "問題",
+			"problem_placeholder": "問題を選択",
+			"language": "言語",
+			"select_language": "言語を選択",
+			"all_languages": "すべての言語",
+			"status": "ステータス",
+			"select_status": "ステータスを選択",
+			"all_status": "すべてのステータス",
+			"all_contests": "すべてのコンテスト",
+			"author": "著者",
+			"author_placeholder": "著者を選択",
+			"contest": "コンテスト",
+			"contest_placeholder": "コンテストを選択",
+			"reset": "フィルターをリセット"
+		},
+		"status": {
+			"ACCEPTED": "正解",
+			"WRONG_ANSWER": "不正解",
+			"TIME_LIMIT_EXCEEDED": "時間制限超過",
+			"MEMORY_LIMIT_EXCEEDED": "メモリ制限超過",
+			"RUNTIME_ERROR": "実行時エラー",
+			"COMPILATION_ERROR": "コンパイルエラー",
+			"INTERNAL_ERROR": "内部エラー",
+			"PENDING": "待機中",
+			"JUDGING": "ジャッジ中",
+			"accepted": "正解",
+			"wrong_answer": "不正解",
+			"time_limit_exceeded": "時間制限超過",
+			"memory_limit_exceeded": "メモリ制限超過",
+			"runtime_error": "実行時エラー",
+			"compilation_error": "コンパイルエラー",
+			"internal_error": "内部エラー",
+			"pending": "待機中",
+			"judging": "ジャッジ中"
+		},
+		"table": {
+			"status": "ステータス",
+			"problem": "問題",
+			"author": "著者",
+			"language": "言語",
+			"submitted": "提出日時",
+			"actions": "アクション",
+			"error_loading": "提出の読み込み中にエラーが発生しました",
+			"unknown_problem": "不明な問題",
+			"by": "作成者",
+			"solved": "解決済み",
+			"score": "スコア"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "提出の読み込みに失敗しました"
+			},
+			"empty": {
+				"title": "まだ提出がありません",
+				"description": "最初に解答を提出してください！"
+			}
+		},
+		"detail": {
+			"title": "提出の詳細",
+			"breadcrumb": {
+				"home": "ホーム",
+				"submissions": "提出"
+			},
+			"tabs": {
+				"info": "情報",
+				"source_code": "ソースコード",
+				"test_cases": "テストケース",
+				"log": "ログ"
+			},
+			"info": {
+				"author": "著者",
+				"problem": "問題",
+				"language": "言語",
+				"score": "スコア",
+				"submitted": "提出日時",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "戻る",
+				"submit_again": "再提出",
+				"view_all_submissions": "すべての提出を表示"
+			},
+			"content": {
+				"no_log_available": "ログ情報はありません",
+				"no_test_cases_available": "テストケースの結果はありません",
+				"subtask_count": "{count}個のサブタスク",
+				"subtask_count_other": "{count}個のサブタスク",
+				"expand_all": "すべて展開",
+				"collapse_all": "すべて折りたたむ",
+				"tests_passed": "{passed}/{total}個合格",
+				"not_found": {
+					"title": "提出が見つかりません",
+					"message": "お探しの提出は見つかりませんでした。",
+					"back_button": "提出に戻る"
+				},
+				"partial": "部分的",
+				"submitted_for": "提出先"
+			}
+		},
+		"chart": {
+			"status": "ステータス",
+			"languages": "言語"
+		}
+	},
+	"submit": {
+		"easy": "簡単",
+		"medium": "普通",
+		"hard": "難しい",
+		"page": {
+			"title": "コードを提出",
+			"select_problem": {
+				"title": "問題が選択されていません",
+				"description": "解答を提出する問題を選択してください。",
+				"browse": "問題を閲覧"
+			},
+			"problem_not_found": {
+				"title": "問題が見つかりません",
+				"description": "提出しようとしている問題が見つかりませんでした。"
+			},
+			"breadcrumb": {
+				"home": "ホーム",
+				"problems": "問題"
+			},
+			"back_to_problem": "問題に戻る",
+			"language": "プログラミング言語",
+			"select_language": "言語を選択",
+			"code": "ソースコード",
+			"code_placeholder": "ここにコードを入力してください...",
+			"submit": "提出",
+			"submitting": "提出中...",
+			"login_required": {
+				"message": "解答を提出するには",
+				"login": "ログイン",
+				"to_submit": "してください"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "コードを提出するにはログインする必要があります",
+				"select_problem": "提出する問題を選択してください",
+				"enter_code": "コードを入力してください",
+				"submit_failed": "コードの提出に失敗しました。もう一度お試しください。"
+			},
+			"success": {
+				"submitted": "コードが正常に提出されました！"
+			}
+		}
+	},
+	"error": {
+		"title": "問題が発生しました",
+		"message": "予期しないエラーが発生しました。後でもう一度お試しください。",
+		"try_again": "再試行",
+		"go_home": "ホームページに移動"
+	},
+	"not_found": {
+		"title": "ページが見つかりません",
+		"message": "お探しのページは存在しません。",
+		"go_home": "ホームページに移動"
+	},
+	"blog": {
+		"create": {
+			"create": "作成",
+			"blogs": "ブログ",
+			"title": "タイトル",
+			"title_placeholder": "タイトルを入力",
+			"description_placeholder": "説明を入力",
+			"upload_thumbnail": "サムネイルをアップロード",
+			"save": "保存",
+			"message": {
+				"title_required": "タイトルは必須です",
+				"title_and_content_required": "タイトルとコンテンツは必須です。"
+			},
+			"create_success": "ブログが正常に作成されました！",
+			"create_fail": "ブログの作成に失敗しました。"
+		},
+		"edit": {
+			"blogs": "ブログ",
+			"edit": "編集",
+			"save": "保存",
+			"message": {
+				"title_required": "タイトルは必須です",
+				"title_and_content_required": "タイトルとコンテンツは必須です。"
+			},
+			"edit_success": "ブログが正常に編集されました！",
+			"edit_fail": "ブログの編集に失敗しました。"
+		},
+		"card": {
+			"blogs": "ブログ",
+			"delete_success": "ブログが正常に削除されました！",
+			"message": {
+				"delete_confirmation": "このブログを削除してもよろしいですか？"
+			},
+			"delete": "削除",
+			"edit": "編集",
+			"cancel": "キャンセル"
+		},
+		"comment": {
+			"create_success": "コメントが正常に作成されました！",
+			"date": {
+				"seconds": "{count}秒前",
+				"minutes": "{count}分前",
+				"hours": "{count}時間前",
+				"days": "{count}日前",
+				"months": "{count}ヶ月前",
+				"years": "{count}年前"
+			},
+			"comment-placeholder": "コメントを書く...",
+			"comment": "コメント",
+			"comments": "コメント",
+			"message": {
+				"comment_required": "コメントは必須です",
+				"delete_confirmation": "このコメントを削除してもよろしいですか？"
+			},
+			"delete": "削除",
+			"edit": "編集",
+			"cancel": "キャンセル",
+			"delete_success": "コメントが正常に削除されました！",
+			"edit_success": "コメントが正常に編集されました！"
+		}
+	},
+	"standing": {
+		"title": "グローバル順位表",
+		"description": "評価と合計スコアに基づくユーザーのランキング",
+		"rating": "評価",
+		"score": "スコア",
+		"top_users": "トップユーザー",
+		"all_users": "すべてのユーザー",
+		"no_data": "データがありません",
+		"modes": {
+			"rating": "評価",
+			"score": "スコア"
+		},
+		"table": {
+			"rank": "順位",
+			"user": "ユーザー",
+			"rating": "評価",
+			"score": "スコア"
+		},
+		"filters": {
+			"search_placeholder": "ユーザーを検索...",
+			"reset": "リセット"
+		},
+		"errors": {
+			"load_failed": "順位表データの読み込みに失敗しました"
+		}
+	},
+	"async_combobox": {
+		"select": "選択...",
+		"search": "検索...",
+		"no_results": "結果が見つかりません。",
+		"load_more": "もっと読み込む..."
+	},
+	"profile": {
+		"title": "プロフィール",
+		"loading": "プロフィールを読み込み中...",
+		"user_not_found": "ユーザーが見つかりません",
+		"sidebar": {
+			"edit_profile": "プロフィールを編集",
+			"rank": "順位",
+			"stats": "統計",
+			"score": "スコア",
+			"rating": "評価",
+			"ac_problems": "AC問題",
+			"submissions": "提出",
+			"blogs": "ブログ",
+			"comments": "コメント",
+			"joined_contests": "参加したコンテスト",
+			"languages": "言語",
+			"submissions_count": "提出",
+			"no_submissions": "まだ提出がありません",
+			"unranked": "ランクなし"
+		},
+		"content": {
+			"submission_activity": "提出アクティビティ",
+			"submissions_in_year": "過去1年間の提出",
+			"accepted": "正解",
+			"loading_activity": "アクティビティデータを読み込み中...",
+			"rating_history": "評価履歴",
+			"problems_by_difficulty": "難易度別のAC問題",
+			"submissions_by_language": "言語別のAC提出",
+			"less": "少なく",
+			"more": "多く"
+		},
+		"tabs": {
+			"recent_solved_problems": "最近解決した問題",
+			"recent_submissions": "最近の提出",
+			"blogs": "ブログ",
+			"problem": "問題",
+			"language": "言語",
+			"solved_count": "解決済み数",
+			"first_solved": "最初に解決",
+			"status": "ステータス",
+			"date": "日付",
+			"title": "タイトル",
+			"publish_date": "公開日",
+			"no_accepted_submissions": "まだ正解した提出はありません。",
+			"no_recent_submissions": "まだ提出はありません。",
+			"no_blogs": "まだ公開されたブログはありません。"
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "コンテスト",
+			"running": "開催中",
+			"upcoming": "開催予定",
+			"ended": "終了",
+			"create_button": "コンテストを作成",
+			"search_placeholder": "コンテストを検索...",
+			"loading": "コンテストを読み込み中...",
+			"no_contests": "コンテストが見つかりません",
+			"no_contests_description": "今後の大会やチャレンジについては、後で確認してください",
+			"error_loading": "コンテストの読み込み中にエラーが発生しました",
+			"rated": "評価済み",
+			"unrated": "未評価",
+			"participants": "{count, plural, =0 {参加者なし} =1 {#人の参加者} other {#人の参加者}}",
+			"joining": "参加済み"
+		},
+		"detail": {
+			"info_tab": "情報",
+			"problems_tab": "問題",
+			"submissions_tab": "提出",
+			"standings_tab": "順位表",
+			"time_remaining": "残り時間",
+			"search_problems": "問題を検索...",
+			"add_problem": "問題を追加",
+			"problem_title": "タイトル",
+			"problem_slug": "スラッグ",
+			"problem_point": "ポイント",
+			"actions": "アクション",
+			"add": "追加",
+			"adding": "追加中...",
+			"remove": "削除",
+			"contest_problems": "コンテストの問題",
+			"rank": "順位",
+			"user": "ユーザー",
+			"score": "スコア",
+			"time": "時間",
+			"points": "ポイント",
+			"no_standings": "順位表はありません",
+			"loading": "読み込み中...",
+			"contest_updated": "コンテストが正常に更新されました！",
+			"problem_added": "問題がコンテストに正常に追加されました！",
+			"failed_to_add_problem": "問題のコンテストへの追加に失敗しました",
+			"problem_removed": "問題がコンテストから正常に削除されました！",
+			"failed_to_remove_problem": "問題のコンテストからの削除に失敗しました",
+			"remove_problem_title": "削除の確認",
+			"remove_problem_description": "このコンテストから「{title}」を削除してもよろしいですか？この操作は元に戻せません。",
+			"remove_problem_cancel": "キャンセル",
+			"remove_problem_confirm": "削除",
+			"running": "開催中",
+			"upcoming": "開催予定",
+			"ended": "終了",
+			"rated": "評価済み",
+			"start_time": "開始時刻",
+			"end_time": "終了時刻",
+			"participants": "参加者",
+			"problems": "問題",
+			"no_problems": "利用可能な問題はありません",
+			"join": "コンテストに参加",
+			"leave": "コンテストを辞退",
+			"joining": "参加中...",
+			"leaving": "辞退中...",
+			"join_success": "コンテストに正常に参加しました！",
+			"leave_success": "コンテストを正常に辞退しました！",
+			"join_fail": "コンテストへの参加に失敗しました。もう一度お試しください。",
+			"leave_fail": "コンテストの辞退に失敗しました。もう一度お試しください。"
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "ダッシュボード",
+			"blog": "ブログ",
+			"problem": "問題",
+			"submission": "提出",
+			"contest": "コンテスト",
+			"user": "ユーザー",
+			"judger": "ジャッジ",
+			"notification": "通知",
+			"profile": "プロフィール",
+			"logout": "ログアウト",
+			"appearance": "外観",
+			"language": "言語",
+			"light": "ライト",
+			"dark": "ダーク",
+			"home": "ホーム"
+		},
+		"dashboard": {
+			"unable_to_load": "ダッシュボードを読み込めません",
+			"error_loading": "ダッシュボードデータの読み込み中にエラーが発生しました。ページを更新してください。",
+			"refresh": "ダッシュボードを更新",
+			"total_users": "総ユーザー数",
+			"active_today": "本日アクティブ",
+			"total_submissions": "総提出数",
+			"success_rate": "成功率",
+			"active_problems": "アクティブな問題",
+			"user_activity": "ユーザーアクティビティ",
+			"submission_volume": "提出量",
+			"language_distribution": "言語分布",
+			"submission_results": "提出結果",
+			"problem_difficulty": "問題の難易度",
+			"contest_participation": "コンテスト参加",
+			"top_users": "トップユーザー",
+			"popular_problems": "人気の問題"
+		},
+		"chart": {
+			"loading": "読み込み中...",
+			"contests": "コンテスト",
+			"participants": "参加者",
+			"contest_participation_trends": "コンテスト参加トレンド",
+			"contest_participation_description": "月間コンテスト数と参加者数",
+			"number_of_contests": "コンテスト数（左Y軸）",
+			"total_participants": "総参加者数（右Y軸）",
+			"judger_queue_performance": "ジャッジキューのパフォーマンス",
+			"judger_queue_description": "リアルタイムのキューサイズと処理時間の監視",
+			"queue_size": "キューサイズ",
+			"processing_time": "処理時間",
+			"queue_size_threshold_warning": "キューサイズがしきい値を超えています！",
+			"queue_size_left": "キューサイズ（左Y軸）",
+			"processing_time_right": "処理時間（右Y軸）",
+			"threshold": "しきい値",
+			"language_usage": "プログラミング言語の使用状況",
+			"language_usage_description": "プログラミング言語別の提出の分布",
+			"submissions": "提出",
+			"percentage": "パーセンテージ",
+			"total_submissions": "総提出数",
+			"problem_difficulty_distribution": "問題の難易度分布",
+			"problem_difficulty_description": "難易度レベルと解決率別の問題数",
+			"total_problems": "総問題数",
+			"solved_by_users": "ユーザーによる解決済み",
+			"solve_rate": "解決率",
+			"submission_results_distribution": "提出結果の分布",
+			"submission_results_description": "提出判定の内訳",
+			"count": "カウント",
+			"submission_volume": "提出量",
+			"submission_volume_description": "毎日の提出数と正答率",
+			"accepted": "正解",
+			"success_rate": "成功率",
+			"system_resource_usage": "システムリソースの使用状況",
+			"system_resource_description": "リアルタイムのCPU、メモリ、ディスク使用状況の監視",
+			"cpu_usage": "CPU使用率",
+			"memory_usage": "メモリ使用率",
+			"disk_usage": "ディスク使用率",
+			"high_resource_usage": "高いリソース使用量が検出されました！",
+			"cpu": "CPU",
+			"memory": "メモリ",
+			"disk": "ディスク",
+			"user_registrations": "ユーザー登録",
+			"user_registrations_description": "毎日の新規登録"
+		},
+		"table": {
+			"loading": "読み込み中...",
+			"most_attempted_problems": "最も試行された問題",
+			"most_attempted_problems_description": "提出数に基づく人気の問題",
+			"problem": "問題",
+			"difficulty": "難易度",
+			"attempts": "試行回数",
+			"solved": "解決済み",
+			"success_rate": "成功率",
+			"top_users_this_week": "今週のトップユーザー",
+			"top_users_this_week_description": "解決済みの問題に基づく最もアクティブなユーザー",
+			"rank": "順位",
+			"user": "ユーザー",
+			"submissions": "提出"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "検索...",
+				"sort_by": "並べ替え",
+				"title": "タイトル",
+				"point": "ポイント",
+				"difficulty": "難易度",
+				"accept": "承認",
+				"accept_rate": "正答率"
+			},
+			"filter": {
+				"new": "新規",
+				"title": "フィルター",
+				"difficulty": "難易度",
+				"easy": "簡単",
+				"medium": "普通",
+				"hard": "難しい",
+				"point": "ポイント",
+				"tags": "タグ",
+				"all": "すべて",
+				"editorial": "解説",
+				"has_editorial": "解説あり",
+				"point_range": "ポイント範囲",
+				"contest": "コンテスト"
+			},
+			"table": {
+				"title": "タイトル",
+				"tags": "タグ",
+				"difficulty": "難易度",
+				"point": "ポイント",
+				"accepted": "正解",
+				"acceptance": "正答率",
+				"editorial": "解説",
+				"easy": "簡単",
+				"medium": "普通",
+				"hard": "難しい",
+				"delete": {
+					"title": "削除の確認",
+					"description": "問題「{title}」を削除してもよろしいですか？この操作は元に戻せません。",
+					"cancel": "キャンセル",
+					"confirm": "削除",
+					"success": "問題が正常に削除されました",
+					"error": "問題の削除に失敗しました"
+				}
+			},
+			"form": {
+				"title": "タイトル",
+				"title_placeholder": "問題のタイトルを入力",
+				"time_limit": "時間制限（ミリ秒）",
+				"memory_limit": "メモリ制限（KB）",
+				"point": "ポイント",
+				"scoring_method": "採点方法",
+				"scoring_method_placeholder": "採点方法を選択",
+				"scoring_method_standard": "標準",
+				"scoring_method_subtask": "サブタスク",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "難易度",
+				"difficulty_placeholder": "難易度を選択",
+				"difficulty_easy": "簡単",
+				"difficulty_medium": "普通",
+				"difficulty_hard": "難しい",
+				"io_mode": "入出力モード",
+				"io_mode_placeholder": "入出力モードを選択",
+				"io_mode_standard": "標準",
+				"io_mode_file": "ファイル",
+				"input_file": "入力ファイル",
+				"input_file_placeholder": "input.txt",
+				"output_file": "出力ファイル",
+				"output_file_placeholder": "output.txt",
+				"tags": "タグ",
+				"statement": "ステートメント",
+				"statement_placeholder": "ここに問題文を記述してください...",
+				"submit": "問題を作成",
+				"update": "問題を更新",
+				"title_required": "タイトルは必須です",
+				"time_limit_min": "時間制限は1ミリ秒以上である必要があります",
+				"time_limit_max": "時間制限は10000ミリ秒以下である必要があります",
+				"memory_limit_min": "メモリ制限は1KB以上である必要があります",
+				"memory_limit_max": "メモリ制限は1048576KB以下である必要があります",
+				"point_min": "ポイントは0以上である必要があります",
+				"point_max": "ポイントは100以下である必要があります",
+				"tags_placeholder": "タグを入力...",
+				"create_success": "問題が正常に作成されました！",
+				"create_error": "問題の作成に失敗しました。もう一度お試しください。",
+				"update_success": "問題が正常に更新されました！",
+				"update_error": "問題の更新に失敗しました。もう一度お試しください。"
+			},
+			"editorial": {
+				"placeholder": "ここに解説の内容を記述してください...",
+				"create": "解説を作成",
+				"save": "解説を保存",
+				"delete": "解説を削除",
+				"cancel": "キャンセル",
+				"deleting": "削除中...",
+				"saving": "保存中...",
+				"no_editorial": "この問題にはまだ解説がありません。",
+				"create_success": "解説が正常に作成されました！",
+				"create_error": "解説の作成に失敗しました。もう一度お試しください。",
+				"update_success": "解説が正常に更新されました！",
+				"update_error": "解説の更新に失敗しました。もう一度お試しください。",
+				"delete_success": "解説が正常に削除されました！",
+				"delete_error": "解説の削除に失敗しました。もう一度お試しください。",
+				"delete_confirmation_title": "この解説を削除してもよろしいですか？",
+				"delete_confirmation_description": "この操作は元に戻せません。これにより、この問題の解説が完全に削除されます。"
+			},
+			"tabs": {
+				"info": "情報",
+				"editorial": "解説",
+				"testcase": "テストケース"
+			},
+			"slug_page": {
+				"loading": "読み込み中...",
+				"problem_not_found": "問題が見つかりません",
+				"error_loading_problem": "問題の読み込み中にエラーが発生しました：{message}",
+				"error_loading_tags": "タグの読み込み中にエラーが発生しました：{message}",
+				"testcase_management": "テストケース管理はここに実装されます。"
+			},
+			"testcase": {
+				"input": "入力",
+				"output": "出力",
+				"save": "保存",
+				"saving": "保存中...",
+				"loading": "読み込み中...",
+				"select_to_edit": "編集するテストケースの入力または出力を選択",
+				"content_placeholder": "テストケースの内容はここに表示されます...",
+				"new_testcase": "新しいテストケース",
+				"new_subtask": "新しいサブタスク",
+				"name": "名前",
+				"cancel": "キャンセル",
+				"create": "作成",
+				"delete": "削除",
+				"creating": "作成中...",
+				"create_subtask_title": "新しいサブタスクを作成",
+				"create_subtask_description": "新しいサブタスクの名前を入力してください。",
+				"subtask_name_placeholder": "サブタスク名を入力",
+				"create_testcase_title": "新しいテストケースを作成",
+				"create_testcase_description": "新しいテストケースの名前を入力してください。",
+				"testcase_name_placeholder": "テストケース名を入力",
+				"delete_subtask_title": "サブタスクを削除",
+				"delete_subtask_description": "このサブタスクを削除してもよろしいですか？この操作は元に戻せません。",
+				"delete_testcase_title": "テストケースを削除",
+				"delete_testcase_description": "このテストケースを削除してもよろしいですか？この操作は元に戻せません。",
+				"success": {
+					"title": "成功",
+					"saved": "テストケースの内容が正常に保存されました",
+					"testcase_created": "テストケースが正常に作成されました",
+					"testcase_deleted": "テストケースが正常に削除されました",
+					"subtask_created": "サブタスクが正常に作成されました",
+					"subtask_deleted": "サブタスクが正常に削除されました"
+				},
+				"error": {
+					"title": "エラー",
+					"load_subtasks": "サブタスクの読み込みに失敗しました",
+					"load_content": "テストケースの内容の読み込みに失敗しました",
+					"save_content": "テストケースの内容の保存に失敗しました",
+					"create_testcase": "テストケースの作成に失敗しました",
+					"delete_testcase": "テストケースの削除に失敗しました",
+					"create_subtask": "サブタスクの作成に失敗しました",
+					"delete_subtask": "サブタスクの削除に失敗しました"
+				}
+			}
+		},
+		"user": {
+			"title": "ユーザー管理",
+			"search_placeholder": "ユーザーを検索...",
+			"sort_by": "並べ替え",
+			"sort_username": "ユーザー名",
+			"sort_fullname": "フルネーム",
+			"sort_rating": "評価",
+			"sort_score": "スコア",
+			"sort_asc": "昇順",
+			"sort_desc": "降順",
+			"no_users_found": "ユーザーが見つかりません",
+			"showing_results": "{total}件中{start}～{end}件を表示",
+			"previous": "前へ",
+			"next": "次へ",
+			"page_of": "{total}ページ中{current}ページ",
+			"table": {
+				"avatar": "アバター",
+				"username": "ユーザー名",
+				"fullname": "フルネーム",
+				"email": "メールアドレス",
+				"role": "役割",
+				"rating": "評価",
+				"score": "スコア",
+				"verified": "確認済み",
+				"verified_yes": "はい",
+				"verified_no": "いいえ"
+			},
+			"detail": {
+				"title": "ユーザーの詳細",
+				"back_to_users": "ユーザーに戻る",
+				"verified": "確認済み",
+				"unverified": "未確認",
+				"email": "メールアドレス",
+				"joined": "参加済み",
+				"last_updated": "最終更新",
+				"bio": "経歴",
+				"statistics": "統計",
+				"score": "スコア",
+				"rating": "評価",
+				"problems_solved": "解決済みの問題",
+				"submissions": "提出",
+				"blogs": "ブログ",
+				"comments": "コメント",
+				"contests": "コンテスト"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count}秒前",
+				"minutes": "{count}分前",
+				"hours": "{count}時間前",
+				"days": "{count}日前",
+				"months": "{count}ヶ月前",
+				"years": "{count}年前"
+			},
+			"page": {
+				"view": "表示",
+				"title": "提出",
+				"breadcrumb": {
+					"home": "ホーム",
+					"submissions": "提出"
+				},
+				"actions": {
+					"submit_solution": "解答を提出",
+					"view_all": "すべて表示",
+					"view_details": "詳細を表示",
+					"submit_code": "コードを提出"
+				},
+				"recent_submissions": "最近の提出",
+				"score": "スコア",
+				"list_title": "{count}件の提出が見つかりました",
+				"submissions_title": "最近の提出",
+				"no_submissions": {
+					"title": "提出が見つかりません",
+					"empty": "最初に解答を提出してください！",
+					"filtered": "現在のフィルターに一致する提出はありません。"
+				},
+				"common": {
+					"score": "スコア"
+				},
+				"pagination": {
+					"previous": "前へ",
+					"next": "次へ",
+					"page_info": "{total}ページ中{page}ページ"
+				},
+				"passed": "合格"
+			},
+			"filters": {
+				"problem": "問題",
+				"problem_placeholder": "問題を選択",
+				"language": "言語",
+				"select_language": "言語を選択",
+				"all_languages": "すべての言語",
+				"status": "ステータス",
+				"select_status": "ステータスを選択",
+				"all_status": "すべてのステータス",
+				"author": "著者",
+				"author_placeholder": "著者を選択",
+				"contest_placeholder": "コンテストを選択",
+				"reset": "フィルターをリセット"
+			},
+			"status": {
+				"ACCEPTED": "正解",
+				"WRONG_ANSWER": "不正解",
+				"TIME_LIMIT_EXCEEDED": "時間制限超過",
+				"MEMORY_LIMIT_EXCEEDED": "メモリ制限超過",
+				"RUNTIME_ERROR": "実行時エラー",
+				"COMPILATION_ERROR": "コンパイルエラー",
+				"INTERNAL_ERROR": "内部エラー",
+				"PENDING": "待機中",
+				"JUDGING": "ジャッジ中",
+				"accepted": "正解",
+				"wrong_answer": "不正解",
+				"time_limit_exceeded": "時間制限超過",
+				"memory_limit_exceeded": "メモリ制限超過",
+				"runtime_error": "実行時エラー",
+				"compilation_error": "コンパイルエラー",
+				"internal_error": "内部エラー",
+				"pending": "待機中",
+				"judging": "ジャッジ中"
+			},
+			"table": {
+				"status": "ステータス",
+				"problem": "問題",
+				"author": "著者",
+				"language": "言語",
+				"submitted": "提出日時",
+				"actions": "アクション",
+				"error_loading": "提出の読み込み中にエラーが発生しました",
+				"unknown_problem": "不明な問題",
+				"by": "作成者",
+				"solved": "解決済み",
+				"score": "スコア"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "提出の読み込みに失敗しました"
+				},
+				"empty": {
+					"title": "まだ提出がありません",
+					"description": "最初に解答を提出してください！"
+				}
+			},
+			"detail": {
+				"title": "提出の詳細",
+				"breadcrumb": {
+					"home": "ホーム",
+					"submissions": "提出"
+				},
+				"tabs": {
+					"info": "情報",
+					"source_code": "ソースコード",
+					"test_cases": "テストケース",
+					"log": "ログ"
+				},
+				"info": {
+					"author": "著者",
+					"problem": "問題",
+					"language": "言語",
+					"score": "スコア",
+					"submitted": "提出日時",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "戻る",
+					"submit_again": "再提出",
+					"view_all_submissions": "すべての提出を表示"
+				},
+				"content": {
+					"no_log_available": "ログ情報はありません",
+					"no_test_cases_available": "テストケースの結果はありません",
+					"subtask_count": "{count}個のサブタスク",
+					"subtask_count_other": "{count}個のサブタスク",
+					"expand_all": "すべて展開",
+					"collapse_all": "すべて折りたたむ",
+					"tests_passed": "{passed}/{total}個合格",
+					"not_found": {
+						"title": "提出が見つかりません",
+						"message": "お探しの提出は見つかりませんでした。",
+						"back_button": "提出に戻る"
+					},
+					"partial": "部分的",
+					"submitted_for": "提出先"
+				}
+			},
+			"chart": {
+				"status": "ステータス",
+				"languages": "言語"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "開催中",
+				"upcoming": "開催予定",
+				"ended": "終了",
+				"create_button": "コンテストを作成",
+				"search_placeholder": "コンテストを検索...",
+				"loading": "読み込み中...",
+				"rated": "評価済み",
+				"unrated": "未評価"
+			},
+			"detail": {
+				"info_tab": "情報",
+				"problems_tab": "問題",
+				"submissions_tab": "提出",
+				"standings_tab": "順位表",
+				"search_problems": "問題を検索...",
+				"add_problem": "問題を追加",
+				"problem_title": "タイトル",
+				"actions": "アクション",
+				"add": "追加",
+				"adding": "追加中...",
+				"remove": "削除",
+				"rank": "順位",
+				"user": "ユーザー",
+				"score": "スコア",
+				"no_standings": "順位表はありません",
+				"loading": "読み込み中...",
+				"contest_updated": "コンテストが正常に更新されました！",
+				"problem_added": "問題がコンテストに正常に追加されました！",
+				"failed_to_add_problem": "問題のコンテストへの追加に失敗しました",
+				"problem_removed": "問題がコンテストから正常に削除されました！",
+				"failed_to_remove_problem": "問題のコンテストからの削除に失敗しました",
+				"remove_problem_title": "削除の確認",
+				"remove_problem_description": "このコンテストから「{title}」を削除してもよろしいですか？この操作は元に戻せません。",
+				"remove_problem_cancel": "キャンセル",
+				"remove_problem_confirm": "削除"
+			},
+			"create": {
+				"title": "コンテストを作成"
+			},
+			"edit": {
+				"title": "コンテストを編集",
+				"loading": "コンテストを読み込み中...",
+				"cancel": "キャンセル"
+			},
+			"form": {
+				"title": "タイトル",
+				"title_placeholder": "コンテストのタイトルを入力",
+				"start_time": "開始時刻",
+				"end_time": "終了時刻",
+				"time": "時間",
+				"select_start_date": "開始日を選択",
+				"select_end_date": "終了日を選択",
+				"is_rated": "評価済み",
+				"is_rated_placeholder": "コンテストが評価済みかどうかを選択",
+				"yes": "はい",
+				"no": "いいえ",
+				"penalty": "ペナルティ（分）",
+				"penalty_placeholder": "ペナルティを分単位で入力",
+				"penalty_min": "ペナルティは0分以上である必要があります",
+				"description": "説明",
+				"description_placeholder": "コンテストの説明を入力",
+				"submit": "コンテストを作成",
+				"update": "コンテストを更新",
+				"title_required": "タイトルは必須です",
+				"start_time_required": "開始時刻は必須です",
+				"end_time_required": "終了時刻は必須です",
+				"create_success": "コンテストが正常に作成されました！",
+				"create_error": "コンテストの作成に失敗しました。もう一度お試しください。",
+				"update_success": "コンテストが正常に更新されました！",
+				"update_error": "コンテストの更新に失敗しました。もう一度お試しください。"
+			}
+		},
+		"judger": {
+			"title": "ジャッジ管理",
+			"description": "システム内のすべてのジャッジを監視および管理します",
+			"loading": "ジャッジを読み込み中...",
+			"judger": "ジャッジ",
+			"busy": "ビジー",
+			"idle": "アイドル",
+			"judgerBusyDescription": "このジャッジは現在提出を処理中です",
+			"judgerIdleDescription": "このジャッジは提出を処理する準備ができています",
+			"noJudgers": "ジャッジが見つかりません",
+			"noJudgersDescription": "現在システムに接続されているジャッジはありません"
+		},
+		"notification": {
+			"send_system_notification": "システム通知を送信",
+			"send_system_notification_description": "すべてのユーザーに通知を送信します",
+			"content_placeholder": "通知内容を入力...",
+			"send": "送信",
+			"sending": "送信中...",
+			"success": {
+				"sent": "システム通知が正常に送信されました！"
+			},
+			"errors": {
+				"content_required": "通知内容は必須です",
+				"send_failed": "システム通知の送信に失敗しました"
+			}
+		}
+	},
+	"notifications": {
+		"title": "通知",
+		"mark_all_read": "すべて既読にする",
+		"mark_as_read": "既読にする",
+		"view_all": "すべての通知を表示",
+		"no_notifications": "まだ通知はありません",
+		"loading": "通知を読み込み中...",
+		"failed_to_load": "通知の読み込みに失敗しました",
+		"unread_count": "{count}件の未読通知",
+		"unread_count_plural": "{count}件の未読通知",
+		"read_count": "{count}件の既読通知",
+		"read_count_plural": "{count}件の既読通知",
+		"just_now": "たった今",
+		"minutes_ago": "{count}分前",
+		"hours_ago": "{count}時間前",
+		"days_ago": "{count}日前",
+		"tabs": {
+			"all": "すべて",
+			"unread": "未読",
+			"read": "既読"
+		},
+		"types": {
+			"new_problem": "新しい問題：{title}",
+			"new_contest": "新しいコンテスト：{title}",
+			"new_blog": "新しいブログ：{title}",
+			"rating_updated": "評価が更新されました",
+			"system": "システム通知",
+			"new_problem_available": "新しい問題が利用可能です",
+			"new_contest_available": "新しいコンテストが利用可能です",
+			"new_blog_post": "新しいブログ投稿"
+		}
+	},
+	"settings": {
+		"title": "設定",
+		"description": "アカウント設定と設定を管理します。",
+		"tabs": {
+			"basic": "基本",
+			"profile": "プロフィール",
+			"notification": "通知"
+		},
+		"basic": {
+			"theme": {
+				"title": "テーマ",
+				"description": "アプリケーションのテーマを選択します。",
+				"light": "ライト",
+				"dark": "ダーク",
+				"system": "システム",
+				"auto": "自動"
+			},
+			"language": {
+				"title": "言語",
+				"description": "アプリケーションの言語を選択します。"
+			}
+		},
+		"profile": {
+			"title": "プロフィール",
+			"description": "プロフィール情報を更新します。",
+			"form": {
+				"username": "ユーザー名",
+				"fullname": "フルネーム",
+				"bio": "経歴",
+				"save": "変更を保存",
+				"saving": "保存中...",
+				"change_avatar": "アバターを変更",
+				"reset_password": "パスワードをリセット",
+				"update_success": "プロフィールが正常に更新されました！",
+				"update_error": "プロフィールの更新に失敗しました。もう一度お試しください。"
+			}
+		},
+		"notification": {
+			"title": "通知",
+			"description": "通知設定を構成します。",
+			"form": {
+				"new_blog": "新しいブログ投稿",
+				"new_problem": "新しい問題",
+				"new_contest": "新しいコンテスト",
+				"update_rating": "評価の更新",
+				"system": "システム通知",
+				"save": "変更を保存",
+				"saving": "保存中...",
+				"update_success": "通知設定が正常に更新されました！",
+				"update_error": "通知設定の更新に失敗しました。もう一度お試しください。"
+			}
+		}
+	}
+}

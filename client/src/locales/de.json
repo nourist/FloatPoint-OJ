@@ -1,0 +1,1307 @@
+{
+	"layout": {
+		"header": {
+			"home": "Startseite",
+			"problems": "Probleme",
+			"submissions": "Einreichungen",
+			"contests": "Wettbewerbe",
+			"standing": "Rangliste",
+			"login": "Anmelden",
+			"register": "Registrieren",
+			"logout": "Abmelden",
+			"profile": "Profil",
+			"settings": "Einstellungen",
+			"appearance": "Erscheinungsbild",
+			"language": "Sprache",
+			"light": "Hell",
+			"dark": "Dunkel",
+			"dashboard": "Dashboard"
+		},
+		"footer": {
+			"copyright": "Copyright © {year} Nourist",
+			"license": "Lizenz",
+			"github": "GitHub",
+			"author": "Autor",
+			"language": "Sprache"
+		}
+	},
+	"auth": {
+		"login": "Anmelden",
+		"register": "Registrieren",
+		"verify_email": "E-Mail bestätigen",
+		"forgot_password": "Passwort vergessen",
+		"reset_password": "Passwort zurücksetzen",
+		"get_password": "Passwort erhalten",
+		"verify_success": "E-Mail erfolgreich bestätigt",
+		"dont_have_account": "Sie haben noch kein Konto?",
+		"already_have_account": "Sie haben bereits ein Konto?",
+		"already_have_password": "Sie haben bereits ein Passwort?",
+		"account_already_verified": "Konto bereits bestätigt?",
+		"continue_with_google": "Mit Google fortfahren",
+		"form": {
+			"email": "E-Mail",
+			"password": "Passwort",
+			"username": "Benutzername",
+			"enter_email": "Geben Sie Ihre E-Mail-Adresse ein",
+			"enter_password": "Geben Sie Ihr Passwort ein",
+			"enter_username": "Geben Sie Ihren Benutzernamen ein",
+			"confirm_password": "Passwort bestätigen",
+			"enter_confirm_password": "Geben Sie Ihr Passwort erneut ein"
+		},
+		"message": {
+			"email_required": "E-Mail ist erforderlich",
+			"password_required": "Passwort ist erforderlich",
+			"username_required": "Benutzername ist erforderlich",
+			"email_invalid": "E-Mail ist ungültig",
+			"password_min": "Das Passwort muss mindestens 8 Zeichen lang sein",
+			"password_uppercase": "Das Passwort muss mindestens einen Großbuchstaben enthalten",
+			"password_lowercase": "Das Passwort muss mindestens einen Kleinbuchstaben enthalten",
+			"password_number": "Das Passwort muss mindestens eine Zahl enthalten",
+			"password_special": "Das Passwort muss mindestens ein Sonderzeichen enthalten",
+			"confirm_password_required": "Passwortbestätigung ist erforderlich",
+			"confirm_password_not_match": "Passwortbestätigung stimmt nicht überein",
+			"token_required": "Token ist erforderlich"
+		},
+		"success": {
+			"register": "Registrierung erfolgreich",
+			"login": "Anmeldung erfolgreich",
+			"forgot_password": "E-Mail zum Zurücksetzen des Passworts erfolgreich gesendet",
+			"verify_email_send": "Bestätigungs-E-Mail erfolgreich gesendet",
+			"reset_password": "Passwort erfolgreich zurückgesetzt",
+			"verify": "Großartig! Ihre E-Mail-Adresse wurde bestätigt. Ihr Konto ist jetzt aktiv und einsatzbereit."
+		},
+		"error": {
+			"login": "Anmeldung fehlgeschlagen"
+		},
+		"description": {
+			"forgot_password": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten",
+			"verify_email": "Geben Sie Ihre E-Mail-Adresse ein, um einen E-Mail-Bestätigungslink zu erhalten"
+		},
+		"toast": {
+			"verify_email": "Bitte überprüfen Sie Ihre E-Mail zur Bestätigung"
+		}
+	},
+	"tiptap": {
+		"blockquote": "Blockzitat",
+		"code_block": "Codeblock",
+		"toggle_highlight": "Hervorhebung umschalten ({color})",
+		"heading": "Überschrift {level}",
+		"insert_image": "Bild einfügen",
+		"link": "Link",
+		"paste_a_link": "Fügen Sie einen Link ein...",
+		"apply_link": "Link anwenden",
+		"open_in_new_window": "In neuem Fenster öffnen",
+		"remove_link": "Link entfernen",
+		"toggle_list": "Liste umschalten {type}",
+		"toggle_mark": "Umschalten {type}",
+		"align": "Ausrichten {align}",
+		"undo": "Rückgängig",
+		"redo": "Wiederholen",
+		"highlight_text": "Text hervorheben",
+		"highlight": "Hervorheben",
+		"remove_highlight": "Hervorhebung entfernen",
+		"highlight_color": "{color} Hervorhebungsfarbe",
+		"highlight_colors": "Hervorhebungsfarben",
+		"format_text_as_heading": "Text als Überschrift formatieren",
+		"heading_tooltip": "Überschrift",
+		"list_options": "Listenoptionen",
+		"list": "Liste",
+		"bulletlist": "Aufzählung",
+		"orderedlist": "Nummerierte Liste",
+		"tasklist": "Aufgabenliste"
+	},
+	"upload": {
+		"title": "Bild hochladen",
+		"supported_formats": "Unterstützte Formate: JPG, PNG, GIF",
+		"click_to_select": "Klicken Sie zum Auswählen",
+		"or_drag_and_drop_file_here": "oder ziehen Sie die Datei hierher"
+	},
+	"home": {
+		"blog": "Blog",
+		"description": "Neueste Artikel, Tutorials und Einblicke aus der Programmier-Community",
+		"new": "Neu",
+		"sidebar": {
+			"rating": "Bewertung",
+			"score": "Punktzahl",
+			"current_contest": "Aktueller Wettbewerb",
+			"ending_in": "Endet in",
+			"join": "Beitreten",
+			"top_raters": "Top-Bewerter",
+			"hot_problems": "Beliebte Probleme",
+			"my_stats": "Meine Statistiken",
+			"problem": "Problem"
+		}
+	},
+	"pagination": {
+		"view": "Ansicht",
+		"sizes": "Größen"
+	},
+	"problem": {
+		"filter": {
+			"title": "Filter",
+			"status": "Status",
+			"all": "Alle",
+			"solved": "Gelöst",
+			"attempted": "Versucht",
+			"todo": "Zu erledigen",
+			"difficulty": "Schwierigkeit",
+			"easy": "Einfach",
+			"medium": "Mittel",
+			"hard": "Schwer",
+			"editorial": "Redaktionell",
+			"has_editorial": "Hat redaktionellen Inhalt",
+			"point": "Punkt",
+			"tags": "Tags",
+			"contest": "Wettbewerb",
+			"contest_placeholder": "Wählen Sie einen Wettbewerb aus"
+		},
+		"search": {
+			"sort_by": "Sortieren nach",
+			"title": "Titel",
+			"point": "Punkt",
+			"difficulty": "Schwierigkeit",
+			"accept": "Akzeptieren",
+			"accept_rate": "Akzeptanzrate"
+		},
+		"table": {
+			"title": "Titel",
+			"difficulty": "Schwierigkeit",
+			"point": "Punkt",
+			"accepted": "Akzeptiert",
+			"acceptance": "Akzeptanz",
+			"editorial": "Redaktionell",
+			"easy": "Einfach",
+			"medium": "Mittel",
+			"hard": "Schwer",
+			"delete": {
+				"title": "Löschen bestätigen",
+				"description": "Sind Sie sicher, dass Sie das Problem \"{title}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+				"cancel": "Abbrechen",
+				"confirm": "Löschen",
+				"success": "Problem erfolgreich gelöscht",
+				"error": "Fehler beim Löschen des Problems"
+			}
+		},
+		"detail": {
+			"header": {
+				"problem_number": "Problem #{number}",
+				"breadcrumb": {
+					"problems": "Probleme"
+				}
+			},
+			"sidebar": {
+				"info": "Informationen",
+				"difficulty": {
+					"label": "Schwierigkeit",
+					"easy": "Einfach",
+					"medium": "Mittel",
+					"hard": "Schwer"
+				},
+				"points": "Punkte",
+				"constraints": {
+					"title": "Einschränkungen",
+					"time_limit": "Zeitlimit",
+					"memory_limit": "Speicherlimit"
+				},
+				"io_format": {
+					"title": "E/A-Format",
+					"input": "Eingabe",
+					"output": "Ausgabe",
+					"stdin": "stdin",
+					"stdout": "stdout"
+				},
+				"statistics": {
+					"title": "Statistiken",
+					"accepted": "Akzeptiert",
+					"submissions": "Einreichungen",
+					"acceptance_rate": "Akzeptanzrate"
+				},
+				"status": {
+					"label": "Status",
+					"solved": "Gelöst",
+					"attempted": "Versucht"
+				},
+				"tags": "Tags",
+				"actions": {
+					"title": "Aktionen",
+					"submit": "Einreichen",
+					"editorial": "Redaktionell",
+					"view_submissions": "Einreichungen anzeigen"
+				}
+			},
+			"statement": {
+				"statement": "Problemstellung",
+				"constraints": "Einschränkungen",
+				"time_limit": "Zeitlimit",
+				"memory_limit": "Speicherlimit",
+				"io_format": "E/A-Format",
+				"input_file": "Eingabedatei",
+				"output_file": "Ausgabedatei",
+				"subtasks": "Teilaufgaben",
+				"subtask_number": "Teilaufgabe {number}: {name}",
+				"test_cases_count": "{count} Testfälle"
+			},
+			"error": {
+				"not_found": "Problem nicht gefunden",
+				"load_failed": "Fehler beim Laden des Problems"
+			}
+		}
+	},
+	"editorial": {
+		"title": "Redaktionell",
+		"not_available": "Redaktioneller Inhalt nicht verfügbar",
+		"not_available_description": "Der redaktionelle Inhalt für dieses Problem ist noch nicht verfügbar oder erfordert das vorherige Lösen des Problems.",
+		"check_again": "Erneut prüfen",
+		"warning": "Dieser redaktionelle Inhalt enthält die Lösung und Erklärung für das Problem. Stellen Sie sicher, dass Sie das Problem zuerst versucht haben!",
+		"created_by": "Redaktionell von: {username}",
+		"breadcrumb": {
+			"problems": "Probleme",
+			"editorial": "Redaktionell"
+		},
+		"back_to_problem": "Zurück zum Problem"
+	},
+	"submission": {
+		"date": {
+			"seconds": "vor {count} Sekunden",
+			"minutes": "vor {count} Minuten",
+			"hours": "vor {count} Stunden",
+			"days": "vor {count} Tagen",
+			"months": "vor {count} Monaten",
+			"years": "vor {count} Jahren"
+		},
+		"page": {
+			"view": "Ansicht",
+			"title": "Einreichungen",
+			"breadcrumb": {
+				"home": "Startseite",
+				"submissions": "Einreichungen"
+			},
+			"actions": {
+				"submit_solution": "Lösung einreichen",
+				"view_all": "Alle anzeigen",
+				"view_details": "Details anzeigen",
+				"submit_code": "Code einreichen"
+			},
+			"recent_submissions": "Letzte Einreichungen",
+			"score": "Punktzahl",
+			"list_title": "{count} Einreichungen gefunden",
+			"submissions_title": "Letzte Einreichungen",
+			"no_submissions": {
+				"title": "Keine Einreichungen gefunden",
+				"empty": "Seien Sie der Erste, der eine Lösung einreicht!",
+				"filtered": "Keine Einreichungen entsprechen Ihren aktuellen Filtern."
+			},
+			"common": {
+				"score": "Punktzahl"
+			},
+			"pagination": {
+				"previous": "Zurück",
+				"next": "Weiter",
+				"page_info": "Seite {page} von {total}"
+			},
+			"passed": "bestanden"
+		},
+		"filters": {
+			"problem": "Problem",
+			"problem_placeholder": "Wählen Sie ein Problem aus",
+			"language": "Sprache",
+			"select_language": "Sprache auswählen",
+			"all_languages": "Alle Sprachen",
+			"status": "Status",
+			"select_status": "Status auswählen",
+			"all_status": "Alle Status",
+			"all_contests": "Alle Wettbewerbe",
+			"author": "Autor",
+			"author_placeholder": "Wählen Sie einen Autor aus",
+			"contest": "Wettbewerb",
+			"contest_placeholder": "Wählen Sie einen Wettbewerb aus",
+			"reset": "Filter zurücksetzen"
+		},
+		"status": {
+			"ACCEPTED": "Akzeptiert",
+			"WRONG_ANSWER": "Falsche Antwort",
+			"TIME_LIMIT_EXCEEDED": "Zeitlimit überschritten",
+			"MEMORY_LIMIT_EXCEEDED": "Speicherlimit überschritten",
+			"RUNTIME_ERROR": "Laufzeitfehler",
+			"COMPILATION_ERROR": "Kompilierungsfehler",
+			"INTERNAL_ERROR": "Interner Fehler",
+			"PENDING": "Ausstehend",
+			"JUDGING": "Wird bewertet",
+			"accepted": "Akzeptiert",
+			"wrong_answer": "Falsche Antwort",
+			"time_limit_exceeded": "Zeitlimit überschritten",
+			"memory_limit_exceeded": "Speicherlimit überschritten",
+			"runtime_error": "Laufzeitfehler",
+			"compilation_error": "Kompilierungsfehler",
+			"internal_error": "Interner Fehler",
+			"pending": "Ausstehend",
+			"judging": "Wird bewertet"
+		},
+		"table": {
+			"status": "Status",
+			"problem": "Problem",
+			"author": "Autor",
+			"language": "Sprache",
+			"submitted": "Eingereicht",
+			"actions": "Aktionen",
+			"error_loading": "Fehler beim Laden der Einreichungen",
+			"unknown_problem": "Unbekanntes Problem",
+			"by": "von",
+			"solved": "gelöst",
+			"score": "Punktzahl"
+		},
+		"messages": {
+			"errors": {
+				"load_failed": "Fehler beim Laden der Einreichungen"
+			},
+			"empty": {
+				"title": "Noch keine Einreichungen",
+				"description": "Seien Sie der Erste, der eine Lösung einreicht!"
+			}
+		},
+		"detail": {
+			"title": "Einreichungsdetails",
+			"breadcrumb": {
+				"home": "Startseite",
+				"submissions": "Einreichungen"
+			},
+			"tabs": {
+				"info": "Info",
+				"source_code": "Quellcode",
+				"test_cases": "Testfälle",
+				"log": "Protokoll"
+			},
+			"info": {
+				"author": "Autor",
+				"problem": "Problem",
+				"language": "Sprache",
+				"score": "Punktzahl",
+				"submitted": "Eingereicht",
+				"id": "ID"
+			},
+			"actions": {
+				"back": "Zurück",
+				"submit_again": "Erneut einreichen",
+				"view_all_submissions": "Alle Einreichungen anzeigen"
+			},
+			"content": {
+				"no_log_available": "Keine Protokollinformationen verfügbar",
+				"no_test_cases_available": "Keine Testfallergebnisse verfügbar",
+				"subtask_count": "{count} Teilaufgabe",
+				"subtask_count_other": "{count} Teilaufgaben",
+				"expand_all": "Alle erweitern",
+				"collapse_all": "Alle ausblenden",
+				"tests_passed": "{passed} / {total} bestanden",
+				"not_found": {
+					"title": "Einreichung nicht gefunden",
+					"message": "Die gesuchte Einreichung konnte nicht gefunden werden.",
+					"back_button": "Zurück zu den Einreichungen"
+				},
+				"partial": "Teilweise",
+				"submitted_for": "Eingereicht für"
+			}
+		},
+		"chart": {
+			"status": "Status",
+			"languages": "Sprachen"
+		}
+	},
+	"submit": {
+		"easy": "Einfach",
+		"medium": "Mittel",
+		"hard": "Schwer",
+		"page": {
+			"title": "Code einreichen",
+			"select_problem": {
+				"title": "Kein Problem ausgewählt",
+				"description": "Bitte wählen Sie ein Problem aus, um Ihre Lösung einzureichen.",
+				"browse": "Probleme durchsuchen"
+			},
+			"problem_not_found": {
+				"title": "Problem nicht gefunden",
+				"description": "Das Problem, für das Sie eine Lösung einreichen möchten, konnte nicht gefunden werden."
+			},
+			"breadcrumb": {
+				"home": "Startseite",
+				"problems": "Probleme"
+			},
+			"back_to_problem": "Zurück zum Problem",
+			"language": "Programmiersprache",
+			"select_language": "Sprache auswählen",
+			"code": "Quellcode",
+			"code_placeholder": "Geben Sie hier Ihren Code ein...",
+			"submit": "Einreichen",
+			"submitting": "Wird eingereicht...",
+			"login_required": {
+				"message": "Bitte",
+				"login": "melden Sie sich an",
+				"to_submit": "um Ihre Lösung einzureichen"
+			}
+		},
+		"messages": {
+			"errors": {
+				"login_required": "Sie müssen angemeldet sein, um Code einzureichen",
+				"select_problem": "Bitte wählen Sie ein Problem aus, für das Sie eine Lösung einreichen möchten",
+				"enter_code": "Bitte geben Sie Ihren Code ein",
+				"submit_failed": "Fehler beim Einreichen des Codes. Bitte versuchen Sie es erneut."
+			},
+			"success": {
+				"submitted": "Code erfolgreich eingereicht!"
+			}
+		}
+	},
+	"error": {
+		"title": "Hoppla! Etwas ist schiefgelaufen",
+		"message": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+		"try_again": "Erneut versuchen",
+		"go_home": "Zur Startseite"
+	},
+	"not_found": {
+		"title": "Hoppla! Seite nicht gefunden",
+		"message": "Die Seite, nach der Sie suchen, existiert nicht.",
+		"go_home": "Zur Startseite"
+	},
+	"blog": {
+		"create": {
+			"create": "Erstellen",
+			"blogs": "Blogs",
+			"title": "Titel",
+			"title_placeholder": "Titel eingeben",
+			"description_placeholder": "Beschreibung eingeben",
+			"upload_thumbnail": "Vorschaubild hochladen",
+			"save": "Speichern",
+			"message": {
+				"title_required": "Titel ist erforderlich",
+				"title_and_content_required": "Titel und Inhalt sind erforderlich."
+			},
+			"create_success": "Blog erfolgreich erstellt!",
+			"create_fail": "Fehler beim Erstellen des Blogs."
+		},
+		"edit": {
+			"blogs": "Blogs",
+			"edit": "Bearbeiten",
+			"save": "Speichern",
+			"message": {
+				"title_required": "Titel ist erforderlich",
+				"title_and_content_required": "Titel und Inhalt sind erforderlich."
+			},
+			"edit_success": "Blog erfolgreich bearbeitet!",
+			"edit_fail": "Fehler beim Bearbeiten des Blogs."
+		},
+		"card": {
+			"blogs": "Blogs",
+			"delete_success": "Blog erfolgreich gelöscht!",
+			"message": {
+				"delete_confirmation": "Sind Sie sicher, dass Sie diesen Blog löschen möchten?"
+			},
+			"delete": "Löschen",
+			"edit": "Bearbeiten",
+			"cancel": "Abbrechen"
+		},
+		"comment": {
+			"create_success": "Kommentar erfolgreich erstellt!",
+			"date": {
+				"seconds": "vor {count} Sekunden",
+				"minutes": "vor {count} Minuten",
+				"hours": "vor {count} Stunden",
+				"days": "vor {count} Tagen",
+				"months": "vor {count} Monaten",
+				"years": "vor {count} Jahren"
+			},
+			"comment-placeholder": "Schreiben Sie einen Kommentar...",
+			"comment": "Kommentar",
+			"comments": "Kommentare",
+			"message": {
+				"comment_required": "Kommentar ist erforderlich",
+				"delete_confirmation": "Sind Sie sicher, dass Sie diesen Kommentar löschen möchten?"
+			},
+			"delete": "Löschen",
+			"edit": "Bearbeiten",
+			"cancel": "Abbrechen",
+			"delete_success": "Kommentar erfolgreich gelöscht!",
+			"edit_success": "Kommentar erfolgreich bearbeitet!"
+		}
+	},
+	"standing": {
+		"title": "Globale Rangliste",
+		"description": "Rangliste der Benutzer basierend auf Bewertung und Gesamtpunktzahl",
+		"rating": "Bewertung",
+		"score": "Punktzahl",
+		"top_users": "Top-Benutzer",
+		"all_users": "Alle Benutzer",
+		"no_data": "Keine Daten verfügbar",
+		"modes": {
+			"rating": "Bewertung",
+			"score": "Punktzahl"
+		},
+		"table": {
+			"rank": "Rang",
+			"user": "Benutzer",
+			"rating": "Bewertung",
+			"score": "Punktzahl"
+		},
+		"filters": {
+			"search_placeholder": "Benutzer suchen...",
+			"reset": "Zurücksetzen"
+		},
+		"errors": {
+			"load_failed": "Fehler beim Laden der Ranglistendaten"
+		}
+	},
+	"async_combobox": {
+		"select": "Auswählen...",
+		"search": "Suchen...",
+		"no_results": "Keine Ergebnisse gefunden.",
+		"load_more": "Mehr laden..."
+	},
+	"profile": {
+		"title": "Profil",
+		"loading": "Profil wird geladen...",
+		"user_not_found": "Benutzer nicht gefunden",
+		"sidebar": {
+			"edit_profile": "Profil bearbeiten",
+			"rank": "Rang",
+			"stats": "Statistiken",
+			"score": "Punktzahl",
+			"rating": "Bewertung",
+			"ac_problems": "AC Probleme",
+			"submissions": "Einreichungen",
+			"blogs": "Blogs",
+			"comments": "Kommentare",
+			"joined_contests": "Beigetretene Wettbewerbe",
+			"languages": "Sprachen",
+			"submissions_count": "Einreichungen",
+			"no_submissions": "Noch keine Einreichungen",
+			"unranked": "Nicht bewertet"
+		},
+		"content": {
+			"submission_activity": "Einreichungsaktivität",
+			"submissions_in_year": "Einreichungen im letzten Jahr",
+			"accepted": "akzeptiert",
+			"loading_activity": "Aktivitätsdaten werden geladen...",
+			"rating_history": "Bewertungsverlauf",
+			"problems_by_difficulty": "AC Probleme nach Schwierigkeit",
+			"submissions_by_language": "AC Einreichungen nach Sprache",
+			"less": "Weniger",
+			"more": "Mehr"
+		},
+		"tabs": {
+			"recent_solved_problems": "Kürzlich gelöste Probleme",
+			"recent_submissions": "Kürzliche Einreichungen",
+			"blogs": "Blogs",
+			"problem": "Problem",
+			"language": "Sprache",
+			"solved_count": "Anzahl gelöst",
+			"first_solved": "Zuerst gelöst",
+			"status": "Status",
+			"date": "Datum",
+			"title": "Titel",
+			"publish_date": "Veröffentlichungsdatum",
+			"no_accepted_submissions": "Noch keine akzeptierten Einreichungen.",
+			"no_recent_submissions": "Noch keine Einreichungen.",
+			"no_blogs": "Noch keine Blogs veröffentlicht."
+		}
+	},
+	"contest": {
+		"page": {
+			"title": "Wettbewerbe",
+			"running": "Laufend",
+			"upcoming": "Bevorstehend",
+			"ended": "Beendet",
+			"create_button": "Wettbewerb erstellen",
+			"search_placeholder": "Wettbewerbe suchen...",
+			"loading": "Wird geladen...",
+			"no_contests": "Keine Wettbewerbe gefunden",
+			"no_contests_description": "Schauen Sie später für bevorstehende Wettbewerbe und Herausforderungen vorbei",
+			"error_loading": "Fehler beim Laden der Wettbewerbe",
+			"rated": "Bewertet",
+			"unrated": "Unbewertet",
+			"participants": "{count, plural, =0 {Keine Teilnehmer} =1 {# Teilnehmer} other {# Teilnehmer}}",
+			"joining": "Beigetreten"
+		},
+		"detail": {
+			"info_tab": "Info",
+			"problems_tab": "Probleme",
+			"submissions_tab": "Einreichungen",
+			"standings_tab": "Rangliste",
+			"time_remaining": "Verbleibende Zeit",
+			"search_problems": "Probleme suchen...",
+			"add_problem": "Problem hinzufügen",
+			"problem_title": "Titel",
+			"problem_slug": "Slug",
+			"problem_point": "Punkte",
+			"actions": "Aktionen",
+			"add": "Hinzufügen",
+			"adding": "Wird hinzugefügt...",
+			"remove": "Entfernen",
+			"contest_problems": "Wettbewerbsprobleme",
+			"rank": "Rang",
+			"user": "Benutzer",
+			"score": "Punktzahl",
+			"time": "Zeit",
+			"points": "Punkte",
+			"no_standings": "Keine Rangliste verfügbar",
+			"loading": "Wird geladen...",
+			"contest_updated": "Wettbewerb erfolgreich aktualisiert!",
+			"problem_added": "Problem erfolgreich zum Wettbewerb hinzugefügt!",
+			"failed_to_add_problem": "Fehler beim Hinzufügen des Problems zum Wettbewerb",
+			"problem_removed": "Problem erfolgreich aus dem Wettbewerb entfernt!",
+			"failed_to_remove_problem": "Fehler beim Entfernen des Problems aus dem Wettbewerb",
+			"remove_problem_title": "Entfernen bestätigen",
+			"remove_problem_description": "Sind Sie sicher, dass Sie \"{title}\" aus diesem Wettbewerb entfernen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+			"remove_problem_cancel": "Abbrechen",
+			"remove_problem_confirm": "Entfernen",
+			"running": "Laufend",
+			"upcoming": "Bevorstehend",
+			"ended": "Beendet",
+			"rated": "Bewertet",
+			"start_time": "Startzeit",
+			"end_time": "Endzeit",
+			"participants": "Teilnehmer",
+			"problems": "Probleme",
+			"no_problems": "Keine Probleme verfügbar",
+			"join": "Wettbewerb beitreten",
+			"leave": "Wettbewerb verlassen",
+			"joining": "Wird beigetreten...",
+			"leaving": "Wird verlassen...",
+			"join_success": "Erfolgreich dem Wettbewerb beigetreten!",
+			"leave_success": "Erfolgreich den Wettbewerb verlassen!",
+			"join_fail": "Fehler beim Beitreten zum Wettbewerb. Bitte versuchen Sie es erneut.",
+			"leave_fail": "Fehler beim Verlassen des Wettbewerbs. Bitte versuchen Sie es erneut."
+		}
+	},
+	"admin": {
+		"layout": {
+			"dashboard": "Dashboard",
+			"blog": "Blog",
+			"problem": "Problem",
+			"submission": "Einreichung",
+			"contest": "Wettbewerb",
+			"user": "Benutzer",
+			"judger": "Bewerter",
+			"notification": "Benachrichtigung",
+			"profile": "Profil",
+			"logout": "Abmelden",
+			"appearance": "Erscheinungsbild",
+			"language": "Sprache",
+			"light": "Hell",
+			"dark": "Dunkel",
+			"home": "Startseite"
+		},
+		"dashboard": {
+			"unable_to_load": "Dashboard kann nicht geladen werden",
+			"error_loading": "Beim Laden der Dashboard-Daten ist ein Fehler aufgetreten. Bitte versuchen Sie, die Seite zu aktualisieren.",
+			"refresh": "Dashboard aktualisieren",
+			"total_users": "Gesamtbenutzer",
+			"active_today": "Heute aktiv",
+			"total_submissions": "Gesamteinreichungen",
+			"success_rate": "Erfolgsrate",
+			"active_problems": "Aktive Probleme",
+			"user_activity": "Benutzeraktivität",
+			"submission_volume": "Einreichungsvolumen",
+			"language_distribution": "Sprachverteilung",
+			"submission_results": "Einreichungsergebnisse",
+			"problem_difficulty": "Problemschwierigkeit",
+			"contest_participation": "Wettbewerbsteilnahme",
+			"top_users": "Top-Benutzer",
+			"popular_problems": "Beliebte Probleme"
+		},
+		"chart": {
+			"loading": "Wird geladen...",
+			"contests": "Wettbewerbe",
+			"participants": "Teilnehmer",
+			"contest_participation_trends": "Trends zur Wettbewerbsteilnahme",
+			"contest_participation_description": "Monatliche Anzahl von Wettbewerben und Teilnehmerzahlen",
+			"number_of_contests": "Anzahl der Wettbewerbe (Linke Y-Achse)",
+			"total_participants": "Gesamtzahl der Teilnehmer (Rechte Y-Achse)",
+			"judger_queue_performance": "Leistung der Bewertungswarteschlange",
+			"judger_queue_description": "Echtzeit-Überwachung der Warteschlangengröße und Verarbeitungszeit",
+			"queue_size": "Warteschlangengröße",
+			"processing_time": "Verarbeitungszeit",
+			"queue_size_threshold_warning": "Warteschlangengröße über dem Schwellenwert!",
+			"queue_size_left": "Warteschlangengröße (Linke Y-Achse)",
+			"processing_time_right": "Verarbeitungszeit (Rechte Y-Achse)",
+			"threshold": "Schwellenwert",
+			"language_usage": "Verwendung von Programmiersprachen",
+			"language_usage_description": "Verteilung der Einreichungen nach Programmiersprache",
+			"submissions": "Einreichungen",
+			"percentage": "Prozentsatz",
+			"total_submissions": "Gesamteinreichungen",
+			"problem_difficulty_distribution": "Verteilung der Problemschwierigkeit",
+			"problem_difficulty_description": "Anzahl der Probleme nach Schwierigkeitsgrad und Lösungsraten",
+			"total_problems": "Gesamtzahl der Probleme",
+			"solved_by_users": "Von Benutzern gelöst",
+			"solve_rate": "Lösungsrate",
+			"submission_results_distribution": "Verteilung der Einreichungsergebnisse",
+			"submission_results_description": "Aufschlüsselung der Einreichungsbewertungen",
+			"count": "Anzahl",
+			"submission_volume": "Einreichungsvolumen",
+			"submission_volume_description": "Tägliche Anzahl von Einreichungen und Akzeptanzrate",
+			"accepted": "Akzeptiert",
+			"success_rate": "Erfolgsrate",
+			"system_resource_usage": "Systemressourcennutzung",
+			"system_resource_description": "Echtzeit-Überwachung von CPU, Speicher und Festplattennutzung",
+			"cpu_usage": "CPU-Nutzung",
+			"memory_usage": "Speichernutzung",
+			"disk_usage": "Festplattennutzung",
+			"high_resource_usage": "Hohe Ressourcennutzung erkannt!",
+			"cpu": "CPU",
+			"memory": "Speicher",
+			"disk": "Festplatte",
+			"user_registrations": "Benutzerregistrierungen",
+			"user_registrations_description": "Tägliche neue Registrierungen"
+		},
+		"table": {
+			"loading": "Wird geladen...",
+			"most_attempted_problems": "Meistversuchte Probleme",
+			"most_attempted_problems_description": "Beliebte Probleme basierend auf der Anzahl der Einreichungen",
+			"problem": "Problem",
+			"difficulty": "Schwierigkeit",
+			"attempts": "Versuche",
+			"solved": "Gelöst",
+			"success_rate": "Erfolgsrate",
+			"top_users_this_week": "Top-Benutzer dieser Woche",
+			"top_users_this_week_description": "Aktivste Benutzer basierend auf gelösten Problemen",
+			"rank": "Rang",
+			"user": "Benutzer",
+			"submissions": "Einreichungen"
+		},
+		"problem": {
+			"toolbar": {
+				"search": "Suchen...",
+				"sort_by": "Sortieren nach",
+				"title": "Titel",
+				"point": "Punkte",
+				"difficulty": "Schwierigkeit",
+				"accept": "Akzeptieren",
+				"accept_rate": "Akzeptanzrate"
+			},
+			"filter": {
+				"new": "Neu",
+				"title": "Filter",
+				"difficulty": "Schwierigkeit",
+				"easy": "Einfach",
+				"medium": "Mittel",
+				"hard": "Schwer",
+				"point": "Punkte",
+				"tags": "Tags",
+				"all": "Alle",
+				"editorial": "Redaktionell",
+				"has_editorial": "Hat redaktionellen Inhalt",
+				"point_range": "Punktebereich",
+				"contest": "Wettbewerb"
+			},
+			"table": {
+				"title": "Titel",
+				"tags": "Tags",
+				"difficulty": "Schwierigkeit",
+				"point": "Punkte",
+				"accepted": "Akzeptiert",
+				"acceptance": "Akzeptanz",
+				"editorial": "Redaktionell",
+				"easy": "Einfach",
+				"medium": "Mittel",
+				"hard": "Schwer",
+				"delete": {
+					"title": "Confirm Delete",
+					"description": "Are you sure you want to delete the problem \"{title}\"? This action cannot be undone.",
+					"cancel": "Abbrechen",
+					"confirm": "Löschen",
+					"success": "Problem deleted successfully",
+					"error": "Failed to delete problem"
+				}
+			},
+			"form": {
+				"title": "Titel",
+				"title_placeholder": "Geben Sie den Problemtitel ein",
+				"time_limit": "Zeitlimit (ms)",
+				"memory_limit": "Speicherlimit (KB)",
+				"point": "Punkte",
+				"scoring_method": "Bewertungsmethode",
+				"scoring_method_placeholder": "Bewertungsmethode auswählen",
+				"scoring_method_standard": "Standard",
+				"scoring_method_subtask": "Teilaufgabe",
+				"scoring_method_icpc": "ICPC",
+				"difficulty": "Schwierigkeit",
+				"difficulty_placeholder": "Schwierigkeit auswählen",
+				"difficulty_easy": "Einfach",
+				"difficulty_medium": "Mittel",
+				"difficulty_hard": "Schwer",
+				"io_mode": "E/A-Modus",
+				"io_mode_placeholder": "E/A-Modus auswählen",
+				"io_mode_standard": "Standard",
+				"io_mode_file": "Datei",
+				"input_file": "Eingabedatei",
+				"input_file_placeholder": "input.txt",
+				"output_file": "Ausgabedatei",
+				"output_file_placeholder": "output.txt",
+				"tags": "Tags",
+				"statement": "Problemstellung",
+				"statement_placeholder": "Schreiben Sie hier die Problemstellung...",
+				"submit": "Problem erstellen",
+				"update": "Problem aktualisieren",
+				"title_required": "Titel ist erforderlich",
+				"time_limit_min": "Zeitlimit muss mindestens 1ms betragen",
+				"time_limit_max": "Zeitlimit darf maximal 10000ms betragen",
+				"memory_limit_min": "Speicherlimit muss mindestens 1KB betragen",
+				"memory_limit_max": "Speicherlimit darf maximal 1048576KB betragen",
+				"point_min": "Punktezahl muss mindestens 0 betragen",
+				"point_max": "Punktezahl darf maximal 100 betragen",
+				"tags_placeholder": "Tags eingeben...",
+				"create_success": "Problem erfolgreich erstellt!",
+				"create_error": "Fehler beim Erstellen des Problems. Bitte versuchen Sie es erneut.",
+				"update_success": "Problem erfolgreich aktualisiert!",
+				"update_error": "Fehler beim Aktualisieren des Problems. Bitte versuchen Sie es erneut."
+			},
+			"editorial": {
+				"placeholder": "Schreiben Sie hier den redaktionellen Inhalt...",
+				"create": "Redaktionellen Inhalt erstellen",
+				"save": "Redaktionellen Inhalt speichern",
+				"delete": "Redaktionellen Inhalt löschen",
+				"cancel": "Abbrechen",
+				"deleting": "Wird gelöscht...",
+				"saving": "Wird gespeichert...",
+				"no_editorial": "Für dieses Problem existiert noch kein redaktioneller Inhalt.",
+				"create_success": "Redaktioneller Inhalt erfolgreich erstellt!",
+				"create_error": "Fehler beim Erstellen des redaktionellen Inhalts. Bitte versuchen Sie es erneut.",
+				"update_success": "Redaktioneller Inhalt erfolgreich aktualisiert!",
+				"update_error": "Fehler beim Aktualisieren des redaktionellen Inhalts. Bitte versuchen Sie es erneut.",
+				"delete_success": "Redaktioneller Inhalt erfolgreich gelöscht!",
+				"delete_error": "Fehler beim Löschen des redaktionellen Inhalts. Bitte versuchen Sie es erneut.",
+				"delete_confirmation_title": "Sind Sie sicher, dass Sie diesen redaktionellen Inhalt löschen möchten?",
+				"delete_confirmation_description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird den redaktionellen Inhalt für dieses Problem dauerhaft löschen."
+			},
+			"tabs": {
+				"info": "Info",
+				"editorial": "Redaktionell",
+				"testcase": "Testcase"
+			},
+			"slug_page": {
+				"loading": "Wird geladen...",
+				"problem_not_found": "Problem nicht gefunden",
+				"error_loading_problem": "Error loading problem: {message}",
+				"error_loading_tags": "Error loading tags: {message}",
+				"testcase_management": "Testfallverwaltung wird hier implementiert."
+			},
+			"testcase": {
+				"input": "Eingabe",
+				"output": "Ausgabe",
+				"save": "Speichern",
+				"saving": "Wird gespeichert...",
+				"loading": "Wird geladen...",
+				"select_to_edit": "Wählen Sie eine Testfall-Eingabe oder -Ausgabe zum Bearbeiten aus",
+				"content_placeholder": "Testfall-Inhalt wird hier angezeigt...",
+				"new_testcase": "Neuer Testfall",
+				"new_subtask": "Neue Teilaufgabe",
+				"name": "Name",
+				"cancel": "Abbrechen",
+				"create": "Erstellen",
+				"delete": "Löschen",
+				"creating": "Wird erstellt...",
+				"create_subtask_title": "Neue Teilaufgabe erstellen",
+				"create_subtask_description": "Geben Sie einen Namen für die neue Teilaufgabe ein.",
+				"subtask_name_placeholder": "Name der Teilaufgabe eingeben",
+				"create_testcase_title": "Neuen Testfall erstellen",
+				"create_testcase_description": "Geben Sie einen Namen für den neuen Testfall ein.",
+				"testcase_name_placeholder": "Name des Testfalls eingeben",
+				"delete_subtask_title": "Teilaufgabe löschen",
+				"delete_subtask_description": "Sind Sie sicher, dass Sie diese Teilaufgabe löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+				"delete_testcase_title": "Testfall löschen",
+				"delete_testcase_description": "Sind Sie sicher, dass Sie diesen Testfall löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+				"success": {
+					"title": "Erfolg",
+					"saved": "Testfall-Inhalt erfolgreich gespeichert",
+					"testcase_created": "Testfall erfolgreich erstellt",
+					"testcase_deleted": "Testfall erfolgreich gelöscht",
+					"subtask_created": "Teilaufgabe erfolgreich erstellt",
+					"subtask_deleted": "Teilaufgabe erfolgreich gelöscht"
+				},
+				"error": {
+					"title": "Fehler",
+					"load_subtasks": "Fehler beim Laden der Teilaufgaben",
+					"load_content": "Fehler beim Laden des Testfall-Inhalts",
+					"save_content": "Fehler beim Speichern des Testfall-Inhalts",
+					"create_testcase": "Fehler beim Erstellen des Testfalls",
+					"delete_testcase": "Fehler beim Löschen des Testfalls",
+					"create_subtask": "Fehler beim Erstellen der Teilaufgabe",
+					"delete_subtask": "Fehler beim Löschen der Teilaufgabe"
+				}
+			}
+		},
+		"user": {
+			"title": "Benutzerverwaltung",
+			"search_placeholder": "Benutzer suchen...",
+			"sort_by": "Sortieren nach",
+			"sort_username": "Benutzername",
+			"sort_fullname": "Vollständiger Name",
+			"sort_rating": "Bewertung",
+			"sort_score": "Punktzahl",
+			"sort_asc": "Aufsteigend",
+			"sort_desc": "Absteigend",
+			"no_users_found": "Keine Benutzer gefunden",
+			"showing_results": "Zeige {start}-{end} von {total} Ergebnissen",
+			"previous": "Zurück",
+			"next": "Weiter",
+			"page_of": "Seite {current} von {total}",
+			"table": {
+				"avatar": "Avatar",
+				"username": "Benutzername",
+				"fullname": "Vollständiger Name",
+				"email": "E-Mail",
+				"role": "Rolle",
+				"rating": "Bewertung",
+				"score": "Punktzahl",
+				"verified": "Verifiziert",
+				"verified_yes": "Ja",
+				"verified_no": "Nein"
+			},
+			"detail": {
+				"title": "Benutzerdetails",
+				"back_to_users": "Zurück zu den Benutzern",
+				"verified": "Verifiziert",
+				"unverified": "Nicht verifiziert",
+				"email": "E-Mail",
+				"joined": "Beigetreten",
+				"last_updated": "Zuletzt aktualisiert",
+				"bio": "Biografie",
+				"statistics": "Statistiken",
+				"score": "Punktzahl",
+				"rating": "Bewertung",
+				"problems_solved": "Gelöste Probleme",
+				"submissions": "Einreichungen",
+				"blogs": "Blogs",
+				"comments": "Kommentare",
+				"contests": "Wettbewerbe"
+			}
+		},
+		"submission": {
+			"date": {
+				"seconds": "{count} seconds ago",
+				"minutes": "{count} minutes ago",
+				"hours": "{count} hours ago",
+				"days": "{count} days ago",
+				"months": "{count} months ago",
+				"years": "{count} years ago"
+			},
+			"page": {
+				"view": "Ansicht",
+				"title": "Submissions",
+				"breadcrumb": {
+					"home": "Startseite",
+					"submissions": "Submissions"
+				},
+				"actions": {
+					"submit_solution": "Submit Solution",
+					"view_all": "View All",
+					"view_details": "Details anzeigen",
+					"submit_code": "Code einreichen"
+				},
+				"recent_submissions": "Letzte Einreichungen",
+				"score": "Punktzahl",
+				"list_title": "{count} Einreichungen gefunden",
+				"submissions_title": "Letzte Einreichungen",
+				"no_submissions": {
+					"title": "Keine Einreichungen gefunden",
+					"empty": "Seien Sie der Erste, der eine Lösung einreicht!",
+					"filtered": "Keine Einreichungen entsprechen Ihren aktuellen Filtern."
+				},
+				"common": {
+					"score": "Punktzahl"
+				},
+				"pagination": {
+					"previous": "Zurück",
+					"next": "Weiter",
+					"page_info": "Seite {page} von {total}"
+				},
+				"passed": "bestanden"
+			},
+			"filters": {
+				"problem": "Problem",
+				"problem_placeholder": "Wählen Sie ein Problem aus",
+				"language": "Sprache",
+				"select_language": "Sprache auswählen",
+				"all_languages": "Alle Sprachen",
+				"status": "Status",
+				"select_status": "Status auswählen",
+				"all_status": "Alle Status",
+				"author": "Autor",
+				"author_placeholder": "Wählen Sie einen Autor aus",
+				"contest_placeholder": "Wählen Sie einen Wettbewerb aus",
+				"reset": "Filter zurücksetzen"
+			},
+			"status": {
+				"ACCEPTED": "Akzeptiert",
+				"WRONG_ANSWER": "Falsche Antwort",
+				"TIME_LIMIT_EXCEEDED": "Zeitlimit überschritten",
+				"MEMORY_LIMIT_EXCEEDED": "Speicherlimit überschritten",
+				"RUNTIME_ERROR": "Laufzeitfehler",
+				"COMPILATION_ERROR": "Kompilierungsfehler",
+				"INTERNAL_ERROR": "Interner Fehler",
+				"PENDING": "Ausstehend",
+				"JUDGING": "Wird bewertet",
+				"accepted": "Akzeptiert",
+				"wrong_answer": "Falsche Antwort",
+				"time_limit_exceeded": "Zeitlimit überschritten",
+				"memory_limit_exceeded": "Speicherlimit überschritten",
+				"runtime_error": "Laufzeitfehler",
+				"compilation_error": "Kompilierungsfehler",
+				"internal_error": "Interner Fehler",
+				"pending": "Ausstehend",
+				"judging": "Wird bewertet"
+			},
+			"table": {
+				"status": "Status",
+				"problem": "Problem",
+				"author": "Autor",
+				"language": "Sprache",
+				"submitted": "Eingereicht",
+				"actions": "Aktionen",
+				"error_loading": "Fehler beim Laden der Einreichungen",
+				"unknown_problem": "Unbekanntes Problem",
+				"by": "von",
+				"solved": "gelöst",
+				"score": "Punktzahl"
+			},
+			"messages": {
+				"errors": {
+					"load_failed": "Fehler beim Laden der Einreichungen"
+				},
+				"empty": {
+					"title": "Noch keine Einreichungen",
+					"description": "Seien Sie der Erste, der eine Lösung einreicht!"
+				}
+			},
+			"detail": {
+				"title": "Einreichungsdetails",
+				"breadcrumb": {
+					"home": "Startseite",
+					"submissions": "Einreichungen"
+				},
+				"tabs": {
+					"info": "Info",
+					"source_code": "Quellcode",
+					"test_cases": "Testfälle",
+					"log": "Protokoll"
+				},
+				"info": {
+					"author": "Autor",
+					"problem": "Problem",
+					"language": "Sprache",
+					"score": "Punktzahl",
+					"submitted": "Eingereicht",
+					"id": "ID"
+				},
+				"actions": {
+					"back": "Zurück",
+					"submit_again": "Erneut einreichen",
+					"view_all_submissions": "Alle Einreichungen anzeigen"
+				},
+				"content": {
+					"no_log_available": "Keine Protokollinformationen verfügbar",
+					"no_test_cases_available": "Keine Testfallergebnisse verfügbar",
+					"subtask_count": "{count} Teilaufgabe",
+					"subtask_count_other": "{count} Teilaufgaben",
+					"expand_all": "Alle erweitern",
+					"collapse_all": "Alle ausblenden",
+					"tests_passed": "{passed} / {total} bestanden",
+					"not_found": {
+						"title": "Einreichung nicht gefunden",
+						"message": "Die gesuchte Einreichung konnte nicht gefunden werden.",
+						"back_button": "Zurück zu den Einreichungen"
+					},
+					"partial": "Teilweise",
+					"submitted_for": "Eingereicht für"
+				}
+			},
+			"chart": {
+				"status": "Status",
+				"languages": "Sprachen"
+			}
+		},
+		"contest": {
+			"page": {
+				"running": "Laufend",
+				"upcoming": "Bevorstehend",
+				"ended": "Beendet",
+				"create_button": "Wettbewerb erstellen",
+				"search_placeholder": "Wettbewerbe suchen...",
+				"loading": "Wird geladen...",
+				"rated": "Bewertet",
+				"unrated": "Unbewertet"
+			},
+			"detail": {
+				"info_tab": "Info",
+				"problems_tab": "Probleme",
+				"submissions_tab": "Einreichungen",
+				"standings_tab": "Rangliste",
+				"search_problems": "Probleme suchen...",
+				"add_problem": "Problem hinzufügen",
+				"problem_title": "Titel",
+				"actions": "Aktionen",
+				"add": "Hinzufügen",
+				"adding": "Wird hinzugefügt...",
+				"remove": "Entfernen",
+				"rank": "Rang",
+				"user": "Benutzer",
+				"score": "Punktzahl",
+				"no_standings": "Keine Rangliste verfügbar",
+				"loading": "Wird geladen...",
+				"contest_updated": "Wettbewerb erfolgreich aktualisiert!",
+				"problem_added": "Problem erfolgreich zum Wettbewerb hinzugefügt!",
+				"failed_to_add_problem": "Fehler beim Hinzufügen des Problems zum Wettbewerb",
+				"problem_removed": "Problem erfolgreich aus dem Wettbewerb entfernt!",
+				"failed_to_remove_problem": "Fehler beim Entfernen des Problems aus dem Wettbewerb",
+				"remove_problem_title": "Entfernen bestätigen",
+				"remove_problem_description": "Sind Sie sicher, dass Sie \"{title}\" aus diesem Wettbewerb entfernen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+				"remove_problem_cancel": "Abbrechen",
+				"remove_problem_confirm": "Entfernen"
+			},
+			"create": {
+				"title": "Wettbewerb erstellen"
+			},
+			"edit": {
+				"title": "Wettbewerb bearbeiten",
+				"loading": "Wettbewerb wird geladen...",
+				"cancel": "Abbrechen"
+			},
+			"form": {
+				"title": "Titel",
+				"title_placeholder": "Geben Sie den Wettbewerbstitel ein",
+				"start_time": "Startzeit",
+				"end_time": "Endzeit",
+				"time": "Zeit",
+				"select_start_date": "Startdatum auswählen",
+				"select_end_date": "Enddatum auswählen",
+				"is_rated": "Ist bewertet",
+				"is_rated_placeholder": "Auswählen, ob der Wettbewerb bewertet ist",
+				"yes": "Ja",
+				"no": "Nein",
+				"penalty": "Strafe (Minuten)",
+				"penalty_placeholder": "Strafe in Minuten eingeben",
+				"penalty_min": "Die Strafe muss mindestens 0 Minuten betragen",
+				"description": "Beschreibung",
+				"description_placeholder": "Geben Sie die Wettbewerbsbeschreibung ein",
+				"submit": "Wettbewerb erstellen",
+				"update": "Wettbewerb aktualisieren",
+				"title_required": "Titel ist erforderlich",
+				"start_time_required": "Startzeit ist erforderlich",
+				"end_time_required": "Endzeit ist erforderlich",
+				"create_success": "Wettbewerb erfolgreich erstellt!",
+				"create_error": "Fehler beim Erstellen des Wettbewerbs. Bitte versuchen Sie es erneut.",
+				"update_success": "Wettbewerb erfolgreich aktualisiert!",
+				"update_error": "Fehler beim Aktualisieren des Wettbewerbs. Bitte versuchen Sie es erneut."
+			}
+		},
+		"judger": {
+			"title": "Bewerterverwaltung",
+			"description": "Überwachen und verwalten Sie alle Bewerter im System",
+			"loading": "Bewerter werden geladen...",
+			"judger": "Bewerter",
+			"busy": "Beschäftigt",
+			"idle": "Leerlauf",
+			"judgerBusyDescription": "Dieser Bewerter verarbeitet derzeit Einreichungen",
+			"judgerIdleDescription": "Dieser Bewerter ist bereit, Einreichungen zu verarbeiten",
+			"noJudgers": "Keine Bewerter gefunden",
+			"noJudgersDescription": "Derzeit sind keine Bewerter mit dem System verbunden"
+		},
+		"notification": {
+			"send_system_notification": "Systembenachrichtigung senden",
+			"send_system_notification_description": "Senden Sie eine Benachrichtigung an alle Benutzer",
+			"content_placeholder": "Benachrichtigungsinhalt eingeben...",
+			"send": "Senden",
+			"sending": "Wird gesendet...",
+			"success": {
+				"sent": "Systembenachrichtigung erfolgreich gesendet!"
+			},
+			"errors": {
+				"content_required": "Benachrichtigungsinhalt ist erforderlich",
+				"send_failed": "Fehler beim Senden der Systembenachrichtigung"
+			}
+		}
+	},
+	"notifications": {
+		"title": "Benachrichtigungen",
+		"mark_all_read": "Alle als gelesen markieren",
+		"mark_as_read": "Als gelesen markieren",
+		"view_all": "Alle Benachrichtigungen anzeigen",
+		"no_notifications": "Noch keine Benachrichtigungen",
+		"loading": "Lade Benachrichtigungen...",
+		"failed_to_load": "Fehler beim Laden der Benachrichtigungen",
+		"unread_count": "{count} ungelesene Benachrichtigung",
+		"unread_count_plural": "{count} ungelesene Benachrichtigungen",
+		"read_count": "{count} gelesene Benachrichtigung",
+		"read_count_plural": "{count} gelesene Benachrichtigungen",
+		"just_now": "Gerade eben",
+		"minutes_ago": "vor {count}m",
+		"hours_ago": "vor {count}h",
+		"days_ago": "vor {count}d",
+		"tabs": {
+			"all": "Alle",
+			"unread": "Ungelesen",
+			"read": "Gelesen"
+		},
+		"types": {
+			"new_problem": "Neues Problem: {title}",
+			"new_contest": "Neuer Wettbewerb: {title}",
+			"new_blog": "Neuer Blog: {title}",
+			"rating_updated": "Bewertung aktualisiert",
+			"system": "Systembenachrichtigung",
+			"new_problem_available": "Neues Problem verfügbar",
+			"new_contest_available": "Neuer Wettbewerb verfügbar",
+			"new_blog_post": "Neuer Blogbeitrag"
+		}
+	},
+	"settings": {
+		"title": "Einstellungen",
+		"description": "Verwalten Sie Ihre Kontoeinstellungen und Präferenzen.",
+		"tabs": {
+			"basic": "Grundlegend",
+			"profile": "Profil",
+			"notification": "Benachrichtigung"
+		},
+		"basic": {
+			"theme": {
+				"title": "Thema",
+				"description": "Wählen Sie ein Thema für die Anwendung aus.",
+				"light": "Hell",
+				"dark": "Dunkel",
+				"system": "System",
+				"auto": "Automatisch"
+			},
+			"language": {
+				"title": "Sprache",
+				"description": "Wählen Sie eine Sprache für die Anwendung aus."
+			}
+		},
+		"profile": {
+			"title": "Profil",
+			"description": "Aktualisieren Sie Ihre Profilinformationen.",
+			"form": {
+				"username": "Benutzername",
+				"fullname": "Vollständiger Name",
+				"bio": "Biografie",
+				"save": "Änderungen speichern",
+				"saving": "Wird gespeichert...",
+				"change_avatar": "Avatar ändern",
+				"reset_password": "Passwort zurücksetzen",
+				"update_success": "Profil erfolgreich aktualisiert!",
+				"update_error": "Fehler beim Aktualisieren des Profils. Bitte versuchen Sie es erneut."
+			}
+		},
+		"notification": {
+			"title": "Benachrichtigungen",
+			"description": "Konfigurieren Sie Ihre Benachrichtigungseinstellungen.",
+			"form": {
+				"new_blog": "Neue Blogbeiträge",
+				"new_problem": "Neue Probleme",
+				"new_contest": "Neue Wettbewerbe",
+				"update_rating": "Bewertungsaktualisierungen",
+				"system": "Systembenachrichtigungen",
+				"save": "Änderungen speichern",
+				"saving": "Wird gespeichert...",
+				"update_success": "Benachrichtigungseinstellungen erfolgreich aktualisiert!",
+				"update_error": "Fehler beim Aktualisieren der Benachrichtigungseinstellungen. Bitte versuchen Sie es erneut."
+			}
+		}
+	}
+}
