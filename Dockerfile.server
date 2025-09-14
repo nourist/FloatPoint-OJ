@@ -1,8 +1,35 @@
-FROM node:18-alpine
+# -------------------------------
+# Build stage
+# -------------------------------
+FROM node:20-alpine AS builder
 
 WORKDIR /app
-COPY server ./server
-RUN cd server && npm install --legacy-peer-deps
 
-EXPOSE 8080
-CMD ["npm", "--prefix", "server", "start"]
+COPY server/package*.json ./
+
+RUN npm install --frozen-lockfile
+
+COPY server/. .
+
+RUN npm run build
+
+# -------------------------------
+# Run stage
+# -------------------------------
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+COPY server/package*.json ./
+
+RUN npm install --production --frozen-lockfile
+
+COPY --from=builder /app/dist ./dist
+
+ADD https://github.com/jwilder/dockerize/releases/download/v0.7.0/dockerize-linux-amd64-v0.7.0.tar.gz /tmp/
+RUN tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64-v0.7.0.tar.gz \
+    && rm /tmp/dockerize-linux-amd64-v0.7.0.tar.gz
+
+EXPOSE 4000
+
+CMD sh -c "dockerize -wait tcp://postgres:5432 -timeout 120s && npm run migration:run:prod && node dist/main.js"

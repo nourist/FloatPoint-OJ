@@ -1,5 +1,43 @@
+# Node modules (cả server và client)
 node_modules
-npm-debug.log
-build
+**/node_modules
+
+# Build output
 dist
-dist-ssr
+build
+.next
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor configs
+.vscode
+.idea
+*.sublime-workspace
+*.sublime-project
+
+# Rust/Cargo build
+target
+**/target
+
+# Cargo lock can be included or ignored depending on build strategy
+# Cargo.lock
+
+# Misc
+*.log
+*.tmp
+*.swp

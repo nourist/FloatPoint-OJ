@@ -1,58 +1,163 @@
-version: '3'
 services:
-    client:
-        build:
-            context: .
-            dockerfile: Dockerfile.client
+    postgres:
+        image: postgres:15
+        environment:
+            POSTGRES_USER: ${DB_USER:-postgres}
+            POSTGRES_PASSWORD: ${DB_PASS:-postgres}
+            POSTGRES_DB: ${DB_NAME:-postgres}
         ports:
-            - '5173:5173'
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
         networks:
             - app-network
 
-    admin:
-        build:
-            context: .
-            dockerfile: Dockerfile.admin
+    minio:
+        image: minio/minio:latest
+        environment:
+            MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+            MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
         ports:
-            - '5174:5174'
+            - "9000:9000"
+            - "9001:9001"
+        command: >
+            server /data --console-address ":9001"
+        volumes:
+            - miniodata:/data
         networks:
             - app-network
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        environment:
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        volumes:
+            - rabbitmqdata:/var/lib/rabbitmq
+        networks:
+            - app-network
+
+    redis:
+        image: redis:alpine
+        environment:
+            - REDIS_PASSWORD=${REDIS_PASSWORD:-redispass}
+        command: redis-server --requirepass ${REDIS_PASSWORD:-redispass}
+        ports:
+            - "6379:6379"
+        volumes:
+            - redisdata:/data
+        networks:
+            - app-network
+
+    judger1:
+        build:
+            context: .
+            dockerfile: Dockerfile.judger
+        networks:
+            - app-network
+        privileged: true
+        environment:
+            JUDGER_ID: ${JUDGER_ID:-1}
+
+            MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in judger
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in judger
+
+            DB_HOST: ${DB_HOST:-postgres}
+            DB_USER: ${DB_USER} #default 'postgres' handled in judger
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in judger
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in judger
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in judger
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in judger
+
+    judger2:
+        build:
+            context: .
+            dockerfile: Dockerfile.judger
+        networks:
+            - app-network
+        privileged: true
+        environment:
+            JUDGER_ID: ${JUDGER_ID:-2}
+
+            MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in judger
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in judger
+
+            DB_HOST: ${DB_HOST:-postgres}
+            DB_USER: ${DB_USER} #default 'postgres' handled in judger
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in judger
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in judger
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in judger
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in judger
 
     server:
         build:
             context: .
             dockerfile: Dockerfile.server
-        ports:
-            - '8080:8080'
         networks:
             - app-network
         environment:
-            - JUDGER_URL=http://judger:8090
-            - DATABASE_URL=mongodb://mongo:27017/FloatPoint
-        depends_on:
-            - mongo
-    judger:
+            MINIO_ENDPOINT: ${MINIO_ENDPOINT:-minio}
+            MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY} #default 'minioadmin' handled in server
+            MINIO_SECRET_KEY: ${MINIO_SECRET_KEY} #default 'minioadmin' handled in server
+
+            DB_HOST: ${DB_HOST:-postgres}
+            DB_USER: ${DB_USER} #default 'postgres' handled in server
+            DB_PASS: ${DB_PASS} #default 'postgres' handled in server
+            DB_NAME: ${DB_NAME} #default 'postgres' handled in server
+
+            RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+            RABBITMQ_USER: ${RABBITMQ_USER} #default 'guest' handled in server
+            RABBITMQ_PASS: ${RABBITMQ_PASS} #default 'guest' handled in server
+
+            REDIS_HOST: ${REDIS_HOST:-redis}
+            REDIS_PASSWORD: ${REDIS_PASSWORD} #default 'redispass' handled in server
+
+            NODE_ENV: ${NODE_ENV} #default 'development' handled in server
+
+            JWT_SECRET: ${JWT_SECRET} #default 'secretKey' handled in server
+            JWT_EXPIRES_IN: ${JWT_EXPIRES_IN} #default '7d' handled in server
+            SALT_ROUNDS: ${SALT_ROUNDS} #default 10 handled in server
+
+            MAIL_HOST: ${MAIL_HOST} #default 'smtp.mailtrap.com' handled in server
+            MAIL_PORT: ${MAIL_PORT} #default 587 handled in server
+            MAIL_USER: ${MAIL_USER} #required
+            MAIL_PASS: ${MAIL_PASS} #required
+            MAIL_FROM_EMAIL: ${MAIL_FROM_EMAIL} #required
+        ports:
+            - "4000:4000"
+
+    client:
         build:
             context: .
-            dockerfile: Dockerfile.judger
-        ports:
-            - '8090:8090'
+            dockerfile: Dockerfile.client
+            args:
+                API_URL: ${API_URL:-http://server:4000}
+                NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
         networks:
             - app-network
-
-    mongo:
-        image: mongo:6.0
-        container_name: mongo
-        networks:
-            - app-network
+        environment:
+            JWT_SECRET: ${JWT_SECRET} #default 'secretKey' handled in client
+            API_URL: ${API_URL:-http://server:4000}
+            NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
+            NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
         ports:
-            - '27017:27017'
-        volumes:
-            - mongo-data:/data/db
+            - "3000:3000"
 
 networks:
     app-network:
         driver: bridge
 
 volumes:
-    mongo-data:
+    pgdata:
+    miniodata:
+    rabbitmqdata:
+    redisdata:
