@@ -36,6 +36,10 @@ const JudgerPage = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		setJudgers(initialJudgers);
+	}, [initialJudgers]);
+
 	return (
 		<>
 			{isLoading ? (

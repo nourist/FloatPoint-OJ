@@ -139,12 +139,16 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.client
+            args:
+                API_URL: ${API_URL:-http://server:4000}
+                NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
         networks:
             - app-network
         environment:
             JWT_SECRET: ${JWT_SECRET} #default 'secretKey' handled in client
-            API_URL: http://server:4000
-            NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+            API_URL: ${API_URL:-http://server:4000}
+            NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
+            NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
         ports:
             - "3000:3000"
 

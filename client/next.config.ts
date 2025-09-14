@@ -1,7 +1,8 @@
 import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
-const apiUrl = new URL(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000');
+const clientApiUrl = new URL(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000');
+const serverApiUrl = new URL(process.env.API_URL || 'http://localhost:4000');
 
 const nextConfig: NextConfig = {
 	// Enable standalone output for Docker optimization
@@ -10,11 +11,11 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: '/storage/:path*',
-				destination: new URL('/storage/:path*', apiUrl).toString(),
+				destination: new URL('/storage/:path*', serverApiUrl).toString(),
 			},
 			{
 				source: '/avatars/:path*',
-				destination: new URL('/storage/avatars/:path*', apiUrl).toString(),
+				destination: new URL('/storage/avatars/:path*', serverApiUrl).toString(),
 			},
 		];
 	},
@@ -24,9 +25,9 @@ const nextConfig: NextConfig = {
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 		remotePatterns: [
 			{
-				protocol: apiUrl.protocol.replaceAll(':', '') as 'http' | 'https',
-				hostname: apiUrl.hostname,
-				port: apiUrl.port,
+				protocol: clientApiUrl.protocol.replaceAll(':', '') as 'http' | 'https',
+				hostname: clientApiUrl.hostname,
+				port: clientApiUrl.port,
 				pathname: '/storage/**',
 			},
 			{
