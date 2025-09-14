@@ -15,7 +15,6 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '~/components/ui/dropdown-menu';
 import UserAvatar from '~/components/user-avatar';
 import { createClientService } from '~/lib/service-client';
-import { joinUrl } from '~/lib/utils';
 import { authServiceInstance } from '~/services/auth';
 import { blogServiceInstance } from '~/services/blog';
 import { Blog } from '~/types/blog.type';
@@ -108,7 +107,7 @@ const BlogCard = ({ data, mutate }: Props) => {
 			</Link>
 			{data.thumbnailUrl && (
 				<div className="bg-accent relative mt-4 h-120 w-full rounded-xl">
-					<Image src={'/' + joinUrl('storage', data.thumbnailUrl)} alt={data.title} fill className="object-contain" />
+					<Image src={data.thumbnailUrl} alt={data.title} fill className="object-contain" />
 				</div>
 			)}
 			<RichTextRenderer className="mt-4" content={JSON.parse(data.content)} />

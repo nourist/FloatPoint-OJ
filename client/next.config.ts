@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
 	async rewrites() {
 		return [
 			{
-				source: '/storage/:path*',
-				destination: new URL('/storage/:path*', serverApiUrl).toString(),
+				source: '/thumbnails/:path*',
+				destination: new URL('/storage/thumbnails/:path*', serverApiUrl).toString(),
 			},
 			{
 				source: '/avatars/:path*',
