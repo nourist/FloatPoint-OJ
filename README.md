@@ -59,7 +59,7 @@ FloatPoint-OJ/
 - **Database**: PostgreSQL with TypeORM
 - **Authentication**: JWT + Passport.js
 - **Message Queue**: RabbitMQ
-- **Caching**: Redis
+- **Judger State Storage**: Redis
 - **File Storage**: MinIO (S3-compatible)
 - **Validation**: Class Validator
 - **Documentation**: Swagger
